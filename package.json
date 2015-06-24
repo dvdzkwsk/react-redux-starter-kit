@@ -1,0 +1,47 @@
+{
+  "name": "wirk-starter",
+  "version": "0.0.0",
+  "description": "Starter kit for Webkit and Isomorphic React with Koa",
+  "main": "index.js",
+  "scripts": {
+    "compile": "webpack",
+    "compile:prod": "NODE_ENV=production npm run compile",
+    "compile:cleanup": "rm -f dist/client/index.html",
+    "build": "npm run clean && npm run compile && npm run compile:cleanup",
+    "build:prod": "NODE_ENV=production npm run build",
+    "server:start": "node ./server/scripts/start",
+    "deploy": "npm run build && npm run server:start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davezuko/wirk-starter.git"
+  },
+  "keywords": [
+    "Webpack",
+    "React",
+    "Isomorphic",
+    "Koa",
+    "Starter",
+    "Boilerplate"
+  ],
+  "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davezuko/wirk-starter/issues"
+  },
+  "homepage": "https://github.com/davezuko/wirk-starter#readme",
+  "dependencies": {
+    "babel-runtime": "^5.6.5",
+    "koa": "^0.21.0",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "babel": "^5.6.5",
+    "babel-core": "^5.6.5",
+    "babel-loader": "^5.1.4",
+    "html-webpack-plugin": "^1.5.2",
+    "object-assign": "^3.0.0",
+    "webpack": "^1.9.11",
+    "webpack-dev-server": "^1.9.0"
+  }
+}
