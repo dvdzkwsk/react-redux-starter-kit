@@ -4,9 +4,10 @@
   "description": "Starter kit for Webkit and Isomorphic React with Koa",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist",
     "compile": "webpack",
     "compile:prod": "NODE_ENV=production npm run compile",
-    "compile:cleanup": "rm -f dist/client/index.html",
+    "compile:cleanup": "rm -f dist/client/index.html; rm -f dist/server/index.html",
     "build": "npm run clean && npm run compile && npm run compile:cleanup",
     "build:prod": "NODE_ENV=production npm run build",
     "server:start": "node ./server/scripts/start",
@@ -33,6 +34,8 @@
   "dependencies": {
     "babel-runtime": "^5.6.5",
     "koa": "^0.21.0",
+    "koa-jade": "^1.1.0",
+    "koa-static": "^1.4.9",
     "react": "^0.13.3"
   },
   "devDependencies": {

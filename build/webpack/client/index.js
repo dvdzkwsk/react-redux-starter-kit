@@ -1,4 +1,3 @@
-import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import makeConfig from '../make-config';

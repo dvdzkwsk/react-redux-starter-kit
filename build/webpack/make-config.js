@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import { inProject, inSrc, inDist } from '../../lib/path';
 import { NODE_ENV, __DEV__, __PROD__ } from '../../lib/environment';
 
-export const DEFAULT_CONFIG = (function () {
+function makeDefaultConfig () {
   const config = {
     output : {
       filename : '[name].[hash].js'
@@ -65,6 +65,6 @@ export const DEFAULT_CONFIG = (function () {
   }
 
   return config;
-})();
+};
 
-export default assign.bind(assign, {}, DEFAULT_CONFIG);
+export default (config) => assign({}, makeDefaultConfig(), config);
