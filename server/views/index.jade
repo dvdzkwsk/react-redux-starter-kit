@@ -1,0 +1,10 @@
+doctype html
+html(lang='en')
+  head
+    title Wirk StarterKit
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+  body
+    div#mount-node !{rendered}
+    each script in scripts
+      script(src=script)

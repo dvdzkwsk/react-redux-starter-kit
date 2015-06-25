@@ -1,10 +1,8 @@
-module.exports = function () {
-  return function *responseTimeMiddleware(next) {
-    const start = new Date();
+module.exports = function *responseTimeMiddleware (next) {
+  const start = new Date();
 
-    yield next;
+  yield next;
 
-    const ms = new Date() - start;
-    this.set('X-Response-Time', `${ms}ms`);
-  };
+  const ms = new Date() - start;
+  this.set('X-Response-Time', `${ms}ms`);
 };
