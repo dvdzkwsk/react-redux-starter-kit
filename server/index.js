@@ -21,6 +21,8 @@ app.use(serve(path.inDist('client')));
 // ------------------------------------
 // Jade Configuration and Globals
 // ------------------------------------
+const clientFiles = fs.readdirSync(path.inDist('client'));
+
 app.use(jade.middleware({
   viewPath : `${__dirname}/views`,
   debug    : env.__DEBUG__,
@@ -29,10 +31,17 @@ app.use(jade.middleware({
 
     // TODO: script ordering currently happens to be correct if it's in
     // reverse alphabetical order, but this really should be more secure.
-    scripts : fs.readdirSync(path.inDist('client'))
+    scripts : clientFiles
       .filter(function (file) {
         return /(app|vendor).*.js$/.test(file);
-      }).reverse()
+      }).reverse(),
+
+    // TODO: currently only one stylesheet is generated, but this should be
+    // more written to be more flexible and not ignore potential cascade issues.
+    styles : clientFiles
+      .filter(function (file) {
+        return /.css$/.test(file);
+      })
   }
 }));
 

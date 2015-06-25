@@ -28,7 +28,8 @@ function makeDefaultConfig () {
         dispatchers : inSrc('dispatchers'),
         models      : inSrc('models'),
         services    : inSrc('services'),
-        stores      : inSrc('stores')
+        stores      : inSrc('stores'),
+        styles      : inSrc('styles')
       }
     },
     module : {

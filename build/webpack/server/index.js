@@ -18,4 +18,14 @@ const config = makeConfig({
   }
 });
 
+// ------------------------------------
+// Server-Specific Plugins
+// ------------------------------------
+config.plugins.push(
+  new webpack.DefinePlugin({
+    '__CLIENT__' : false,
+    '__SERVER__' : true
+  })
+);
+
 export default require(`./_${NODE_ENV}`)(config);
