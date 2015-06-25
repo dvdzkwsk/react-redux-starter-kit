@@ -18,7 +18,4 @@ const config = makeConfig({
   }
 });
 
-console.log('server config');
-console.log(config);
-
 export default require(`./_${NODE_ENV}`)(config);

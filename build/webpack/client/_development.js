@@ -5,5 +5,12 @@ export default function (config) {
     'webpack/hot/dev-server'
   );
 
+  config.module.loaders = config.module.loaders.map(loader => {
+    if (/js/.test(loader.test)) {
+      loader.loaders = ['react-hot', ...loader.loaders];
+    }
+    return loader;
+  });
+
   return config;
 };

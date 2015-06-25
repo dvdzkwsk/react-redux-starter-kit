@@ -3,8 +3,7 @@ const fs    = require('fs'),
       koa   = require('koa'),
       jade  = require('koa-jade'),
       path  = require('../lib/path'),
-      serve = require('koa-static'),
-      React = require('react');
+      serve = require('koa-static');
 
 const app  = koa();
 

@@ -11,7 +11,11 @@
     "build": "npm run clean && npm run compile && npm run compile:cleanup",
     "build:prod": "NODE_ENV=production npm run build",
     "server:start": "node ./server/scripts/start",
-    "deploy": "npm run build && npm run server:start"
+    "dev": "webpack-dev-server --port 3000 --hot --inline --colors --history-api-fallback",
+    "dev:quiet": "webpack-dev-server --port 3000 --hot --inline --colors --no-info --history-api-fallback --quiet",
+    "setup": "npm install",
+    "test": "",
+    "deploy": "npm run setup && npm run build && npm run test"
   },
   "repository": {
     "type": "git",
@@ -44,6 +48,7 @@
     "babel-loader": "^5.1.4",
     "html-webpack-plugin": "^1.5.2",
     "object-assign": "^3.0.0",
+    "react-hot-loader": "^1.2.7",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0"
   }
