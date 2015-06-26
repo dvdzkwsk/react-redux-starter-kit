@@ -4,5 +4,5 @@ module.exports = function *loggerMiddleware (next) {
   yield next;
 
   const ms = new Date() - start;
-  console.log('%s %s - %sms', this.method, this.url, ms);
+  console.log('%s %s - %sms', this.method, this.url, new Date() - start);
 };
