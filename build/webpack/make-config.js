@@ -33,11 +33,22 @@ function makeDefaultConfig () {
       }
     },
     module : {
+      preLoaders : [
+        {
+          test : [/\.js$/],
+          loaders : ['eslint-loader'],
+          exclude : /node_modules/
+        }
+      ],
       loaders : [{
         test : [/\.(js|jsx)?$/],
         include : inProject('app'),
         loaders : ['babel?optional[]=runtime&stage=0']
       }]
+    },
+    eslint : {
+      configFile : inProject('.eslintrc'),
+      fairlOnError : __PROD__
     }
   };
 
