@@ -3,6 +3,7 @@ const NODE_ENV = require('../lib/environment');
 module.exports = exports = {
 
   // environment
+  env       : NODE_ENV,
   __DEBUG__ : NODE_ENV === 'development',
 
   // build system
