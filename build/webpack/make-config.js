@@ -1,7 +1,13 @@
 import assign from 'object-assign';
 import webpack from 'webpack';
-import { inProject, inSrc, inDist } from '../../lib/path';
-import { NODE_ENV, __DEV__, __PROD__ } from '../../lib/environment';
+import {
+  NODE_ENV,
+  inProject,
+  inSrc,
+  SRC_DIRNAME,
+  __DEV__,
+  __PROD__
+} from '../../config';
 
 function makeDefaultConfig () {
   const config = {
@@ -26,23 +32,25 @@ function makeDefaultConfig () {
         components  : inSrc('components'),
         constants   : inSrc('constants'),
         dispatchers : inSrc('dispatchers'),
+        layouts     : inSrc('layouts'),
         models      : inSrc('models'),
         services    : inSrc('services'),
         stores      : inSrc('stores'),
-        styles      : inSrc('styles')
+        styles      : inSrc('styles'),
+        views       : inSrc('views')
       }
     },
     module : {
       preLoaders : [
         {
-          test : [/\.js$/],
+          test : /\.(js|jsx)?$/,
           loaders : ['eslint-loader'],
-          exclude : /node_modules/
+          include : inProject(SRC_DIRNAME)
         }
       ],
       loaders : [{
-        test : [/\.(js|jsx)?$/],
-        include : inProject('app'),
+        test : /\.(js|jsx)?$/,
+        include : inProject(SRC_DIRNAME),
         loaders : ['babel?optional[]=runtime&stage=0']
       }]
     },

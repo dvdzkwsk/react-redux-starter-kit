@@ -1,12 +1,12 @@
 doctype html
 html(lang='en')
   head
-    title Wirk StarterKit
+    title Isomorphic React Webpack Start
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
     each style in styles
       link(rel='stylesheet' href=style)
   body
-    div#mount-node !{rendered}
+    | !{rendered}
     each script in scripts
       script(src=script)

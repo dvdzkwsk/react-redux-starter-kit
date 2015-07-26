@@ -1,69 +1,58 @@
 {
-  "name": "wirk-starter",
+  "name": "isomorphic-react-webpack-starter",
   "version": "0.0.0",
-  "description": "Starter kit for Webkit and Isomorphic React with Koa",
+  "description": "TBD",
   "main": "index.js",
-  "engines": {
-    "iojs": ">=2.0.0",
-    "npm": ">=1.3"
-  },
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "webpack && npm run compile:cleanup",
-    "compile:prod": "NODE_ENV=production npm run compile",
-    "compile:cleanup": "rm -f dist/client/index.html; rm -f dist/server/index.html",
-    "build": "npm run compile",
-    "build:prod": "NODE_ENV=production npm run build",
-    "server:start": "node ./server/scripts/start.js",
+    "compile:cleanup": "rm dist/client/index.html",
     "dev": "webpack-dev-server --port 3000 --hot --inline --colors --history-api-fallback",
     "dev:quiet": "webpack-dev-server --port 3000 --hot --inline --colors --no-info --history-api-fallback --quiet",
-    "setup": "npm install",
-    "test": "echo \"test is noop\"",
-    "deploy": "npm run build:prod && npm run test",
-    "postinstall": "npm run deploy"
+    "test": "npm run test:unit",
+    "test:unit": "node ./node_modules/karma/bin/karma start",
+    "deploy": "npm run test && npm run compile",
+    "server:start": "node --harmony ./server/scripts/start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/davezuko/wirk-starter.git"
-  },
-  "keywords": [
-    "Webpack",
-    "React",
-    "Isomorphic",
-    "Koa",
-    "Starter",
-    "Boilerplate"
-  ],
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/davezuko/wirk-starter/issues"
-  },
-  "homepage": "https://github.com/davezuko/wirk-starter#readme",
   "dependencies": {
     "autoprefixer-core": "^5.2.1",
-    "babel": "^5.6.5",
-    "babel-core": "^5.6.5",
+    "autoprefixer-loader": "^1.2.0",
+    "babel": "^5.2.15",
+    "babel-core": "^5.2.15",
     "babel-eslint": "^3.1.23",
-    "babel-loader": "^5.1.4",
-    "babel-runtime": "^5.6.5",
-    "css-loader": "^0.15.1",
-    "csswring": "^3.0.5",
+    "babel-loader": "^5.0.0",
+    "babel-runtime": "^5.4.7",
+    "css-loader": "^0.12.0",
     "eslint": "^0.24.1",
-    "eslint-loader": "^0.14.1",
-    "extract-text-webpack-plugin": "^0.8.2",
-    "html-webpack-plugin": "^1.5.2",
+    "eslint-loader": "^0.14.2",
+    "extract-text-webpack-plugin": "^0.8.0",
+    "html-webpack-plugin": "^1.3.0",
     "koa": "^0.21.0",
     "koa-jade": "^1.1.0",
     "koa-static": "^1.4.9",
+    "node-sass": "^3.2.0",
     "object-assign": "^3.0.0",
-    "postcss-loader": "^0.5.1",
     "react": "^0.13.3",
-    "react-hot-loader": "^1.2.7",
-    "style-loader": "^0.12.3",
-    "webpack": "^1.9.11",
+    "react-router": "^0.13.3",
+    "sass-loader": "^1.0.3",
+    "style-loader": "^0.12.1",
+    "webpack": "^1.9.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^1.9.0"
+    "chai": "^2.3.0",
+    "karma": "^0.12.32",
+    "karma-chai": "^0.1.0",
+    "karma-chai-plugins": "^0.5.0",
+    "karma-coverage": "^0.3.1",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-spec-reporter": "0.0.19",
+    "karma-webpack": "^1.5.1",
+    "mocha": "^2.2.5",
+    "phantomjs-polyfill": "0.0.1",
+    "react-hot-loader": "^1.2.7",
+    "webpack-dev-server": "^1.8.2"
   }
 }

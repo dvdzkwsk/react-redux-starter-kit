@@ -1,11 +1,12 @@
-const fs    = require('fs'),
-      env   = require('../lib/environment'),
-      koa   = require('koa'),
-      jade  = require('koa-jade'),
-      path  = require('../lib/path'),
-      serve = require('koa-static');
+const fs     = require('fs'),
+      koa    = require('koa'),
+      jade   = require('koa-jade'),
+      config = require('../config'),
+      router = require('../dist/server'),
+      React  = require('react'),
+      serve  = require('koa-static');
 
-const app  = koa();
+const app = koa();
 
 // ------------------------------------
 // Response Time Header and Logging
@@ -16,17 +17,17 @@ app.use(require('./middleware/logger'));
 // ------------------------------------
 // Static File Middleware
 // ------------------------------------
-app.use(serve(path.inDist('client')));
+app.use(serve(config.inDist('client')));
 
 // ------------------------------------
 // Jade Configuration and Globals
 // ------------------------------------
-const clientFiles = fs.readdirSync(path.inDist('client'));
+const clientFiles = fs.readdirSync(config.inDist('client'));
 
 app.use(jade.middleware({
   viewPath : `${__dirname}/views`,
-  debug    : env.__DEBUG__,
-  pretty   : env.__DEBUG__,
+  debug    : config.__DEBUG__,
+  pretty   : config.__DEBUG__,
   locals   : {
 
     // TODO: script ordering currently happens to be correct if it's in
@@ -37,7 +38,7 @@ app.use(jade.middleware({
       }).reverse(),
 
     // TODO: currently only one stylesheet is generated, but this should be
-    // more written to be more flexible and not ignore potential cascade issues.
+    // written to be more flexible and not ignore potential cascade issues.
     styles : clientFiles
       .filter(function (file) {
         return /.css$/.test(file);
@@ -48,6 +49,14 @@ app.use(jade.middleware({
 // ------------------------------------
 // View Rendering
 // ------------------------------------
-app.use(require('./middleware/render'));
+app.use(function *reactRenderer () {
+  if (!/favicon/.test(this.request.url)) {
+    router(this.request.url, function (rendered) {
+      this.render('index', {
+        rendered : rendered
+      });
+    }.bind(this));
+  }
+});
 
 module.exports = app;
