@@ -34,6 +34,7 @@ function makeDefaultConfig () {
         dispatchers : inSrc('dispatchers'),
         layouts     : inSrc('layouts'),
         models      : inSrc('models'),
+        routes      : inSrc('routes'),
         services    : inSrc('services'),
         stores      : inSrc('stores'),
         styles      : inSrc('styles'),

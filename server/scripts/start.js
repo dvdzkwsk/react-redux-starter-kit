@@ -1,5 +1,5 @@
 const server = require('../index'),
-      config = require('../../config');
+      port   = require('../../config').SERVER_PORT;
 
-server.listen(config.SERVER_PORT);
-console.log(`Koa server listening on port ${config.SERVER_PORT}.`);
+server.listen(port);
+console.log(`Koa server listening on port: ${port}.`);

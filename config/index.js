@@ -31,5 +31,5 @@ module.exports = exports = {
   VENDOR_DEPENDENCIES : ['react'],
 
   // koa server
-  SERVER_PORT : 4000
+  SERVER_PORT : process.env.PORT || 4000
 };

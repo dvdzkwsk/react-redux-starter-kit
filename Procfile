@@ -1,1 +1,1 @@
-web: node ./server/scripts/start.js
+web: npm run server:start
