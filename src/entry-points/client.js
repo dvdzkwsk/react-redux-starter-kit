@@ -1,7 +1,5 @@
-import Router from 'react-router';
-import React  from 'react';
-import routes from '../routes';
+import React from 'react';
+import App from 'containers/app';
+import { history } from 'react-router/lib/BrowserHistory';
 
-Router.run(routes, Router.HistoryLocation, (Root) => {
-  React.render(<Root />, document.body);
-});
+React.render(<App history={history} />, document.body);

@@ -28,7 +28,14 @@ module.exports = exports = {
   inDist    : inProject.bind(undefined, DIST_DIRNAME),
 
   // build system
-  VENDOR_DEPENDENCIES : ['react'],
+  // these will be bundled separately from the core app
+  VENDOR_DEPENDENCIES : [
+    'immutable',
+    'react',
+    'react-redux',
+    'react-router',
+    'redux'
+  ],
 
   // koa server
   SERVER_PORT : process.env.PORT || 4000

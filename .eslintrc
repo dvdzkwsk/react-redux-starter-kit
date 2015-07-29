@@ -157,7 +157,7 @@
     "one-var": [1, {
       "var"   : "always",
       "let"   : "always",
-      "const" : "never"
+      "const" : "always"
     }],
     "operator-assignment": [0, "always"],
     "padded-blocks": [2, "never"],

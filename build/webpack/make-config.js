@@ -20,8 +20,8 @@ function makeDefaultConfig () {
         'process.env' : {
           'NODE_ENV' : JSON.stringify(NODE_ENV)
         },
-        '__DEV__'  : __DEV__,
-        '__PROD__' : __PROD__
+        '__DEV__'   : __DEV__,
+        '__PROD__'  : __PROD__
       }),
       new webpack.optimize.DedupePlugin()
     ],
@@ -31,9 +31,11 @@ function makeDefaultConfig () {
         actions     : inSrc('actions'),
         components  : inSrc('components'),
         constants   : inSrc('constants'),
+        containers  : inSrc('containers'),
         dispatchers : inSrc('dispatchers'),
         layouts     : inSrc('layouts'),
         models      : inSrc('models'),
+        reducers    : inSrc('reducers'),
         routes      : inSrc('routes'),
         services    : inSrc('services'),
         stores      : inSrc('stores'),
