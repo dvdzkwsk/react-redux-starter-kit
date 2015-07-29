@@ -5,7 +5,13 @@ import {
   TODO_TOGGLE_COMPLETE
 } from 'constants/todo';
 
-const initialState = Immutable.Iterable.Indexed(); // eslint-disable-line
+/* eslint-disable */
+const initialState = Immutable.Iterable.Indexed([
+  Immutable.Map({ complete : true,  copy : 'Install this boilerplate' }),
+  Immutable.Map({ complete : true,  copy : 'Check out the dev server' }),
+  Immutable.Map({ complete : false, copy : 'Get started on your project!' })
+]);
+/* eslint-enable */
 
 export default function todos (state = initialState, action) {
   const { type, payload } = action;
