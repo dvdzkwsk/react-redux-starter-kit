@@ -1,8 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as TodoActions from 'actions/todo';
-import store from 'stores';
 
 @connect(state => ({
   todos : state.todos
@@ -14,7 +11,7 @@ export default class HomeView extends React.Component {
 
   renderTodos (todos) {
     return todos.map(todo =>
-      <li className='todo__item'>{todo.copy}</li>
+      <li className='todo__item' key={todo.copy}>{todo.copy}</li>
     );
   }
 
