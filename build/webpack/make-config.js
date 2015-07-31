@@ -5,6 +5,7 @@ import {
   inProject,
   inSrc,
   SRC_DIRNAME,
+  __DEBUG__,
   __DEV__,
   __PROD__
 } from '../../config';
@@ -20,6 +21,7 @@ function makeDefaultConfig () {
         'process.env' : {
           'NODE_ENV' : JSON.stringify(NODE_ENV)
         },
+        '__DEBUG__' : __DEBUG__,
         '__DEV__'   : __DEV__,
         '__PROD__'  : __PROD__
       }),
