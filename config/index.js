@@ -1,6 +1,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const resolve = require('path').resolve,
+      yargs   = require('yargs').argv,
       _slice  = [].slice;
 
 const SRC_DIRNAME  = 'src',
@@ -15,7 +16,7 @@ module.exports = exports = {
 
   // environment
   NODE_ENV  : process.env.NODE_ENV,
-  __DEBUG__ : process.env.NODE_ENV === 'development',
+  __DEBUG__ : !!yargs.debug,
   __DEV__   : process.env.NODE_ENV === 'development',
   __PROD__  : process.env.NODE_ENV === 'production',
 

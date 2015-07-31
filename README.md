@@ -54,11 +54,16 @@ Similar to `npm run test`, but only runs e2e tests - _NOT YET AVAILABLE_.
 Helper script to run tests and then, on success, compile your application.
 
 #### `npm run dev`
-Runs the webpack build system just like in `compile`
+Runs the webpack build system just like in `compile` but enables HMR and react hot-loader. The webpack dev server can be found at `localhost:3000`.
+
+#### `npm run dev:debug`'
+Same as `npm run dev` but enables `--debug` flag automatically.
 
 #### `npm run dev:quiet`
+Same as `npm run dev` but disables verbose debugging information.
 
 #### `npm run server:start`
+Kicks off the Koa server (defaults to `localhost:4000`).
 
 Webpack
 -------
@@ -119,6 +124,15 @@ Deployment
 
 Troubleshooting
 ---------------
+
+### `--debug` isn't working
+If you're using one of the pre-configured npm scripts, make sure you follow npm's syntax:
+
+`npm run [command] [-- <args>]`
+
+As an example, `npm run compile` would look like this:
+
+`npm run compile -- --debug`
 
 TODO
 ----
