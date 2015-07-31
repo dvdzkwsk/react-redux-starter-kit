@@ -51,7 +51,7 @@ app.use(jade.middleware({
 // ------------------------------------
 app.use(function *reactRenderer () {
   if (!/favicon/.test(this.request.url)) {
-    router(this.request.url, function (rendered) {
+    router(this.request, function (rendered) {
       this.render('index', {
         rendered : rendered
       });
