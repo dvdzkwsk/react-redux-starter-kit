@@ -4,7 +4,7 @@ import * as reducers from 'reducers';
 
 var buildStore;
 
-if (__DEV__) {
+if (__DEBUG__) {
   buildStore = compose(devTools(), createStore);
 } else {
   buildStore = createStore;

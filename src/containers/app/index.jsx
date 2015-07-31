@@ -22,15 +22,15 @@ export default class ClientApp extends React.Component {
     super();
   }
 
-  // renderDevTools () {
-  //   if (__DEV__ && false) {
-  //     return (
-  //       <DebugPanel top left bottom key='debugPanel'>
-  //         <DevTools store={store} monitor={LogMonitor} />
-  //       </DebugPanel>
-  //     );
-  //   }
-  // }
+  renderDevTools () {
+    if (__DEBUG__) {
+      return (
+        <DebugPanel top left bottom key='debugPanel'>
+          <DevTools store={store} monitor={LogMonitor} />
+        </DebugPanel>
+      );
+    }
+  }
 
   renderRouter () {
     var router;
@@ -53,6 +53,7 @@ export default class ClientApp extends React.Component {
   render () {
     return (
       <div>
+        {this.renderDevTools()}
         {this.renderRouter()}
       </div>
     );

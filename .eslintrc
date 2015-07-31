@@ -12,6 +12,7 @@
   "globals": {
     "__DEV__"    : false,
     "__PROD__"   : false,
+    "__DEBUG__"  : false,
     "__CLIENT__" : false,
     "__SERVER__" : false
   },

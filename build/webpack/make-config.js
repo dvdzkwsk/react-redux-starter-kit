@@ -10,8 +10,6 @@ import {
   __PROD__
 } from '../../config';
 
-console.log('DEBUG = ', __DEBUG__);
-
 function makeDefaultConfig () {
   const config = {
     output : {
