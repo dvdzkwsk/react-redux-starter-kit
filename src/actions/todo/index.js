@@ -4,10 +4,10 @@ import {
   TODO_TOGGLE_COMPLETE
 } from 'constants/todo';
 
-export function createTodo (text) {
+export function createTodo (copy) {
   return {
     type    : TODO_CREATE,
-    payload : { text }
+    payload : { copy }
   };
 }
 

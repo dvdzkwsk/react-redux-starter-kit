@@ -6,8 +6,13 @@ import {
   TODO_TOGGLE_COMPLETE
 } from 'constants/todo';
 
+const uid = (seed => () => seed++)(0);
 function createTodoItem (copy, complete = false) {
-  return Immutable.Map({ copy, complete });
+  return Immutable.Map({
+    id : uid(),
+    copy,
+    complete
+  });
 }
 
 const initialState = Immutable.List([
@@ -22,12 +27,18 @@ export default function todos (state = initialState, action) {
 
   switch (type) {
     case TODO_CREATE:
-
-      break;
+      return state.push(
+        createTodoItem(payload.copy)
+      );
     case TODO_DESTROY:
-      break;
+      return state.filter(todo =>
+        todo.get('id') !== payload.id
+      );
     case TODO_TOGGLE_COMPLETE:
-      break;
+      return state.map(todo =>
+        todo.get('id') === payload.id ?
+          todo.set('complete', !todo.get('complete')) : todo
+      );
     default:
       return state;
   }
