@@ -1,5 +1,6 @@
-Isomorphic React Redux Koa Starter Kit
-======================================
+React Redux Koa Starter Kit
+===========================
+Starter kit to get you up and running with a bunch of awesome new technologies. This boilerplate provides server-side rendering of your routes (by way of Koa and react-router), and the sample application gives you a quick demo of Redux. All of this sits on top of a configurable, feature-rich Webpack build system that's already setup to provide unit testing, linting, hot-reloading, sass-loading with css-extraction, and a whole lot more. Check out the full feature list below!
 
 Table of Contents
 -----------------
@@ -18,7 +19,7 @@ Features
 * React
 * react-router (`1.0.0-beta`)
 * redux (`1.0.0-beta`)
-  * redux devtools
+  * redux devtools (enabled when you use `--debug`)
 * Immutable.js
 * Karma
   * Mocha w/ Chai
@@ -28,6 +29,7 @@ Features
   * webpack-dev-server
   * react-hot-loader
   * sass-loader
+    * CSS extraction in production mode
   * babel w/ babel-runtime
   * eslint-loader
   * pre-configured aliases and globals
@@ -56,7 +58,7 @@ Helper script to run tests and then, on success, compile your application.
 #### `npm run dev`
 Runs the webpack build system just like in `compile` but enables HMR and react hot-loader. The webpack dev server can be found at `localhost:3000`.
 
-#### `npm run dev:debug`'
+#### `npm run dev:debug`
 Same as `npm run dev` but enables `--debug` flag automatically.
 
 #### `npm run dev:quiet`
@@ -102,7 +104,7 @@ True when `process.env.NODE_ENV` is `development`
 True when `process.env.NODE_ENV` is `production`
 
 #### `__DEBUG__`
-True when the compiler is run with `--debug` (any environment)
+True when the compiler is run with `--debug` (any environment).
 
 #### `__CLIENT__`
 True when the client bundler is running.
@@ -136,5 +138,5 @@ As an example, `npm run compile` would look like this:
 
 TODO
 ----
-* [ ] Better developer tools for server code
+* [ ] Nodemon or something for server
 * [ ] Better developer tools for server bundle
