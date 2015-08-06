@@ -19,13 +19,14 @@ Features
 * React
 * react-router (`1.0.0-beta`)
 * redux (`1.0.0-beta`)
-  * redux devtools (enabled when you use `--debug`)
+  * redux devtools (enabled with `--debug` flag)
 * Immutable.js
 * Karma
   * Mocha w/ Chai
   * PhantomJS
 * Webpack
   * server and client bundles
+    * client bundle splits app code vs. vendor dependencies
   * webpack-dev-server
   * react-hot-loader
   * sass-loader
@@ -66,6 +67,10 @@ Same as `npm run dev` but disables verbose debugging information.
 
 #### `npm run server:start`
 Kicks off the Koa server (defaults to `localhost:4000`).
+
+### Configuration
+
+Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, as well as tweak what ports Webpack and WebpackDevServer run on.
 
 Webpack
 -------
@@ -138,5 +143,6 @@ As an example, `npm run compile` would look like this:
 
 TODO
 ----
+* [ ] Standardize how configs are built in ~/build (either all functions or none)
 * [ ] Nodemon or something for server
 * [ ] Better developer tools for server bundle
