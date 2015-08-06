@@ -1,1 +1,3 @@
-export default (config) => config;
+module.exports = function makeServerDevelopmentConfig (config) {
+  return config;
+};

@@ -1,12 +1,12 @@
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+const webpack = require('webpack'),
+      ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-export default function (config) {
+module.exports = function makeClientProductionConfig (config) {
   config.plugins.push(
     new ExtractTextPlugin('[name].[contenthash].css')
   );
 
-  config.module.loaders = config.module.loaders.map(loader => {
+  config.module.loaders = config.module.loaders.map(function (loader) {
 
     // Extract CSS to a file
     if (/css/.test(loader.test)) {

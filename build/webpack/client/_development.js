@@ -1,13 +1,13 @@
-export default function (config) {
+module.exports = function makeClientDevelopmentConfig (config) {
   config.devtool = 'eval';
   config.entry.app.push(
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/dev-server'
   );
 
-  config.module.loaders = config.module.loaders.map(loader => {
+  config.module.loaders = config.module.loaders.map(function (loader) {
     if (/js/.test(loader.test)) {
-      loader.loaders = ['react-hot', ...loader.loaders];
+      loader.loaders.unshift('react-hot');
     }
     return loader;
   });

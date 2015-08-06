@@ -1,14 +1,6 @@
-import assign from 'object-assign';
-import webpack from 'webpack';
-import {
-  NODE_ENV,
-  inProject,
-  inSrc,
-  SRC_DIRNAME,
-  __DEBUG__,
-  __DEV__,
-  __PROD__
-} from '../../config';
+const assign        = require('object-assign'),
+      webpack       = require('webpack'),
+      projectConfig = require('../../config');
 
 function makeDefaultConfig () {
   const config = {
@@ -19,30 +11,30 @@ function makeDefaultConfig () {
     plugins : [
       new webpack.DefinePlugin({
         'process.env' : {
-          'NODE_ENV' : JSON.stringify(NODE_ENV)
+          'NODE_ENV' : JSON.stringify(projectConfig.NODE_ENV)
         },
-        '__DEBUG__' : __DEBUG__,
-        '__DEV__'   : __DEV__,
-        '__PROD__'  : __PROD__
+        '__DEBUG__' : projectConfig.__DEBUG__,
+        '__DEV__'   : projectConfig.__DEV__,
+        '__PROD__'  : projectConfig.__PROD__
       }),
       new webpack.optimize.DedupePlugin()
     ],
     resolve : {
       extensions : ['', '.js', '.jsx'],
       alias : {
-        actions     : inSrc('actions'),
-        components  : inSrc('components'),
-        constants   : inSrc('constants'),
-        containers  : inSrc('containers'),
-        dispatchers : inSrc('dispatchers'),
-        layouts     : inSrc('layouts'),
-        models      : inSrc('models'),
-        reducers    : inSrc('reducers'),
-        routes      : inSrc('routes'),
-        services    : inSrc('services'),
-        stores      : inSrc('stores'),
-        styles      : inSrc('styles'),
-        views       : inSrc('views')
+        actions     : projectConfig.inSrc('actions'),
+        components  : projectConfig.inSrc('components'),
+        constants   : projectConfig.inSrc('constants'),
+        containers  : projectConfig.inSrc('containers'),
+        dispatchers : projectConfig.inSrc('dispatchers'),
+        layouts     : projectConfig.inSrc('layouts'),
+        models      : projectConfig.inSrc('models'),
+        reducers    : projectConfig.inSrc('reducers'),
+        routes      : projectConfig.inSrc('routes'),
+        services    : projectConfig.inSrc('services'),
+        stores      : projectConfig.inSrc('stores'),
+        styles      : projectConfig.inSrc('styles'),
+        views       : projectConfig.inSrc('views')
       }
     },
     module : {
@@ -50,32 +42,32 @@ function makeDefaultConfig () {
         {
           test : /\.(js|jsx)?$/,
           loaders : ['eslint-loader'],
-          include : inProject(SRC_DIRNAME)
+          include : projectConfig.inProject(projectConfig.SRC_DIRNAME)
         }
       ],
       loaders : [{
         test : /\.(js|jsx)?$/,
-        include : inProject(SRC_DIRNAME),
+        include : projectConfig.inProject(projectConfig.SRC_DIRNAME),
         loaders : ['babel?optional[]=runtime&stage=0']
       }]
     },
     eslint : {
-      configFile : inProject('.eslintrc'),
-      fairlOnError : __PROD__
+      configFile : projectConfig.inProject('.eslintrc'),
+      fairlOnError : projectConfig.__PROD__
     }
   };
 
   // ----------------------------------
   // Environment-Specific Defaults
   // ----------------------------------
-  if (__DEV__) {
+  if (projectConfig.__DEV__) {
     config.plugins.push(
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
     );
   }
 
-  if (__PROD__) {
+  if (projectConfig.__PROD__) {
     config.plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         output : {
@@ -92,4 +84,6 @@ function makeDefaultConfig () {
   return config;
 };
 
-export default (config) => assign({}, makeDefaultConfig(), config);
+module.exports = function makeConfig (configModifier) {
+  return assign({}, makeDefaultConfig(), configModifier);
+};

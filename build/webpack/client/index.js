@@ -1,20 +1,20 @@
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import makeConfig from '../make-config';
-import { inSrc, inDist, NODE_ENV, VENDOR_DEPENDENCIES } from '../../../config';
+const webpack           = require('webpack'),
+      makeConfig        = require('../make-config'),
+      projectConfig     = require('../../../config'),
+      HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = makeConfig({
   name   : 'Client',
   target : 'web',
   entry  : {
     app : [
-      inSrc('entry-points/client')
+      projectConfig.inSrc('entry-points/client')
     ],
-    vendor : VENDOR_DEPENDENCIES
+    vendor : projectConfig.VENDOR_DEPENDENCIES
   },
   output : {
     filename : '[name].[hash].js',
-    path     : inDist('client')
+    path     : projectConfig.inDist('client')
   }
 });
 
@@ -27,7 +27,7 @@ config.plugins.push(
     '__SERVER__' : false
   }),
   new HtmlWebpackPlugin({
-    template : inSrc('index.html'),
+    template : projectConfig.inSrc('index.html'),
     hash     : true
   }),
   new webpack.optimize.CommonsChunkPlugin('vendor', '[name].[hash].js')
@@ -43,11 +43,11 @@ config.module.loaders.push(
       'style-loader',
       'css-loader',
       'autoprefixer?browsers=last 2 version',
-      `sass-loader?includePaths[]=${inSrc('styles')}`
+      `sass-loader?includePaths[]=${projectConfig.inSrc('styles')}`
     ]
   }
 );
 
-export default (configName) => {
-  return require(`./_${configName || NODE_ENV}`)(config);
+module.exports = function makeClientConfig (type) {
+  return require('./_' + (type || projectConfig.NODE_ENV))(config);
 };

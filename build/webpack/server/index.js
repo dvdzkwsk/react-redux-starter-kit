@@ -1,18 +1,18 @@
-import webpack from 'webpack';
-import makeConfig from '../make-config';
-import { inSrc, inDist, NODE_ENV } from '../../../config';
+const webpack       = require('webpack'),
+      makeConfig    = require('../make-config'),
+      projectConfig = require('../../../config');
 
 const config = makeConfig({
   name   : 'server',
   target : 'node',
   entry  : {
     app : [
-      inSrc('entry-points/server')
+      projectConfig.inSrc('entry-points/server')
     ]
   },
   output : {
     filename : 'index.js',
-    path     : inDist('server'),
+    path     : projectConfig.inDist('server'),
     libraryTarget : 'commonjs2'
   },
   preloaders : []
@@ -37,11 +37,11 @@ config.module.loaders.push(
     loaders : [
       'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]',
       'autoprefixer?browsers=last 2 version',
-      `sass-loader?includePaths[]=${inSrc('styles')}`
+      `sass-loader?includePaths[]=${projectConfig.inSrc('styles')}`
     ]
   }
 );
 
-export default (configName) => {
-  return require(`./_${configName || NODE_ENV}`)(config);
+module.exports = function makeServerConfig (type) {
+  return require('./_' + (type || projectConfig.NODE_ENV))(config);
 };

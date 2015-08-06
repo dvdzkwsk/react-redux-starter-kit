@@ -38,6 +38,7 @@ module.exports = exports = {
     'redux'
   ],
 
-  // koa server
-  SERVER_PORT : process.env.PORT || 4000
+  // server configuration
+  WEBPACK_PORT : 3000,
+  SERVER_PORT  : process.env.PORT || 4000
 };
