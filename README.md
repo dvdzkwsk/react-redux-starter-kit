@@ -26,7 +26,7 @@ Features
   * PhantomJS
 * Webpack
   * server and client bundles
-    * client bundle splits app code vs. vendor dependencies
+    * client bundle splits app code from vendor dependencies
   * webpack-dev-server
   * react-hot-loader
   * sass-loader
@@ -70,7 +70,7 @@ Kicks off the Koa server (defaults to `localhost:4000`).
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, as well as tweak what ports Webpack and WebpackDevServer run on.
+Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, as well as tweak what ports Webpack and WebpackDevServer run on. You'll also be able to configure what packages webpack should treat as vendor dependencies.
 
 Webpack
 -------
@@ -81,10 +81,10 @@ As mentioned in features, the default Webpack configuration provides some global
 These can be used as such:
 
 ```js
-require('../../components/my-component') // without alias
-require('components/my-component') // with alias
+import MyComponent from '../../components/my-component'; // without alias
+import MyComponent from 'components/my-component'; // with alias
 
-// Available aliases:
+  // Available aliases:
   actions     => '~/src/actions'
   components  => '~/src/components'
   constants   => '~/src/constants'
