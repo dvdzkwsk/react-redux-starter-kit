@@ -37,7 +37,7 @@ config.module.loaders.push(
     loaders : [
       'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]',
       'autoprefixer?browsers=last 2 version',
-      `sass-loader?includePaths[]=${projectConfig.inSrc('styles')}`
+      'sass-loader?includePaths[]=' + projectConfig.inSrc('styles')
     ]
   }
 );
