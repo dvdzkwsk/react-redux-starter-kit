@@ -4,5 +4,5 @@ module.exports = function *responseTimeMiddleware (next) {
   yield next;
 
   const ms = new Date() - start;
-  this.set('X-Response-Time', `${ms}ms`);
+  this.set('X-Response-Time', ms + 'ms');
 };
