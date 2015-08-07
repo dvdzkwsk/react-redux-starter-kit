@@ -25,16 +25,19 @@ function renderMarkupInTemplate (markup) {
   return template.replace('${render}', markup);
 }
 
-// TODO: shouldn't have to do this favicon check
 // TODO: gzipping
 // TODO: caching
+// TODO: should only attempt to render if the request.url is valid.
+// TODO: static middleware should be above this, but need to figure out
+// how to ignore index.html first...
 app.use(function *reactRenderer (next) {
   if (!/.(js|css|ico)/.test(this.request.url)) {
     router(this.request, function (rendered) {
       this.body = renderMarkupInTemplate(rendered);
     }.bind(this));
+  } else {
+    yield next;
   }
-  yield next;
 });
 
 // ------------------------------------
