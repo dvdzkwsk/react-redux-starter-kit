@@ -36,6 +36,8 @@ Features
   * pre-configured aliases and globals
   * easy per-environment configuration
 
+**NOTE**: Bootstrap is loaded from its CDN for the sole purposes of making the example not look hideous. I didn't want to actually include it as an application dependency, so if you wish to remove it just delete its `<link>` tag in `~/src/index.html`.
+
 Usage
 -----
 
@@ -143,6 +145,7 @@ As an example, `npm run compile` would look like this:
 
 TODO
 ----
+* [ ] Create actual TODO components
 * [ ] Standardize how configs are built in ~/build (either all functions or none)
 * [ ] Nodemon or something for server
 * [ ] Better developer tools for server bundle

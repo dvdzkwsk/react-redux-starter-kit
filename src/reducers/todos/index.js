@@ -7,19 +7,18 @@ import {
 } from 'constants/todo';
 
 const uid = (seed => () => seed++)(0);
-function createTodoItem (copy, complete = false) {
+function createTodoItem (copy) {
   return Immutable.Map({
-    id : uid(),
-    copy,
-    complete
+    id       : uid(),
+    copy     : copy,
+    complete : false
   });
 }
 
 const initialState = Immutable.List([
-  { complete : true,  copy : 'Install this boilerplate' },
-  { complete : true,  copy : 'Check out the dev server' },
-  { complete : false, copy : 'Get started on your project!' }
-].map(({ copy, complete }) => createTodoItem(copy, complete)));
+  'Read the docs',
+  'Build something cool'
+].map(createTodoItem));
 /* eslint-enable */
 
 export default function todos (state = initialState, action) {

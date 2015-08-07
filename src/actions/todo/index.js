@@ -11,10 +11,10 @@ export function createTodo (copy) {
   };
 }
 
-export function toggleCompleteTodo (todo) {
+export function toggleCompleteTodo (id) {
   return {
     type    : TODO_TOGGLE_COMPLETE,
-    payload : { todo }
+    payload : { id }
   };
 }
 

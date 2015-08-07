@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createTodo, destroyTodo } from 'actions/todo';
+import { createTodo, destroyTodo, toggleCompleteTodo } from 'actions/todo';
 
 @connect(state => ({
   todos : state.todos
@@ -35,12 +35,21 @@ export default class HomeView extends React.Component {
     this.props.dispatch(destroyTodo(id));
   }
 
+  _toggleComplete (id) {
+    this.props.dispatch(toggleCompleteTodo(id));
+  }
+
   renderTodos (todos) {
     return todos.map(todo =>
-      <li className='todo__item'
-          key={todo.id}
-          onClick={this._destroyTodo.bind(this, todo.id)}>
-        {todo.copy}
+      <li className='todo__item' key={todo.id}>
+        <div className='checkbox'
+             onChange={this._toggleComplete.bind(this, todo.id)}>
+          <label>
+            <input type='checkbox'
+                   checked={todo.complete}/>
+            {todo.copy}
+          </label>
+        </div>
       </li>
     );
   }
@@ -51,15 +60,20 @@ export default class HomeView extends React.Component {
     return (
       <div className='view view--home'>
         <h1>Stuff that you should do. Maybe, I guess.</h1>
-        <ul className='todo__list'>
+        <ul className='todo__list list-unstyled'>
           {this.renderTodos(todos)}
         </ul>
-        <form className='create-todo' onSubmit={::this._createTodo}>
-          <label htmlFor='todo'>Another thing to do:</label>
-          <input name='todo'
-                 value={this.state.todo}
-                 onChange={this._bindTo('todo')} />
-          <button className='btn'>Create Todo</button>
+        <form className='form-inline' onSubmit={::this._createTodo}>
+          <div className='form-group'>
+            <input name='todo'
+                   className='form-control'
+                   placeholder='Do something else!'
+                   value={this.state.todo}
+                   onChange={this._bindTo('todo')} />
+          </div>
+          <button type='submit' className='btn btn-default'>
+            Create Todo
+          </button>
         </form>
       </div>
     );
