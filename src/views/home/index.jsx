@@ -31,22 +31,18 @@ export default class HomeView extends React.Component {
     }
   }
 
-  _destroyTodo (id) {
-    this.props.dispatch(destroyTodo(id));
-  }
-
-  _toggleComplete (id) {
-    this.props.dispatch(toggleCompleteTodo(id));
+  _toggleComplete (copy) {
+    this.props.dispatch(toggleCompleteTodo(copy));
   }
 
   renderTodos (todos) {
-    return todos.map(todo =>
-      <li className='todo__item' key={todo.id}>
-        <div className='checkbox'
-             onChange={this._toggleComplete.bind(this, todo.id)}>
+    return todos.map((todo, idx) =>
+      <li className='todo__item' key={idx}>
+        <div className='checkbox'>
           <label>
             <input type='checkbox'
-                   checked={todo.complete}/>
+                   checked={todo.complete}
+                   onChange={this._toggleComplete.bind(this, todo.copy)}/>
             {todo.copy}
           </label>
         </div>

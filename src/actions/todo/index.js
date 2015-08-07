@@ -11,16 +11,16 @@ export function createTodo (copy) {
   };
 }
 
-export function toggleCompleteTodo (id) {
+export function toggleCompleteTodo (copy) {
   return {
     type    : TODO_TOGGLE_COMPLETE,
-    payload : { id }
+    payload : { copy }
   };
 }
 
-export function destroyTodo (id) {
+export function destroyTodo (copy) {
   return {
     type    : TODO_DESTROY,
-    payload : { id }
+    payload : { copy }
   };
 }

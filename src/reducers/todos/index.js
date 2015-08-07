@@ -6,9 +6,7 @@ import {
   TODO_TOGGLE_COMPLETE
 } from 'constants/todo';
 
-const uid = ((_seed) => () => _seed++)(0);
 const createTodoItem = (copy) => Immutable.Map({
-  id       : uid(),
   copy     : copy,
   complete : false
 });
@@ -29,11 +27,11 @@ export default function todos (state = initialState, action) {
       );
     case TODO_DESTROY:
       return state.filter(todo =>
-        todo.get('id') !== payload.id
+        todo.get('copy') !== payload.copy
       );
     case TODO_TOGGLE_COMPLETE:
       return state.map(todo =>
-        todo.get('id') === payload.id ?
+        todo.get('copy') === payload.copy ?
           todo.set('complete', !todo.get('complete')) : todo
       );
     default:

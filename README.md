@@ -149,5 +149,5 @@ TODO
 * [ ] Standardize how configs are built in ~/build (either all functions or none)
 * [ ] Nodemon or something for server
 * [ ] Better developer tools for server bundle
-* [ ] Server inclusion of webpack scripts is _really bad_, find better solution.
 * [ ] Add ability to bake all routes into pre-rendered html files
+* [ ] Need a way to get koa-static to ignore `index.html` (I don't want to use its `defer` option)
