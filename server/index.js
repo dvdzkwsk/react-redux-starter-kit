@@ -14,21 +14,11 @@ app.use(require('./middleware/response-time'));
 app.use(require('./middleware/logger'));
 
 // ------------------------------------
-// Static File Middleware
-// ------------------------------------
-app.use(serve(config.inDist('client')));
-
-// ------------------------------------
-// Jade Configuration and Globals
-// ------------------------------------
-const clientFiles = fs.readdirSync(config.inDist('client'));
-
-// ------------------------------------
 // View Rendering
 // ------------------------------------
 // TODO: this is... not awesome. Figure out a better way without having to
 // insert dummy placeholders in the template.
-const template = fs.readFileSync(config.inDist('client/template.html'), 'utf-8')
+const template = fs.readFileSync(config.inDist('client/index.html'), 'utf-8')
   .replace('<div id="mount"></div>', '<div id="mount">${render}</div>')
 
 function renderMarkupInTemplate (markup) {
@@ -38,12 +28,18 @@ function renderMarkupInTemplate (markup) {
 // TODO: shouldn't have to do this favicon check
 // TODO: gzipping
 // TODO: caching
-app.use(function *reactRenderer () {
-  if (!/favicon/.test(this.request.url)) {
+app.use(function *reactRenderer (next) {
+  if (!/.(js|css|ico)/.test(this.request.url)) {
     router(this.request, function (rendered) {
       this.body = renderMarkupInTemplate(rendered);
     }.bind(this));
   }
+  yield next;
 });
+
+// ------------------------------------
+// Static File Middleware
+// ------------------------------------
+app.use(serve(config.inDist('client')));
 
 module.exports = app;
