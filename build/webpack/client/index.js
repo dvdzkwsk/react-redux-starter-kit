@@ -46,7 +46,7 @@ config.module.loaders.push(
       'style-loader',
       'css-loader',
       'autoprefixer?browsers=last 2 version',
-      `sass-loader?includePaths[]=${projectConfig.inSrc('styles')}`
+      'sass-loader?includePaths[]=' + projectConfig.inSrc('styles')
     ]
   }
 );
