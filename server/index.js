@@ -26,6 +26,8 @@ const clientFiles = fs.readdirSync(config.inDist('client'));
 // ------------------------------------
 // View Rendering
 // ------------------------------------
+// TODO: this is... not awesome. Figure out a better way without having to
+// insert dummy placeholders in the template.
 const template = fs.readFileSync(config.inDist('client/template.html'), 'utf-8')
   .replace('<div id="mount"></div>', '<div id="mount">${render}</div>')
 

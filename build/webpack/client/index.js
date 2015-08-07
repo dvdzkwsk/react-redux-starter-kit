@@ -29,7 +29,7 @@ config.plugins.push(
   new HtmlWebpackPlugin({
     template : projectConfig.inSrc('index.html'),
     hash     : true,
-    filename : 'template.html',
+    filename : 'index.html',
     minify   : projectConfig.__PROD__,
     inject   : 'body'
   }),
