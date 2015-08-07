@@ -44,7 +44,7 @@ Usage
 #### `npm run compile`
 Runs the Webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`).
 
-**NOTE**: I'm still searching for a good solution for when to run the server entry point bundler. As a result - for the time being - if you wish to run the Koa server you'll need to run `compile` with `NODE_ENV=production` first.
+**NOTE**: I'm still searching for a good solution for when to run the server entry point bundler, since it doesn't make much sense to run webpack on it when you're just using the dev server. As a result (only for the time being) if you wish to run the Koa server you'll need to run `compile` with `NODE_ENV=production` first, since that's the only time the server bundle gets compiled.
 
 #### `npm run test`
 Runs all tests for the application. In development mode this will run in watch mode and re-run individual test files when they change; in production mode a failing test will fail your build.
@@ -149,3 +149,5 @@ TODO
 * [ ] Standardize how configs are built in ~/build (either all functions or none)
 * [ ] Nodemon or something for server
 * [ ] Better developer tools for server bundle
+* [ ] Server inclusion of webpack scripts is _really bad_, find better solution.
+* [ ] Add ability to bake all routes into pre-rendered html files

@@ -6,14 +6,12 @@ import {
   TODO_TOGGLE_COMPLETE
 } from 'constants/todo';
 
-const uid = (seed => () => seed++)(0);
-function createTodoItem (copy) {
-  return Immutable.Map({
-    id       : uid(),
-    copy     : copy,
-    complete : false
-  });
-}
+const uid = ((_seed) => () => _seed++)(0);
+const createTodoItem = (copy) => Immutable.Map({
+  id       : uid(),
+  copy     : copy,
+  complete : false
+});
 
 const initialState = Immutable.List([
   'Read the docs',

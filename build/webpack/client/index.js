@@ -28,7 +28,10 @@ config.plugins.push(
   }),
   new HtmlWebpackPlugin({
     template : projectConfig.inSrc('index.html'),
-    hash     : true
+    hash     : true,
+    filename : 'template.html',
+    minify   : projectConfig.__PROD__,
+    inject   : 'body'
   }),
   new webpack.optimize.CommonsChunkPlugin('vendor', '[name].[hash].js')
 );
