@@ -14,7 +14,8 @@ const config = makeConfig({
   },
   output : {
     filename : '[name].[hash].js',
-    path     : projectConfig.inDist('client')
+    path     : projectConfig.inDist('client'),
+    publicPath : '/'
   }
 });
 
