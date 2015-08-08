@@ -1,5 +1,5 @@
 /* eslint-disable */
-import createConstants from '../utils/createConstants';
+import createConstants from 'utils/create-constants';
 
 export default createConstants(
   'TODO_CREATE',
