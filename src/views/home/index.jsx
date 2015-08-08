@@ -1,10 +1,12 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { createTodo, destroyTodo, toggleCompleteTodo } from 'actions/todo';
+import * as TodoActionCreators from 'actions/todo';
+import TodoList from 'components/todo-list';
 
-@connect(state => ({
-  todos : state.todos
-}))
+// TODO: make the create-todo form a component so that a bound action
+// can be provided rather than manually using this.props.dispatch(action)
+@connect(state => ({ todos : state.todos }))
 export default class HomeView extends React.Component {
   constructor () {
     super();
@@ -20,57 +22,45 @@ export default class HomeView extends React.Component {
   }
 
   _createTodo (e) {
-    const { todo } = this.state;
-
     e.preventDefault();
-    if (todo && todo.length) {
-      this.props.dispatch(createTodo(todo));
-      this.setState({
-        todo : ''
-      });
-    }
+    this.props.dispatch(TodoActionCreators.createTodo(this.state.todo));
+    this.setState({
+      todo : ''
+    });
   }
 
-  _toggleComplete (copy) {
-    this.props.dispatch(toggleCompleteTodo(copy));
-  }
-
-  renderTodos (todos) {
-    return todos.map((todo, idx) =>
-      <li className='todo__item' key={idx}>
-        <div className='checkbox'>
-          <label>
-            <input type='checkbox'
-                   checked={todo.complete}
-                   onChange={this._toggleComplete.bind(this, todo.copy)}/>
-            {todo.copy}
-          </label>
-        </div>
-      </li>
-    );
-  }
-
-  render () {
-    const todos = this.props.todos.toJS();
-
+  renderNewTodoForm () {
     return (
-      <div className='view view--home'>
-        <h1>Stuff that you should do. Maybe, I guess.</h1>
-        <ul className='todo__list list-unstyled'>
-          {this.renderTodos(todos)}
-        </ul>
-        <form className='form-inline' onSubmit={::this._createTodo}>
-          <div className='form-group'>
-            <input name='todo'
-                   className='form-control'
+      <form onSubmit={::this._createTodo}>
+        <div className='row'>
+          <div className='col-sm-9'>
+            <input className='form-control'
                    placeholder='Do something else!'
                    value={this.state.todo}
                    onChange={this._bindTo('todo')} />
           </div>
-          <button type='submit' className='btn btn-default'>
-            Create Todo
-          </button>
-        </form>
+          <div className='col-sm-3'>
+            <button type='submit' className='btn btn-block btn-default'>
+              Create Todo
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  render () {
+    const todos   = this.props.todos.toJS(),
+          actions = bindActionCreators(TodoActionCreators, this.props.dispatch);
+
+    return (
+      <div className='view view--home'>
+        <div className='row'>
+          <div className='col-md-8 col-md-offset-2'>
+            <TodoList todos={todos} {...actions} />
+            {this.renderNewTodoForm()}
+          </div>
+        </div>
       </div>
     );
   }

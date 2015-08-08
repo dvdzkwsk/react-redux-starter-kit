@@ -22,6 +22,7 @@ function makeDefaultConfig () {
     resolve : {
       extensions : ['', '.js', '.jsx'],
       alias : {
+        'action-creators' : projectConfig.inSrc('action-creators'),
         actions     : projectConfig.inSrc('actions'),
         components  : projectConfig.inSrc('components'),
         constants   : projectConfig.inSrc('constants'),

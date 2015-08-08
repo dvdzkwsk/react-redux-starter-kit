@@ -87,6 +87,7 @@ import MyComponent from '../../components/my-component'; // without alias
 import MyComponent from 'components/my-component'; // with alias
 
   // Available aliases:
+  action-creators  => '~/src/action-creators'
   actions     => '~/src/actions'
   components  => '~/src/components'
   constants   => '~/src/constants'
@@ -145,9 +146,12 @@ As an example, `npm run compile` would look like this:
 
 TODO
 ----
-* [ ] Create actual TODO components
+* [ ] Flesh out sample app
 * [ ] Standardize how configs are built in ~/build (either all functions or none)
 * [ ] Nodemon or something for server
 * [ ] Better developer tools for server bundle
 * [ ] Add ability to bake all routes into pre-rendered html files
 * [ ] Need a way to get koa-static to ignore `index.html` (I don't want to use its `defer` option)
+* [ ] Travis builds to verify that:
+  - tests work
+  - both iojs and node ^0.12 can run dev, test, and the server
