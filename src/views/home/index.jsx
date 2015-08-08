@@ -15,6 +15,12 @@ export default class HomeView extends React.Component {
     };
   }
 
+  componentWillMount () {
+    this._todoActions = bindActionCreators(
+      TodoActionCreators, this.props.dispatch
+    );
+  }
+
   _bindTo (prop) {
     return (e) => this.setState({
       [prop] : e.target.value
@@ -50,14 +56,13 @@ export default class HomeView extends React.Component {
   }
 
   render () {
-    const todos   = this.props.todos.toJS(),
-          actions = bindActionCreators(TodoActionCreators, this.props.dispatch);
+    const todos = this.props.todos.toJS();
 
     return (
       <div className='view view--home'>
         <div className='row'>
           <div className='col-md-8 col-md-offset-2'>
-            <TodoList todos={todos} {...actions} />
+            <TodoList todos={todos} {...this._todoActions} />
             {this.renderNewTodoForm()}
           </div>
         </div>
