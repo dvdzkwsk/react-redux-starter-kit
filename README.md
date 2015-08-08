@@ -152,6 +152,10 @@ TODO
 * [ ] Better developer tools for server bundle
 * [ ] Add ability to bake all routes into pre-rendered html files
 * [ ] Need a way to get koa-static to ignore `index.html` (I don't want to use its `defer` option)
+* [ ] Improve how the template is rendered server-side
+  - Caching
+  - Gzipping (need to verify if this is enabled or not
+  - Handle react-router errors
 * [ ] Travis builds to verify that:
   - tests work
   - both iojs and node ^0.12 can run dev, test, and the server
