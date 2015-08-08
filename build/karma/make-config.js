@@ -44,6 +44,6 @@ function makeDefaultConfig () {
 
 module.exports = function (karmaConfig) {
   return karmaConfig.set(
-    require(`./configs/_${projectConfig.NODE_ENV}`)(makeDefaultConfig())
+    require('./configs/_' + projectConfig.NODE_ENV)(makeDefaultConfig())
   );
 };

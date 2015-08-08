@@ -11,7 +11,7 @@
     "dev:quiet": "npm run dev -- --quiet",
     "test": "npm run test:unit",
     "test:unit": "node ./node_modules/karma/bin/karma start",
-    "test:server": "mocha server/scripts/test.js",
+    "test:server": "mocha --harmony server/scripts/test.js",
     "deploy": "npm run test && npm run compile && npm run test:server",
     "server:start": "node --harmony ./server/scripts/start"
   },
