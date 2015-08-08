@@ -1,5 +1,6 @@
 /* eslint-disable */
 import Immutable from 'immutable';
+import createReducer from 'utils/create-reducer';
 import {
   TODO_CREATE,
   TODO_DESTROY,
@@ -17,24 +18,16 @@ const initialState = Immutable.List([
 ].map(createTodoItem));
 /* eslint-enable */
 
-export default function todos (state = initialState, action) {
-  const { type, payload } = action;
-
-  switch (type) {
-    case TODO_CREATE:
-      return state.push(
-        createTodoItem(payload.copy)
-      );
-    case TODO_DESTROY:
-      return state.filter(todo =>
-        todo.get('copy') !== payload.copy
-      );
-    case TODO_TOGGLE_COMPLETE:
-      return state.map(todo =>
-        todo.get('copy') === payload.copy ?
-          todo.set('complete', !todo.get('complete')) : todo
-      );
-    default:
-      return state;
+export default createReducer(initialState, {
+  [TODO_CREATE]  : (state, { copy }) => state.push(createTodoItem(copy)),
+  [TODO_DESTROY] : (state, { copy }) => {
+    return state.filter(todo => todo.get('copy') !== copy);
+  },
+  [TODO_TOGGLE_COMPLETE] : (state, { copy }) => {
+    return state.map(todo => {
+      return todo.get('copy') === copy
+        ? todo.set('complete', !todo.get('complete'))
+        : todo;
+    });
   }
-}
+});

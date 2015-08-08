@@ -35,7 +35,8 @@ function makeDefaultConfig () {
         services    : projectConfig.inSrc('services'),
         stores      : projectConfig.inSrc('stores'),
         styles      : projectConfig.inSrc('styles'),
-        views       : projectConfig.inSrc('views')
+        views       : projectConfig.inSrc('views'),
+        utils       : projectConfig.inSrc('utils')
       }
     },
     module : {

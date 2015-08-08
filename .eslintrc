@@ -155,11 +155,7 @@
     "no-underscore-dangle": 0,
     "no-unneeded-ternary": 2,
     "object-curly-spacing": [1, "always"],
-    "one-var": [1, {
-      "var"   : "always",
-      "let"   : "always",
-      "const" : "always"
-    }],
+    "one-var": 0,
     "operator-assignment": [0, "always"],
     "padded-blocks": [2, "never"],
     "quotes": [2, "single", "avoid-escape"],
