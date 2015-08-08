@@ -21,6 +21,14 @@ const config = makeConfig({
 // ------------------------------------
 // Client-Specific Plugins
 // ------------------------------------
+// NOTE: this is a temporary workaround. I don't know how to get Karma
+// to include the vendor bundle that webpack creates, so to get around that
+// we remove the bundle splitting when webpack is used with Karma.
+const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin(
+  'vendor', '[name].[hash].js'
+);
+commonChunkPlugin.__KARMA_IGNORE__ = true;
+
 config.plugins.push(
   new webpack.DefinePlugin({
     '__CLIENT__' : true,
@@ -33,7 +41,7 @@ config.plugins.push(
     minify   : projectConfig.__PROD__,
     inject   : 'body'
   }),
-  new webpack.optimize.CommonsChunkPlugin('vendor', '[name].[hash].js')
+  commonChunkPlugin
 );
 
 // ------------------------------------

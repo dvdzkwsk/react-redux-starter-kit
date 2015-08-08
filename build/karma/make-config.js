@@ -3,7 +3,7 @@ const projectConfig     = require('../../config'),
       KARMA_ENTRY_FILE  = 'karma.entry.js';
 
 const WEBPACK_CONFIG = makeWebpackConfig(
-  require('../webpack/client')('development')
+  require('../webpack/client')()
 );
 
 function makeDefaultConfig () {
@@ -24,6 +24,10 @@ function makeDefaultConfig () {
     webpack : {
       devtool : 'inline-source-map',
       resolve : WEBPACK_CONFIG.resolve,
+      plugins : WEBPACK_CONFIG.plugins
+        .filter(function (plugin) {
+          return !plugin.__KARMA_IGNORE__;
+        }),
       module  : {
         loaders : WEBPACK_CONFIG.module.loaders
       }
@@ -44,6 +48,6 @@ function makeDefaultConfig () {
 
 module.exports = function (karmaConfig) {
   return karmaConfig.set(
-    require(`./configs/_${projectConfig.NODE_ENV}`)(makeDefaultConfig())
+    require('./configs/_' + projectConfig.NODE_ENV)(makeDefaultConfig())
   );
 };
