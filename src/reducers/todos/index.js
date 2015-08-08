@@ -18,7 +18,7 @@ const initialState = Immutable.List([
 ].map(createTodoItem));
 /* eslint-enable */
 
-export default createReducer({
+export default createReducer(initialState, {
   [TODO_CREATE]  : (state, { copy }) => state.push(createTodoItem(copy)),
   [TODO_DESTROY] : (state, { copy }) => {
     return state.filter(todo => todo.get('copy') !== copy);
