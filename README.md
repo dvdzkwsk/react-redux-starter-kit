@@ -19,7 +19,8 @@ Features
 * React
 * react-router (`1.0.0-beta`)
 * redux (`1.0.0-beta`)
-  * redux devtools (enabled with `--debug` flag)
+  * redux-devtools (enabled with `--debug` flag)
+  * react-redux
 * Immutable.js
 * Karma
   * Mocha w/ Chai
@@ -47,13 +48,16 @@ Runs the Webpack build system with your current NODE_ENV and compiles the applic
 **NOTE**: I'm still searching for a good solution for when to run the server entry point bundler, since it doesn't make much sense to run webpack on it when you're just using the dev server. As a result (only for the time being) if you wish to run the Koa server you'll need to run `compile` with `NODE_ENV=production` first, since that's the only time the server bundle gets compiled.
 
 #### `npm run test`
-Runs all tests for the application. In development mode this will run in watch mode and re-run individual test files when they change; in production mode a failing test will fail your build.
+Runs all client-side tests for the application. In development mode this will run in watch mode and re-run individual test files when they change; in production mode a failing test will fail your build.
 
 #### `npm run test:unit`
 Similar to `npm run test`, but only runs unit tests.
 
 #### `npm run test:e2e`
 Similar to `npm run test`, but only runs e2e tests - _NOT YET AVAILABLE_.
+
+#### `npm run test:server`
+Runs the small test suite in `~/server/scripts/test.js`. This will ideally be expanded in the future to allow for an entry point similar to what exists for client-side tests.
 
 #### `npm run deploy`
 Helper script to run tests and then, on success, compile your application.

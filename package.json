@@ -11,7 +11,8 @@
     "dev:quiet": "npm run dev -- --quiet",
     "test": "npm run test:unit",
     "test:unit": "node ./node_modules/karma/bin/karma start",
-    "deploy": "npm run test && npm run compile",
+    "test:server": "mocha server/scripts/test.js",
+    "deploy": "npm run test && npm run compile && npm run test:server",
     "server:start": "node --harmony ./server/scripts/start"
   },
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
@@ -50,6 +51,7 @@
     "redux": "^1.0.0-rc",
     "sass-loader": "^1.0.3",
     "style-loader": "^0.12.1",
+    "supertest": "^1.0.1",
     "webpack": "^1.9.0",
     "yargs": "^3.16.1"
   },
