@@ -1,6 +1,12 @@
+/* eslint-disable */
 import { compose, createStore, combineReducers } from 'redux';
-import { devTools } from 'redux-devtools';
 import * as reducers from 'reducers';
+
+// TODO: better way to do conditional requires with webpack?
+const { devTools } = (function () {
+  return __DEBUG__ ? require('redux-devtools') : {};
+})();
+/* eslint-enable */
 
 var buildStore;
 
