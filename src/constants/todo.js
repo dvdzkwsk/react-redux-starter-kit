@@ -1,5 +1,9 @@
 /* eslint-disable */
-export const TODO_CREATE  = 'TODO_CREATE';
-export const TODO_DESTROY = 'TODO_DESTROY';
-export const TODO_TOGGLE_COMPLETE = 'TODO_TOGGLE_COMPLETE';
+import createConstants from '../utils/createConstants';
+
+export default createConstants(
+  'TODO_CREATE',
+  'TODO_DESTROY',
+  'TODO_TOGGLE_COMPLETE'
+);
 /* eslint-enable */
