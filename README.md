@@ -9,6 +9,7 @@ Redux, React-Router, and React are constantly releasing new API changes. If you'
 
 Table of Contents
 -----------------
+1. [Requirements](#requirements)
 1. [Features](#features)
 1. [Usage](#usage)
 1. [Webpack](#webpack)
@@ -17,6 +18,11 @@ Table of Contents
 1. [Utilities](#utilities)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
+
+Requirements
+------------
+
+Node `^0.12.0` or io.js `^2.0.0`.
 
 Features
 --------
