@@ -1,43 +1,48 @@
-React Redux Koa Starter Kit
-===========================
+React Redux Starter Kit
+=======================
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg)](https://travis-ci.org/davezuko/react-redux-starter-kit)
+[![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 
 Starter kit to get you up and running with a bunch of awesome new technologies. This boilerplate provides server-side rendering of your routes (by way of Koa and react-router), and the sample application gives you a quick demo of Redux. All of this sits on top of a configurable, feature-rich Webpack build system that's already setup to provide unit testing, linting, hot-reloading, sass-loading with css-extraction, and a whole lot more. Check out the full feature list below!
+
+Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please check out the current TODO list in `~/docs/todo` or create a new issue if you think this repo is missing something!
 
 Table of Contents
 -----------------
 1. [Features](#features)
 1. [Usage](#usage)
 1. [Webpack](#webpack)
+1. [Styles](#styles)
 1. [Testing](#testing)
+1. [Utilities](#utilities)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
-1. [TODO](#todo)
 
 Features
 --------
 
-* Koa
-* React
-* react-router (`1.0.0-beta`)
-* redux (`1.0.0-beta`)
+* [React](https://github.com/facebook/react)
+* [react-router](https://github.com/rackt/react-router) (`1.0.0-beta`)
+* [Redux](https://github.com/gaearon/redux) (`1.0.0-beta`)
   * redux-devtools (enabled with `--debug` flag)
   * react-redux
-* Immutable.js
+* [Koa](https://github.com/koajs/koa)
+* [Immutable.js](https://github.com/facebook/immutable-js)
 * Karma
   * Mocha w/ Chai
   * PhantomJS
-* Webpack
-  * server and client bundles
-    * client bundle splits app code from vendor dependencies
+* [Webpack](https://github.com/webpack/webpack)
+  * Separate server and client bundles
+    * Client bundle splits app code from vendor dependencies
   * webpack-dev-server
   * react-hot-loader
   * sass-loader
     * CSS extraction in production mode
   * babel w/ babel-runtime
   * eslint-loader
-  * pre-configured aliases and globals
-  * easy per-environment configuration
+    * Configured to fail production builds on error
+  * Pre-configured aliases and globals
+  * Easy per-environment configuration
 
 **NOTE**: Bootstrap is loaded from its CDN for the sole purposes of making the example not look hideous. I didn't want to actually include it as an application dependency, so if you wish to remove it just delete its `<link>` tag in `~/src/index.html`.
 
@@ -55,14 +60,11 @@ Runs all client-side tests for the application. In development mode this will ru
 #### `npm run test:unit`
 Similar to `npm run test`, but only runs unit tests.
 
-#### `npm run test:e2e`
-Similar to `npm run test`, but only runs e2e tests - _NOT YET AVAILABLE_.
-
 #### `npm run test:server`
-Runs the small test suite in `~/server/scripts/test.js`. This will ideally be expanded in the future to allow for an entry point similar to what exists for client-side tests.
+Runs the small test suite in `~/server/scripts/test.js`. This will ideally be expanded in the future to instead act as an entry point similar to what exists for client-side tests.
 
 #### `npm run deploy`
-Helper script to run tests and then, on success, compile your application.
+Helper script to run tests and then, on success, compile your application. Server tests that rely on the compiled server bundle will be run after compilation finishes.
 
 #### `npm run dev`
 Runs the webpack build system just like in `compile` but enables HMR and react hot-loader. The webpack dev server can be found at `localhost:3000`.
@@ -78,15 +80,31 @@ Kicks off the Koa server (defaults to `localhost:4000`).
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, as well as tweak what ports Webpack and WebpackDevServer run on. You'll also be able to configure what packages webpack should treat as vendor dependencies.
+Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, as well as tweak what ports Webpack and WebpackDevServer run on.
 
 Webpack
 -------
 
-As mentioned in features, the default Webpack configuration provides some globals and aliases to make your life easier.
+### Configuration
+Webpack bundles are separated into sub-folders that define configurations for their respective bundle (e.g. `~/build/webpack/client` and `~/build/webpack-server`). A default webpack configuration is provided in `~/build/webpack/make-config`, which exports a function that will merge a config object on top of that default configuration.
+
+Bundle-specific configurations can further this customizability by implementing environment-specific configurations. Check out `~/build/webpack/client/_development` for an example. You can configure which bundles are used and when in `~/webpack.config.js`.
+
+### Vendor Bundle
+You can redefine which packages to treat as vendor dependencies by editing `VENDOR_DEPENDENCIES` in `~/config/index.js`. These default to
+
+```js
+VENDOR_DEPENDENCIES : [
+  'immutable',
+  'react',
+  'react-redux',
+  'react-router',
+  'redux'
+]
+```
 
 ### Aliases
-These can be used as such:
+As mentioned in features, the default Webpack configuration provides some globals and aliases to make your life easier. These can be used as such:
 
 ```js
 import MyComponent from '../../components/my-component'; // without alias
@@ -106,6 +124,7 @@ import MyComponent from 'components/my-component'; // with alias
   services    => '~/src/services'
   stores      => '~/src/stores'
   styles      => '~/src/styles'
+  utils       => '~/src/utils'
   views       => '~/src/views'
 ```
 
@@ -126,10 +145,76 @@ True when the client bundler is running.
 #### `__SERVER__`
 True when the server bundler is running.
 
+Styles
+------
+
+All `.scss` imports will be run through the sass-loader, extracted during production builds, and ignored during server builds. If you're requiring styles from a base styles directory (useful for generic, app-wide styles) in your JS, you can make use of the `styles` alias, e.g.:
+
+```js
+// ~/src/components/some/nested/component/index.jsx
+import `styles/core.scss`;
+```
+
+Furthermore, this `styles` directory is aliased for sass imports, which further eliminates manual directory traversing. An example nested `.scss` file:
+
+```scss
+// current path: ~/src/styles/some/nested/style.scss
+// what used to be this:
+@import '../../base';
+
+// can now be this:
+@import 'base';
+```
+
 Testing
 -------
 
 To add a unit test, simply create `.spec.js` file anywhere in `~/src`. The entry point for Karma uses webpack's custom require to load all these files, and both Mocha and Chai will be available to you within your test without the need to import them.
+
+Utilities
+---------
+
+This boilerplate comes with two simple utilities (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/src/utils` you'll find `create-constants` and `create-reducers`. The former is pretty much an even lazier `keyMirror`, so if you _really_ hate typing out those constants you may want to give it a shot. Check it out:
+
+```js
+import createConstants from 'utils/create-constants';
+
+export default createConstants(
+  'TODO_CREATE',
+  'TODO_DESTROY',
+  'TODO_TOGGLE_COMPLETE'
+);
+```
+
+The other utility, `create-reducer`, is designed to expedite creating reducers when they're defined via an object map rather than switch statements. As an example, what once looked like this:
+
+```js
+import { TODO_CREATE } from 'constants/todo';
+
+const initialState = [];
+const handlers = {
+  [TODO_CREATE] : (state, payload) => { ... }
+};
+
+export default function todo (state = initialState, action) {
+  const handler = handlers[action.type];
+
+  return handler ? handler(state, action.payload) : state;
+}
+```
+
+Can now look like this:
+
+```js
+import { TODO_CREATE } from 'constants/todo';
+import createReducer from 'utils/create-reducer';
+
+const initialState = [];
+
+export default createReducer(initialState, {
+  [TODO_CREATE] : (state, payload) => { ... }
+});
+```
 
 Deployment
 ----------
@@ -149,19 +234,3 @@ If you're using one of the pre-configured npm scripts, make sure you follow npm'
 As an example, `npm run compile` would look like this:
 
 `npm run compile -- --debug`
-
-TODO
-----
-* [ ] Flesh out sample app
-* [ ] Standardize how configs are built in ~/build (either all functions or none)
-* [ ] Nodemon or something for server
-* [ ] Better developer tools for server bundle
-* [ ] Add ability to bake all routes into pre-rendered html files
-* [ ] Need a way to get koa-static to ignore `index.html` (I don't want to use its `defer` option)
-* [ ] Improve how the template is rendered server-side
-  - Caching
-  - Gzipping (need to verify if this is enabled or not
-  - Handle react-router errors
-* [ ] Travis builds to verify that:
-  - tests work
-  - both iojs and node ^0.12 can run dev, test, and the server

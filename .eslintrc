@@ -112,7 +112,7 @@
 
     "array-bracket-spacing": 0,
     "indent": [2, 2, {
-      "indentSwitchCase": true
+      "SwitchCase": 1
     }],
     "brace-style": 1,
     "camelcase": 0,
@@ -122,8 +122,7 @@
     "eol-last": 1,
     "func-names": 0,
     "func-style": 0,
-    "key-spacing": [1, {
-      "align": "colon",
+    "key-spacing": [0, {
       "beforeColon": true,
       "afterColon": true
     }],
@@ -145,9 +144,9 @@
     }],
     "no-nested-ternary": 2,
     "no-new-object": 1,
-    "semi-spacing": [1, {
+    "semi-spacing": [2, {
       "before": false,
-      "after": 1
+      "after": true
     }],
     "no-spaced-func": 2,
     "no-ternary": 0,
@@ -155,15 +154,15 @@
     "no-underscore-dangle": 0,
     "no-unneeded-ternary": 2,
     "object-curly-spacing": [1, "always"],
-    "one-var": 0,
+    "one-var": [0, {
+      "var"   : "always",
+      "let"   : "always",
+      "const" : "always"
+    }],
     "operator-assignment": [0, "always"],
     "padded-blocks": [2, "never"],
     "quotes": [2, "single", "avoid-escape"],
     "quote-props": [1, "as-needed"],
-    "semi-spacing": [2, {
-      "before" : false,
-      "after"  : true
-    }],
     "sort-vars": 0,
     "space-after-keywords": [2, "always"],
     "space-before-blocks": [2, "always"],
