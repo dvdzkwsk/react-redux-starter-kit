@@ -1,6 +1,6 @@
 {
   "name": "react-redux-starter-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Boilerplate to get you started with React, Redux, React-Router, and Koa",
   "main": "index.js",
   "scripts": {
