@@ -45,13 +45,13 @@ function makeDefaultConfig () {
     module : {
       preLoaders : [
         {
-          test : /\.(js|jsx)?$/,
+          test : /\.(js|jsx)$/,
           loaders : ['eslint-loader'],
           include : projectConfig.inProject(projectConfig.SRC_DIRNAME)
         }
       ],
       loaders : [{
-        test : /\.(js|jsx)?$/,
+        test : /\.(js|jsx)$/,
         include : projectConfig.inProject(projectConfig.SRC_DIRNAME),
         loaders : ['babel?optional[]=runtime&stage=0']
       }]
