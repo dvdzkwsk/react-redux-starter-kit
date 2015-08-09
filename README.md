@@ -174,10 +174,10 @@ To add a unit test, simply create `.spec.js` file anywhere in `~/src`. The entry
 Utilities
 ---------
 
-This boilerplate comes with two simple utilities (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/src/utils` you'll find `create-constants` and `create-reducers`. The former is pretty much an even lazier `keyMirror`, so if you _really_ hate typing out those constants you may want to give it a shot. Check it out:
+This boilerplate comes with two simple utilities (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/src/utils` you'll find exports for `createConstants` and `createReducer`. The former is pretty much an even lazier `keyMirror`, so if you _really_ hate typing out those constants you may want to give it a shot. Check it out:
 
 ```js
-import createConstants from 'utils/create-constants';
+import { createConstants } from 'utils';
 
 export default createConstants(
   'TODO_CREATE',
@@ -207,7 +207,7 @@ Can now look like this:
 
 ```js
 import { TODO_CREATE } from 'constants/todo';
-import createReducer from 'utils/create-reducer';
+import { createReducer } from 'utils';
 
 const initialState = [];
 

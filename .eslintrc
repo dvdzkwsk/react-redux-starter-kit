@@ -131,7 +131,7 @@
       "beforeLineComment"  : true
     }],
     "max-nested-callbacks": [2, 3],
-    "new-cap": 2,
+    "new-cap": 0,
     "new-parens": 2,
     "newline-after-var": 1,
     "no-array-constructor": 2,

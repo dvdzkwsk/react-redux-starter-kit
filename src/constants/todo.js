@@ -1,9 +1,7 @@
-/* eslint-disable */
-import createConstants from 'utils/create-constants';
+import { createConstants } from 'utils';
 
 export default createConstants(
   'TODO_CREATE',
   'TODO_DESTROY',
   'TODO_TOGGLE_COMPLETE'
 );
-/* eslint-enable */

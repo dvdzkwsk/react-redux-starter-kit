@@ -1,11 +1,12 @@
-/* eslint-disable */
+
 import Immutable from 'immutable';
-import createReducer from 'utils/create-reducer';
+import { createReducer } from 'utils';
 import {
   TODO_CREATE,
   TODO_DESTROY,
   TODO_TOGGLE_COMPLETE
 } from 'constants/todo';
+
 
 const createTodoItem = (copy) => Immutable.Map({
   copy     : copy,
@@ -16,7 +17,6 @@ const initialState = Immutable.List([
   'Read the docs',
   'Build something cool'
 ].map(createTodoItem));
-/* eslint-enable */
 
 export default createReducer(initialState, {
   [TODO_CREATE]  : (state, { copy }) => state.push(createTodoItem(copy)),
