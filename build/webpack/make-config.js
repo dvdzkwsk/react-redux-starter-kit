@@ -21,23 +21,26 @@ function makeDefaultConfig () {
     ],
     resolve : {
       extensions : ['', '.js', '.jsx'],
-      alias : {
-        'action-creators' : projectConfig.inSrc('action-creators'),
-        actions     : projectConfig.inSrc('actions'),
-        components  : projectConfig.inSrc('components'),
-        constants   : projectConfig.inSrc('constants'),
-        containers  : projectConfig.inSrc('containers'),
-        dispatchers : projectConfig.inSrc('dispatchers'),
-        layouts     : projectConfig.inSrc('layouts'),
-        models      : projectConfig.inSrc('models'),
-        reducers    : projectConfig.inSrc('reducers'),
-        routes      : projectConfig.inSrc('routes'),
-        services    : projectConfig.inSrc('services'),
-        stores      : projectConfig.inSrc('stores'),
-        styles      : projectConfig.inSrc('styles'),
-        views       : projectConfig.inSrc('views'),
-        utils       : projectConfig.inSrc('utils')
-      }
+      alias : [
+        'action-creators',
+        'actions',
+        'components',
+        'constants',
+        'containers',
+        'dispatchers',
+        'layouts',
+        'models',
+        'reducers',
+        'routes',
+        'services',
+        'stores',
+        'styles',
+        'utils',
+        'views'
+      ].reduce(function (acc, x) {
+        acc[x] = projectConfig.inSrc(x);
+        return acc;
+      }, {})
     },
     module : {
       preLoaders : [
