@@ -55,7 +55,7 @@ function makeDefaultConfig () {
     },
     eslint : {
       configFile : projectConfig.inProject('.eslintrc'),
-      fairlOnError : projectConfig.__PROD__
+      failOnError : projectConfig.__PROD__
     }
   };
 
