@@ -4,14 +4,20 @@ import Location from 'react-router/lib/Location';
 import routes from '../routes';
 import App from 'containers/app';
 
-export default function render (req, callback) {
-  const location = new Location(req.path, req.query);
+export default function render (request) {
+  return function renderThunk (callback) {
+    const location = new Location(request.path, request.query);
 
-  Router.run(routes, location, function (error, initialState, transition) {
-    const rendered = React.renderToString(
-      <App initialState={initialState} />
-    );
+    Router.run(routes, location, function (error, initialState, transition) {
+      try {
+        const rendered = React.renderToString(
+          <App initialState={initialState} />
+        );
 
-    callback(rendered);
-  });
+        callback(null, rendered);
+      } catch (e) {
+        callback(e);
+      }
+    });
+  };
 }
