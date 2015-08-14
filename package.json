@@ -50,7 +50,7 @@
     "react": "^0.13.3",
     "react-redux": "^0.8.0",
     "react-router": "1.0.0-beta3",
-    "redux": "^1.0.0-rc",
+    "redux": "^1.0.0",
     "sass-loader": "^2.0.0",
     "style-loader": "^0.12.1",
     "supertest": "^1.0.1",

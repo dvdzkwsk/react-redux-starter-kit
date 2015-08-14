@@ -29,7 +29,7 @@ Features
 
 * [React](https://github.com/facebook/react)
 * [react-router](https://github.com/rackt/react-router) (`1.0.0-beta`)
-* [Redux](https://github.com/gaearon/redux) (`1.0.0-rc`)
+* [Redux](https://github.com/gaearon/redux) (`1.0.0`)
   * redux-devtools (enabled with `--debug` flag)
   * react-redux
 * [Koa](https://github.com/koajs/koa)
