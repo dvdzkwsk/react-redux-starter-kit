@@ -52,6 +52,7 @@
     "react-router": "1.0.0-beta3",
     "redux": "^1.0.0",
     "redux-devtools": "^1.0.0",
+    "redux-react-router": "^0.2.1",
     "sass-loader": "^2.0.0",
     "style-loader": "^0.12.1",
     "supertest": "^1.0.1",
