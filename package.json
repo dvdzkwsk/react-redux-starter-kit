@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "react-hot-loader": "^1.2.8",
-    "redux-devtools": "^0.2.0",
+    "redux-devtools": "^1.0.0",
     "webpack-dev-server": "^1.10.1"
   }
 }
