@@ -1,15 +1,9 @@
-/* eslint-disable */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import store from 'stores';
 import routes from 'routes';
-
-// TODO: better way to do conditional requires with webpack?
-const { DevTools, LogMonitor, DebugPanel } = (function () {
-  return __DEBUG__ ? require('redux-devtools/lib/react') : {};
-})();
-/* eslint-enable */
+import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 
 export default class ClientApp extends React.Component {
   static propTypes = {

@@ -12,6 +12,9 @@ function inProject () {
   return resolve.apply(resolve, [PROJECT_PATH].concat(_slice.apply(arguments)));
 }
 
+// ------------------------------------
+// Configuration Definition
+// ------------------------------------
 module.exports = exports = {
 
   // environment
@@ -29,13 +32,14 @@ module.exports = exports = {
   inDist    : inProject.bind(undefined, DIST_DIRNAME),
 
   // build system
-  // these will be bundled separately from the core app
   VENDOR_DEPENDENCIES : [
     'immutable',
     'react',
     'react-redux',
     'react-router',
-    'redux'
+    'redux',
+    'redux-devtools',
+    'redux-devtools/lib/react'
   ],
 
   // server configuration
