@@ -1,6 +1,17 @@
 Changelog
 =========
 
+0.3.0
+-----
+
+#### Improvements
+* Bumps Redux version to first major release.
+* Bumps Redux-devtools version to first major release.
+
+#### Fixes
+* Fixes broken hot-reload in `:debug` mode.
+  - Temporarily fixed by moving `redux-devtools` into the vendor bundle.
+
 0.2.0
 -----
 
