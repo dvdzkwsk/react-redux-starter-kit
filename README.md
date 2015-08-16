@@ -5,7 +5,7 @@ React Redux Starter Kit
 
 Starter kit to get you up and running with a bunch of awesome new technologies. This boilerplate provides server-side rendering of your routes (by way of Koa and react-router), and the sample application gives you a quick demo of Redux. All of this sits on top of a configurable, feature-rich Webpack build system that's already setup to provide unit testing, linting, hot-reloading, sass-loading with css-extraction, and a whole lot more. Check out the full feature list below!
 
-Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please check out the current TODO list in `~/docs/todo` or create a new issue if you think this repo is missing something!
+Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please check out the [current todo list](https://github.com/davezuko/react-redux-starter-kit/blob/master/docs/todo.md) or create a new issue if you think this repo is missing something!
 
 Table of Contents
 -----------------
