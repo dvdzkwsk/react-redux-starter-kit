@@ -5,6 +5,7 @@ Documentation
 
 Improvements
 ------------
+* [ ] Move example application to separate repo.
 * [ ] Move bootstrap dependency to core styles file.
 
 Redux
