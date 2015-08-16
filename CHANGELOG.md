@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.3.1
+-----
+
+#### Fixes
+* https://github.com/davezuko/react-redux-starter-kit/issues/19
+  - Invalid initialStates from server-side router will now yield to the next middleware.
+
 0.3.0
 -----
 
