@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4.0
+-----
+
+#### Improvements
+* Cleans up/removes example code per https://github.com/davezuko/react-redux-starter-kit/issues/20
+
 0.3.1
 -----
 
