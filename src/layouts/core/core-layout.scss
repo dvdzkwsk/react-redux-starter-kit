@@ -1,6 +1,4 @@
+// This imports /styles/core.scss which includes normalize.css
+// All application-wide styles should reside in the /styles, whereas component-
+// specific can live in their component-level .scss file.
 @import 'core';
-
-.view-container {
-  max-width: 1000px;
-  margin: 0 auto;
-}

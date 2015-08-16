@@ -6,15 +6,13 @@ describe('Koa Server', function () {
     it('Should respond with a 200.', function (done) {
       request
         .get('/')
-        .expect(200, done)
+        .expect(200, done);
     });
-  });
 
-  describe('GET /about', function () {
-    it('Should respond with a 200.', function (done) {
+    it('Should respond with sample welcome text.', function (done) {
       request
-        .get('/about')
-        .expect(200, done)
+        .get('/')
+        .expect(/Welcome to the React Redux Starter Kit/, done);
     });
   });
 });

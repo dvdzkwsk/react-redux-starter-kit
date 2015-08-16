@@ -17,6 +17,7 @@ Table of Contents
 1. [Testing](#testing)
 1. [Utilities](#utilities)
 1. [Deployment](#deployment)
+1. [Examples](#examples)
 1. [Troubleshooting](#troubleshooting)
 
 Requirements
@@ -228,6 +229,13 @@ Deployment
 ### Dokku Requirements
   * Add io.js as a buildpack:
     - In `~/ENV` append: `export BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-nodejs`
+
+Examples
+--------
+
+Have an application you'd like to showcase that uses this starter kit? Feel free to list it here!
+
+1. [Example TODO Application](https://github.com/davezuko/react-redux-starter-kit/tree/example/todo-application) - This is the example that originally came packaged with the starter-kit; it's since been separated so that you can spend less time clearing out sample code and more time developing something new!
 
 Troubleshooting
 ---------------
