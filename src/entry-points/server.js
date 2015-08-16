@@ -8,16 +8,21 @@ export default function render (request) {
   return function renderThunk (callback) {
     const location = new Location(request.path, request.query);
 
-    Router.run(routes, location, function (error, initialState, transition) {
-      try {
+    try {
+      Router.run(routes, location, function (error, initialState, transition) {
+        if (!initialState) {
+          throw new Error(
+            `Could not render ${request.path}: no initial state returned.`
+          );
+        }
+
         const rendered = React.renderToString(
           <App initialState={initialState} />
         );
-
         callback(null, rendered);
-      } catch (e) {
-        callback(e);
-      }
-    });
+      });
+    } catch (e) {
+      callback(e);
+    }
   };
 }

@@ -1,4 +1,4 @@
-const router    = require('../../dist/server'),
+const runRouter = require('../../dist/server'),
       USE_CACHE = process.env.NODE_ENV === 'production';
 
 function renderIntoTemplate (template, content) {
@@ -6,9 +6,14 @@ function renderIntoTemplate (template, content) {
 }
 
 module.exports = function makeRenderRouteMiddleware (template) {
-  return function *renderRouteMiddleware () {
-    const rendered = yield router(this.request);
+  return function *renderRouteMiddleware (next) {
+    try {
+      const rendered = yield runRouter(this.request);
 
-    this.body = renderIntoTemplate(template, rendered);
+      this.body = renderIntoTemplate(template, rendered);
+    } catch (e) {
+      console.log(e);
+      yield next;
+    }
   };
 };
