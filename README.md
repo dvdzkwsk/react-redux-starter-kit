@@ -106,7 +106,9 @@ VENDOR_DEPENDENCIES : [
   'react',
   'react-redux',
   'react-router',
-  'redux'
+  'redux',
+  'redux-devtools',
+  'redux-devtools/lib/react'
 ]
 ```
 
@@ -118,7 +120,6 @@ import MyComponent from '../../components/my-component'; // without alias
 import MyComponent from 'components/my-component'; // with alias
 
   // Available aliases:
-  action-creators  => '~/src/action-creators'
   actions     => '~/src/actions'
   components  => '~/src/components'
   constants   => '~/src/constants'

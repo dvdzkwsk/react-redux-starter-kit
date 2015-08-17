@@ -22,7 +22,6 @@ function makeDefaultConfig () {
     resolve : {
       extensions : ['', '.js', '.jsx'],
       alias : [
-        'action-creators',
         'actions',
         'components',
         'constants',
