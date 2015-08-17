@@ -11,10 +11,6 @@ export default class ClientApp extends React.Component {
     initialState : React.PropTypes.object
   }
 
-  static defaultProps = {
-    initialState : {}
-  }
-
   constructor () {
     super();
   }
