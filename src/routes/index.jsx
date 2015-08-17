@@ -1,6 +1,6 @@
 import { Route }   from 'react-router';
 import React       from 'react';
-import CoreLayout  from 'layouts/core';
+import CoreLayout  from 'layouts/core-layout';
 import HomeView    from 'views/home';
 
 export default (

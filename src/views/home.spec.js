@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeView from './index';
+import HomeView from './home';
 
 describe('(View) Home', function () {
 
