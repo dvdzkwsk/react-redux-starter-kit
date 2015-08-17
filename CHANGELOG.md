@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.5.0
+-----
+
+#### Improvements
+* Restructures src directory so filenames are more identifiable.
+
+#### Breaking Changes
+* Removes action-creators alias as it's unlikely to be used.
+
 0.4.0
 -----
 
