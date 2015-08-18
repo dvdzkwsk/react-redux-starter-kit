@@ -7,6 +7,8 @@ Starter kit to get you up and running with a bunch of awesome new technologies. 
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please check out the [current todo list](https://github.com/davezuko/react-redux-starter-kit/blob/master/docs/todo.md) or create a new issue if you think this repo is missing something!
 
+**NOTE**: In the past, this project came bundled with a sample Todo application to showcase the starter kit in action.  has since been moved out of master so that you have more of a clean slate to work with, but you can still [find it in its own branch](https://github.com/davezuko/react-redux-starter-kit/tree/example/todo-application)!
+
 Table of Contents
 -----------------
 1. [Requirements](#requirements)
@@ -17,7 +19,6 @@ Table of Contents
 1. [Testing](#testing)
 1. [Utilities](#utilities)
 1. [Deployment](#deployment)
-1. [Examples](#examples)
 1. [Troubleshooting](#troubleshooting)
 
 Requirements
@@ -230,13 +231,6 @@ Deployment
 ### Dokku Requirements
   * Add io.js as a buildpack:
     - In `~/ENV` append: `export BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-nodejs`
-
-Examples
---------
-
-Have an application you'd like to showcase that uses this starter kit? Feel free to list it here!
-
-1. [Example TODO Application](https://github.com/davezuko/react-redux-starter-kit/tree/example/todo-application) - This is the example that originally came packaged with the starter-kit; it's since been separated so that you can spend less time clearing out sample code and more time developing something new!
 
 Troubleshooting
 ---------------
