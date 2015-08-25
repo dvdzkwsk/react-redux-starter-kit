@@ -1,16 +1,13 @@
 const webpack = require('webpack'),
-      argv    = require('yargs').argv,
       config  = require('../../config'),
       WebpackDevServer = require('webpack-dev-server'),
       makeCompiler = require('../webpack/client');
 
-const QUIET_MODE = !!argv.quiet;
-
 const server = new WebpackDevServer(webpack(makeCompiler()), {
   contentBase : config.inProject(config.SRC_DIRNAME),
   hot    : true,
-  quiet  : QUIET_MODE,
-  noInfo : QUIET_MODE,
+  quiet  : config.QUIET_MODE,
+  noInfo : config.QUIET_MODE,
   lazy   : false,
   stats  : {
     colors : true
