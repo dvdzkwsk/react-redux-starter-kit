@@ -24,7 +24,7 @@ module.exports = exports = {
   __PROD__  : process.env.NODE_ENV === 'production',
 
   // configuration flags
-  QUIET_MODE : !!argv.quet,
+  QUIET_MODE : !!argv.quiet,
 
   // path helpers
   SRC_DIRNAME  : SRC_DIRNAME,
