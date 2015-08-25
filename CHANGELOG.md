@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.6.0
+-----
+
+#### Fixes
+* Fixes potential spacing issues when Webpack tries to load a config file.
+  - Thanks to [nuragic](https://github.com/nuragic) for his [PR](https://github.com/davezuko/react-redux-starter-kit/pull/32)
+
+#### Improvements
+* Upgrades koa to `1.0.0`
+* Upgrades react-redux to `1.0.0`
+* Upgrades object-assign to `0.4.0`
+
 0.5.0
 -----
 
