@@ -83,6 +83,9 @@ Runs the small test suite in `~/server/scripts/test.js`. This will ideally be ex
 #### `npm run server:start`
 Kicks off the Koa server (defaults to `localhost:4000`).
 
+#### `npm run server:dev`
+Kicks off the Koa server with Nodemon so any file changes in ~/server will trigger a server restart.
+
 #### `npm run deploy`
 Helper script to run tests and then, on success, compile your application. Server tests that rely on the compiled server bundle will be run after compilation finishes.
 
