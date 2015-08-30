@@ -1,4 +1,3 @@
-
 import Immutable from 'immutable';
 import { createReducer } from 'utils';
 import {
@@ -6,7 +5,6 @@ import {
   TODO_DESTROY,
   TODO_TOGGLE_COMPLETE
 } from 'constants/todo';
-
 
 const createTodoItem = (copy) => Immutable.Map({
   copy     : copy,
