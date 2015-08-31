@@ -1,4 +1,4 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = (process.env.NODE_ENV || 'development').trim();
 
 const resolve = require('path').resolve,
       argv    = require('yargs').argv,
