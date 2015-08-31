@@ -18,10 +18,11 @@ function inProject () {
 module.exports = exports = {
 
   // environment globals
-  NODE_ENV  : process.env.NODE_ENV,
-  __DEBUG__ : !!argv.debug,
-  __DEV__   : process.env.NODE_ENV === 'development',
-  __PROD__  : process.env.NODE_ENV === 'production',
+  NODE_ENV     : process.env.NODE_ENV,
+  __DEBUG__    : !!argv.debug,
+  __DEBUG_NW__ : !!argv.nw,
+  __DEV__      : process.env.NODE_ENV === 'development',
+  __PROD__     : process.env.NODE_ENV === 'production',
 
   // configuration flags
   QUIET_MODE : !!argv.quiet,

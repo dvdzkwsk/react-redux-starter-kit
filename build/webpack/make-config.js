@@ -13,9 +13,10 @@ function makeDefaultConfig () {
         'process.env' : {
           'NODE_ENV' : JSON.stringify(projectConfig.NODE_ENV)
         },
-        '__DEBUG__' : projectConfig.__DEBUG__,
-        '__DEV__'   : projectConfig.__DEV__,
-        '__PROD__'  : projectConfig.__PROD__
+        '__DEBUG__'    : projectConfig.__DEBUG__,
+        '__DEBUG_NW__' : projectConfig.__DEBUG_NW__,
+        '__DEV__'      : projectConfig.__DEV__,
+        '__PROD__'     : projectConfig.__PROD__
       }),
       new webpack.optimize.DedupePlugin()
     ],

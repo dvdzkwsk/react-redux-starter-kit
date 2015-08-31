@@ -5,6 +5,8 @@ import store from 'stores';
 import routes from 'routes';
 import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 
+import createDevToolsWindow from 'utils';
+
 export default class ClientApp extends React.Component {
   static propTypes = {
     history      : React.PropTypes.object,
@@ -16,11 +18,16 @@ export default class ClientApp extends React.Component {
   }
 
   renderDevTools () {
-    return (
-      <DebugPanel top left bottom key='debugPanel'>
-        <DevTools store={store} monitor={LogMonitor} />
-      </DebugPanel>
-    );
+    if (__DEBUG_NW__) {
+      createDevToolsWindow(store);
+      return null;
+    } else {
+      return (
+        <DebugPanel top left bottom key='debugPanel'>
+          <DevTools store={store} monitor={LogMonitor} />
+        </DebugPanel>
+      );
+    }
   }
 
   renderRouter () {
@@ -38,9 +45,15 @@ export default class ClientApp extends React.Component {
   }
 
   render () {
+    let debugTools = null;
+
+    if (__DEBUG__) {
+      debugTools = this.renderDevTools();
+    }
+
     return (
       <div>
-        {__DEBUG__ && this.renderDevTools()}
+        {debugTools}
         <Provider store={store}>
           {() => this.renderRouter()}
         </Provider>
