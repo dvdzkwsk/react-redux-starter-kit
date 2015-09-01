@@ -57,7 +57,7 @@ Features
 Usage
 -----
 
-#### `npm run dev`
+#### `npm run dev` also `npm start`
 Runs the webpack build system just like in `compile` but enables HMR and react hot-loader. The webpack dev server can be found at `localhost:3000`.
 
 #### `npm run dev:debug`

@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "webpack",
+    "start": "npm run dev",
     "dev": "node --harmony ./build/webpack-dev-server",
     "dev:debug": "npm run dev -- --debug",
     "dev:debugnw": "npm run dev -- --debug --nw",
