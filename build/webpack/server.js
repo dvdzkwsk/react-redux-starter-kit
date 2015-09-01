@@ -36,7 +36,7 @@ const webpackConfig = {
     loaders : [
       {
         test    : /\.(js|jsx)$/,
-        include :  paths.project(config.get('dir_src'))
+        include :  paths.project(config.get('dir_src')),
         loaders : ['babel?optional[]=runtime&stage=0']
       },
       {
@@ -71,4 +71,4 @@ if (globals.__PROD__) {
   );
 }
 
-return webpackConfig;
+export default webpackConfig;

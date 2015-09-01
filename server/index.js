@@ -3,7 +3,8 @@ import koa    from 'koa';
 import serve  from 'koa-static';
 import config from '../config';
 
-const app = koa();
+const paths = config.get('utils_paths');
+const app   = koa();
 
 // ------------------------------------
 // Response Time Header and Logging
@@ -14,14 +15,14 @@ app.use(require('./middleware/logger'));
 // ------------------------------------
 // Static File Middleware
 // ------------------------------------
-app.use(serve(config.inDist('client'), {
+app.use(serve(paths.dist('client'), {
   index : '__IGNORE_INDEX.HTML__'
 }));
 
 // ------------------------------------
 // View Rendering
 // ------------------------------------
-const template = fs.readFileSync(config.inDist('client/index.html'), 'utf-8')
+const template = fs.readFileSync(paths.dist('client/index.html'), 'utf-8')
   .replace('<div id="root"></div>', '<div id="root">${content}</div>');
 
 app.use(require('./middleware/render-route')(template));

@@ -1,11 +1,10 @@
-const runRouter = require('../../dist/server'),
-      USE_CACHE = process.env.NODE_ENV === 'production';
+import runRouter from '../../dist/server';
 
 function renderIntoTemplate (template, content) {
   return template.replace('${content}', content);
 }
 
-module.exports = function makeRenderRouteMiddleware (template) {
+export default function makeRenderRouteMiddleware (template) {
   return function *renderRouteMiddleware (next) {
     try {
       const rendered = yield runRouter(this.request);
