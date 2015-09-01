@@ -1,6 +1,23 @@
 Changelog
 =========
 
+0.7.0
+-----
+#### New Features
+* Support for redux-devtools in separate window with `dev:debugnw`
+  - Thanks to [mlusetti](https://github.com/mlusetti)
+
+#### Improvements
+* Upgrades react to `0.14.0-beta3`
+* Upgrades react to `0.14.0-beta3`
+* Upgrades redux to `^2.0.0`
+* Upgrades redux-devtools to `^2.0.0`
+* Upgrades react-redux to `^2.0.0`
+
+#### Fixes
+* Configuration file name trimming on Windows machines
+  - Thanks to [nuragic](https://github.com/nuragic)
+
 0.6.0
 -----
 
