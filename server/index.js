@@ -1,7 +1,7 @@
-const fs     = require('fs'),
-      koa    = require('koa'),
-      serve  = require('koa-static'),
-      config = require('../config');
+import fs     from 'fs';
+import koa    from 'koa';
+import serve  from 'koa-static';
+import config from '../config';
 
 const app = koa();
 
@@ -22,8 +22,8 @@ app.use(serve(config.inDist('client'), {
 // View Rendering
 // ------------------------------------
 const template = fs.readFileSync(config.inDist('client/index.html'), 'utf-8')
-  .replace('<div id="mount"></div>', '<div id="mount">${content}</div>');
+  .replace('<div id="root"></div>', '<div id="root">${content}</div>');
 
 app.use(require('./middleware/render-route')(template));
 
-module.exports = app;
+export default app;

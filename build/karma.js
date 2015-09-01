@@ -1,16 +1,13 @@
-const projectConfig     = require('../../config'),
-      makeWebpackConfig = require('../webpack/make-config'),
-      KARMA_ENTRY_FILE  = 'karma.entry.js';
+import config from '../../config';
+import webpackConfig from './webpack/client';
 
-const WEBPACK_CONFIG = makeWebpackConfig(
-  require('../webpack/client')()
-);
+const KARMA_ENTRY_FILE  = 'karma.entry.js';
 
 function makeDefaultConfig () {
   const preprocessors = {};
 
   preprocessors[KARMA_ENTRY_FILE] = ['webpack'];
-  preprocessors[projectConfig.SRC_DIRNAME + '/**/*.js'] = ['webpack'];
+  preprocessors[config.get('dir_src') + '/**/*.js'] = ['webpack'];
 
   return {
     files : [
@@ -25,9 +22,7 @@ function makeDefaultConfig () {
       devtool : 'inline-source-map',
       resolve : WEBPACK_CONFIG.resolve,
       plugins : WEBPACK_CONFIG.plugins
-        .filter(function (plugin) {
-          return !plugin.__KARMA_IGNORE__;
-        }),
+        .filter(p => !plugin.__KARMA_IGNORE__),
       module  : {
         loaders : WEBPACK_CONFIG.module.loaders
       }
@@ -47,7 +42,6 @@ function makeDefaultConfig () {
 }
 
 module.exports = function (karmaConfig) {
-  return karmaConfig.set(
-    require('./configs/_' + projectConfig.NODE_ENV)(makeDefaultConfig())
+  return karmaConfig.set(makeDefaultConfig())
   );
 };
