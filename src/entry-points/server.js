@@ -1,4 +1,5 @@
-import React  from 'react';
+import React    from 'react';
+import ReactDOM from 'react-dom/server';
 import Router from 'react-router';
 import Location from 'react-router/lib/Location';
 import routes from '../routes';
@@ -16,7 +17,7 @@ export default function render (request) {
           );
         }
 
-        const rendered = React.renderToString(
+        const rendered = ReactDOM.renderToString(
           <App initialState={initialState} />
         );
         callback(null, rendered);
