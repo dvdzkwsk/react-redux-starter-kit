@@ -83,6 +83,6 @@ config.set('utils_aliases', [
   'styles',
   'utils',
   'views'
-].reduce((acc, x) => (acc[x] = paths.src(x) && acc), {}));
+].reduce((acc, x) => ((acc[x] = paths.src(x)) && acc), {}));
 
 export default config;

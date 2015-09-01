@@ -42,6 +42,5 @@ function makeDefaultConfig () {
 }
 
 module.exports = function (karmaConfig) {
-  return karmaConfig.set(makeDefaultConfig())
-  );
+  return karmaConfig.set(makeDefaultConfig());
 };

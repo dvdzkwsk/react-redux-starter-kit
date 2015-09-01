@@ -48,16 +48,16 @@ const webpackConfig = {
         test : /\.(js|jsx)$/,
         include :  paths.project(config.get('dir_src')),
         loaders : ['babel?optional[]=runtime&stage=0']
+      },
+      {
+        test    : /\.scss$/,
+        loaders : [
+          'style-loader',
+          'css-loader',
+          'autoprefixer?browsers=last 2 version',
+          'sass-loader?includePaths[]=' + paths.src('styles')
+        ]
       }
-      // {
-      //   test   : /\.scss$/,
-      //   loaders : [
-      //     'style-loader',
-      //     'css-loader',
-      //     'autoprefixer?browsers=last 2 version',
-      //     'sass-loader?includePaths[]=' + paths.src('styles')
-      //   ]
-      // }
     ]
   },
   eslint : {
@@ -109,16 +109,16 @@ if (globals.__PROD__) {
   );
 
   // Extract CSS to a separate file
-  config.module.loaders = config.module.loaders.map((loader) => {
-    if (/css/.test(loader.test)) {
-      const [first, ...rest] = loader.loaders;
-
-      loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
-      delete loader.loaders;
-    }
-
-    return loader;
-  });
+  // config.module.loaders = config.module.loaders.map((loader) => {
+  //   if (/css/.test(loader.test)) {
+  //     const [first, ...rest] = loader.loaders;
+  //
+  //     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
+  //     delete loader.loaders;
+  //   }
+  //
+  //   return loader;
+  // });
 }
 
 export default webpackConfig;
