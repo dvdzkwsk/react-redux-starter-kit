@@ -63,6 +63,9 @@ Runs the webpack build system just like in `compile` but enables HMR and react h
 #### `npm run dev:debug`
 Same as `npm run dev` but enables `--debug` flag automatically (this will enable redux-devtools).
 
+#### `npm run dev:debugnw`
+Same as `npm run dev:debug` but opens the debug tools in a new window.
+
 #### `npm run dev:quiet`
 Same as `npm run dev` but disables verbose debugging information.
 
