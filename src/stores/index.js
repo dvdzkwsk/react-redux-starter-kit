@@ -1,13 +1,24 @@
-import { compose, createStore, combineReducers } from 'redux';
+import { compose, createStore } from 'redux';
 import { devTools } from 'redux-devtools';
-import * as reducers from 'reducers';
+import rootReducer from 'reducers';
 
-var buildStore;
+var createStoreWithMiddleware;
 
 if (__DEBUG__) {
-  buildStore = compose(devTools())(createStore);
+  createStoreWithMiddleware = compose(devTools())(createStore);
 } else {
-  buildStore = createStore;
+  createStoreWithMiddleware = createStore;
 }
 
-export default buildStore(combineReducers(reducers));
+export default function configureStore (initialState) {
+  const store = createStoreWithMiddleware(rootReducer, initialState);
+
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers/index');
+
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+  return store;
+}

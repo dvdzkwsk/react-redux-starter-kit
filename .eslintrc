@@ -161,7 +161,7 @@
       "const" : "always"
     }],
     "operator-assignment": [0, "always"],
-    "padded-blocks": [2, "never"],
+    "padded-blocks": [0, "never"],
     "quotes": [2, "single", "avoid-escape"],
     "quote-props": [1, "as-needed"],
     "sort-vars": 0,

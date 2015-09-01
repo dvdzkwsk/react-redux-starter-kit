@@ -8,6 +8,17 @@ const initialState  = {
   message : 'Welcome to the React Redux Starter Kit!'
 };
 
-export default createReducer(initialState, {
-  [SAMPLE_ACTION] : (state, payload) => state // aka noop
-});
+const actions = {
+  [SAMPLE_ACTION] : (state, payload) => {
+    console.log('sample action received.'); // eslint-disable-line
+
+    // noop
+    return state;
+  }
+};
+
+export default function (state = initialState, action) {
+  const handler = actions[action.type];
+
+  return handler ? handler(state, action.payload) : state;
+}
