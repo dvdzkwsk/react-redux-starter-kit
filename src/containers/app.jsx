@@ -55,7 +55,7 @@ export default class ClientApp extends React.Component {
       <div>
         {debugTools}
         <Provider store={store}>
-          {() => this.renderRouter()}
+          {this.renderRouter()}
         </Provider>
       </div>
     );
