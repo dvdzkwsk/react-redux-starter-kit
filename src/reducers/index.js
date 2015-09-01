@@ -1,1 +1,6 @@
-export { default as sample } from './sample';
+import { combineReducers } from 'redux';
+import sample from './sample';
+
+export default combineReducers({
+  sample
+});
