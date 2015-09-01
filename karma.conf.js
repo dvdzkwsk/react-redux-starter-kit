@@ -1,1 +1,2 @@
-module.exports = require('./build/karma/make-config');
+require('babel/register');
+module.exports = require('./build/karma');

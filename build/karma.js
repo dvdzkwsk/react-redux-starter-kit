@@ -1,6 +1,7 @@
-import config from '../../config';
+import config from '../config';
 import webpackConfig from './webpack/client';
 
+const globals = config.get('globals');
 const KARMA_ENTRY_FILE  = 'karma.entry.js';
 
 function makeDefaultConfig () {
@@ -14,17 +15,18 @@ function makeDefaultConfig () {
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
       './' + KARMA_ENTRY_FILE
     ],
+    singleRun  : globals.__PROD__,
     frameworks : ['chai', 'mocha'],
     preprocessors : preprocessors,
     reporters : ['spec'],
     browsers : ['PhantomJS'],
     webpack : {
       devtool : 'inline-source-map',
-      resolve : WEBPACK_CONFIG.resolve,
-      plugins : WEBPACK_CONFIG.plugins
-        .filter(p => !plugin.__KARMA_IGNORE__),
+      resolve : webpackConfig.resolve,
+      plugins : webpackConfig.plugins
+        .filter(p => !p.__KARMA_IGNORE__),
       module  : {
-        loaders : WEBPACK_CONFIG.module.loaders
+        loaders : webpackConfig.module.loaders
       }
     },
     webpackMiddleware : {
@@ -41,6 +43,4 @@ function makeDefaultConfig () {
   };
 }
 
-module.exports = function (karmaConfig) {
-  return karmaConfig.set(makeDefaultConfig());
-};
+export default (karmaConfig) => karmaConfig.set(makeDefaultConfig());
