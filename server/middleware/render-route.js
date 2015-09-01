@@ -15,4 +15,4 @@ export default function makeRenderRouteMiddleware (template) {
       yield next;
     }
   };
-};
+}
