@@ -27,7 +27,7 @@
     "babel-loader": "^5.0.0",
     "babel-runtime": "^5.8.20",
     "chai": "^3.2.0",
-    "css-loader": "^0.16.0",
+    "css-loader": "^0.17.0",
     "eslint": "^1.0.0",
     "eslint-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^0.8.0",
