@@ -51,6 +51,7 @@
     "phantomjs-polyfill": "0.0.1",
     "react": "^0.14.0-beta3",
     "react-dom": "^0.14.0-beta3",
+    "react-hot-loader": "^1.2.8",
     "react-redux": "^2.0.0",
     "react-router": "1.0.0-beta3",
     "redux": "^2.0.0",
@@ -63,7 +64,6 @@
     "yargs": "^3.18.0"
   },
   "devDependencies": {
-    "react-hot-loader": "^1.2.8",
     "webpack-dev-server": "^1.10.1"
   }
 }
