@@ -18,10 +18,13 @@ export default class HomeView extends React.Component {
 
   render () {
     return (
-      <div className='container'>
+      <div className='container text-center'>
         <h1>Welcome to the React Redux Starter Kit</h1>
         <h2>Sample Counter: {this.props.counter}</h2>
-        <button onClick={::this._increment}>Increment</button>
+        <button className='btn btn-default'
+                onClick={::this._increment}>
+          Increment
+        </button>
       </div>
     );
   }
