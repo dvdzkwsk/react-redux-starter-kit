@@ -38,7 +38,7 @@ config.set('webpack_public_path',
 // Project
 // ------------------------------------
 config.set('path_project', path.resolve(__dirname, '../'));
-config.set('dir_src',  'src');
+config.set('dir_src',  'client');
 config.set('dir_dist', 'dist');
 
 config.set('vendor_dependencies', [
