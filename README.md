@@ -67,8 +67,6 @@ Same as `npm run dev:debug` but opens the debug tools in a new window.
 #### `npm run compile`
 Runs the Webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`). Production builds will fail on eslint errors (but not on warnings).
 
-**NOTE**: I'm still searching for a good solution for when to run the server entry point bundler, since it doesn't make much sense to run webpack on it when you're just using the dev server. As a result (only for the time being) if you wish to run the Koa server you'll need to run `compile` with `NODE_ENV=production` first, since that's the only time the server bundle gets compiled.
-
 #### `npm run test`
 Runs all tests for the application. When run in a production build, failing tests will fail your build.
 
