@@ -8,12 +8,7 @@ import createDevToolsWindow from 'utils';
 
 const store = configureStore();
 
-export default class ClientApp extends React.Component {
-  static propTypes = {
-    history      : React.PropTypes.object,
-    initialState : React.PropTypes.object
-  }
-
+export default class Root extends React.Component {
   constructor () {
     super();
   }
@@ -32,17 +27,13 @@ export default class ClientApp extends React.Component {
   }
 
   renderRouter () {
-    if (__SERVER__) {
-      return (
-        <Router {...this.props.initialState} />
-      );
-    } else {
-      return (
-        <Router history={this.props.history}>
-          {routes}
-        </Router>
-      );
-    }
+    const routerState = this.props.initialState || this.props;
+
+    return (
+      <Router {...routerState}>
+        {routes}
+      </Router>
+    );
   }
 
   render () {

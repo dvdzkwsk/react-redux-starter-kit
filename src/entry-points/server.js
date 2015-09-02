@@ -1,9 +1,9 @@
 import React    from 'react';
 import ReactDOM from 'react-dom/server';
-import Router from 'react-router';
+import Router   from 'react-router';
 import Location from 'react-router/lib/Location';
-import routes from '../routes';
-import App from 'containers/app';
+import routes   from '../routes';
+import Root     from 'containers/root';
 
 export default function render (request) {
   return function renderThunk (callback) {
@@ -18,7 +18,7 @@ export default function render (request) {
         }
 
         const rendered = ReactDOM.renderToString(
-          <App initialState={initialState} />
+          <Root initialState={initialState} />
         );
         callback(null, rendered);
       });

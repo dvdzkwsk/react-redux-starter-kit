@@ -1,6 +1,6 @@
-import React    from 'react';
-import ReactDOM from 'react-dom';
-import App      from 'containers/app';
+import React       from 'react';
+import ReactDOM    from 'react-dom';
+import Root        from 'containers/root';
 import { history } from 'react-router/lib/BrowserHistory';
 
-ReactDOM.render(<App history={history} />, document.getElementById('mount'));
+ReactDOM.render(<Root history={history} />, document.getElementById('root'));

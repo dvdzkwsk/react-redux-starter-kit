@@ -1,35 +1,32 @@
-const projectConfig     = require('../../config'),
-      makeWebpackConfig = require('../webpack/make-config'),
-      KARMA_ENTRY_FILE  = 'karma.entry.js';
+import config from '../config';
+import webpackConfig from './webpack/client';
 
-const WEBPACK_CONFIG = makeWebpackConfig(
-  require('../webpack/client')()
-);
+const globals = config.get('globals');
+const KARMA_ENTRY_FILE  = 'karma.entry.js';
 
 function makeDefaultConfig () {
   const preprocessors = {};
 
   preprocessors[KARMA_ENTRY_FILE] = ['webpack'];
-  preprocessors[projectConfig.SRC_DIRNAME + '/**/*.js'] = ['webpack'];
+  preprocessors[config.get('dir_src') + '/**/*.js'] = ['webpack'];
 
   return {
     files : [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
       './' + KARMA_ENTRY_FILE
     ],
+    singleRun  : globals.__PROD__,
     frameworks : ['chai', 'mocha'],
     preprocessors : preprocessors,
     reporters : ['spec'],
     browsers : ['PhantomJS'],
     webpack : {
       devtool : 'inline-source-map',
-      resolve : WEBPACK_CONFIG.resolve,
-      plugins : WEBPACK_CONFIG.plugins
-        .filter(function (plugin) {
-          return !plugin.__KARMA_IGNORE__;
-        }),
+      resolve : webpackConfig.resolve,
+      plugins : webpackConfig.plugins
+        .filter(p => !p.__KARMA_IGNORE__),
       module  : {
-        loaders : WEBPACK_CONFIG.module.loaders
+        loaders : webpackConfig.module.loaders
       }
     },
     webpackMiddleware : {
@@ -46,8 +43,4 @@ function makeDefaultConfig () {
   };
 }
 
-module.exports = function (karmaConfig) {
-  return karmaConfig.set(
-    require('./configs/_' + projectConfig.NODE_ENV)(makeDefaultConfig())
-  );
-};
+export default (karmaConfig) => karmaConfig.set(makeDefaultConfig());

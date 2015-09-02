@@ -1,6 +1,17 @@
 Changelog
 =========
 
+0.8.0
+-----
+
+#### Improvements
+* All build-, server-, and client-related code is now ES6.
+* Significantly refactors how client and server webpack configs are built.
+* `reducers/index.js` now exports combined root reducer.
+
+#### Fixes
+* Redux store now explicitly handles HMR.
+
 0.7.0
 -----
 #### New Features
