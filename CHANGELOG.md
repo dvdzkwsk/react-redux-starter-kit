@@ -8,9 +8,16 @@ Changelog
 * All build-, server-, and client-related code is now ES6.
 * Significantly refactors how client and server webpack configs are built.
 * `reducers/index.js` now exports combined root reducer.
+* Client application code now lives in `~/client` instead of `~/src` in order to conform to Redux standards.
 
 #### Fixes
 * Redux store now explicitly handles HMR.
+
+#### Changes
+* Webpack compiler configurations are no longer merged on top of a base default configuration. This can become unwieldy and even though explicitly writing each configuration file out is more verbose, it ends up being more maintainable.
+
+#### Deprecations
+* Quiet mode has been removed (`npm run dev:quiet`).
 
 0.7.0
 -----
