@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import config  from '../../config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ExtractPlugin from 'extract-text-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const paths   = config.get('utils_paths'),
       globals = config.get('globals');
@@ -23,6 +23,7 @@ const webpackConfig = {
   plugins : [
     new webpack.DefinePlugin(config.get('globals')),
     new webpack.optimize.DedupePlugin(),
+    new ExtractTextPlugin('[name].[contenthash].css'),
     new HtmlWebpackPlugin({
       template : paths.src('index.html'),
       hash     : true,
@@ -51,12 +52,11 @@ const webpackConfig = {
       },
       {
         test    : /\.scss$/,
-        loaders : [
-          'style-loader',
+        loader : ExtractTextPlugin.extract('style-loader', [
           'css-loader',
           'autoprefixer?browsers=last 2 version',
           'sass-loader?includePaths[]=' + paths.src('styles')
-        ]
+        ].join('!'))
       }
     ]
   },
@@ -107,18 +107,6 @@ if (globals.__PROD__) {
       }
     })
   );
-
-  // Extract CSS to a separate file
-  // config.module.loaders = config.module.loaders.map((loader) => {
-  //   if (/css/.test(loader.test)) {
-  //     const [first, ...rest] = loader.loaders;
-  //
-  //     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
-  //     delete loader.loaders;
-  //   }
-  //
-  //   return loader;
-  // });
 }
 
 export default webpackConfig;
