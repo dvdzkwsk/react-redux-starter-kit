@@ -118,20 +118,20 @@ import MyComponent from '../../components/my-component'; // without alias
 import MyComponent from 'components/my-component'; // with alias
 
   // Available aliases:
-  actions     => '~/src/actions'
-  components  => '~/src/components'
-  constants   => '~/src/constants'
-  containers  => '~/src/containers'
-  dispatchers => '~/src/dispatchers'
-  layouts     => '~/src/layouts'
-  models      => '~/src/models'
-  reducers    => '~/src/reducers'
-  routes      => '~/src/routes'
-  services    => '~/src/services'
-  stores      => '~/src/stores'
-  styles      => '~/src/styles'
-  utils       => '~/src/utils'
-  views       => '~/src/views'
+  actions     => '~/client/actions'
+  components  => '~/client/components'
+  constants   => '~/client/constants'
+  containers  => '~/client/containers'
+  dispatchers => '~/client/dispatchers'
+  layouts     => '~/client/layouts'
+  models      => '~/client/models'
+  reducers    => '~/client/reducers'
+  routes      => '~/client/routes'
+  services    => '~/client/services'
+  stores      => '~/client/stores'
+  styles      => '~/client/styles'
+  utils       => '~/client/utils'
+  views       => '~/client/views'
 ```
 
 ### Globals
@@ -157,14 +157,14 @@ Styles
 All `.scss` imports will be run through the sass-loader, extracted during production builds, and ignored during server builds. If you're requiring styles from a base styles directory (useful for generic, app-wide styles) in your JS, you can make use of the `styles` alias, e.g.:
 
 ```js
-// ~/src/components/some/nested/component/index.jsx
+// ~/client/components/some/nested/component/index.jsx
 import `styles/core.scss`;
 ```
 
 Furthermore, this `styles` directory is aliased for sass imports, which further eliminates manual directory traversing. An example nested `.scss` file:
 
 ```scss
-// current path: ~/src/styles/some/nested/style.scss
+// current path: ~/client/styles/some/nested/style.scss
 // what used to be this:
 @import '../../base';
 
@@ -175,12 +175,12 @@ Furthermore, this `styles` directory is aliased for sass imports, which further 
 Testing
 -------
 
-To add a unit test, simply create `.spec.js` file anywhere in `~/src`. The entry point for Karma uses webpack's custom require to load all these files, and both Mocha and Chai will be available to you within your test without the need to import them.
+To add a unit test, simply create `.spec.js` file anywhere in `~/client`. The entry point for Karma uses webpack's custom require to load all these files, and both Mocha and Chai will be available to you within your test without the need to import them.
 
 Utilities
 ---------
 
-This boilerplate comes with two simple utilities (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/src/utils` you'll find exports for `createConstants` and `createReducer`. The former is pretty much an even lazier `keyMirror`, so if you _really_ hate typing out those constants you may want to give it a shot. Check it out:
+This boilerplate comes with two simple utilities (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/client/utils` you'll find exports for `createConstants` and `createReducer`. The former is pretty much an even lazier `keyMirror`, so if you _really_ hate typing out those constants you may want to give it a shot. Check it out:
 
 ```js
 import { createConstants } from 'utils';
