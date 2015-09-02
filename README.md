@@ -18,6 +18,7 @@ Table of Contents
 1. [Styles](#styles)
 1. [Testing](#testing)
 1. [Utilities](#utilities)
+1. [Server](#server)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
 
@@ -32,8 +33,9 @@ Features
 * [React](https://github.com/facebook/react) (`0.14.0-beta3`)
 * [react-router](https://github.com/rackt/react-router) (`1.0.0-beta`)
 * [Redux](https://github.com/gaearon/redux) (`2.0.0`)
-  * redux-devtools (enabled with `--debug` flag)
   * react-redux
+  * redux-devtools (enabled with `--debug` flag)
+    * or try `npm run dev:debugnw` to display it in a separate window.
 * [Koa](https://github.com/koajs/koa)
 * [Immutable.js](https://github.com/facebook/immutable-js)
 * Karma
@@ -44,15 +46,11 @@ Features
     * Client bundle splits app code from vendor dependencies
   * webpack-dev-server
   * react-hot-loader
-  * sass-loader
-    * CSS extraction in production mode
+  * sass-loader with CSS extraction
   * babel w/ babel-runtime
   * eslint-loader
     * Configured to fail production builds on error
-  * Pre-configured aliases and globals
-  * Easy per-environment configuration
-
-**NOTE**: Bootstrap is loaded from its CDN for the sole purposes of making the example not look hideous. I didn't want to actually include it as an application dependency, so if you wish to remove it just delete its `<link>` tag in `~/src/index.html`.
+  * Pre-configured folder aliases and globals
 
 Usage
 -----
@@ -65,9 +63,6 @@ Same as `npm run dev` but enables `--debug` flag automatically (this will enable
 
 #### `npm run dev:debugnw`
 Same as `npm run dev:debug` but opens the debug tools in a new window.
-
-#### `npm run dev:quiet`
-Same as `npm run dev` but disables verbose debugging information.
 
 #### `npm run compile`
 Runs the Webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`). Production builds will fail on eslint errors (but not on warnings).
@@ -100,15 +95,13 @@ Webpack
 -------
 
 ### Configuration
-Webpack bundles are separated into sub-folders that define configurations for their respective bundle (e.g. `~/build/webpack/client` and `~/build/webpack-server`). A default webpack configuration is provided in `~/build/webpack/make-config`, which exports a function that will merge a config object on top of that default configuration.
-
-Bundle-specific configurations can further this customizability by implementing environment-specific configurations. Check out `~/build/webpack/client/_development` for an example. You can configure which bundles are used and when in `~/webpack.config.js`.
+There are two configuration files for the webpack compiler, client and server, located in `~/build/webpack` and named accordingly. When the webpack dev server runs, only the client compiler will be used. When webpack itself is run to compile to disk, both the client and server configurations will be used. Settings that are bundle agnostic should be defined in `~/config/index.js` and imported where needed.
 
 ### Vendor Bundle
-You can redefine which packages to treat as vendor dependencies by editing `VENDOR_DEPENDENCIES` in `~/config/index.js`. These default to
+You can redefine which packages to treat as vendor dependencies by editing `vendor_dependencies` in `~/config/index.js`. These default to:
 
 ```js
-VENDOR_DEPENDENCIES : [
+[
   'immutable',
   'react',
   'react-redux',
@@ -230,6 +223,11 @@ export default createReducer(initialState, {
   [TODO_CREATE] : (state, payload) => { ... }
 });
 ```
+
+Server
+------
+
+The application used by the server is pre-compiled, meaning the server does not load the application from source during runtime. While loading it at runtime sounds great, and a lot of examples do it, they neglect any incorporation of critical assets that aren't just JavaScript. As such, in order to support non-JS assets (read: sass), the application used by the server must be pre-bundled. The alternative would be preprocessing the server with webpack, and since any development on the server is likely to _not_ touch rendering, it makes more sense to support a more dynamic server environment.
 
 Deployment
 ----------
