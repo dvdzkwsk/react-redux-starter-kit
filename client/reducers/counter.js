@@ -8,7 +8,7 @@ const COUNTER_INCREMENT = 'COUNTER_INCREMENT';
 const initialState = 0;
 
 export default createReducer(initialState, {
-  [COUNTER_INCREMENT] : (state, payload) => {
+  [COUNTER_INCREMENT] : (state) => {
     return state + 1;
   }
 });

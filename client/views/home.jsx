@@ -5,14 +5,18 @@ import { connect } from 'react-redux';
   counter : state.counter
 }))
 export default class HomeView extends React.Component {
+  static propTypes = {
+    dispatch : React.PropTypes.func.isRequired,
+    counter  : React.PropTypes.number.isRequired
+  }
+
   constructor () {
     super();
   }
 
+  // normally you'd import an action creator, but I don't want to create
+  // a file that you're just going to delete anyways!
   _increment () {
-
-    // normally you'd import an action creator, but I don't want to create
-    // a file that you're just going to delete anyways!
     this.props.dispatch({ type : 'COUNTER_INCREMENT' });
   }
 
