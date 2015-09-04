@@ -1,12 +1,10 @@
-import assign from 'object-assign';
 import React from 'react';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 export function createConstants (...constants) {
   return constants.reduce((acc, constant) => {
-    return assign(acc, {
-      [constant] : constant
-    });
+    acc[constant] = constant;
+    return acc;
   }, {});
 }
 
