@@ -10,8 +10,10 @@ export default function render (request) {
     const location = new Location(request.path, request.query);
 
     try {
-      Router.run(routes, location, function (error, initialState, transition) {
-        if (!initialState) {
+      Router.run(routes, location, function (error, initialState) {
+        if (error) {
+          throw error;
+        } else if (!initialState) {
           throw new Error(
             `Could not render ${request.path}: no initial state returned.`
           );

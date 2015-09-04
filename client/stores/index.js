@@ -2,7 +2,7 @@ import { compose, createStore } from 'redux';
 import { devTools } from 'redux-devtools';
 import rootReducer from 'reducers';
 
-var createStoreWithMiddleware;
+let createStoreWithMiddleware;
 
 if (__DEBUG__) {
   createStoreWithMiddleware = compose(devTools())(createStore);
