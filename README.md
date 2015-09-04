@@ -49,6 +49,7 @@ Features
   * sass-loader with CSS extraction
   * babel w/ babel-runtime
   * eslint-loader
+    * Uses [Airbnb's eslint config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) (with some softened rules)
     * Configured to fail production builds on error
   * Pre-configured folder aliases and globals
 
