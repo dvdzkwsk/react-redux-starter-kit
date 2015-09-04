@@ -48,7 +48,7 @@ const webpackConfig = {
       {
         test : /\.(js|jsx)$/,
         include :  paths.project(config.get('dir_src')),
-        loaders : ['react-hot', 'babel?optional[]=runtime&stage=0']
+        loaders : ['babel?optional[]=runtime']
       },
       {
         test    : /\.scss$/,
