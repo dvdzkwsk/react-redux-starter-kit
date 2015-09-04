@@ -1,6 +1,22 @@
 Changelog
 =========
 
+0.9.0
+-----
+
+#### Features
+* Koa server now uses gzip middleware.
+
+#### Improvements
+* Switches out react-hot-loader in favor of [react-transform-webpack-hmr](https://github.com/gaearon/react-transform-webpack-hmr).
+* Eslint configuration now uses Airbnb's configuration (slightly softened).
+* Migrates all actual development dependencies to devDependencies in `package.json`.
+* Example store and view are now more intuitive (simple counter display).
+* CSS-loader dependency upgraded from `0.16.0` to `0.17.0`.
+
+#### Deprecations
+* Removes unnecessary object-assign dependency.
+
 0.8.0
 -----
 
