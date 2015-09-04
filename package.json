@@ -24,7 +24,6 @@
     "immutable": "^3.7.4",
     "koa": "^1.0.0",
     "koa-static": "^1.4.9",
-    "object-assign": "^4.0.0",
     "react": "^0.14.0-beta3",
     "react-dom": "^0.14.0-beta3",
     "react-redux": "^2.0.0",
