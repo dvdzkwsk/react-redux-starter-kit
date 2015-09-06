@@ -1,0 +1,10 @@
+.todo-item {
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__notification {
+    margin-right: 1rem;
+  }
+}

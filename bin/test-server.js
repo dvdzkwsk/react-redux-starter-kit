@@ -14,7 +14,7 @@ describe('Koa Server', function () {
     it('Should respond with sample welcome text.', function (done) {
       request
         .get('/')
-        .expect(/Welcome to the React Redux Starter Kit/, done);
+        .expect(/Stuff that you should do. Maybe, I guess./, done);
     });
   });
 });
