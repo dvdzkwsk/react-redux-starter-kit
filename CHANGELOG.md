@@ -1,6 +1,19 @@
 Changelog
 =========
 
+0.10.0
+------
+
+#### Features
+* Initial state can now be injected from the server (still WIP).
+* Adds react-addons-test-utils as a devDependency.
+
+#### Improvements
+* Eslint no longer prevents webpack from bundling in development mode if an error is emitted.
+  * See: https://github.com/MoOx/eslint-loader/issues/23
+* Updates all `.jsx` files to `.js`. (https://github.com/davezuko/react-redux-starter-kit/issues/37)
+* Updates all React component file names to be ProperCased.
+
 0.9.0
 -----
 

@@ -1,7 +1,7 @@
 {
   "name": "react-redux-starter-kit",
-  "version": "0.9.0",
-  "description": "Boilerplate to get you started with React, Redux, React-Router, and Koa",
+  "version": "0.10.0",
+  "description": "Get started with React, Redux, React-Router, and Koa!",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
