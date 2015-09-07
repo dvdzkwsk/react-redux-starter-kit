@@ -1,6 +1,6 @@
 import React          from 'react';
 import ReactDOM       from 'react-dom';
-import Root           from 'containers/root';
+import Root           from 'containers/Root';
 import configureStore from 'stores';
 import { history }    from 'react-router/lib/BrowserHistory';
 
