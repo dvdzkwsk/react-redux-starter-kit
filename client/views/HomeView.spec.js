@@ -1,5 +1,5 @@
-import React from 'react';
-import HomeView from './home';
+import React    from 'react';
+import HomeView from './HomeView';
 
 describe('(View) Home', function () {
 

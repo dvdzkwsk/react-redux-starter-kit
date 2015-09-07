@@ -3,7 +3,7 @@ import ReactDOM       from 'react-dom/server';
 import Router         from 'react-router';
 import Location       from 'react-router/lib/Location';
 import routes         from '../routes';
-import Root           from 'containers/root';
+import Root           from 'containers/Root';
 import configureStore from 'stores';
 
 let _store;
