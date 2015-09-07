@@ -6,6 +6,5 @@ import { history }    from 'react-router/lib/BrowserHistory';
 
 const target = document.getElementById('root');
 const store  = configureStore(window.__INITIAL_STATE__);
-console.log('initial state = ', window.__INITIAL_STATE__);
 
 ReactDOM.render(<Root routerHistory={history} store={store}/>, target);
