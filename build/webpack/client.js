@@ -61,8 +61,9 @@ const webpackConfig = {
     ]
   },
   eslint : {
-    configFile : paths.project('.eslintrc'),
-    failOnError : globals.__PROD__
+    configFile  : paths.project('.eslintrc'),
+    failOnError : globals.__PROD__,
+    emitWarning : globals.__DEV__
   }
 };
 
