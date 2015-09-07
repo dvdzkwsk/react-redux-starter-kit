@@ -1,16 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import configureStore from 'stores';
 import routes from 'routes';
 import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 import createDevToolsWindow from 'utils';
 
-const store = configureStore();
-
 export default class Root extends React.Component {
   static propTypes = {
-    initialState : React.PropTypes.object
+    routerHistory      : React.PropTypes.object,
+    initialRouterState : React.PropTypes.object,
+    store : React.PropTypes.object
   }
 
   constructor () {
@@ -19,19 +18,21 @@ export default class Root extends React.Component {
 
   renderDevTools () {
     if (__DEBUG_NW__) {
-      createDevToolsWindow(store);
+      createDevToolsWindow(this.props.store);
       return null;
     } else {
       return (
         <DebugPanel top left bottom key='debugPanel'>
-          <DevTools store={store} monitor={LogMonitor} />
+          <DevTools store={this.props.store} monitor={LogMonitor} />
         </DebugPanel>
       );
     }
   }
 
   renderRouter () {
-    const routerState = this.props.initialState || this.props;
+    const routerState = this.props.initialRouterState ?
+      this.props.initialRouterState :
+      { history : this.props.routerHistory };
 
     return (
       <Router {...routerState}>
@@ -50,7 +51,7 @@ export default class Root extends React.Component {
     return (
       <div>
         {debugTools}
-        <Provider store={store}>
+        <Provider store={this.props.store}>
           {this.renderRouter()}
         </Provider>
       </div>

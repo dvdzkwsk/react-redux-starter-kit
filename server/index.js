@@ -1,4 +1,3 @@
-import fs     from 'fs';
 import koa    from 'koa';
 import serve  from 'koa-static';
 import config from '../config';
@@ -23,9 +22,13 @@ app.use(serve(paths.dist('client'), {
 // ------------------------------------
 // View Rendering
 // ------------------------------------
-const template = fs.readFileSync(paths.dist('client/index.html'), 'utf-8')
-  .replace('<div id="root"></div>', '<div id="root">${content}</div>');
+function getInitialState () {
+  const counter = this.request.query.counter ?
+    parseInt(this.request.query.counter) : 10;
 
-app.use(require('./middleware/render-route')(template));
+  return new Promise(res => res({ counter }));
+}
+
+app.use(require('./middleware/render-route')(getInitialState));
 
 export default app;
