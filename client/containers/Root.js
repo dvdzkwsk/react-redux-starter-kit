@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import routes from 'routes';
 import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
-import createDevToolsWindow from 'utils';
+import { createDevToolsWindow } from 'utils';
 
 export default class Root extends React.Component {
   static propTypes = {
