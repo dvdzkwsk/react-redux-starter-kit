@@ -1,13 +1,18 @@
-import React from 'react';
+import React       from 'react';
 import { connect } from 'react-redux';
 
-@connect(state => ({
+// We define mapDispatchToProps where we'd normally use the @connect
+// decorator so the data requirements are clear upfront, but then
+// export the decorated component after the main class definition so
+// the component can be tested w/ and w/o being connected.
+// See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
+const mapDispatchToProps = (state) => ({
   counter : state.counter
-}))
-export default class HomeView extends React.Component {
+});
+export class HomeView extends React.Component {
   static propTypes = {
-    dispatch : React.PropTypes.func.isRequired,
-    counter  : React.PropTypes.number.isRequired
+    dispatch : React.PropTypes.func,
+    counter  : React.PropTypes.number
   }
 
   constructor () {
@@ -33,3 +38,5 @@ export default class HomeView extends React.Component {
     );
   }
 }
+
+export default connect(mapDispatchToProps)(HomeView);

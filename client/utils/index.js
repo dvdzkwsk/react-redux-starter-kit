@@ -16,7 +16,7 @@ export function createReducer (initialState, reducerMap) {
   };
 }
 
-export default function createDevToolsWindow (store) {
+export function createDevToolsWindow (store) {
   const win = window.open(
     null,
     'redux-devtools', // give it a name so it reuses the same window
