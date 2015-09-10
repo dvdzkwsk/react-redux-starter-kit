@@ -30,8 +30,8 @@ Node `^0.12.0` or io.js `^2.0.0`.
 Features
 --------
 
-* [React](https://github.com/facebook/react) (`0.14.0-beta3`)
-  * Includes react-addons-test-utils (`0.14.0-beta3`)
+* [React](https://github.com/facebook/react) (`0.14.0-rc1`)
+  * Includes react-addons-test-utils (`0.14.0-rc1`)
 * [react-router](https://github.com/rackt/react-router) (`1.0.0-beta`)
 * [Redux](https://github.com/gaearon/redux) (`2.0.0`)
   * react-redux
