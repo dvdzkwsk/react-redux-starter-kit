@@ -37,13 +37,6 @@ const webpackConfig = {
     alias : config.get('utils_aliases')
   },
   module : {
-    preLoaders : [
-      {
-        test : /\.(js|jsx)$/,
-        loaders : ['eslint-loader'],
-        include : paths.project(config.get('dir_src'))
-      }
-    ],
     loaders : [
       {
         test : /\.(js|jsx)$/,
@@ -108,6 +101,22 @@ if (globals.__PROD__) {
       }
     })
   );
+}
+
+// ------------------------------------
+// Optional Configuration
+// ------------------------------------
+if (
+  !globals.__DEV__ ||
+  (globals.__DEV__ && config.get('webpack_lint_in_dev'))
+) {
+  webpackConfig.module.preLoaders = [
+    {
+      test : /\.(js|jsx)$/,
+      loaders : ['eslint-loader'],
+      include : paths.project(config.get('dir_src'))
+    }
+  ];
 }
 
 export default webpackConfig;

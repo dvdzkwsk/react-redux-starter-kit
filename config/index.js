@@ -34,6 +34,9 @@ config.set('webpack_public_path',
   `http://${config.get('server_host')}:${config.get('webpack_port')}/`
 );
 
+// build options
+config.set('webpack_lint_in_dev', true);
+
 // ------------------------------------
 // Project
 // ------------------------------------
