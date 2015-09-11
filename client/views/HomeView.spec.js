@@ -58,25 +58,27 @@ describe('(View) Home', function () {
   });
 
   it('Should call props.dispatch when "Increment" button is clicked.', function () {
-    let clicked = false;
+    const dispatch = sinon.spy();
     const btn = TestUtils.findRenderedDOMComponentWithTag(
-      renderWith({ dispatch : () => clicked = true }), 'button'
+      renderWith({ dispatch }), 'button'
     );
 
-    expect(clicked).to.be.false;
+    dispatch.should.have.not.been.called;
     TestUtils.Simulate.click(btn);
-    expect(clicked).to.be.true;
+    dispatch.should.have.been.called;
   });
 
   it('Should dispatch an action with type "COUNTER_INCREMENT" when "Increment" button is clicked.', function () {
-    let action;
+    const dispatch = sinon.spy();
     const btn = TestUtils.findRenderedDOMComponentWithTag(
-      renderWith({ dispatch : (a) => action = a }), 'button'
+      renderWith({ dispatch }), 'button'
     );
 
-    expect(action).to.be.undefined;
+    dispatch.should.have.not.been.called;
     TestUtils.Simulate.click(btn);
-    expect(action).to.be.exist;
-    expect(action).to.have.property('type', 'COUNTER_INCREMENT');
+
+    expect(dispatch.firstCall.args[0]).to.exist;
+    expect(dispatch.firstCall.args[0]).be.an.object;
+    expect(dispatch.firstCall.args[0]).to.have.property('type', 'COUNTER_INCREMENT');
   });
 });

@@ -39,8 +39,8 @@ Features
     * or try `npm run dev:debugnw` to display it in a separate window.
 * [Koa](https://github.com/koajs/koa)
 * [Immutable.js](https://github.com/facebook/immutable-js)
-* Karma
-  * Mocha w/ Chai
+* [Karma](https://github.com/karma-runner/karma)
+  * Mocha w/ Chai and Sinon-Chai
   * PhantomJS
 * [Babel](https://github.com/babel/babel)
   * react-transform-webpack-hmr for hot reloading
