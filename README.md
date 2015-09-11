@@ -23,7 +23,7 @@ Table of Contents
 Requirements
 ------------
 
-Node `^0.12.0` or io.js `^2.0.0`.
+Node (`^4.0.0` | `^0.12.0`) or io.js `^2.0.0`.
 
 Features
 --------
