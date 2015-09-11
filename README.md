@@ -146,12 +146,6 @@ True when `process.env.NODE_ENV` is `production`
 #### `__DEBUG__`
 True when the compiler is run with `--debug` (any environment).
 
-#### `__CLIENT__`
-True when the client bundler is running.
-
-#### `__SERVER__`
-True when the server bundler is running.
-
 Styles
 ------
 
