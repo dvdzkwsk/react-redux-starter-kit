@@ -24,7 +24,7 @@ app.use(serve(paths.dist('client'), {
 // ------------------------------------
 function getInitialState () {
   const counter = this.request.query.counter ?
-    parseInt(this.request.query.counter) : 10;
+    parseInt(this.request.query.counter) : 0;
 
   return new Promise(res => res({ counter }));
 }
