@@ -21,7 +21,9 @@ const webpackConfig = {
     publicPath : '/'
   },
   plugins : [
-    new webpack.DefinePlugin(config.get('globals')),
+    new webpack.DefinePlugin(Object.assign(config.get('globals'), {
+      __CLIENT__ : true
+    })),
     new webpack.optimize.DedupePlugin(),
     new ExtractTextPlugin('[name].[contenthash].css'),
     new HtmlWebpackPlugin({
