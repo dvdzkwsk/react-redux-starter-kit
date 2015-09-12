@@ -24,6 +24,7 @@ const webpackConfig = {
     new webpack.DefinePlugin(Object.assign(config.get('globals'), {
       __CLIENT__ : true
     })),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new ExtractTextPlugin('[name].[contenthash].css'),
     new HtmlWebpackPlugin({
