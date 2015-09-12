@@ -18,7 +18,9 @@ const webpackConfig = {
     libraryTarget : 'commonjs2'
   },
   plugins : [
-    new webpack.DefinePlugin(config.get('globals')),
+    new webpack.DefinePlugin(Object.assign(config.get('globals'), {
+      __SERVER__ : true
+    })),
     new webpack.optimize.DedupePlugin()
   ],
   resolve : {

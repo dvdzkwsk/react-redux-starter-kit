@@ -4,12 +4,13 @@ import { Router } from 'react-router';
 import routes from 'routes';
 import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 import { createDevToolsWindow } from 'utils';
+import { RoutingContext } from 'react-router';
 
 export default class Root extends React.Component {
   static propTypes = {
-    routerHistory      : React.PropTypes.object,
-    initialRouterState : React.PropTypes.object,
-    store : React.PropTypes.object
+    store          : React.PropTypes.object.isRequired,
+    routerHistory  : React.PropTypes.object,
+    routingContext : React.PropTypes.object
   }
 
   constructor () {
@@ -29,16 +30,19 @@ export default class Root extends React.Component {
     }
   }
 
+  // TODO: invariant error when neither of these are provided
   renderRouter () {
-    const routerState = this.props.initialRouterState ?
-      this.props.initialRouterState :
-      { history : this.props.routerHistory };
-
-    return (
-      <Router {...routerState}>
-        {routes}
-      </Router>
-    );
+    if (this.props.routingContext) {
+      return (
+        <RoutingContext {...this.props.routingContext} />
+      );
+    } else if (this.props.routerHistory) {
+      return (
+        <Router history={this.props.routerHistory}>
+          {routes}
+        </Router>
+      );
+    }
   }
 
   render () {

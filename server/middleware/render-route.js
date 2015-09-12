@@ -1,9 +1,15 @@
-import fs     from 'fs';
-import config from '../../config';
+import fs        from 'fs';
+import config    from '../../config';
+import React     from 'react';
+import ReactDOM  from 'react-dom/server';
 
 const paths = config.get('utils_paths');
-const { render, route, getStoreState } = require(paths.dist('server'));
 
+const { Root, route, configureStore } = require(paths.dist('server'));
+
+// ------------------------------------
+// Rendering Setup
+// ------------------------------------
 // TODO: there's a cleaner way to do this. The reason we're using the
 // compiled .html file is so that we don't have to worry about query strings
 // on generated assets, and we maintain a consistent index.html file between
@@ -24,20 +30,27 @@ function renderIntoTemplate (template, content, initialState) {
     .replace('${initialState}', JSON.stringify(initialState));
 }
 
+// ------------------------------------
+// Rendering Middleware
+// ------------------------------------
 export default function makeRenderRouteMiddleware (middleware) {
   return function *renderRouteMiddleware (next) {
+    let initialState;
+
+    if (typeof middleware === 'function') {
+      initialState = yield middleware.call(this);
+    }
+
     try {
-      let initialState;
+      const props = yield route(this.request.url);
 
-      if (typeof middleware === 'function') {
-        initialState = yield middleware.call(this);
-      }
-
-      const routerState = yield route(this.request);
-      const rendered    = yield render(routerState, initialState);
-      const storeState  = yield getStoreState();
-
-      this.body = renderIntoTemplate(template, rendered, storeState);
+      this.body = renderIntoTemplate(
+        template,
+        ReactDOM.renderToString(
+          <Root routingContext={props} store={configureStore(initialState)} />
+        ),
+        initialState
+      );
     } catch (e) {
       console.log(e);
       yield next;
