@@ -42,15 +42,12 @@ export default function makeRenderRouteMiddleware (middleware) {
     }
 
     try {
-      const props = yield route(this.request.url);
-
-      this.body = renderIntoTemplate(
-        template,
-        ReactDOM.renderToString(
-          <Root routingContext={props} store={configureStore(initialState)} />
-        ),
-        initialState
+      const props  = yield route(this.request.url);
+      const markup = ReactDOM.renderToString(
+        <Root routingContext={props} store={configureStore(initialState)} />
       );
+
+      this.body = renderIntoTemplate(template, markup, initialState);
     } catch (e) {
       console.log(e);
       yield next;
