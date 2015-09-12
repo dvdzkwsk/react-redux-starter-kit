@@ -30,7 +30,7 @@ Features
 
 * [React](https://github.com/facebook/react) (`0.14.0-rc1`)
   * Includes react-addons-test-utils (`0.14.0-rc1`)
-* [react-router](https://github.com/rackt/react-router) (`1.0.0-beta`)
+* [react-router](https://github.com/rackt/react-router) (`1.0.0-rc1`)
 * [Redux](https://github.com/gaearon/redux) (`2.0.0`)
   * react-redux
   * redux-devtools (enabled with `--debug` flag)
@@ -145,6 +145,12 @@ True when `process.env.NODE_ENV` is `production`
 
 #### `__DEBUG__`
 True when the compiler is run with `--debug` (any environment).
+
+#### `__CLIENT__`
+True when the client bundler is running.
+
+#### `__SERVER__`
+True when the server bundler is running.
 
 Styles
 ------
