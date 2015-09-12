@@ -23,6 +23,7 @@
     "babel": "^5.8.23",
     "history": "^1.9.0",
     "immutable": "^3.7.4",
+    "invariant": "^2.1.0",
     "koa": "^1.0.0",
     "koa-static": "^1.4.9",
     "react": "^0.14.0-rc1",
