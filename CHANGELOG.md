@@ -1,6 +1,19 @@
 Changelog
 =========
 
+0.11.0
+------
+
+#### Features
+* Upgrades all React dependencies to `0.14.0-rc1`
+* Upgrades react-router to `1.0.0-rc`
+  * Updates client and server rendering accordingly
+* Adds Sinon-Chai for improved assertions and function spies
+* Adds option to disable eslint when in development
+
+#### Improvements
+* Improved example unit tests using react-addons-test-utils and Sinon Chai
+
 0.10.0
 ------
 
