@@ -1,8 +1,8 @@
-import routes              from 'routes';
-import { match }           from 'react-router';
-import createLocation      from 'history/lib/createLocation';
+import routes          from 'routes';
+import { match }       from 'react-router';
+import createLocation  from 'history/lib/createLocation';
 
-export Root           from 'containers/root';
+export Root           from 'containers/Root';
 export configureStore from 'stores';
 
 export function route (url) {
