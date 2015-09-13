@@ -1,6 +1,20 @@
 Changelog
 =========
 
+0.12.0
+------
+
+#### Features
+* Upgrades react-router to `^3.0.0`. This is the only reason for the minor-level version  bump.
+* Webpack now uses OccurrenceOrderPlugin to produce consistent bundle hashes.
+
+#### Fixes
+* Adds `history` to vendor dependencies to fix HMR caused by upgrade to react-router `1.0.0-rc`
+
+#### Improvements
+* Server no longer modifies initial counter state by default.
+* Adds invariant error in route rendering method to enforce router state definition through props.
+
 0.11.0
 ------
 
