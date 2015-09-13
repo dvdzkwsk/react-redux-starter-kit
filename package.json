@@ -42,6 +42,7 @@
     "babel-plugin-react-transform": "^1.0.2",
     "babel-runtime": "^5.8.20",
     "css-loader": "^0.17.0",
+    "delicate-error-reporter": "0.0.9",
     "eslint": "^1.0.0",
     "eslint-config-airbnb": "0.0.8",
     "eslint-loader": "^1.0.0",
