@@ -96,7 +96,7 @@ if (globals.__DEV__) {
 if (globals.__PROD__) {
 
   // Compile CSS to its own file in production.
-  module.loaders = module.loaders.map(loader => {
+  webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
     if (/css/.test(loader.test)) {
       const [first, ...rest] = loader.loaders;
 
