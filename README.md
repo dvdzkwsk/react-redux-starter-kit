@@ -41,8 +41,9 @@ Features
   * Mocha w/ Chai and Sinon-Chai
   * PhantomJS
 * [Babel](https://github.com/babel/babel)
-  * react-transform-webpack-hmr for hot reloading
-  * configured to use babel runtime rather than inline transformations
+  * `react-transform-webpack-hmr` for hot reloading
+  * `react-transform-catch-errors` for more visible error reporting
+  * Uses babel runtime rather than inline transformations
 * [Webpack](https://github.com/webpack/webpack)
   * Separate server and client bundles
     * Client bundle splits app code from vendor dependencies

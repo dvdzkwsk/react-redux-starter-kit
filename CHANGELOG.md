@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.13.0
+------
+
+#### Features
+* Adds `react-transform-catch-errors` along with `delicate-error-reporter`. Thanks [bulby97](https://github.com/bulby97) for this!
+
+#### Fixes
+* ExtractTextPlugin is once again production only. This fixes an issue where styles wouldn't be hot reloaded with Webpack.
+
 0.12.0
 ------
 
