@@ -48,11 +48,12 @@ const webpackConfig = {
       },
       {
         test    : /\.scss$/,
-        loader : ExtractTextPlugin.extract('style-loader', [
+        loaders : [
+          'style-loader',
           'css-loader',
           'autoprefixer?browsers=last 2 version',
           'sass-loader?includePaths[]=' + paths.src('styles')
-        ].join('!'))
+        ]
       }
     ]
   },
@@ -93,11 +94,21 @@ if (globals.__DEV__) {
 }
 
 if (globals.__PROD__) {
+
+  // Compile CSS to its own file in production.
+  module.loaders = module.loaders.map(loader => {
+    if (/css/.test(loader.test)) {
+      const [first, ...rest] = loader.loaders;
+
+      loader.loader = ExtractTextPlugin(first, rest.join('!'));
+      delete loader.loaders;
+    }
+
+    return loader;
+  });
+
   webpackConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
-      output : {
-        'comments'  : false
-      },
       compress : {
         'unused'    : true,
         'dead_code' : true
