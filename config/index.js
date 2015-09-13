@@ -45,6 +45,7 @@ config.set('dir_src',  'client');
 config.set('dir_dist', 'dist');
 
 config.set('vendor_dependencies', [
+  'history',
   'immutable',
   'react',
   'react-redux',

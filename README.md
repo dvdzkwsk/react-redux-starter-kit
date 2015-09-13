@@ -101,6 +101,7 @@ You can redefine which packages to treat as vendor dependencies by editing `vend
 
 ```js
 [
+  'history',
   'immutable',
   'react',
   'react-redux',
