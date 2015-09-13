@@ -100,7 +100,7 @@ if (globals.__PROD__) {
     if (/css/.test(loader.test)) {
       const [first, ...rest] = loader.loaders;
 
-      loader.loader = ExtractTextPlugin(first, rest.join('!'));
+      loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
       delete loader.loaders;
     }
 
