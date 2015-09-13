@@ -6,6 +6,40 @@ import { argv } from 'yargs';
 const config = new Map();
 
 // ------------------------------------
+// User Configuration
+// ------------------------------------
+// NOTE: Due to limitations with Webpack's custom require, which is used for
+// looking up all *.spec.js files, if you edit dir_src you _must_ also edit
+// the path in ~/karma.entry.js.
+config.set('dir_src',  'client');
+config.set('dir_dist', 'dist');
+
+config.set('server_host',  'localhost');
+config.set('server_port',  process.env.PORT || 4000);
+config.set('webpack_port', 3000);
+
+config.set('vendor_dependencies', [
+  'history',
+  'immutable',
+  'react',
+  'react-redux',
+  'react-router',
+  'redux',
+  'redux-devtools',
+  'redux-devtools/lib/react'
+]);
+
+config.set('webpack_lint_in_dev', true);
+
+/*  *********************************************
+-------------------------------------------------
+
+All Internal Configuration Below
+Edit at your own risk
+
+-------------------------------------------------
+************************************************/
+// ------------------------------------
 // Environment
 // ------------------------------------
 config.set('env', process.env.NODE_ENV);
@@ -21,39 +55,16 @@ config.set('globals', {
 });
 
 // ------------------------------------
-// Server
-// ------------------------------------
-config.set('server_host', 'localhost');
-config.set('server_port', process.env.PORT || 4000);
-
-// ------------------------------------
 // Webpack
 // ------------------------------------
-config.set('webpack_port', 3000);
 config.set('webpack_public_path',
   `http://${config.get('server_host')}:${config.get('webpack_port')}/`
 );
-
-// build options
-config.set('webpack_lint_in_dev', true);
 
 // ------------------------------------
 // Project
 // ------------------------------------
 config.set('path_project', path.resolve(__dirname, '../'));
-config.set('dir_src',  'client');
-config.set('dir_dist', 'dist');
-
-config.set('vendor_dependencies', [
-  'history',
-  'immutable',
-  'react',
-  'react-redux',
-  'react-router',
-  'redux',
-  'redux-devtools',
-  'redux-devtools/lib/react'
-]);
 
 // ------------------------------------
 // Utilities
