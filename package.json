@@ -30,7 +30,7 @@
     "react-dom": "^0.14.0-rc1",
     "react-redux": "^2.0.0",
     "react-router": "1.0.0-rc1",
-    "redux": "^2.0.0",
+    "redux": "^3.0.0",
     "thunkify": "^2.1.2",
     "yargs": "^3.18.0"
   },

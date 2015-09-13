@@ -31,7 +31,7 @@ Features
 * [React](https://github.com/facebook/react) (`0.14.0-rc1`)
   * Includes react-addons-test-utils (`0.14.0-rc1`)
 * [react-router](https://github.com/rackt/react-router) (`1.0.0-rc1`)
-* [Redux](https://github.com/gaearon/redux) (`2.0.0`)
+* [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
   * react-redux
   * redux-devtools (enabled with `--debug` flag)
     * or try `npm run dev:debugnw` to display it in a separate window.
