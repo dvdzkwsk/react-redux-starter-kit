@@ -1,13 +1,19 @@
-import React             from 'react';
-import TestUtils         from 'react-addons-test-utils';
-import { HomeView }      from './HomeView';
-import { shallowRender } from 'utils/test';
+import React        from 'react';
+import TestUtils    from 'react-addons-test-utils';
+import { HomeView } from './HomeView';
 
-function renderWith (props = {}) {
+function shallowRender (component) {
+  const renderer = TestUtils.createRenderer();
+
+  renderer.render(component);
+  return renderer.getRenderOutput();
+}
+
+function renderWithProps (props = {}) {
   return TestUtils.renderIntoDocument(<HomeView {...props} />);
 }
 
-function shallowRenderWith (props = {}) {
+function shallowRenderWithProps (props = {}) {
   return shallowRender(<HomeView {...props} />)
 }
 
@@ -15,8 +21,8 @@ describe('(View) Home', function () {
   let component, rendered;
 
   beforeEach(function () {
-    component = shallowRenderWith();
-    rendered  = renderWith();
+    component = shallowRenderWithProps();
+    rendered  = renderWithProps();
   });
 
   it('(Meta) Should have a test that works with Chai expectations.', function () {
@@ -43,7 +49,7 @@ describe('(View) Home', function () {
 
   it('Should render props.counter at the end of the sample counter <h2>.', function () {
     const h2 = TestUtils.findRenderedDOMComponentWithTag(
-      renderWith({ counter : 5 }), 'h2'
+      renderWithProps({ counter : 5 }), 'h2'
     );
 
     expect(h2).to.exist;
@@ -60,7 +66,7 @@ describe('(View) Home', function () {
   it('Should call props.dispatch when "Increment" button is clicked.', function () {
     const dispatch = sinon.spy();
     const btn = TestUtils.findRenderedDOMComponentWithTag(
-      renderWith({ dispatch }), 'button'
+      renderWithProps({ dispatch }), 'button'
     );
 
     dispatch.should.have.not.been.called;
@@ -71,7 +77,7 @@ describe('(View) Home', function () {
   it('Should dispatch an action with type "COUNTER_INCREMENT" when "Increment" button is clicked.', function () {
     const dispatch = sinon.spy();
     const btn = TestUtils.findRenderedDOMComponentWithTag(
-      renderWith({ dispatch }), 'button'
+      renderWithProps({ dispatch }), 'button'
     );
 
     dispatch.should.have.not.been.called;
