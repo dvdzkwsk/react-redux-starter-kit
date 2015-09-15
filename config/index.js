@@ -11,7 +11,7 @@ const config = new Map();
 // NOTE: Due to limitations with Webpack's custom require, which is used for
 // looking up all *.spec.js files, if you edit dir_src you _must_ also edit
 // the path in ~/karma.entry.js.
-config.set('dir_src',  'client');
+config.set('dir_src',  'src');
 config.set('dir_dist', 'dist');
 
 config.set('server_host',  'localhost');
