@@ -33,8 +33,8 @@ Features
 * [react-router](https://github.com/rackt/react-router) (`1.0.0-rc1`)
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
   * react-redux
-  * redux-devtools (enabled with `--debug` flag)
-    * or try `npm run dev:debugnw` to display it in a separate window.
+  * redux-devtools
+    * use `npm run dev:nw` to display in a separate window.
 * [Koa](https://github.com/koajs/koa)
 * [Immutable.js](https://github.com/facebook/immutable-js)
 * [Karma](https://github.com/karma-runner/karma)
@@ -60,11 +60,11 @@ Usage
 #### `npm run dev` also `npm start`
 Runs the webpack build system just like in `compile` but enables HMR. The webpack dev server can be found at `localhost:3000`.
 
-#### `npm run dev:debug`
-Same as `npm run dev` but enables `--debug` flag automatically (this will enable redux-devtools).
+#### `npm run dev:nw`
+Same as `npm run dev` but opens the debug tools in a new window.
 
-#### `npm run dev:debugnw`
-Same as `npm run dev:debug` but opens the debug tools in a new window.
+#### `npm run dev:no-debug`
+Same as `npm run dev` but disables devtools.
 
 #### `npm run compile`
 Runs the Webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`). Production builds will fail on eslint errors (but not on warnings).
@@ -240,11 +240,4 @@ Deployment
 Troubleshooting
 ---------------
 
-### `--debug` isn't working
-If you're using one of the pre-configured npm scripts, make sure you follow npm's syntax:
-
-`npm run [command] [-- <args>]`
-
-As an example, `npm run compile` would look like this:
-
-`npm run compile -- --debug`
+Nothing yet. Having an issue? Report it and I'll get to it as soon as possible!
