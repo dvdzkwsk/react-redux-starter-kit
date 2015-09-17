@@ -9,7 +9,7 @@ const paths   = config.get('utils_paths'),
 const webpackConfig = {
   name    : 'client',
   target  : 'web',
-  devtool : 'inline-source-map',
+  devtool : 'source-map',
   entry   : {
     app : [
       paths.src('entry-points/client')
