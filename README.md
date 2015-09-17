@@ -7,6 +7,8 @@ Starter kit to get you up and running with a bunch of awesome new technologies. 
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please contribute or create a new issue if you think this starter kit is missing something!
 
+**Want to use this starter kit without the server?** There's a branch for that, [check it out here!](https://github.com/davezuko/react-redux-starter-kit/tree/no-server)
+
 Table of Contents
 -----------------
 1. [Requirements](#requirements)
