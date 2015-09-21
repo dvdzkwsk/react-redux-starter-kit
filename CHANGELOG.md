@@ -1,6 +1,28 @@
 Changelog
 =========
 
+0.14.0
+------
+
+#### Features
+* Replaces `react-transform-webpack-hmr` with its replacement `react-transform-hmr`. Thanks to [daviferreira](https://github.com/daviferreira).
+* Replaces `delicate-error-reporter` with `redbox-react`. Thanks to [bulby97](https://github.com/bulby97).
+* Created a `no-server` branch [here](https://github.com/davezuko/react-redux-starter-kit/tree/no-server) to make it easier for users who don't care about Koa.
+
+#### Improvements
+* Renames `client` directory to `src` to be more intuitive.
+* `inline-source-map` has been replaced by `source-map` as the default webpack devTool to reduce build sizes.
+* Refactors configuration file to focus on commonly-configured options rather than mixing them with internal configuration.
+* Swaps `dev` and `dev:debug` so debug tools are now enabled by default and can be disabled instead with `dev:no-debug`.
+* Repositions Redux devtools so they no longer block errors displayed by `redbox-react`.
+* Adds explicit directory references to some `import` statements to clarify which are from from `npm` and which are local.
+
+#### Fixes
+* Fixes naming in `HomeView` where `mapStateToProps` was incorrectly written as `mapDispatchToProps`.
+
+#### Deprecations
+* Removes local test utilities (in `~/src/utils/test`).
+
 0.13.0
 ------
 
