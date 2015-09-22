@@ -60,21 +60,4 @@ const webpackConfig = {
   }
 };
 
-// ----------------------------------
-// Environment-Specific Defaults
-// ----------------------------------
-if (globals.__PROD__) {
-  webpackConfig.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      output : {
-        'comments'  : false
-      },
-      compress : {
-        'unused'    : true,
-        'dead_code' : true
-      }
-    })
-  );
-}
-
 export default webpackConfig;
