@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import fs      from 'fs';
 import config  from '../../config';
 
 const paths   = config.get('utils_paths'),
