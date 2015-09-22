@@ -12,6 +12,9 @@ const webpackConfig = {
       paths.src('entry-points/server')
     ]
   },
+  // Don't include npm packages since these can be imported at runtime
+  // from the Koa application.
+  externals : fs.readdirSync('node_modules').filter(x => x !== '.bin'),
   output : {
     filename : 'index.js',
     path     : paths.dist('server'),
