@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import fs      from 'fs';
 import config  from '../../config';
 
 const paths   = config.get('utils_paths'),
@@ -12,6 +13,9 @@ const webpackConfig = {
       paths.src('entry-points/server')
     ]
   },
+  // Don't include npm packages since these can be imported at runtime
+  // from the Koa application.
+  externals : fs.readdirSync('node_modules').filter(x => x !== '.bin'),
   output : {
     filename : 'index.js',
     path     : paths.dist('server'),
@@ -56,22 +60,5 @@ const webpackConfig = {
     failOnError : globals.__PROD__
   }
 };
-
-// ----------------------------------
-// Environment-Specific Defaults
-// ----------------------------------
-if (globals.__PROD__) {
-  webpackConfig.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      output : {
-        'comments'  : false
-      },
-      compress : {
-        'unused'    : true,
-        'dead_code' : true
-      }
-    })
-  );
-}
 
 export default webpackConfig;
