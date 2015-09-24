@@ -62,7 +62,7 @@
     "phantomjs-polyfill": "0.0.1",
     "react-addons-test-utils": "^0.14.0-rc1",
     "react-transform-catch-errors": "^0.1.2",
-    "react-transform-hmr": "^1.0.0",
+    "react-transform-hmr": "^1.1.0",
     "redbox-react": "^1.0.4",
     "redux-devtools": "^2.1.2",
     "sass-loader": "^2.0.0",
