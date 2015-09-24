@@ -6,11 +6,7 @@ function renderWithProps (props = {}) {
   return TestUtils.renderIntoDocument(<TodoList {...props} />);
 }
 
-function shallowRenderWithProps (props = {}) {
-  return shallowRender(<TodoList {...props} />)
-}
-
-describe('(View) Home', function () {
+describe('TodoList', function () {
   let rendered, props;
 
   beforeEach(function () {
