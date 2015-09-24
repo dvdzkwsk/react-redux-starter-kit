@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import config  from '../../config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import Clean from 'clean-webpack-plugin';
 
 const paths   = config.get('utils_paths'),
       globals = config.get('globals');
@@ -114,6 +115,11 @@ if (globals.__PROD__) {
         'dead_code' : true
       }
     })
+  );
+
+  //clean client folder pre production compile
+  webpackConfig.plugins.push(
+    new Clean(['/client'], __dirname + '/../../dist')
   );
 }
 
