@@ -13,6 +13,7 @@
     "test": "npm run test:unit && npm run test:server",
     "test:unit": "node ./node_modules/karma/bin/karma start",
     "test:server": "mocha --harmony bin/test-server",
+    "test:e2e": "nightwatch -e chrome",
     "deploy": "npm run test:unit && npm run compile && npm run test:server",
     "server:start": "node --harmony bin/server",
     "server:dev": "nodemon --harmony --watch server bin/server"
@@ -58,6 +59,8 @@
     "mocha": "^2.2.5",
     "node-sass": "^3.2.0",
     "nodemon": "^1.4.1",
+    "nightwatch": "^0.8.3",
+    "selenium-server-standalone-jar": "^2.47.1",
     "phantomjs": "^1.9.17",
     "phantomjs-polyfill": "0.0.1",
     "react-addons-test-utils": "^0.14.0-rc1",
