@@ -92,6 +92,11 @@ if (globals.__DEV__) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   );
+} else {
+  //clean client folder pre production compile
+  webpackConfig.plugins.push(
+    new Clean(['/client'], paths.dist())
+  );
 }
 
 if (globals.__PROD__) {
@@ -115,11 +120,6 @@ if (globals.__PROD__) {
         'dead_code' : true
       }
     })
-  );
-
-  //clean client folder pre production compile
-  webpackConfig.plugins.push(
-    new Clean(['/client'], paths.dist())
   );
 }
 
