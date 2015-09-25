@@ -119,7 +119,7 @@ if (globals.__PROD__) {
 
   //clean client folder pre production compile
   webpackConfig.plugins.push(
-    new Clean(['/client'], __dirname + '/../../dist')
+    new Clean(['/client'], paths.dist())
   );
 }
 
