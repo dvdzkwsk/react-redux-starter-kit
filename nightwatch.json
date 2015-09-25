@@ -12,7 +12,7 @@
     "host" : "127.0.0.1",
     "port" : 4444,
     "cli_args" : {
-      "webdriver.chrome.driver" : "/chromedriver",
+      "webdriver.chrome.driver" : "/path/to/your/chromedriver",
       "webdriver.ie.driver" : ""
     }
   },
