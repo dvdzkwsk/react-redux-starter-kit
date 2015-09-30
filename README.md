@@ -7,6 +7,8 @@ Starter kit to get you up and running with a bunch of awesome new front-end tech
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please contribute or create a new issue if you think this starter kit is missing something!
 
+**Where'd the server go?**. This starter kit used to come packaged with a Koa server to perform basic server-side rendering. However, despite that, universal rendering remained secondary to the goal of this starter kit, so it made more sense to remove that aspect; after all, do one thing and do it well.
+
 Table of Contents
 -----------------
 1. [Requirements](#requirements)
