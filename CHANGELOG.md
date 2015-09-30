@@ -1,6 +1,20 @@
 Changelog
 =========
 
+0.15.0
+------
+
+### Fixes
+* HMR is now longer enabled for simple compilations. You can now compile development builds that won't constantly ping a non-existent dev server.
+* react-transform-hmr now only runs when HMR is enabled.
+
+### Improvements
+* Unit tests now only run in watch mode when explicitly requested. This makes it much more convenient to run tests on any environment without having to struggle with the `singleRun` flag in Karma.
+* There is now only a single webpack configuration (rather than one for the client and one for the server). As a result, configuration has once again been split into a base configuration which is then extended based on the current `NODE_ENV`.
+
+### Deprecations
+* Removed Koa server (sad days).
+
 0.14.0
 ------
 
