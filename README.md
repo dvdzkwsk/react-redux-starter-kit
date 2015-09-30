@@ -69,6 +69,9 @@ Runs the Webpack build system with your current NODE_ENV and compiles the applic
 #### `npm run test`
 Runs unit tests with Karma.
 
+#### `npm run test:dev`
+Same as `npm run test`, but will watch for changes and re-run tests.
+
 #### `npm run deploy`
 Helper script to run tests and then, on success, compile your application.
 
