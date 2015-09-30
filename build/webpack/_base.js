@@ -10,13 +10,13 @@ const webpackConfig = {
   devtool : 'source-map',
   entry   : {
     app : [
-      paths.project('client')
+      paths.project(config.get('dir_src'))
     ],
     vendor : config.get('vendor_dependencies')
   },
   output : {
     filename   : '[name].[hash].js',
-    path       : paths.dist('client'),
+    path       : paths.project(config.get('dir_dist')),
     publicPath : '/'
   },
   plugins : [
@@ -32,7 +32,8 @@ const webpackConfig = {
     })
   ],
   resolve : {
-    extensions : ['', '.js', '.jsx']
+    extensions : ['', '.js', '.jsx'],
+    alias      : config.get('utils_aliases')
   },
   module : {
     preLoaders : [
