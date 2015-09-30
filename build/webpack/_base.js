@@ -50,7 +50,20 @@ const webpackConfig = {
         loader  : 'babel',
         query   : {
           stage    : 0,
-          optional : ['runtime']
+          optional : ['runtime'],
+          env      : {
+            development : {
+              plugins : ['react-transform'],
+              extra   : {
+                'react-transform' : {
+                  transforms : [{
+                    transform : 'react-transform-catch-errors',
+                    imports   : ['react', 'redbox-react']
+                  }]
+                }
+              }
+            }
+          }
         }
       },
       {
