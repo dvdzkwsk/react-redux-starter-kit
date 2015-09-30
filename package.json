@@ -1,7 +1,7 @@
 {
   "name": "react-redux-starter-kit",
   "version": "0.14.0",
-  "description": "Get started with React, Redux, React-Router, and Koa!",
+  "description": "Get started with React, Redux, and React-Router!",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
@@ -10,12 +10,8 @@
     "dev": "node --harmony bin/webpack-dev-server",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
-    "test": "npm run test:unit && npm run test:server",
-    "test:unit": "node ./node_modules/karma/bin/karma start",
-    "test:server": "mocha --harmony bin/test-server",
-    "deploy": "npm run test:unit && npm run compile && npm run test:server",
-    "server:start": "node --harmony bin/server",
-    "server:dev": "nodemon --harmony --watch server bin/server"
+    "test": "node ./node_modules/karma/bin/karma start",
+    "deploy": "npm run test && npm run compile"
   },
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
@@ -24,14 +20,11 @@
     "history": "^1.9.0",
     "immutable": "^3.7.4",
     "invariant": "^2.1.0",
-    "koa": "^1.0.0",
-    "koa-static": "^1.4.9",
     "react": "^0.14.0-rc1",
     "react-dom": "^0.14.0-rc1",
     "react-redux": "^3.0.0-alpha",
     "react-router": "1.0.0-rc1",
     "redux": "^3.0.0",
-    "thunkify": "^2.1.2",
     "yargs": "^3.18.0"
   },
   "devDependencies": {
@@ -58,7 +51,6 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.2.5",
     "node-sass": "^3.3.3",
-    "nodemon": "^1.4.1",
     "phantomjs": "^1.9.17",
     "phantomjs-polyfill": "0.0.1",
     "react-addons-test-utils": "^0.14.0-rc1",
@@ -68,7 +60,6 @@
     "redux-devtools": "^2.1.2",
     "sass-loader": "^2.0.0",
     "style-loader": "^0.12.1",
-    "supertest": "^1.0.1",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.10.1"
   }
