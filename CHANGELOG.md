@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.15.1
+------
+
+### Fixes
+* Dev server now loads the correct Webpack configuration with HMR enabled.
+* Redbox-React error catcher is now loaded correctly in development.
+
 0.15.0
 ------
 
