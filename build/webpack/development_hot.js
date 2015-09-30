@@ -1,0 +1,42 @@
+import webpack       from 'webpack';
+import config        from '../../config';
+import webpackConfig from './development';
+
+webpackConfig.entry.app.push(
+  `webpack-dev-server/client?${config.get('webpack_public_path')}`,
+  `webpack/hot/dev-server`
+);
+
+webpackConfig.plugins.push(
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoErrorsPlugin()
+);
+
+// We need to apply the react-transform plugins to the Babel configuration,
+// but _only_ when HMR is enabled. Putting this in the default development
+// configuration will break other tasks such as test:unit because Webpack
+// HMR is not enabled there, and these transforms require it.
+webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
+  if (/js/.test(loader.test)) {
+    loader.query.env = {
+      development : {
+        plugins : [
+          'babel-plugin-react-transform'
+        ],
+        extra : {
+          'react-transform' : {
+            transforms  : [{
+              transform : 'react-transform-hmr',
+              imports   : ['react'],
+              locals    : ['module']
+            }]
+          }
+        }
+      }
+    };
+  }
+
+  return loader;
+});
+
+export default webpackConfig;
