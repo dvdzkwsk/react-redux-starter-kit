@@ -14,6 +14,10 @@
     "test:dev": "npm run test -- --watch",
     "deploy": "npm run test && npm run compile"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+  },
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
