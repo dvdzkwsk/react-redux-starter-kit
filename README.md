@@ -62,6 +62,8 @@ Runs the webpack build system just like in `compile` but enables HMR. The webpac
 #### `npm run dev:nw`
 Same as `npm run dev` but opens the debug tools in a new window.
 
+**Note:** you'll need to allow popups in Chrome, or you'll see an error: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
+
 #### `npm run dev:no-debug`
 Same as `npm run dev` but disables devtools.
 

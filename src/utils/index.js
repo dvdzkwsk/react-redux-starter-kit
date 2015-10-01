@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 export function createConstants (...constants) {
@@ -28,10 +29,14 @@ export function createDevToolsWindow (store) {
 
   // wait a little bit for it to reload, then render
   setTimeout(() => {
-    React.render(
-      <DebugPanel top right bottom left >
+    // Wait for the reload to prevent:
+    // "Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element."
+    win.document.write('<div id="react-devtools-root"></div>');
+
+    ReactDOM.render(
+      <DebugPanel top right bottom left key="debugPanel" >
         <DevTools store={store} monitor={LogMonitor} />
       </DebugPanel>
-      , win.document.body);
+      , win.document.getElementById('react-devtools-root'));
   }, 10);
 }

@@ -14,6 +14,10 @@
     "test:dev": "npm run test -- --watch",
     "deploy": "npm run test && npm run compile"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+  },
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
@@ -58,7 +62,7 @@
     "react-transform-catch-errors": "^0.1.2",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
-    "redux-devtools": "^2.1.2",
+    "redux-devtools": "tomatau/redux-devtools#e126f799bb81a61e4a2ce69fbc501e09b15b5f5d",
     "sass-loader": "^2.0.0",
     "style-loader": "^0.12.1",
     "webpack": "^1.11.0",
