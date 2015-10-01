@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 export function createConstants (...constants) {
@@ -26,12 +27,14 @@ export function createDevToolsWindow (store) {
   // reload in case it's reusing the same window with the old content
   win.location.reload();
 
+  win.document.write('<div id="react-devtools-root"></div>');
+
   // wait a little bit for it to reload, then render
   setTimeout(() => {
-    React.render(
-      <DebugPanel top right bottom left >
+    ReactDOM.render(
+      <DebugPanel top right bottom left key="debugPanel" >
         <DevTools store={store} monitor={LogMonitor} />
       </DebugPanel>
-      , win.document.body);
+      , win.document.getElementById('react-devtools-root'));
   }, 10);
 }
