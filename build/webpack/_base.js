@@ -1,4 +1,4 @@
-import webpack           from 'webpack';
+ import webpack           from 'webpack';
 import config            from '../../config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
@@ -74,11 +74,25 @@ const webpackConfig = {
           'autoprefixer?browsers=last 2 version',
           'sass-loader?includePaths[]=' + paths.src('styles')
         ]
+      },
+      {
+        test    : /\.styl$/,
+        loaders : [
+          'stylus-loader',
+          'css-loader',
+          'style-loader'
+        ]
       }
     ]
   },
   eslint : {
     configFile : paths.project('.eslintrc')
+  },
+  stylus  : {
+    use   : [
+      require('nib')(), 
+      require('rupture')
+    ]
   }
 };
 
