@@ -27,10 +27,12 @@ export function createDevToolsWindow (store) {
   // reload in case it's reusing the same window with the old content
   win.location.reload();
 
-  win.document.write('<div id="react-devtools-root"></div>');
-
   // wait a little bit for it to reload, then render
   setTimeout(() => {
+    // Wait for the reload to prevent:
+    // "Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element."
+    win.document.write('<div id="react-devtools-root"></div>');
+
     ReactDOM.render(
       <DebugPanel top right bottom left key="debugPanel" >
         <DevTools store={store} monitor={LogMonitor} />
