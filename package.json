@@ -62,7 +62,7 @@
     "react-transform-catch-errors": "^0.1.2",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
-    "redux-devtools": "git+ssh://git@github.com:tomatau/redux-devtools.git",
+    "redux-devtools": "tomatau/redux-devtools#d77ef99126e42542c3939d09a26fd1ccb043091e",
     "sass-loader": "^2.0.0",
     "style-loader": "^0.12.1",
     "webpack": "^1.11.0",
