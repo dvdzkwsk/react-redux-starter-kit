@@ -13,6 +13,7 @@ Table of Contents
 -----------------
 1. [Requirements](#requirements)
 1. [Features](#features)
+1. [Getting Started](#getting-started)
 1. [Usage](#usage)
 1. [Webpack](#webpack)
 1. [Styles](#styles)
@@ -52,6 +53,18 @@ Features
     * Uses [Airbnb's eslint config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) (with some softened rules)
     * Configured to fail production builds on error
   * Pre-configured folder aliases and globals
+
+Getting Started
+---------------
+
+Just clone the repo and install the necessary node modules:
+
+```shell
+$ git clone https://github.com/davezuko/react-redux-starter-kit.git ReduxStarterApp
+$ cd ReduxStarterApp
+$ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
+$ npm start                     # Compile and launch
+```
 
 Usage
 -----
