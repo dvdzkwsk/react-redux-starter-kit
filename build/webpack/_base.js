@@ -7,7 +7,6 @@ const paths = config.get('utils_paths');
 const webpackConfig = {
   name    : 'client',
   target  : 'web',
-  devtool : 'source-map',
   entry   : {
     app : [
       paths.project(config.get('dir_src'))
