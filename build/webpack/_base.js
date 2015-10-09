@@ -26,7 +26,6 @@ const webpackConfig = {
       template : paths.src('index.html'),
       hash     : true,
       filename : 'index.html',
-      minify   : true,
       inject   : 'body'
     })
   ],
