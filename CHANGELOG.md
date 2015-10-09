@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.15.2
+------
+
+### Fixes
+* Remove unused/broken "minify" property provided to HtmlWebpackPlugin configuration.
+
 0.15.1
 ------
 
