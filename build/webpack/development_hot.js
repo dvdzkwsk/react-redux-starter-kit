@@ -17,7 +17,7 @@ webpackConfig.plugins.push(
 // configuration will break other tasks such as test:unit because Webpack
 // HMR is not enabled there, and these transforms require it.
 webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
-  if (/js/.test(loader.test)) {
+  if (/js(?!on)/.test(loader.test)) {
     loader.query.env.development.extra['react-transform'].transforms.push({
       transform : 'react-transform-hmr',
       imports   : ['react'],
