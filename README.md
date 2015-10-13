@@ -38,7 +38,6 @@ Features
   * react-redux
   * redux-devtools
     * use `npm run dev:nw` to display in a separate window.
-* [Immutable.js](https://github.com/facebook/immutable-js)
 * [Karma](https://github.com/karma-runner/karma)
   * Mocha w/ Chai and Sinon-Chai
   * PhantomJS
@@ -139,7 +138,6 @@ You can redefine which packages to treat as vendor dependencies by editing `vend
 ```js
 [
   'history',
-  'immutable',
   'react',
   'react-redux',
   'react-router',

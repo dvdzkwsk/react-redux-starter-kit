@@ -20,7 +20,6 @@ config.set('webpack_port', 3000);
 
 config.set('vendor_dependencies', [
   'history',
-  'immutable',
   'react',
   'react-redux',
   'react-router',
