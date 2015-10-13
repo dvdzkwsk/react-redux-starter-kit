@@ -15,6 +15,7 @@ Table of Contents
 1. [Features](#features)
 1. [Getting Started](#getting-started)
 1. [Usage](#usage)
+1. [Structure](#structure)
 1. [Webpack](#webpack)
 1. [Styles](#styles)
 1. [Testing](#testing)
@@ -95,6 +96,36 @@ Helper script to run tests and then, on success, compile your application.
 ### Configuration
 
 Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, as well as tweak what ports Webpack and WebpackDevServer run on.
+
+Structure
+---------
+
+The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. It is something that has worked very well for me and my team, but use only what makes sense to you.
+
+### General Structure
+```
+.
+├── bin                      # Build/Start scripts
+├── build                    # All build-related configuration
+│   ├── webpack              # Environment-specific configuration files for Webpack
+├── config                   # Project configuration settings
+└── src                      # Application source code
+    ├── components           # Generic React Components (generally Dumb components)
+    ├── containers           # Components that provide context (e.g. Redux Providers)
+    ├── layouts              # Components that dictate major page structure
+    ├── reducers             # Redux reducers
+    ├── routes               # Application route definitions
+    ├── stores               # Redux store configuration
+    ├── utils                # Generic utilities
+    ├── views                # Components that live at a route
+    └── index.js             # Application bootstrap and rendering
+```
+
+### Components vs. Views vs. Layouts
+
+**TL;DR:** They're all components.
+
+This distinction may not be important for you, but as an explanation: A **Layout** is something that describes an entire page structure, such as a fixed navigation, viewport, sidebar, and footer. Most applications will probably only have one layout, but keeping these components separate makes their intent clear. **Views** are components that live at routes, and are generally rendered within a **Layout**. What this ends up meaning is that, with this structure, nearly everything inside of **Components** ends up being a dumb component.
 
 Webpack
 -------
