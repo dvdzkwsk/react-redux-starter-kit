@@ -31,8 +31,8 @@ Node `^4.0.0`
 Features
 --------
 
-* [React](https://github.com/facebook/react) (`0.14.0-rc1`)
-  * Includes react-addons-test-utils (`0.14.0-rc1`)
+* [React](https://github.com/facebook/react) (`^0.14.0`)
+  * Includes react-addons-test-utils (`^0.14.0`)
 * [react-router](https://github.com/rackt/react-router) (`1.0.0-rc1`)
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
   * react-redux
