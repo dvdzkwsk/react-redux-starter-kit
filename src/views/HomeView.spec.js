@@ -1,6 +1,7 @@
-import React        from 'react';
-import TestUtils    from 'react-addons-test-utils';
-import { HomeView } from './HomeView';
+import React                  from 'react';
+import TestUtils              from 'react-addons-test-utils';
+import { bindActionCreators } from 'redux';
+import { HomeView }            from './HomeView';
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer();
@@ -18,11 +19,18 @@ function shallowRenderWithProps (props = {}) {
 }
 
 describe('(View) Home', function () {
-  let component, rendered;
+  let component, rendered, _props, _spies;
 
   beforeEach(function () {
-    component = shallowRenderWithProps();
-    rendered  = renderWithProps();
+    _spies = {};
+    _props = {
+      actions : bindActionCreators({
+        increment : (_spies.increment = sinon.spy())
+      }, _spies.dispatch = sinon.spy())
+    };
+
+    component = shallowRenderWithProps(_props);
+    rendered  = renderWithProps(_props);
   });
 
   it('(Meta) Should have a test that works with Chai expectations.', function () {
@@ -49,7 +57,7 @@ describe('(View) Home', function () {
 
   it('Should render props.counter at the end of the sample counter <h2>.', function () {
     const h2 = TestUtils.findRenderedDOMComponentWithTag(
-      renderWithProps({ counter : 5 }), 'h2'
+      renderWithProps({ ..._props, counter : 5 }), 'h2'
     );
 
     expect(h2).to.exist;
@@ -63,28 +71,11 @@ describe('(View) Home', function () {
     expect(btn.textContent).to.match(/Increment/);
   });
 
-  it('Should call props.dispatch when "Increment" button is clicked.', function () {
-    const dispatch = sinon.spy();
-    const btn = TestUtils.findRenderedDOMComponentWithTag(
-      renderWithProps({ dispatch }), 'button'
-    );
+  it('Should dispatch an action when "Increment" button is clicked.', function () {
+    const btn = TestUtils.findRenderedDOMComponentWithTag(rendered, 'button');
 
-    dispatch.should.have.not.been.called;
+    _spies.dispatch.should.have.not.been.called;
     TestUtils.Simulate.click(btn);
-    dispatch.should.have.been.called;
-  });
-
-  it('Should dispatch an action with type "COUNTER_INCREMENT" when "Increment" button is clicked.', function () {
-    const dispatch = sinon.spy();
-    const btn = TestUtils.findRenderedDOMComponentWithTag(
-      renderWithProps({ dispatch }), 'button'
-    );
-
-    dispatch.should.have.not.been.called;
-    TestUtils.Simulate.click(btn);
-
-    expect(dispatch.firstCall.args[0]).to.exist;
-    expect(dispatch.firstCall.args[0]).be.an.object;
-    expect(dispatch.firstCall.args[0]).to.have.property('type', 'COUNTER_INCREMENT');
+    _spies.dispatch.should.have.been.called;
   });
 });
