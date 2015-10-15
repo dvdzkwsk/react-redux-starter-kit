@@ -34,7 +34,7 @@ Features
   * Includes react-addons-test-utils (`^0.14.0`)
 * [react-router](https://github.com/rackt/react-router) (`1.0.0-rc1`)
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
-  * react-redux
+  * react-redux (`^4.0.0`)
   * redux-devtools
     * use `npm run dev:nw` to display in a separate window.
 * [Karma](https://github.com/karma-runner/karma)
