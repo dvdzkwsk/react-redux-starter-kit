@@ -20,7 +20,6 @@ Table of Contents
 1. [Styles](#styles)
 1. [Testing](#testing)
 1. [Utilities](#utilities)
-1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
 
 Requirements
@@ -252,13 +251,6 @@ export default createReducer(initialState, {
   [TODO_CREATE] : (state, payload) => { ... }
 });
 ```
-
-Deployment
-----------
-
-### Dokku Requirements
-  * Add io.js as a buildpack:
-    - In `~/ENV` append: `export BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-nodejs`
 
 Troubleshooting
 ---------------
