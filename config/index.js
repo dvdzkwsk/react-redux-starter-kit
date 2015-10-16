@@ -9,7 +9,7 @@ const config = new Map();
 // User Configuration
 // ------------------------------------
 // NOTE: Due to limitations with Webpack's custom require, which is used for
-// looking up all *.spec.js files, if you edit dir_src you _must_ also edit
+// looking up all *.spec.js files, if you edit dir_src you must also edit
 // the path in ~/karma.entry.js.
 config.set('dir_src',  'src');
 config.set('dir_dist', 'dist');
@@ -28,13 +28,11 @@ config.set('vendor_dependencies', [
   'redux-devtools/lib/react'
 ]);
 
-config.set('webpack_lint_in_dev', true);
-
 /*  *********************************************
 -------------------------------------------------
 
 All Internal Configuration Below
-Edit at your own risk
+Edit at Your Own Risk
 
 -------------------------------------------------
 ************************************************/
@@ -87,13 +85,10 @@ config.set('utils_aliases', [
   'components',
   'constants',
   'containers',
-  'dispatchers',
   'layouts',
-  'models',
   'reducers',
   'routes',
   'services',
-  'stores',
   'styles',
   'utils',
   'views'
