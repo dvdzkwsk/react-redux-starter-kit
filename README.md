@@ -101,7 +101,6 @@ Structure
 
 The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. It is something that has worked very well for me and my team, but use only what makes sense to you.
 
-### General Structure
 ```
 .
 ├── bin                      # Build/Start scripts
