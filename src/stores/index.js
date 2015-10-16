@@ -3,12 +3,12 @@ import rootReducer  from '../reducers';
 import { devTools } from 'redux-devtools';
 import thunk        from 'redux-thunk';
 
-export default function configureStore (initialState) {
+export default function configureStore (initialState, debug = false) {
   let createStoreWithMiddleware;
 
   const middleware = applyMiddleware(thunk);
 
-  if (__DEBUG__) {
+  if (debug) {
     createStoreWithMiddleware = compose(middleware, devTools());
   } else {
     createStoreWithMiddleware = compose(middleware);
