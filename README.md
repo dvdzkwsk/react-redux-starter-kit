@@ -37,6 +37,7 @@ Features
   * react-redux (`^4.0.0`)
   * redux-devtools
     * use `npm run dev:nw` to display in a separate window.
+  * redux-thunk middleware
 * [Karma](https://github.com/karma-runner/karma)
   * Mocha w/ Chai and Sinon-Chai
   * PhantomJS
