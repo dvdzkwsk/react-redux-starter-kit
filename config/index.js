@@ -15,7 +15,6 @@ config.set('dir_src',  'src');
 config.set('dir_dist', 'dist');
 
 config.set('server_host',  'localhost');
-config.set('server_port',  process.env.PORT || 4000);
 config.set('webpack_port', 3000);
 
 config.set('vendor_dependencies', [
