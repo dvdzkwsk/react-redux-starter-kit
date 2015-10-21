@@ -1,6 +1,27 @@
 Changelog
 =========
 
+0.16.0
+------
+
+### Features
+* Adds redux-router (thanks to [dougvk](https://github.com/dougvk))
+* Adds redux-thunk middleware
+* Adds loaders for font files (thanks to [nodkz](https://github.com/nodkz))
+* Adds url loader
+* Upgrades React dependencies to stable `^0.14.0`
+* Upgrades react-redux to `^4.0.0`
+
+### Improvements
+* Cleans up unused configuration settings
+* configureStore no longer relies on a global variable to determine whether or not to enable devtool middleware
+* Removes unused invariant and ImmutableJS vendor dependencies
+* Removes unused webpack-clean plugin
+* Tweaks .js loader configuration to make it easier to add json-loader
+* Updates counter example to demonstrate `mapDispatchToProps`
+* Force `components` directory inclusion
+* Documentation improvements
+
 0.15.2
 ------
 
