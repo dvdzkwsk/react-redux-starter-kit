@@ -1,7 +1,6 @@
 import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
-import { Link } from 'react-router';
 
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
@@ -40,8 +39,6 @@ export class HomeView extends React.Component {
                 onClick={this.props.actions.increment}>
           Increment
         </button>
-        <Link to={'/test'}>'Test'</Link>
-        <Link to={'/home'}>'Home'</Link>
       </div>
     );
   }
