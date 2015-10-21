@@ -1,6 +1,7 @@
 import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
+import { Link } from 'react-router';
 
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
@@ -14,7 +15,8 @@ const actionCreators = {
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  counter : state.counter
+  counter : state.counter,
+  routerState : state.router
 });
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
@@ -38,6 +40,8 @@ export class HomeView extends React.Component {
                 onClick={this.props.actions.increment}>
           Increment
         </button>
+        <Link to={'/test'}>'Test'</Link>
+        <Link to={'/home'}>'Home'</Link>
       </div>
     );
   }
