@@ -14,7 +14,8 @@ const actionCreators = {
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  counter : state.counter
+  counter : state.counter,
+  routerState : state.router
 });
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)

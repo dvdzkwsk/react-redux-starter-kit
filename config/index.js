@@ -23,6 +23,7 @@ config.set('vendor_dependencies', [
   'react-redux',
   'react-router',
   'redux',
+  'redux-router',
   'redux-devtools',
   'redux-devtools/lib/react'
 ]);
