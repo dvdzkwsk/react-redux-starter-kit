@@ -1,9 +1,8 @@
-process.env.NODE_ENV = (process.env.NODE_ENV || 'development').trim();
-
 import path     from 'path';
 import { argv } from 'yargs';
-import 'dotenv';
+import dotenv   from 'dotenv';
 
+dotenv.load()
 const config = new Map();
 
 // ------------------------------------
