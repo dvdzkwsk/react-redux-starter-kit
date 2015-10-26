@@ -26,10 +26,6 @@ export class HomeView extends React.Component {
     counter  : React.PropTypes.number
   }
 
-  constructor () {
-    super();
-  }
-
   render () {
     return (
       <div className='container text-center'>
