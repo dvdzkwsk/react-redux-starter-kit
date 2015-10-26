@@ -144,9 +144,7 @@ You can redefine which packages to treat as vendor dependencies by editing `vend
   'react-redux',
   'react-router',
   'redux-router',
-  'redux',
-  'redux-devtools',
-  'redux-devtools/lib/react'
+  'redux'
 ]
 ```
 
