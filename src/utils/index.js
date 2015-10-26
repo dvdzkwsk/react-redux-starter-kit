@@ -34,7 +34,7 @@ export function createDevToolsWindow (store) {
     win.document.write('<div id="react-devtools-root"></div>');
 
     ReactDOM.render(
-      <DebugPanel top right bottom left key="debugPanel" >
+      <DebugPanel top right bottom left key='debugPanel' >
         <DevTools store={store} monitor={LogMonitor} />
       </DebugPanel>
       , win.document.getElementById('react-devtools-root'));
