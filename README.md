@@ -72,16 +72,16 @@ $ npm start                     # Compile and launch
 Usage
 -----
 
-#### `npm run dev` also `npm start`
-Runs the webpack build system just like in `compile` but enables HMR. The webpack dev server can be found at `localhost:3000`.
+#### `npm start`
+Runs the webpack build system with webpack-dev-server (by default found at `localhost:3000`).
 
 #### `npm run dev:nw`
-Same as `npm run dev` but opens the debug tools in a new window.
+**Currently unavailable with redux-devtools @ ^3.0.0**. Same as `npm run start` but opens the debug tools in a new window.
 
 **Note:** you'll need to allow popups in Chrome, or you'll see an error: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
 
 #### `npm run dev:no-debug`
-Same as `npm run dev` but disables devtools.
+Same as `npm run start` but disables devtools.
 
 #### `npm run compile`
 Runs the Webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`). Production builds will fail on eslint errors (but not on warnings).
