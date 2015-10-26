@@ -59,7 +59,7 @@
     "phantomjs": "^1.9.17",
     "phantomjs-polyfill": "0.0.1",
     "react-addons-test-utils": "^0.14.0",
-    "react-transform-catch-errors": "^0.1.2",
+    "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
     "redux-devtools": "tomatau/redux-devtools#e126f799bb81a61e4a2ce69fbc501e09b15b5f5d",
