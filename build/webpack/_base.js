@@ -70,7 +70,7 @@ const webpackConfig = {
           'style-loader',
           'css-loader',
           'autoprefixer?browsers=last 2 version',
-          'sass-loader?includePaths[]=' + paths.src('styles')
+          'sass-loader'
         ]
       },
       { test: /\.woff(\?.*)?$/,     loader: "url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff" },
@@ -79,6 +79,9 @@ const webpackConfig = {
       { test: /\.eot(\?.*)?$/,      loader: "file-loader?prefix=fonts/&name=[path][name].[ext]" },
       { test: /\.svg(\?.*)?$/,      loader: "url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml" }
     ]
+  },
+  sassLoader : {
+    includePaths : paths.src('styles')
   },
   eslint : {
     configFile : paths.project('.eslintrc')
