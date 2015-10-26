@@ -1,10 +1,14 @@
-import { applyMiddleware, compose, createStore } from 'redux';
-import rootReducer  from '../reducers';
-import { devTools } from 'redux-devtools';
-import thunk        from 'redux-thunk';
-import routes       from '../routes';
+import rootReducer          from '../reducers';
+import thunk                from 'redux-thunk';
+import routes               from '../routes';
 import { reduxReactRouter } from 'redux-router';
-import createHistory from 'history/lib/createBrowserHistory';
+import createHistory        from 'history/lib/createBrowserHistory';
+import DevTools             from 'containers/DevTools';
+import {
+  applyMiddleware,
+  compose,
+  createStore
+} from 'redux';
 
 export default function configureStore (initialState, debug = false) {
   let createStoreWithMiddleware;
@@ -12,9 +16,16 @@ export default function configureStore (initialState, debug = false) {
   const middleware = applyMiddleware(thunk);
 
   if (debug) {
-    createStoreWithMiddleware = compose(middleware, reduxReactRouter({ routes, createHistory }), devTools());
+    createStoreWithMiddleware = compose(
+      middleware,
+      reduxReactRouter({ routes, createHistory }),
+      DevTools.instrument()
+    );
   } else {
-    createStoreWithMiddleware = compose(middleware, reduxReactRouter({ routes, createHistory }));
+    createStoreWithMiddleware = compose(
+      middleware,
+      reduxReactRouter({ routes, createHistory })
+    );
   }
 
   const store = createStoreWithMiddleware(createStore)(
