@@ -36,8 +36,8 @@ const webpackConfig = {
   module : {
     preLoaders : [
       {
-        test : /\.(js|jsx)$/,
-        loaders : ['eslint-loader'],
+        test    : /\.(js|jsx)$/,
+        loader  : 'eslint-loader',
         exclude : /node_modules/
       }
     ],
