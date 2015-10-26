@@ -1,7 +1,7 @@
 import React                  from 'react';
 import TestUtils              from 'react-addons-test-utils';
 import { bindActionCreators } from 'redux';
-import { HomeView }            from './HomeView';
+import { HomeView }           from './HomeView';
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer();
