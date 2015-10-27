@@ -7,11 +7,11 @@
     "clean": "rm -rf dist",
     "compile": "webpack",
     "start": "npm run dev",
-    "dev": "node --harmony bin/webpack-dev-server",
+    "dev": "NODE_ENV=development node --harmony bin/webpack-dev-server",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
-    "test:dev": "npm run test -- --watch",
+    "test:dev": "NODE_ENV=development npm run test -- --watch",
     "deploy": "npm run test && npm run compile"
   },
   "repository": {
@@ -22,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.23",
+    "dotenv": "^1.2.0",
     "history": "^1.9.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
