@@ -76,7 +76,7 @@ Usage
 Runs the webpack build system with webpack-dev-server (by default found at `localhost:3000`).
 
 #### `npm run dev:nw`
-**Currently unavailable with redux-devtools @ ^3.0.0**. Same as `npm run start` but opens the debug tools in a new window.
+Same as `npm run start` but opens the debug tools in a new window.
 
 **Note:** you'll need to allow popups in Chrome, or you'll see an error: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
 
