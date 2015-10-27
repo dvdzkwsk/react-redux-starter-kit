@@ -1,6 +1,5 @@
 .DS_STORE
 *.log
-.env
 
 node_modules
 
