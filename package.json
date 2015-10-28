@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
+    "lint": "eslint src/**/*.js",
     "compile": "webpack",
     "start": "npm run dev",
     "dev": "NODE_ENV=development node --harmony bin/webpack-dev-server",
@@ -12,7 +13,7 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
     "test:dev": "NODE_ENV=development npm run test -- --watch",
-    "deploy": "npm run test && npm run compile"
+    "deploy": "npm run lint && npm run test && npm run compile"
   },
   "repository": {
     "type": "git",
