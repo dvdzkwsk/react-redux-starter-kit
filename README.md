@@ -92,6 +92,12 @@ Runs unit tests with Karma.
 #### `npm run test:dev`
 Same as `npm run test`, but will watch for changes and re-run tests.
 
+#### `npm run lint`
+Run eslint against all `.js` files in `~/src`. This used to be a preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an `eslint` plugin for your text editor.
+
+#### `npm run test:lint`
+Lint all `.spec.js` files in of `~/tests`.
+
 #### `npm run deploy`
 Helper script to run tests and then, on success, compile your application.
 
@@ -110,16 +116,17 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── build                    # All build-related configuration
 │   ├── webpack              # Environment-specific configuration files for Webpack
 ├── config                   # Project configuration settings
-└── src                      # Application source code
-    ├── components           # Generic React Components (generally Dumb components)
-    ├── containers           # Components that provide context (e.g. Redux Providers)
-    ├── layouts              # Components that dictate major page structure
-    ├── reducers             # Redux reducers
-    ├── routes               # Application route definitions
-    ├── stores               # Redux store configuration
-    ├── utils                # Generic utilities
-    ├── views                # Components that live at a route
-    └── index.js             # Application bootstrap and rendering
+├── src                      # Application source code
+│   ├── components           # Generic React Components (generally Dumb components)
+│   ├── containers           # Components that provide context (e.g. Redux Providers)
+│   ├── layouts              # Components that dictate major page structure
+│   ├── reducers             # Redux reducers
+│   ├── routes               # Application route definitions
+│   ├── stores               # Redux store configuration
+│   ├── utils                # Generic utilities
+│   ├── views                # Components that live at a route
+│   └── index.js             # Application bootstrap and rendering
+└── tests                    # Unit tests
 ```
 
 ### Components vs. Views vs. Layouts
@@ -204,7 +211,7 @@ Furthermore, this `styles` directory is aliased for sass imports, which further 
 Testing
 -------
 
-To add a unit test, simply create `.spec.js` file anywhere in `~/src`. The entry point for Karma uses webpack's custom require to load all these files, and both Mocha and Chai will be available to you within your test without the need to import them.
+To add a unit test, simply create `.spec.js` file anywhere in `~/tests`. The entry point for Karma uses webpack's custom require to load all these files, and both Mocha and Chai will be available to you within your test without the need to import them.
 
 Utilities
 ---------
