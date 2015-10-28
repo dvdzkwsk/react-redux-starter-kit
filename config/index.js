@@ -2,7 +2,7 @@ import path     from 'path';
 import { argv } from 'yargs';
 import dotenv   from 'dotenv';
 
-dotenv.load()
+dotenv.load();
 const config = new Map();
 
 // ------------------------------------
@@ -16,7 +16,7 @@ config.set('dir_dist', 'dist');
 config.set('dir_test', 'tests');
 
 config.set('webpack_host',  'localhost');
-config.set('webpack_port', process.env.PORT || 3000);
+config.set('webpack_port',  process.env.PORT || 3000); // eslint-disable-line
 
 config.set('vendor_dependencies', [
   'history',
@@ -69,8 +69,8 @@ config.set('path_project', path.resolve(__dirname, '../'));
 // Utilities
 // ------------------------------------
 const paths = (() => {
-  const base    = [config.get('path_project')],
-        resolve = path.resolve;
+  const base    = [config.get('path_project')];
+  const resolve = path.resolve;
 
   const project = (...args) => resolve.apply(resolve, [...base, ...args]);
 
@@ -94,6 +94,6 @@ config.set('utils_aliases', [
   'styles',
   'utils',
   'views'
-].reduce((acc, x) => ((acc[x] = paths.src(x)) && acc), {}));
+].reduce((acc, dir) => ((acc[dir] = paths.src(dir)) && acc), {}));
 
 export default config;
