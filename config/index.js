@@ -27,9 +27,6 @@ config.set('vendor_dependencies', [
   'redux-router'
 ]);
 
-// Should linting be turned on during local live development?
-config.set('lint_in_live_dev', false);
-
 /*  *********************************************
 -------------------------------------------------
 
