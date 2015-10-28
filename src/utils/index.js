@@ -1,7 +1,7 @@
 import React        from 'react';
 import ReactDOM     from 'react-dom';
 import { Provider } from 'react-redux';
-import DevTools     from 'containers/DevTools';
+import DevTools     from 'containers/DevToolsWindow';
 
 export function createConstants (...constants) {
   return constants.reduce((acc, constant) => {
@@ -22,7 +22,7 @@ export function createDevToolsWindow (store) {
   const win = window.open(
     null,
     'redux-devtools', // give it a name so it reuses the same window
-    'menubar=no,location=no,resizable=yes,scrollbars=no,status=no'
+    `width=400,height=${window.outerHeight},menubar=no,location=no,resizable=yes,scrollbars=no,status=no`
   );
 
   // reload in case it's reusing the same window with the old content
@@ -33,6 +33,7 @@ export function createDevToolsWindow (store) {
     // Wait for the reload to prevent:
     // "Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element."
     win.document.write('<div id="react-devtools-root"></div>');
+    win.document.body.style.margin = '0';
 
     ReactDOM.render(
       <Provider store={store}>
