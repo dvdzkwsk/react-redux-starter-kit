@@ -2,7 +2,6 @@ import { argv }      from 'yargs';
 import config        from '../config';
 import webpackConfig from '../webpack.config';
 
-const globals = config.get('globals');
 const KARMA_ENTRY_FILE  = 'karma.entry.js';
 
 function makeDefaultConfig () {
@@ -15,7 +14,8 @@ function makeDefaultConfig () {
     frameworks : ['mocha', 'sinon-chai'],
     preprocessors : {
       [KARMA_ENTRY_FILE] : ['webpack'],
-      [`${config.get('dir_src')}/**/*.js`] : ['webpack']
+      [`${config.get('dir_src')}/**/*.js`] : ['webpack'],
+      [`${config.get('dir_test')}/**/*.js`] : ['webpack']
     },
     reporters : ['spec'],
     browsers : ['PhantomJS'],
@@ -23,7 +23,7 @@ function makeDefaultConfig () {
       devtool : 'inline-source-map',
       resolve : webpackConfig.resolve,
       plugins : webpackConfig.plugins
-        .filter(p => !p.__KARMA_IGNORE__),
+        .filter(plugin => !plugin.__KARMA_IGNORE__),
       module  : {
         loaders : webpackConfig.module.loaders
       }
