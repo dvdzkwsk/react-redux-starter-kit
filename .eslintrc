@@ -4,11 +4,7 @@
     "__DEV__"      : false,
     "__PROD__"     : false,
     "__DEBUG__"    : false,
-    "__DEBUG_NW__" : false,
-    "assert"       : false,
-    "describe"     : false,
-    "expect"       : false,
-    "it"           : false
+    "__DEBUG_NW__" : false
   },
   "rules": {
     "comma-dangle" : [1, "never"],
