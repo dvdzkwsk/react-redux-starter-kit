@@ -15,7 +15,8 @@ function makeDefaultConfig () {
     frameworks : ['mocha', 'sinon-chai'],
     preprocessors : {
       [KARMA_ENTRY_FILE] : ['webpack'],
-      [`${config.get('dir_src')}/**/*.js`] : ['webpack']
+      [`${config.get('dir_src')}/**/*.js`] : ['webpack'],
+      [`${config.get('dir_test')}/**/*.js`] : ['webpack']
     },
     reporters : ['spec'],
     browsers : ['PhantomJS'],
