@@ -34,13 +34,6 @@ const webpackConfig = {
     alias      : config.get('utils_aliases')
   },
   module : {
-    preLoaders : [
-      {
-        test    : /\.(js|jsx)$/,
-        loader  : 'eslint-loader',
-        exclude : /node_modules/
-      }
-    ],
     loaders : [
       {
         test : /\.(js|jsx)$/,
@@ -82,9 +75,6 @@ const webpackConfig = {
   },
   sassLoader : {
     includePaths : paths.src('styles')
-  },
-  eslint : {
-    configFile : paths.project('.eslintrc')
   }
 };
 

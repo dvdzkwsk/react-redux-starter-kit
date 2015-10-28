@@ -23,6 +23,4 @@ webpackConfig.plugins.push(
   })
 );
 
-webpackConfig.eslint.failOnError = true;
-
 export default webpackConfig;
