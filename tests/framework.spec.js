@@ -9,12 +9,13 @@ describe('(Framework) Karma Plugins', function () {
     assert.equal(typeof should, 'object');
   });
 
-  it('Should have Chai as Promised helpers.', function () {
-    const promise = new Promise(res => res('test'));
+  it('Should have chai-as-promised helpers.', function () {
+    const pass = new Promise(res => res('test'));
+    const fail = new Promise((res, rej) => rej());
 
     return Promise.all([
-      expect(promise).to.be.fulfilled,
-      promise.should.become('test')
+      expect(pass).to.be.fulfilled,
+      expect(fail).to.not.be.fulfilled
     ]);
   });
 });
