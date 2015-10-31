@@ -33,10 +33,6 @@ describe('(View) Home', function () {
     _rendered  = renderWithProps(_props);
   });
 
-  it('(Meta) Should have a test that works with Chai expectations.', function () {
-    expect(true).to.be.true;
-  });
-
   it('Should render as a <div>.', function () {
     expect(_component.type).to.equal('div');
   });
