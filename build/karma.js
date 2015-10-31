@@ -11,7 +11,7 @@ function makeDefaultConfig () {
       './' + KARMA_ENTRY_FILE
     ],
     singleRun  : !argv.watch,
-    frameworks : ['mocha', 'sinon-chai'],
+    frameworks : ['mocha', 'sinon-chai', 'chai-as-promised', 'chai'],
     preprocessors : {
       [KARMA_ENTRY_FILE] : ['webpack'],
       [`${config.get('dir_src')}/**/*.js`] : ['webpack'],
@@ -34,6 +34,8 @@ function makeDefaultConfig () {
     plugins : [
       require('karma-webpack'),
       require('karma-mocha'),
+      require('karma-chai'),
+      require('karma-chai-as-promised'),
       require('karma-sinon-chai'),
       require('karma-coverage'),
       require('karma-phantomjs-launcher'),

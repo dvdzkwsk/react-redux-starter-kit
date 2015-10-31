@@ -1,3 +1,4 @@
+import assert                 from 'assert';
 import React                  from 'react';
 import TestUtils              from 'react-addons-test-utils';
 import { bindActionCreators } from 'redux';
@@ -18,6 +19,25 @@ function shallowRenderWithProps (props = {}) {
   return shallowRender(<HomeView {...props} />);
 }
 
+describe('(Meta) Test Framework', function () {
+  it('Should expose "expect" globally.', function () {
+    assert.equal(typeof expect, 'function');
+  });
+
+  it('Should expose "should" globally.', function () {
+    assert.equal(typeof should, 'object');
+  });
+
+  it('Should have Chai as Promised helpers.', function () {
+    const promise = new Promise(res => res('test'));
+
+    return Promise.all([
+      expect(promise).to.be.fulfilled,
+      promise.should.eventually.become('test')
+    ]);
+  });
+});
+
 describe('(View) Home', function () {
   let _component, _rendered, _props, _spies;
 
@@ -31,10 +51,6 @@ describe('(View) Home', function () {
 
     _component = shallowRenderWithProps(_props);
     _rendered  = renderWithProps(_props);
-  });
-
-  it('(Meta) Should have a test that works with Chai expectations.', function () {
-    expect(true).to.be.true;
   });
 
   it('Should render as a <div>.', function () {
