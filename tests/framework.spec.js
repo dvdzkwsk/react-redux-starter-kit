@@ -14,7 +14,7 @@ describe('(Framework) Karma Plugins', function () {
 
     return Promise.all([
       expect(promise).to.be.fulfilled,
-      promise.should.eventually.become('test')
+      promise.should.become('test')
     ]);
   });
 });
