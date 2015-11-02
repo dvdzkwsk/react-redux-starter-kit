@@ -1,12 +1,7 @@
 import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
-
-// Normally you'd import your action creators, but I don't want to create
-// a file that you're just going to delete anyways!
-const actionCreators = {
-  increment : () => ({ type : 'COUNTER_INCREMENT' })
-};
+import counterActions         from 'actions/counter';
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -18,7 +13,7 @@ const mapStateToProps = (state) => ({
   routerState : state.router
 });
 const mapDispatchToProps = (dispatch) => ({
-  actions : bindActionCreators(actionCreators, dispatch)
+  actions : bindActionCreators(counterActions, dispatch)
 });
 export class HomeView extends React.Component {
   static propTypes = {
