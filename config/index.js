@@ -8,12 +8,10 @@ const config = new Map();
 // ------------------------------------
 // User Configuration
 // ------------------------------------
-// NOTE: Due to limitations with Webpack's custom require, which is used for
-// looking up all *.spec.js files, if you edit dir_test you must also edit
-// the path in ~/karma.entry.js.
-config.set('dir_src',  'src');
-config.set('dir_dist', 'dist');
-config.set('dir_test', 'tests');
+config.set('dir_src',      'src');
+config.set('dir_dist',     'dist');
+config.set('dir_test',     'tests');
+config.set('dir_coverage', 'coverage');
 
 config.set('webpack_host',  'localhost');
 config.set('webpack_port',  process.env.PORT || 3000); // eslint-disable-line
