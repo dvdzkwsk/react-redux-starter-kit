@@ -2,15 +2,19 @@ import { argv }      from 'yargs';
 import config        from '../config';
 import webpackConfig from '../webpack.config';
 
+const KARMA_ENTRY_FILE  = 'karma.entry.js';
+
 function makeDefaultConfig () {
   return {
     files : [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
-      `./${config.get('dir_test')}/**/*.spec.js`
+      './tests/**/*.js',
+      './' + KARMA_ENTRY_FILE
     ],
     singleRun  : !argv.watch,
     frameworks : ['mocha', 'sinon-chai', 'chai-as-promised', 'chai'],
     preprocessors : {
+      [KARMA_ENTRY_FILE] : ['webpack'],
       [`${config.get('dir_src')}/**/*.js`] : ['webpack'],
       [`${config.get('dir_test')}/**/*.js`] : ['webpack']
     },
@@ -23,10 +27,10 @@ function makeDefaultConfig () {
         .filter(plugin => !plugin.__KARMA_IGNORE__),
       module  : {
         loaders : webpackConfig.module.loaders,
-        postLoaders : [{
+        preLoaders : [{
           test : /\.(js|jsx)$/,
           include : /src/,
-          loader  : 'istanbul-instrumenter'
+          loader  : 'isparta'
         }]
       }
     },

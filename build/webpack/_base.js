@@ -9,7 +9,7 @@ const webpackConfig = {
   target  : 'web',
   entry   : {
     app : [
-      paths.project(config.get('dir_src'))
+      paths.project(config.get('dir_src')) + '/app.js'
     ],
     vendor : config.get('vendor_dependencies')
   },
