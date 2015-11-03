@@ -11,7 +11,12 @@ const config = new Map();
 config.set('dir_src',      'src');
 config.set('dir_dist',     'dist');
 config.set('dir_test',     'tests');
-config.set('dir_coverage', 'coverage');
+
+config.set('coverage_enabled', !argv.watch);
+config.set('coverage_reporters', [
+  { type : 'text-summary' },
+  { type : 'html', dir : 'coverage' }
+]);
 
 config.set('webpack_host',  'localhost');
 config.set('webpack_port',  process.env.PORT || 3000); // eslint-disable-line
