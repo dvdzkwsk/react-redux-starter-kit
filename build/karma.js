@@ -2,12 +2,13 @@ import { argv }      from 'yargs';
 import config        from '../config';
 import webpackConfig from '../webpack.config';
 
-const KARMA_ENTRY_FILE  = 'karma.entry.js';
+const KARMA_ENTRY_FILE   = 'karma.entry.js';
 
 function makeDefaultConfig () {
-  return {
+  const karma = {
     files : [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
+      './tests/**/*.js',
       './' + KARMA_ENTRY_FILE
     ],
     singleRun  : !argv.watch,
@@ -31,6 +32,9 @@ function makeDefaultConfig () {
     webpackMiddleware : {
       noInfo : true
     },
+    coverageReporter : {
+      reporters : config.get('coverage_reporters')
+    },
     plugins : [
       require('karma-webpack'),
       require('karma-mocha'),
@@ -42,6 +46,17 @@ function makeDefaultConfig () {
       require('karma-spec-reporter')
     ]
   };
+
+  if (config.get('coverage_enabled')) {
+    karma.reporters.push('coverage');
+    karma.webpack.module.preLoaders = [{
+      test    : /\.(js|jsx)$/,
+      include : /src/,
+      loader  : 'isparta'
+    }];
+  }
+
+  return karma;
 }
 
 export default (karmaConfig) => karmaConfig.set(makeDefaultConfig());

@@ -1,4 +1,3 @@
-// Require all ".spec.js" files in ~/tests.
-var context = require.context('./tests', true, /.+\.spec\.js$/);
-context.keys().forEach(context);
-module.exports = context;
+// Require all files in ~/src, excluding app.js
+var srcContext = require.context('./src', true, /^((?!app).)*\.(js|jsx)/);
+srcContext.keys().forEach(srcContext);
