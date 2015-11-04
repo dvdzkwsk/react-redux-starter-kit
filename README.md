@@ -44,6 +44,7 @@ Features
 * [Karma](https://github.com/karma-runner/karma)
   * Mocha w/ Chai and Sinon-Chai
   * PhantomJS
+  * Code coverage reports
 * [Babel](https://github.com/babel/babel)
   * `react-transform-hmr` for hot reloading
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
@@ -87,10 +88,10 @@ Same as `npm run start` but disables devtools.
 Runs the Webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`). Production builds will fail on eslint errors (but not on warnings).
 
 #### `npm run test`
-Runs unit tests with Karma.
+Runs unit tests with Karma and generates coverage reports.
 
 #### `npm run test:dev`
-Same as `npm run test`, but will watch for changes and re-run tests.
+Similar to `npm run test`, but will watch for changes and re-run tests; does not generate coverage reports.
 
 #### `npm run lint`
 Run eslint against all `.js` files in `~/src`. This used to be a preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an `eslint` plugin for your text editor.
@@ -211,7 +212,9 @@ Furthermore, this `styles` directory is aliased for sass imports, which further 
 Testing
 -------
 
-To add a unit test, simply create `.spec.js` file anywhere in `~/tests`. The entry point for Karma uses webpack's custom require to load all these files, and both Mocha and Chai will be available to you within your test without the need to import them.
+To add a unit test, simply create `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
+
+Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/index.js`.
 
 Utilities
 ---------
