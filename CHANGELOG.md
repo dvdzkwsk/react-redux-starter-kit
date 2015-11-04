@@ -1,6 +1,34 @@
 Changelog
 =========
 
+0.17.0
+------
+
+### Features
+* Karma coverage now generates proper coverage reports
+* Added chai-as-promised
+* Added `npm run lint` script to lint all `~/src` code
+* Added `npm run test:lint` script to lint all `*.spec.js` files in `~/tests`
+* Updated `npm run deploy` to explicitly run linter on source code
+* Added `dotenv` (thanks [dougvk](https://github.com/dougvk))
+
+### Improvements
+* Renamed application entry point from `index.js` -> `app.js` (clarifies intent and helps with coverage reports)
+* Refactored sample counter constants and actions to their appropriate locations (thanks [kyleect](https://github.com/kyleect))
+* Devtools in `npm run dev:nw` now take up the full window (thanks [jhgg](https://github.com/jhgg))
+* Webpack no longer runs an eslint pre-loader (cleans up console messages while developing)
+* Moved tests into their own directory (alleviates lint/organization issues)
+* Renamed `stores` to `store` to be more intuitive
+* Webpack-dev-server now uses a configurable host (thanks [waynelkh](https://github.com/waynelkh))
+* Sass-loader is now configured independently of its loader definition
+* Upgraded `redux-devtools` from `^2.0.0` -> `^3.0.0`
+* Upgraded `react-transform-catch-errors` from `^0.1.0` -> `^1.0.0`
+
+### Fixes
+* Fix .editorconfig missing a setting that caused it to not be picked up in all IDE's
+* Cleans up miscellaneous lint errors.
+
+
 0.16.0
 ------
 
