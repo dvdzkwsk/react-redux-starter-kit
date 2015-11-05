@@ -85,7 +85,7 @@ Same as `npm run start` but opens the debug tools in a new window.
 Same as `npm run start` but disables devtools.
 
 #### `npm run compile`
-Runs the Webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`). Production builds will fail on eslint errors (but not on warnings).
+Runs the webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`).
 
 #### `npm run test`
 Runs unit tests with Karma and generates coverage reports.
@@ -100,11 +100,11 @@ Run eslint against all `.js` files in `~/src`. This used to be a preloader, but 
 Lint all `.spec.js` files in of `~/tests`.
 
 #### `npm run deploy`
-Helper script to run tests and then, on success, compile your application.
+Helper script to run linter, tests, and then, on success, compile your application to disk.
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, as well as tweak what ports Webpack and WebpackDevServer run on.
+Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, add/remove aliases, tweak your vendor dependencies, and more.
 
 Structure
 ---------
@@ -141,7 +141,7 @@ Webpack
 -------
 
 ### Configuration
-The webpack compiler configuration is located in `~/build/webpack`. When the webpack dev server runs, only the client compiler will be used. When webpack itself is run to compile to disk, both the client and server configurations will be used. Settings that are bundle agnostic should be defined in `~/config/index.js` and imported where needed.
+The webpack compiler configuration is located in `~/build/webpack`. Here you'll find configurations for each environment; `development`, `production`, and `development_hot` exist out of the box. These configurations are selected based on your current `NODE_ENV`, with the exception of `development_hot` which will _always_ be used by webpack dev server.
 
 ### Vendor Bundle
 You can redefine which packages to treat as vendor dependencies by editing `vendor_dependencies` in `~/config/index.js`. These default to:
@@ -158,7 +158,7 @@ You can redefine which packages to treat as vendor dependencies by editing `vend
 ```
 
 ### Aliases
-As mentioned in features, the default Webpack configuration provides some globals and aliases to make your life easier. These can be used as such:
+As mentioned in features, the default webpack configuration provides some globals and aliases to make your life easier. These can be used as such:
 
 ```js
 import MyComponent from '../../components/my-component'; // without alias
@@ -199,7 +199,9 @@ All `.scss` imports will be run through the sass-loader and extracted during pro
 import 'styles/core.scss'; // this imports ~/src/styles/core.scss
 ```
 
-Furthermore, this `styles` directory is aliased for sass imports, which further eliminates manual directory traversing; this is especially useful for importing variables/mixins. An example nested `.scss` file:
+Furthermore, this `styles` directory is aliased for sass imports, which further eliminates manual directory traversing; this is especially useful for importing variables/mixins.
+
+Here's an example:
 
 ```scss
 // current file: ~/src/styles/some/nested/style.scss
