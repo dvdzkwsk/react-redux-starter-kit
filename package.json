@@ -8,11 +8,11 @@
     "lint": "eslint ./src/**/*.js",
     "compile": "webpack",
     "start": "npm run dev",
-    "dev": "better-npm-run dev",
+    "dev": "node ./node_modules/.bin/better-npm-run dev",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
-    "test:dev": "better-npm-run test:dev",
+    "test:dev": "node ./node_modules/.bin/better-npm-run test:dev",
     "test:lint": "eslint ./tests/**/*.spec.js",
     "deploy": "npm run lint && npm run test && npm run compile"
   },
