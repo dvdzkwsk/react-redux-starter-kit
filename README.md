@@ -5,7 +5,7 @@ React Redux Starter Kit
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 
-Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich Webpack build system that's already setup to provide unit testing, linting, hot reloading, sass imports with CSS extraction, and a whole lot more. Check out the full feature list below!
+Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide unit testing, linting, hot reloading, sass imports with CSS extraction, and a whole lot more. Check out the full feature list below!
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please contribute or create a new issue if you think this starter kit is missing something!
 
@@ -27,7 +27,7 @@ Table of Contents
 Requirements
 ------------
 
-Node `^4.0.0`
+Node `^4.0.0` or `^5.0.0` ([npm3](https://www.npmjs.com/package/npm3) recommended).
 
 Features
 --------
@@ -42,7 +42,7 @@ Features
     * use `npm run dev:nw` to display in a separate window.
   * redux-thunk middleware
 * [Karma](https://github.com/karma-runner/karma)
-  * Mocha w/ Chai and Sinon-Chai
+  * Mocha w/ Chai, Sinon-Chai, and Chai-as-Promised
   * PhantomJS
   * Code coverage reports
 * [Babel](https://github.com/babel/babel)
@@ -50,13 +50,13 @@ Features
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
   * Uses babel runtime rather than inline transformations
 * [Webpack](https://github.com/webpack/webpack)
-  * Splits app code from vendor dependencies
+  * Separates application code from vendor dependencies
   * webpack-dev-server
   * sass-loader with CSS extraction
-  * eslint-loader
-    * Uses [Airbnb's eslint config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) (with some softened rules)
-    * Configured to fail production builds on error
   * Pre-configured folder aliases and globals
+* [ESLint](http://eslint.org)
+  * Uses [Airbnb's ESLint config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) (with some softened rules)
+  * Includes separate test-specific `.eslintrc` to work with Mocha and Chai
 
 Getting Started
 ---------------
@@ -259,7 +259,7 @@ export default function todo (state = initialState, action) {
 Can now look like this:
 
 ```js
-import { TODO_CREATE } from 'constants/todo';
+import { TODO_CREATE }   from 'constants/todo';
 import { createReducer } from 'utils';
 
 const initialState = [];
