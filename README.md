@@ -161,21 +161,24 @@ You can redefine which packages to treat as vendor dependencies by editing `vend
 As mentioned in features, the default webpack configuration provides some globals and aliases to make your life easier. These can be used as such:
 
 ```js
-import MyComponent from '../../components/my-component'; // without alias
-import MyComponent from 'components/my-component'; // with alias
+// current file: ~/src/views/some/nested/View.js
+import SomeComponent from '../../../components/SomeComponent'; // without alias
+import SomeComponent from 'components/SomeComponent'; // with alias
+```
 
-  // Available aliases:
-  actions     => '~/src/actions'
-  components  => '~/src/components'
-  constants   => '~/src/constants'
-  containers  => '~/src/containers'
-  layouts     => '~/src/layouts'
-  reducers    => '~/src/reducers'
-  routes      => '~/src/routes'
-  services    => '~/src/services'
-  styles      => '~/src/styles'
-  utils       => '~/src/utils'
-  views       => '~/src/views'
+Available aliases:
+```js
+actions     => '~/src/actions'
+components  => '~/src/components'
+constants   => '~/src/constants'
+containers  => '~/src/containers'
+layouts     => '~/src/layouts'
+reducers    => '~/src/reducers'
+routes      => '~/src/routes'
+services    => '~/src/services'
+styles      => '~/src/styles'
+utils       => '~/src/utils'
+views       => '~/src/views'
 ```
 
 ### Globals
