@@ -183,6 +183,8 @@ views       => '~/src/views'
 
 ### Globals
 
+These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/index.js`.
+
 #### `__DEV__`
 True when `process.env.NODE_ENV` is `development`
 
