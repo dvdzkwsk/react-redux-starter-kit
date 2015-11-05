@@ -118,6 +118,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   ├── webpack              # Environment-specific configuration files for Webpack
 ├── config                   # Project configuration settings
 ├── src                      # Application source code
+│   ├── actions              # Redux action creators
 │   ├── components           # Generic React Components (generally Dumb components)
 │   ├── containers           # Components that provide context (e.g. Redux Providers)
 │   ├── layouts              # Components that dictate major page structure
