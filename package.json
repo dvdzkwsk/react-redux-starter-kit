@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "eslint ./src/**/*.js",
+    "lint:tests": "eslint ./tests/**/*.spec.js",
     "compile": "webpack",
     "start": "npm run dev",
     "dev": "node ./node_modules/.bin/better-npm-run dev",
@@ -13,7 +14,6 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
     "test:dev": "node ./node_modules/.bin/better-npm-run test:dev",
-    "test:lint": "eslint ./tests/**/*.spec.js",
     "deploy": "npm run lint && npm run test && npm run compile"
   },
   "betterScripts": {

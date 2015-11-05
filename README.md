@@ -94,9 +94,9 @@ Runs unit tests with Karma and generates coverage reports.
 Similar to `npm run test`, but will watch for changes and re-run tests; does not generate coverage reports.
 
 #### `npm run lint`
-Run eslint against all `.js` files in `~/src`. This used to be a preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an `eslint` plugin for your text editor.
+Run ESLint against all `.js` files in `~/src`. This used to be a webpack preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an `eslint` plugin for your text editor.
 
-#### `npm run test:lint`
+#### `npm run lint:tests`
 Lint all `.spec.js` files in of `~/tests`.
 
 #### `npm run deploy`
@@ -104,7 +104,7 @@ Helper script to run linter, tests, and then, on success, compile your applicati
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, add/remove aliases, tweak your vendor dependencies, and more.
+Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, add/remove aliases, tweak your vendor dependencies, and more. For the most part, you should be able to make your changes in here without ever having to touch the webpack build configuration.
 
 Structure
 ---------
@@ -115,7 +115,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 .
 ├── bin                      # Build/Start scripts
 ├── build                    # All build-related configuration
-│   ├── webpack              # Environment-specific configuration files for Webpack
+│   ├── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
 ├── src                      # Application source code
 │   ├── actions              # Redux action creators
