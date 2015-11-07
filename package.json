@@ -9,26 +9,12 @@
     "lint:tests": "eslint ./tests/**/*.spec.js",
     "compile": "webpack",
     "start": "npm run dev",
-    "dev": "node ./node_modules/.bin/better-npm-run dev",
-    "dev:nw": "npm run dev -- --nw",
+    "dev": "node --harmony bin/webpack-dev-server",
+    "dev:nw": "npm run dev --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
-    "test:dev": "node ./node_modules/.bin/better-npm-run test:dev",
+    "test:dev": "npm run test -- --watch",
     "deploy": "npm run lint && npm run test && npm run compile"
-  },
-  "betterScripts": {
-    "dev": {
-      "command": "node --harmony bin/webpack-dev-server",
-      "env": {
-        "NODE_ENV": "development"
-      }
-    },
-    "test:dev": {
-      "command": "npm run test -- --watch",
-      "env": {
-        "NODE_ENV": "development"
-      }
-    }
   },
   "repository": {
     "type": "git",
@@ -56,7 +42,6 @@
     "babel-loader": "^5.0.0",
     "babel-plugin-react-transform": "^1.1.0",
     "babel-runtime": "^5.8.20",
-    "better-npm-run": "0.0.3",
     "chai-as-promised": "^5.1.0",
     "css-loader": "^0.21.0",
     "eslint": "^1.0.0",
