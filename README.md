@@ -5,11 +5,9 @@ React Redux Starter Kit
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 
-Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide unit testing, linting, hot reloading, sass imports with CSS extraction, and a whole lot more. Check out the full feature list below!
+Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide unit testing, coverage reporting, hot reloading, sass imports with CSS extraction, and a whole lot more. Check out the full feature list below!
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please contribute or create a new issue if you think this starter kit is missing something!
-
-**Where'd the server go?**. This starter kit used to come packaged with a Koa server to perform basic server-side rendering. However, despite that, universal rendering remained secondary to the goal of this starter kit, so it made more sense to remove that aspect; after all, do one thing and do it well.
 
 Table of Contents
 -----------------
@@ -73,7 +71,7 @@ $ npm start                     # Compile and launch
 Usage
 -----
 
-#### `npm start`
+#### `npm start` (alias for `npm run dev`)
 Runs the webpack build system with webpack-dev-server (by default found at `localhost:3000`).
 
 #### `npm run dev:nw`
@@ -94,17 +92,17 @@ Runs unit tests with Karma and generates coverage reports.
 Similar to `npm run test`, but will watch for changes and re-run tests; does not generate coverage reports.
 
 #### `npm run lint`
-Run ESLint against all `.js` files in `~/src`. This used to be a webpack preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an `eslint` plugin for your text editor.
+Runs ESLint against all `.js` files in `~/src`. This used to be a webpack preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an `eslint` plugin for your text editor.
 
 #### `npm run lint:tests`
-Lint all `.spec.js` files in of `~/tests`.
+Lints all `.spec.js` files in of `~/tests`.
 
 #### `npm run deploy`
 Helper script to run linter, tests, and then, on success, compile your application to disk.
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your src and dist directories, add/remove aliases, tweak your vendor dependencies, and more. For the most part, you should be able to make your changes in here without ever having to touch the webpack build configuration.
+Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, add/remove aliases, tweak your vendor dependencies, and more. For the most part, you should be able to make your changes in here without ever having to touch the webpack build configuration.
 
 Structure
 ---------
@@ -115,16 +113,16 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 .
 ├── bin                      # Build/Start scripts
 ├── build                    # All build-related configuration
-│   ├── webpack              # Environment-specific configuration files for webpack
+│   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
 ├── src                      # Application source code
 │   ├── actions              # Redux action creators
 │   ├── components           # Generic React Components (generally Dumb components)
-│   ├── containers           # Components that provide context (e.g. Redux Providers)
+│   ├── containers           # Components that provide context (e.g. Redux Provider)
 │   ├── layouts              # Components that dictate major page structure
 │   ├── reducers             # Redux reducers
 │   ├── routes               # Application route definitions
-│   ├── stores               # Redux store configuration
+│   ├── store                # Redux store configuration
 │   ├── utils                # Generic utilities
 │   ├── views                # Components that live at a route
 │   └── app.js               # Application bootstrap and rendering
@@ -201,7 +199,7 @@ True when the compiler is run with `--debug` (any environment).
 Styles
 ------
 
-All `.scss` imports will be run through the sass-loader and extracted during production builds. If you're requiring styles from a base styles directory (useful for generic, app-wide styles), you can make use of the `styles` alias, e.g.:
+All `.scss` imports will be run through the sass-loader and extracted during production builds. If you're importing styles from a base styles directory (useful for generic, app-wide styles), you can make use of the `styles` alias, e.g.:
 
 ```js
 // current file: ~/src/components/some/nested/component/index.jsx
