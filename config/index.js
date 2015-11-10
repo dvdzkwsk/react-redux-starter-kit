@@ -1,3 +1,4 @@
+/* eslint-disable */
 import path     from 'path';
 import { argv } from 'yargs';
 import dotenv   from 'dotenv';
@@ -21,7 +22,7 @@ config.set('coverage_reporters', [
 ]);
 
 config.set('webpack_host',  'localhost');
-config.set('webpack_port',  process.env.PORT || 3000); // eslint-disable-line
+config.set('webpack_port',  process.env.PORT || 3000);
 
 // Define what dependencies we'd like to treat as vendor dependencies,
 // but only include the ones that actually exist in package.json. This
@@ -34,11 +35,11 @@ config.set('vendor_dependencies', [
   'react-router',
   'redux',
   'redux-router'
-].filter(d => {
-  if (pkg.dependencies[d]) return true;
+].filter(dep => {
+  if (pkg.dependencies[dep]) return true;
 
   console.log(chalk.yellow(
-    `Package "${d}" was not found as an npm dependency and won't be ` +
+    `Package "${dep}" was not found as an npm dependency and won't be ` +
     `included in the vendor bundle.\n` +
     `Consider removing it from vendor_dependencies in ~/config/index.js`
   ));
@@ -111,3 +112,4 @@ config.set('utils_aliases', [
 ].reduce((acc, dir) => ((acc[dir] = paths.src(dir)) && acc), {}));
 
 export default config;
+/* eslint-enable */
