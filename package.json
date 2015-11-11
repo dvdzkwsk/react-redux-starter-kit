@@ -10,7 +10,7 @@
     "compile": "webpack",
     "start": "npm run dev",
     "dev": "node --harmony bin/webpack-dev-server",
-    "dev:nw": "npm run dev --nw",
+    "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
     "test:dev": "npm run test -- --watch",
