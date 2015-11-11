@@ -5,7 +5,7 @@ React Redux Starter Kit
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 
-Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide unit testing, coverage reporting, hot reloading, sass imports with CSS extraction, and a whole lot more. Check out the full feature list below!
+Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, sass imports with CSS extraction, unit testing, code coverage reports, bundle splitting, and a whole lot more. Check out the full feature list below!
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please contribute or create a new issue if you think this starter kit is missing something!
 
