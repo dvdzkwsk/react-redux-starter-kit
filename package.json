@@ -39,10 +39,12 @@
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "autoprefixer-loader": "^3.1.0",
+    "babel-core": "^6.1.18",
     "babel-eslint": "^4.1.1",
-    "babel-loader": "^5.0.0",
+    "babel-loader": "^6.1.0",
     "babel-plugin-react-transform": "^1.1.0",
     "babel-runtime": "^5.8.20",
+    "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "css-loader": "^0.21.0",
     "eslint": "^1.0.0",
