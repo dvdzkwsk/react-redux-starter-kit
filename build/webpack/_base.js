@@ -14,7 +14,7 @@ const webpackConfig = {
     vendor : config.get('vendor_dependencies')
   },
   output : {
-    filename   : '[name].[hash].js',
+    filename   : '[name].js',
     path       : paths.project(config.get('dir_dist')),
     publicPath : '/'
   },
@@ -84,7 +84,7 @@ const webpackConfig = {
 // to include the vendor bundle that webpack creates, so to get around that
 // we remove the bundle splitting when webpack is used with Karma.
 const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin(
-  'vendor', '[name].[hash].js'
+  'vendor', '[name].js'
 );
 commonChunkPlugin.__KARMA_IGNORE__ = true;
 webpackConfig.plugins.push(commonChunkPlugin);
