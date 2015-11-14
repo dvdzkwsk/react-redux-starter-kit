@@ -106,6 +106,7 @@ config.set('utils_aliases', [
   'reducers',
   'routes',
   'services',
+  'store',
   'styles',
   'utils',
   'views'

@@ -178,6 +178,7 @@ layouts     => '~/src/layouts'
 reducers    => '~/src/reducers'
 routes      => '~/src/routes'
 services    => '~/src/services'
+store       => `~/src/store`
 styles      => '~/src/styles'
 utils       => '~/src/utils'
 views       => '~/src/views'
