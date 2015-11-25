@@ -1,6 +1,7 @@
 import webpack           from 'webpack';
 import config            from '../../config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import autoprefixer      from 'autoprefixer';
 
 const paths = config.get('utils_paths');
 
@@ -62,7 +63,7 @@ const webpackConfig = {
         loaders : [
           'style-loader',
           'css-loader',
-          'autoprefixer?browsers=last 2 version',
+          'postcss-loader',
           'sass-loader'
         ]
       },
@@ -77,7 +78,8 @@ const webpackConfig = {
   },
   sassLoader : {
     includePaths : paths.src('styles')
-  }
+  },
+  postcss : [ autoprefixer({ browsers : ['last 2 versions'] }) ]
 };
 
 // NOTE: this is a temporary workaround. I don't know how to get Karma
