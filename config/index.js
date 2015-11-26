@@ -34,7 +34,7 @@ config.set('vendor_dependencies', [
   'react-redux',
   'react-router',
   'redux',
-  'redux-router'
+  'redux-simple-router'
 ].filter(dep => {
   if (pkg.dependencies[dep]) return true;
 
