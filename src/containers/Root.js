@@ -1,14 +1,15 @@
 import React                    from 'react';
 import { Provider }             from 'react-redux';
+import { Router }               from 'react-router';
 import routes                   from '../routes';
-import { ReduxRouter }          from 'redux-router';
 import DevTools                 from './DevTools';
 import { createDevToolsWindow } from '../utils';
 
 export default class Root extends React.Component {
   static propTypes = {
-    store : React.PropTypes.object.isRequired,
-    debug : React.PropTypes.bool,
+    history : React.PropTypes.object.isRequired,
+    store   : React.PropTypes.object.isRequired,
+    debug   : React.PropTypes.bool,
     debugExternal : React.PropTypes.bool
   }
 
@@ -30,9 +31,9 @@ export default class Root extends React.Component {
     return (
       <Provider store={this.props.store}>
         <div>
-          <ReduxRouter>
+          <Router history={this.props.history}>
             {routes}
-          </ReduxRouter>
+          </Router>
           {this.renderDevTools()}
         </div>
       </Provider>

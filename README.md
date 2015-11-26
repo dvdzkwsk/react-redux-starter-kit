@@ -34,7 +34,7 @@ Features
   * Includes react-addons-test-utils (`^0.14.0`)
 * [React-Router](https://github.com/rackt/react-router) (`^1.0.0`)
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
-  * redux-router (`^1.0.0-beta3`)
+  * redux-simple-router (`^0.0.10`)
   * react-redux (`^4.0.0`)
   * redux-devtools
     * use `npm run dev:nw` to display in a separate window.
@@ -154,7 +154,7 @@ You can redefine which packages to treat as vendor dependencies by editing `vend
   'react',
   'react-redux',
   'react-router',
-  'redux-router',
+  'redux-simple-router',
   'redux'
 ]
 ```
