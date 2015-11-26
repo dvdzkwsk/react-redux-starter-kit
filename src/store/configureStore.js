@@ -17,6 +17,8 @@ export default function configureStore (initialState, debug = false) {
       middleware,
       DevTools.instrument()
     );
+  }else{
+    createStoreWithMiddleware = compose(middleware);
   }
 
   const store = createStoreWithMiddleware(createStore)(
