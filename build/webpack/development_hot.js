@@ -3,7 +3,7 @@ import config        from '../../config';
 import webpackConfig from './development';
 
 webpackConfig.entry.app.push(
-  `webpack-dev-server/client?${config.get('webpack_public_path')}`,
+  `webpack-hot-middleware/client?path=/__webpack_hmr`,
   `webpack/hot/dev-server`
 );
 
