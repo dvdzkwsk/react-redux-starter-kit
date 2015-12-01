@@ -23,11 +23,10 @@ describe('(View) Home', function () {
 
   beforeEach(function () {
     _spies = {};
-    _props = {
-      actions : bindActionCreators({
-        increment : (_spies.increment = sinon.spy())
-      }, _spies.dispatch = sinon.spy())
-    };
+    _props = bindActionCreators({
+      increment : (_spies.increment = sinon.spy())
+    }, _spies.dispatch = sinon.spy())
+
 
     _component = shallowRenderWithProps(_props);
     _rendered  = renderWithProps(_props);
