@@ -49,7 +49,7 @@ Features
   * Uses babel runtime rather than inline transformations
 * [Webpack](https://github.com/webpack/webpack)
   * Separates application code from vendor dependencies
-  * webpack-dev-server
+  * dev middleware and HMR via Express middleware
   * sass-loader with CSS extraction
   * Pre-configured folder aliases and globals
 * [ESLint](http://eslint.org)
@@ -72,15 +72,15 @@ Usage
 -----
 
 #### `npm start` (alias for `npm run dev`)
-Runs the webpack build system with webpack-dev-server (by default found at `localhost:3000`).
+Runs the webpack build system with HMR enabled (by default found at `localhost:3000`).
 
 #### `npm run dev:nw`
-Same as `npm run start` but opens the debug tools in a new window.
+Same as `npm run start` but opens the redux dev tools in a new window.
 
 **Note:** you'll need to allow popups in Chrome, or you'll see an error: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
 
 #### `npm run dev:no-debug`
-Same as `npm run start` but disables devtools.
+Same as `npm run start` but disables redux dev tools.
 
 #### `npm run compile`
 Runs the webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`).
@@ -115,6 +115,8 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── build                    # All build-related configuration
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
+├── server                   # Express application (uses webpack middleware)
+│   └── app.js               # Server application entry point
 ├── src                      # Application source code
 │   ├── actions              # Redux action creators
 │   ├── components           # Generic React Components (generally Dumb components)
@@ -139,7 +141,7 @@ Webpack
 -------
 
 ### Configuration
-The webpack compiler configuration is located in `~/build/webpack`. Here you'll find configurations for each environment; `development`, `production`, and `development_hot` exist out of the box. These configurations are selected based on your current `NODE_ENV`, with the exception of `development_hot` which will _always_ be used by webpack dev server.
+The webpack compiler configuration is located in `~/build/webpack`. Here you'll find configurations for each environment; `development`, `production`, and `development_hot` exist out of the box. These configurations are selected based on your current `NODE_ENV`, with the exception of `development_hot` which will _always_ be used during live development.
 
 **Note**: There has been a conscious decision to keep development-specific configuration (such as hot-reloading) out of `.babelrc`. By doing this, it's possible to create cleaner development builds (such as for teams that have a `dev` -> `stage` -> `production` workflow) that don't, for example, constantly poll for HMR updates.
 
