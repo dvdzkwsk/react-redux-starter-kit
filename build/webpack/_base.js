@@ -27,7 +27,10 @@ const webpackConfig = {
       template : paths.src('index.html'),
       hash     : true,
       filename : 'index.html',
-      inject   : 'body'
+      inject   : 'body',
+      minify   : {
+        collapseWhitespace : true
+      }
     })
   ],
   resolve : {
