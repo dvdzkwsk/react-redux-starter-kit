@@ -1,6 +1,35 @@
 Changelog
 =========
 
+0.18.0
+-----
+
+### Features
+* Replaces `webpack-dev-server` with `Express` and webpack middleware
+* Replaces `redux-router` with `redux-simple-router`
+* Use `postcss-loader` for autoprefixing rather than autoprefixer-loader
+* Configuration will now warn you of missing dependencies for vendor bundle
+* Upgrade `react-router` from `1.0.0-rc1` -> `^1.0.0`
+* Upgrade `css-loader` from `0.21.0` -> `0.23.0`
+* Upgrade `eslint-config-airbnb` from `0.1.0` to `^1.0.0`
+* Upgrade `karma-spec-reporter` from `0.0.21` to `0.0.22`
+* Upgrade `extract-text-webpack-plugin` from `^0.8.0` to `^0.9.0`
+
+### Improvements
+* Compiled `index.html` is now minified
+* Content hashes are now injected directly into the filename rather than appended as query strings
+* Better reporting of webpack build status
+* Use object-style configuration for `sass-loader` rather than inline query string
+* Rename `test:lint` task to `lint:tests`
+* Various documentation improvements
+
+### Fixes
+* Content hash is now longer duplicated in CSS bundle
+* Karma plugins are autoloaded now, rather than explicitly defined
+* Removes extraneous wrapping div in `Root` container
+* Fixes awkwardly named arguments to `createReducer` utility
+* Add missing alias to `~/src/store`
+
 0.17.0
 ------
 
