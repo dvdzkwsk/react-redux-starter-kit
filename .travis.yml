@@ -2,6 +2,7 @@ sudo: false
 language: node_js
 node_js:
   - "4.0"
+  - "5.0"
 
 cache:
   directories:
@@ -11,4 +12,5 @@ install:
   - npm install
 
 script:
+  - NODE_ENV=development npm run deploy
   - NODE_ENV=production npm run deploy
