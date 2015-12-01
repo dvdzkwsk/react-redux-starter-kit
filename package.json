@@ -9,7 +9,7 @@
     "lint:tests": "eslint ./tests/**/*.spec.js",
     "compile": "webpack",
     "start": "npm run dev",
-    "dev": "node --harmony bin/webpack-dev-server",
+    "dev": "node --harmony bin/server",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
