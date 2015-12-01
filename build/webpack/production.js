@@ -14,7 +14,7 @@ webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
 });
 
 webpackConfig.plugins.push(
-  new ExtractTextPlugin('[name].css'),
+  new ExtractTextPlugin('[name].[hash].css'),
   new webpack.optimize.UglifyJsPlugin({
     compress : {
       'unused'    : true,
