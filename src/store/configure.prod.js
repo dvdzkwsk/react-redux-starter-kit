@@ -7,11 +7,9 @@ import {
 } from 'redux';
 
 export default function configureStore (initialState) {
-  const middleware = applyMiddleware(thunk);
-  const createStoreWithMiddleware = compose(middleware);
+  const createStoreWithMiddleware = compose(applyMiddleware(thunk));
 
-  const store = createStoreWithMiddleware(createStore)(
+  return createStoreWithMiddleware(createStore)(
     rootReducer, initialState
   );
-  return store;
 }
