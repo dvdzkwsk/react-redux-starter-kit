@@ -3,7 +3,7 @@ import ReactDOM               from 'react-dom';
 import createBrowserHistory   from 'history/lib/createBrowserHistory';
 import { syncReduxAndRouter } from 'redux-simple-router';
 import Root                   from './containers/Root';
-import configureStore         from './store/configureStore';
+import configureStore         from './store';
 
 const target  = document.getElementById('root');
 const history = createBrowserHistory();
@@ -16,7 +16,7 @@ const node = (
     history={history}
     store={store}
     debug={__DEBUG__}
-    debugExternal={__DEBUG_NW__} 
+    debugExternal={__DEBUG_NW__}
   />
 );
 
