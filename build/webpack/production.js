@@ -1,6 +1,11 @@
 import webpack           from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import config            from '../../config';
 import webpackConfig     from './_base';
+
+if (config.get('production_enable_source_maps')) {
+  webpackConfig.devtool = 'source-map';
+}
 
 webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
   if (/css/.test(loader.test)) {
