@@ -5,7 +5,9 @@ React Redux Starter Kit
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 
-Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, sass imports with CSS extraction, unit testing, code coverage reports, bundle splitting, and a whole lot more. Check out the full feature list below!
+This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, sass imports with CSS extraction, unit testing, code coverage reports, bundle splitting, and a whole lot more. Check out the full feature list below!
+
+The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun.
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please contribute or create a new issue if you think this starter kit is missing something!
 
@@ -32,13 +34,13 @@ Features
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
   * Includes react-addons-test-utils (`^0.14.0`)
-* [React-Router](https://github.com/rackt/react-router) (`^1.0.0`)
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
-  * redux-simple-router (`^0.0.10`)
   * react-redux (`^4.0.0`)
   * redux-devtools
     * use `npm run dev:nw` to display in a separate window.
   * redux-thunk middleware
+* [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
+* [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^0.0.10`)
 * [Karma](https://github.com/karma-runner/karma)
   * Mocha w/ Chai, Sinon-Chai, and Chai-as-Promised
   * PhantomJS
@@ -51,6 +53,7 @@ Features
   * Separates application code from vendor dependencies
   * dev middleware and HMR via Express middleware
   * sass-loader with CSS extraction
+  * postcss-loader with cssnano for style autoprefixing and minification
   * Pre-configured folder aliases and globals
 * [ESLint](http://eslint.org)
   * Uses [Airbnb's ESLint config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) (with some softened rules)
@@ -62,8 +65,8 @@ Getting Started
 Just clone the repo and install the necessary node modules:
 
 ```shell
-$ git clone https://github.com/davezuko/react-redux-starter-kit.git ReduxStarterApp
-$ cd ReduxStarterApp
+$ git clone https://github.com/davezuko/react-redux-starter-kit.git
+$ cd react-redux-starter-kit
 $ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
 $ npm start                     # Compile and launch
 ```
@@ -77,13 +80,13 @@ Runs the webpack build system with HMR enabled (by default found at `localhost:3
 #### `npm run dev:nw`
 Same as `npm run start` but opens the redux dev tools in a new window.
 
-**Note:** you'll need to allow popups in Chrome, or you'll see an error: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
+**Note:** you'll need to allow popups in Chrome for this to work. Refer to [Troubleshooting](#troubleshooting) for more on this.
 
 #### `npm run dev:no-debug`
 Same as `npm run start` but disables redux dev tools.
 
 #### `npm run compile`
-Runs the webpack build system with your current NODE_ENV and compiles the application to disk (`~/dist`).
+Runs the webpack build system **with your current NODE_ENV** and compiles the application to disk (`~/dist` by default).
 
 #### `npm run test`
 Runs unit tests with Karma and generates coverage reports.
@@ -92,7 +95,7 @@ Runs unit tests with Karma and generates coverage reports.
 Similar to `npm run test`, but will watch for changes and re-run tests; does not generate coverage reports.
 
 #### `npm run lint`
-Runs ESLint against all `.js` files in `~/src`. This used to be a webpack preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an `eslint` plugin for your text editor.
+Runs ESLint against all `.js` files in `~/src`. This used to be a webpack preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an ESLint plugin for your text editor.
 
 #### `npm run lint:tests`
 Lints all `.spec.js` files in of `~/tests`.
@@ -103,6 +106,15 @@ Helper script to run linter, tests, and then, on success, compile your applicati
 ### Configuration
 
 Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, add/remove aliases, tweak your vendor dependencies, and more. For the most part, you should be able to make your changes in here without ever having to touch the webpack build configuration.
+
+Common configuration options:
+
+* `dir_src` - application source code base path
+* `dir_dist` - path to build compiled application
+* `server_host` - hostname for the express server
+* `server_port` - port for the express server
+* `production_enable_source_maps` - create source maps in production?
+* `vendor_dependencies` - packages to separate into to the vendor bundle.
 
 Structure
 ---------
@@ -277,4 +289,8 @@ export default createReducer(initialState, {
 Troubleshooting
 ---------------
 
-Nothing yet. Having an issue? Report it and I'll get to it as soon as possible!
+### `npm run dev:nw` produces `cannot read location of undefined.`
+
+This is most likely because the new window has been blocked by your popup blocker, so make sure it's disabled before trying again.
+
+Reference: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
