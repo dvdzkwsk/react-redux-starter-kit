@@ -1,2 +1,2 @@
 @import 'base';
-@import 'vendor/normalize';
+:global { @import 'vendor/normalize'; }
