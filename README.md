@@ -72,16 +72,24 @@ $ npm start                     # Compile and launch
 Usage
 -----
 
+Before delving into the descriptions for each available npm script, here's a brief summary of the three which will most likely be your bread and butter:
+
+* Doing live development? Use `npm start` to spin up the dev server.
+* Compiling the application to disk? Use `npm run compile`.
+* Deploying to an environment? `npm run deploy` can help with that.
+
+Great, now that introductions have been made, here's everything in full detail:
+
 #### `npm start` (alias for `npm run dev`)
 Runs the webpack build system with HMR enabled (by default found at `localhost:3000`).
 
 #### `npm run dev:nw`
-Same as `npm run start` but opens the redux dev tools in a new window.
+Same as `npm start` but opens the redux dev tools in a new window.
 
 **Note:** you'll need to allow popups in Chrome for this to work. Refer to [Troubleshooting](#troubleshooting) for more on this.
 
 #### `npm run dev:no-debug`
-Same as `npm run start` but disables redux dev tools.
+Same as `npm start` but disables redux dev tools.
 
 #### `npm run compile`
 Runs the webpack build system **with your current NODE_ENV** and compiles the application to disk (`~/dist` by default).
@@ -108,7 +116,7 @@ Basic project configuration can be found in `~/config/index.js`. Here you'll be 
 Common configuration options:
 
 * `dir_src` - application source code base path
-* `dir_dist` - path to build compiled application
+* `dir_dist` - path to build compiled application to
 * `server_host` - hostname for the express server
 * `server_port` - port for the express server
 * `production_enable_source_maps` - create source maps in production?
