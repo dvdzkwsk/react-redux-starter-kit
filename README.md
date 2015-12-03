@@ -78,7 +78,9 @@ Before delving into the descriptions for each available npm script, here's a bri
 * Compiling the application to disk? Use `npm run compile`.
 * Deploying to an environment? `npm run deploy` can help with that.
 
-Great, now that introductions have been made, here's everything in full detail:
+**NOTE**: Deploying to a specific environment? Make sure to specify your target NODE_ENV so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/production.js`.
+
+Great, now that introductions have been made here's everything in full detail:
 
 #### `npm start` (alias for `npm run dev`)
 Runs the webpack build system with HMR enabled (by default found at `localhost:3000`).
