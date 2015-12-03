@@ -65,7 +65,7 @@ const webpackConfig = {
         test    : /\.scss$/,
         loaders : [
           'style-loader',
-          'css-loader',
+          'css-loader?sourceMap',
           'postcss-loader',
           'sass-loader'
         ]
@@ -84,6 +84,7 @@ const webpackConfig = {
   },
   postcss : [
     cssnano({
+      sourcemap : true,
       autoprefixer : {
         add      : true,
         remove   : true,
