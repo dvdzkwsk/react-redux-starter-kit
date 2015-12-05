@@ -9,27 +9,15 @@ dotenv.load();
 const config = new Map();
 
 // ------------------------------------
-// User Configuration
+// Project Customization
 // ------------------------------------
-config.set('dir_src',  'src');
-config.set('dir_dist', 'dist');
-config.set('dir_test', 'tests');
 
-config.set('coverage_enabled', !argv.watch); // enabled if not in watch mode
-config.set('coverage_reporters', [
-  { type : 'text-summary' },
-  { type : 'html', dir : 'coverage' }
-]);
-
-config.set('server_host',  'localhost');
-config.set('server_port',  process.env.PORT || 3000);
-
+// Should source maps be generated when the application is compiled
+// for production?
 config.set('production_enable_source_maps', false);
 
-// Define what dependencies we'd like to treat as vendor dependencies,
-// but only include the ones that actually exist in package.json. This
-// makes it easier to remove dependencies without breaking the
-// vendor bundle.
+// What dependencies should be compiled separately from the core
+// application code?
 config.set('vendor_dependencies', [
   'history',
   'react',
@@ -37,15 +25,33 @@ config.set('vendor_dependencies', [
   'react-router',
   'redux',
   'redux-simple-router'
-].filter(dep => {
-  if (pkg.dependencies[dep]) return true;
+]);
 
-  console.log(chalk.yellow(
-    `Package "${dep}" was not found as an npm dependency and won't be ` +
-    `included in the vendor bundle.\n` +
-    `Consider removing it from vendor_dependencies in ~/config/index.js`
-  ));
-}));
+// ------------------------------------
+// Project Structure
+// ------------------------------------
+
+// Where is the root of the project in relation to this file?
+config.set('dir_base', path.resolve(__dirname, '../'));
+
+config.set('dir_src',  'src');    // where React app source code lives
+config.set('dir_dist', 'dist');   // where to deploy compiled code
+config.set('dir_test', 'tests');  // where tests live
+
+// ------------------------------------
+// Server Configuration
+// ------------------------------------
+config.set('server_host',  'localhost');
+config.set('server_port',  process.env.PORT || 3000);
+
+// ------------------------------------
+// Test Configuration
+// ------------------------------------
+config.set('coverage_enabled', !argv.watch); // enabled if not in watch mode
+config.set('coverage_reporters', [
+  { type : 'text-summary' },
+  { type : 'html', dir : 'coverage' }
+]);
 
 /*  *********************************************
 -------------------------------------------------
@@ -71,16 +77,20 @@ config.set('globals', {
 });
 
 // ------------------------------------
-// Webpack
+// Verify Vendor Dependencies
 // ------------------------------------
-config.set('webpack_public_path',
-  `http://${config.get('webpack_host')}:${config.get('webpack_port')}/`
-);
+const vendor = config.get('vendor_dependencies')
 
-// ------------------------------------
-// Project
-// ------------------------------------
-config.set('path_project', path.resolve(__dirname, '../'));
+const validVendor = vendor.filter(dep => {
+  if (pkg.dependencies[dep]) return true;
+
+  console.log(chalk.yellow(
+    `Package "${dep}" was not found as an npm dependency in package.json; ` +
+    `it won't be included in the webpack vendor bundle.\n` +
+    `Consider removing it from vendor_dependencies in ~/config/index.js`
+  ));
+});
+config.set('vendor_dependencies', vendor);
 
 // ------------------------------------
 // Utilities
