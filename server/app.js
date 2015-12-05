@@ -20,7 +20,7 @@ app.use(historyApiFallback({
 if (config.get('globals').__DEV__) {
   app.use(WebpackDevMiddleware(compiler, {
     publicPath  : webpackConfig.output.publicPath,
-    contentBase : paths.project(config.get('dir_src')),
+    contentBase : paths.base(config.get('dir_src')),
     hot         : true,
     quiet       : false,
     noInfo      : false,

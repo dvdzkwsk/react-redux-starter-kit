@@ -41,8 +41,8 @@ config.set('dir_test', 'tests');  // where tests live
 // ------------------------------------
 // Server Configuration
 // ------------------------------------
-config.set('server_host',  'localhost');
-config.set('server_port',  process.env.PORT || 3000);
+config.set('server_host', 'localhost');
+config.set('server_port', process.env.PORT || 3000);
 
 // ------------------------------------
 // Test Configuration
@@ -96,15 +96,15 @@ config.set('vendor_dependencies', vendor);
 // Utilities
 // ------------------------------------
 const paths = (() => {
-  const base    = [config.get('path_project')];
+  const base    = config.get('dir_base');
   const resolve = path.resolve;
 
-  const project = (...args) => resolve.apply(resolve, [...base, ...args]);
+  const base = (...args) => resolve.apply(resolve, [...base, ...args]);
 
   return {
-    project : project,
-    src     : project.bind(null, config.get('dir_src')),
-    dist    : project.bind(null, config.get('dir_dist'))
+    base : base,
+    src  : base.bind(null, config.get('dir_src')),
+    dist : base.bind(null, config.get('dir_dist'))
   };
 })();
 

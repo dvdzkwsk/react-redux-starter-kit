@@ -10,13 +10,13 @@ const webpackConfig = {
   target  : 'web',
   entry   : {
     app : [
-      paths.project(config.get('dir_src')) + '/app.js'
+      paths.base(config.get('dir_src')) + '/app.js'
     ],
     vendor : config.get('vendor_dependencies')
   },
   output : {
     filename   : '[name].[hash].js',
-    path       : paths.project(config.get('dir_dist')),
+    path       : paths.base(config.get('dir_dist')),
     publicPath : '/'
   },
   plugins : [
