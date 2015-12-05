@@ -96,10 +96,10 @@ config.set('vendor_dependencies', vendor);
 // Utilities
 // ------------------------------------
 const paths = (() => {
-  const base    = config.get('dir_base');
-  const resolve = path.resolve;
+  const resolve  = path.resolve;
 
-  const base = (...args) => resolve.apply(resolve, [...base, ...args]);
+  const base = (...args) =>
+    resolve.apply(resolve, [config.get('dir_base'), ...args]);
 
   return {
     base : base,
