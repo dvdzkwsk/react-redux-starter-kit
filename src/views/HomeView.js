@@ -1,5 +1,4 @@
 import React                  from 'react';
-import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import counterActions         from 'actions/counter';
 import { Link }               from 'react-router';
@@ -10,12 +9,11 @@ import { Link }               from 'react-router';
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  counter : state.counter,
-  routerState : state.router
+  counter : state.counter
 });
 export class HomeView extends React.Component {
   static propTypes = {
-    actions  : React.PropTypes.object,
+    increment  : React.PropTypes.func,
     counter  : React.PropTypes.number
   }
 
