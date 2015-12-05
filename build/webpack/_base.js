@@ -10,7 +10,7 @@ const webpackConfig = {
   target  : 'web',
   entry   : {
     app : [
-      paths.base(config.get('dir_src')) + '/app.js'
+      paths.base(config.get('dir_client')) + '/app.js'
     ],
     vendor : config.get('vendor_dependencies')
   },
@@ -24,7 +24,7 @@ const webpackConfig = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new HtmlWebpackPlugin({
-      template : paths.src('index.html'),
+      template : paths.client('index.html'),
       hash     : false,
       filename : 'index.html',
       inject   : 'body',
@@ -80,7 +80,7 @@ const webpackConfig = {
     ]
   },
   sassLoader : {
-    includePaths : paths.src('styles')
+    includePaths : paths.client('styles')
   },
   postcss : [
     cssnano({

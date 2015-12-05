@@ -34,9 +34,10 @@ config.set('vendor_dependencies', [
 // Where is the root of the project in relation to this file?
 config.set('dir_base', path.resolve(__dirname, '../'));
 
-config.set('dir_src',  'src');    // where React app source code lives
-config.set('dir_dist', 'dist');   // where to deploy compiled code
-config.set('dir_test', 'tests');  // where tests live
+config.set('dir_client', 'src');    // where React app source code lives
+config.set('dir_server', 'server'); // where server source code lives
+config.set('dir_dist',   'dist');   // where to deploy compiled code
+config.set('dir_test',   'tests');  // where tests live
 
 // ------------------------------------
 // Server Configuration
@@ -102,9 +103,9 @@ const paths = (() => {
     resolve.apply(resolve, [config.get('dir_base'), ...args]);
 
   return {
-    base : base,
-    src  : base.bind(null, config.get('dir_src')),
-    dist : base.bind(null, config.get('dir_dist'))
+    base   : base,
+    client : base.bind(null, config.get('dir_client')),
+    dist   : base.bind(null, config.get('dir_dist'))
   };
 })();
 
@@ -122,7 +123,7 @@ config.set('utils_aliases', [
   'styles',
   'utils',
   'views'
-].reduce((acc, dir) => ((acc[dir] = paths.src(dir)) && acc), {}));
+].reduce((acc, dir) => ((acc[dir] = paths.client(dir)) && acc), {}));
 
 export default config;
 /* eslint-enable */

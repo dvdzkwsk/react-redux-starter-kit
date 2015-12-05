@@ -8,7 +8,7 @@ function makeDefaultConfig () {
   const karma = {
     files : [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
-      './tests/**/*.js',
+      `./${config.get('dir_test')}/**/*.js`,
       './' + KARMA_ENTRY_FILE
     ],
     singleRun  : !argv.watch,
@@ -41,7 +41,7 @@ function makeDefaultConfig () {
     karma.reporters.push('coverage');
     karma.webpack.module.preLoaders = [{
       test    : /\.(js|jsx)$/,
-      include : /src/,
+      include : new RegExp(config.get('dir_client')),
       loader  : 'isparta'
     }];
   }
