@@ -226,7 +226,7 @@ True when the compiler is run with `--debug` (any environment).
 Server
 ------
 
-This starter kit comes packaged with an express server. Out of the box, the sole purpose of this server is to provide the webpack-dev-middleware and webpack-hot-middleware for hot module replacement. Using a local server app in place of webpack-dev-server makes it easier for users to transition their applications to be universal/isomorphic since there is more cohesion between server and webpack code.
+This starter kit comes packaged with an express server. Out of the box, the sole purpose of this server is to provide the webpack-dev-middleware and webpack-hot-middleware for hot module replacement. Using a local server app in place of webpack-dev-server will hopefully make it easier for users to transition their applications to be universal/isomorphic since the development server no longer stands on its own.
 
 Styles
 ------
