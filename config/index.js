@@ -91,7 +91,7 @@ const validVendor = vendor.filter(dep => {
     `Consider removing it from vendor_dependencies in ~/config/index.js`
   ));
 });
-config.set('vendor_dependencies', vendor);
+config.set('vendor_dependencies', validVendor);
 
 // ------------------------------------
 // Utilities
