@@ -17,6 +17,7 @@ Table of Contents
 1. [Usage](#usage)
 1. [Structure](#structure)
 1. [Webpack](#webpack)
+1. [Server](#server)
 1. [Styles](#styles)
 1. [Testing](#testing)
 1. [Utilities](#utilities)
@@ -39,6 +40,15 @@ Features
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
 * [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^0.0.10`)
+* [Webpack](https://github.com/webpack/webpack)
+  * Separates application code from vendor dependencies
+  * dev middleware and HMR via Express middleware
+  * sass-loader with CSS extraction
+  * postcss-loader with cssnano for style autoprefixing and minification
+  * Pre-configured folder aliases and globals
+* [Express](https://github.com/strongloop/express)
+  * webpack-dev-middleware
+  * webpack-hot-middleware
 * [Karma](https://github.com/karma-runner/karma)
   * Mocha w/ Chai, Sinon-Chai, and Chai-as-Promised
   * PhantomJS
@@ -47,12 +57,6 @@ Features
   * `react-transform-hmr` for hot reloading
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
   * Uses babel runtime rather than inline transformations
-* [Webpack](https://github.com/webpack/webpack)
-  * Separates application code from vendor dependencies
-  * dev middleware and HMR via Express middleware
-  * sass-loader with CSS extraction
-  * postcss-loader with cssnano for style autoprefixing and minification
-  * Pre-configured folder aliases and globals
 * [ESLint](http://eslint.org)
   * Uses [Airbnb's ESLint config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) (with some softened rules)
   * Includes separate test-specific `.eslintrc` to work with Mocha and Chai
@@ -83,18 +87,18 @@ Before delving into the descriptions for each available npm script, here's a bri
 Great, now that introductions have been made here's everything in full detail:
 
 #### `npm start` (alias for `npm run dev`)
-Runs the webpack build system with HMR enabled (by default found at `localhost:3000`).
+Spins up express server at `localhost:3000`. If `NODE_ENV` is `development` (the default) webpack-dev-middleware and HMR will be enabled.
+
+#### `npm run compile`
+Runs the webpack build system **with your current NODE_ENV** and compiles the application to disk (`~/dist` by default).
 
 #### `npm run dev:nw`
-Same as `npm start` but opens the redux dev tools in a new window.
+Same as `npm start` but opens the redux devtools in a new window.
 
 **Note:** you'll need to allow popups in Chrome for this to work. Refer to [Troubleshooting](#troubleshooting) for more on this.
 
 #### `npm run dev:no-debug`
 Same as `npm start` but disables redux dev tools.
-
-#### `npm run compile`
-Runs the webpack build system **with your current NODE_ENV** and compiles the application to disk (`~/dist` by default).
 
 #### `npm run test`
 Runs unit tests with Karma and generates coverage reports.
@@ -218,6 +222,11 @@ True when `process.env.NODE_ENV` is `production`
 
 #### `__DEBUG__`
 True when the compiler is run with `--debug` (any environment).
+
+Server
+------
+
+This starter kit comes packaged with an express server. Out of the box, the sole purpose of this server is to provide the webpack-dev-middleware and webpack-hot-middleware for hot module replacement. Using a local server app in place of webpack-dev-server makes it easier for users to transition their applications to be universal/isomorphic since there is more cohesion between server and webpack code.
 
 Styles
 ------
