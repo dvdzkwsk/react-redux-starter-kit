@@ -1,4 +1,3 @@
-/* eslint-disable */
 import path     from 'path';
 import { argv } from 'yargs';
 import dotenv   from 'dotenv';
@@ -14,6 +13,9 @@ const config = new Map();
 // Project Customization
 // ------------------------------------
 
+config.set('webpack_quiet', false);
+config.set('webpack_no_info', false);
+
 // Should source maps be generated when the application is compiled
 // for production?
 config.set('production_enable_source_maps', false);
@@ -28,6 +30,7 @@ config.set('vendor_dependencies', [
   'redux',
   'redux-simple-router'
 ]);
+
 
 // ------------------------------------
 // Project Structure
@@ -127,4 +130,3 @@ config.set('utils_aliases', [
 ].reduce((acc, dir) => ((acc[dir] = paths.client(dir)) && acc), {}));
 
 export default config;
-/* eslint-enable */

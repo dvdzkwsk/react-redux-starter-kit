@@ -11,8 +11,8 @@ export default function ({ compiler, publicPath }) {
     publicPath,
     contentBase : paths.base(config.get('dir_client')),
     hot         : true,
-    quiet       : false,
-    noInfo      : false,
+    quiet       : config.get('webpack_quiet'),
+    noInfo      : config.get('webpack_no_info'),
     lazy        : false,
     stats       : {
       colors : true
