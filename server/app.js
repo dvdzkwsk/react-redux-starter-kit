@@ -24,8 +24,10 @@ if (config.get('globals').__DEV__) {
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +
-    'does not come with any server functionality for production.'
-  )
+    'does not come with any server functionality for production. To learn ' +
+    'more about deployment strategies, check out the "deployment" section ' +
+    'in the README.'
+  );
 }
 
 export default app;
