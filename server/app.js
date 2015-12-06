@@ -2,7 +2,8 @@ import express              from 'express';
 import historyApiFallback   from 'connect-history-api-fallback';
 import config               from '../config';
 
-const app = express();
+const app   = express();
+const debug = require('debug')('kit:server');
 
 app.use(historyApiFallback({
   verbose : false
@@ -20,6 +21,11 @@ if (config.get('globals').__DEV__) {
     publicPath : webpackConfig.output.publicPath
   }));
   app.use(require('./middleware/webpack-hmr')({ compiler }));
+} else {
+  debug(
+    'Application is being run outside of development mode. This starter kit ' +
+    'does not come with any server functionality for production.'
+  )
 }
 
 export default app;
