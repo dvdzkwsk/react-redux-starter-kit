@@ -13,8 +13,8 @@ const mapStateToProps = (state) => ({
 });
 export class HomeView extends React.Component {
   static propTypes = {
-    increment  : React.PropTypes.func,
-    counter  : React.PropTypes.number
+    increment : React.PropTypes.func,
+    counter   : React.PropTypes.number
   }
 
   render () {

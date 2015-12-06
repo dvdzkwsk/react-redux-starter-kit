@@ -10,8 +10,7 @@ const webpackConfig = require('./development');
 // Define Overrides
 // ------------------------------------
 webpackConfig.entry.app.push(
-  `webpack-hot-middleware/client?path=/__webpack_hmr`,
-  `webpack/hot/dev-server`
+  `webpack-hot-middleware/client?path=/__webpack_hmr`
 );
 
 webpackConfig.plugins.push(
