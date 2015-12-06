@@ -2,8 +2,10 @@
 import path     from 'path';
 import { argv } from 'yargs';
 import dotenv   from 'dotenv';
-import chalk    from 'chalk';
 import pkg      from '../package.json';
+
+const debug = require('debug')('kit:config');
+debug('Create configuration.');
 
 dotenv.load();
 const config = new Map();
@@ -84,11 +86,11 @@ config.set('vendor_dependencies', config.get('vendor_dependencies')
   .filter(dep => {
     if (pkg.dependencies[dep]) return true;
 
-    console.log(chalk.yellow(
+    debug(
       `Package "${dep}" was not found as an npm dependency in package.json; ` +
       `it won't be included in the webpack vendor bundle.\n` +
       `Consider removing it from vendor_dependencies in ~/config/index.js`
-    ));
+    );
   })
 );
 

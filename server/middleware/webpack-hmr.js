@@ -1,8 +1,9 @@
 import WebpackHotMiddleware from 'webpack-hot-middleware';
-import chalk                from 'chalk';
+
+const debug = require('debug')('kit:server:webpack-hmr');
 
 export default function ({ compiler }) {
-  console.log(chalk.blue('Webpack HMR is enabled.'));
+  debug('Enable Webpack Hot Module Replacement (HMR).');
 
   return WebpackHotMiddleware(compiler);
 }

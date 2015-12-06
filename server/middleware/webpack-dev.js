@@ -1,11 +1,11 @@
 import WebpackDevMiddleware from 'webpack-dev-middleware';
-import chalk                from 'chalk';
 import config               from '../../config';
 
-const paths = config.get('utils_paths')
+const paths = config.get('utils_paths');
+const debug = require('debug')('kit:server:webpack-dev');
 
 export default function ({ compiler, publicPath }) {
-  console.log(chalk.blue('Webpack dev middleware is enabled.'));
+  debug('Enable Webpack dev middleware.');
 
   return WebpackDevMiddleware(compiler, {
     publicPath,

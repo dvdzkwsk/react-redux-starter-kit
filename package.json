@@ -8,7 +8,7 @@
     "lint": "eslint ./src/**/*.js",
     "lint:tests": "eslint ./tests/**/*.spec.js",
     "compile": "webpack",
-    "start": "npm run dev",
+    "start": "DEBUG=kit:* npm run dev",
     "dev": "node --harmony bin/server",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
@@ -24,8 +24,8 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.23",
-    "chalk": "^1.1.1",
     "cssnano": "^3.3.2",
+    "debug": "^2.2.0",
     "dotenv": "^1.2.0",
     "history": "^1.9.0",
     "react": "^0.14.0",

@@ -1,7 +1,14 @@
-import webpack       from 'webpack';
-import config        from '../../config';
-import webpackConfig from './development';
+import webpack from 'webpack';
+import config  from '../../config';
 
+const debug = require('debug')('kit:webpack:development_hot');
+debug('Create configuration.');
+
+const webpackConfig = require('./development');
+
+// ------------------------------------
+// Define Overrides
+// ------------------------------------
 webpackConfig.entry.app.push(
   `webpack-hot-middleware/client?path=/__webpack_hmr`,
   `webpack/hot/dev-server`

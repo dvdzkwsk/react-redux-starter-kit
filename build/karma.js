@@ -2,9 +2,12 @@ import { argv }      from 'yargs';
 import config        from '../config';
 import webpackConfig from '../webpack.config';
 
+const debug = require('debug')('kit:karma');
 const KARMA_ENTRY_FILE = 'karma.entry.js';
 
 function makeDefaultConfig () {
+  debug('Create Karma configuration.');
+  
   const karma = {
     files : [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
@@ -49,4 +52,6 @@ function makeDefaultConfig () {
   return karma;
 }
 
-export default (karmaConfig) => karmaConfig.set(makeDefaultConfig());
+export default (karmaConfig) => {
+  karmaConfig.set(makeDefaultConfig());
+};

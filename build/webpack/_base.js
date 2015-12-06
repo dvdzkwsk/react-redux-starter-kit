@@ -5,6 +5,9 @@ import config            from '../../config';
 
 const paths = config.get('utils_paths');
 
+const debug = require('debug')('kit:webpack:_base');
+debug('Create configuration.');
+
 const webpackConfig = {
   name    : 'client',
   target  : 'web',
