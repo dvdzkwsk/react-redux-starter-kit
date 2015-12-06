@@ -78,20 +78,19 @@ config.set('globals', {
 });
 
 // ------------------------------------
-// Verify Vendor Dependencies
+// Validate Vendor Dependencies
 // ------------------------------------
-const vendor = config.get('vendor_dependencies')
+config.set('vendor_dependencies', config.get('vendor_dependencies')
+  .filter(dep => {
+    if (pkg.dependencies[dep]) return true;
 
-const validVendor = vendor.filter(dep => {
-  if (pkg.dependencies[dep]) return true;
-
-  console.log(chalk.yellow(
-    `Package "${dep}" was not found as an npm dependency in package.json; ` +
-    `it won't be included in the webpack vendor bundle.\n` +
-    `Consider removing it from vendor_dependencies in ~/config/index.js`
-  ));
-});
-config.set('vendor_dependencies', validVendor);
+    console.log(chalk.yellow(
+      `Package "${dep}" was not found as an npm dependency in package.json; ` +
+      `it won't be included in the webpack vendor bundle.\n` +
+      `Consider removing it from vendor_dependencies in ~/config/index.js`
+    ));
+  })
+);
 
 // ------------------------------------
 // Utilities
