@@ -12,7 +12,6 @@ const config = new Map();
 // ------------------------------------
 // Project Customization
 // ------------------------------------
-
 config.set('webpack_quiet', false);
 config.set('webpack_no_info', false);
 
@@ -30,7 +29,6 @@ config.set('vendor_dependencies', [
   'redux',
   'redux-simple-router'
 ]);
-
 
 // ------------------------------------
 // Project Structure

@@ -8,5 +8,11 @@ const host = config.get('server_host');
 const port = config.get('server_port');
 
 server.listen(port, host, function () {
-  debug('Server is now running at ' + host + ':' + port + '.');
+  const message = 'Server is now running at ' + host + ':' + port + '.';
+
+  if (!process.env.DEBUG) {
+    console.log(message);
+  } else {
+    debug(message);
+  }
 });
