@@ -10,7 +10,7 @@ debug('Create configuration.');
 
 const CSS_MODULES_LOADER = [
   'css-loader?modules',
-  // 'sourceMap',
+  'sourceMap',
   'importLoaders=1',
   'localIdentName=[name]__[local]___[hash:base64:5]'
 ].join('&');
