@@ -1,9 +1,10 @@
-import express              from 'express';
-import historyApiFallback   from 'connect-history-api-fallback';
-import config               from '../config';
+import express            from 'express';
+import historyApiFallback from 'connect-history-api-fallback';
+import config             from '../config';
 
 const app   = express();
 const debug = require('debug')('kit:server');
+const paths = config.utils_paths;
 
 app.use(historyApiFallback({
   verbose : false
@@ -28,6 +29,11 @@ if (config.env === 'development') {
     'more about deployment strategies, check out the "deployment" section ' +
     'in the README.'
   );
+
+  // Serving ~/dist by default. Ideally these files should be served by
+  // the web server and not the app server, but this helps to demo the
+  // server in production.
+  app.use(express.static(paths.base(config.dir_dist)));
 }
 
 export default app;
