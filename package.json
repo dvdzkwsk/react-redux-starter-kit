@@ -60,7 +60,7 @@
     "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sinon-chai": "^1.0.0",
-    "karma-spec-reporter": "0.0.22",
+    "karma-spec-reporter": "0.0.23",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.2.5",
     "node-sass": "^3.3.3",
