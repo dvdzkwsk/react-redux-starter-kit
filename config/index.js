@@ -2,7 +2,6 @@ import fs       from 'fs';
 import path     from 'path';
 import { argv } from 'yargs';
 
-require('dotenv').load();
 const debug = require('debug')('kit:config');
 debug('Create configuration.');
 
