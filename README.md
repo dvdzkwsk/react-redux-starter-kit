@@ -83,38 +83,21 @@ Before delving into the descriptions for each available npm script, here's a bri
 * Compiling the application to disk? Use `npm run compile`.
 * Deploying to an environment? `npm run deploy` can help with that.
 
-**NOTE**: Deploying to a specific environment? Make sure to specify your target NODE_ENV so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/production.js`.
+**NOTE:** This package makes use of the [debug](https://github.com/visionmedia/debug) package. To see all messages during the build process, set the `DEBUG` environment variable to `kit:*` (e.g. `DEBUG=kit:* npm start`).
 
 Great, now that introductions have been made here's everything in full detail:
 
-#### `npm start` (alias for `npm run dev`)
-Spins up express server at `localhost:3000`. If `NODE_ENV` is `development` (the default) webpack-dev-middleware and HMR will be enabled.
+* `npm start` - Spins up express server to serve your app at `localhost:3000`. HMR will be enabled in development.
+* `npm run compile` - Compiles the application to disk (`~/dist` by default).
+* `npm run dev:nw` - Same as `npm start`, but opens the redux devtools in a new window.
+* `npm run dev:no-debug` - Same as `npm start` but disables redux devtools.
+* `npm run test` - Runs unit tests with Karma and generates a coverage report.
+* `npm run test:dev` - Runs Karma and watches for changes to re-run tests; does not generate coverage reports.
+* `npm run lint` - Runs ESLint against your source code.
+* `npm run lint:tests` - Runs ESLint against your tests.
+* `npm run deploy`- Runs linter, tests, and then, on success, compiles your application to disk.
 
-#### `npm run compile`
-Runs the webpack build system **with your current NODE_ENV** and compiles the application to disk (`~/dist` by default).
-
-#### `npm run dev:nw`
-Same as `npm start` but opens the redux devtools in a new window.
-
-**Note:** you'll need to allow popups in Chrome for this to work. Refer to [Troubleshooting](#troubleshooting) for more on this.
-
-#### `npm run dev:no-debug`
-Same as `npm start` but disables redux dev tools.
-
-#### `npm run test`
-Runs unit tests with Karma and generates coverage reports.
-
-#### `npm run test:dev`
-Similar to `npm run test`, but will watch for changes and re-run tests; does not generate coverage reports.
-
-#### `npm run lint`
-Runs ESLint against all `.js` files in `~/src`. This used to be a webpack preloader, but the browser console output could get fairly ugly. If you want development-time linting, consider using an ESLint plugin for your text editor.
-
-#### `npm run lint:tests`
-Lints all `.spec.js` files in of `~/tests`.
-
-#### `npm run deploy`
-Helper script to run linter, tests, and then, on success, compile your application to disk.
+**NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/production.js`.
 
 ### Configuration
 
