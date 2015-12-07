@@ -11,6 +11,7 @@ export function createConstants (...constants) {
 }
 
 export function createReducer (initialState, fnMap) {
+  // possible use of rest arguments: https://github.com/rackt/redux/issues/749#issuecomment-141570236
   return (state = initialState, { type, payload }, ...rest) => {
     const handler = fnMap[type];
 
