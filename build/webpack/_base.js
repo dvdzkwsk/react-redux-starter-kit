@@ -45,24 +45,7 @@ const webpackConfig = {
       {
         test : /\.(js|jsx)$/,
         exclude : /node_modules/,
-        loader  : 'babel',
-        query   : {
-          stage    : 0,
-          optional : ['runtime'],
-          env      : {
-            development : {
-              plugins : ['react-transform'],
-              extra   : {
-                'react-transform' : {
-                  transforms : [{
-                    transform : 'react-transform-catch-errors',
-                    imports   : ['react', 'redbox-react']
-                  }]
-                }
-              }
-            }
-          }
-        }
+        loader  : 'babel'
       },
       {
         test    : /\.scss$/,
@@ -108,5 +91,21 @@ const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin(
 );
 commonChunkPlugin.__KARMA_IGNORE__ = true;
 webpackConfig.plugins.push(commonChunkPlugin);
+
+// ------------------------------------
+// Hot Module Replacement
+// ------------------------------------
+if (!config.get('disable_hmr')) {
+  debug('Hot Module Replacement (HMR) enabled.');
+
+  webpackConfig.entry.app.push(
+    `webpack-hot-middleware/client?path=/__webpack_hmr`
+  );
+
+  webpackConfig.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  );
+}
 
 export default webpackConfig;

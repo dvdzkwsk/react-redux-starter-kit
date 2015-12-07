@@ -7,7 +7,7 @@
     "clean": "rm -rf dist",
     "lint": "eslint ./src/**/*.js",
     "lint:tests": "eslint ./tests/**/*.spec.js",
-    "compile": "node --harmony bin/compile",
+    "compile": "node --harmony bin/compile --static",
     "start": "node --harmony bin/server",
     "dev": "npm start",
     "dev:nw": "npm run dev -- --nw",

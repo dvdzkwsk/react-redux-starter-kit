@@ -13,7 +13,7 @@ app.use(historyApiFallback({
 // run in development mode.
 if (config.get('globals').__DEV__) {
   const webpack       = require('webpack');
-  const webpackConfig = require('../build/webpack/development_hot');
+  const webpackConfig = require('../build/webpack/development');
   const compiler      = webpack(webpackConfig);
 
   app.use(require('./middleware/webpack-dev')({

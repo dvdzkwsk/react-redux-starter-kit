@@ -67,7 +67,10 @@ Edit at Your Own Risk
 // ------------------------------------
 // Environment
 // ------------------------------------
-config.set('env', process.env.NODE_ENV);
+const env = process.env.NODE_ENV;
+
+config.set('env', env);
+config.set('disable_hmr', !!argv.static);
 config.set('globals', {
   'process.env'  : {
     'NODE_ENV' : JSON.stringify(config.get('env'))
