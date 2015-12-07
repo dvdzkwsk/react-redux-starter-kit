@@ -11,7 +11,7 @@ app.use(historyApiFallback({
 
 // Enable webpack middleware if the application is being
 // run in development mode.
-if (config.get('globals').__DEV__) {
+if (config.env === 'development') {
   const webpack       = require('webpack');
   const webpackConfig = require('../build/webpack/development_hot');
   const compiler      = webpack(webpackConfig);

@@ -3,7 +3,7 @@ import cssnano           from 'cssnano';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import config            from '../../config';
 
-const paths = config.get('utils_paths');
+const paths = config.utils_paths;
 
 const debug = require('debug')('kit:webpack:_base');
 debug('Create configuration.');
@@ -13,17 +13,17 @@ const webpackConfig = {
   target  : 'web',
   entry   : {
     app : [
-      paths.base(config.get('dir_client')) + '/app.js'
+      paths.base(config.dir_client) + '/app.js'
     ],
-    vendor : config.get('vendor_dependencies')
+    vendor : config.compiler_vendor
   },
   output : {
     filename   : '[name].[hash].js',
-    path       : paths.base(config.get('dir_dist')),
+    path       : paths.base(config.dir_dist),
     publicPath : '/'
   },
   plugins : [
-    new webpack.DefinePlugin(config.get('globals')),
+    new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new HtmlWebpackPlugin({
@@ -38,7 +38,7 @@ const webpackConfig = {
   ],
   resolve : {
     extensions : ['', '.js', '.jsx'],
-    alias      : config.get('utils_aliases')
+    alias      : config.utils_aliases
   },
   module : {
     loaders : [

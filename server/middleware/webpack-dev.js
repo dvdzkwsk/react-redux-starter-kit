@@ -1,7 +1,7 @@
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import config               from '../../config';
 
-const paths = config.get('utils_paths');
+const paths = config.utils_paths;
 const debug = require('debug')('kit:server:webpack-dev');
 
 export default function ({ compiler, publicPath }) {
@@ -9,10 +9,10 @@ export default function ({ compiler, publicPath }) {
 
   return WebpackDevMiddleware(compiler, {
     publicPath,
-    contentBase : paths.base(config.get('dir_client')),
+    contentBase : paths.base(config.dir_client),
     hot         : true,
-    quiet       : config.get('webpack_quiet'),
-    noInfo      : config.get('webpack_no_info'),
+    quiet       : config.compiler_quiet,
+    noInfo      : config.compiler_quiet,
     lazy        : false,
     stats       : {
       colors : true

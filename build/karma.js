@@ -5,20 +5,20 @@ const debug = require('debug')('kit:karma');
 debug('Create configuration.');
 
 const KARMA_ENTRY_FILE = 'karma.entry.js';
-const webpackConfig    = require('./webpack/' + config.get('env'));
+const webpackConfig    = require('./webpack/' + config.env);
 
 const karmaConfig = {
   basePath : '../', // project root in relation to bin/karma.js
   files : [
     './node_modules/phantomjs-polyfill/bind-polyfill.js',
-    `./${config.get('dir_test')}/**/*.js`,
+    `./${config.dir_test}/**/*.js`,
     './' + KARMA_ENTRY_FILE
   ],
   singleRun  : !argv.watch,
   frameworks : ['mocha', 'sinon-chai', 'chai-as-promised', 'chai'],
   preprocessors : {
     [KARMA_ENTRY_FILE] : ['webpack'],
-    [`${config.get('dir_test')}/**/*.js`] : ['webpack']
+    [`${config.dir_test}/**/*.js`] : ['webpack']
   },
   reporters : ['spec'],
   browsers : ['PhantomJS'],
@@ -36,11 +36,11 @@ const karmaConfig = {
     noInfo : true
   },
   coverageReporter : {
-    reporters : config.get('coverage_reporters')
+    reporters : config.coverage_reporters
   }
 };
 
-if (config.get('coverage_enabled')) {
+if (config.coverage_enabled) {
   karmaConfig.reporters.push('coverage');
   karmaConfig.webpack.module.preLoaders = [{
     test    : /\.(js|jsx)$/,

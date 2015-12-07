@@ -10,7 +10,9 @@ const webpackConfig = require('./_base');
 // ------------------------------------
 // Define Overrides
 // ------------------------------------
-if (config.get('production_enable_source_maps')) {
+const PROD_CONFIG = config.env_production;
+
+if (PROD_CONFIG.source_maps) {
   debug('Source maps enabled for production.');
   webpackConfig.devtool = 'source-map';
 } else {

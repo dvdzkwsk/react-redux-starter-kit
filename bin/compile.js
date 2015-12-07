@@ -6,7 +6,7 @@ const debug    = require('debug')('kit:bin:compile');
 debug('Create webpack compiler.');
 
 const compiler = require('webpack')(
-  require('../build/webpack/' + config.get('env'))
+  require('../build/webpack/' + config.env)
 );
 
 compiler.run(function (err, stats) {
@@ -29,8 +29,8 @@ compiler.run(function (err, stats) {
     debug('Webpack compiler encountered warnings.');
 
     if (
-      config.get('env') === 'production' &&
-      config.get('production_fail_on_warning')
+      config.env === 'production' &&
+      config.env_production.fail_on_warning
     ) {
       process.exit(1);
     }

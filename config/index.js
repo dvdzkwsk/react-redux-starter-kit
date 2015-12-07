@@ -1,62 +1,60 @@
 import path     from 'path';
 import { argv } from 'yargs';
-import dotenv   from 'dotenv';
-import pkg      from '../package.json';
 
+require('dotenv').load();
 const debug = require('debug')('kit:config');
 debug('Create configuration.');
 
-dotenv.load();
-const config = new Map();
+const config = {
+  env : process.env.NODE_ENV,
 
-// ------------------------------------
-// Project Customization
-// ------------------------------------
-config.set('webpack_quiet', false);
-config.set('webpack_no_info', false);
+  // ----------------------------------
+  // Project Structure
+  // ----------------------------------
+  path_base  : path.resolve(__dirname, '../'),
+  dir_client : 'src',
+  dir_dist   : 'dist',
+  dir_server : 'server',
+  dir_test   : 'tests',
 
-config.set('production_fail_on_warning', false);
-config.set('production_enable_source_maps', false);
+  // ----------------------------------
+  // Server Configuration
+  // ----------------------------------
+  server_host : 'localhost',
+  server_port : process.env.PORT || 3000,
 
-// What dependencies should be compiled separately from the core
-// application code?
-config.set('vendor_dependencies', [
-  'history',
-  'react',
-  'react-redux',
-  'react-router',
-  'redux',
-  'redux-simple-router'
-]);
+  // ----------------------------------
+  // Compiler Configuration
+  // ----------------------------------
+  compiler_quiet  : false,
+  compiler_vendor : [
+    'history',
+    'react',
+    'react-redux',
+    'react-router',
+    'redux',
+    'redux-simple-router'
+  ],
 
-// ------------------------------------
-// Project Structure
-// ------------------------------------
+  // ----------------------------------
+  // Test Configuration
+  // ----------------------------------
+  coverage_enabled   : !!argv.coverage,
+  coverage_reporters : [
+    { type : 'text-summary' },
+    { type : 'html', dir : 'coverage' }
+  ],
 
-// Where is the root of the project in relation to this file?
-config.set('dir_base', path.resolve(__dirname, '../'));
+  // ----------------------------------
+  // Environment-Specific Configuration
+  // ----------------------------------
+  env_production : {
+    fail_on_warning : false,
+    source_maps     : false
+  }
+};
 
-config.set('dir_client', 'src');    // where React app source code lives
-config.set('dir_server', 'server'); // where server source code lives
-config.set('dir_dist',   'dist');   // where to deploy compiled code
-config.set('dir_test',   'tests');  // where tests live
-
-// ------------------------------------
-// Server Configuration
-// ------------------------------------
-config.set('server_host', 'localhost');
-config.set('server_port', process.env.PORT || 3000);
-
-// ------------------------------------
-// Test Configuration
-// ------------------------------------
-config.set('coverage_enabled', !argv.watch); // enabled if not in watch mode
-config.set('coverage_reporters', [
-  { type : 'text-summary' },
-  { type : 'html', dir : 'coverage' }
-]);
-
-/*  *********************************************
+/************************************************
 -------------------------------------------------
 
 All Internal Configuration Below
@@ -64,25 +62,27 @@ Edit at Your Own Risk
 
 -------------------------------------------------
 ************************************************/
+
 // ------------------------------------
 // Environment
 // ------------------------------------
-config.set('env', process.env.NODE_ENV);
-config.set('globals', {
+config.globals = {
   'process.env'  : {
-    'NODE_ENV' : JSON.stringify(config.get('env'))
+    'NODE_ENV' : JSON.stringify(config.env)
   },
-  'NODE_ENV'     : config.get('env'),
-  '__DEV__'      : config.get('env') === 'development',
-  '__PROD__'     : config.get('env') === 'production',
-  '__DEBUG__'    : config.get('env') === 'development' && !argv.no_debug,
+  'NODE_ENV'     : config.env,
+  '__DEV__'      : config.env === 'development',
+  '__PROD__'     : config.env === 'production',
+  '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__DEBUG_NW__' : !!argv.nw
-});
+};
 
 // ------------------------------------
 // Validate Vendor Dependencies
 // ------------------------------------
-config.set('vendor_dependencies', config.get('vendor_dependencies')
+const pkg = require('../package.json');
+
+config.compiler_vendor = config.compiler_vendor
   .filter(dep => {
     if (pkg.dependencies[dep]) return true;
 
@@ -91,27 +91,25 @@ config.set('vendor_dependencies', config.get('vendor_dependencies')
       `it won't be included in the webpack vendor bundle.\n` +
       `Consider removing it from vendor_dependencies in ~/config/index.js`
     );
-  })
-);
+  });
 
 // ------------------------------------
 // Utilities
 // ------------------------------------
-const paths = (() => {
+config.utils_paths = (() => {
   const resolve  = path.resolve;
 
   const base = (...args) =>
-    resolve.apply(resolve, [config.get('dir_base'), ...args]);
+    resolve.apply(resolve, [config.path_base, ...args]);
 
   return {
     base   : base,
-    client : base.bind(null, config.get('dir_client')),
-    dist   : base.bind(null, config.get('dir_dist'))
+    client : base.bind(null, config.dir_client),
+    dist   : base.bind(null, config.dir_dist)
   };
 })();
 
-config.set('utils_paths', paths);
-config.set('utils_aliases', [
+config.utils_aliases = [
   'actions',
   'components',
   'constants',
@@ -124,6 +122,9 @@ config.set('utils_aliases', [
   'styles',
   'utils',
   'views'
-].reduce((acc, dir) => ((acc[dir] = paths.client(dir)) && acc), {}));
+].reduce((acc, dir) => {
+  acc[dir] = config.utils_paths.client(dir);
+  return acc;
+}, {});
 
 export default config;
