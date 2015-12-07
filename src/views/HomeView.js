@@ -1,7 +1,8 @@
-import React                  from 'react';
-import { connect }            from 'react-redux';
-import counterActions         from 'actions/counter';
-import { Link }               from 'react-router';
+import React          from 'react';
+import { connect }    from 'react-redux';
+import counterActions from 'actions/counter';
+import { Link }       from 'react-router';
+import styles         from './HomeView.scss';
 
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -21,7 +22,10 @@ export class HomeView extends React.Component {
     return (
       <div className='container text-center'>
         <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>Sample Counter: {this.props.counter}</h2>
+        <h2>
+          Sample Counter:&nbsp;
+          <span className={styles.counter}>{this.props.counter}</span>
+        </h2>
         <button className='btn btn-default'
                 onClick={this.props.increment}>
           Increment
