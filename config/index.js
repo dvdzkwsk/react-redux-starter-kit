@@ -15,8 +15,7 @@ const config = new Map();
 config.set('webpack_quiet', false);
 config.set('webpack_no_info', false);
 
-// Should source maps be generated when the application is compiled
-// for production?
+config.set('production_fail_on_warning', false);
 config.set('production_enable_source_maps', false);
 
 // What dependencies should be compiled separately from the core
