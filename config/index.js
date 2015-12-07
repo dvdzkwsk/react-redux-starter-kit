@@ -1,3 +1,4 @@
+import fs       from 'fs';
 import path     from 'path';
 import { argv } from 'yargs';
 
@@ -26,8 +27,10 @@ const config = {
   // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
-  compiler_quiet  : false,
-  compiler_vendor : [
+  compiler_source_maps     : true,
+  compiler_fail_on_warning : false,
+  compiler_quiet           : false,
+  compiler_vendor          : [
     'history',
     'react',
     'react-redux',
@@ -43,15 +46,7 @@ const config = {
   coverage_reporters : [
     { type : 'text-summary' },
     { type : 'html', dir : 'coverage' }
-  ],
-
-  // ----------------------------------
-  // Environment-Specific Configuration
-  // ----------------------------------
-  env_production : {
-    fail_on_warning : false,
-    source_maps     : false
-  }
+  ]
 };
 
 /************************************************
@@ -127,4 +122,20 @@ config.utils_aliases = [
   return acc;
 }, {});
 
-export default config;
+// ------------------------------------
+// Apply Environment Overrides
+// ------------------------------------
+debug('Apply environment overrides.');
+
+const targetConfig = argv.config || config.env;
+let overrides;
+
+try {
+  overrides = require(`./_${targetConfig}`);
+} catch (e) {
+  debug(
+    `No configuration overrides found for NODE_ENV "${targetConfig}"`
+  );
+}
+
+export default Object.assign({}, config, overrides);

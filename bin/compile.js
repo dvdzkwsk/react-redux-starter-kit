@@ -28,10 +28,7 @@ compiler.run(function (err, stats) {
   } else if (jsonStats.warnings.length > 0) {
     debug('Webpack compiler encountered warnings.');
 
-    if (
-      config.env === 'production' &&
-      config.env_production.fail_on_warning
-    ) {
+    if (config.compiler_fail_on_warning) {
       process.exit(1);
     }
   }
