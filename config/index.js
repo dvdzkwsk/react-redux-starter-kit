@@ -1,4 +1,3 @@
-import fs       from 'fs';
 import path     from 'path';
 import { argv } from 'yargs';
 
@@ -27,6 +26,8 @@ const config = {
   // Compiler Configuration
   // ----------------------------------
   compiler_source_maps     : true,
+  compiler_hash_type       : 'hash',
+  compiler_inline_manifest : false,
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
   compiler_vendor          : [
