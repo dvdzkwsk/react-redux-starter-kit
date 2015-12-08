@@ -47,7 +47,7 @@ const webpackConfig = {
         exclude : /node_modules/,
         loader  : 'babel',
         query   : {
-          stage    : 0,
+          presets: ['es2015'],
           optional : ['runtime'],
           env      : {
             development : {
