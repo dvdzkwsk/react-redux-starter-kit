@@ -6,7 +6,7 @@ React Redux Starter Kit
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 [![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
 
-This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, sass imports with CSS extraction, unit testing, code coverage reports, bundle splitting, and a whole lot more.
+This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
 
 The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
 
@@ -43,11 +43,13 @@ Features
 * [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
 * [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^0.0.10`)
 * [Webpack](https://github.com/webpack/webpack)
-  * Separates application code from vendor dependencies
-  * dev middleware and HMR via Express middleware
-  * sass-loader with CSS extraction
+  * [CSS modules!](https://github.com/css-modules/css-modules)
+  * sass-loader
   * postcss-loader with cssnano for style autoprefixing and minification
   * Pre-configured folder aliases and globals
+  * Separate vendor-only bundle for common dependencies
+  * CSS extraction during production builds
+  * Loader support for fonts and images
 * [Express](https://github.com/strongloop/express)
   * webpack-dev-middleware
   * webpack-hot-middleware
@@ -102,7 +104,7 @@ Great, now that introductions have been made here's everything in full detail:
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, add/remove aliases, tweak your vendor dependencies, and more. For the most part, you should be able to make your changes in here without ever having to touch the webpack build configuration.
+Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, add/remove aliases, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here _without ever having to touch the webpack build configuration_. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
 
 Common configuration options:
 
@@ -110,8 +112,8 @@ Common configuration options:
 * `dir_dist` - path to build compiled application to
 * `server_host` - hostname for the express server
 * `server_port` - port for the express server
-* `production_enable_source_maps` - create source maps in production?
-* `vendor_dependencies` - packages to separate into to the vendor bundle.
+* `compiler_source_maps` - whether or not to generate source maps
+* `compiler_vendor` - packages to separate into to the vendor bundle
 
 Structure
 ---------
@@ -157,7 +159,7 @@ The webpack compiler configuration is located in `~/build/webpack`. Here you'll 
 So why not just disable HMR? Well, as a further explanation, enabling `react-transform-hmr` in `.babelrc` but building the project without HMR enabled (think of running tests with `NODE_ENV=development` but without a dev server) causes errors to be thrown, so this decision also alleviates that issue.
 
 ### Vendor Bundle
-You can redefine which packages to treat as vendor dependencies by editing `vendor_dependencies` in `~/config/index.js`. These default to:
+You can redefine which packages to treat as vendor dependencies by editing `compiler_vendor` in `~/config/index.js`. These default to:
 
 ```js
 [
@@ -216,7 +218,9 @@ This starter kit comes packaged with an Express server. It's important to note t
 Styles
 ------
 
-All `.scss` imports will be run through the sass-loader and extracted during production builds. If you're importing styles from a base styles directory (useful for generic, app-wide styles), you can make use of the `styles` alias, e.g.:
+Both `.scss` and `.css` file extensions are supported out of the box and are configured to use [CSS Modules](https://github.com/css-modules/css-modules). After being imported, styles will be processed with [PostCSS](https://github.com/postcss/postcss) for minification and autoprefixing, and will be extracted to a `.css` file during production builds.
+
+**NOTE:** If you're importing styles from a base styles directory (useful for generic, app-wide styles), you can make use of the `styles` alias, e.g.:
 
 ```js
 // current file: ~/src/components/some/nested/component/index.jsx
