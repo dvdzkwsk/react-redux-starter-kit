@@ -30,6 +30,7 @@ const config = {
   compiler_inline_manifest : false,
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
+  compiler_public_path     : '/',
   compiler_vendor          : [
     'history',
     'react',
@@ -131,7 +132,7 @@ const targetConfig = argv.config || config.env;
 let overrides;
 
 try {
-  overrides = require(`./_${targetConfig}`);
+  overrides = require(`./_${targetConfig}`)(config);
 } catch (e) {
   debug(
     `No configuration overrides found for NODE_ENV "${targetConfig}"`
