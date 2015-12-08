@@ -4,7 +4,7 @@ import config  from '../../config';
 const debug = require('debug')('kit:webpack:development_hot');
 debug('Create configuration.');
 
-const webpackConfig = require('./development');
+import webpackConfig from './development';
 
 // ------------------------------------
 // Define Overrides

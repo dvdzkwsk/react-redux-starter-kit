@@ -1,7 +1,7 @@
 const debug = require('debug')('kit:webpack:development');
 debug('Create configuration.');
 
-const webpackConfig = require('./_base');
+import webpackConfig from './_base';
 
 // ------------------------------------
 // Define Overrides

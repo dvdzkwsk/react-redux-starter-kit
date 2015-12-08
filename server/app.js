@@ -1,6 +1,8 @@
 import express              from 'express';
 import historyApiFallback   from 'connect-history-api-fallback';
 import config               from '../config';
+import webpackDev from './middleware/webpack-dev';
+import webpackHrm from './middleware/webpack-hmr';
 
 const app   = express();
 const debug = require('debug')('kit:server');
@@ -16,11 +18,11 @@ if (config.env === 'development') {
   const webpackConfig = require('../build/webpack/development_hot');
   const compiler      = webpack(webpackConfig);
 
-  app.use(require('./middleware/webpack-dev')({
+  app.use(webpackDev({
     compiler,
     publicPath : webpackConfig.output.publicPath
   }));
-  app.use(require('./middleware/webpack-hmr')({ compiler }));
+  app.use(webpackHrm({ compiler }));
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +
