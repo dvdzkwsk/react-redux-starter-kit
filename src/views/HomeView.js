@@ -24,7 +24,7 @@ export class HomeView extends React.Component {
         <h1>Welcome to the React Redux Starter Kit</h1>
         <h2>
           Sample Counter:&nbsp;
-          <span className={styles.counter}>{this.props.counter}</span>
+          <span className={styles['counter--green']}>{this.props.counter}</span>
         </h2>
         <button className='btn btn-default'
                 onClick={this.props.increment}>
