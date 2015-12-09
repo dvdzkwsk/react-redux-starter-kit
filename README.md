@@ -112,6 +112,7 @@ Common configuration options:
 * `dir_dist` - path to build compiled application to
 * `server_host` - hostname for the express server
 * `server_port` - port for the express server
+* `compiler_css_modules` - whether or not to enable CSS modules
 * `compiler_source_maps` - whether or not to generate source maps
 * `compiler_vendor` - packages to separate into to the vendor bundle
 
