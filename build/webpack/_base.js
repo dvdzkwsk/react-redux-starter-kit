@@ -51,24 +51,23 @@ const webpackConfig = {
   module : {
     loaders : [
       {
-        test : /\.(js|jsx)$/,
         test    : /\.(js|jsx)$/,
         exclude : /node_modules/,
         loader  : 'babel',
         query   : {
-          stage    : 0,
-          optional : ['runtime'],
-          env      : {
+          presets : ['es2015', 'react', 'stage-0'],
+          env     : {
             development : {
-              plugins : ['react-transform'],
-              extra   : {
-                'react-transform' : {
+              plugins : [
+                ['react-transform', {
+                  /*  omit HMR plugin by default and _only_
+                      load it in hot dev mode.  */
                   transforms : [{
                     transform : 'react-transform-catch-errors',
-                    imports   : ['react', 'redbox-react']
+                    imports : [ 'react', 'redbox-react']
                   }]
-                }
-              }
+                }]
+              ]
             }
           }
         }

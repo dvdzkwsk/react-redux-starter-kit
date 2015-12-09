@@ -57,7 +57,7 @@ Features
   * Mocha w/ Chai, Sinon-Chai, and Chai-as-Promised
   * PhantomJS
   * Code coverage reports
-* [Babel](https://github.com/babel/babel)
+* [Babel](https://github.com/babel/babel) (`^6.3.0`)
   * `react-transform-hmr` for hot reloading
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
   * Uses babel runtime rather than inline transformations

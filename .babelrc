@@ -1,3 +1,15 @@
 {
-  "stage" : 0
+  "presets": ["stage-0", "react", "es2015"],
+  "env": {
+    "development": {
+      "plugins": [
+        ["react-transform", {
+          "transforms": [{
+            "transform": "react-transform-catch-errors",
+            "imports": ["react", "redbox-react"]
+          }]
+        }]
+      ]
+    }
+  }
 }
