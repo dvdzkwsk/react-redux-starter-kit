@@ -25,6 +25,7 @@ const webpackConfig = {
     ],
     vendor : config.compiler_vendor
   },
+  cacheDirectory : true,
   output : {
     filename   : `[name].[${config.compiler_hash_type}].js`,
     path       : paths.base(config.dir_dist),
@@ -51,7 +52,7 @@ const webpackConfig = {
   module : {
     loaders : [
       {
-        test : /\.(js|jsx)$/,
+        test    : /\.(js|jsx)$/,
         exclude : /node_modules/,
         loader  : 'babel',
         query   : {
