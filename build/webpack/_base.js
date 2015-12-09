@@ -1,5 +1,6 @@
 import webpack           from 'webpack';
 import cssnano           from 'cssnano';
+import AddModuleExports  from 'babel-plugin-add-module-exports';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import config            from '../../config';
 
@@ -31,6 +32,7 @@ const webpackConfig = {
     publicPath : config.compiler_public_path
   },
   plugins : [
+    AddModuleExports,
     new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
