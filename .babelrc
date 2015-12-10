@@ -1,6 +1,6 @@
 {
-  "presets": ["stage-0", "react", "es2015"],
-  "plugins": ["add-module-exports"],
+  "presets": ["es2015", "react", "stage-0"],
+  "plugins": ["transform-runtime", "add-module-exports"],
   "env": {
     "development": {
       "plugins": [

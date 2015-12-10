@@ -26,7 +26,6 @@ const webpackConfig = {
     ],
     vendor : config.compiler_vendor
   },
-  cacheDirectory : true,
   output : {
     filename   : `[name].[${config.compiler_hash_type}].js`,
     path       : paths.base(config.dir_dist),
@@ -65,8 +64,9 @@ const webpackConfig = {
         exclude : /node_modules/,
         loader  : 'babel',
         query   : {
-          presets : ['es2015', 'react', 'stage-0'],
+          cacheDirectory : true,
           plugins : ['transform-runtime'],
+          presets : ['es2015', 'react', 'stage-0'],
           env     : {
             development : {
               plugins : [
