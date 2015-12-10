@@ -51,6 +51,13 @@ const webpackConfig = {
     alias      : config.utils_aliases
   },
   module : {
+    preLoaders: [
+      { 
+        test: /\.js$/, 
+        loader: "eslint-loader", 
+        exclude: /node_modules/
+      }
+    ],
     loaders : [
       {
         test    : /\.(js|jsx)$/,
@@ -115,7 +122,10 @@ const webpackConfig = {
         removeAll : true
       }
     })
-  ]
+  ],
+  eslint: {
+    configFile: `${paths.base()}/.eslintrc`
+  }
 };
 
 // NOTE: this is a temporary workaround. I don't know how to get Karma
