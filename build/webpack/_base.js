@@ -9,12 +9,13 @@ const paths = config.utils_paths;
 const debug = require('debug')('kit:webpack:_base');
 debug('Create configuration.');
 
-const CSS_MODULES_LOADER = [
-  'css-loader?modules',
-  'sourceMap',
-  'importLoaders=1',
-  'localIdentName=[name]__[local]___[hash:base64:5]'
-].join('&');
+const CSS_LOADER = !config.compiler_css_modules ?
+  'css-loader' : [
+    'css-loader?modules',
+    'sourceMap',
+    'importLoaders=1',
+    'localIdentName=[name]__[local]___[hash:base64:5]'
+  ].join('&');
 
 const webpackConfig = {
   name    : 'client',
@@ -85,7 +86,7 @@ const webpackConfig = {
         test    : /\.scss$/,
         loaders : [
           'style-loader',
-          CSS_MODULES_LOADER,
+          CSS_LOADER,
           'postcss-loader',
           'sass-loader'
         ]
@@ -94,7 +95,7 @@ const webpackConfig = {
         test    : /\.css$/,
         loaders : [
           'style-loader',
-          CSS_MODULES_LOADER
+          CSS_LOADER
         ]
       },
       /* eslint-disable */
