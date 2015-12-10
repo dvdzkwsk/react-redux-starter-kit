@@ -28,7 +28,7 @@ Table of Contents
 Requirements
 ------------
 
-Node `^4.0.0` or `^5.0.0` ([npm3](https://www.npmjs.com/package/npm3) recommended).
+Node `^5.0.0`
 
 Features
 --------
@@ -202,14 +202,9 @@ views       => '~/src/views'
 
 These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/index.js`.
 
-#### `__DEV__`
-True when `process.env.NODE_ENV` is `development`
-
-#### `__PROD__`
-True when `process.env.NODE_ENV` is `production`
-
-#### `__DEBUG__`
-True when the compiler is run with `--debug` (any environment).
+* `process.env.NODE_ENV` - the active `NODE_ENV` when the build started
+* `__DEV__` - True when `process.env.NODE_ENV` is `development`
+* `__PROD__` - True when `process.env.NODE_ENV` is `production`
 
 Server
 ------
@@ -251,8 +246,7 @@ Coverage reports will be compiled to `~/coverage` by default. If you wish to cha
 Utilities
 ---------
 
-This boilerplate comes with a simple utility (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/client/utils` you'll find an export for `createReducer` which is designed to expedite creating reducers when they're defined via an object map rather than switch statements. As an example, what once looked like this:
-
+This boilerplate comes with a simple utility (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/client/utils` you'll find an export for `createReducer` designed to expedite the creation of reducers when they're defined via an object map rather than switch statements. As an example, what once looked like this:
 
 ```js
 import { TODO_CREATE } from 'constants/todo';
