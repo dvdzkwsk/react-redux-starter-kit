@@ -4,20 +4,22 @@ import config   from '../config';
 const debug = require('debug')('kit:karma');
 debug('Create configuration.');
 
-const KARMA_ENTRY_FILE = 'karma.entry.js';
 const webpackConfig    = require('./webpack/' + config.env);
 
 const karmaConfig = {
   basePath : '../', // project root in relation to bin/karma.js
   files : [
     './node_modules/phantomjs-polyfill/bind-polyfill.js',
-    `./${config.dir_test}/**/*.js`,
-    './' + KARMA_ENTRY_FILE
+    {
+      pattern: `./${config.dir_test}/**/*.js`,
+      watched: false,
+      served: true,
+      included: true
+    }
   ],
   singleRun  : !argv.watch,
   frameworks : ['mocha', 'sinon-chai', 'chai-as-promised', 'chai'],
   preprocessors : {
-    [KARMA_ENTRY_FILE] : ['webpack'],
     [`${config.dir_test}/**/*.js`] : ['webpack']
   },
   reporters : ['spec'],
