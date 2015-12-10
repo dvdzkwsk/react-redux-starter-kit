@@ -23,11 +23,15 @@ webpackConfig.plugins.push(
 // HMR is not enabled there, and these transforms require it.
 webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
   if (/js(?!on)/.test(loader.test)) {
-    loader.query.env.development.extra['react-transform'].transforms.push({
+    debug('HMR detected! Patching Babel config with react-transform plugin.')
+
+    const reactTransformHmr = {
       transform : 'react-transform-hmr',
       imports   : ['react'],
       locals    : ['module']
-    });
+    };
+
+    loader.query.env.development.plugins[0][1].transforms.push(reactTransformHmr);
   }
 
   return loader;

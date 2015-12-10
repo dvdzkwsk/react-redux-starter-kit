@@ -3,19 +3,12 @@ import ReactDOM     from 'react-dom';
 import { Provider } from 'react-redux';
 import DevTools     from 'containers/DevToolsWindow';
 
-export function createConstants (...constants) {
-  return constants.reduce((acc, constant) => {
-    acc[constant] = constant;
-    return acc;
-  }, {});
-}
-
 export function createReducer (initialState, fnMap) {
   // possible use of rest arguments: https://github.com/rackt/redux/issues/749#issuecomment-141570236
-  return (state = initialState, { type, payload }, ...rest) => {
+  return (state = initialState, { type, payload }) => {
     const handler = fnMap[type];
 
-    return handler ? handler(state, payload, ...rest) : state;
+    return handler ? handler(state, payload) : state;
   };
 }
 

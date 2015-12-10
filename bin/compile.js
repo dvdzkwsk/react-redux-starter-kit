@@ -1,4 +1,4 @@
-require('babel/register');
+require('babel-register');
 
 const fs     = require('fs');
 const config = require('../config');

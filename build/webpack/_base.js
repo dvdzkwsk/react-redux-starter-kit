@@ -1,5 +1,6 @@
 import webpack           from 'webpack';
 import cssnano           from 'cssnano';
+import AddModuleExports  from 'babel-plugin-add-module-exports';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import config            from '../../config';
 
@@ -25,13 +26,13 @@ const webpackConfig = {
     ],
     vendor : config.compiler_vendor
   },
-  cacheDirectory : true,
   output : {
     filename   : `[name].[${config.compiler_hash_type}].js`,
     path       : paths.base(config.dir_dist),
     publicPath : config.compiler_public_path
   },
   plugins : [
+    AddModuleExports,
     new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -50,25 +51,34 @@ const webpackConfig = {
     alias      : config.utils_aliases
   },
   module : {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: "eslint-loader",
+        exclude: /node_modules/
+      }
+    ],
     loaders : [
       {
         test    : /\.(js|jsx)$/,
         exclude : /node_modules/,
         loader  : 'babel',
         query   : {
-          stage    : 0,
-          optional : ['runtime'],
-          env      : {
+          cacheDirectory : true,
+          plugins : ['transform-runtime'],
+          presets : ['es2015', 'react', 'stage-0'],
+          env     : {
             development : {
-              plugins : ['react-transform'],
-              extra   : {
-                'react-transform' : {
+              plugins : [
+                ['react-transform', {
+                  /*  omit HMR plugin by default and _only_
+                      load it in hot dev mode.  */
                   transforms : [{
                     transform : 'react-transform-catch-errors',
-                    imports   : ['react', 'redbox-react']
+                    imports : [ 'react', 'redbox-react']
                   }]
-                }
-              }
+                }]
+              ]
             }
           }
         }
@@ -114,7 +124,10 @@ const webpackConfig = {
         removeAll : true
       }
     })
-  ]
+  ],
+  eslint: {
+    configFile: `${paths.base()}/.eslintrc`
+  }
 };
 
 // NOTE: this is a temporary workaround. I don't know how to get Karma

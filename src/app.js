@@ -16,7 +16,7 @@ const node = (
     history={history}
     store={store}
     debug={__DEBUG__}
-    debugExternal={__DEBUG_NW__} 
+    debugExternal={__DEBUG_NW__}
   />
 );
 
