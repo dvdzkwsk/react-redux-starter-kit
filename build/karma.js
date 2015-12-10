@@ -44,7 +44,7 @@ if (config.coverage_enabled) {
   karmaConfig.reporters.push('coverage');
   karmaConfig.webpack.module.preLoaders = [{
     test    : /\.(js|jsx)$/,
-    include : new RegExp(config.get('dir_client')),
+    include : new RegExp(config.dir_client),
     loader  : 'isparta'
   }];
 }
