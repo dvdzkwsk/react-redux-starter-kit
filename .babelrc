@@ -1,16 +1,4 @@
 {
   "presets": ["es2015", "react", "stage-0"],
-  "plugins": ["transform-runtime", "add-module-exports"],
-  "env": {
-    "development": {
-      "plugins": [
-        ["react-transform", {
-          "transforms": [{
-            "transform": "react-transform-catch-errors",
-            "imports": ["react", "redbox-react"]
-          }]
-        }]
-      ]
-    }
-  }
+  "plugins": ["transform-runtime", "add-module-exports"]
 }
