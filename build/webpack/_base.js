@@ -53,9 +53,9 @@ const webpackConfig = {
   },
   module : {
     preLoaders: [
-      { 
-        test: /\.js$/, 
-        loader: "eslint-loader", 
+      {
+        test: /\.js$/,
+        loader: "eslint-loader",
         exclude: /node_modules/
       }
     ],
@@ -66,6 +66,7 @@ const webpackConfig = {
         loader  : 'babel',
         query   : {
           presets : ['es2015', 'react', 'stage-0'],
+          plugins : ['transform-runtime'],
           env     : {
             development : {
               plugins : [
