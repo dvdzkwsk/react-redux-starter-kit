@@ -251,19 +251,8 @@ Coverage reports will be compiled to `~/coverage` by default. If you wish to cha
 Utilities
 ---------
 
-This boilerplate comes with two simple utilities (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/client/utils` you'll find exports for `createConstants` and `createReducer`. The former is pretty much an even lazier `keyMirror`, so if you _really_ hate typing out those constants you may want to give it a shot. Check it out:
+This boilerplate comes with a simple utility (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/client/utils` you'll find an export for `createReducer` which is designed to expedite creating reducers when they're defined via an object map rather than switch statements. As an example, what once looked like this:
 
-```js
-import { createConstants } from 'utils';
-
-export default createConstants(
-  'TODO_CREATE',
-  'TODO_DESTROY',
-  'TODO_TOGGLE_COMPLETE'
-);
-```
-
-The other utility, `create-reducer`, is designed to expedite creating reducers when they're defined via an object map rather than switch statements. As an example, what once looked like this:
 
 ```js
 import { TODO_CREATE } from 'constants/todo';
