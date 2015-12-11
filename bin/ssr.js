@@ -8,23 +8,15 @@
  */
 
 
-require("babel-core/register")({
-	//stage: 0
-	// only: /src/,
-	presets: ["es2015", "react", "stage-0"],
-	//plugins: [
-	//	"sass-loader"
-	//]
-	//module: {
-	//	loaders: [
-	//	  {
-	//		test: /\.scss$/,
-	//		loaders: ["style", "css", "sass"]
-	//	  }
-	//	]
-	//}
+require("babel-core/register");
 
-});
+
+require.extensions['.scss'] = function(module, filename) {
+	var ExtractTextPlugin = require('extract-text-webpack-plugin');
+	debugger;
+	return ExtractTextPlugin.extract(filename);
+}
+
 
 /**
  * Define isomorphic constants.
