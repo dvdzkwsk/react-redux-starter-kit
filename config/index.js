@@ -44,7 +44,7 @@ const config = {
   // ----------------------------------
   // Test Configuration
   // ----------------------------------
-  coverage_enabled   : !!argv.coverage,
+  coverage_enabled   : !argv.watch,
   coverage_reporters : [
     { type : 'text-summary' },
     { type : 'html', dir : 'coverage' }
