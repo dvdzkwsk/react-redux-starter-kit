@@ -14,7 +14,8 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js --coverage",
     "test:dev": "npm run test -- --watch",
-    "deploy": "npm run lint && npm run test && npm run compile"
+    "deploy": "npm run lint && npm run test && npm run compile",
+    "production": "npm run clean && NODE_ENV=production npm run lint && NODE_ENV=production npm run test && NODE_ENV=production npm run compile && NODE_ENV=production node ./bin/ssr"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,10 @@
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
+    "h2o2": "^4.0.2",
+    "hapi": "^11.1.2",
     "history": "1.13.1",
+    "inert": "^3.2.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
@@ -34,6 +38,7 @@
     "redux": "^3.0.0",
     "redux-simple-router": "^1.0.0",
     "redux-thunk": "^1.0.0",
+    "url": "^0.11.0",
     "yargs": "^3.18.0"
   },
   "devDependencies": {
@@ -74,6 +79,7 @@
     "node-sass": "^3.3.3",
     "phantomjs": "^1.9.17",
     "phantomjs-polyfill": "0.0.1",
+    "piping": "^0.3.0",
     "postcss-loader": "^0.8.0",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-catch-errors": "^1.0.0",
