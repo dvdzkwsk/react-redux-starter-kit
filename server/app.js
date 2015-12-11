@@ -10,11 +10,10 @@ app.use(historyApiFallback({
   verbose : false
 }));
 
-// Enable webpack middleware if the application is being
-// run in development mode.
-if (config.env === 'development') {
+// Serve app with Webpack if HMR is enabled
+if (config.compiler_enable_hmr) {
   const webpack       = require('webpack');
-  const webpackConfig = require('../build/webpack/development_hot');
+  const webpackConfig = require('../build/webpack');
   const compiler      = webpack(webpackConfig);
 
   app.use(require('./middleware/webpack-dev')({

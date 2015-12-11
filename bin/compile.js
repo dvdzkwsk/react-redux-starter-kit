@@ -7,9 +7,7 @@ const paths  = config.utils_paths;
 
 debug('Create webpack compiler.');
 
-const compiler = require('webpack')(
-  require('../build/webpack/' + config.env)
-);
+const compiler = require('webpack')(require('../build/webpack'));
 
 compiler.run(function (err, stats) {
   const jsonStats = stats.toJson();

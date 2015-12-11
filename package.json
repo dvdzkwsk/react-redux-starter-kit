@@ -9,7 +9,7 @@
     "lint:tests": "eslint ./tests/**/*.spec.js",
     "compile": "node -r dotenv/config --harmony bin/compile",
     "start": "npm run dev",
-    "dev": "node -r dotenv/config --harmony bin/server",
+    "dev": "node -r dotenv/config bin/server --hot",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js",
