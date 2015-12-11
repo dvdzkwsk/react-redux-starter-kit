@@ -6,6 +6,10 @@ React Redux Starter Kit
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 [![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
 
+
+> ### This Project Recently Upgraded to Babel 6!
+> Woohoo! If you'd like to try it out, you're welcome to build directly from the master branch. However, if troubleshooting issues with Babel isn't quite your thing, just pull the [stable v0.18.0 release](https://github.com/davezuko/react-redux-starter-kit/tree/v0.18.0) and continue on your way with Babel 5.
+
 This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
 
 The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
