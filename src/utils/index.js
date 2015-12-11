@@ -1,7 +1,7 @@
 import React        from 'react';
 import ReactDOM     from 'react-dom';
 import { Provider } from 'react-redux';
-import DevTools     from 'containers/DevToolsWindow';
+import DevTools     from '../containers/DevToolsWindow';
 
 export function createReducer (initialState, fnMap) {
   // possible use of rest arguments: https://github.com/rackt/redux/issues/749#issuecomment-141570236

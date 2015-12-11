@@ -9,9 +9,21 @@
 
 
 require("babel-core/register")({
-	stage: 0
+	//stage: 0
 	// only: /src/,
-	// presets: ["es2015", "react", "stage-0"]
+	presets: ["es2015", "react", "stage-0"],
+	//plugins: [
+	//	"sass-loader"
+	//]
+	//module: {
+	//	loaders: [
+	//	  {
+	//		test: /\.scss$/,
+	//		loaders: ["style", "css", "sass"]
+	//	  }
+	//	]
+	//}
+
 });
 
 /**
@@ -26,5 +38,5 @@ if (process.env.NODE_ENV !== "production") {
 	}
 }
 
-
+console.log('Great Success');
 module.exports = require('../server/hapi');

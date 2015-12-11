@@ -13,6 +13,8 @@
  * begin imports
  *******************/
 
+console.log('1');
+
 import {Server} from "hapi";
 import h2o2 from "h2o2";
 import inert from "inert";
@@ -28,6 +30,8 @@ import url from "url";
 /*******************
  * end imports
  *******************/
+
+console.log('2');
 
 /**
  * Create Redux store, and get intitial state.
