@@ -1,5 +1,4 @@
 import webpack from 'webpack';
-import config  from '../../config';
 import webpackConfig from './development';
 
 const debug = require('debug')('kit:webpack:development_hot');
