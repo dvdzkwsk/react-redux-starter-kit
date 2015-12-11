@@ -137,6 +137,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   ├── reducers             # Redux reducers
 │   ├── routes               # Application route definitions
 │   ├── store                # Redux store configuration
+│   ├── styles               # Stylesheets for the application
 │   ├── utils                # Generic utilities
 │   ├── views                # Components that live at a route
 │   └── app.js               # Application bootstrap and rendering
