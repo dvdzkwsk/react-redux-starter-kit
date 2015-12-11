@@ -10,7 +10,7 @@ const debug = require('debug')('kit:webpack:_base');
 debug('Create configuration.');
 
 const CSS_LOADER = !config.compiler_css_modules ?
-  'css-loader' : [
+  'css-loader?sourceMap' : [
     'css-loader?modules',
     'sourceMap',
     'importLoaders=1',

@@ -1,10 +1,9 @@
-import { argv } from 'yargs';
-import config   from '../config';
+import { argv }      from 'yargs';
+import config        from '../config';
+import webpackConfig from './webpack';
 
 const debug = require('debug')('kit:karma');
 debug('Create configuration.');
-
-const webpackConfig    = require('./webpack/' + config.env);
 
 const karmaConfig = {
   basePath : '../', // project root in relation to bin/karma.js
