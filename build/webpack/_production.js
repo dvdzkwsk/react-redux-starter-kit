@@ -1,3 +1,4 @@
+import webpack           from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import config            from '../../config';
 
