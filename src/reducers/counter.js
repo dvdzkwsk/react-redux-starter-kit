@@ -1,4 +1,4 @@
-import { createReducer }     from '../utils';
+import { createReducer }     from 'utils';
 import { COUNTER_INCREMENT } from 'constants/counter';
 
 const initialState = 0;
