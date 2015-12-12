@@ -29,7 +29,6 @@ const config = {
   compiler_enable_hmr      : false,
   compiler_source_maps     : true,
   compiler_hash_type       : 'hash',
-  compiler_inline_manifest : false,
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
   compiler_public_path     : '/',
