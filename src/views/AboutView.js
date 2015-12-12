@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 
 const AboutView = () => (
   <div className='container text-center'>
@@ -7,6 +7,6 @@ const AboutView = () => (
     <hr />
     <Link to='/'>Back To Home View</Link>
   </div>
-);
+)
 
-export default AboutView;
+export default AboutView

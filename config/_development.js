@@ -1,10 +1,11 @@
-import { argv } from 'yargs';
+/* eslint key-spacing:0 */
+import { argv } from 'yargs'
 
 export default (config) => {
-  const HMR_ENABLED = !!argv.hot;
+  const HMR_ENABLED = !!argv.hot
   const overrides = {
     compiler_enable_hmr : HMR_ENABLED
-  };
+  }
 
   // We use an explicit public path when the assets are served by webpack
   // to fix this issue:
@@ -12,8 +13,8 @@ export default (config) => {
   if (HMR_ENABLED) {
     overrides.compiler_public_path = (
       `http://${config.server_host}:${config.server_port}/`
-    );
+    )
   }
 
-  return overrides;
-};
+  return overrides
+}

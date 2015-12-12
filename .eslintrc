@@ -1,7 +1,8 @@
 {
   "parser"  : "babel-eslint",
   "extends" : [
-    "defaults/configurations/airbnb"
+    "standard",
+    "standard-react"
   ],
   "env"     : {
     "browser" : true
@@ -13,14 +14,6 @@
     "__DEBUG_NW__" : false
   },
   "rules": {
-    "comma-dangle" : [1, "never"],
-    "func-names"   : 0,
-    "key-spacing"  : 0,
-    "space-before-function-paren" : [2, "always"],
-    "no-else-return"   : 0,
-    "no-multi-spaces"  : 0,
-    "quotes"           : [2, "single"],
-    "jsx-quotes"       : [2, "prefer-single"],
-    "one-var"          : 0
+    "semi" : [2, "never"]
   }
 }

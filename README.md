@@ -5,10 +5,13 @@ React Redux Starter Kit
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 [![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
-
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 > ### This Project Recently Upgraded to Babel 6!
 > Woohoo! If you'd like to try it out, you're welcome to build directly from the master branch. However, if troubleshooting issues with Babel isn't quite your thing, just pull the [stable v0.18.0 release](https://github.com/davezuko/react-redux-starter-kit/tree/v0.18.0) and continue on your way with Babel 5.
+
+> ### Want Semicolons?
+> After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs.
 
 This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
 
@@ -66,7 +69,7 @@ Features
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
   * Uses babel runtime rather than inline transformations
 * [ESLint](http://eslint.org)
-  * Includes [eslint-config-defaults](https://github.com/walmartlabs/eslint-config-defaults) (uses airbnb by default)
+  * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this!
   * Includes separate test-specific `.eslintrc` to work with Mocha and Chai
 
 Getting Started
@@ -100,8 +103,6 @@ Great, now that introductions have been made here's everything in full detail:
 * `npm run dev:no-debug` - Same as `npm start` but disables redux devtools.
 * `npm run test` - Runs unit tests with Karma and generates a coverage report.
 * `npm run test:dev` - Runs Karma and watches for changes to re-run tests; does not generate coverage reports.
-* `npm run lint` - Runs ESLint against your source code.
-* `npm run lint:tests` - Runs ESLint against your tests.
 * `npm run deploy`- Runs linter, tests, and then, on success, compiles your application to disk.
 
 **NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/production.js`.

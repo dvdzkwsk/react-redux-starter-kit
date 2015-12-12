@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { actions as counterActions } from '../redux/modules/counter';
-import styles from './HomeView.scss';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { actions as counterActions } from '../redux/modules/counter'
+import styles from './HomeView.scss'
 
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -10,12 +10,12 @@ import styles from './HomeView.scss';
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  counter : state.counter
-});
+  counter: state.counter
+})
 export class HomeView extends React.Component {
   static propTypes = {
-    increment : React.PropTypes.func,
-    counter   : React.PropTypes.number
+    increment: React.PropTypes.func,
+    counter: React.PropTypes.number
   }
 
   render () {
@@ -33,8 +33,8 @@ export class HomeView extends React.Component {
         <hr />
         <Link to='/about'>Go To About View</Link>
       </div>
-    );
+    )
   }
 }
 
-export default connect(mapStateToProps, counterActions)(HomeView);
+export default connect(mapStateToProps, counterActions)(HomeView)
