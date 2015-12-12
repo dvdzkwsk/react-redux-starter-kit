@@ -134,14 +134,13 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── server                   # Express application (uses webpack middleware)
 │   └── app.js               # Server application entry point
 ├── src                      # Application source code
-│   ├── actions              # Redux action creators
 │   ├── components           # Generic React Components (generally Dumb components)
 │   ├── containers           # Components that provide context (e.g. Redux Provider)
 │   ├── layouts              # Components that dictate major page structure
-│   ├── reducers             # Redux reducers
+│   ├── redux                # Redux-specific pieces
+│   │   └── modules          # Collections of reducers/constants/actions
 │   ├── routes               # Application route definitions
-│   ├── store                # Redux store configuration
-│   ├── styles               # Stylesheets for the application
+│   ├── styles               # Application-wide styles (generally settings)
 │   ├── utils                # Generic utilities
 │   ├── views                # Components that live at a route
 │   └── app.js               # Application bootstrap and rendering
@@ -178,29 +177,17 @@ You can redefine which packages to treat as vendor dependencies by editing `comp
 ]
 ```
 
-### Aliases
-As mentioned in features, the default webpack configuration provides some globals and aliases to make your life easier. These can be used as such:
+### Webpack Root Resolve
+Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
 
 ```js
 // current file: ~/src/views/some/nested/View.js
-import SomeComponent from '../../../components/SomeComponent'; // without alias
-import SomeComponent from 'components/SomeComponent'; // with alias
-```
 
-Available aliases:
-```js
-actions     => '~/src/actions'
-components  => '~/src/components'
-constants   => '~/src/constants'
-containers  => '~/src/containers'
-layouts     => '~/src/layouts'
-reducers    => '~/src/reducers'
-routes      => '~/src/routes'
-services    => '~/src/services'
-store       => `~/src/store`
-styles      => '~/src/styles'
-utils       => '~/src/utils'
-views       => '~/src/views'
+// What used to be this:
+import SomeComponent from '../../../components/SomeComponent';
+
+// Can now be this:
+import SomeComponent from 'components/SomeComponent'; // Hooray!
 ```
 
 ### Globals

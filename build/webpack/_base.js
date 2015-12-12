@@ -47,8 +47,8 @@ const webpackConfig = {
     })
   ],
   resolve : {
-    extensions : ['', '.js', '.jsx'],
-    alias      : config.utils_aliases
+    root : paths.base(config.dir_client),
+    extensions : ['', '.js', '.jsx']
   },
   module : {
     preLoaders: [

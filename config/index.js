@@ -107,24 +107,6 @@ config.utils_paths = (() => {
   };
 })();
 
-config.utils_aliases = [
-  'actions',
-  'components',
-  'constants',
-  'containers',
-  'layouts',
-  'reducers',
-  'routes',
-  'services',
-  'store',
-  'styles',
-  'utils',
-  'views'
-].reduce((acc, dir) => {
-  acc[dir] = config.utils_paths.client(dir);
-  return acc;
-}, {});
-
 // ------------------------------------
 // Apply Environment Overrides
 // ------------------------------------
