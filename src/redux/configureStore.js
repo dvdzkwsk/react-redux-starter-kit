@@ -1,21 +1,20 @@
 import thunk       from 'redux-thunk';
 import rootReducer from './modules';
-import DevTools    from '../containers/DevTools';
 import {
   applyMiddleware,
   compose,
   createStore
 } from 'redux';
 
-export default function configureStore (initialState, debug = false) {
+export default function configureStore (initialState) {
   let createStoreWithMiddleware;
 
   const middleware = applyMiddleware(thunk);
 
-  if (debug) {
+  if (__DEBUG__) {
     createStoreWithMiddleware = compose(
       middleware,
-      DevTools.instrument()
+      require('containers/DevTools').default.instrument()
     );
   } else {
     createStoreWithMiddleware = compose(middleware);

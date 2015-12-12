@@ -1,7 +1,6 @@
 import React        from 'react';
 import { Provider } from 'react-redux';
 import { Router }   from 'react-router';
-import DevTools     from 'containers/DevTools';
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -18,6 +17,8 @@ export default class Root extends React.Component {
     );
 
     if (__DEBUG__ && !__DEBUG_NW__) {
+      const DevTools = require('containers/DevTools').default;
+
       return (
         <Provider store={this.props.store}>
           <div>
