@@ -1,2 +1,2 @@
-export createReducer        from './createReducer.js';
-export createDevToolsWindow from './createDevToolsWindow.js';
+export createReducer from './createReducer.js'
+export createDevToolsWindow from './createDevToolsWindow.js'

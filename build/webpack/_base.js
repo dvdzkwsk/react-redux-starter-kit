@@ -1,81 +1,81 @@
-import webpack           from 'webpack';
-import cssnano           from 'cssnano';
-import AddModuleExports  from 'babel-plugin-add-module-exports';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import config            from '../../config';
+import webpack from 'webpack'
+import cssnano from 'cssnano'
+import AddModuleExports from 'babel-plugin-add-module-exports'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import config from '../../config'
+import _debug from 'debug'
 
-const paths = config.utils_paths;
+const paths = config.utils_paths
+const debug = _debug('kit:webpack:_base')
+debug('Create configuration.')
 
-const debug = require('debug')('kit:webpack:_base');
-debug('Create configuration.');
-
-const CSS_LOADER = !config.compiler_css_modules ?
-  'css-loader?sourceMap' : [
+const CSS_LOADER = !config.compiler_css_modules
+  ? 'css-loader?sourceMap'
+  : [
     'css-loader?modules',
     'sourceMap',
     'importLoaders=1',
     'localIdentName=[name]__[local]___[hash:base64:5]'
-  ].join('&');
+  ].join('&')
 
 const webpackConfig = {
-  name    : 'client',
-  target  : 'web',
-  entry   : {
-    app : [
+  name: 'client',
+  target: 'web',
+  entry: {
+    app: [
       paths.base(config.dir_client) + '/app.js'
     ],
-    vendor : config.compiler_vendor
+    vendor: config.compiler_vendor
   },
-  output : {
-    filename   : `[name].[${config.compiler_hash_type}].js`,
-    path       : paths.base(config.dir_dist),
-    publicPath : config.compiler_public_path
+  output: {
+    filename: `[name].[${config.compiler_hash_type}].js`,
+    path: paths.base(config.dir_dist),
+    publicPath: config.compiler_public_path
   },
-  plugins : [
+  plugins: [
     AddModuleExports,
     new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new HtmlWebpackPlugin({
-      template : paths.client('index.html'),
-      hash     : false,
-      filename : 'index.html',
-      inject   : 'body',
-      minify   : {
-        collapseWhitespace : true
+      template: paths.client('index.html'),
+      hash: false,
+      filename: 'index.html',
+      inject: 'body',
+      minify: {
+        collapseWhitespace: true
       }
     })
   ],
-  resolve : {
-    root : paths.base(config.dir_client),
-    extensions : ['', '.js', '.jsx']
+  resolve: {
+    root: paths.base(config.dir_client),
+    extensions: ['', '.js', '.jsx']
   },
-  module : {
+  module: {
     preLoaders: [
       {
         test: /\.js$/,
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         exclude: /node_modules/
       }
     ],
-    loaders : [
+    loaders: [
       {
-        test    : /\.(js|jsx)$/,
-        exclude : /node_modules/,
-        loader  : 'babel',
-        query   : {
-          cacheDirectory : true,
-          plugins : ['transform-runtime'],
-          presets : ['es2015', 'react', 'stage-0'],
-          env     : {
-            development : {
-              plugins : [
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          cacheDirectory: true,
+          plugins: ['transform-runtime'],
+          presets: ['es2015', 'react', 'stage-0'],
+          env: {
+            development: {
+              plugins: [
                 ['react-transform', {
-                  /*  omit HMR plugin by default and _only_
-                      load it in hot dev mode.  */
-                  transforms : [{
-                    transform : 'react-transform-catch-errors',
-                    imports : [ 'react', 'redbox-react']
+                  // omit HMR plugin by default and _only_ load in hot mode
+                  transforms: [{
+                    transform: 'react-transform-catch-errors',
+                    imports: ['react', 'redbox-react']
                   }]
                 }]
               ]
@@ -84,8 +84,8 @@ const webpackConfig = {
         }
       },
       {
-        test    : /\.scss$/,
-        loaders : [
+        test: /\.scss$/,
+        loaders: [
           'style-loader',
           CSS_LOADER,
           'postcss-loader',
@@ -93,8 +93,8 @@ const webpackConfig = {
         ]
       },
       {
-        test    : /\.css$/,
-        loaders : [
+        test: /\.css$/,
+        loaders: [
           'style-loader',
           CSS_LOADER
         ]
@@ -109,35 +109,35 @@ const webpackConfig = {
       /* eslint-enable */
     ]
   },
-  sassLoader : {
-    includePaths : paths.client('styles')
+  sassLoader: {
+    includePaths: paths.client('styles')
   },
-  postcss : [
+  postcss: [
     cssnano({
-      sourcemap : true,
-      autoprefixer : {
-        add      : true,
-        remove   : true,
-        browsers : ['last 2 versions']
+      sourcemap: true,
+      autoprefixer: {
+        add: true,
+        remove: true,
+        browsers: ['last 2 versions']
       },
-      discardComments : {
-        removeAll : true
+      discardComments: {
+        removeAll: true
       }
     })
   ],
   eslint: {
     configFile: `${paths.base()}/.eslintrc`
   }
-};
+}
 
 // NOTE: this is a temporary workaround. I don't know how to get Karma
 // to include the vendor bundle that webpack creates, so to get around that
 // we remove the bundle splitting when webpack is used with Karma.
 const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
-  names : ['vendor']
-});
-commonChunkPlugin.__KARMA_IGNORE__ = true;
+  names: ['vendor']
+})
+commonChunkPlugin.__KARMA_IGNORE__ = true
 
-webpackConfig.plugins.push(commonChunkPlugin);
+webpackConfig.plugins.push(commonChunkPlugin)
 
-export default webpackConfig;
+export default webpackConfig
