@@ -33,7 +33,12 @@ const config = {
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
   compiler_public_path     : '/',
-  compiler_vendor          : [
+  compiler_stats           : {
+    chunks : false,
+    chunkModules : false,
+    colors : true
+  },
+  compiler_vendor : [
     'history',
     'react',
     'react-redux',

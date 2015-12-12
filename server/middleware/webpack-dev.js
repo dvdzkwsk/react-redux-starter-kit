@@ -14,8 +14,6 @@ export default function ({ compiler, publicPath }) {
     quiet       : config.compiler_quiet,
     noInfo      : config.compiler_quiet,
     lazy        : false,
-    stats       : {
-      colors : true
-    }
+    stats       : config.compiler_stats
   });
 }
