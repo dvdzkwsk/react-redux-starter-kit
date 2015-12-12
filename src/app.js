@@ -7,7 +7,7 @@ import Root from './containers/Root'
 import configureStore from './redux/configureStore'
 
 const history = createBrowserHistory()
-const store = configureStore(window.__INITIAL_STATE__, __DEBUG__)
+const store = configureStore(window.__INITIAL_STATE__)
 
 syncReduxAndRouter(history, store, (state) => state.router)
 
