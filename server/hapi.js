@@ -133,34 +133,13 @@ server.ext("onPreResponse", (request, reply) => {
 			const webserver = process.env.NODE_ENV === "production" ? "" : "//" + hostname + ":8080";
 
 			const template = fs.readFileSync(paths.dist('index.html'), 'utf-8');
-			debugger;
-			reply(template);
+			const injectedManifest = template.replace(
+				new RegExp(`<div id="root">`),
+				`<div id="root">` + reactString
+			);
+			reply(injectedManifest);
 
-			//fs.readFile(__dirname + '/../dist/index.html', function(err, data){
-			//	debugger;
-			//	if (err) throw err;
-			//	this.reply(data);
-			//}.bind({reply: reply}));
 
-			//let output = (
-			//	`<!doctype html>
-			//	<html lang="en-us">
-			//		<head>
-			//			<meta charset="utf-8">
-			//			<title>Hapi Universal Redux</title>
-			//			<link rel="shortcut icon" href="/favicon.ico">
-			//		</head>
-			//		<body>
-			//			<div id="react-root">${reactString}</div>
-			//			<div id="react-dev"></div>
-			//		<script>
-			//			window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
-			//		</script>
-			//		<script src=${webserver}/dist/client.js></script>
-			//	</body>
-			//	</html>`
-			//);
-			//reply(output);
 		}
 	});
 });

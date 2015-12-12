@@ -30,5 +30,4 @@ if (process.env.NODE_ENV !== "production") {
 	}
 }
 
-console.log('Great Success');
 module.exports = require('../server/hapi');
