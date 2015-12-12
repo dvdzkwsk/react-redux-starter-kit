@@ -66,7 +66,7 @@ Features
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
   * Uses babel runtime rather than inline transformations
 * [ESLint](http://eslint.org)
-  * Uses [Airbnb's ESLint config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) (with some softened rules)
+  * Includes [eslint-config-defaults](https://github.com/walmartlabs/eslint-config-defaults) (uses airbnb by default)
   * Includes separate test-specific `.eslintrc` to work with Mocha and Chai
 
 Getting Started
