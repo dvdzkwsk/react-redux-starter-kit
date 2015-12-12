@@ -10,12 +10,12 @@
 
 require("babel-core/register");
 
-
-require.extensions['.scss'] = function(module, filename) {
-	var ExtractTextPlugin = require('extract-text-webpack-plugin');
-	debugger;
-	return ExtractTextPlugin.extract(filename);
-}
+/**
+ * when running to scss files do nothing, they are already compiled and put in the dist folder
+ * @param module
+ * @param filename
+ */
+require.extensions['.scss'] = function(module, filename) {};
 
 
 /**

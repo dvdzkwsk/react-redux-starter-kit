@@ -26,6 +26,9 @@ import configureStore from "../src/store/configureStore";
 import { Provider } from 'react-redux';
 import routes from "../src/routes";
 import url from "url";
+const fs = require('fs');
+const config = require('../config');
+const paths  = config.utils_paths;
 
 /*******************
  * end imports
@@ -128,25 +131,36 @@ server.ext("onPreResponse", (request, reply) => {
 			);
 
 			const webserver = process.env.NODE_ENV === "production" ? "" : "//" + hostname + ":8080";
-			let output = (
-				`<!doctype html>
-				<html lang="en-us">
-					<head>
-						<meta charset="utf-8">
-						<title>Hapi Universal Redux</title>
-						<link rel="shortcut icon" href="/favicon.ico">
-					</head>
-					<body>
-						<div id="react-root">${reactString}</div>
-						<div id="react-dev"></div>
-					<script>
-						window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
-					</script>
-					<script src=${webserver}/dist/client.js></script>
-				</body>
-				</html>`
-			);
-			reply(output);
+
+			const template = fs.readFileSync(paths.dist('index.html'), 'utf-8');
+			debugger;
+			reply(template);
+
+			//fs.readFile(__dirname + '/../dist/index.html', function(err, data){
+			//	debugger;
+			//	if (err) throw err;
+			//	this.reply(data);
+			//}.bind({reply: reply}));
+
+			//let output = (
+			//	`<!doctype html>
+			//	<html lang="en-us">
+			//		<head>
+			//			<meta charset="utf-8">
+			//			<title>Hapi Universal Redux</title>
+			//			<link rel="shortcut icon" href="/favicon.ico">
+			//		</head>
+			//		<body>
+			//			<div id="react-root">${reactString}</div>
+			//			<div id="react-dev"></div>
+			//		<script>
+			//			window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
+			//		</script>
+			//		<script src=${webserver}/dist/client.js></script>
+			//	</body>
+			//	</html>`
+			//);
+			//reply(output);
 		}
 	});
 });
