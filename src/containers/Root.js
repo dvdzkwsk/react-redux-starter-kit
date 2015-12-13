@@ -16,7 +16,7 @@ export default class Root extends React.Component {
       </Router>
     )
 
-    if (__DEBUG__ && !__DEBUG_NW__) {
+    if (__DEBUG__ && !__DEBUG_NEW_WINDOW__) {
       const DevTools = require('containers/DevTools')
 
       return (
