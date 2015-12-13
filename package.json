@@ -15,7 +15,7 @@
     "test": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js --coverage",
     "test:dev": "npm run test -- --watch",
     "deploy": "npm run lint && npm run test && npm run compile",
-    "production": "npm run clean && NODE_ENV=production npm run lint && NODE_ENV=production npm run test && NODE_ENV=production npm run compile && NODE_ENV=production node ./bin/ssr"
+    "production": "NODE_ENV=production npm run lint && NODE_ENV=production npm run test && NODE_ENV=production npm run compile && NODE_ENV=production node ./bin/ssr"
   },
   "repository": {
     "type": "git",
