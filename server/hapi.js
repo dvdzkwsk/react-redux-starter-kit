@@ -34,22 +34,18 @@ const paths  = config.utils_paths;
  * end imports
  *******************/
 
-console.log('2');
 
-/**
- * Create Redux store, and get intitial state.
- */
+//redux store and state we might have to dispatch stuff according to the url we are rendering
 const store = configureStore();
 const initialState = store.getState();
 
-/**
- * Start Hapi server on port 8000.
- */
+//from environment variable grab our data and the backend data
 const hostname = process.env.HOSTNAME || "localhost";
 const restHostUrl = process.env.SERVER_URL || "localhost";
 const restHostProtocol = process.env.SERVER_PROTOCOL || "http";
 const restHostPort = process.env.SERVER_PROTOCOL || "1337";
 
+//creating hapi server - popping my cherry with hapi on this one - im more of an express kinda guy.
 const server = new Server();
 server.connection({host: hostname, port: process.env.PORT || 8000});
 server.register(
@@ -69,20 +65,19 @@ server.register(
 	});
 });
 
-/**
- * Attempt to serve static requests from the public folder.
- */
+//serve static files
+console.log(__dirname + '../dist');
 server.route({
-	method:  "GET",
-	path:    "/{params*}",
-	handler: {
-		file: (request) => "static" + request.path
-	}
+    method: 'GET',
+    path: '/assets/{param*}',
+    handler: {
+        directory: {
+            path: __dirname + '/../dist'
+        }
+    }
 });
 
-/**
- * Endpoint that proxies all api requests to our backend
- */
+//proxy my server urls
 server.route({
 	method: "GET",
 	path: "/api/{path*}",
@@ -105,16 +100,11 @@ server.route({
 	}
 });
 
-
-/**
- * Catch dynamic requests here to fire-up React Router.
- */
+//these are dynamic requests i need to render
 server.ext("onPreResponse", (request, reply) => {
 	if (typeof request.response.statusCode !== "undefined") {
     	return reply.continue();
   	}
-
-	//let location = createLocation(request.path);
 
 	match({routes, location: request.path}, (error, redirectLocation, renderProps) => {
 		if (redirectLocation) {
@@ -124,21 +114,21 @@ server.ext("onPreResponse", (request, reply) => {
 	  		reply.continue();
 		}
 		else {
+
+			//router rendering
 			const reactString = ReactDOM.renderToString(
 				<Provider store={store}>
 					<RoutingContext {...renderProps} />
 				</Provider>
 			);
 
-			const webserver = process.env.NODE_ENV === "production" ? "" : "//" + hostname + ":8080";
-
+			//grab the index file from dist and serve the index content with what we rendered
 			const template = fs.readFileSync(paths.dist('index.html'), 'utf-8');
 			const injectedManifest = template.replace(
 				new RegExp(`<div id="root">`),
 				`<div id="root">` + reactString
 			);
 			reply(injectedManifest);
-
 
 		}
 	});
