@@ -1,7 +1,7 @@
 require('babel-register')
 
 const config = require('../config')
-const debug = require('debug')('kit:bin:compile')
+const debug = require('debug')('app:bin:compile')
 
 debug('Create webpack compiler.')
 

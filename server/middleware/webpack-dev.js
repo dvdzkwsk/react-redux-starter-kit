@@ -2,7 +2,7 @@ import WebpackDevMiddleware from 'webpack-dev-middleware'
 import config from '../../config'
 
 const paths = config.utils_paths
-const debug = require('debug')('kit:server:webpack-dev')
+const debug = require('debug')('app:server:webpack-dev')
 
 export default function ({ compiler, publicPath }) {
   debug('Enable Webpack dev middleware.')

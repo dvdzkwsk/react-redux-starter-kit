@@ -3,7 +3,7 @@ import historyApiFallback from 'connect-history-api-fallback'
 import config from '../config'
 
 const app = express()
-const debug = require('debug')('kit:server')
+const debug = require('debug')('app:server')
 const paths = config.utils_paths
 
 app.use(historyApiFallback({

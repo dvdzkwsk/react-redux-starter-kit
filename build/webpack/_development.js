@@ -3,7 +3,7 @@ import webpack from 'webpack'
 import config from '../../config'
 import _debug from 'debug'
 
-const debug = _debug('kit:webpack:development')
+const debug = _debug('app:webpack:development')
 
 export default (webpackConfig) => {
   debug('Create configuration.')

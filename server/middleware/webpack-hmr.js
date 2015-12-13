@@ -1,6 +1,6 @@
 import WebpackHotMiddleware from 'webpack-hot-middleware'
 
-const debug = require('debug')('kit:server:webpack-hmr')
+const debug = require('debug')('app:server:webpack-hmr')
 
 export default function ({ compiler }) {
   debug('Enable Webpack Hot Module Replacement (HMR).')

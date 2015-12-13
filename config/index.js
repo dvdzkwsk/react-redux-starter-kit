@@ -1,6 +1,6 @@
 import _debug from 'debug'
 
-const debug = _debug('kit:config')
+const debug = _debug('app:config')
 debug('Create configuration.')
 import base from './_base'
 
