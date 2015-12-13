@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "node -r dotenv/config --harmony bin/compile",
-    "lint:fix": "eslint **/*.js --fix",
+    "lint": "eslint **/* --quiet",
+    "lint:fix": "npm run lint -- --fix",
     "start": "npm run dev",
     "dev": "node -r dotenv/config bin/server --hot",
     "dev:nw": "npm run dev -- --nw",
