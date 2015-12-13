@@ -1,6 +1,5 @@
 import webpack from 'webpack'
 import cssnano from 'cssnano'
-import AddModuleExports from 'babel-plugin-add-module-exports'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import config from '../../config'
 import _debug from 'debug'
@@ -33,7 +32,6 @@ const webpackConfig = {
     publicPath: config.compiler_public_path
   },
   plugins: [
-    AddModuleExports,
     new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -66,7 +64,7 @@ const webpackConfig = {
         loader: 'babel',
         query: {
           cacheDirectory: true,
-          plugins: ['transform-runtime'],
+          plugins: ['transform-runtime', 'add-module-exports'],
           presets: ['es2015', 'react', 'stage-0'],
           env: {
             development: {
