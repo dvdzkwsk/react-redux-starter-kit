@@ -16,7 +16,7 @@ syncReduxAndRouter(history, store, (state) => state.router)
 // uglification and dead code removal when __DEBUG_NW__ is false, which
 // wouldn't be possible if it was handled via a React component prop.
 if (__DEBUG__ && __DEBUG_NW__) {
-  require('utils/createDevToolsWindow').default(store)
+  require('utils/createDevToolsWindow')(store)
 }
 
 // Render the React application to the DOM

@@ -17,7 +17,7 @@ export default class Root extends React.Component {
     )
 
     if (__DEBUG__ && !__DEBUG_NW__) {
-      const DevTools = require('containers/DevTools').default
+      const DevTools = require('containers/DevTools')
 
       return (
         <Provider store={this.props.store}>
