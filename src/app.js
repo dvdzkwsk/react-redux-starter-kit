@@ -15,7 +15,7 @@ syncReduxAndRouter(history, store, (state) => state.router)
 // because we need access to the store but want this logic to be removed via
 // uglification and dead code removal when __DEBUG_NW__ is false, which
 // wouldn't be possible if it was handled via a React component prop.
-if (__DEBUG__ && __DEBUG_NW__) {
+if (__DEBUG__ && __DEBUG_NEW_WINDOW__) {
   require('utils/createDevToolsWindow')(store)
 }
 

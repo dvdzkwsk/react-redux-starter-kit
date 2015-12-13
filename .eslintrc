@@ -11,7 +11,7 @@
     "__DEV__"      : false,
     "__PROD__"     : false,
     "__DEBUG__"    : false,
-    "__DEBUG_NW__" : false
+    "__DEBUG_NEW_WINDOW__" : false
   },
   "rules": {
     "semi" : [2, "never"]

@@ -76,7 +76,7 @@ config.globals = {
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
-  '__DEBUG_NW__' : !!argv.nw
+  '__DEBUG_NEW_WINDOW__' : !!argv.nw
 }
 
 // ------------------------------------
