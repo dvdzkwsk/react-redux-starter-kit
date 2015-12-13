@@ -6,7 +6,7 @@ import config from '../../config'
 import _debug from 'debug'
 
 const paths = config.utils_paths
-const debug = _debug('kit:webpack:_base')
+const debug = _debug('app:webpack:_base')
 debug('Create configuration.')
 
 const CSS_LOADER = !config.compiler_css_modules
