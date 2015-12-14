@@ -32,8 +32,9 @@ export default (webpackConfig) => {
     // but _only_ when HMR is enabled. Putting this in the default development
     // configuration will break other tasks such as test:unit because Webpack
     // HMR is not enabled there, and these transforms require it.
+    let appliedHmr = false
     webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
-      if (/js(?!on)/.test(loader.test)) {
+      if (loader.loader === 'babel') {
         debug('Apply react-transform-hmr to babel development transforms')
 
         const reactTransformHmr = {
@@ -41,12 +42,33 @@ export default (webpackConfig) => {
           imports   : ['react'],
           locals    : ['module']
         }
-        loader.query.env.development.plugins[0][1].transforms
-          .push(reactTransformHmr)
+
+        loader.query.env.development.plugins =
+          loader.query.env.development.plugins.map(plugin => {
+            let [name, options, ...rest] = plugin
+            if (name !== 'react-transform') {
+              return plugin;
+            }
+
+            appliedHmr = true
+            options = {
+              ...options,
+              transforms: [
+                ...options.transforms,
+                reactTransformHmr
+              ]
+            }
+
+            return [ name, options, ...rest ]
+          })
       }
 
       return loader
     })
+
+    if (!appliedHmr) {
+      debug('Babel plugin react-transform-hmr could not be applied')
+    }
   }
 
   return webpackConfig
