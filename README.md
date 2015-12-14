@@ -139,10 +139,10 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   ├── containers           # Components that provide context (e.g. Redux Provider)
 │   ├── layouts              # Components that dictate major page structure
 │   ├── redux                # Redux-specific pieces
-│   │   └── modules          # Collections of reducers/constants/actions
+│   │   ├── modules          # Collections of reducers/constants/actions
+│   │   └── utils            # Redux-specific helpers
 │   ├── routes               # Application route definitions
 │   ├── styles               # Application-wide styles (generally settings)
-│   ├── utils                # Generic utilities
 │   ├── views                # Components that live at a route
 │   └── app.js               # Application bootstrap and rendering
 └── tests                    # Unit tests
