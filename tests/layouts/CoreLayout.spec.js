@@ -34,11 +34,4 @@ describe('(Layout) Core', function () {
     expect(_component.type).to.equal('div')
   })
 
-  it('Should render a child component.', function () {
-    const child = TestUtils.findRenderedDOMComponentWithClass(
-      _rendered, 'child'
-    )
-
-    expect(child).to.exist
-  })
 })
