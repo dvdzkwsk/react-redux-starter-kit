@@ -28,7 +28,6 @@ Table of Contents
 1. [Server](#server)
 1. [Styles](#styles)
 1. [Testing](#testing)
-1. [Utilities](#utilities)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
 
@@ -236,38 +235,6 @@ Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
 
 Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/_base.js`.
-
-Utilities
----------
-
-This boilerplate comes with a simple utility (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/client/utils` you'll find an export for `createReducer` designed to expedite the creation of reducers when they're defined via an object map rather than switch statements. As an example, what once looked like this:
-
-```js
-import { TODO_CREATE } from 'constants/todo'
-
-const handlers = {
-  [TODO_CREATE] : (state, payload) => { ... }
-}
-
-const initialState = [];
-export default function todo (state = initialState, action) {
-  const handler = handlers[action.type];
-
-  return handler ? handler(state, action.payload) : state;
-}
-```
-
-Can now look like this:
-
-```js
-import { TODO_CREATE } from 'constants/todo'
-import { createReducer } from 'utils'
-
-const initialState = []
-export default createReducer(initialState, {
-  [TODO_CREATE] : (state, payload) => { ... }
-})
-```
 
 Deployment
 ----------
