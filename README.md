@@ -45,7 +45,7 @@ Features
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
   * redux-devtools
-    * use `npm run dev:nw` to display in a separate window.
+    * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
 * [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^0.0.10`)
@@ -53,19 +53,18 @@ Features
   * [CSS modules!](https://github.com/css-modules/css-modules)
   * sass-loader
   * postcss-loader with cssnano for style autoprefixing and minification
-  * Pre-configured folder aliases and globals
-  * Separate vendor-only bundle for common dependencies
+  * Bundle splitting for app and vendor dependencies
   * CSS extraction during production builds
-  * Loader support for fonts and images
+  * Loaders for fonts and images
 * [Express](https://github.com/strongloop/express)
   * webpack-dev-middleware
   * webpack-hot-middleware
 * [Karma](https://github.com/karma-runner/karma)
-  * Mocha w/ Chai, Sinon-Chai, and Chai-as-Promised
+  * Mocha w/ chai, sinon-chai, and chai-as-promised
   * PhantomJS
   * Code coverage reports
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
-  * `react-transform-hmr` for hot reloading
+  * react-transform-hmr for hot reloading
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
   * Uses babel runtime rather than inline transformations
 * [ESLint](http://eslint.org)
@@ -87,13 +86,13 @@ $ npm start                     # Compile and launch
 Usage
 -----
 
-Before delving into the descriptions for each available npm script, here's a brief summary of the three which will most likely be your bread and butter:
+Before delving into the descriptions of each available npm script, here's a brief summary of the three which will most likely be your bread and butter:
 
 * Doing live development? Use `npm start` to spin up the dev server.
 * Compiling the application to disk? Use `npm run compile`.
 * Deploying to an environment? `npm run deploy` can help with that.
 
-**NOTE:** This package makes use of [debug](https://github.com/visionmedia/debug) to improve your debugging experience. To see all starter kit messages during the build process, set the `DEBUG` environment variable to `app:*` (e.g. `DEBUG=app:* npm start`).
+**NOTE:** This package makes use of [debug](https://github.com/visionmedia/debug) to improve your debugging experience. For convenience, all of messages are prefixed with `app:*`. If you'd like to to change what debug statements are displayed, you can override the `DEBUG` environment variable to `app:*` via the CLI (e.g. `DEBUG=app:* npm start`) or update the `~/.env` file.
 
 Great, now that introductions have been made here's everything in full detail:
 
@@ -104,12 +103,14 @@ Great, now that introductions have been made here's everything in full detail:
 * `npm run test` - Runs unit tests with Karma and generates a coverage report.
 * `npm run test:dev` - Runs Karma and watches for changes to re-run tests; does not generate coverage reports.
 * `npm run deploy`- Runs linter, tests, and then, on success, compiles your application to disk.
+* `npm run lint`- Lint all `.js` files.
+* `npm run lint:fix` - Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).
 
-**NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/production.js`.
+**NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/_production.js`.
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, add/remove aliases, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here _without ever having to touch the webpack build configuration_. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
+Basic project configuration can be found in `~/config/_base.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
 
 Common configuration options:
 
@@ -158,14 +159,14 @@ Webpack
 -------
 
 ### Configuration
-The webpack compiler configuration is located in `~/build/webpack`. Here you'll find configurations for each environment; `development`, `production`, and `development_hot` exist out of the box. These configurations are selected based on your current `NODE_ENV`, with the exception of `development_hot` which will _always_ be used during live development.
+The webpack compiler configuration is located in `~/build/webpack`. Here you'll find configurations for each environment; `development` and `production` exist out of the box.
 
 **Note**: There has been a conscious decision to keep development-specific configuration (such as hot-reloading) out of `.babelrc`. By doing this, it's possible to create cleaner development builds (such as for teams that have a `dev` -> `stage` -> `production` workflow) that don't, for example, constantly poll for HMR updates.
 
 So why not just disable HMR? Well, as a further explanation, enabling `react-transform-hmr` in `.babelrc` but building the project without HMR enabled (think of running tests with `NODE_ENV=development` but without a dev server) causes errors to be thrown, so this decision also alleviates that issue.
 
 ### Vendor Bundle
-You can redefine which packages to treat as vendor dependencies by editing `compiler_vendor` in `~/config/index.js`. These default to:
+You can redefine which packages to bundle separately by modifying `compiler_vendor` in `~/config/_base.js`. These default to:
 
 ```js
 [
@@ -185,10 +186,10 @@ Webpack is configured to make use of [resolve.root](http://webpack.github.io/doc
 // current file: ~/src/views/some/nested/View.js
 
 // What used to be this:
-import SomeComponent from '../../../components/SomeComponent';
+import SomeComponent from '../../../components/SomeComponent'
 
 // Can now be this:
-import SomeComponent from 'components/SomeComponent'; // Hooray!
+import SomeComponent from 'components/SomeComponent' // Hooray!
 ```
 
 ### Globals
@@ -213,7 +214,7 @@ Both `.scss` and `.css` file extensions are supported out of the box and are con
 
 ```js
 // current file: ~/src/components/some/nested/component/index.jsx
-import 'styles/core.scss'; // this imports ~/src/styles/core.scss
+import 'styles/core.scss' // this imports ~/src/styles/core.scss
 ```
 
 Furthermore, this `styles` directory is aliased for sass imports, which further eliminates manual directory traversing; this is especially useful for importing variables/mixins.
@@ -234,7 +235,7 @@ Testing
 
 To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
 
-Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/index.js`.
+Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/_base.js`.
 
 Utilities
 ---------
@@ -242,13 +243,13 @@ Utilities
 This boilerplate comes with a simple utility (thanks to [StevenLangbroek](https://github.com/StevenLangbroek)) to help speed up your Redux development process. In `~/client/utils` you'll find an export for `createReducer` designed to expedite the creation of reducers when they're defined via an object map rather than switch statements. As an example, what once looked like this:
 
 ```js
-import { TODO_CREATE } from 'constants/todo';
+import { TODO_CREATE } from 'constants/todo'
 
-const initialState = [];
 const handlers = {
   [TODO_CREATE] : (state, payload) => { ... }
-};
+}
 
+const initialState = [];
 export default function todo (state = initialState, action) {
   const handler = handlers[action.type];
 
@@ -259,14 +260,13 @@ export default function todo (state = initialState, action) {
 Can now look like this:
 
 ```js
-import { TODO_CREATE }   from 'constants/todo';
-import { createReducer } from 'utils';
+import { TODO_CREATE } from 'constants/todo'
+import { createReducer } from 'utils'
 
-const initialState = [];
-
+const initialState = []
 export default createReducer(initialState, {
   [TODO_CREATE] : (state, payload) => { ... }
-});
+})
 ```
 
 Deployment
