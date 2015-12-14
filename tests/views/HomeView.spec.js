@@ -23,9 +23,13 @@ describe('(View) Home', function () {
 
   beforeEach(function () {
     _spies = {}
-    _props = bindActionCreators({
-      increment: (_spies.increment = sinon.spy())
-    }, _spies.dispatch = sinon.spy())
+    _props = {
+      counter: 0,
+      ...bindActionCreators({
+        doubleAsync: (_spies.doubleAsync = sinon.spy()),
+        increment: (_spies.increment = sinon.spy())
+      }, _spies.dispatch = sinon.spy())
+    }
 
     _component = shallowRenderWithProps(_props)
     _rendered = renderWithProps(_props)
@@ -58,18 +62,41 @@ describe('(View) Home', function () {
     expect(h2.textContent).to.match(/5$/)
   })
 
-  it('Should render an "Increment" button.', function () {
-    const btn = TestUtils.findRenderedDOMComponentWithTag(_rendered, 'button')
+  describe('An increment button...', function () {
+    let _btn
 
-    expect(btn).to.exist
-    expect(btn.textContent).to.match(/Increment/)
+    beforeEach(() => {
+      _btn = TestUtils.scryRenderedDOMComponentsWithTag(_rendered, 'button')
+        .filter(a => /Increment/.test(a.textContent))[0]
+    })
+
+    it('should be rendered.', function () {
+      expect(_btn).to.exist
+    })
+
+    it('should dispatch an action when clicked.', function () {
+      _spies.dispatch.should.have.not.been.called
+      TestUtils.Simulate.click(_btn)
+      _spies.dispatch.should.have.been.called
+    })
   })
 
-  it('Should dispatch an action when "Increment" button is clicked.', function () {
-    const btn = TestUtils.findRenderedDOMComponentWithTag(_rendered, 'button')
+  describe('A Double (Async) button...', function () {
+    let _btn
 
-    _spies.dispatch.should.have.not.been.called
-    TestUtils.Simulate.click(btn)
-    _spies.dispatch.should.have.been.called
+    beforeEach(() => {
+      _btn = TestUtils.scryRenderedDOMComponentsWithTag(_rendered, 'button')
+        .filter(a => /Double/.test(a.textContent))[0]
+    })
+
+    it('should be rendered.', function () {
+      expect(_btn).to.exist
+    })
+
+    it('should dispatch an action when clicked.', function () {
+      _spies.dispatch.should.have.not.been.called
+      TestUtils.Simulate.click(_btn)
+      _spies.dispatch.should.have.been.called
+    })
   })
 })
