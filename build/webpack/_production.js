@@ -16,25 +16,11 @@ export default (webpackConfig) => {
   }
 
   debug('Apply ExtractTextPlugin to CSS loaders.')
-  let appliedExtractCSS = false
   webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
-    if (!loader.loaders) {
+    if (!loader.loaders ||
+        !loader.loaders.find(loader => /css/.test(loader.split('?')[0]))) {
       return loader
     }
-
-    let hasCSSLoader = false
-    loader.loaders.forEach(styleLoader => {
-      const [loaderName, ...params] = styleLoader.split('?')
-      if (loaderName === 'css-loader') {
-        hasCSSLoader = true
-      }
-    })
-
-    if (!hasCSSLoader) {
-      return loader
-    }
-
-    appliedExtractCSS = true
 
     const [first, ...rest] = loader.loaders
     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
@@ -42,10 +28,6 @@ export default (webpackConfig) => {
 
     return loader
   })
-
-  if (!appliedExtractCSS) {
-    debug('Plugin ExtractTextPlugin could not be applied to CSS loaders.')
-  }
 
   debug('Inject ExtractText and UglifyJS plugins.')
   webpackConfig.plugins.push(
