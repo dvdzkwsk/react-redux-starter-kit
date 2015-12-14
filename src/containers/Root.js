@@ -9,30 +9,29 @@ export default class Root extends React.Component {
     store: React.PropTypes.object.isRequired
   }
 
-  render () {
-    const content = (
+  get content () {
+    return (
       <Router history={this.props.history}>
         {this.props.routes}
       </Router>
     )
+  }
 
+  get devTools () {
     if (__DEBUG__ && !__DEBUG_NEW_WINDOW__) {
       const DevTools = require('containers/DevTools')
-
-      return (
-        <Provider store={this.props.store}>
-          <div>
-            {content}
-            <DevTools />
-          </div>
-        </Provider>
-      )
-    } else {
-      return (
-        <Provider store={this.props.store}>
-          {content}
-        </Provider>
-      )
+      return <DevTools />
     }
+  }
+
+  render () {
+    return (
+      <Provider store={this.props.store}>
+        <div style={{ height: '100%' }}>
+          {this.content}
+          {this.devTools}
+        </div>
+      </Provider>
+    )
   }
 }
