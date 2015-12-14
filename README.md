@@ -48,7 +48,7 @@ Features
     * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
-* [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^0.0.10`)
+* [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^1.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
   * [CSS modules!](https://github.com/css-modules/css-modules)
   * sass-loader
