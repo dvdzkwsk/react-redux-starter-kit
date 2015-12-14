@@ -1,17 +1,15 @@
-import createReducer from 'utils/createReducer'
+import { createAction,
+         handleActions } from 'redux-actions'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
-const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const increment = (value = 1) => ({
-  type: COUNTER_INCREMENT,
-  payload: { value }
-})
+export const increment = createAction(COUNTER_INCREMENT, (value = 1) => value)
 
 // This is a thunk, meaning it is a function that immediately
 // returns a function for lazy evaluation. It is incredibly useful for
@@ -35,6 +33,6 @@ export const actions = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-export default createReducer(0, {
-  [COUNTER_INCREMENT]: (state, { value }) => state + value
-})
+export default handleActions({
+  COUNTER_INCREMENT: (state, { payload }) => state + payload
+}, 1)
