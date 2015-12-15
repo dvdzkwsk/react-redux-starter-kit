@@ -5,8 +5,8 @@ import HomeView from 'views/HomeView'
 import AboutView from 'views/AboutView'
 
 export default (
-  <Route component={CoreLayout} path='/'>
+  <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
-    <Route component={AboutView} path='/about' />
+    <Route path='/about' component={AboutView} />
   </Route>
 )
