@@ -9,9 +9,9 @@ const debug = _debug('app:webpack:_base')
 debug('Create configuration.')
 
 const CSS_LOADER = !config.compiler_css_modules
-  ? 'css-loader?sourceMap'
+  ? 'css?sourceMap'
   : [
-    'css-loader?modules',
+    'css?modules',
     'sourceMap',
     'importLoaders=1',
     'localIdentName=[name]__[local]___[hash:base64:5]'
@@ -125,7 +125,7 @@ const webpackConfig = {
     })
   ],
   eslint: {
-    configFile: `${paths.base()}/.eslintrc`
+    configFile: paths.base('.eslintrc')
   }
 }
 
