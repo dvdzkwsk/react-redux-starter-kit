@@ -84,18 +84,18 @@ const webpackConfig = {
       {
         test: /\.scss$/,
         loaders: [
-          'style-loader',
+          'style',
           CSS_LOADER,
-          'postcss-loader',
-          'sass-loader'
+          'postcss',
+          'sass'
         ]
       },
       {
         test: /\.css$/,
         loaders: [
-          'style-loader',
+          'style',
           CSS_LOADER,
-          'postcss-loader'
+          'postcss'
         ]
       },
       /* eslint-disable */
