@@ -18,11 +18,13 @@ export default class Root extends React.Component {
   }
 
   get devTools () {
-    if (__DEBUG_NEW_WINDOW__) {
-      require('../redux/utils/createDevToolsWindow')(this.props.store)
-    } else {
-      const DevTools = require('containers/DevTools')
-      return <DevTools />
+    if (__DEBUG__) {
+      if (__DEBUG_NEW_WINDOW__) {
+        require('../redux/utils/createDevToolsWindow')(this.props.store)
+      } else {
+        const DevTools = require('containers/DevTools')
+        return <DevTools />
+      }
     }
   }
 
@@ -31,7 +33,7 @@ export default class Root extends React.Component {
       <Provider store={this.props.store}>
         <div style={{ height: '100%' }}>
           {this.content}
-          {__DEBUG__ && this.devTools}
+          {this.devTools}
         </div>
       </Provider>
     )
