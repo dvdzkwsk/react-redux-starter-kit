@@ -22,7 +22,6 @@ compiler.run(function (err, stats) {
     process.exit(1)
   } else if (jsonStats.warnings.length > 0) {
     debug('Webpack compiler encountered warnings.')
-    console.log(jsonStats.warnings)
 
     if (config.compiler_fail_on_warning) {
       process.exit(1)
