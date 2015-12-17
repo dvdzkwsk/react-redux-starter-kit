@@ -82,6 +82,10 @@ const webpackConfig = {
         }
       },
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.scss$/,
         loaders: [
           'style',
