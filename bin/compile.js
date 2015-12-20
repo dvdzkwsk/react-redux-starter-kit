@@ -2,9 +2,11 @@ require('babel-register')
 
 const config = require('../config')
 const debug = require('debug')('app:bin:compile')
+const fs = require('fs-extra')
+
+const paths = config.utils_paths
 
 debug('Create webpack compiler.')
-
 const compiler = require('webpack')(require('../build/webpack'))
 
 compiler.run(function (err, stats) {
@@ -29,4 +31,7 @@ compiler.run(function (err, stats) {
   } else {
     debug('No errors or warnings encountered.')
   }
+
+  debug('Copy static assets to dist folder.')
+  fs.copySync(paths.client('assets'), paths.dist())
 })
