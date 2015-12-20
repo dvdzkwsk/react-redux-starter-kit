@@ -1,6 +1,53 @@
 Changelog
 =========
 
+1.0.0
+-----
+
+### Features
+* Upgraded from Babel 5 to Babel 6 :tada:
+* Added script to copy static assets from ~src/assets to ~/dist during compilation
+* Added CSS Modules (can be toggled on/off in config file)
+* Enabled source maps for CSS
+* Added `postcss-loader`
+* Added `debug` module to replace `console.log`
+* Added `json-loader`
+* Added `url-loader` for `(png|jpg)` files
+* Added `redux-actions` with demo
+* Upgraded `redux-devtools` from `^3.0.0-beta` to `^3.0.0`
+* Upgraded `redux-simple-router` from `^0.0.10` to `^1.0.0`
+* Upgraded `isparta` from `^2.0.0` to `^3.0.0`
+* Replaced `karma-sinon-chai` with `karma-chai-sinon` for peerDependencies fix
+* Added sample asynchronous action
+* Added example `composes` style to demo CSS modules in `HomeView`
+* Added `lint:fix` npm script
+* Added CONTRIBUTING document
+* Added placeholder favicon
+
+### Improvements
+* Refactored application to follow ducks-like architecture
+* Improved how configuration determines when to apply HMR-specific Babel transforms
+* Replaced explicit aliases with `resolve.root`
+* Renamed karma configuration file to more widely-known `karma.conf`
+* Made `CoreLayout` a pure (stateless) component
+* Renamed debug namespace from `kit:*` to `app:*`
+* Standardized coding conventions
+* Added ability to easily specify environment-specific configuration overrides
+* Extended available configuration options
+* Improved miscellaneous documentation
+* Refactored webpack middleware in express server into separate files
+
+### Fixes
+* Fixed DevTools imports so they are longer included in production builds
+* Added CSS best practices to root tag, node, and `core.scss` file
+* Disabled manifest extraction due to broken production builds
+* Updated Webpack dev server uses explicit publicPath during live development
+* Fixed Karma running tests twice after file change during watch mode
+
+### Deprecations
+* Removed `eslint-config-airbnb`
+* Deprecated support for Node `^4.0.0`
+
 0.18.0
 -----
 
