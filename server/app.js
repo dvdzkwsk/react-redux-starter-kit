@@ -13,7 +13,7 @@ app.use(historyApiFallback({
 // Serve app with Webpack if HMR is enabled
 if (config.compiler_enable_hmr) {
   const webpack = require('webpack')
-  const webpackConfig = require('../build/webpack')
+  const webpackConfig = require('../build/webpack.config')
   const compiler = webpack(webpackConfig)
 
   app.use(require('./middleware/webpack-dev')({

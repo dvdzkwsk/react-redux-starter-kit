@@ -1,6 +1,6 @@
 import { argv } from 'yargs'
 import config from '../config'
-import webpackConfig from './webpack'
+import webpackConfig from './webpack.config'
 
 const debug = require('debug')('app:karma')
 debug('Create configuration.')
