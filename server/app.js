@@ -28,11 +28,8 @@ if (config.compiler_enable_hmr) {
     'more about deployment strategies, check out the "deployment" section ' +
     'in the README.'
   )
-
-  // Serving ~/dist by default. Ideally these files should be served by
-  // the web server and not the app server, but this helps to demo the
-  // server in production.
-  app.use(express.static(paths.base(config.dir_dist)))
 }
+
+app.use(express.static(paths.base('static')))
 
 export default app
