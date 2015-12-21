@@ -11,7 +11,12 @@ export default function configureStore (initialState) {
 
   const middleware = applyMiddleware(thunk)
 
-  if (__DEBUG__) {
+  if (window.devToolsExtension) { // using chrome's redux dev tools
+    createStoreWithMiddleware = compose(
+      middleware,
+      window.devToolsExtension()
+    )
+  } else if (__DEBUG__) {
     createStoreWithMiddleware = compose(
       middleware,
       require('containers/DevTools').instrument()
