@@ -16,6 +16,12 @@ if (config.compiler_enable_hmr) {
   const webpackConfig = require('../build/webpack.config')
   const compiler = webpack(webpackConfig)
 
+  // Serve the static assets from ~/src/assets since Webpack is unaware of
+  // these files. This middleware doesn't need to be enabled outside
+  // of development since these files will be copied into ~/dist.
+  app.use(express.static(paths.client('assets')))
+
+  // Enable webpack-dev-server middleware
   app.use(require('./middleware/webpack-dev')({
     compiler,
     publicPath: webpackConfig.output.publicPath
