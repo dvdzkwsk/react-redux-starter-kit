@@ -135,7 +135,6 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── server                   # Express application (uses webpack middleware)
 │   └── app.js               # Server application entry point
 ├── src                      # Application source code
-│   ├── assets               # Static assets (not imported anywhere in source code)
 │   ├── components           # Generic React Components (generally Dumb components)
 │   ├── containers           # Components that provide context (e.g. Redux Provider)
 │   ├── layouts              # Components that dictate major page structure
@@ -143,6 +142,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   │   ├── modules          # Collections of reducers/constants/actions
 │   │   └── utils            # Redux-specific helpers
 │   ├── routes               # Application route definitions
+│   ├── static               # Static assets (not imported anywhere in source code)
 │   ├── styles               # Application-wide styles (generally settings)
 │   ├── views                # Components that live at a route
 │   └── app.js               # Application bootstrap and rendering
