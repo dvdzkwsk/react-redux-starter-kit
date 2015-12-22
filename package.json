@@ -23,7 +23,6 @@
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
-    "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
     "history": "1.13.1",
@@ -49,6 +48,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.3.13",
     "babel-runtime": "^6.3.19",
+    "cssnano": "^3.3.2",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "connect-history-api-fallback": "^1.1.0",
