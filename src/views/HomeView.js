@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import { Button, Grid, Row, Col, PageHeader } from 'react-bootstrap'
 
 import { actions as counterActions } from '../redux/modules/counter'
+import JobList from 'containers/JobList'
+import Refer from 'containers/Refer'
 import styles from './HomeView.scss'
 
 // We define mapStateToProps where we'd normally use
@@ -30,11 +32,11 @@ export class HomeView extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={6}>
-            <h3>All Jobs</h3>
+          <Col xs={8}>
+            <JobList />
           </Col>
-          <Col xs={6}>
-            <h3>Already know who to refer?</h3>
+          <Col xs={4}>
+            <Refer />
           </Col>
         </Row>
         <Row>
