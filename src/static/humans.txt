@@ -1,0 +1,9 @@
+# Check it out: http://humanstxt.org/
+
+# TEAM
+
+    <name> -- <role> -- <twitter>
+
+# THANKS
+
+    <name>
