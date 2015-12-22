@@ -1,6 +1,6 @@
 {
   "name": "react-redux-starter-kit",
-  "version": "0.18.0",
+  "version": "1.0.0",
   "description": "Get started with React, Redux, and React-Router!",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js",
     "test:dev": "npm run test -- --watch",
-    "deploy": "npm run test && npm run compile"
+    "deploy": "npm run test && npm run clean && npm run compile"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.1",
-    "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
     "flexboxgrid": "^6.3.0",
@@ -55,6 +54,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.3.13",
     "babel-runtime": "^6.3.19",
+    "cssnano": "^3.3.2",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "connect-history-api-fallback": "^1.1.0",
