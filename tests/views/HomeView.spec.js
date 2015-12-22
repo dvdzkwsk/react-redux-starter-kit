@@ -1,6 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import { bindActionCreators } from 'redux'
+import { Row } from 'react-flexbox-grid'
 import { HomeView } from 'views/HomeView'
 
 function shallowRender (component) {
@@ -35,8 +36,8 @@ describe('(View) Home', function () {
     _rendered = renderWithProps(_props)
   })
 
-  it('Should render as a <div>.', function () {
-    expect(_component.type).to.equal('div')
+  it('Should render as a <Row>.', function () {
+    expect(_component.type).to.equal(Row)
   })
 
   it('Should include an <h1> with welcome text.', function () {

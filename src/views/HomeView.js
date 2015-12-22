@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-toolbox'
+import { Row, Col } from 'react-flexbox-grid'
 import { Link } from 'react-router'
 import { actions as counterActions } from '../redux/modules/counter'
 import styles from './HomeView.scss'
@@ -22,21 +23,23 @@ export class HomeView extends React.Component {
 
   render () {
     return (
-      <div className='container text-center'>
-        <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>
-          Sample Counter:&nbsp;
-          <span className={styles['counter--green']}>{this.props.counter}</span>
-        </h2>
-        <Button raised accent onClick={() => this.props.increment(1)}>
-          Increment
-        </Button>
-        <Button primary onClick={this.props.doubleAsync}>
-          Double (Async)
-        </Button>
-        <hr />
-        <Link to='/about'>Go To About View</Link>
-      </div>
+      <Row center='xs'>
+        <Col xs={8}>
+          <h1>Welcome to the React Redux Starter Kit</h1>
+          <h2>
+            Sample Counter:&nbsp;
+            <span className={styles['counter--green']}>{this.props.counter}</span>
+          </h2>
+          <Button raised accent onClick={() => this.props.increment(1)}>
+            Increment
+          </Button>
+          <Button primary onClick={this.props.doubleAsync}>
+            Double (Async)
+          </Button>
+          <hr />
+          <Link to='/about'>Go To About View</Link>
+        </Col>
+      </Row>
     )
   }
 }
