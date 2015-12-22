@@ -52,6 +52,7 @@ const config = {
   // ----------------------------------
   coverage_enabled   : !argv.watch,
   coverage_reporters : [
+    { type : 'lcovonly' },
     { type : 'text-summary' },
     { type : 'html', dir : 'coverage' }
   ]
