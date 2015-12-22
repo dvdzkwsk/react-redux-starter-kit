@@ -1,5 +1,6 @@
 import React from 'react'
 import { App } from 'react-toolbox'
+import { Grid } from 'react-flexbox-grid'
 import '../styles/core.scss'
 
 // Note: Stateless/function components *will not* hot reload!
@@ -14,7 +15,9 @@ import '../styles/core.scss'
 function CoreLayout ({ children }) {
   return (
     <App>
-      {children}
+      <Grid fluid>
+        {children}
+      </Grid>
     </App>
   )
 }
