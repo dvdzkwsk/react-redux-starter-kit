@@ -48,7 +48,7 @@ const webpackConfig = {
   ],
   resolve: {
     root: paths.base(config.dir_client),
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.scss']
   },
   module: {
     preLoaders: [

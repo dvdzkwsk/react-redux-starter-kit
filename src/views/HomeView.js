@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Button } from 'react-toolbox'
 import { Link } from 'react-router'
 import { actions as counterActions } from '../redux/modules/counter'
 import styles from './HomeView.scss'
@@ -27,14 +28,12 @@ export class HomeView extends React.Component {
           Sample Counter:&nbsp;
           <span className={styles['counter--green']}>{this.props.counter}</span>
         </h2>
-        <button className='btn btn-default'
-                onClick={() => this.props.increment(1)}>
+        <Button raised accent onClick={() => this.props.increment(1)}>
           Increment
-        </button>
-        <button className='btn btn-default'
-                onClick={this.props.doubleAsync}>
+        </Button>
+        <Button primary onClick={this.props.doubleAsync}>
           Double (Async)
-        </button>
+        </Button>
         <hr />
         <Link to='/about'>Go To About View</Link>
       </div>
