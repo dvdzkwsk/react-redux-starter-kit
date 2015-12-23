@@ -3,20 +3,18 @@ import { createAction, handleActions } from 'redux-actions'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const OPEN_MODAL = 'OPEN_MODAL'
+export const GENERAL_FORM_OPEN_MODAL = 'GENERAL_FORM_OPEN_MODAL'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const open = createAction(OPEN_MODAL)
-
 export const actions = {
-  open
+  open: createAction(GENERAL_FORM_OPEN_MODAL)
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 export default handleActions({
-  OPEN_MODAL: (state, { payload }) => !state
-}, false)
+  GENERAL_FORM_OPEN_MODAL: (state, { payload }) => ({ ...state, isOpen: !state.isOpen })
+}, { isOpen: false })

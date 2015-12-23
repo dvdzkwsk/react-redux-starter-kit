@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, Modal, OverlayTrigger, Popover, Tooltip } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 
+import GeneralReferForm from 'components/GeneralReferForm'
 import { actions as referActions } from '../redux/modules/generalRefer'
 
 const mapStateToProps = (state) => ({
@@ -10,13 +11,11 @@ const mapStateToProps = (state) => ({
 export default class Refer extends React.Component {
 
   static propTypes = {
-    generalRefer: React.PropTypes.bool.isRequired,
+    generalRefer: React.PropTypes.object.isRequired,
     open: React.PropTypes.func.isRequired
   }
 
   render () {
-    let popover = <Popover title='popover'>very popover. such engagement</Popover>
-    let tooltip = <Tooltip>wow.</Tooltip>
     return (
     <div>
       <h3>Already know who to refer?</h3>
@@ -31,25 +30,12 @@ export default class Refer extends React.Component {
         <span className='glyphicon glyphicon-tower' aria-hidden='true'></span>
         Referral Leaderboard
       </h3>
-      <Modal show={this.props.generalRefer} onHide={() => this.props.open()}>
+      <Modal show={this.props.generalRefer.isOpen} onHide={() => this.props.open()}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Make a Referral</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Text in a modal</h4>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
-          <h4>Popover in a modal</h4>
-          <p>there is a <OverlayTrigger overlay={popover}><a href='#'>popover</a></OverlayTrigger> here</p>
-
-          <h4>Tooltips in a modal</h4>
-          <p>there is a <OverlayTrigger overlay={tooltip}><a href='#'>tooltip</a></OverlayTrigger> here</p>
-
-          <hr />
-
-          <h4>Overflowing text to show scroll behavior</h4>
-          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-           in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+          <GeneralReferForm />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => this.props.open()}>Close</Button>
