@@ -133,7 +133,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
 ├── server                   # Express application (uses webpack middleware)
-│   └── app.js               # Server application entry point
+│   └── main.js              # Server application entry point
 ├── src                      # Application source code
 │   ├── components           # Generic React Components (generally Dumb components)
 │   ├── containers           # Components that provide context (e.g. Redux Provider)
@@ -145,7 +145,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   ├── static               # Static assets (not imported anywhere in source code)
 │   ├── styles               # Application-wide styles (generally settings)
 │   ├── views                # Components that live at a route
-│   └── app.js               # Application bootstrap and rendering
+│   └── main.js              # Application bootstrap and rendering
 └── tests                    # Unit tests
 ```
 
