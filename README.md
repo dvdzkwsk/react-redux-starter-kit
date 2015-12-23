@@ -254,3 +254,10 @@ Troubleshooting
 This is most likely because the new window has been blocked by your popup blocker, so make sure it's disabled before trying again.
 
 Reference: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
+
+### high CPU usage of an editor
+
+If compilation causes high CPU usage you need to exclude `dist` folder e.g. in Sublime add
+```
+	"folder_exclude_patterns": [".svn",	".git",	".hg", "CVS",	"node_modules",	"dist"]
+```
