@@ -20,9 +20,9 @@ export default class Root extends React.Component {
   get devTools () {
     if (__DEBUG__) {
       if (__DEBUG_NEW_WINDOW__) {
-        require('../redux/utils/createDevToolsWindow')(this.props.store)
+        require('../redux/utils/createDevToolsWindow').default(this.props.store)
       } else {
-        const DevTools = require('containers/DevTools')
+        const DevTools = require('containers/DevTools').default
         return <DevTools />
       }
     }
