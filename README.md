@@ -200,6 +200,11 @@ These are global variables available to you anywhere in your source code. If you
 * `__DEV__` - True when `process.env.NODE_ENV` is `development`
 * `__PROD__` - True when `process.env.NODE_ENV` is `production`
 
+### Provided Plugins
+
+Webpack is configured to use [ProvidePlugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin), which lets you use commonly used imports
+without explicitly writing an import statement, reducing boilerplate. To add more automatic imports, add them to `providedPlugins` in `~/build/webpack-environments/_base.js`. Additionally, add them to your `.eslintrc` file as a global as webpack will import them if encountered.
+
 Server
 ------
 

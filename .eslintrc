@@ -11,9 +11,12 @@
     "__DEV__"      : false,
     "__PROD__"     : false,
     "__DEBUG__"    : false,
-    "__DEBUG_NEW_WINDOW__" : false
+    "__DEBUG_NEW_WINDOW__" : false,
+    "React": true,
+    "ReactDOM": true
   },
   "rules": {
-    "semi" : [2, "never"]
+    "semi" : [2, "never"],
+    "react-in-jsx-scope": 0
   }
 }
