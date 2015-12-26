@@ -14,6 +14,13 @@ if (config.proxy && config.proxy.enabled) {
   app.all(config.proxy.prefix + '*', function (req, res) {
     apiProxy.web(req, res, { target: config.proxy.target })
   })
+  apiProxy.on('error', function (err, req, res) {
+    res.writeHead(500, {
+      'Content-Type': 'text/plain'
+    })
+    res.end('Something went wrong. And we are reporting a custom error message.')
+    debug('proxy error: ', err)
+  })
   filterProxy = function (fn) {
     return function (req, res, next) {
       if (req.path.startsWith(config.proxy.prefix)) {
