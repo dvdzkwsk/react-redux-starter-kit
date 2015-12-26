@@ -44,7 +44,8 @@ const webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new webpack.ProvidePlugin(config.compiler_globals)
   ],
   resolve: {
     root: paths.base(config.dir_client),

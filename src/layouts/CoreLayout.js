@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/core.scss'
 
 // Note: Stateless/function components *will not* hot reload!
