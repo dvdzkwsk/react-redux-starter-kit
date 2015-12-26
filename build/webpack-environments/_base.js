@@ -17,11 +17,6 @@ const CSS_LOADER = !config.compiler_css_modules
     'localIdentName=[name]__[local]___[hash:base64:5]'
   ].join('&')
 
-const providedPlugins = {
-  'React': 'react',
-  'ReactDOM': 'react-dom'
-}
-
 const webpackConfig = {
   name: 'client',
   target: 'web',
@@ -50,7 +45,7 @@ const webpackConfig = {
         collapseWhitespace: true
       }
     }),
-    new webpack.ProvidePlugin(providedPlugins)
+    new webpack.ProvidePlugin(config.compiler_globals)
   ],
   resolve: {
     root: paths.base(config.dir_client),
