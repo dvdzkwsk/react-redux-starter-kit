@@ -55,4 +55,5 @@ if (config.compiler_enable_hmr) {
   // server in production.
   app.use(express.static(paths.base(config.dir_dist)))
 }
+
 export default app
