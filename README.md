@@ -200,10 +200,16 @@ These are global variables available to you anywhere in your source code. If you
 * `__DEV__` - True when `process.env.NODE_ENV` is `development`
 * `__PROD__` - True when `process.env.NODE_ENV` is `production`
 
+Additionally, the following variables are globally available by automatic imports (see section "Globally available imports" further below):
+
+* `React` (imported from `'react'`)
+* `ReactDOM` (imported from `'react-dom'`)
+
 ### Provided Plugins
 
-Webpack is configured to use [ProvidePlugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin), which lets you use commonly used imports
-without explicitly writing an import statement, reducing boilerplate. To add more automatic imports, add them to `compiler_globals` in `~/config/_base`. Additionally, add them to the globals object in your `.eslintrc` so you don't encounter misleading linter errors.
+#### Globally availabe imports via ProvidePlugin
+
+Webpack is configured to use [ProvidePlugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin), which lets you use commonly used imports without explicitly writing an import statement, reducing boilerplate. To add more automatic imports, add them to `compiler_globals` in `~/config/_base`. Additionally, add them to the globals object in your `.eslintrc` so you don't encounter misleading linter errors.
 
 Server
 ------
