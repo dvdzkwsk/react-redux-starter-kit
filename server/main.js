@@ -1,40 +1,28 @@
 import express from 'express'
 import historyApiFallback from 'connect-history-api-fallback'
 import config from '../config'
-import httpProxy from 'http-proxy'
+import proxyMiddleware from 'http-proxy-middleware'
 
 const app = express()
 const debug = require('debug')('app:server')
 const paths = config.utils_paths
 
-let filterProxy = (x) => x // if no proxy defined - identity function
-
 if (config.proxy && config.proxy.enabled) {
-  let apiProxy = httpProxy.createProxyServer()
-  app.all(config.proxy.prefix + '*', function (req, res) {
-    apiProxy.web(req, res, { target: config.proxy.target })
-  })
-  apiProxy.on('error', function (err, req, res) {
+  let options = config.proxy.options
+  options.onError = function (err, req, res) {
     res.writeHead(500, {
       'Content-Type': 'text/plain'
     })
     res.end('Something went wrong. And we are reporting a custom error message.')
     debug('proxy error: ', err)
-  })
-  filterProxy = function (fn) {
-    return function (req, res, next) {
-      if (req.path.startsWith(config.proxy.prefix)) {
-        next()
-      } else {
-        fn(req, res, next)
-      }
-    }
   }
+  let apiProxy = proxyMiddleware(config.proxy.context, options)
+  app.use(apiProxy)
 }
 
-app.use(filterProxy(historyApiFallback({
+app.use(historyApiFallback({
   verbose: false
-})))
+}))
 
 // Serve app with Webpack if HMR is enabled
 if (config.compiler_enable_hmr) {
@@ -42,11 +30,11 @@ if (config.compiler_enable_hmr) {
   const webpackConfig = require('../build/webpack.config')
   const compiler = webpack(webpackConfig)
 
-  app.use(filterProxy(require('./middleware/webpack-dev')({
+  app.use(require('./middleware/webpack-dev')({
     compiler,
     publicPath: webpackConfig.output.publicPath
-  })))
-  app.use(filterProxy(require('./middleware/webpack-hmr')({ compiler })))
+  }))
+  app.use(require('./middleware/webpack-hmr')({ compiler }))
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +
@@ -58,6 +46,6 @@ if (config.compiler_enable_hmr) {
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
-  app.use(filterProxy(express.static(paths.base(config.dir_dist))))
+  app.use(express.static(paths.base(config.dir_dist)))
 }
 export default app
