@@ -7,8 +7,13 @@ export default (config) => {
     compiler_enable_hmr : HMR_ENABLED,
     proxy:{
       enabled: false,
-      prefix: '/api',
-      target: 'http://localhost:1337'
+      context:['/api'],
+      options:
+        {
+          // http-proxy-middleware options
+          target: 'http://localhost:1337',
+          ws: true
+        }
     }
   }
 
