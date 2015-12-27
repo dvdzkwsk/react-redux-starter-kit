@@ -125,6 +125,7 @@ const webpackConfig = {
         remove: true,
         browsers: ['last 2 versions']
       },
+      safe: true,
       discardComments: {
         removeAll: true
       }
