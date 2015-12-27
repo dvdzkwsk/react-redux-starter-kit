@@ -36,6 +36,7 @@ if (config.compiler_enable_hmr) {
   // when the application is compiled.
   app.use(express.static(paths.client('static')))
 
+  // Enable webpack-dev-server middleware
   app.use(require('./middleware/webpack-dev')({
     compiler,
     publicPath: webpackConfig.output.publicPath
