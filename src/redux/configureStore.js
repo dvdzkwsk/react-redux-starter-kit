@@ -14,7 +14,7 @@ export default function configureStore (initialState) {
   if (__DEBUG__) {
     createStoreWithMiddleware = compose(
       middleware,
-      window.devToolsExtension ? window.devToolsExtension() : require('containers/DevTools').instrument()
+      window.devToolsExtension ? window.devToolsExtension() : require('containers/DevTools').default.instrument()
     )
   } else {
     createStoreWithMiddleware = compose(middleware)
@@ -25,7 +25,7 @@ export default function configureStore (initialState) {
   )
   if (module.hot) {
     module.hot.accept('./rootReducer', () => {
-      const nextRootReducer = require('./rootReducer')
+      const nextRootReducer = require('./rootReducer').default
 
       store.replaceReducer(nextRootReducer)
     })
