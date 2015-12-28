@@ -1,5 +1,5 @@
 import thunk from 'redux-thunk'
-import rootReducer from './modules'
+import rootReducer from './rootReducer'
 import {
   applyMiddleware,
   compose,
@@ -24,8 +24,8 @@ export default function configureStore (initialState) {
     rootReducer, initialState
   )
   if (module.hot) {
-    module.hot.accept('./modules', () => {
-      const nextRootReducer = require('./modules')
+    module.hot.accept('./rootReducer', () => {
+      const nextRootReducer = require('./rootReducer')
 
       store.replaceReducer(nextRootReducer)
     })
