@@ -63,9 +63,10 @@ Features
   * PhantomJS
   * Code coverage reports
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
-  * react-transform-hmr for hot reloading
-  * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
-  * Uses babel runtime rather than inline transformations
+  * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
+  * [babel-preset-react-hmre](https://github.com/danmartinez101/babel-preset-react-hmre) for:
+    * react-transform-hmr (HMR for React components)
+    * redbox-react (visible error reporting for React components)
 * [ESLint](http://eslint.org)
   * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this!
   * Includes separate test-specific `.eslintrc` to work with Mocha and Chai
