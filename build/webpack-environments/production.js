@@ -16,17 +16,13 @@ export default (webpackConfig) => {
   }
 
   debug('Apply ExtractTextPlugin to CSS loaders.')
-  webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
-    if (!loader.loaders ||
-        !loader.loaders.find(name => /css/.test(name.split('?')[0]))) {
-      return loader
-    }
-
+  const cssLoaders = webpackConfig.module.loaders.filter(loader =>
+    loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
+  )
+  cssLoaders.forEach(loader => {
     const [first, ...rest] = loader.loaders
     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
     delete loader.loaders
-
-    return loader
   })
 
   debug('Inject ExtractText and UglifyJS plugins.')
