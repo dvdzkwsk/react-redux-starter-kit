@@ -53,7 +53,7 @@ Features
   * sass-loader
   * postcss-loader with cssnano for style autoprefixing and minification
   * Bundle splitting for app and vendor dependencies
-  * CSS extraction during production builds
+  * CSS extraction during builts that are not using HMR (like `npm run compile`)
   * Loaders for fonts and images
 * [Express](https://github.com/strongloop/express)
   * webpack-dev-middleware
