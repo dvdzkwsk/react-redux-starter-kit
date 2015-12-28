@@ -1,5 +1,4 @@
 import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../../config'
 import _debug from 'debug'
 
@@ -15,21 +14,8 @@ export default (webpackConfig) => {
     debug('Source maps are disabled in production.')
   }
 
-  debug('Apply ExtractTextPlugin to CSS loaders.')
-  const cssLoaders = webpackConfig.module.loaders.filter(loader =>
-    loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
-  )
-  cssLoaders.forEach(loader => {
-    const [first, ...rest] = loader.loaders
-    loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
-    delete loader.loaders
-  })
-
-  debug('Inject ExtractText and UglifyJS plugins.')
+  debug('Inject UglifyJS plugins.')
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('[name].[contenthash].css', {
-      allChunks: true
-    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
