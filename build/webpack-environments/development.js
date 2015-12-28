@@ -39,18 +39,47 @@ export default (webpackConfig) => {
       if (/babel/.test(loader.loader)) {
         debug('Apply react-transform-hmr to babel development transforms')
 
-        if (loader.query.env.development.plugins[0][0] !== 'react-transform') {
-          debug('ERROR: react-transform must be the first plugin')
-          return loader
+        // Check if this fork has implemented their own development environment
+        // transforms in _base and log a warning so that any unexpected
+        // behavior is documented.
+        if (
+          loader.query.env &&
+          loader.query.env.development &&
+          loader.query.env.development.plugins
+        ) {
+          debug([
+            'It looks like you\'ve added development-specific transforms to',
+            'babel-loader via the "env" property. This configuration is',
+            'modified in "`~/build/webpack-environments/development" in',
+            'order to apply redbox-react and react-transform-hmr, so you',
+            'may have to adjust that logic to account for your added',
+            'transforms.'
+          ].join(' '))
+        } else {
+
+          // this path didn't exist, so create all non-existent objects.
+          loader.query.env = loader.query.env || {}
+          loader.query.env.development = loader.query.env.development || {}
         }
 
-        const reactTransformHmr = {
-          transform : 'react-transform-hmr',
-          imports   : ['react'],
-          locals    : ['module']
-        }
-        loader.query.env.development.plugins[0][1].transforms
-          .push(reactTransformHmr)
+        // Yeah... the new Babel plugin configuration is _really_ ugly. :/
+        // They're essentially tuples, with [pluginName, pluginConfig], so
+        // we push our new tuple into the collection of existing transforms.
+        const plugins = loader.query.env.development.plugins || []
+        loader.query.env.development.plugins = [...plugins, [
+          'react-transform', {
+            transforms: [
+              {
+                transform: 'react-transform-catch-errors',
+                imports: ['react', 'redbox-react']
+              }, {
+                transform: 'react-transform-hmr',
+                imports: ['react'],
+                locals: ['module']
+              }
+            ]
+          }
+        ]]
       }
 
       return loader

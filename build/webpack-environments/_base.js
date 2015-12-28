@@ -64,23 +64,13 @@ const webpackConfig = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel',
+
+        // NOTE: live development transforms (HMR, redbox-react) are
+        // configured in ~/build/webpack-environments/development.js
         query: {
           cacheDirectory: true,
           plugins: ['transform-runtime'],
-          presets: ['es2015', 'react', 'stage-0'],
-          env: {
-            development: {
-              plugins: [
-                ['react-transform', {
-                  // omit HMR plugin by default and _only_ load in hot mode
-                  transforms: [{
-                    transform: 'react-transform-catch-errors',
-                    imports: ['react', 'redbox-react']
-                  }]
-                }]
-              ]
-            }
-          }
+          presets: ['es2015', 'react', 'stage-0']
         }
       },
       {
