@@ -8,13 +8,14 @@ import {
 
 export default function configureStore (initialState) {
   let createStoreWithMiddleware
-
   const middleware = applyMiddleware(thunk)
 
   if (__DEBUG__) {
     createStoreWithMiddleware = compose(
       middleware,
-      window.devToolsExtension ? window.devToolsExtension() : require('containers/DevTools').default.instrument()
+      window.devToolsExtension
+        ? window.devToolsExtension()
+        : require('containers/DevTools').default.instrument()
     )
   } else {
     createStoreWithMiddleware = compose(middleware)

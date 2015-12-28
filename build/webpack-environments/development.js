@@ -56,7 +56,6 @@ export default (webpackConfig) => {
             'transforms.'
           ].join(' '))
         } else {
-
           // this path didn't exist, so create all non-existent objects.
           loader.query.env = loader.query.env || {}
           loader.query.env.development = loader.query.env.development || {}
