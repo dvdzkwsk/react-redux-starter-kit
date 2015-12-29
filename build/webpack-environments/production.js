@@ -14,7 +14,7 @@ export default (webpackConfig) => {
     debug('Source maps are disabled in production.')
   }
 
-  debug('Inject UglifyJS plugins.')
+  debug('Apply UglifyJS plugin.')
   webpackConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {

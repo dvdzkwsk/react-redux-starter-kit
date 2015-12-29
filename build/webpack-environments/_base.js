@@ -130,7 +130,6 @@ const webpackConfig = {
 // when we don't know the public path (we know it only when HMR is enabled) we
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
-
 if (!config.compiler_enable_hmr) {
   debug('Apply ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.loaders.filter(loader =>
@@ -145,7 +144,7 @@ if (!config.compiler_enable_hmr) {
     new ExtractTextPlugin('[name].[contenthash].css', {
       allChunks: true
     })
-  );
+  )
 }
 
 // NOTE: this is a temporary workaround. I don't know how to get Karma
