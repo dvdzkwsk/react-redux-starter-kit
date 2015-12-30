@@ -12,6 +12,7 @@
     "__PROD__"     : false,
     "__DEBUG__"    : false,
     "__DEBUG_NEW_WINDOW__" : false,
+    "__BASENAME__" : false,
     "React": true,
     "ReactDOM": true
   },
