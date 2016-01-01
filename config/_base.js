@@ -35,7 +35,7 @@ const config = {
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
-  compiler_public_path     : '/',
+  compiler_public_path     : '',
   compiler_stats           : {
     chunks : false,
     chunkModules : false,
@@ -81,7 +81,8 @@ config.globals = {
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
-  '__DEBUG_NEW_WINDOW__' : !!argv.nw
+  '__DEBUG_NEW_WINDOW__' : !!argv.nw,
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '/')
 }
 
 // ------------------------------------
