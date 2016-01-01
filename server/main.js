@@ -1,10 +1,24 @@
 import express from 'express'
 import historyApiFallback from 'connect-history-api-fallback'
 import config from '../config'
+import proxyMiddleware from 'http-proxy-middleware'
 
 const app = express()
 const debug = require('debug')('app:server')
 const paths = config.utils_paths
+
+if (config.proxy && config.proxy.enabled) {
+  let options = config.proxy.options
+  options.onError = function (err, req, res) {
+    res.writeHead(500, {
+      'Content-Type': 'text/plain'
+    })
+    res.end('Something went wrong. And we are reporting a custom error message.')
+    debug('proxy error: ', err)
+  }
+  let apiProxy = proxyMiddleware(config.proxy.context, options)
+  app.use(apiProxy)
+}
 
 app.use(historyApiFallback({
   verbose: false
