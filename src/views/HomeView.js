@@ -12,9 +12,11 @@ const mapStateToProps = (state) => ({
   counter: state.counter
 })
 
-// React components can now be defined as pure functions
+/*
+// React components can be defined as pure functions
 // https://facebook.github.io/react/docs/reusable-components.html#stateless-functions
-function HomeView ({ counter, doubleAsync, increment }) {
+// This however causes karma tests fail
+export function HomeView ({ counter, doubleAsync, increment }) {
   return (
     <div className='container text-center'>
       <h1>Welcome to the React Redux Starter Kit</h1>
@@ -39,6 +41,37 @@ HomeView.propTypes = {
   counter: React.PropTypes.number.isRequired,
   doubleAsync: React.PropTypes.func.isRequired,
   increment: React.PropTypes.func.isRequired
+}
+*/
+
+export class HomeView extends React.Component {
+  static propTypes = {
+    counter: React.PropTypes.number.isRequired,
+    doubleAsync: React.PropTypes.func.isRequired,
+    increment: React.PropTypes.func.isRequired
+  }
+  render () {
+    const { counter, doubleAsync, increment } = this.props
+    return (
+      <div className='container text-center'>
+        <h1>Welcome to the React Redux Starter Kit</h1>
+        <h2>
+          Sample Counter:&nbsp;
+          <span className={styles['counter--green']}>{counter}</span>
+        </h2>
+        <button className='btn btn-default'
+                onClick={() => increment(1)}>
+          Increment
+        </button>
+        <button className='btn btn-default'
+                onClick={doubleAsync}>
+          Double (Async)
+        </button>
+        <hr />
+        <Link to='/about'>Go To About View</Link>
+      </div>
+    )
+  }
 }
 
 // Note: Stateless/function components *will not* yet hot reload!
