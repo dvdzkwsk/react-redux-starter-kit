@@ -1,33 +1,31 @@
-import express from 'express'
-import historyApiFallback from 'connect-history-api-fallback'
+import koa from 'koa'
+import webpack from 'webpack'
+import webpackConfig from '../build/webpack.config'
+import serve from 'koa-static'
+import _debug from 'debug'
 import config from '../config'
 
-const app = express()
-const debug = require('debug')('app:server')
+const debug = _debug('app:server')
 const paths = config.utils_paths
+const app = koa()
 
-app.use(historyApiFallback({
-  verbose: false
-}))
-
-// Serve app with Webpack if HMR is enabled
+// ------------------------------------
+// Apply Webpack HMR Middleware
+// ------------------------------------
 if (config.compiler_enable_hmr) {
-  const webpack = require('webpack')
-  const webpackConfig = require('../build/webpack.config')
   const compiler = webpack(webpackConfig)
+
+  // Enable webpack-dev and webpack-hot middleware
+  const { publicPath } = webpackConfig.output 
+
+  app.use(require('./middleware/webpack-dev')(compiler, publicPath))
+  app.use(require('./middleware/webpack-hmr')(compiler))
 
   // Serve static assets from ~/src/static since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
-  app.use(express.static(paths.client('static')))
-
-  // Enable webpack-dev-server middleware
-  app.use(require('./middleware/webpack-dev')({
-    compiler,
-    publicPath: webpackConfig.output.publicPath
-  }))
-  app.use(require('./middleware/webpack-hmr')({ compiler }))
+  app.use(serve(paths.client('static')))
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +
@@ -39,7 +37,7 @@ if (config.compiler_enable_hmr) {
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
-  app.use(express.static(paths.base(config.dir_dist)))
+  app.use(serve(paths.base(config.dir_dist)))
 }
 
 export default app
