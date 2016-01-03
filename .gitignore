@@ -5,3 +5,10 @@ node_modules
 
 dist
 coverage
+
+# Temp files #
+######################
+*.swo
+*.swp
+*~
+*.orig
