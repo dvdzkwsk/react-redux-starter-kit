@@ -9,6 +9,9 @@ const debug = _debug('app:server')
 const paths = config.utils_paths
 const app = koa()
 
+// This rewrites all routes requests to the root /index.html file
+// (ignoring file requests). If you want to implement isomorphic
+// rendering, you'll want to remove this middleware.
 app.use(require('koa-connect-history-api-fallback')({
   verbose: false
 }))
