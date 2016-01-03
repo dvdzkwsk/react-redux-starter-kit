@@ -9,8 +9,8 @@ const debug = _debug('app:server')
 const paths = config.utils_paths
 const app = koa()
 
-app.use(require('./middleware/connect-history-api-fallback')({
-  verbose: true
+app.use(require('koa-connect-history-api-fallback')({
+  verbose: false
 }))
 
 // ------------------------------------
