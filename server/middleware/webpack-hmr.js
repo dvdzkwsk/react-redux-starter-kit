@@ -1,18 +1,10 @@
-import WebpackHotMiddleware from 'webpack-hot-middleware'
-import applyExpressMiddleware from '../lib/apply-express-middleware'
+import WebpackHotMiddleware from 'koa-webpack-hot-middleware'
 import _debug from 'debug'
 
 const debug = _debug('app:server:webpack-hmr')
 
-export default function (compiler, opts) {
+export default function (compiler) {
   debug('Enable Webpack Hot Module Replacement (HMR).')
-  
-  const middleware = WebpackHotMiddleware(compiler, opts)
-  return function* (next) {
-    let nextStep = yield applyExpressMiddleware(middleware, this.req, this.res)
 
-    if (nextStep && next) {
-      yield* next
-    }
-  }
+  return WebpackHotMiddleware(compiler)
 }

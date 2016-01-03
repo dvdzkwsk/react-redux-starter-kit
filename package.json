@@ -82,6 +82,8 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-spec-reporter": "0.0.23",
     "karma-webpack": "^1.7.0",
+    "koa-webpack-dev-middleware": "^1.1.0",
+    "koa-webpack-hot-middleware": "^1.0.3",
     "mocha": "^2.2.5",
     "node-sass": "^3.3.3",
     "phantomjs": "^1.9.17",
@@ -96,8 +98,6 @@
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
-    "webpack": "^1.12.9",
-    "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0"
+    "webpack": "^1.12.9"
   }
 }
