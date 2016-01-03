@@ -1,5 +1,5 @@
 // Based on: https://github.com/dayAlone/koa-webpack-hot-middleware/blob/master/index.js
-export default function applyExpressMiddleware (middleware, req, res) {
+export default function applyExpressMiddleware (fn, req, res) {
   const originalEnd = res.end
 
   return function (done) {
@@ -7,7 +7,7 @@ export default function applyExpressMiddleware (middleware, req, res) {
       originalEnd.apply(this, arguments)
       done(null, 0)
     }
-    middleware(req, res, function () {
+    fn(req, res, function () {
       done(null, 1)
     })
   }

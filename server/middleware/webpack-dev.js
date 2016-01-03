@@ -1,5 +1,5 @@
 import WebpackDevMiddleware from 'webpack-dev-middleware'
-import applyExpressMiddleware from './apply-express-middleware'
+import applyExpressMiddleware from '../lib/apply-express-middleware'
 import _debug from 'debug'
 import config from '../../config'
 
@@ -9,15 +9,14 @@ const debug = _debug('app:server:webpack-dev')
 export default function (compiler, publicPath) {
   debug('Enable webpack dev middleware.')
 
-  /* eslint key-spacing:0 */
   const middleware = WebpackDevMiddleware(compiler, {
     publicPath,
-    contentBase : paths.base(config.dir_client),
-    hot         : true,
-    quiet       : config.compiler_quiet,
-    noInfo      : config.compiler_quiet,
-    lazy        : false,
-    stats       : config.compiler_stats
+    contentBase: paths.base(config.dir_client),
+    hot: true,
+    quiet: config.compiler_quiet,
+    noInfo: config.compiler_quiet,
+    lazy: false,
+    stats: config.compiler_stats
   })
 
   return function* (next) {
@@ -32,7 +31,7 @@ export default function (compiler, publicPath) {
     })
 
     if (runNext) {
-      yield *next
+      yield* next
     }
   }
 }

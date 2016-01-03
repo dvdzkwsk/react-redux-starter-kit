@@ -1,5 +1,5 @@
 import WebpackHotMiddleware from 'webpack-hot-middleware'
-import applyExpressMiddleware from './apply-express-middleware'
+import applyExpressMiddleware from '../lib/apply-express-middleware'
 import _debug from 'debug'
 
 const debug = _debug('app:server:webpack-hmr')

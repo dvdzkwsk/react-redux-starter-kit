@@ -9,6 +9,10 @@ const debug = _debug('app:server')
 const paths = config.utils_paths
 const app = koa()
 
+app.use(require('./middleware/connect-history-api-fallback')({
+  verbose: true
+}))
+
 // ------------------------------------
 // Apply Webpack HMR Middleware
 // ------------------------------------
@@ -28,8 +32,8 @@ if (config.compiler_enable_hmr) {
   app.use(serve(paths.client('static')))
 } else {
   debug(
-    'Application is being run outside of development mode. This starter kit ' +
-    'does not provide any production-specific server functionality. To learn ' +
+    'Server is being run outside of live development mode. This starter kit ' +
+    'does not provide any production-ready server functionality. To learn ' +
     'more about deployment strategies, check out the "deployment" section ' +
     'in the README.'
   )

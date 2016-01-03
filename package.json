@@ -36,6 +36,7 @@
     "redux-actions": "^0.9.0",
     "redux-simple-router": "^1.0.1",
     "redux-thunk": "^1.0.0",
+    "url": "^0.11.0",
     "yargs": "^3.18.0"
   },
   "devDependencies": {
@@ -52,7 +53,6 @@
     "babel-runtime": "^6.3.19",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
-    "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.23.0",
     "cssnano": "^3.3.2",
     "eslint": "^1.10.3",
