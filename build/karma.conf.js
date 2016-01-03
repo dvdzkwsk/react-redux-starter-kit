@@ -46,7 +46,8 @@ if (config.coverage_enabled) {
   karmaConfig.webpack.module.preLoaders = [{
     test: /\.(js|jsx)$/,
     include: new RegExp(config.dir_client),
-    loader: 'isparta'
+    loader: 'isparta',
+    exclude: /node_modules/
   }]
 }
 
