@@ -1,5 +1,6 @@
 import TestUtils from 'react-addons-test-utils'
 import CoreLayout from 'layouts/CoreLayout'
+import { App } from 'react-toolbox'
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer()
@@ -26,7 +27,7 @@ describe('(Layout) Core', function () {
     _component = shallowRenderWithProps(_props)
   })
 
-  it('Should render as a <div>.', function () {
-    expect(_component.type).to.equal('div')
+  it("Should render as React-Toolbox's <App>.", function () {
+    expect(_component.type).to.equal(App)
   })
 })
