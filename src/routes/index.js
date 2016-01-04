@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 // NOTE: here we're making use of the `resolve.root` configuration

@@ -1,4 +1,3 @@
-import React from 'react'
 import { App } from 'react-toolbox'
 import { Grid } from 'react-flexbox-grid'
 import '../styles/core.scss'

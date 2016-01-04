@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-toolbox'
 import { Row, Col } from 'react-flexbox-grid'
