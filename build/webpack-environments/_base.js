@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import cssnano from 'cssnano'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../../config'
 import _debug from 'debug'
 
@@ -44,7 +45,8 @@ const webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new webpack.ProvidePlugin(config.compiler_globals)
   ],
   resolve: {
     root: paths.base(config.dir_client),
@@ -63,23 +65,13 @@ const webpackConfig = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel',
+
+        // NOTE: live development transforms (HMR, redbox-react) are
+        // configured in ~/build/webpack-environments/development.js
         query: {
           cacheDirectory: true,
-          plugins: ['transform-runtime', 'add-module-exports'],
-          presets: ['es2015', 'react', 'stage-0'],
-          env: {
-            development: {
-              plugins: [
-                ['react-transform', {
-                  // omit HMR plugin by default and _only_ load in hot mode
-                  transforms: [{
-                    transform: 'react-transform-catch-errors',
-                    imports: ['react', 'redbox-react']
-                  }]
-                }]
-              ]
-            }
-          }
+          plugins: ['transform-runtime'],
+          presets: ['es2015', 'react', 'stage-0']
         }
       },
       {
@@ -124,6 +116,7 @@ const webpackConfig = {
         remove: true,
         browsers: ['last 2 versions']
       },
+      safe: true,
       discardComments: {
         removeAll: true
       }
@@ -132,6 +125,26 @@ const webpackConfig = {
   eslint: {
     configFile: paths.base('.eslintrc')
   }
+}
+
+// when we don't know the public path (we know it only when HMR is enabled) we
+// need to use the extractTextPlugin to fix this issue:
+// http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
+if (!config.compiler_enable_hmr) {
+  debug('Apply ExtractTextPlugin to CSS loaders.')
+  webpackConfig.module.loaders.filter(loader =>
+    loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
+  ).forEach(loader => {
+    const [first, ...rest] = loader.loaders
+    loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
+    delete loader.loaders
+  })
+
+  webpackConfig.plugins.push(
+    new ExtractTextPlugin('[name].[contenthash].css', {
+      allChunks: true
+    })
+  )
 }
 
 // NOTE: this is a temporary workaround. I don't know how to get Karma
