@@ -41,13 +41,13 @@ Features
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
   * Includes react-addons-test-utils (`^0.14.0`)
-* [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
+* [Redux](https://github.com/rackt/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
   * redux-devtools
     * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
-* [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^1.0.0`)
+* [redux-simple-router](https://github.com/rackt/redux-simple-router) (`^1.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
   * [CSS modules!](https://github.com/css-modules/css-modules)
   * sass-loader
