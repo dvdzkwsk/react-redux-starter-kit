@@ -31,7 +31,7 @@ const config = {
     'React' : 'react',
     'ReactDOM' : 'react-dom'
   },
-  compiler_source_maps     : true,
+  compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
