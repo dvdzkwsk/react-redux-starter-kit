@@ -19,7 +19,7 @@ export default function (compiler, publicPath) {
     stats: config.compiler_stats
   })
 
-  return function* (next) {
+  return function * (next) {
     let ctx = this
     let req = this.req
 

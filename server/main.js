@@ -23,7 +23,7 @@ if (config.compiler_enable_hmr) {
   const compiler = webpack(webpackConfig)
 
   // Enable webpack-dev and webpack-hot middleware
-  const { publicPath } = webpackConfig.output 
+  const { publicPath } = webpackConfig.output
 
   app.use(require('./middleware/webpack-dev')(compiler, publicPath))
   app.use(require('./middleware/webpack-hmr')(compiler))
