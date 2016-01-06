@@ -11,27 +11,60 @@ import styles from './HomeView.scss'
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
+
+/*
+// React components can be defined as pure functions
+// https://facebook.github.io/react/docs/reusable-components.html#stateless-functions
+// This however causes karma tests fail
+export function HomeView ({ counter, doubleAsync, increment }) {
+  return (
+    <div className='container text-center'>
+      <h1>Welcome to the React Redux Starter Kit</h1>
+      <h2>
+        Sample Counter:&nbsp;
+        <span className={styles['counter--green']}>{counter}</span>
+      </h2>
+      <button className='btn btn-default'
+              onClick={() => increment(1)}>
+        Increment
+      </button>
+      <button className='btn btn-default'
+              onClick={doubleAsync}>
+        Double (Async)
+      </button>
+      <hr />
+      <Link to='/about'>Go To About View</Link>
+    </div>
+  )
+}
+HomeView.propTypes = {
+  counter: React.PropTypes.number.isRequired,
+  doubleAsync: React.PropTypes.func.isRequired,
+  increment: React.PropTypes.func.isRequired
+}
+*/
+
 export class HomeView extends React.Component {
   static propTypes = {
     counter: React.PropTypes.number.isRequired,
     doubleAsync: React.PropTypes.func.isRequired,
     increment: React.PropTypes.func.isRequired
   }
-
   render () {
+    const { counter, doubleAsync, increment } = this.props
     return (
       <div className='container text-center'>
         <h1>Welcome to the React Redux Starter Kit</h1>
         <h2>
           Sample Counter:&nbsp;
-          <span className={styles['counter--green']}>{this.props.counter}</span>
+          <span className={styles['counter--green']}>{counter}</span>
         </h2>
         <button className='btn btn-default'
-                onClick={() => this.props.increment(1)}>
+                onClick={() => increment(1)}>
           Increment
         </button>
         <button className='btn btn-default'
-                onClick={this.props.doubleAsync}>
+                onClick={doubleAsync}>
           Double (Async)
         </button>
         <hr />
@@ -41,4 +74,20 @@ export class HomeView extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, counterActions)(HomeView)
+// Note: Stateless/function components *will not* yet hot reload!
+// react-transform *only* works on component classes.
+// https://github.com/gaearon/babel-plugin-react-transform/issues/57
+//
+// Since connected components don't need additional props, they can easily
+// be wrapped to support hot reloading.
+// Once the babel-plugin-react-transform issue has been resolved this class
+// maybe removed and the following used instead:
+//
+// export default connect(mapStateToProps, counterActions)(HomeView)
+//
+export default class Connector extends React.Component {
+  render () {
+    let Component = connect(mapStateToProps, counterActions)(HomeView)
+    return (<Component/>)
+  }
+}
