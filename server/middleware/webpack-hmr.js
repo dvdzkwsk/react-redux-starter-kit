@@ -6,9 +6,9 @@ const debug = _debug('app:server:webpack-hmr')
 
 export default function (compiler, opts) {
   debug('Enable Webpack Hot Module Replacement (HMR).')
-  
+
   const middleware = WebpackHotMiddleware(compiler, opts)
-  return function* (next) {
+  return function * (next) {
     let nextStep = yield applyExpressMiddleware(middleware, this.req, this.res)
 
     if (nextStep && next) {
