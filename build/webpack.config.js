@@ -113,7 +113,6 @@ webpackConfig.module.loaders = [{
   loader: 'json'
 }]
 
-
 // Styles
 const cssLoader = !config.compiler_css_modules
   ? 'css?sourceMap'
