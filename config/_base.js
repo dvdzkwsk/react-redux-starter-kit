@@ -82,7 +82,7 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__DEBUG_NEW_WINDOW__' : !!argv.nw,
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '/')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 }
 
 // ------------------------------------
