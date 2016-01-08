@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { actions as counterActions } from '../redux/modules/counter'
+import { actions as counterActions } from '../../redux/modules/counter'
 import styles from './HomeView.scss'
 
 // We define mapStateToProps where we'd normally use
