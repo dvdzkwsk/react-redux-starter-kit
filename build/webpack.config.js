@@ -56,8 +56,7 @@ webpackConfig.plugins = [
     minify: {
       collapseWhitespace: true
     }
-  }),
-  new webpack.ProvidePlugin(config.compiler_globals)
+  })
 ]
 
 if (config.compiler_enable_hmr) {
