@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import '../../styles/core.scss'
 
 // Note: Stateless/function components *will not* hot reload!
@@ -21,7 +21,7 @@ function CoreLayout ({ children }) {
 }
 
 CoreLayout.propTypes = {
-  children: React.PropTypes.element
+  children: PropTypes.element
 }
 
 export default CoreLayout

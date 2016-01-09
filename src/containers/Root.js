@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 
 export default class Root extends React.Component {
   static propTypes = {
-    history: React.PropTypes.object.isRequired,
-    routes: React.PropTypes.element.isRequired,
-    store: React.PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    routes: PropTypes.element.isRequired,
+    store: PropTypes.object.isRequired
   };
 
   get content () {
