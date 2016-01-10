@@ -8,7 +8,7 @@ import '../../styles/core.scss'
 // leverage React's new Stateless Functions:
 // https://facebook.github.io/react/docs/reusable-components.html#stateless-functions
 //
-// CoreLayout is a pure function of it's props, so we can
+// CoreLayout is a pure function of its props, so we can
 // define it with a plain javascript function...
 function CoreLayout ({ children }) {
   return (
