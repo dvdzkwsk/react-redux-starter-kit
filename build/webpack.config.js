@@ -15,7 +15,7 @@ const webpackConfig = {
   devtool: config.compiler_devtool,
   resolve: {
     root: paths.base(config.dir_client),
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   },
   module: {}
 }
@@ -82,7 +82,7 @@ if (config.env === 'production') {
 // Pre-Loaders
 // ------------------------------------
 webpackConfig.module.preLoaders = [{
-  test: /\.js$/,
+  test: /\.(js|jsx)$/,
   loader: 'eslint',
   exclude: /node_modules/
 }]
@@ -97,7 +97,7 @@ webpackConfig.eslint = {
 // ------------------------------------
 // JavaScript / JSON
 webpackConfig.module.loaders = [{
-  test: /\.js$/,
+  test: /\.(js|jsx)$/,
   exclude: /node_modules/,
   loader: 'babel',
   query: {
