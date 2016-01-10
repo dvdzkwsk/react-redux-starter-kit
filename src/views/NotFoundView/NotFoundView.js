@@ -1,20 +1,21 @@
+import React from 'react'
 import { Link } from 'react-router'
 import { defineMessages, FormattedMessage } from 'react-intl'
 
 const messages = defineMessages({
   welcome: {
-    id: 'about.welcome',
-    description: 'title h1',
-    defaultMessage: 'This is the about view!'
+    id: 'notFound.welcome',
+    description: 'page message',
+    defaultMessage: 'This is a demo 404 page!'
   },
   linkHomeView: {
-    id: 'about.linkAboutView',
+    id: 'notFound.linkHomeView',
     description: 'Text link for home view',
     defaultMessage: 'Back To Home View'
   }
 })
 
-export class AboutView extends React.Component {
+export class NotFoundView extends React.Component {
   render () {
     return (
       <div className='container text-center'>
@@ -26,4 +27,4 @@ export class AboutView extends React.Component {
   }
 }
 
-export default AboutView
+export default NotFoundView

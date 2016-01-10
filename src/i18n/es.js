@@ -2,10 +2,10 @@
 export default {
   "home.welcome": "Bienvenido al Starter Kit de React Redux",
   "home.sampleCounter": "Contador de ejemplo: ",
-  "home.linkAboutView": "Ir a la Vista About",
+  "home.linkNotFoundView": "Ir a la página de error 404",
   "home.spanish": "Español",
   "home.english": "Inglés",
   "home.french": "Francés",
-  "about.welcome": "Esta es la vista about",
-  "about.linkAboutView": "Volver a la vista de Inicio"
+  "notFound.welcome": "Esta es la vista de error 404",
+  "notFound.linkHomeView": "Volver a la vista de Inicio"
 }

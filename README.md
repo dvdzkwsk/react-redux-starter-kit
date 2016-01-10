@@ -41,13 +41,13 @@ Features
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
   * Includes react-addons-test-utils (`^0.14.0`)
-* [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
+* [Redux](https://github.com/rackt/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
   * redux-devtools
     * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
-* [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^1.0.0`)
+* [redux-simple-router](https://github.com/rackt/redux-simple-router) (`^1.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
   * [CSS modules!](https://github.com/css-modules/css-modules)
   * sass-loader
@@ -55,7 +55,7 @@ Features
   * Bundle splitting for app and vendor dependencies
   * CSS extraction during builts that are not using HMR (like `npm run compile`)
   * Loaders for fonts and images
-* [Express](https://github.com/strongloop/express)
+* [Koa](https://github.com/koajs/koa) (`^1.0.0`)
   * webpack-dev-middleware
   * webpack-hot-middleware
 * [Karma](https://github.com/karma-runner/karma)
@@ -96,7 +96,7 @@ Before delving into the descriptions of each available npm script, here's a brie
 
 Great, now that introductions have been made here's everything in full detail:
 
-* `npm start` - Spins up express server to serve your app at `localhost:3000`. HMR will be enabled in development.
+* `npm start` - Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.
 * `npm run compile` - Compiles the application to disk (`~/dist` by default).
 * `npm run dev:nw` - Same as `npm start`, but opens the redux devtools in a new window.
 * `npm run dev:no-debug` - Same as `npm start` but disables redux devtools.
@@ -116,8 +116,8 @@ Common configuration options:
 
 * `dir_src` - application source code base path
 * `dir_dist` - path to build compiled application to
-* `server_host` - hostname for the express server
-* `server_port` - port for the express server
+* `server_host` - hostname for the Koa server
+* `server_port` - port for the Koa server
 * `compiler_css_modules` - whether or not to enable CSS modules
 * `compiler_source_maps` - whether or not to generate source maps
 * `compiler_vendor` - packages to separate into to the vendor bundle
@@ -133,7 +133,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── build                    # All build-related configuration
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
-├── server                   # Express application (uses webpack middleware)
+├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
 │   ├── components           # Generic React Components (generally Dumb components)
@@ -201,21 +201,12 @@ These are global variables available to you anywhere in your source code. If you
 * `__DEV__` - True when `process.env.NODE_ENV` is `development`
 * `__PROD__` - True when `process.env.NODE_ENV` is `production`
 
-Additionally, the following variables are globally available by automatic imports (see section "Globally available imports" further below):
-
-* `React` (imported from `'react'`)
-* `ReactDOM` (imported from `'react-dom'`)
-
-### Provided Plugins
-
-#### Globally availabe imports via ProvidePlugin
-
-Webpack is configured to use [ProvidePlugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin), which lets you use commonly used imports without explicitly writing an import statement, reducing boilerplate. To add more automatic imports, add them to `compiler_globals` in `~/config/_base`. Additionally, add them to the globals object in your `.eslintrc` so you don't encounter misleading linter errors.
-
 Server
 ------
 
-This starter kit comes packaged with an Express server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom Express app in place of webpack-dev-server will hopefully make it easier for users to extend the starter kit to include functionality such as back-end API's, isomorphic/universal rendering, and more -- all without bloating the base boilerplate. Because of this, it should be noted that the provided server is **not** production-ready. If you're deploying to production, take a look at [the deployment section](#deployment).
+> **Note:** We're using Koa `^1.0.0` until `^2.0.0` stable is released. A lot of the middleware in Koa's ecosystem hasn't caught up yet, so even though async/await is awesome, `^1.0.0` will currently provide a better developer experience.
+
+This starter kit comes packaged with an Koa server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom Koa app in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) will hopefully make it easier for users to extend the starter kit to include functionality such as back-end API's, isomorphic/universal rendering, and more -- all without bloating the base boilerplate. Because of this, it should be noted that the provided server is **not** production-ready. If you're deploying to production, take a look at [the deployment section](#deployment).
 
 Styles
 ------
@@ -254,7 +245,7 @@ Deployment
 
 Out of the box, this starter kit is deployable by serving the `~/dist` folder generated by `npm run compile` (make sure to specify your target `NODE_ENV` as well). This project does not concern itself with the details of server-side rendering or API structure, since that demands an opinionated structure that makes it difficult to extend the starter kit. However, if you do need help with more advanced deployment strategies, here are a few tips:
 
-If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. The Express server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
+If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. The Koa server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
 
 Have more questions? Feel free to submit an issue or join the Gitter chat!
 

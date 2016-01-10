@@ -1,3 +1,4 @@
+import React from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import { IntlProvider } from 'react-intl'
@@ -10,7 +11,7 @@ class Root extends React.Component {
     routes: React.PropTypes.element.isRequired,
     store: React.PropTypes.object.isRequired,
     locale: React.PropTypes.string.isRequired
-  }
+  };
 
   get content () {
     const intlData = {

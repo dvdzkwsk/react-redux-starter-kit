@@ -1,8 +1,9 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { actions as counterActions } from '../redux/modules/counter'
-import { actions as localeActions } from '../redux/modules/locale'
-import styles from './HomeView.scss'
+import { actions as counterActions } from '../../redux/modules/counter'
+import classes from './HomeView.scss'
+import { actions as localeActions } from '../../redux/modules/locale'
 import { defineMessages, FormattedMessage } from 'react-intl'
 
 const messages = defineMessages({
@@ -16,10 +17,10 @@ const messages = defineMessages({
     description: 'Sample Counter text',
     defaultMessage: 'Sample Counter: '
   },
-  linkAboutView: {
-    id: 'home.linkAboutView',
-    description: 'Text link for about view',
-    defaultMessage: 'Go to About View'
+  linkNotFoundView: {
+    id: 'home.linkNotFoundView',
+    description: 'Text link for not found view',
+    defaultMessage: 'Go to 404 Page'
   },
   spanish: {
     id: 'home.spanish',
@@ -54,7 +55,7 @@ export class HomeView extends React.Component {
     increment: React.PropTypes.func.isRequired,
     locale: React.PropTypes.string.isRequired,
     localeChange: React.PropTypes.func.isRequired
-  }
+  };
 
   handleChange (e) {
     this.props.localeChange(e.target.value)
@@ -71,7 +72,7 @@ export class HomeView extends React.Component {
         <h1><FormattedMessage {...messages.welcome} />"</h1>
         <h2>
           <FormattedMessage {...messages.sampleCounter} />
-          <span className={styles['counter--green']}>{this.props.counter}</span>
+          <span className={classes['counter--green']}>{this.props.counter}</span>
         </h2>
         <button className='btn btn-default'
                 onClick={() => this.props.increment(1)}>
@@ -82,7 +83,7 @@ export class HomeView extends React.Component {
           Double (Async)
         </button>
         <hr />
-        <Link to='/about'><FormattedMessage {...messages.linkAboutView} /></Link>
+        <Link to='/404'><FormattedMessage {...messages.linkNotFoundView} /></Link>
       </div>
     )
   }
