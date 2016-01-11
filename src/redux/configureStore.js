@@ -1,4 +1,5 @@
 import thunk from 'redux-thunk'
+import { syncHistory } from 'redux-simple-router'
 import rootReducer from './rootReducer'
 import {
   applyMiddleware,
@@ -6,9 +7,9 @@ import {
   createStore
 } from 'redux'
 
-export default function configureStore (initialState) {
+export default function configureStore (initialState, history) {
   let createStoreWithMiddleware
-  const middleware = applyMiddleware(thunk)
+  const middleware = applyMiddleware(syncHistory(history), thunk)
 
   if (__DEBUG__) {
     createStoreWithMiddleware = compose(
