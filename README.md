@@ -55,7 +55,7 @@ Features
   * Bundle splitting for app and vendor dependencies
   * CSS extraction during builts that are not using HMR (like `npm run compile`)
   * Loaders for fonts and images
-* [Koa](https://github.com/koajs/koa) (`^1.0.0`)
+* [Koa](https://github.com/koajs/koa) (`^2.0.0-alpha`)
   * webpack-dev-middleware
   * webpack-hot-middleware
 * [Karma](https://github.com/karma-runner/karma)
@@ -203,8 +203,6 @@ These are global variables available to you anywhere in your source code. If you
 
 Server
 ------
-
-> **Note:** We're using Koa `^1.0.0` until `^2.0.0` stable is released. A lot of the middleware in Koa's ecosystem hasn't caught up yet, so even though async/await is awesome, `^1.0.0` will currently provide a better developer experience.
 
 This starter kit comes packaged with an Koa server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom Koa app in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) will hopefully make it easier for users to extend the starter kit to include functionality such as back-end API's, isomorphic/universal rendering, and more -- all without bloating the base boilerplate. Because of this, it should be noted that the provided server is **not** production-ready. If you're deploying to production, take a look at [the deployment section](#deployment).
 
