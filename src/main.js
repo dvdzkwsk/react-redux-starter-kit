@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { createHistory, useBasename } from 'history'
 import { syncReduxAndRouter } from 'redux-simple-router'
 import routes from './routes'

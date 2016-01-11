@@ -1,7 +1,8 @@
+import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import { bindActionCreators } from 'redux'
 import { Row } from 'react-flexbox-grid'
-import { HomeView } from 'views/HomeView'
+import { HomeView } from 'views/HomeView/HomeView'
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer()
