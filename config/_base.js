@@ -27,11 +27,7 @@ const config = {
   // ----------------------------------
   compiler_css_modules     : true,
   compiler_enable_hmr      : false,
-  compiler_globals         : {
-    'React' : 'react',
-    'ReactDOM' : 'react-dom'
-  },
-  compiler_source_maps     : true,
+  compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
@@ -83,7 +79,7 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__DEBUG_NEW_WINDOW__' : !!argv.nw,
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '/')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 }
 
 // ------------------------------------
