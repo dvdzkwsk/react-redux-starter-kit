@@ -19,19 +19,16 @@ export default function (compiler, publicPath) {
     stats: config.compiler_stats
   })
 
-  return function * (next) {
-    let ctx = this
-    let req = this.req
-
-    let runNext = yield applyExpressMiddleware(middleware, req, {
+  return async function koaWebpackDevMiddleware (ctx, next) {
+    let hasNext = await applyExpressMiddleware(middleware, ctx.req, {
       end: (content) => ctx.body = content,
       setHeader: function () {
         ctx.set.apply(ctx, arguments)
       }
     })
 
-    if (runNext) {
-      yield* next
+    if (hasNext) {
+      await next()
     }
   }
 }
