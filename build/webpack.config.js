@@ -125,6 +125,7 @@ const cssLoader = !config.compiler_css_modules
 
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
+  include: /src/,
   loaders: [
     'style',
     cssLoader,
@@ -133,9 +134,33 @@ webpackConfig.module.loaders.push({
   ]
 })
 
+// Don't treat global SCSS as modules
+webpackConfig.module.loaders.push({
+  test: /\.scss$/,
+  exclude: /src/,
+  loaders: [
+    'style',
+    'css?sourceMap',
+    'postcss',
+    'sass'
+  ]
+})
+
+// Don't treat global, third-party CSS as modules
+webpackConfig.module.loaders.push({
+  test: /\.css$/,
+  exclude: /src/,
+  loaders: [
+    'style',
+    'css?sourceMap',
+    'postcss'
+  ]
+})
+
 webpackConfig.sassLoader = {
   includePaths: paths.client('styles')
 }
+
 webpackConfig.postcss = [
   cssnano({
     sourcemap: true,
