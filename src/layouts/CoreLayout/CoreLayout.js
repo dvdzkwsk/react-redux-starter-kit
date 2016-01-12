@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { App } from 'react-toolbox'
 import { Grid } from 'react-flexbox-grid'
 import '../../styles/core.scss'
@@ -9,7 +9,7 @@ import '../../styles/core.scss'
 // leverage React's new Stateless Functions:
 // https://facebook.github.io/react/docs/reusable-components.html#stateless-functions
 //
-// CoreLayout is a pure function of it's props, so we can
+// CoreLayout is a pure function of its props, so we can
 // define it with a plain javascript function...
 function CoreLayout ({ children }) {
   return (
@@ -22,7 +22,7 @@ function CoreLayout ({ children }) {
 }
 
 CoreLayout.propTypes = {
-  children: React.PropTypes.element
+  children: PropTypes.element
 }
 
 export default CoreLayout
