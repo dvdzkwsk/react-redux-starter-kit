@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'react-toolbox'
 import { Row, Col } from 'react-flexbox-grid'
@@ -16,9 +16,9 @@ const mapStateToProps = (state) => ({
 })
 export class HomeView extends React.Component {
   static propTypes = {
-    counter: React.PropTypes.number.isRequired,
-    doubleAsync: React.PropTypes.func.isRequired,
-    increment: React.PropTypes.func.isRequired
+    counter: PropTypes.number.isRequired,
+    doubleAsync: PropTypes.func.isRequired,
+    increment: PropTypes.func.isRequired
   };
 
   render () {

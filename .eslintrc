@@ -12,12 +12,9 @@
     "__PROD__"     : false,
     "__DEBUG__"    : false,
     "__DEBUG_NEW_WINDOW__" : false,
-    "__BASENAME__" : false,
-    "React": true,
-    "ReactDOM": true
+    "__BASENAME__" : false
   },
   "rules": {
-    "semi" : [2, "never"],
-    "react-in-jsx-scope": 0
+    "semi" : [2, "never"]
   }
 }
