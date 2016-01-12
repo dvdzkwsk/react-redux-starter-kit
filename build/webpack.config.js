@@ -66,11 +66,6 @@ if (__DEV__) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   )
-} else if (__TEST__) {
-  // Don't split bundles during testing, since we only want import one bundle
-  webpackConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin({
-    names: ['vendor']
-  }))
 } else if (__PROD__) {
   debug('Apply UglifyJS plugin.')
   webpackConfig.plugins.push(
@@ -81,6 +76,13 @@ if (__DEV__) {
       }
     })
   )
+}
+
+// Don't split bundles during testing, since we only want import one bundle
+if (!__TEST__) {
+  webpackConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+    names: ['vendor']
+  }))
 }
 
 // ------------------------------------
