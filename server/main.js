@@ -21,7 +21,7 @@ app.use(convert(historyApiFallback({
 // ------------------------------------
 // Apply Webpack HMR Middleware
 // ------------------------------------
-if (config.compiler_enable_hmr) {
+if (config.env === 'development') {
   const compiler = webpack(webpackConfig)
 
   // Enable webpack-dev and webpack-hot middleware

@@ -12,13 +12,36 @@
     "compile": "node -r dotenv/config --harmony bin/compile",
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
-    "start": "node -r dotenv/config bin/server --hot",
-    "dev": "nodemon -r dotenv/config bin/server --hot",
+    "start": "better-npm-run start",
+    "dev": "better-npm-run dev",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
-    "test": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js",
+    "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
-    "deploy": "npm run test && npm run clean && npm run compile"
+    "deploy": "better-npm-run deploy"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "nodemon -r dotenv/config bin/server",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "deploy": {
+      "command": "npm run test && npm run clean && npm run compile",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "start": {
+      "command": "node -r dotenv/config bin/server"
+    },
+    "test": {
+      "command": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js",
+      "env": {
+        "NODE_ENV": "test"
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -27,6 +50,7 @@
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
+    "better-npm-run": "0.0.5",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
     "history": "^1.17.0",
