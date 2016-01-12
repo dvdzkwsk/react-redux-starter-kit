@@ -5,7 +5,7 @@ import { argv } from 'yargs'
 
 const debug = _debug('app:config:_base')
 const config = {
-  env : process.env.NODE_ENV,
+  env : process.env.NODE_ENV || 'development',
 
   // ----------------------------------
   // Project Structure
