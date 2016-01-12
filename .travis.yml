@@ -11,6 +11,7 @@ install:
   - npm install
 
 script:
+  - npm run test
   - NODE_ENV=development npm run deploy
   - NODE_ENV=staging npm run deploy
   - NODE_ENV=production npm run deploy

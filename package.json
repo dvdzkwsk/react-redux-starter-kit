@@ -28,7 +28,7 @@
       }
     },
     "deploy": {
-      "command": "npm run test && npm run clean && npm run compile",
+      "command": "npm run clean && npm run compile",
       "env": {
         "NODE_ENV": "production"
       }
