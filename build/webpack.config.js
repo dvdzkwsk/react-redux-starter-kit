@@ -2,6 +2,7 @@ import webpack from 'webpack'
 import cssnano from 'cssnano'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import ComponentResolverPlugin from 'component-resolver-webpack'
 import config from '../config'
 import _debug from 'debug'
 
@@ -45,6 +46,9 @@ webpackConfig.output = {
 // Plugins
 // ------------------------------------
 webpackConfig.plugins = [
+  new webpack.ResolverPlugin([
+    new ComponentResolverPlugin()
+  ]),
   new webpack.DefinePlugin(config.globals),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.optimize.DedupePlugin(),
