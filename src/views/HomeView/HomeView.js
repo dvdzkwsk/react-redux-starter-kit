@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { actions as counterActions } from '../../redux/modules/counter'
+import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 import { actions as localeActions } from '../../redux/modules/locale'
 import { defineMessages, FormattedMessage } from 'react-intl'
@@ -69,6 +70,14 @@ export class HomeView extends React.Component {
           <option value='fr'>French</option>
           <option value='en'>English</option>
         </select>
+        <h1><FormattedMessage {...messages.welcome} />"</h1>
+        <div className='row'>
+          <div className='col-xs-2 col-xs-offset-5'>
+            <img className={classes.duck}
+                 src={DuckImage}
+                 alt='This is a duck, because Redux.' />
+          </div>
+        </div>
         <h1><FormattedMessage {...messages.welcome} />"</h1>
         <h2>
           <FormattedMessage {...messages.sampleCounter} />
