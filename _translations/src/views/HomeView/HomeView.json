@@ -1,0 +1,32 @@
+[
+  {
+    "id": "home.welcome",
+    "description": "Welcome to the homepage",
+    "defaultMessage": "Welcome to the React Redux Starter Kit"
+  },
+  {
+    "id": "home.sampleCounter",
+    "description": "Sample Counter text",
+    "defaultMessage": "Sample Counter:"
+  },
+  {
+    "id": "home.linkNotFoundView",
+    "description": "Text link for not found view",
+    "defaultMessage": "Go to 404 Page"
+  },
+  {
+    "id": "home.spanish",
+    "description": "Select language",
+    "defaultMessage": "Spanish"
+  },
+  {
+    "id": "home.english",
+    "description": "Select language",
+    "defaultMessage": "English"
+  },
+  {
+    "id": "home.french",
+    "description": "Select language",
+    "defaultMessage": "French"
+  }
+]

@@ -7,5 +7,17 @@
 // within webpack helps prevent unexpected errors.
 {
   "presets": ["es2015", "react", "stage-0"],
-  "plugins": ["transform-runtime", "add-module-exports"]
+  "plugins": ["transform-runtime", "add-module-exports" ],
+
+
+"env": {
+    "i18n": {
+      "plugins": [
+        [ "react-intl", {
+          "messagesDir": "./_translations",
+          "enforceDescriptions": false
+        }]
+      ]
+    }
+  }
 }

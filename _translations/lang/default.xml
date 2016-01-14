@@ -1,0 +1,87 @@
+
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="default">
+  <file id="f1">
+    
+<unit id="home.english">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[English]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.french">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[French]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.linkNotFoundView">
+  <notes>
+    <note>Text link for not found view</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[Go to 404 Page]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.sampleCounter">
+  <notes>
+    <note>Sample Counter text</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[Sample Counter:]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.spanish">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[Spanish]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.welcome">
+  <notes>
+    <note>Welcome to the homepage</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[Welcome to the React Redux Starter Kit]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+<unit id="notFound.linkHomeView">
+  <notes>
+    <note>Text link for home view</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[Back To Home View]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+<unit id="notFound.welcome">
+  <notes>
+    <note>page message</note>
+  </notes>
+  <segment state="initial">
+    <source><![CDATA[This is a demo 404 page!]]></source>
+    <target><![CDATA[]]></target>
+  </segment>
+</unit>
+  
+ </file>
+</xliff>
+  

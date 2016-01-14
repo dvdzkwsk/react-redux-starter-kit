@@ -1,0 +1,87 @@
+
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="it">
+  <file id="f1">
+    
+<unit id="home.english">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[English]]></source>
+    <target><![CDATA[Inglés]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.french">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[French]]></source>
+    <target><![CDATA[Francés]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.linkNotFoundView">
+  <notes>
+    <note>Text link for not found view</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[Go to 404 Page]]></source>
+    <target><![CDATA[Aller à la vue 404 error]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.sampleCounter">
+  <notes>
+    <note>Sample Counter text</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[Sample Counter:]]></source>
+    <target><![CDATA[Contateur d'example: ]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.spanish">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[Spanish]]></source>
+    <target><![CDATA[Español]]></target>
+  </segment>
+</unit>
+  
+<unit id="home.welcome">
+  <notes>
+    <note>Welcome to the homepage</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[Welcome to the React Redux Starter Kit]]></source>
+    <target><![CDATA[Bienvenue au Starter Kit du React Redux]]></target>
+  </segment>
+</unit>
+  
+<unit id="notFound.linkHomeView">
+  <notes>
+    <note>Text link for home view</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[Back To Home View]]></source>
+    <target><![CDATA[Retourner à la vue de dèpart]]></target>
+  </segment>
+</unit>
+  
+<unit id="notFound.welcome">
+  <notes>
+    <note>page message</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[This is a demo 404 page!]]></source>
+    <target><![CDATA[Cella est la vue 404 error]]></target>
+  </segment>
+</unit>
+  
+ </file>
+</xliff>
+  
