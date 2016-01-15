@@ -64,6 +64,7 @@ Features
   * Code coverage reports
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
   * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
+  * [babel-plugin-react-pure-components](https://github.com/thejameskyle/babel-plugin-react-pure-components) transforms pure component classes into  function components
   * [babel-preset-react-hmre](https://github.com/danmartinez101/babel-preset-react-hmre) for:
     * react-transform-hmr (HMR for React components)
     * redbox-react (visible error reporting for React components)
