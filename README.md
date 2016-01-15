@@ -180,18 +180,43 @@ You can redefine which packages to bundle separately by modifying `compiler_vend
 ]
 ```
 
-### Webpack Root Resolve
-Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
+### Webpack Resolvers
+Webpack is configured to make use of several shortcuts that help make imports more flexible, modular and DRY:
+ - [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root) lets you import local packages as if you were traversing from the root of your `~/src` directory.
+ - [component-resolver-webpack](https://github.com/toptal/component-resolver-webpack) shortcut for resolving components with filenames that match their directory names, the widely accepted convention for modular react components used in this projecs.
 
+**Using `resolve.root`:**
 ```js
-// current file: ~/src/views/some/nested/View.js
-
 // What used to be this:
-import SomeComponent from '../../../components/SomeComponent'
+import SomeComponent from '../../../components/SomeComponent/SomeComponent.js'
 
 // Can now be this:
-import SomeComponent from 'components/SomeComponent' // Hooray!
+import SomeComponent from 'components/SomeComponent/SomeComponent' // Hooray!
 ```
+
+No more relative imports! Not only is this is a nice shortcut, resolving `import` from the root makes our structure much more flexible.
+
+But did you notice the redudent `SomeComponent/SomeComponent` reference? That's a code smell that is an unfortunate result of the following modern convention for organizing component project structure:
+> The component file should be placed in a directory named as component itself e.g `Button.jsx` must be placed inside `Button` directorty: `Button/Button.jsx`.
+
+That's where the component resolver plugin comes in...
+
+**Using `resolve.root` and component resolver:**
+
+```js
+// relative import:
+import SomeComponent from '../../../components/SomeComponent/SomeComponent.js'
+
+// using root and extension resolvers (current setup)
+import SomeComponent from 'components/SomeComponent/SomeComponent'
+
+// using component resolver plugin
+import SomeComponent from 'components/SomeComponent'  // Boom!
+```
+
+Note that standard import syntax and behavior are not affected, so the former import and require methods will still work.
+
+### 
 
 ### Globals
 
