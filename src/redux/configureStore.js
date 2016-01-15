@@ -1,33 +1,26 @@
-import thunk from 'redux-thunk'
-import { syncHistory } from 'redux-simple-router'
-import rootReducer from './rootReducer'
 import { applyMiddleware, compose, createStore } from 'redux'
+import { syncHistory } from 'redux-simple-router'
+import thunk from 'redux-thunk'
+import rootReducer from './rootReducer'
 
-export default initialState => history => {
-  let createStoreWithMiddleware
+function withDevTools (middleware) {
+  const devTools = window.devToolsExtension
+    ? window.devToolsExtension()
+    : require('containers/DevTools').default.instrument()
+  return compose(middleware, devTools)
+}
 
-  const syncedHistory = syncHistory(history)
-  const middleware = applyMiddleware(thunk, syncedHistory)
+export default function configureStore ({ initialState = {}, history }) {
+  // Sync with router via history instance (main.js)
+  const routerMiddleware = syncHistory(history)
 
-  if (__DEBUG__) {
-    createStoreWithMiddleware = compose(
-      middleware,
-      window.devToolsExtension
-        ? window.devToolsExtension()
-        : require('containers/DevTools').default.instrument()
-    )
-  } else {
-    createStoreWithMiddleware = compose(middleware)
-  }
+  // Compose final middleware and use devtools in debug environment
+  let middleware = applyMiddleware(thunk, routerMiddleware)
+  if (__DEBUG__) middleware = withDevTools(middleware)
 
-  const store = createStoreWithMiddleware(createStore)(
-    rootReducer, initialState
-  )
-
-  if (__DEBUG__) {
-    // Required for replaying router actions (ie. redux devtools)
-    syncedHistory.listenForReplays(store, state => state.router)
-  }
+  // Create final store and subscribe router in debug env ie. for devtools
+  const store = middleware(createStore)(rootReducer, initialState)
+  if (__DEBUG__) routerMiddleware.listenForReplays(store, ({ router }) => router)
 
   if (module.hot) {
     module.hot.accept('./rootReducer', () => {
@@ -36,6 +29,5 @@ export default initialState => history => {
       store.replaceReducer(nextRootReducer)
     })
   }
-
   return store
 }
