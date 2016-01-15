@@ -6,6 +6,7 @@ import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 import { actions as localeActions } from '../../redux/modules/locale'
 import { defineMessages, FormattedMessage } from 'react-intl'
+import LanguageSelector from 'components/LanguageSelector'
 
 const messages = defineMessages({
   welcome: {
@@ -63,14 +64,12 @@ export class HomeView extends React.Component {
   }
 
   render () {
+    const {localeChange} = this.props
     return (
       <div className='container text-center'>
-        <select defaultValue={this.props.locale} onChange={(e) => this.handleChange(e)}>
-          <option value='es'>Spanish</option>
-          <option value='fr'>French</option>
-          <option value='en'>English</option>
-        </select>
-        <h1><FormattedMessage {...messages.welcome} />"</h1>
+      <LanguageSelector onChange={localeChange}>prueba Idioma Selector</LanguageSelector>
+
+        <h1><FormattedMessage {...messages.welcome} /></h1>
         <div className='row'>
           <div className='col-xs-2 col-xs-offset-5'>
             <img className={classes.duck}
@@ -78,7 +77,7 @@ export class HomeView extends React.Component {
                  alt='This is a duck, because Redux.' />
           </div>
         </div>
-        <h1><FormattedMessage {...messages.welcome} />"</h1>
+        <h1><FormattedMessage {...messages.welcome} /></h1>
         <h2>
           <FormattedMessage {...messages.sampleCounter} />
           <span className={classes['counter--green']}>{this.props.counter}</span>
