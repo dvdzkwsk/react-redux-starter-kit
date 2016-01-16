@@ -195,11 +195,14 @@ import SomeComponent from 'components/SomeComponent' // Hooray!
 
 ### Globals
 
-These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/index.js`.
+These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/_base.js`. When adding new globals, also add them to `~/.eslintrc`.
 
 * `process.env.NODE_ENV` - the active `NODE_ENV` when the build started
 * `__DEV__` - True when `process.env.NODE_ENV` is `development`
 * `__PROD__` - True when `process.env.NODE_ENV` is `production`
+* `__TEST__` - True when `process.env.NODE_ENV` is `test`
+* `__DEBUG__` - True when `process.env.NODE_ENV` is `development` and cli arg `--no_debug` is not set (`npm run dev:no-debug`)
+* `__BASENAME__` - [npm history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)
 
 Server
 ------
