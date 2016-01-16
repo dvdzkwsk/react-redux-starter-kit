@@ -141,6 +141,16 @@ webpackConfig.module.loaders.push({
   ]
 })
 
+webpackConfig.module.loaders.push({
+  test: /\.css$/,
+  include: /src/,
+  loaders: [
+    'style',
+    cssLoader,
+    'postcss'
+  ]
+})
+
 // Don't treat global SCSS as modules
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
