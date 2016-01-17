@@ -86,6 +86,7 @@ export class HomeView extends React.Component {
                 onClick={() => this.props.increment(1)}>
           Increment
         </button>
+        {' '}
         <button className='btn btn-default'
                 onClick={this.props.doubleAsync}>
           Double (Async)
