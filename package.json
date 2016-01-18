@@ -28,7 +28,7 @@
       }
     },
     "deploy": {
-      "command": "npm run clean && npm run compile",
+      "command": "npm run lint && npm run clean && npm run compile",
       "env": {
         "NODE_ENV": "production"
       }
@@ -51,17 +51,23 @@
   "license": "MIT",
   "dependencies": {
     "better-npm-run": "0.0.5",
+    "classnames": "^2.2.1",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
+    "flexboxgrid": "^6.3.0",
     "history": "^2.0.0-rc2",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",
     "koa-static": "^2.0.0",
+    "normalize.css": "^3.0.3",
     "react": "^0.14.0",
+    "react-addons-css-transition-group": "^0.14.3",
     "react-dom": "^0.14.0",
+    "react-flexbox-grid": "^0.8.3",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0-rc5",
+    "react-toolbox": "^0.14.0",
     "redux": "^3.0.0",
     "redux-actions": "^0.9.0",
     "redux-simple-router": "^2.0.2",
@@ -103,6 +109,7 @@
     "karma-chai-as-promised": "^0.1.2",
     "karma-chai-sinon": "^0.1.5",
     "karma-coverage": "^0.5.0",
+    "karma-es6-shim": "^0.2.0",
     "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sourcemap-loader": "^0.3.7",

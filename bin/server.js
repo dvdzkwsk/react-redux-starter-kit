@@ -7,5 +7,5 @@ const debug = require('debug')('app:bin:server')
 const port = config.server_port
 const host = config.server_host
 
-server.listen(port)
+server.listen(port, host)
 debug(`Server is now running at ${host}:${port}.`)
