@@ -33,7 +33,8 @@ Table of Contents
 Requirements
 ------------
 
-Node `^5.0.0`
+* node `^4.2.0`
+* npm `^3.0.0`
 
 Features
 --------
@@ -45,7 +46,7 @@ Features
   * redux-devtools
     * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
-* [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
+* [react-router](https://github.com/rackt/react-router) (`^2.0.0-rc5`)
 * [redux-simple-router](https://github.com/rackt/redux-simple-router) (`^1.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
   * [CSS modules!](https://github.com/css-modules/css-modules)
@@ -158,13 +159,6 @@ This distinction may not be important for you, but as an explanation: A **Layout
 Webpack
 -------
 
-### Configuration
-The webpack compiler configuration is located in `~/build/webpack`. Here you'll find configurations for each environment; `development` and `production` exist out of the box.
-
-**Note**: There has been a conscious decision to keep development-specific configuration (such as hot-reloading) out of `.babelrc`. By doing this, it's possible to create cleaner development builds (such as for teams that have a `dev` -> `stage` -> `production` workflow) that don't, for example, constantly poll for HMR updates.
-
-So why not just disable HMR? Well, as a further explanation, enabling `react-transform-hmr` in `.babelrc` but building the project without HMR enabled (think of running tests with `NODE_ENV=development` but without a dev server) causes errors to be thrown, so this decision also alleviates that issue.
-
 ### Vendor Bundle
 You can redefine which packages to bundle separately by modifying `compiler_vendor` in `~/config/_base.js`. These default to:
 
@@ -194,11 +188,14 @@ import SomeComponent from 'components/SomeComponent' // Hooray!
 
 ### Globals
 
-These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/index.js`.
+These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/_base.js`. When adding new globals, also add them to `~/.eslintrc`.
 
 * `process.env.NODE_ENV` - the active `NODE_ENV` when the build started
 * `__DEV__` - True when `process.env.NODE_ENV` is `development`
 * `__PROD__` - True when `process.env.NODE_ENV` is `production`
+* `__TEST__` - True when `process.env.NODE_ENV` is `test`
+* `__DEBUG__` - True when `process.env.NODE_ENV` is `development` and cli arg `--no_debug` is not set (`npm run dev:no-debug`)
+* `__BASENAME__` - [npm history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)
 
 Server
 ------

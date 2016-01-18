@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Button } from 'react-toolbox'
-import { Row, Col } from 'react-flexbox-grid'
 import { Link } from 'react-router'
 import { actions as counterActions } from '../../redux/modules/counter'
+import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 
 // We define mapStateToProps where we'd normally use
@@ -23,23 +22,33 @@ export class HomeView extends React.Component {
 
   render () {
     return (
-      <Row center='xs'>
-        <Col xs={8}>
-          <h1>Welcome to the React Redux Starter Kit</h1>
-          <h2>
-            Sample Counter:&nbsp;
-            <span className={classes['counter--green']}>{this.props.counter}</span>
-          </h2>
-          <Button raised accent onClick={() => this.props.increment(1)}>
-            Increment
-          </Button>
-          <Button primary onClick={this.props.doubleAsync}>
-            Double (Async)
-          </Button>
-          <hr />
-          <Link to='/about'>Go To About View</Link>
-        </Col>
-      </Row>
+      <div className='container text-center'>
+        <div className='row'>
+          <div className='col-xs-2 col-xs-offset-5'>
+            <img className={classes.duck}
+                 src={DuckImage}
+                 alt='This is a duck, because Redux.' />
+          </div>
+        </div>
+        <h1>Welcome to the React Redux Starter Kit</h1>
+        <h2>
+          Sample Counter:
+          {' '}
+          <span className={classes['counter--green']}>{this.props.counter}</span>
+        </h2>
+        <button className='btn btn-default'
+                onClick={() => this.props.increment(1)}>
+          Increment
+        </button>
+        {' '}
+        <button className='btn btn-default'
+                onClick={this.props.doubleAsync}>
+          Double (Async)
+        </button>
+        <hr />
+        <Link to='/torrents'>Go to torrents page</Link>
+        <Link to='/404'>Go to 404 Page</Link>
+      </div>
     )
   }
 }

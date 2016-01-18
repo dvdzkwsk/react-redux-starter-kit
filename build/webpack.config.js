@@ -5,17 +5,18 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../config'
 import _debug from 'debug'
 
-const paths = config.utils_paths
 const debug = _debug('app:webpack:config')
-debug('Create configuration.')
+const paths = config.utils_paths
+const {__DEV__, __PROD__, __TEST__} = config.globals
 
+debug('Create configuration.')
 const webpackConfig = {
   name: 'client',
   target: 'web',
   devtool: config.compiler_devtool,
   resolve: {
     root: paths.base(config.dir_client),
-    extensions: ['', '.js', '.scss']
+    extensions: ['', '.js', '.jsx', '.scss']
   },
   module: {}
 }
@@ -25,7 +26,7 @@ const webpackConfig = {
 const APP_ENTRY_PATH = paths.base(config.dir_client) + '/main.js'
 
 webpackConfig.entry = {
-  app: config.compiler_enable_hmr
+  app: __DEV__
     ? [APP_ENTRY_PATH, 'webpack-hot-middleware/client?path=/__webpack_hmr']
     : [APP_ENTRY_PATH],
   vendor: config.compiler_vendor
@@ -59,37 +60,44 @@ webpackConfig.plugins = [
   })
 ]
 
-if (config.compiler_enable_hmr) {
+if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).')
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   )
-}
-if (config.env === 'production') {
+} else if (__PROD__) {
   debug('Apply UglifyJS plugin.')
   webpackConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
-        dead_code: true
+        dead_code: true,
+        warnings: false
       }
     })
   )
+}
+
+// Don't split bundles during testing, since we only want import one bundle
+if (!__TEST__) {
+  webpackConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+    names: ['vendor']
+  }))
 }
 
 // ------------------------------------
 // Pre-Loaders
 // ------------------------------------
 webpackConfig.module.preLoaders = [{
-  test: /\.js$/,
+  test: /\.(js|jsx)$/,
   loader: 'eslint',
   exclude: /node_modules/
 }]
 
 webpackConfig.eslint = {
   configFile: paths.base('.eslintrc'),
-  emitWarning: config.compiler_enable_hmr
+  emitWarning: __DEV__
 }
 
 // ------------------------------------
@@ -97,13 +105,13 @@ webpackConfig.eslint = {
 // ------------------------------------
 // JavaScript / JSON
 webpackConfig.module.loaders = [{
-  test: /\.js$/,
+  test: /\.(js|jsx)$/,
   exclude: /node_modules/,
   loader: 'babel',
   query: {
     cacheDirectory: true,
     plugins: ['transform-runtime'],
-    presets: config.compiler_enable_hmr
+    presets: __DEV__
       ? ['es2015', 'react', 'stage-0', 'react-hmre']
       : ['es2015', 'react', 'stage-0']
   }
@@ -131,6 +139,16 @@ webpackConfig.module.loaders.push({
     cssLoader,
     'postcss',
     'sass'
+  ]
+})
+
+webpackConfig.module.loaders.push({
+  test: /\.css$/,
+  include: /src/,
+  loaders: [
+    'style',
+    cssLoader,
+    'postcss'
   ]
 })
 
@@ -181,6 +199,7 @@ webpackConfig.postcss = [
 webpackConfig.module.loaders.push(
   { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
   { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
+  { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
   { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
   { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
   { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
@@ -191,10 +210,10 @@ webpackConfig.module.loaders.push(
 // ------------------------------------
 // Finalize Configuration
 // ------------------------------------
-// when we don't know the public path (we know it only when HMR is enabled) we
+// when we don't know the public path (we know it only when HMR is enabled [in development]) we
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
-if (!config.compiler_enable_hmr) {
+if (!__DEV__) {
   debug('Apply ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.loaders.filter(loader =>
     loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
@@ -210,14 +229,5 @@ if (!config.compiler_enable_hmr) {
     })
   )
 }
-
-// NOTE: this is a temporary workaround. I don't know how to get Karma
-// to include the vendor bundle that webpack creates, so to get around that
-// we remove the bundle splitting when webpack is used with Karma.
-const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
-  names: ['vendor']
-})
-commonChunkPlugin.__KARMA_IGNORE__ = true
-webpackConfig.plugins.push(commonChunkPlugin)
 
 export default webpackConfig
