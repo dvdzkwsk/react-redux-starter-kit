@@ -58,11 +58,12 @@ export class HomeView extends React.Component {
     locale: React.PropTypes.string.isRequired,
     localeChange: React.PropTypes.func.isRequired
   };
-
+/*
+  No need for handleChange????
   handleChange (e) {
     this.props.localeChange(e.target.value)
   }
-
+*/
   render () {
     const {localeChange} = this.props
     return (
