@@ -52,7 +52,7 @@
   "dependencies": {
     "better-npm-run": "0.0.5",
     "debug": "^2.2.0",
-    "dotenv": "^1.2.0",
+    "dotenv": "^2.0.0",
     "history": "^2.0.0-rc2",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
