@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { actions as counterActions } from '../../redux/modules/counter'
+import { actions as fetchingActions } from '../../redux/modules/fetching'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 
@@ -11,10 +12,12 @@ import classes from './HomeView.scss'
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  counter: state.counter
+  counter: state.counter,
+  fetching: state.fetching
 })
 export class HomeView extends React.Component {
   static propTypes = {
+    fetching: PropTypes.bool.isRequired,
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
     increment: PropTypes.func.isRequired
@@ -42,8 +45,9 @@ export class HomeView extends React.Component {
         </button>
         {' '}
         <button className='btn btn-default'
+                disabled={this.props.fetching}
                 onClick={this.props.doubleAsync}>
-          Double (Async)
+          { this.props.fetching ? 'Wait...' : 'Double (Async)' }
         </button>
         <hr />
         <Link to='/404'>Go to 404 Page</Link>
@@ -52,4 +56,4 @@ export class HomeView extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, counterActions)(HomeView)
+export default connect(mapStateToProps, Object.assign({}, counterActions, fetchingActions))(HomeView)
