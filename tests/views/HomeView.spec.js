@@ -25,6 +25,7 @@ describe('(View) Home', function () {
     _spies = {}
     _props = {
       counter: 0,
+      fetching: false,
       ...bindActionCreators({
         doubleAsync: (_spies.doubleAsync = sinon.spy()),
         increment: (_spies.increment = sinon.spy())

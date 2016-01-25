@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
+import { fetch, endFetch } from './fetching'
 
 // ------------------------------------
 // Constants
@@ -18,8 +19,9 @@ export const increment = createAction(COUNTER_INCREMENT, (value = 1) => value)
 // reducer take care of this logic.
 export const doubleAsync = () => {
   return (dispatch, getState) => {
+    dispatch(fetch())
     setTimeout(() => {
-      dispatch(increment(getState().counter))
+      dispatch([endFetch(), increment(getState().counter)])
     }, 1000)
   }
 }
