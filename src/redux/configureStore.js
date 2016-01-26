@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-import { syncHistory } from 'redux-simple-router'
+import { syncHistory } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './rootReducer'
 
@@ -20,7 +20,7 @@ export default function configureStore ({ initialState = {}, history }) {
 
   // Create final store and subscribe router in debug env ie. for devtools
   const store = middleware(createStore)(rootReducer, initialState)
-  if (__DEBUG__) routerMiddleware.listenForReplays(store, ({ router }) => router)
+  if (__DEBUG__) routerMiddleware.listenForReplays(store, ({ router }) => router.location)
 
   if (module.hot) {
     module.hot.accept('./rootReducer', () => {
