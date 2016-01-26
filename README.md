@@ -35,6 +35,7 @@ You can also run a script to extract all those translations as key-value.
 $ npm run build:i18n:langs
 ```
 
+There are console errors for default message. It will be [fixed with the new React-intl release](https://github.com/yahoo/react-intl/issues/251)
 
 #### Thanks
 
