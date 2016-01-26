@@ -31,7 +31,6 @@ $ npm run build:i18n
 
 You can also run a script to extract all those translations as key-value.
 
-<<<<<<< HEAD
 ```bash
 $ npm run build:i18n:langs
 ```
