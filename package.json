@@ -54,7 +54,7 @@
   "dependencies": {
     "better-npm-run": "0.0.5",
     "debug": "^2.2.0",
-    "dotenv": "^1.2.0",
+    "dotenv": "^2.0.0",
     "intl": "^1.0.1",
     "history": "^2.0.0-rc2",
     "koa": "^2.0.0-alpha.3",
@@ -101,7 +101,7 @@
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.8.4",
     "fs-extra": "^0.26.3",
-    "html-webpack-plugin": "^1.6.1",
+    "html-webpack-plugin": "^2.7.1",
     "isparta-loader": "^2.0.0",
     "json-loader": "^0.5.4",
     "karma": "^0.13.8",
