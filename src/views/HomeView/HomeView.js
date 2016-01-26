@@ -55,17 +55,11 @@ export class HomeView extends React.Component {
     counter: React.PropTypes.number.isRequired,
     doubleAsync: React.PropTypes.func.isRequired,
     increment: React.PropTypes.func.isRequired,
-    locale: React.PropTypes.string.isRequired,
     localeChange: React.PropTypes.func.isRequired
   };
-/*
-  No need for handleChange????
-  handleChange (e) {
-    this.props.localeChange(e.target.value)
-  }
-*/
+
   render () {
-    const {localeChange, locale} = this.props
+    const {localeChange} = this.props
     return (
       <div className='container text-center'>
       <LanguageSelector onChange={localeChange}>prueba Idioma Selector</LanguageSelector>

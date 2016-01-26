@@ -4,7 +4,7 @@ import { sync as mkdirpSync } from 'mkdirp'
 import * as i18n from '../src/i18n'
 
 const MESSAGES_PATTERN = './_translations/**/*.json'
-const LANG_DIR         = './_translations/lang/'
+const LANG_DIR = './_translations/lang/'
 // Ensure output folder exists
 mkdirpSync(LANG_DIR)
 
@@ -19,15 +19,14 @@ let defaultMessages = globSync(MESSAGES_PATTERN)
 .map(file => JSON.parse(file))
 .reduce((collection, descriptors) => {
   descriptors.forEach(({ id, defaultMessage, description }) => {
-    if (collection.hasOwnProperty(id))
+    if (collection.hasOwnProperty(id)) {
       throw new Error(`Duplicate message id: ${id}`)
+    }
 
     collection[id] = { defaultMessage, description }
   })
   return collection
 }, {})
-
-
 
 // Sort keys by name
 const messageKeys = Object.keys(defaultMessages)
@@ -50,8 +49,8 @@ Object.keys(i18n).forEach(lang => {
 })
 
 function buildUnits (source, target) {
-  console.log ("source:" + source);
-  console.log ("target:" + target);
+  console.log('source:' + source)
+  console.log('target:' + target)
   return Object.keys(source).map(key => {
     const sourceMessage = source[key]
     const targetMessage = target[key]
@@ -85,5 +84,5 @@ function buildXliffDocument (lang, units) {
  </file>
 </xliff>
   `
-/*eslint-enable max-len*/
+/* eslint-enable max-len */
 }
