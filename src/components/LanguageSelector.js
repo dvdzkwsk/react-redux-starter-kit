@@ -22,7 +22,7 @@ class LanguageSelector extends Component {
     render () {
       const {formatMessage, locale} = this.props.intl
       return (
-        <select defaultValue={locale} onChange={(e) => this.handleChange(e)}>
+        <select value={locale} onChange={(e) => this.handleChange(e)}>
                 <option id='es' value='es'>{formatMessage(messages.spanish)}</option>
                 <option id='fr' value='fr'>{formatMessage(messages.french)}</option>
                 <option id='en' value='en'>{formatMessage(messages.english)}</option>
