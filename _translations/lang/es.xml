@@ -6,9 +6,9 @@
   <notes>
     <note>Select language</note>
   </notes>
-  <segment state="translated">
+  <segment state="initial">
     <source><![CDATA[English]]></source>
-    <target><![CDATA[Inglés]]></target>
+    <target><![CDATA[]]></target>
   </segment>
 </unit>
   
@@ -16,9 +16,9 @@
   <notes>
     <note>Select language</note>
   </notes>
-  <segment state="translated">
+  <segment state="initial">
     <source><![CDATA[French]]></source>
-    <target><![CDATA[Francés]]></target>
+    <target><![CDATA[]]></target>
   </segment>
 </unit>
   
@@ -46,9 +46,9 @@
   <notes>
     <note>Select language</note>
   </notes>
-  <segment state="translated">
+  <segment state="initial">
     <source><![CDATA[Spanish]]></source>
-    <target><![CDATA[Español]]></target>
+    <target><![CDATA[]]></target>
   </segment>
 </unit>
   
@@ -59,6 +59,36 @@
   <segment state="translated">
     <source><![CDATA[Welcome to the React Redux Starter Kit]]></source>
     <target><![CDATA[Bienvenido al Starter Kit de React Redux]]></target>
+  </segment>
+</unit>
+  
+<unit id="languageSelector.english">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[English]]></source>
+    <target><![CDATA[Inglés]]></target>
+  </segment>
+</unit>
+  
+<unit id="languageSelector.french">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[French]]></source>
+    <target><![CDATA[Francés]]></target>
+  </segment>
+</unit>
+  
+<unit id="languageSelector.spanish">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[Spanish]]></source>
+    <target><![CDATA[Español]]></target>
   </segment>
 </unit>
   

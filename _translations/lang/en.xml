@@ -62,6 +62,36 @@
   </segment>
 </unit>
   
+<unit id="languageSelector.english">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[English]]></source>
+    <target><![CDATA[English]]></target>
+  </segment>
+</unit>
+  
+<unit id="languageSelector.french">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[French]]></source>
+    <target><![CDATA[French]]></target>
+  </segment>
+</unit>
+  
+<unit id="languageSelector.spanish">
+  <notes>
+    <note>Select language</note>
+  </notes>
+  <segment state="translated">
+    <source><![CDATA[Spanish]]></source>
+    <target><![CDATA[Spanish]]></target>
+  </segment>
+</unit>
+  
 <unit id="notFound.linkHomeView">
   <notes>
     <note>Text link for home view</note>
