@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import React, {Component, PropTypes} from 'react'
+import {defineMessages, injectIntl, intlShape} from 'react-intl'
 const messages = defineMessages({
   spanish: {
     id: 'languageSelector.spanish',
@@ -23,9 +23,9 @@ class LanguageSelector extends Component {
       const {formatMessage, locale} = this.props.intl
       return (
         <select defaultValue={locale} onChange={(e) => this.handleChange(e)}>
-                <option value='es'>{formatMessage(messages.spanish)}</option>
-                <option value='fr'>{formatMessage(messages.french)}</option>
-            <option value='en'>{formatMessage(messages.english)}</option>
+                <option id='es' value='es'>{formatMessage(messages.spanish)}</option>
+                <option id='fr' value='fr'>{formatMessage(messages.french)}</option>
+                <option id='en' value='en'>{formatMessage(messages.english)}</option>
         </select>
         )
     }

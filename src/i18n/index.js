@@ -1,7 +1,3 @@
-exports.es = (function (obj) {
-  return obj && obj.__esModule ? obj['default'] : obj
-}(require('./es')))
+export { default as fr } from './fr'
+export { default as es } from './es'
 
-exports.fr = (function (obj) {
-  return obj && obj.__esModule ? obj['default'] : obj
-}(require('./fr')))
