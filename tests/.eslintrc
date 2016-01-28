@@ -7,5 +7,8 @@
     "expect" : false,
     "should" : false,
     "sinon"  : false
+  },
+  "rules": {
+    "max-nested-callbacks": [1, 4]
   }
 }

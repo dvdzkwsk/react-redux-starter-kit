@@ -1,9 +1,9 @@
-import { argv } from 'yargs'
-import config from '../config'
-import webpackConfig from './webpack.config'
+import { argv } from 'yargs';
+import config from '../config';
+import webpackConfig from './webpack.config';
 
-const debug = require('debug')('app:karma')
-debug('Create configuration.')
+const debug = require('debug')('app:karma');
+debug('Create configuration.');
 
 const karmaConfig = {
   basePath: '../', // project root in relation to bin/karma.js
@@ -38,16 +38,16 @@ const karmaConfig = {
   coverageReporter: {
     reporters: config.coverage_reporters
   }
-}
+};
 
 if (config.coverage_enabled) {
-  karmaConfig.reporters.push('coverage')
+  karmaConfig.reporters.push('coverage');
   karmaConfig.webpack.module.preLoaders = [{
     test: /\.(js|jsx)$/,
     include: new RegExp(config.dir_client),
     loader: 'isparta',
     exclude: /node_modules/
-  }]
+  }];
 }
 
-export default (cfg) => cfg.set(karmaConfig)
+export default (cfg) => cfg.set(karmaConfig);

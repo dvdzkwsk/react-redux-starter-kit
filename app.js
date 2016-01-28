@@ -1,7 +1,7 @@
-if(process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
   // Start prod server
-  require('./server')
-}else{
+  require('./server');
+} else {
   // Start dev server
-  require('./bin/server')
+  require('./bin/server');
 }

@@ -1,2 +1,2 @@
-require('babel-register')
+require('babel-register');
 // TODO: production server code goes here

@@ -8,4 +8,4 @@ export default (config) => ({
     chunkModules : true,
     colors : true
   }
-})
+});
