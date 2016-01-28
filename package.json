@@ -18,13 +18,20 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
-    "deploy": "better-npm-run deploy"
+    "deploy": "better-npm-run deploy",
+    "prod": "better-npm-run prod"
   },
   "betterScripts": {
     "dev": {
       "command": "nodemon -r dotenv/config bin/server",
       "env": {
         "NODE_ENV": "development"
+      }
+    },
+    "prod": {
+      "command": "node -r dotenv/config ./server",
+      "env": {
+        "NODE_ENV": "production"
       }
     },
     "deploy": {
@@ -34,7 +41,7 @@
       }
     },
     "start": {
-      "command": "node -r dotenv/config bin/server"
+      "command": "node -r dotenv/config app"
     },
     "test": {
       "command": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js",
@@ -53,6 +60,7 @@
     "better-npm-run": "0.0.5",
     "debug": "^2.2.0",
     "dotenv": "^2.0.0",
+    "express": "^4.13.4",
     "history": "^2.0.0-rc2",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
@@ -70,6 +78,7 @@
     "yargs": "^3.18.0"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.2.0",
     "babel-core": "^6.3.17",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.0",
@@ -83,6 +92,7 @@
     "babel-runtime": "^6.3.19",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
+    "compression-webpack-plugin": "^0.3.0",
     "css-loader": "^0.23.0",
     "cssnano": "^3.3.2",
     "eslint": "^1.10.3",

@@ -15,6 +15,16 @@
     "__BASENAME__" : false
   },
   "rules": {
-    "semi" : [2, "never"]
+    "camelcase": 2,
+    "constructor-super": 2,
+    "comma-style": [2, "last"],
+    "eol-last": 2,
+    "indent"  : [2, 2],
+    "key-spacing": [2, {"afterColon": true}],
+    "no-var"  : 2,
+    "no-const-assign": 2,
+    "max-nested-callbacks": [1, 2],
+    "prefer-const": 2,
+    "semi"    : [2, "always"]
   }
 }

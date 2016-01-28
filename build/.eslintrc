@@ -9,6 +9,6 @@
     "sinon"  : false
   },
   "rules": {
-    "max-nested-callbacks": [1, 4]
+    "camelcase": 0
   }
 }
