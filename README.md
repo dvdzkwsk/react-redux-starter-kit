@@ -44,8 +44,8 @@ Features
   * redux-devtools
     * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
-* [react-router](https://github.com/rackt/react-router) (`^2.0.0-rc5`)
-* [redux-simple-router](https://github.com/rackt/redux-simple-router) (`^1.0.0`)
+* [react-router](https://github.com/rackt/react-router) (`^2.0.0`)
+* [react-router-redux](https://github.com/rackt/react-router-redux) (`^2.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
   * [CSS modules!](https://github.com/css-modules/css-modules)
   * sass-loader
@@ -117,7 +117,7 @@ Common configuration options:
 * `server_host` - hostname for the Koa server
 * `server_port` - port for the Koa server
 * `compiler_css_modules` - whether or not to enable CSS modules
-* `compiler_source_maps` - whether or not to generate source maps
+* `compiler_devtool` - what type of source-maps to generate (set to `false`/`null` to disable)
 * `compiler_vendor` - packages to separate into to the vendor bundle
 
 Structure
@@ -166,7 +166,7 @@ You can redefine which packages to bundle separately by modifying `compiler_vend
   'react',
   'react-redux',
   'react-router',
-  'redux-simple-router',
+  'react-router-redux',
   'redux'
 ]
 ```
