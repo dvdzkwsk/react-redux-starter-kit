@@ -181,16 +181,16 @@ webpackConfig.sassLoader = {
 
 webpackConfig.postcss = [
   cssnano({
-    sourcemap: true,
     autoprefixer: {
       add: true,
       remove: true,
       browsers: ['last 2 versions']
     },
-    safe: true,
     discardComments: {
       removeAll: true
-    }
+    },
+    safe: true,
+    sourcemap: true
   })
 ]
 

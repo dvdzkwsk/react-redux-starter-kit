@@ -1,7 +1,7 @@
 // Code copied from https://github.com/popomore/koa-proxy
 // Copyright (c) 2014 popomore. Licensed under the MIT license.
 
-'use strict';
+'use strict'
 
 var join = require('url').resolve
 var iconv = require('iconv-lite')

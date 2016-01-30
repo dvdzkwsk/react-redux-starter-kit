@@ -21,7 +21,7 @@ export default function (compiler, publicPath) {
 
   return async function koaWebpackDevMiddleware (ctx, next) {
     let hasNext = await applyExpressMiddleware(middleware, ctx.req, {
-      end: (content) => ctx.body = content,
+      end: (content) => (ctx.body = content),
       setHeader: function () {
         ctx.set.apply(ctx, arguments)
       }
