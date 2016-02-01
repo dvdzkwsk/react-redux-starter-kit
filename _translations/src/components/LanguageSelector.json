@@ -1,0 +1,17 @@
+[
+  {
+    "id": "languageSelector.spanish",
+    "description": "Select language",
+    "defaultMessage": "Spanish"
+  },
+  {
+    "id": "languageSelector.english",
+    "description": "Select language",
+    "defaultMessage": "English"
+  },
+  {
+    "id": "languageSelector.french",
+    "description": "Select language",
+    "defaultMessage": "French"
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "notFound.welcome",
+    "description": "page message",
+    "defaultMessage": "This is a demo 404 page!"
+  },
+  {
+    "id": "notFound.linkHomeView",
+    "description": "Text link for home view",
+    "defaultMessage": "Back To Home View"
+  }
+]

@@ -1,19 +1,29 @@
 import React, { PropTypes } from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
+import { IntlProvider } from 'react-intl'
+import * as messages from 'i18n/'
+import { connect } from 'react-redux'
 
-export default class Root extends React.Component {
+class Root extends React.Component {
   static propTypes = {
-    history: PropTypes.object.isRequired,
-    routes: PropTypes.element.isRequired,
-    store: PropTypes.object.isRequired
+    history: React.PropTypes.object.isRequired,
+    routes: React.PropTypes.element.isRequired,
+    store: React.PropTypes.object.isRequired,
+    locale: React.PropTypes.string.isRequired
   };
 
   get content () {
+    const intlData = {
+      locale: this.props.locale,
+      messages: messages[this.props.locale]
+    }
     return (
-      <Router history={this.props.history}>
-        {this.props.routes}
-      </Router>
+      <IntlProvider {...intlData}>
+        <Router history={this.props.history}>
+          {this.props.routes}
+        </Router>
+      </IntlProvider>
     )
   }
 
@@ -43,3 +53,9 @@ export default class Root extends React.Component {
     )
   }
 }
+
+function mapStateToProps (state) {
+  return { locale: state.locale }
+}
+export default connect(mapStateToProps)(Root)
+
