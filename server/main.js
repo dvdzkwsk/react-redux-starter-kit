@@ -27,6 +27,11 @@ if (config.env === 'development') {
   // Enable webpack-dev and webpack-hot middleware
   const { publicPath } = webpackConfig.output
 
+  if (config.proxy && config.proxy.enabled) {
+    const options = config.proxy.options
+    app.use(convert(require('./middleware/webpack-proxy')(options)))
+  }
+
   app.use(require('./middleware/webpack-dev')(compiler, publicPath))
   app.use(require('./middleware/webpack-hmr')(compiler))
 
