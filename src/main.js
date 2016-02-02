@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { useRouterHistory } from 'react-router'
 import { createHistory } from 'history'
-import routes from './routes'
+import makeRoutes from './routes'
 import Root from './containers/Root'
 import configureStore from './redux/configureStore'
 
@@ -11,6 +11,8 @@ const history = useRouterHistory(createHistory)(historyConfig)
 
 const initialState = window.__INITIAL_STATE__
 const store = configureStore({ initialState, history })
+
+const routes = makeRoutes(store)
 
 // Render the React application to the DOM
 ReactDOM.render(
