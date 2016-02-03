@@ -9,7 +9,7 @@ export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 // ------------------------------------
 export const increment = (value: number = 1): Action => ({
   type: COUNTER_INCREMENT,
-  payload: value,
+  payload: value
 })
 
 // This is a thunk, meaning it is a function that immediately

@@ -4,6 +4,9 @@
     "standard",
     "standard-react"
   ],
+  "plugins" : [
+    "flow-vars"
+  ],
   "env"     : {
     "browser" : true
   },
@@ -15,6 +18,9 @@
     "__BASENAME__" : false
   },
   "rules": {
-    "semi" : [2, "never"]
+    "semi" : [2, "never"],
+    "space-infix-ops": 0,
+    "flow-vars/define-flow-type": 1,
+    "flow-vars/use-flow-type": 1
   }
 }
