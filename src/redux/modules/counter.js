@@ -20,9 +20,12 @@ export const increment = (value: number = 1): Action => ({
 // reducer take care of this logic.
 export const doubleAsync = () => {
   return (dispatch, getState) => {
-    setTimeout(() => {
-      dispatch(increment(getState().counter))
-    }, 1000)
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        dispatch(increment(getState().counter))
+        resolve()
+      }, 200)
+    })
   }
 }
 
