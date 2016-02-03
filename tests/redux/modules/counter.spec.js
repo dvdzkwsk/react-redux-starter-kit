@@ -39,6 +39,14 @@ describe('(Redux Module) Counter', function () {
     it('Should return an action with type "COUNTER_INCREMENT".', function () {
       expect(increment()).to.have.property('type', COUNTER_INCREMENT)
     })
+
+    it('Should assign the first argument to the "payload" property.', function () {
+      expect(increment(5)).to.have.property('payload', 5)
+    })
+
+    it('Should default the "payload" property to 1 if not provided.', function () {
+      expect(increment()).to.have.property('payload', 1)
+    })
   })
 
   describe('(Action Creator) doubleAsync', function () {
