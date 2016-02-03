@@ -1,0 +1,49 @@
+[version]
+0.21.0
+
+[ignore]
+.*/bin/.*
+.*/build/.*
+.*/config/.*
+.*/coverage/.*
+.*/node_modules/.*
+.*/src/styles/.*
+
+[include]
+./node_modules/
+
+[libs]
+./node_modules/flow-interfaces/interfaces/
+
+[options]
+module.system=haste
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+
+module.name_mapper='.*\.scss$' -> 'CSSModule'
+module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^components$' -> '<PROJECT_ROOT>/src/components'
+module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/src/containers/\1'
+module.name_mapper='^containers$' -> '<PROJECT_ROOT>/src/containers'
+module.name_mapper='^layouts\/\(.*\)$' -> '<PROJECT_ROOT>/src/layouts/\1'
+module.name_mapper='^layouts$' -> '<PROJECT_ROOT>/src/layouts'
+module.name_mapper='^redux\/\(.*\)$' -> '<PROJECT_ROOT>/src/redux/\1'
+module.name_mapper='^redux$' -> '<PROJECT_ROOT>/src/redux'
+module.name_mapper='^routes\/\(.*\)$' -> '<PROJECT_ROOT>/src/routes/\1'
+module.name_mapper='^routes$' -> '<PROJECT_ROOT>/src/routes'
+module.name_mapper='^styles\/\(.*\)$' -> '<PROJECT_ROOT>/src/styles/\1'
+module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/utils/\1'
+module.name_mapper='^utils$' -> '<PROJECT_ROOT>/src/utils'
+module.name_mapper='^views\/\(.*\)$' -> '<PROJECT_ROOT>/src/views/\1'
+module.name_mapper='^views$' -> '<PROJECT_ROOT>/src/views'
+
+munge_underscores=true
+strip_root=true
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe
+suppress_type=$FixMe
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(1[0-6]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*www[a-z,_]*\\)?)\\)
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(1[0-6]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*www[a-z,_]*\\)?)\\)? #[0-9]+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
