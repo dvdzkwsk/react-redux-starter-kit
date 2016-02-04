@@ -1,27 +1,44 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import '../../styles/core.scss'
 
-// Note: Stateless/function components *will not* hot reload!
-// react-transform *only* works on component classes.
-//
-// Since layouts rarely change, they are a good place to
-// leverage React's new Stateless Functions:
-// https://facebook.github.io/react/docs/reusable-components.html#stateless-functions
-//
-// CoreLayout is a pure function of its props, so we can
-// define it with a plain javascript function...
-function CoreLayout ({ children }) {
-  return (
-    <div className='page-container'>
-      <div className='view-container'>
-        {children}
+/*
+  Note: Stateless function components *will not* hot reload!
+  react-transform *only* works on component classes (since
+  it wraps the component's backing instance).
+
+  We are using a babel plugin to transform pure component
+  classes to function components for production builds.
+
+  Since CoreLayout is a pure function of it's props, the
+  babel compiler will output the following:
+
+  function CoreLayout ({ children }) {
+    return (
+      <div className='page-container'>
+        <div className='view-container'>
+          {children}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
 
-CoreLayout.propTypes = {
-  children: PropTypes.element
-}
+  CoreLayout.propTypes = {
+    children: React.PropTypes.element
+  }
+*/
 
-export default CoreLayout
+export default class CoreLayout extends React.Component {
+  static propTypes = {
+    children: React.PropTypes.element
+  };
+  render () {
+    const { children } = this.props
+    return (
+      <div className='page-container'>
+        <div className='view-container'>
+          {children}
+        </div>
+      </div>
+    )
+  }
+}

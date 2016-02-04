@@ -13,7 +13,7 @@ import classes from './HomeView.scss'
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
-export class HomeView extends React.Component {
+class HomeView extends React.Component {
   static propTypes = {
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
@@ -51,5 +51,16 @@ export class HomeView extends React.Component {
     )
   }
 }
+
+// Export component class for testing.
+export { HomeView }
+// The syntax above is optional but required to support
+// the pure class -> function component transform in production.
+// Named export class declarations are not supported yet
+// but will be soon. In the meantime, export class declarations
+// as an object map ie: export { FooClass, BarClass }.
+// Since only pure component classes can be transformed, you
+// can use standard named exports `export class X` syntax...
+// ie. for components with lifecycle methods
 
 export default connect(mapStateToProps, counterActions)(HomeView)
