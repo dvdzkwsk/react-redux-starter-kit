@@ -45,7 +45,7 @@ Features
     * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^2.0.0`)
-* [react-router-redux](https://github.com/rackt/react-router-redux) (`^2.0.0`)
+* [react-router-redux](https://github.com/rackt/react-router-redux) (`^3.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
   * [CSS modules!](https://github.com/css-modules/css-modules)
   * sass-loader
@@ -58,6 +58,7 @@ Features
   * webpack-hot-middleware
 * [Karma](https://github.com/karma-runner/karma)
   * Mocha w/ chai, sinon-chai, and chai-as-promised
+  * [Airbnb's Enzyme](https://github.com/airbnb/enzyme) with [chai-enzyme](https://github.com/producthunt/chai-enzyme)
   * PhantomJS
   * Code coverage reports
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
@@ -67,7 +68,7 @@ Features
     * redbox-react (visible error reporting for React components)
 * [ESLint](http://eslint.org)
   * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this!
-  * Includes separate test-specific `.eslintrc` to work with Mocha and Chai
+  * Includes separate test-specific `.eslintrc` to support chai assertions
 
 Getting Started
 ---------------
