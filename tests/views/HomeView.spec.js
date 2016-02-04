@@ -2,6 +2,7 @@ import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import { bindActionCreators } from 'redux'
 import { HomeView } from 'views/HomeView/HomeView'
+import { mount } from 'enzyme'
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer()
@@ -60,6 +61,12 @@ describe('(View) Home', function () {
 
     expect(h2).to.exist
     expect(h2.textContent).to.match(/5$/)
+  })
+
+  it('Should render exactly two buttons.', function () {
+    const wrapper = mount(<HomeView />)
+
+    expect(wrapper).to.have.descendants('.btn')
   })
 
   describe('An increment button...', function () {
