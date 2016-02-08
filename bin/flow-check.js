@@ -1,7 +1,8 @@
-const cp = require('child_process')
+import cp from 'child_process'
+import flowBin from 'flow-bin'
 
 try {
-  cp.execFileSync(require('flow-bin'), ['check'], {stdio: 'inherit'})
+  cp.execFileSync(flowBin, ['check'], {stdio: 'inherit'})
 } catch (e) {
   process.exit(1)
 }

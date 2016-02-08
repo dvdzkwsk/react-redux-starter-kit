@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "compile": "node -r dotenv/config --harmony bin/compile",
+    "compile": "babel-node bin/compile",
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
@@ -23,24 +23,30 @@
   },
   "betterScripts": {
     "dev": {
-      "command": "nodemon -r dotenv/config bin/server",
+      "command": "nodemon --exec babel-node bin/server",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "DEBUG": "app:*"
       }
     },
     "deploy": {
       "command": "npm run clean && npm run compile",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
       }
     },
     "start": {
-      "command": "node -r dotenv/config bin/server"
+      "command": "babel-node bin/server",
+      "env": {
+        "DEBUG": "app:*"
+      }
     },
     "test": {
-      "command": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js",
+      "command": "babel-node ./node_modules/karma/bin/karma start bin/karma",
       "env": {
-        "NODE_ENV": "test"
+        "NODE_ENV": "test",
+        "DEBUG": "app:*"
       }
     }
   },
@@ -52,8 +58,8 @@
   "license": "MIT",
   "dependencies": {
     "better-npm-run": "0.0.5",
+    "co-request": "^1.0.0",
     "debug": "^2.2.0",
-    "dotenv": "^2.0.0",
     "history": "^2.0.0-rc2",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
@@ -70,6 +76,7 @@
     "yargs": "^3.18.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.5.1",
     "babel-core": "^6.3.17",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.0",

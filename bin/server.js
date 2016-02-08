@@ -1,9 +1,8 @@
-require('babel-register')
+import config from '../config'
+import server from '../server/main'
+import _debug from 'debug'
 
-const config = require('../config')
-const server = require('../server/main')
-const debug = require('debug')('app:bin:server')
-
+const debug = _debug('app:bin:server')
 const port = config.server_port
 const host = config.server_host
 

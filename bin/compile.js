@@ -1,15 +1,16 @@
-require('babel-register')
+import fs from 'fs-extra'
+import _debug from 'debug'
+import webpack from 'webpack'
+import webpackConfig from '../build/webpack.config'
+import config from '../config'
 
-const config = require('../config')
-const debug = require('debug')('app:bin:compile')
-const fs = require('fs-extra')
-
+const debug = _debug('app:bin:compile')
 const paths = config.utils_paths
 
 debug('Create webpack compiler.')
-const compiler = require('webpack')(require('../build/webpack.config'))
+const compiler = webpack(webpackConfig)
 
-compiler.run(function (err, stats) {
+compiler.run((err, stats) => {
   const jsonStats = stats.toJson()
 
   debug('Webpack compile completed.')

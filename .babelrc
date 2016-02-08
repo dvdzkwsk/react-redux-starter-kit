@@ -1,11 +1,11 @@
 // NOTE: These options are overriden by the babel-loader configuration
 // for webpack, which can be found in ~/build/webpack-environments/_base
 // and ~/build/webpack-environments/production.
-// 
+//
 // Why? The react-transform-hmr plugin depends on HMR (and throws if
 // module.hot is disbled, so keeping it and related plugins contained
 // within webpack helps prevent unexpected errors.
 {
   "presets": ["es2015", "react", "stage-0"],
-  "plugins": ["transform-runtime", "add-module-exports"]
+  "plugins": ["transform-runtime"]
 }

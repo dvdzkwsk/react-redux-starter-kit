@@ -1,3 +1,3 @@
-require('babel-register')
+import karmaConfig from '../build/karma.conf'
 
-module.exports = require('../build/karma.conf')
+module.exports = karmaConfig // because Karma is special
