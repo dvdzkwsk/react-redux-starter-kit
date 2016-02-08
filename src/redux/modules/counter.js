@@ -18,9 +18,9 @@ export const increment = (value: number = 1): Action => ({
 // NOTE: This is solely for demonstration purposes. In a real application,
 // you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
 // reducer take care of this logic.
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
+export const doubleAsync = (): Function => {
+  return (dispatch: Function, getState: Function): Promise => {
+    return new Promise((resolve: Function): void => {
       setTimeout(() => {
         dispatch(increment(getState().counter))
         resolve()
@@ -38,14 +38,14 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state, {payload}) => state + payload
+  [COUNTER_INCREMENT]: (state: number, action: {payload: number}): number => state + action.payload
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = 0
-export default function counterReducer (state: number = initialState, action: Action): Object {
+export default function counterReducer (state: number = initialState, action: Action): number {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
