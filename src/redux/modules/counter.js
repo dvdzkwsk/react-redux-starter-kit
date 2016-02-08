@@ -7,6 +7,9 @@ export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 // ------------------------------------
 // Actions
 // ------------------------------------
+// NOTE: "Action" is a Flow interface defined in https://github.com/TechnologyAdvice/flow-interfaces
+// If you're unfamiliar with Flow, you are completely welcome to avoid annotating your code, but
+// if you'd like to learn more you can check out: flowtype.org.
 export const increment = (value: number = 1): Action => ({
   type: COUNTER_INCREMENT,
   payload: value
