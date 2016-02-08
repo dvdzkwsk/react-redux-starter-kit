@@ -87,7 +87,7 @@ config.globals = {
 const pkg = require('../package.json')
 
 config.compiler_vendor = config.compiler_vendor
-  .filter(dep => {
+  .filter((dep) => {
     if (pkg.dependencies[dep]) return true
 
     debug(

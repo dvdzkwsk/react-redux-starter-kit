@@ -21,13 +21,13 @@ module.exports = function (options) {
 
     // don't match
     if (!url) {
-      return yield* next
+      return yield * next
     }
 
     // if match option supplied, restrict proxy to that match
     if (options.match) {
       if (!path.match(options.match)) {
-        return yield* next
+        return yield * next
       }
     }
 
