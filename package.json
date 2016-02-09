@@ -61,6 +61,7 @@
     "co-request": "^1.0.0",
     "debug": "^2.2.0",
     "history": "^2.0.0-rc2",
+    "iconv-lite": "^0.4.13",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",
