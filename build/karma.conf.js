@@ -40,7 +40,7 @@ const karmaConfig = {
       ],
       loaders: webpackConfig.module.loaders.concat([
         {
-          test: /sinon\/pkg\/sinon\.js/,
+          test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
           loader: 'imports?define=>false,require=>false'
         }
       ])
