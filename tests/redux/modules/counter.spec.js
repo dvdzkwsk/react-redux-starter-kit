@@ -4,6 +4,7 @@ import {
   doubleAsync,
   default as counterReducer
 } from 'redux/modules/counter'
+// ...
 
 describe('(Redux Module) Counter', function () {
   it('Should export a constant COUNTER_INCREMENT.', function () {
