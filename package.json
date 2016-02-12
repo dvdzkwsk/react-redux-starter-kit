@@ -8,7 +8,7 @@
     "npm": "^3.0.0"
   },
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "compile": "babel-node bin/compile",
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
@@ -132,6 +132,7 @@
     "redux-devtools": "^3.0.0",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.1",
+    "rimraf": "^2.5.1",
     "sass-loader": "^3.0.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
