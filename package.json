@@ -19,7 +19,8 @@
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
     "deploy": "better-npm-run deploy",
-    "flow:check": "babel-node bin/flow-check"
+    "flow:check": "babel-node bin/flow-check",
+    "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
     "dev": {
@@ -92,6 +93,7 @@
     "chai-as-promised": "^5.1.0",
     "chai-enzyme": "^0.4.0",
     "cheerio": "^0.20.0",
+    "codecov": "^1.0.1",
     "css-loader": "^0.23.0",
     "cssnano": "^3.3.2",
     "enzyme": "^1.5.0",
