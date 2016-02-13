@@ -1,0 +1,11 @@
+{
+  "name": "angular-socket-io",
+  "version": "0.7.0",
+  "main": "socket.js",
+  "dependencies": {
+    "angular": "^1.2.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.2.6"
+  }
+}

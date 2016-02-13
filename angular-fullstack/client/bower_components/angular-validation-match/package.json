@@ -1,0 +1,56 @@
+{
+  "name": "angular-validation-match",
+  "version": "1.5.2",
+  "homepage": "https://github.com/TheSharpieOne/angular-validation-match",
+  "description": "Checks if one input matches another",
+  "main": "./index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TheSharpieOne/angular-validation-match"
+  },
+  "keywords": [
+    "Angular",
+    "input",
+    "form",
+    "confirmation",
+    "match",
+    "validation"
+  ],
+  "author": [
+    "TheSharpieOne <evan@lostonia.com>"
+  ],
+  "maintainers": [
+    {
+      "name": "TheSharpieOne",
+      "web": "https://github.com/TheSharpieOne"
+    }
+  ],
+  "license": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "devDependencies": {
+    "chai": "1.10.0",
+    "gulp": "^3.8.8",
+    "gulp-bump": "~0.1.0",
+    "gulp-karma": "0.0.4",
+    "gulp-ng-annotate": "^0.3.3",
+    "gulp-sequence": "^0.3.1",
+    "gulp-uglifyjs": "^0.4.3",
+    "gulp-wrap": "^0.3.0",
+    "karma": "^0.12.21",
+    "karma-chai-sinon": "^0.1.4",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-mocha": "~0.1",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma-script-launcher": "~0.1.0",
+    "sinon": "^1.12.1",
+    "sinon-chai": "^2.6.0"
+  }
+}
