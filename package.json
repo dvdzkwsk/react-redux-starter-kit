@@ -58,6 +58,7 @@
   "license": "MIT",
   "dependencies": {
     "better-npm-run": "0.0.5",
+    "bluebird": "3.3.0",
     "co-request": "1.0.0",
     "debug": "2.2.0",
     "history": "2.0.0",
@@ -66,6 +67,7 @@
     "koa-connect-history-api-fallback": "0.3.0",
     "koa-convert": "1.2.0",
     "koa-static": "2.0.0",
+    "mongoose": "4.4.3",
     "react": "^0.14.0",
     "react-dom": "0.14.7",
     "react-redux": "4.4.0",
