@@ -14,6 +14,7 @@
 
 [libs]
 ./node_modules/flow-interfaces/interfaces/
+./interfaces/
 
 [options]
 module.system=haste
@@ -21,7 +22,8 @@ esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
 
-module.name_mapper='.*\.scss$' -> 'CSSModule'
+module.name_mapper='.*\.\(scss\|css\)$' -> 'CSSModule'
+module.name_mapper='.*\.\(jpg\|jpeg\|gif\|svg\|png\)$' -> 'Image'
 module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
 module.name_mapper='^components$' -> '<PROJECT_ROOT>/src/components'
 module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/src/containers/\1'
