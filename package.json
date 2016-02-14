@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "compile": "babel-node bin/compile",
-    "lint": "eslint . ./",
+    "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
