@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { actions as counterActions } from '../../redux/modules/counter'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
@@ -43,8 +42,6 @@ export class HomeView extends React.Component {
         <button className='btn btn-default' onClick={this.props.doubleAsync}>
           Double (Async)
         </button>
-        <hr />
-        <Link to='/404'>Go to 404 Page</Link>
       </div>
     )
   }
