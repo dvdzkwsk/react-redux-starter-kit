@@ -66,6 +66,8 @@ Features
   * [babel-preset-react-hmre](https://github.com/danmartinez101/babel-preset-react-hmre) for:
     * react-transform-hmr (HMR for React components)
     * redbox-react (visible error reporting for React components)
+  * [babel-plugin-transform-react-constant-elements](https://babeljs.io/docs/plugins/transform-react-constant-elements/) save some memory allocation
+  * [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) remove `PropTypes`
 * [ESLint](http://eslint.org)
   * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this!
   * Includes separate test-specific `.eslintrc` to support chai assertions
