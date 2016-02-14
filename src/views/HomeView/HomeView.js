@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { actions as counterActions } from '../../redux/modules/counter'
+import { increment, doubleAsync } from '../../redux/modules/counter'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 
@@ -22,22 +22,11 @@ type Props = {
 // that we can export the undecorated component for testing.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 export class HomeView extends React.Component<void, Props, void> {
-  _handleIncrement: Function;
-
   static propTypes = {
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
     increment: PropTypes.func.isRequired
   };
-
-  constructor () {
-    super()
-    this._handleIncrement = this._handleIncrement.bind(this)
-  }
-
-  _handleIncrement () {
-    this.props.increment(1)
-  }
 
   render () {
     return (
@@ -55,7 +44,7 @@ export class HomeView extends React.Component<void, Props, void> {
           {' '}
           <span className={classes['counter--green']}>{this.props.counter}</span>
         </h2>
-        <button className='btn btn-default' onClick={this._handleIncrement}>
+        <button className='btn btn-default' onClick={this.props.increment}>
           Increment
         </button>
         {' '}
@@ -70,4 +59,7 @@ export class HomeView extends React.Component<void, Props, void> {
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
-export default connect((mapStateToProps), counterActions)(HomeView)
+export default connect((mapStateToProps), {
+  increment: () => increment(1),
+  doubleAsync
+})(HomeView)
