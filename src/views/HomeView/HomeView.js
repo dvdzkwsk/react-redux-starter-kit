@@ -19,6 +19,15 @@ export class HomeView extends React.Component {
     increment: PropTypes.func.isRequired
   };
 
+  constructor () {
+    super()
+    this._handleIncrement = ::this._handleIncrement
+  }
+
+  _handleIncrement () {
+    this.props.increment(1)
+  }
+
   render () {
     return (
       <div className='container text-center'>
@@ -35,7 +44,7 @@ export class HomeView extends React.Component {
           {' '}
           <span className={classes['counter--green']}>{this.props.counter}</span>
         </h2>
-        <button className='btn btn-default' onClick={() => this.props.increment(1)}>
+        <button className='btn btn-default' onClick={this._handleIncrement}>
           Increment
         </button>
         {' '}
