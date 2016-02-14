@@ -19,6 +19,7 @@
 module.system=haste
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
+esproposal.decorators=ignore
 
 module.name_mapper='.*\.scss$' -> 'CSSModule'
 module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
