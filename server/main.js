@@ -10,6 +10,7 @@ import config from '../config'
 import webpackProxyMiddleware from './middleware/webpack-proxy'
 import webpackDevMiddleware from './middleware/webpack-dev'
 import webpackHMRMiddleware from './middleware/webpack-hmr'
+import essentialMiddlewares from './middleware/essentials';
 import router from './router';
 
 // Configure Mongoose Promise
@@ -25,6 +26,9 @@ mongoose.connection.on('error', function(err) {
 const debug = _debug('app:server')
 const paths = config.utils_paths
 const app = new Koa()
+
+// Apply essential middlewares
+essentialMiddlewares(app);
 
 // Apply API and Auth routes
 app.use(router.routes());

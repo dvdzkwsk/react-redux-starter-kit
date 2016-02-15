@@ -10,94 +10,86 @@
 import _ from 'lodash';
 import Thing from './thing.model';
 
-function respondWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
+function respondWithResult(ctx, statusCode = 200) {
   return function(entity) {
-    if (entity) {
-      res.status(statusCode).json(entity);
-    }
+    ctx.status = statusCode;
+    ctx.body = entity;
   };
 }
 
-function saveUpdates(updates) {
+function handleResourceNotFound(ctx, statusCode = 404) {
   return function(entity) {
-    var updated = _.merge(entity, updates);
-    return updated.saveAsync()
-      .spread(updated => {
-        return updated;
-      });
+    ctx.status = statusCode;
+    ctx.body = { message: `${entity} not found` };
   };
 }
 
-function removeEntity(res) {
-  return function(entity) {
-    if (entity) {
-      return entity.removeAsync()
-        .then(() => {
-          res.status(204).end();
-        });
-    }
-  };
-}
-
-function handleEntityNotFound(res) {
-  return function(entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
-}
-
-function handleError(ctx, statusCode) {
-  statusCode = statusCode || 500;
+function handleError(ctx, statusCode = 500) {
   return function(err) {
-    res.status(statusCode).send(err);
+    ctx.status = statusCode;
+    ctx.body = { message: err.message };
   };
 }
 
 // Gets a list of Things
-// export async function index(ctx, next) {
-//   try {
-//     ctx.body = await Thing.find();
-//   } catch (err) {
-//     ctx.status = err.status || 500;
-//     ctx.body = { message: err.message };
-//   }
-// }
+export async function index(ctx, next) {
+  try {
+    const things = await Thing.find();
+    respondWithResult(ctx)(things);
+  } catch (err) {
+    handleError(ctx, err);
+  }
+}
 
 // Gets a single Thing from the DB
-// export function show(ctx, next) {
-//   Thing.findByIdAsync(req.params.id)
-//     .then(handleEntityNotFound(res))
-//     .then(respondWithResult(res))
-//     .catch(handleError(res));
-// }
+export async function show(ctx, next) {
+  try {
+    const thing = await Thing.findById(ctx.params.id);
+    if (!thing) return handleResourceNotFound(ctx); 
+    respondWithResult(ctx)(thing);
+  } catch (err) {
+    handleError(ctx, err);
+  }
+}
 
-// // Creates a new Thing in the DB
-// export function create(ctx, next) {
-//   Thing.createAsync(req.body)
-//     .then(respondWithResult(res, 201))
-//     .catch(handleError(res));
-// }
+// Creates a new Thing in the DB
+export async function create(ctx, next) {
+  try {
+    const thing = await Thing.create(ctx.request.body);
+    respondWithResult(ctx, 201)(thing);
+  } catch (err) {
+    handleError(ctx, err);
+  }
+}
 
-// // Updates an existing Thing in the DB
-// export function update(ctx, next) {
-//   if (req.body._id) {
-//     delete req.body._id;
-//   }
-//   Thing.findByIdAsync(req.params.id)
-//     .then(handleEntityNotFound(res))
-//     .then(saveUpdates(req.body))
-//     .then(respondWithResult(res))
-//     .catch(handleError(res));
-// }
+// Updates an existing Thing in the DB
+export async function update(ctx, next) {
+  if (ctx.request.body._id) 
+    delete ctx.request.body._id;
+  
+  try { 
+    const thing = await Thing.findById(ctx.params.id);
+    if (!thing) return handleResourceNotFound(ctx);
 
-// // Deletes a Thing from the DB
-// export function destroy(ctx, next) {
-//   Thing.findByIdAsync(req.params.id)
-//     .then(handleEntityNotFound(res))
-//     .then(removeEntity(res))
-//     .catch(handleError(res));
-// }
+    const updated = await _.merge(thing, ctx.request.body)
+                           .save();
+
+    respondWithResult(ctx)(updated);
+  } catch (err) {
+    handleError(res);
+  }
+}
+
+// Deletes a Thing from the DB
+export async function destroy(ctx, next) {
+  try {
+    const thing = Thing.findById(ctx.params.id);
+    if (!thing) return handleResourceNotFound(ctx);
+
+    await thing.remove();
+
+    respondWithResult(ctx, 204)();
+  } catch (err) {
+    handleError(res);
+  }
+}
