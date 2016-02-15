@@ -1,6 +1,4 @@
-'use strict';
-
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+import mongoose from 'mongoose';
 
 var ThingSchema = new mongoose.Schema({
   name: String,

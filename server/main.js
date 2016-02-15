@@ -1,5 +1,6 @@
 import Koa from 'koa'
 import convert from 'koa-convert'
+import mongoose from 'mongoose';
 import webpack from 'webpack'
 import webpackConfig from '../build/webpack.config'
 import historyApiFallback from 'koa-connect-history-api-fallback'
@@ -9,10 +10,24 @@ import config from '../config'
 import webpackProxyMiddleware from './middleware/webpack-proxy'
 import webpackDevMiddleware from './middleware/webpack-dev'
 import webpackHMRMiddleware from './middleware/webpack-hmr'
+import router from './router';
+
+// Configure Mongoose Promise
+mongoose.Promise = require('bluebird');
+
+// Connect to MongoDB
+mongoose.connect(config.mongo_uri, config.mongo_options);
+mongoose.connection.on('error', function(err) {
+  console.error('MongoDB connection error: ' + err);
+  process.exit(-1);
+});
 
 const debug = _debug('app:server')
 const paths = config.utils_paths
 const app = new Koa()
+
+// Apply API and Auth routes
+app.use(router.routes());
 
 // This rewrites all routes requests to the root /index.html file
 // (ignoring file requests). If you want to implement isomorphic
@@ -59,48 +74,28 @@ if (config.env === 'development') {
 
 export default app
 
+// // Populate databases with sample data
+// if (config.seedDB) { require('./config/seed'); }
 
-/**
- * Main application file
- */
+// // Setup server
+// var app = express();
+// var server = http.createServer(app);
+// var socketio = require('socket.io')(server, {
+//   serveClient: config.env !== 'production',
+//   path: '/socket.io-client'
+// });
+// require('./config/socketio')(socketio);
+// require('./config/express')(app);
+// require('./routes')(app);
 
-'use strict';
+// // Start server
+// function startServer() {
+//   app.angularFullstack = server.listen(config.port, config.ip, function() {
+//     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+//   });
+// }
 
-import express from 'express';
-import mongoose from 'mongoose';
-mongoose.Promise = require('bluebird');
-import config from './config/environment';
-import http from 'http';
+// setImmediate(startServer);
 
-// Connect to MongoDB
-mongoose.connect(config.mongo.uri, config.mongo.options);
-mongoose.connection.on('error', function(err) {
-  console.error('MongoDB connection error: ' + err);
-  process.exit(-1);
-});
-
-// Populate databases with sample data
-if (config.seedDB) { require('./config/seed'); }
-
-// Setup server
-var app = express();
-var server = http.createServer(app);
-var socketio = require('socket.io')(server, {
-  serveClient: config.env !== 'production',
-  path: '/socket.io-client'
-});
-require('./config/socketio')(socketio);
-require('./config/express')(app);
-require('./routes')(app);
-
-// Start server
-function startServer() {
-  app.angularFullstack = server.listen(config.port, config.ip, function() {
-    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-  });
-}
-
-setImmediate(startServer);
-
-// Expose app
-exports = module.exports = app;
+// // Expose app
+// exports = module.exports = app;
