@@ -1,5 +1,6 @@
 /* eslint key-spacing:0 */
 export default () => ({
+  mongo_uri                : 'mongodb://localhost/fullstack-react',
   compiler_fail_on_warning : false,
   compiler_hash_type       : 'chunkhash',
   compiler_devtool         : null,

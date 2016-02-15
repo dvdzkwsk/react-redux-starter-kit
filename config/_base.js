@@ -23,6 +23,16 @@ const config = {
   server_port : process.env.PORT || 3000,
 
   // ----------------------------------
+  // Database Configuration
+  // ----------------------------------
+  mongo_options : {
+    db: {
+      safe: true
+    }
+  },
+
+
+  // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
   compiler_css_modules     : true,
