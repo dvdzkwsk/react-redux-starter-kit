@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "compile": "babel-node bin/compile",
+    "compile": "better-npm-run compile",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
@@ -23,6 +23,12 @@
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
+    "compile": {
+      "command": "babel-node bin/compile",
+      "env": {
+        "DEBUG": "app:*"
+      }
+    },
     "dev": {
       "command": "nodemon --exec babel-node bin/server",
       "env": {
