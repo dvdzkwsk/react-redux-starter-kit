@@ -1,9 +1,8 @@
-'use strict';
-
-import app from '../..';
+import app from '../../main';
 import User from './user.model';
-var user;
-var genUser = function() {
+
+let user;
+const genUser = () => {
   user = new User({
     provider: 'local',
     name: 'Fake User',
@@ -13,57 +12,57 @@ var genUser = function() {
   return user;
 };
 
-describe('User Model', function() {
-  before(function() {
+describe('User Model', () => {
+  before(() => {
     // Clear users before testing
-    return User.removeAsync();
+    return User.remove();
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     genUser();
   });
 
-  afterEach(function() {
-    return User.removeAsync();
+  afterEach(() => {
+    return User.remove();
   });
 
-  it('should begin with no users', function() {
-    return expect(User.findAsync({})).to
+  it('should begin with no users', () => {
+    return expect(User.find({})).to
       .eventually.have.length(0);
   });
 
-  it('should fail when saving a duplicate user', function() {
-    return expect(user.saveAsync()
-      .then(function() {
-        var userDup = genUser();
-        return userDup.saveAsync();
+  it('should fail when saving a duplicate user', () => {
+    return expect(user.save()
+      .then(() => {
+        const userDup = genUser();
+        return userDup.save();
       })).to.be.rejected;
   });
 
-  describe('#email', function() {
-    it('should fail when saving without an email', function() {
+  describe('#email', () => {
+    it('should fail when saving without an email', () => {
       user.email = '';
-      return expect(user.saveAsync()).to.be.rejected;
+      return expect(user.save()).to.be.rejected;
     });
   });
 
-  describe('#password', function() {
-    beforeEach(function() {
-      return user.saveAsync();
+  describe('#password', () => {
+    beforeEach(() => {
+      return user.save();
     });
 
-    it('should authenticate user if valid', function() {
+    it('should authenticate user if valid', () => {
       expect(user.authenticate('password')).to.be.true;
     });
 
-    it('should not authenticate user if invalid', function() {
+    it('should not authenticate user if invalid', () => {
       expect(user.authenticate('blah')).to.not.be.true;
     });
 
-    it('should remain the same hash unless the password is updated', function() {
+    it('should remain the same hash unless the password is updated', () => {
       user.name = 'Test User';
-      return expect(user.saveAsync()
-        .spread(function(u) {
+      return expect(user.save()
+        .then(u => {
           return u.authenticate('password');
         })).to.eventually.be.true;
     });

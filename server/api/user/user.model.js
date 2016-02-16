@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
-let UserSchema = new Schema({
+let UserSchema = new mongoose.Schema({
   name: String,
   email: {
     type: String,
