@@ -1,8 +1,6 @@
-'use strict';
-
-import express from 'express';
+import Router from 'koa-router';
 import passport from 'passport';
-import config from '../config/environment';
+import config from '../../config';
 import User from '../api/user/user.model';
 
 // Passport Configuration
