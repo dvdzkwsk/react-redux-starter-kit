@@ -40,97 +40,104 @@ export async function index(ctx, next) {
     const users = User.find({}, '-salt -password');
     respondWithResult(ctx)(users);
   } catch (err) {
-    handleError(ctx, err);
+    handleError(ctx)(err);
   }
 }
 
 /**
  * Get a single user
  */
-export function show(req, res, next) {
+export async function show(ctx, next) {
   try {
     const user = User.findById(ctx.params.id);
-    if (!user) return handleResourceNotFound(ctx);
-    .then(user => {
-      if (!user) {
-        return res.status(404).end();
-      }
-      res.json(user.profile);
-    })
-    .catch(err => next(err));
+    if (!user) return handleResourceNotFound(ctx)('user');
+    respondWithResult(ctx)(user);
+  } catch (err) {
+    handleError(ctx)(err);
+  }
 }
+
 /**
  * Creates a new user
  */
-export function create(req, res, next) {
-  var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.role = 'user';
-  newUser.saveAsync()
-    .spread(function(user) {
-      var token = jwt.sign({ _id: user._id }, config.secrets.session, {
-        expiresIn: 60 * 60 * 5
-      });
-      res.json({ token });
-    })
-    .catch(validationError(res));
-}
+export async function create(ctx, next) {
+  try {
+    let newUser = new User(ctx.request.body);
+    newUser.provider = 'local';
+    newUser.role = 'user';
 
+    await newUser.save();
+    const token = jwt.sign({ 
+      _id: user._id 
+    }, config.secrets.session, {
+      expiresIn: 60 * 60 * 5
+    });
+
+    respondWithResult(ctx)({ token });
+  } catch (err) {
+    validationError(ctx)(err);
+  }
+}
 
 /**
  * Deletes a user
  * restriction: 'admin'
  */
-export function destroy(ctx, next) {
-  User.findByIdAndRemoveAsync(req.params.id)
-    .then(function() {
-      res.status(204).end();
-    })
-    .catch(handleError(res));
+export async function destroy(ctx, next) {
+  try {
+    const user = User.findByIdAnd(ctx.params.id);
+    if (!user) return handleResourceNotFound(ctx)('user');
+
+    await user.remove();
+
+    respondWithResult(ctx, 204)();
+  } catch (err) {
+    handleError(ctx)(err);
+  }
 }
 
 /**
  * Change a users password
  */
-export function changePassword(req, res, next) {
-  var userId = req.user._id;
-  var oldPass = String(req.body.oldPassword);
-  var newPass = String(req.body.newPassword);
+export async function changePassword(ctx, next) {
+  const userId = ctx.user._id;
+  const oldPass = String(ctx.request.body.oldPassword);
+  const newPass = String(ctx.request.body.newPassword);
 
-  User.findByIdAsync(userId)
-    .then(user => {
-      if (user.authenticate(oldPass)) {
-        user.password = newPass;
-        return user.saveAsync()
-          .then(() => {
-            res.status(204).end();
-          })
-          .catch(validationError(res));
-      } else {
-        return res.status(403).end();
-      }
-    });
+  try {
+    let user = User.findByIdAsync(userId);
+
+    if (user.authenticate(oldPass)) {
+      user.password = newPass;
+      await user.save();
+
+      respondWithResult(ctx, 204)();
+    } else {
+      ctx.status = 403;
+    }
+  } catch (err) {
+    validationError(ctx)(err);
+  }
 }
 
 /**
  * Get my info
  */
-export function me(req, res, next) {
-  var userId = req.user._id;
+export async function me(ctx, next) {
+  const userId = ctx.user._id;
 
-  User.findOneAsync({ _id: userId }, '-salt -password')
-    .then(user => { // don't ever give out the password or salt
-      if (!user) {
-        return res.status(401).end();
-      }
-      res.json(user);
-    })
-    .catch(err => next(err));
+  try {
+    const me = User.findOne({ _id: userId }, '-salt -password');
+    
+    respondWithResult(ctx)(me);
+  } catch (err) {
+    handleError(ctx)(err);
+  }
 }
 
 /**
  * Authentication callback
  */
-export function authCallback(req, res, next) {
-  res.redirect('/');
+export async function authCallback(ctx, next) {
+  ctx.redirect('/');
 }

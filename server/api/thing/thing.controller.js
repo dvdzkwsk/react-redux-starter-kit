@@ -48,7 +48,7 @@ export async function show(ctx, next) {
     if (!thing) return handleResourceNotFound(ctx)('thing');
     respondWithResult(ctx)(thing);
   } catch (err) {
-    handleError(ctx, err);
+    handleError(ctx)(err);
   }
 }
 
@@ -58,7 +58,7 @@ export async function create(ctx, next) {
     const thing = await Thing.create(ctx.request.body);
     respondWithResult(ctx, 201)(thing);
   } catch (err) {
-    handleError(ctx, err);
+    handleError(ctx)(err);
   }
 }
 
@@ -76,7 +76,7 @@ export async function update(ctx, next) {
 
     respondWithResult(ctx)(updated);
   } catch (err) {
-    handleError(res);
+    handleError(ctx)(err);
   }
 }
 
@@ -90,6 +90,6 @@ export async function destroy(ctx, next) {
 
     respondWithResult(ctx, 204)();
   } catch (err) {
-    handleError(res);
+    handleError(ctx)(err);
   }
 }

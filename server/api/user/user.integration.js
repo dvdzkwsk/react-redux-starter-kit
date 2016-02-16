@@ -1,32 +1,32 @@
-'use strict';
-
-import app from '../..';
+import server from '../../main';
 import User from './user.model';
 import request from 'supertest';
 
+const app = server.listen();
+
 describe('User API:', function() {
-  var user;
+  let user;
 
   // Clear users before testing
   before(function() {
-    return User.removeAsync().then(function() {
+    return User.remove().then(function() {
       user = new User({
         name: 'Fake User',
         email: 'test@example.com',
         password: 'password'
       });
 
-      return user.saveAsync();
+      return user.save();
     });
   });
 
   // Clear users after testing
   after(function() {
-    return User.removeAsync();
+    return User.remove();
   });
 
   describe('GET /api/users/me', function() {
-    var token;
+    let token;
 
     before(function(done) {
       request(app)
