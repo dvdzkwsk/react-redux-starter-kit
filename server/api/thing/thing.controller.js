@@ -83,7 +83,7 @@ export async function update(ctx, next) {
 // Deletes a Thing from the DB
 export async function destroy(ctx, next) {
   try {
-    const thing = Thing.findById(ctx.params.id);
+    const thing = await Thing.findById(ctx.params.id);
     if (!thing) return handleResourceNotFound(ctx);
 
     await thing.remove();

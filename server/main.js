@@ -76,7 +76,7 @@ if (config.env === 'development') {
   app.use(convert(serve(paths.base(config.dir_dist))))
 }
 
-export default app
+export default app;
 
 // // Populate databases with sample data
 // if (config.seedDB) { require('./config/seed'); }
