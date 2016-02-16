@@ -1,6 +1,6 @@
-'use strict';
+import proxyquire from 'proxyquire';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+proxyquire.noPreserveCache();
 
 var userCtrlStub = {
   index: 'userCtrl.index',
@@ -29,10 +29,8 @@ var routerStub = {
 
 // require the index with our stubbed out modules
 var userIndex = proxyquire('./index', {
-  'express': {
-    Router() {
-      return routerStub;
-    }
+  'koa-router': function() {
+    return routerStub;
   },
   './user.controller': userCtrlStub,
   '../../auth/auth.service': authServiceStub
