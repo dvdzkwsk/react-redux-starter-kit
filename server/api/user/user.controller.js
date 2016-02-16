@@ -1,5 +1,4 @@
 import User from './user.model';
-import passport from 'passport';
 import config from '../../../config';
 import jwt from 'jsonwebtoken';
 

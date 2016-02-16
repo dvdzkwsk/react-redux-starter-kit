@@ -2,7 +2,7 @@ import proxyquire from 'proxyquire';
 
 proxyquire.noPreserveCache();
 
-var userCtrlStub = {
+const userCtrlStub = {
   index: 'userCtrl.index',
   destroy: 'userCtrl.destroy',
   me: 'userCtrl.me',
@@ -11,7 +11,7 @@ var userCtrlStub = {
   create: 'userCtrl.create'
 };
 
-var authServiceStub = {
+const authServiceStub = {
   isAuthenticated() {
     return 'authService.isAuthenticated';
   },
@@ -20,7 +20,7 @@ var authServiceStub = {
   }
 };
 
-var routerStub = {
+const routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   post: sinon.spy(),
@@ -28,23 +28,23 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var userIndex = proxyquire('./index', {
-  'koa-router': function() {
+const userIndex = proxyquire('./index', {
+  'koa-router': () => {
     return routerStub;
   },
   './user.controller': userCtrlStub,
   '../../auth/auth.service': authServiceStub
 });
 
-describe('User API Router:', function() {
+describe('User API Router:', () => {
 
-  it('should return an express router instance', function() {
-    expect(userIndex).to.equal(routerStub);
+  it('should return an express router instance', () => {
+    expect(userIndex.default).to.equal(routerStub);
   });
 
-  describe('GET /api/users', function() {
+  describe('GET /api/users', () => {
 
-    it('should verify admin role and route to user.controller.index', function() {
+    it('should verify admin role and route to user.controller.index', () => {
       expect(routerStub.get
         .withArgs('/', 'authService.hasRole.admin', 'userCtrl.index')
         ).to.have.been.calledOnce;
@@ -52,9 +52,9 @@ describe('User API Router:', function() {
 
   });
 
-  describe('DELETE /api/users/:id', function() {
+  describe('DELETE /api/users/:id', () => {
 
-    it('should verify admin role and route to user.controller.destroy', function() {
+    it('should verify admin role and route to user.controller.destroy', () => {
       expect(routerStub.delete
         .withArgs('/:id', 'authService.hasRole.admin', 'userCtrl.destroy')
         ).to.have.been.calledOnce;
@@ -62,9 +62,9 @@ describe('User API Router:', function() {
 
   });
 
-  describe('GET /api/users/me', function() {
+  describe('GET /api/users/me', () => {
 
-    it('should be authenticated and route to user.controller.me', function() {
+    it('should be authenticated and route to user.controller.me', () => {
       expect(routerStub.get
         .withArgs('/me', 'authService.isAuthenticated', 'userCtrl.me')
         ).to.have.been.calledOnce;
@@ -72,9 +72,9 @@ describe('User API Router:', function() {
 
   });
 
-  describe('PUT /api/users/:id/password', function() {
+  describe('PUT /api/users/:id/password', () => {
 
-    it('should be authenticated and route to user.controller.changePassword', function() {
+    it('should be authenticated and route to user.controller.changePassword', () => {
       expect(routerStub.put
         .withArgs('/:id/password', 'authService.isAuthenticated', 'userCtrl.changePassword')
         ).to.have.been.calledOnce;
@@ -82,9 +82,9 @@ describe('User API Router:', function() {
 
   });
 
-  describe('GET /api/users/:id', function() {
+  describe('GET /api/users/:id', () => {
 
-    it('should be authenticated and route to user.controller.show', function() {
+    it('should be authenticated and route to user.controller.show', () => {
       expect(routerStub.get
         .withArgs('/:id', 'authService.isAuthenticated', 'userCtrl.show')
         ).to.have.been.calledOnce;
@@ -92,9 +92,9 @@ describe('User API Router:', function() {
 
   });
 
-  describe('POST /api/users', function() {
+  describe('POST /api/users', () => {
 
-    it('should route to user.controller.create', function() {
+    it('should route to user.controller.create', () => {
       expect(routerStub.post
         .withArgs('/', 'userCtrl.create')
         ).to.have.been.calledOnce;
