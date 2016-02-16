@@ -1,14 +1,14 @@
-import passport from 'passport';
-import {OAuth2Strategy as GoogleStrategy} from 'passport-google-oauth';
+import passport from 'koa-passport';
+import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 
 export function setup(User, config) {
   passport.use(new GoogleStrategy({
-    clientID: config.google.clientID,
-    clientSecret: config.google.clientSecret,
-    callbackURL: config.google.callbackURL
+    clientID: config.google.client_id,
+    clientSecret: config.google.client_secret,
+    callbackURL: config.google.callback_url,
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOneAsync({
+    User.findOne({
       'google.id': profile.id
     })
       .then(user => {
@@ -24,7 +24,7 @@ export function setup(User, config) {
           provider: 'google',
           google: profile._json
         });
-        user.saveAsync()
+        user.save()
           .then(user => done(null, user))
           .catch(err => done(err));
       })

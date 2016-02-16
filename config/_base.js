@@ -32,6 +32,27 @@ const config = {
   },
 
   // ----------------------------------
+  // API Related
+  // ----------------------------------
+  facebook: {
+    client_id:      'client_id',
+    client_secret:  'client_secret',
+    callback_url:   'callback_url'
+  },
+
+  google: {
+    client_id:      'client_id',
+    client_secret:  'client_secret',
+    callback_url:   'callback_url'
+  },
+
+  twitter: {
+    client_id:      'client_id',
+    client_secret:  'client_secret',
+    callback_url:   'callback_url'
+  },
+
+  // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
   compiler_css_modules     : true,

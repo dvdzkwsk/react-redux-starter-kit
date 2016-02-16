@@ -1,13 +1,11 @@
-'use strict';
+import Router from 'koa-router';
+import passport from 'koa-passport';
+import { signToken } from '../auth.service';
 
-import express from 'express';
-import passport from 'passport';
-import {signToken} from '../auth.service';
+const router = new Router();
 
-var router = express.Router();
-
-router.post('/', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+router.post('/', function(ctx, next) {
+  return passport.authenticate('local', function(user, info, status) {
     var error = err || info;
     if (error) {
       return res.status(401).json(error);
@@ -18,7 +16,20 @@ router.post('/', function(req, res, next) {
 
     var token = signToken(user._id, user.role);
     res.json({ token });
-  })(req, res, next)
+  })(ctx, next)
 });
+
+
+app.use(route.post('/custom', function(ctx, next) {
+  return passport.authenticate('local', function(user, info, status) {
+    if (user === false) {
+      ctx.status = 401
+      ctx.body = { success: false }
+    } else {
+      ctx.body = { success: true }
+      return ctx.login(user)
+    }
+  })(ctx, next)
+}))
 
 export default router;

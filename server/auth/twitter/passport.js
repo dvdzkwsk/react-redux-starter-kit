@@ -1,14 +1,14 @@
-import passport from 'passport';
-import {Strategy as TwitterStrategy} from 'passport-twitter';
+import passport from 'koa-passport';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 
 export function setup(User, config) {
   passport.use(new TwitterStrategy({
-    consumerKey: config.twitter.clientID,
-    consumerSecret: config.twitter.clientSecret,
-    callbackURL: config.twitter.callbackURL
+    consumerKey: config.twitter.client_id,
+    consumerSecret: config.twitter.client_secret,
+    callbackURL: config.twitter.callback_url,
   },
   function(token, tokenSecret, profile, done) {
-    User.findOneAsync({
+    User.findOne({
       'twitter.id_str': profile.id
     })
       .then(user => {
@@ -23,7 +23,7 @@ export function setup(User, config) {
           provider: 'twitter',
           twitter: profile._json
         });
-        user.saveAsync()
+        user.save()
           .then(user => done(null, user))
           .catch(err => done(err));
       })

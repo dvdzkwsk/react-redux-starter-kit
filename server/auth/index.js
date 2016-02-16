@@ -1,5 +1,4 @@
 import Router from 'koa-router';
-import passport from 'passport';
 import config from '../../config';
 import User from '../api/user/user.model';
 
@@ -9,7 +8,7 @@ require('./facebook/passport').setup(User, config);
 require('./google/passport').setup(User, config);
 require('./twitter/passport').setup(User, config);
 
-var router = express.Router();
+const router = new Router();
 
 router.use('/local', require('./local'));
 router.use('/facebook', require('./facebook'));

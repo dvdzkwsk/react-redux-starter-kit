@@ -1,12 +1,12 @@
 import config from '../../config';
 import jwt from 'jsonwebtoken';
 import koaJwt from 'koa-jwt';
-// import compose from 'composable-middleware';
+import compose from 'koa-compose';
 import User from '../api/user/user.model';
 
-// var validateJwt = expressJwt({
-//   secret: config.secrets_session
-// });
+const validateJwt = koaJwt({
+  secret: config.secrets_session
+});
 
 /**
  * Attaches the user object to the request if authenticated
@@ -68,7 +68,7 @@ export function signToken(id, role) {
 /**
  * Set token cookie directly for oAuth strategies
  */
-export function setTokenCookie(req, res) {
+export function setTokenCookie(ctx, next) {
   // if (!req.user) {
   //   return res.status(404).send('It looks like you aren\'t logged in, please try again.');
   // }
