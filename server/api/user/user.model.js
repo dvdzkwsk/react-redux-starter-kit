@@ -1,12 +1,9 @@
-'use strict';
-
 import crypto from 'crypto';
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
-import {Schema} from 'mongoose';
+import mongoose from 'mongoose';
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
-var UserSchema = new Schema({
+let UserSchema = new Schema({
   name: String,
   email: {
     type: String,
@@ -78,7 +75,7 @@ UserSchema
   .path('email')
   .validate(function(value, respond) {
     var self = this;
-    return this.constructor.findOneAsync({ email: value })
+    return this.constructor.findOne({ email: value })
       .then(function(user) {
         if (user) {
           if (self.id === user.id) {
@@ -93,7 +90,7 @@ UserSchema
       });
   }, 'The specified email address is already in use.');
 
-var validatePresenceOf = function(value) {
+const validatePresenceOf = function(value) {
   return value && value.length;
 };
 

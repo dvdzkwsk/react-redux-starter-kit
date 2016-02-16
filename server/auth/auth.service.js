@@ -1,7 +1,6 @@
-import passport from 'passport';
 import config from '../../config';
 import jwt from 'jsonwebtoken';
-import expressJwt from 'express-jwt';
+import koaJwt from 'koa-jwt';
 import compose from 'composable-middleware';
 import User from '../api/user/user.model';
 
@@ -61,7 +60,7 @@ export function hasRole(roleRequired) {
  * Returns a jwt token signed by the app secret
  */
 export function signToken(id, role) {
-  return jwt.sign({ _id: id, role: role }, config.secrets.session, {
+  return jwt.sign({ _id: id, role: role }, config.secrets_session, {
     expiresIn: 60 * 60 * 5
   });
 }
