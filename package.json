@@ -74,6 +74,7 @@
     "debug": "2.2.0",
     "history": "2.0.0",
     "iconv-lite": "0.4.13",
+    "jsonwebtoken": "5.5.4",
     "koa": "2.0.0-alpha.3",
     "koa-bodyparser": "3.0.0",
     "koa-connect-history-api-fallback": "0.3.0",

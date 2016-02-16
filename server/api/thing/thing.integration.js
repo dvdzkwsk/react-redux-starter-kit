@@ -137,6 +137,8 @@ describe('Thing API:', function() {
           if (err) {
             return done(err);
           }
+
+          expect(res.body.message).to.equal('thing not found');
           done();
         });
     });

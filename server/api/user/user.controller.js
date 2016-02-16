@@ -3,17 +3,31 @@ import passport from 'passport';
 import config from '../../../config';
 import jwt from 'jsonwebtoken';
 
-function validationError(res, statusCode) {
-  statusCode = statusCode || 422;
+function validationError(ctx, statusCode = 422) {
   return function(err) {
-    res.status(statusCode).json(err);
+    ctx.status = statusCode;
+    ctx.body = { message: err.message };
   }
 }
 
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
+function respondWithResult(ctx, statusCode = 200) {
+  return function(entity) {
+    ctx.status = statusCode;
+    ctx.body = entity;
+  };
+}
+
+function handleResourceNotFound(ctx, statusCode = 404) {
+  return function(entity) {
+    ctx.status = statusCode;
+    ctx.body = { message: `${entity} not found` };
+  };
+}
+
+function handleError(ctx, statusCode = 500) {
   return function(err) {
-    res.status(statusCode).send(err);
+    ctx.status = statusCode;
+    ctx.body = { message: err.message };
   };
 }
 
@@ -21,14 +35,30 @@ function handleError(res, statusCode) {
  * Get list of users
  * restriction: 'admin'
  */
-export function index(req, res) {
-  User.findAsync({}, '-salt -password')
-    .then(users => {
-      res.status(200).json(users);
-    })
-    .catch(handleError(res));
+export async function index(ctx, next) {
+  try {
+    const users = User.find({}, '-salt -password');
+    respondWithResult(ctx)(users);
+  } catch (err) {
+    handleError(ctx, err);
+  }
 }
 
+/**
+ * Get a single user
+ */
+export function show(req, res, next) {
+  try {
+    const user = User.findById(ctx.params.id);
+    if (!user) return handleResourceNotFound(ctx);
+    .then(user => {
+      if (!user) {
+        return res.status(404).end();
+      }
+      res.json(user.profile);
+    })
+    .catch(err => next(err));
+}
 /**
  * Creates a new user
  */
@@ -46,27 +76,12 @@ export function create(req, res, next) {
     .catch(validationError(res));
 }
 
-/**
- * Get a single user
- */
-export function show(req, res, next) {
-  var userId = req.params.id;
-
-  User.findByIdAsync(userId)
-    .then(user => {
-      if (!user) {
-        return res.status(404).end();
-      }
-      res.json(user.profile);
-    })
-    .catch(err => next(err));
-}
 
 /**
  * Deletes a user
  * restriction: 'admin'
  */
-export function destroy(req, res) {
+export function destroy(ctx, next) {
   User.findByIdAndRemoveAsync(req.params.id)
     .then(function() {
       res.status(204).end();
