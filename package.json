@@ -8,6 +8,10 @@
     "npm": "^3.0.0"
   },
   "scripts": {
+    "test:server:spec": "NODE_ENV=test mocha --compilers js:babel-core/register --require server/lib/test-helper.js 'server/**/*.spec.js'",
+    "test:server:integration": "NODE_ENV=test mocha --compilers js:babel-core/register --require server/lib/test-helper.js 'server/**/*.integration.js'",
+    "test:server": "NODE_ENV=test mocha --compilers js:babel-core/register --require server/lib/test-helper.js 'server/**/*.{spec,integration}.js'",
+    "test:server:file": "NODE_ENV=test mocha --compilers js:babel-core/register --require server/lib/test-helper.js",
     "clean": "rm -rf dist",
     "compile": "babel-node bin/compile",
     "lint": "eslint . ./",
@@ -139,6 +143,7 @@
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
     "style-loader": "0.13.0",
+    "supertest": "1.2.0",
     "url-loader": "0.5.7",
     "webpack": "1.12.9",
     "webpack-dev-middleware": "1.5.1",

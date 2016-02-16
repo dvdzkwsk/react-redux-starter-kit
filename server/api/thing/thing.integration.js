@@ -1,14 +1,13 @@
-'use strict';
-
-var app = require('../..');
+import server from '../../main';
 import request from 'supertest';
 
-var newThing;
+const app = server.listen();
+let newThing;
 
 describe('Thing API:', function() {
 
   describe('GET /api/things', function() {
-    var things;
+    let things;
 
     beforeEach(function(done) {
       request(app)
@@ -57,7 +56,7 @@ describe('Thing API:', function() {
   });
 
   describe('GET /api/things/:id', function() {
-    var thing;
+    let thing;
 
     beforeEach(function(done) {
       request(app)
@@ -85,7 +84,7 @@ describe('Thing API:', function() {
   });
 
   describe('PUT /api/things/:id', function() {
-    var updatedThing;
+    let updatedThing;
 
     beforeEach(function(done) {
       request(app)
