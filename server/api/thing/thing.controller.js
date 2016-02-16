@@ -45,7 +45,7 @@ export async function index(ctx, next) {
 export async function show(ctx, next) {
   try {
     const thing = await Thing.findById(ctx.params.id);
-    if (!thing) return handleResourceNotFound(ctx); 
+    if (!thing) return handleResourceNotFound(ctx)('thing');
     respondWithResult(ctx)(thing);
   } catch (err) {
     handleError(ctx, err);
@@ -69,7 +69,7 @@ export async function update(ctx, next) {
   
   try { 
     const thing = await Thing.findById(ctx.params.id);
-    if (!thing) return handleResourceNotFound(ctx);
+    if (!thing) return handleResourceNotFound(ctx)('thing');
 
     const updated = await _.merge(thing, ctx.request.body)
                            .save();
@@ -84,7 +84,7 @@ export async function update(ctx, next) {
 export async function destroy(ctx, next) {
   try {
     const thing = await Thing.findById(ctx.params.id);
-    if (!thing) return handleResourceNotFound(ctx);
+    if (!thing) return handleResourceNotFound(ctx)('thing');
 
     await thing.remove();
 
