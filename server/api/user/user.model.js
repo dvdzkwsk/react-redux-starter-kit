@@ -74,7 +74,7 @@ UserSchema
 UserSchema
   .path('email')
   .validate(function(value, respond) {
-    var self = this;
+    const self = this;
     return this.constructor.findOne({ email: value })
       .then(function(user) {
         if (user) {
@@ -90,7 +90,7 @@ UserSchema
       });
   }, 'The specified email address is already in use.');
 
-const validatePresenceOf = function(value) {
+const validatePresenceOf = value => {
   return value && value.length;
 };
 
@@ -163,7 +163,7 @@ UserSchema.methods = {
    * @api public
    */
   makeSalt(byteSize, callback) {
-    var defaultByteSize = 16;
+    let defaultByteSize = 16;
 
     if (typeof arguments[0] === 'function') {
       callback = arguments[0];
@@ -202,9 +202,9 @@ UserSchema.methods = {
       return null;
     }
 
-    var defaultIterations = 10000;
-    var defaultKeyLength = 64;
-    var salt = new Buffer(this.salt, 'base64');
+    const defaultIterations = 10000;
+    const defaultKeyLength = 64;
+    const salt = new Buffer(this.salt, 'base64');
 
     if (!callback) {
       return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)

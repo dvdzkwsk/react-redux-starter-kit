@@ -39,6 +39,20 @@ describe('User Model', () => {
       })).to.be.rejected;
   });
 
+  describe('#profile', () => {
+    it('should have a profile virtual', () => {
+      expect(user.profile.name).to.equal(user.name);
+      expect(user.profile.role).to.equal(user.role);
+    });
+  });
+  
+  describe('#token', () => {
+    it('should have a token virtual', () => {
+      expect(user.token._id).to.equal(user._id);
+      expect(user.token.role).to.equal(user.role);
+    });
+  });
+  
   describe('#email', () => {
     it('should fail when saving without an email', () => {
       user.email = '';
