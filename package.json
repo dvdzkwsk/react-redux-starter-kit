@@ -4,8 +4,8 @@
   "description": "Get started with React, Redux, and React-Router!",
   "main": "index.js",
   "engines": {
-    "node": ">=4.2.0",
-    "npm": "^3.0.0"
+    "node": "4.2.4",
+    "npm": "3.7.2"
   },
   "scripts": {
     "test:server:spec": "NODE_ENV=test mocha --compilers js:babel-core/register --require server/lib/test-helper.js 'server/**/*.spec.js'",
