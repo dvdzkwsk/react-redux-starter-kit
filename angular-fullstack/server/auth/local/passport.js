@@ -1,8 +1,8 @@
-import passport from 'koa-passport';
-import { Strategy as LocalStrategy } from 'passport-local';
+import passport from 'passport';
+import {Strategy as LocalStrategy} from 'passport-local';
 
 function localAuthenticate(User, email, password, done) {
-  User.findOne({
+  User.findOneAsync({
     email: email.toLowerCase()
   })
     .then(user => {
