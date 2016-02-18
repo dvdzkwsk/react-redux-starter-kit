@@ -89,16 +89,24 @@ if (!__TEST__) {
 // ------------------------------------
 // Pre-Loaders
 // ------------------------------------
-webpackConfig.module.preLoaders = [{
-  test: /\.(js|jsx)$/,
-  loader: 'eslint',
-  exclude: /node_modules/
-}]
+// Disabled 2/18/2016 by DZ
+// Reason: https://github.com/MoOx/eslint-loader/issues/82
+// On a >10k LoC project this preloader caused a ~3x increase
+// in initial build time (5s -> 16s). I recommend using an
+// ESLint plugin for your IDE and running the lint task
+// separately in CI (`npm run lint`), or, if your project is
+// still relatively small, you can uncomment the lines below:
 
-webpackConfig.eslint = {
-  configFile: paths.base('.eslintrc'),
-  emitWarning: __DEV__
-}
+// webpackConfig.module.preLoaders = [{
+//   test: /\.(js|jsx)$/,
+//   loader: 'eslint',
+//   exclude: /node_modules/
+// }]
+
+// webpackConfig.eslint = {
+//   configFile: paths.base('.eslintrc'),
+//   emitWarning: __DEV__
+// }
 
 // ------------------------------------
 // Loaders
