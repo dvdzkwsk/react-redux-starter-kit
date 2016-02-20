@@ -27,8 +27,9 @@ const APP_ENTRY_PATH = paths.base(config.dir_client) + '/main.js'
 
 webpackConfig.entry = {
   app: __DEV__
-    ? [APP_ENTRY_PATH, `webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`]
-    : [APP_ENTRY_PATH],
+    ? ['bootstrap-loader', APP_ENTRY_PATH,
+       `webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`]
+    : ['bootstrap-loader', APP_ENTRY_PATH],
   vendor: config.compiler_vendor
 }
 
@@ -215,6 +216,11 @@ webpackConfig.module.loaders.push({
     BASE_CSS_LOADER,
     'postcss'
   ]
+})
+
+webpackConfig.module.loaders.push({
+  test: /bootstrap-sass\/assets\/javascripts\//,
+  loaders: ['imports?jQuery=jquery']
 })
 
 // ------------------------------------
