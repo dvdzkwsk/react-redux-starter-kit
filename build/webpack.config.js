@@ -183,7 +183,7 @@ if (config.compiler_css_modules) {
   // only treat all files in this project's /src/ directory as
   // CSS modules.
   const cssModulesPaths = new RegExp('(' + [
-    paths.client()
+    paths.base(config.dir_client)
   ].join('|') + ')')
 
   webpackConfig.module.loaders.push({
