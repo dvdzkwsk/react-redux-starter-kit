@@ -1,8 +1,8 @@
-import passport from 'passport';
-import {Strategy as LocalStrategy} from 'passport-local';
+import passport from 'koa-passport';
+import { Strategy as LocalStrategy } from 'passport-local';
 
 function localAuthenticate(User, email, password, done) {
-  User.findOneAsync({
+  User.findOne({
     email: email.toLowerCase()
   })
     .then(user => {
@@ -11,6 +11,7 @@ function localAuthenticate(User, email, password, done) {
           message: 'This email is not registered.'
         });
       }
+
       user.authenticate(password, function(authError, authenticated) {
         if (authError) {
           return done(authError);
@@ -21,6 +22,7 @@ function localAuthenticate(User, email, password, done) {
           return done(null, user);
         }
       });
+
     })
     .catch(err => done(err));
 }

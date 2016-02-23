@@ -27,6 +27,7 @@ export function setup(User, config) {
           provider: 'facebook',
           facebook: profile._json
         });
+
         user.save()
           .then(user => done(null, user))
           .catch(err => done(err));

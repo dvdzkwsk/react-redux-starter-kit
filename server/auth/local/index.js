@@ -6,30 +6,16 @@ const router = new Router();
 
 router.post('/', function(ctx, next) {
   return passport.authenticate('local', function(user, info, status) {
-    var error = err || info;
-    if (error) {
-      return res.status(401).json(error);
-    }
     if (!user) {
-      return res.status(404).json({message: 'Something went wrong, please try again.'});
+      ctx.status = 404;
+      return ctx.body = {
+        message: 'Something went wrong, please try again.'
+      };
     }
 
-    var token = signToken(user._id, user.role);
-    res.json({ token });
+    const token = signToken(user._id, user.role);
+    ctx.body = { token };
   })(ctx, next)
 });
-
-
-app.use(route.post('/custom', function(ctx, next) {
-  return passport.authenticate('local', function(user, info, status) {
-    if (user === false) {
-      ctx.status = 401
-      ctx.body = { success: false }
-    } else {
-      ctx.body = { success: true }
-      return ctx.login(user)
-    }
-  })(ctx, next)
-}))
 
 export default router;

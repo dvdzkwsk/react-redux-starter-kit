@@ -1,4 +1,4 @@
-import passport from 'passport';
+import passport from 'koa-passport';
 import {Strategy as FacebookStrategy} from 'passport-facebook';
 
 export function setup(User, config) {

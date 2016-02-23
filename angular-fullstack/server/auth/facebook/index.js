@@ -1,7 +1,5 @@
-'use strict';
-
 import express from 'express';
-import passport from 'passport';
+import passport from 'koa-passport';
 import {setTokenCookie} from '../auth.service';
 
 var router = express.Router();
