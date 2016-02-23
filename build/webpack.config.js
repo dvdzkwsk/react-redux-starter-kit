@@ -126,6 +126,12 @@ webpackConfig.module.loaders = [{
             }]
           }]
         ]
+      },
+      production: {
+        plugins: [
+          'transform-react-remove-prop-types',
+          'transform-react-constant-elements'
+        ]
       }
     }
   }
@@ -135,60 +141,85 @@ webpackConfig.module.loaders = [{
   loader: 'json'
 }]
 
-// Styles
-const cssLoader = !config.compiler_css_modules
-  ? 'css?sourceMap'
-  : [
-    'css?modules',
-    'sourceMap',
+// ------------------------------------
+// Style Loaders
+// ------------------------------------
+// We use cssnano with the postcss loader, so we tell
+// css-loader not to duplicate minimization.
+const BASE_CSS_LOADER = 'css?sourceMap&-minimize'
+
+// Add any packge names here whose styles need to be treated as CSS modules.
+// These paths will be combined into a single regex.
+const PATHS_TO_TREAT_AS_CSS_MODULES = [
+  // 'react-toolbox', (example)
+]
+
+// If config has CSS modules enabled, treat this project's styles as CSS modules.
+if (config.compiler_css_modules) {
+  PATHS_TO_TREAT_AS_CSS_MODULES.push(
+    paths.base(config.dir_client).replace(/[\^\$\.\*\+\-\?\=\!\:\|\\\/\(\)\[\]\{\}\,]/g, '\\$&')
+  )
+}
+
+const isUsingCSSModules = !!PATHS_TO_TREAT_AS_CSS_MODULES.length
+const cssModulesRegex = new RegExp(`(${PATHS_TO_TREAT_AS_CSS_MODULES.join('|')})`)
+
+// Loaders for styles that need to be treated as CSS modules.
+if (isUsingCSSModules) {
+  const cssModulesLoader = [
+    BASE_CSS_LOADER,
+    'modules',
     'importLoaders=1',
     'localIdentName=[name]__[local]___[hash:base64:5]'
   ].join('&')
 
+  webpackConfig.module.loaders.push({
+    test: /\.scss$/,
+    include: cssModulesRegex,
+    loaders: [
+      'style',
+      cssModulesLoader,
+      'postcss',
+      'sass?sourceMap'
+    ]
+  })
+
+  webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    include: cssModulesRegex,
+    loaders: [
+      'style',
+      cssModulesLoader,
+      'postcss'
+    ]
+  })
+}
+
+// Loaders for files that should not be treated as CSS modules.
+const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
-  include: /src/,
+  exclude: excludeCSSModules,
   loaders: [
     'style',
-    cssLoader,
+    BASE_CSS_LOADER,
     'postcss',
     'sass?sourceMap'
   ]
 })
-
 webpackConfig.module.loaders.push({
   test: /\.css$/,
-  include: /src/,
+  exclude: excludeCSSModules,
   loaders: [
     'style',
-    cssLoader,
+    BASE_CSS_LOADER,
     'postcss'
   ]
 })
 
-// Don't treat global SCSS as modules
-webpackConfig.module.loaders.push({
-  test: /\.scss$/,
-  exclude: /src/,
-  loaders: [
-    'style',
-    'css?sourceMap',
-    'postcss',
-    'sass?sourceMap'
-  ]
-})
-
-// Don't treat global, third-party CSS as modules
-webpackConfig.module.loaders.push({
-  test: /\.css$/,
-  exclude: /src/,
-  loaders: [
-    'style',
-    'css?sourceMap',
-    'postcss'
-  ]
-})
-
+// ------------------------------------
+// Style Configuration
+// ------------------------------------
 webpackConfig.sassLoader = {
   includePaths: paths.client('styles')
 }
