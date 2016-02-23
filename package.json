@@ -80,8 +80,7 @@
     "react-router-redux": "^4.0.0-beta",
     "redux": "^3.0.0",
     "redux-thunk": "^1.0.0",
-    "url": "^0.11.0",
-    "yargs": "^3.18.0"
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
@@ -150,6 +149,7 @@
     "url-loader": "^0.5.6",
     "webpack": "1.12.9",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0"
+    "webpack-hot-middleware": "^2.6.0",
+    "yargs": "^4.0.0"
   }
 }
