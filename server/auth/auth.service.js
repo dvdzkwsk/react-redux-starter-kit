@@ -2,38 +2,42 @@ import config from '../../config';
 import jwt from 'jsonwebtoken';
 import koaJwt from 'koa-jwt';
 import compose from 'koa-compose';
+import convert from 'koa-convert';
 import User from '../api/user/user.model';
 
-const validateJwt = koaJwt({
+const validateJwt = convert(koaJwt({
   secret: config.secrets_session
-});
+}));
 
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
  */
 export function isAuthenticated() {
-  // return compose()
-  //   // Validate jwt
-  //   .use(function(req, res, next) {
-  //     // allow access_token to be passed through query parameter as well
-  //     if (req.query && req.query.hasOwnProperty('access_token')) {
-  //       req.headers.authorization = 'Bearer ' + req.query.access_token;
-  //     }
-  //     validateJwt(req, res, next);
-  //   })
-  //   // Attach user to request
-  //   .use(function(req, res, next) {
-  //     User.findByIdAsync(req.user._id)
-  //       .then(user => {
-  //         if (!user) {
-  //           return res.status(401).end();
-  //         }
-  //         req.user = user;
-  //         next();
-  //       })
-  //       .catch(err => next(err));
-  //   });
+  function authentication(ctx, next) {
+    // allow access_token to be passed through query parameter as well
+    if (ctx.query && ctx.query.hasOwnProperty('access_token')) {
+      ctx.headers.authorization = `Bearer ${ctx.query.access_token}`;
+    }
+    
+    validateJwt(ctx, next);
+  }
+
+  function attachUserToContext(ctx, next) {
+    User.findById(ctx.state.user._id)
+      .then(user => {
+        if (!user) {
+          return ctx.status = 401;
+        }
+
+        ctx.state.user = user;
+
+        next();
+      })
+      .catch(err => next(err));
+  }
+ 
+  return compose([authentication, attachUserToContext]);
 }
 
 /**

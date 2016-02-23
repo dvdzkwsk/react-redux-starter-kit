@@ -47,7 +47,7 @@ describe('User API:', () => {
         });
     });
 
-    xit('should respond with a user profile when authenticated', done => {
+    it('should respond with a user profile when authenticated', done => {
       request(app)
         .get('/api/users/me')
         .set('authorization', 'Bearer ' + token)

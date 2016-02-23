@@ -36,7 +36,7 @@ function handleError(ctx, statusCode = 500) {
  */
 export async function index(ctx, next) {
   try {
-    const users = User.find({}, '-salt -password');
+    const users = await User.find({}, '-salt -password');
     respondWithResult(ctx)(users);
   } catch (err) {
     handleError(ctx)(err);
@@ -48,7 +48,7 @@ export async function index(ctx, next) {
  */
 export async function show(ctx, next) {
   try {
-    const user = User.findById(ctx.params.id);
+    const user = await User.findById(ctx.params.id);
     if (!user) return handleResourceNotFound(ctx)('user');
     respondWithResult(ctx)(user);
   } catch (err) {
@@ -84,7 +84,7 @@ export async function create(ctx, next) {
  */
 export async function destroy(ctx, next) {
   try {
-    const user = User.findByIdAnd(ctx.params.id);
+    const user = await User.findById(ctx.params.id);
     if (!user) return handleResourceNotFound(ctx)('user');
 
     await user.remove();
@@ -104,7 +104,7 @@ export async function changePassword(ctx, next) {
   const newPass = String(ctx.request.body.newPassword);
 
   try {
-    let user = User.findByIdAsync(userId);
+    let user = await User.findById(userId);
 
     if (user.authenticate(oldPass)) {
       user.password = newPass;
@@ -123,13 +123,14 @@ export async function changePassword(ctx, next) {
  * Get my info
  */
 export async function me(ctx, next) {
-  const userId = ctx.user._id;
+  const userId = ctx.state.user._id;
 
   try {
-    const me = User.findOne({ _id: userId }, '-salt -password');
+    const me = await User.findOne({ _id: userId }, '-salt -password');
     
     respondWithResult(ctx)(me);
   } catch (err) {
+    console.log(err);
     handleError(ctx)(err);
   }
 }
