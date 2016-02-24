@@ -19,6 +19,7 @@ Table of Contents
 1. [Requirements](#requirements)
 1. [Features](#features)
 1. [Getting Started](#getting-started)
+1. [Starting a New Project](#starting-a-new-project)
 1. [Usage](#usage)
 1. [Structure](#structure)
 1. [Webpack](#webpack)
@@ -82,6 +83,18 @@ $ git clone https://github.com/davezuko/react-redux-starter-kit.git
 $ cd react-redux-starter-kit
 $ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
 $ npm start                     # Compile and launch
+```
+
+Starting a New Project
+----------------------
+
+Want to start a new project without having to clean up the (tiny) example code? After cloning the repo and following the steps above, do the following:
+
+```shell
+$ git checkout -b <your-project-name> new-project
+$ npm install                   # There are a few npm dependencies in this branch that aren't in master
+$ npm run make:project          # Make your new project
+$ rm -rf .git && git init       # Start a new git repository
 ```
 
 Usage
@@ -257,6 +270,10 @@ Reference: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issue
 ### Babel Issues
 
 Running into issues with Babel? Babel 6 can be tricky, please either report an issue or try out the [stable v0.18.1 release](https://github.com/davezuko/react-redux-starter-kit/tree/v0.18.1) with Babel 5. If you do report an issue, please try to include relevant debugging information such as your node, npm, and babel versions.
+
+### Babel Polyfill
+
+By default this repo does not bundle the babel polyfill in order to reduce bundle size. If you want to include it, you can use [this commit](https://github.com/jokeyrhyme/react-redux-starter-kit/commit/f3f095b547ee63474b9361128bb95d370da04b35) from [jokeyrhyme](https://github.com/jokeyrhyme) as a reference.
 
 ### Internationalization Support
 
