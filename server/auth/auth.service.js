@@ -5,9 +5,9 @@ import compose from 'koa-compose';
 import convert from 'koa-convert';
 import User from '../api/user/user.model';
 
-const validateJwt = convert(koaJwt({
-  secret: config.secrets_session
-}));
+// const validateJwt = convert(koaJwt({
+//   secret: config.secrets_session
+// }));
 
 /**
  * Attaches the user object to the request if authenticated
@@ -19,45 +19,95 @@ export function isAuthenticated() {
     if (ctx.query && ctx.query.hasOwnProperty('access_token')) {
       ctx.headers.authorization = `Bearer ${ctx.query.access_token}`;
     }
-    
-    validateJwt(ctx, next);
+
+    next();
+  }
+
+  // function *validateJwt(next) {
+  //   const token = this.header.authorization.split(' ')[1];
+
+  //   console.log(token);
+  //   try {
+  //     let user = yield jwt.verify(token, config.secrets_session);
+
+  //     this.state.user = user;
+  //     yield next;
+  //   } catch (err) {
+  //     console.log(err, 'dude');
+  //     yield next;
+  //   }
+  // }
+  //
+  function validateJwt(ctx, next) {
+   const token = ctx.header.authorization.split(' ')[1];
+
+  // //   console.log(token);
+    try {
+      let user = jwt.verify(token, config.secrets_session);
+
+      ctx.state.user = user;
+      next();
+    } catch (err) {
+      console.log(err, 'dude');
+      next(err);
+    }
+    //
+    // ctx.state.user = {
+    //   _id: '123'
+    // };
+    // next();
+
   }
 
   function attachUserToContext(ctx, next) {
-    User.findById(ctx.state.user._id)
-      .then(user => {
-        if (!user) {
-          return ctx.status = 401;
-        }
+    next();
+    // User.findById(ctx.state.user._id)
+    //   .then(user => {
+    //     if (!user) {
+    //       return ctx.status = 401;
+    //     }
 
-        ctx.state.user = user;
+    //     ctx.state.user = user;
 
-        next();
-      })
-      .catch(err => next(err));
+    //     next();
+    //   })
+    //   .catch(err => next(err));
   }
+
+  // function attachUserToContext(ctx, next) {
+  //   ctx.state.user = {
+  //     _id: '123'
+  //   };
+
+  //   next();
+  // }
+  //
+  //
+  
+  return compose([authentication, validateJwt, attachUserToContext]);
  
-  return compose([authentication, attachUserToContext]);
+  // return compose([authentication,  convert(validateJwt), attachUserToContext]);
 }
 
 /**
  * Checks if the user role meets the minimum requirements of the route
  */
 export function hasRole(roleRequired) {
-  // if (!roleRequired) {
-  //   throw new Error('Required role needs to be set');
-  // }
+  if (!roleRequired) {
+    throw new Error('Required role needs to be set');
+  }
 
-  // return compose()
-  //   .use(isAuthenticated())
-  //   .use(function meetsRequirements(req, res, next) {
-  //     if (config.userRoles.indexOf(req.user.role) >=
-  //         config.userRoles.indexOf(roleRequired)) {
-  //       next();
-  //     } else {
-  //       res.status(403).send('Forbidden');
-  //     }
-  //   });
+  function meetsRequirements(ctx, next) {
+    if (config.userRoles.indexO(req.user.role) >=
+        config.userRoles.indexOf(roleRequired)) {
+      next();
+    } else {
+      ctx.status = 403;
+      ctx.body = { message: 'Forbidden' };
+    }
+  }
+
+  return compose([isAuthenticated(), meetsRequirements]);
 }
 
 /**
@@ -73,10 +123,14 @@ export function signToken(id, role) {
  * Set token cookie directly for oAuth strategies
  */
 export function setTokenCookie(ctx, next) {
-  // if (!req.user) {
-  //   return res.status(404).send('It looks like you aren\'t logged in, please try again.');
-  // }
-  // var token = signToken(req.user._id, req.user.role);
-  // res.cookie('token', token);
-  // res.redirect('/');
+  if (!ctx.state.user) {
+    ctx.status = 404;
+    return ctx.body = {
+      message: "It looks like you aren't logged in, please try again."
+    };
+  }
+
+  const token = signToken(ctx.state.user._id, ctx.state.user.role);
+  ctx.cookie('token', token);
+  ctx.redirect('/');
 }

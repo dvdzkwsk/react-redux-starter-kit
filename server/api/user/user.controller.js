@@ -124,11 +124,18 @@ export async function changePassword(ctx, next) {
  */
 export async function me(ctx, next) {
   const userId = ctx.state.user._id;
+  console.log(userId);
 
   try {
-    const me = await User.findOne({ _id: userId }, '-salt -password');
+    // const me = await User.findOne({ _id: userId }, '-salt -password');
+    //
+    // const me = {
+    //   _id: '123'
+    // };
     
+    const me = ctx.state.user;
     respondWithResult(ctx)(me);
+    console.log('got here');
   } catch (err) {
     console.log(err);
     handleError(ctx)(err);
