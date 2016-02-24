@@ -4,12 +4,12 @@ import request from 'supertest';
 const app = server.listen();
 let newThing;
 
-describe('Thing API:', () => {
+describe('Thing API:', function() {
 
-  describe('GET /api/things', () => {
+  describe('GET /api/things', function() {
     let things;
 
-    beforeEach(done => {
+    beforeEach(function(done) {
       request(app)
         .get('/api/things')
         .expect(200)
@@ -23,14 +23,14 @@ describe('Thing API:', () => {
         });
     });
 
-    it('should respond with JSON array', () => {
+    it('should respond with JSON array', function() {
       expect(things).to.be.instanceOf(Array);
     });
 
   });
 
-  describe('POST /api/things', () => {
-    beforeEach(done => {
+  describe('POST /api/things', function() {
+    beforeEach(function(done) {
       request(app)
         .post('/api/things')
         .send({
@@ -48,17 +48,17 @@ describe('Thing API:', () => {
         });
     });
 
-    it('should respond with the newly created thing', () => {
+    it('should respond with the newly created thing', function() {
       expect(newThing.name).to.equal('New Thing');
       expect(newThing.info).to.equal('This is the brand new thing!!!');
     });
 
   });
 
-  describe('GET /api/things/:id', () => {
+  describe('GET /api/things/:id', function() {
     let thing;
 
-    beforeEach(done => {
+    beforeEach(function(done) {
       request(app)
         .get('/api/things/' + newThing._id)
         .expect(200)
@@ -72,21 +72,21 @@ describe('Thing API:', () => {
         });
     });
 
-    afterEach(() => {
+    afterEach(function() {
       thing = {};
     });
 
-    it('should respond with the requested thing', () => {
+    it('should respond with the requested thing', function() {
       expect(thing.name).to.equal('New Thing');
       expect(thing.info).to.equal('This is the brand new thing!!!');
     });
 
   });
 
-  describe('PUT /api/things/:id', () => {
+  describe('PUT /api/things/:id', function() {
     let updatedThing;
 
-    beforeEach(done => {
+    beforeEach(function(done) {
       request(app)
         .put('/api/things/' + newThing._id)
         .send({
@@ -104,20 +104,20 @@ describe('Thing API:', () => {
         });
     });
 
-    afterEach(() => {
+    afterEach(function() {
       updatedThing = {};
     });
 
-    it('should respond with the updated thing', () => {
+    it('should respond with the updated thing', function() {
       expect(updatedThing.name).to.equal('Updated Thing');
       expect(updatedThing.info).to.equal('This is the updated thing!!!');
     });
 
   });
 
-  describe('DELETE /api/things/:id', () => {
+  describe('DELETE /api/things/:id', function() {
 
-    it('should respond with 204 on successful removal', done => {
+    it('should respond with 204 on successful removal', function(done) {
       request(app)
         .delete('/api/things/' + newThing._id)
         .expect(204)
@@ -129,7 +129,7 @@ describe('Thing API:', () => {
         });
     });
 
-    it('should respond with 404 when thing does not exist', done => {
+    it('should respond with 404 when thing does not exist', function(done) {
       request(app)
         .delete('/api/things/' + newThing._id)
         .expect(404)

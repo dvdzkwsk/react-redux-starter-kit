@@ -4,12 +4,12 @@ import request from 'supertest';
 
 const app = server.listen();
 
-describe('User API:', () => {
+describe('User API:', function() {
   let user;
 
   // Clear users before testing
-  before(() => {
-    return User.remove().then(() => {
+  before(function() {
+    return User.remove().then(function() {
       user = new User({
         name: 'Fake User',
         email: 'test@example.com',
@@ -21,14 +21,18 @@ describe('User API:', () => {
   });
 
   // Clear users after testing
-  after(() => {
+  after(function() {
     return User.remove();
   });
 
-  describe('GET /api/users/me', () => {
+  describe('GET /', function() {
+
+  });
+
+  describe('GET /api/users/me', function() {
     let token;
 
-    before(done => {
+    before(function(done) {
       request(app)
         .post('/auth/local')
         .send({
@@ -47,7 +51,7 @@ describe('User API:', () => {
         });
     });
 
-    it('should respond with a user profile when authenticated', done => {
+    it('should respond with a user profile when authenticated', function(done) {
       request(app)
         .get('/api/users/me')
         .set('authorization', 'Bearer ' + token)
@@ -63,7 +67,7 @@ describe('User API:', () => {
         });
     });
 
-    it('should respond with a 401 when not authenticated', done => {
+    it('should respond with a 401 when not authenticated', function(done) {
       request(app)
         .get('/api/users/me')
         .expect(401)
