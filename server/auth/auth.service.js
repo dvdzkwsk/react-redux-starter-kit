@@ -5,9 +5,9 @@ import compose from 'koa-compose';
 import convert from 'koa-convert';
 import User from '../api/user/user.model';
 
-// const validateJwt = convert(koaJwt({
-//   secret: config.secrets_session
-// }));
+const validateJwt = convert(koaJwt({
+  secret: config.secrets_session
+}));
 
 /**
  * Attaches the user object to the request if authenticated
@@ -20,73 +20,27 @@ export function isAuthenticated() {
       ctx.headers.authorization = `Bearer ${ctx.query.access_token}`;
     }
 
-    next();
+    // validate jwt
+    return validateJwt(ctx, next);
   }
 
-  // function *validateJwt(next) {
-  //   const token = this.header.authorization.split(' ')[1];
-
-  //   console.log(token);
-  //   try {
-  //     let user = yield jwt.verify(token, config.secrets_session);
-
-  //     this.state.user = user;
-  //     yield next;
-  //   } catch (err) {
-  //     console.log(err, 'dude');
-  //     yield next;
-  //   }
-  // }
-  //
-  function validateJwt(ctx, next) {
-   const token = ctx.header.authorization.split(' ')[1];
-
-  // //   console.log(token);
+  async function attachUserToContext(ctx, next) {
     try {
-      let user = jwt.verify(token, config.secrets_session);
+      const user = await User.findById(ctx.state.user._id);
+
+      if (!user) {
+        return ctx.status = 403;
+      }
 
       ctx.state.user = user;
-      next();
+      return next();
     } catch (err) {
-      console.log(err, 'dude');
-      next(err);
+      return next(err);
     }
-    //
-    // ctx.state.user = {
-    //   _id: '123'
-    // };
-    // next();
 
   }
 
-  function attachUserToContext(ctx, next) {
-    next();
-    // User.findById(ctx.state.user._id)
-    //   .then(user => {
-    //     if (!user) {
-    //       return ctx.status = 401;
-    //     }
-
-    //     ctx.state.user = user;
-
-    //     next();
-    //   })
-    //   .catch(err => next(err));
-  }
-
-  // function attachUserToContext(ctx, next) {
-  //   ctx.state.user = {
-  //     _id: '123'
-  //   };
-
-  //   next();
-  // }
-  //
-  //
-  
-  return compose([authentication, validateJwt, attachUserToContext]);
- 
-  // return compose([authentication,  convert(validateJwt), attachUserToContext]);
+  return compose([authentication, attachUserToContext]);
 }
 
 /**
@@ -98,9 +52,9 @@ export function hasRole(roleRequired) {
   }
 
   function meetsRequirements(ctx, next) {
-    if (config.userRoles.indexO(req.user.role) >=
+    if (config.userRoles.indexO(ctx.state.user.role) >=
         config.userRoles.indexOf(roleRequired)) {
-      next();
+      return next();
     } else {
       ctx.status = 403;
       ctx.body = { message: 'Forbidden' };

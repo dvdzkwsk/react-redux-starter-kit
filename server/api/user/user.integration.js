@@ -63,7 +63,7 @@ describe('User API:', () => {
         });
     });
 
-    xit('should respond with a 401 when not authenticated', done => {
+    it('should respond with a 401 when not authenticated', done => {
       request(app)
         .get('/api/users/me')
         .expect(401)
