@@ -1,18 +1,13 @@
-'use strict';
+import Router from 'koa-router';
+import passport from 'koa-passport';
+import { setTokenCookie } from '../auth.service';
 
-import express from 'express';
-import passport from 'passport';
-import {setTokenCookie} from '../auth.service';
-
-var router = express.Router();
+const router = new Router();
 
 router
   .get('/', passport.authenticate('google', {
+    scope: ['email', 'profile'],
     failureRedirect: '/signup',
-    scope: [
-      'profile',
-      'email'
-    ],
     session: false
   }))
   .get('/callback', passport.authenticate('google', {
