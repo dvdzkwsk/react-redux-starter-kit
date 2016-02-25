@@ -23,6 +23,10 @@ mongoose.connection.on('error', function(err) {
   process.exit(-1);
 });
 
+if (config.seed_db) { 
+  require('./lib/seed').default();
+}
+
 const debug = _debug('app:server')
 const paths = config.utils_paths
 const app = new Koa()

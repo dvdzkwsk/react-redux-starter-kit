@@ -3,6 +3,7 @@
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
 export default (config) => ({
   mongo_uri           : 'mongodb://localhost/fullstack-react-dev',
+  seed_db             : true,
 
   secrets_session     : 'fullstack-react-dev-secret',
 
