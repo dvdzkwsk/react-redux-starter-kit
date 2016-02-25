@@ -1,7 +1,7 @@
-import passport from 'koa-passport';
-import { Strategy as FacebookStrategy } from 'passport-facebook';
+import passport from 'koa-passport'
+import { Strategy as FacebookStrategy } from 'passport-facebook'
 
-export function setup(User, config) {
+export function setup (User, config) {
   passport.use(new FacebookStrategy({
     clientID: config.facebook.client_id,
     clientSecret: config.facebook.client_secret,
@@ -11,13 +11,13 @@ export function setup(User, config) {
       'emails'
     ]
   },
-  function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     User.findOne({
       'facebook.id': profile.id
     })
       .then(user => {
         if (user) {
-          return done(null, user);
+          return done(null, user)
         }
 
         user = new User({
@@ -26,14 +26,14 @@ export function setup(User, config) {
           role: 'user',
           provider: 'facebook',
           facebook: profile._json
-        });
+        })
 
         user.save()
-          .then(user =>  {
-            done(null, user);
+          .then(user => {
+            done(null, user)
           })
-          .catch(err => done(err));
+          .catch(err => done(err))
       })
-      .catch(err => done(err));
-  }));
+      .catch(err => done(err))
+  }))
 }

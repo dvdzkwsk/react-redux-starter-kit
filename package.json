@@ -68,6 +68,7 @@
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.9.1",
     "bluebird": "^3.3.0",
     "co-request": "^1.0.0",
     "debug": "^2.2.0",

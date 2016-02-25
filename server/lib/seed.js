@@ -1,39 +1,20 @@
-import Thing from '../api/thing/thing.model';
-import User from '../api/user/user.model';
+import Thing from '../api/thing/thing.model'
+import User from '../api/user/user.model'
 
-export default async function seed() {
-  await Thing.find({}).remove();
+export default async function seed () {
+  await Thing.find({}).remove()
 
   await Thing.create({
     name: 'Development Tools',
-    info: 'Integration with popular tools such as Bower, Grunt, Babel, Karma, ' +
-           'Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, ' +
-           'Stylus, Sass, and Less.'
+    info: 'Integration with popular tools such as Webpack, Babel, Karma, ' +
+          'Mocha, ESLint, and Redux Devtools.'
   }, {
     name: 'Server and Client integration',
-    info: 'Built with a powerful and fun stack: MongoDB, Express, ' +
-           'AngularJS, and Node.'
-  }, {
-    name: 'Smart Build System',
-    info: 'Build system ignores `spec` files, allowing you to keep ' +
-           'tests alongside code. Automatic injection of scripts and ' +
-           'styles into your index.html'
-  }, {
-    name: 'Modular Structure',
-    info: 'Best practice client and server structures allow for more ' +
-           'code reusability and maximum scalability'
-  }, {
-    name: 'Optimized Build',
-    info: 'Build process packs up your templates as a single JavaScript ' +
-           'payload, minifies your scripts/css/images, and rewrites asset ' +
-           'names for caching.'
-  }, {
-    name: 'Deployment Ready',
-    info: 'Easily deploy your app to Heroku or Openshift with the heroku ' +
-           'and openshift subgenerators'
-  });
+    info: 'Built with a powerful and fun stack: MongoDB, Koa, ' +
+           'React, and Node.'
+  })
 
-  await User.find({}).remove();
+  await User.find({}).remove()
 
   await User.create({
     provider: 'local',
@@ -46,7 +27,7 @@ export default async function seed() {
     name: 'Admin',
     email: 'admin@example.com',
     password: 'admin'
-  });
+  })
 
-  console.log('done populating database');
+  console.log('done populating database')
 }

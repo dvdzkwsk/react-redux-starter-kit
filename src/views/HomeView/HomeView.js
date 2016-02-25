@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { increment, doubleAsync } from '../../redux/modules/counter'
+import { getThing } from '../../redux/modules/thing'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 
@@ -25,25 +26,33 @@ export class HomeView extends React.Component<void, Props, void> {
   static propTypes = {
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
-    increment: PropTypes.func.isRequired
+    increment: PropTypes.func.isRequired,
+    getThing: PropTypes.func.isRequired,
+    things: PropTypes.array.isRequired
   };
 
+  componentDidMount () {
+    this.props.getThing();
+    console.log('mount');
+  }
+
   render () {
-    const things = [{
-      info: 'info 1',
-      name: 'name 1'
-    }, {
-      info: 'info 2',
-      name: 'name 2'
-    }];
+    const things = this.props.things;
+    // const things = [{
+    //   info: 'info 1',
+    //   name: 'name 1'
+    // }, {
+    //   info: 'info 2',
+    //   name: 'name 2'
+    // }]
 
-    const addThing = function() {
-      console.log('addThing');
-    };
+    const addThing = function () {
+      console.log('addThing')
+    }
 
-    const deleteThing = function() {
-      console.log('deleteThing');
-    };
+    const deleteThing = function () {
+      console.log('deleteThing')
+    }
 
     return (
       <div>
@@ -70,26 +79,26 @@ export class HomeView extends React.Component<void, Props, void> {
           </button>
 
         </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <h1 className="page-header">Features:</h1>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-lg-12'>
+              <h1 className='page-header'>Features:</h1>
               {things.map(thing => {
                 return (
-                  <ul className="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6">
-                    <li><a href="#">{thing.name}<button type="button" className="close" onClick={addThing}>&times;</button></a></li>
+                  <ul className='nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6'>
+                    <li><a href='#'>{thing.name}<button type='button' className='close' onClick={addThing}>&times;</button></a></li>
                   </ul>
-                );
+                )
               })}
             </div>
           </div>
 
-          <form className="thing-form">
+          <form className='thing-form'>
             <label>Syncs in realtime across clients</label>
-            <p className="input-group">
-              <input type="text" className="form-control" placeholder="Add a new thing here." ng-model="main.newThing" />
-              <span className="input-group-btn">
-                <button type="submit" className="btn btn-primary" onClick={addThing}>Add New</button>
+            <p className='input-group'>
+              <input type='text' className='form-control' placeholder='Add a new thing here.' ng-model='main.newThing' />
+              <span className='input-group-btn'>
+                <button type='submit' className='btn btn-primary' onClick={addThing}>Add New</button>
               </span>
             </p>
           </form>
@@ -100,9 +109,12 @@ export class HomeView extends React.Component<void, Props, void> {
 }
 
 const mapStateToProps = (state) => ({
-  counter: state.counter
+  counter: state.counter,
+  things: state.things
 })
+
 export default connect((mapStateToProps), {
   increment: () => increment(1),
-  doubleAsync
+  doubleAsync,
+  getThing
 })(HomeView)

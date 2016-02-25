@@ -1,54 +1,48 @@
 /* @flow */
+import axios from 'axios'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+export const GET_THING = 'GET_THING'
+export const GET_THING_SUCCESS = 'GET_THING_SUCCESS'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-// NOTE: "Action" is a Flow interface defined in https://github.com/TechnologyAdvice/flow-interfaces
-// If you're unfamiliar with Flow, you are completely welcome to avoid annotating your code, but
-// if you'd like to learn more you can check out: flowtype.org.
-export const increment = (value: number = 1): Action => ({
-  type: COUNTER_INCREMENT,
-  payload: value
-})
-
-// This is a thunk, meaning it is a function that immediately
-// returns a function for lazy evaluation. It is incredibly useful for
-// creating async actions, especially when combined with redux-thunk!
-// NOTE: This is solely for demonstration purposes. In a real application,
-// you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
-// reducer take care of this logic.
-export const doubleAsync = (): Function => {
-  return (dispatch: Function, getState: Function): Promise => {
-    return new Promise((resolve: Function): void => {
-      setTimeout(() => {
-        dispatch(increment(getState().counter))
-        resolve()
-      }, 200)
-    })
+export const getThing = () => {
+  return (dispatch, getState) => {
+    return axios.get('/api/things')
+      .then((res) => {
+        dispatch(getThingSuccess(res.data))
+      })
   }
 }
 
+export const getThingSuccess = (thing) => ({
+  type: GET_THING_SUCCESS,
+  payload: thing
+})
+
 export const actions = {
-  increment,
-  doubleAsync
+  getThing,
+  getThingSuccess
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state: number, action: {payload: number}): number => state + action.payload
+  [GET_THING_SUCCESS] (state, action) {
+    return action.payload
+  }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0
-export default function counterReducer (state: number = initialState, action: Action): number {
+const initialState = []
+export default function thingReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

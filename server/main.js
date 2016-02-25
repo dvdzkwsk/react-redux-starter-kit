@@ -1,6 +1,6 @@
 import Koa from 'koa'
 import convert from 'koa-convert'
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 import webpack from 'webpack'
 import webpackConfig from '../build/webpack.config'
 import historyApiFallback from 'koa-connect-history-api-fallback'
@@ -10,21 +10,21 @@ import config from '../config'
 import webpackProxyMiddleware from './middleware/webpack-proxy'
 import webpackDevMiddleware from './middleware/webpack-dev'
 import webpackHMRMiddleware from './middleware/webpack-hmr'
-import essentialMiddlewares from './middleware/essentials';
-import router from './router';
+import essentialMiddlewares from './middleware/essentials'
+import router from './router'
 
 // Configure Mongoose Promise
-mongoose.Promise = require('bluebird');
+mongoose.Promise = require('bluebird')
 
 // Connect to MongoDB
-mongoose.connect(config.mongo_uri, config.mongo_options);
-mongoose.connection.on('error', function(err) {
-  console.error('MongoDB connection error: ' + err);
-  process.exit(-1);
-});
+mongoose.connect(config.mongo_uri, config.mongo_options)
+mongoose.connection.on('error', function (err) {
+  console.error('MongoDB connection error: ' + err)
+  process.exit(-1)
+})
 
-if (config.seed_db) { 
-  require('./lib/seed').default();
+if (config.seed_db) {
+  require('./lib/seed').default()
 }
 
 const debug = _debug('app:server')
@@ -32,10 +32,10 @@ const paths = config.utils_paths
 const app = new Koa()
 
 // Apply essential middlewares
-essentialMiddlewares(app);
+essentialMiddlewares(app)
 
 // Apply API and Auth routes
-app.use(router.routes());
+app.use(router.routes())
 
 // This rewrites all routes requests to the root /index.html file
 // (ignoring file requests). If you want to implement isomorphic
@@ -80,7 +80,7 @@ if (config.env === 'development') {
   app.use(convert(serve(paths.base(config.dir_dist))))
 }
 
-export default app;
+export default app
 
 // // Populate databases with sample data
 // if (config.seedDB) { require('./config/seed'); }
