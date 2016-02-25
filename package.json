@@ -85,6 +85,7 @@
     "koa-static": "^2.0.0",
     "lodash": "^4.3.0",
     "mongoose": "^4.4.3",
+    "passport-facebook": "^2.1.0",
     "passport-local": "^1.0.0",
     "proxyquire": "^1.7.4",
     "react": "^0.14.0",

@@ -36,9 +36,9 @@ const config = {
   // API Related
   // ----------------------------------
   facebook: {
-    client_id:      'client_id',
-    client_secret:  'client_secret',
-    callback_url:   'callback_url'
+    client_id:      '1034051416616509',
+    client_secret:  '93212a3a61757111571a9cd7b4731432',
+    callback_url:   'http://localhost:3000/auth/facebook/callback'
   },
 
   google: {

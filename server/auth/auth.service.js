@@ -85,6 +85,6 @@ export function setTokenCookie(ctx, next) {
   }
 
   const token = signToken(ctx.state.user._id, ctx.state.user.role);
-  ctx.cookie('token', token);
+  ctx.cookies.set('token', token);
   ctx.redirect('/');
 }

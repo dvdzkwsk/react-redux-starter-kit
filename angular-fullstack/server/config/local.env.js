@@ -9,8 +9,8 @@ module.exports = {
   DOMAIN: 'http://localhost:9000',
   SESSION_SECRET: 'angularfullstack-secret',
 
-  FACEBOOK_ID: 'app-id',
-  FACEBOOK_SECRET: 'secret',
+  FACEBOOK_ID: '1034051416616509',
+  FACEBOOK_SECRET: '93212a3a61757111571a9cd7b4731432',
 
   TWITTER_ID: 'app-id',
   TWITTER_SECRET: 'secret',

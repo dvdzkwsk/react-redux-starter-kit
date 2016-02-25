@@ -31,6 +31,7 @@ export class HomeView extends React.Component<void, Props, void> {
   render () {
     return (
       <div className='container text-center'>
+        <a href='/auth/facebook/'>Facebook</a>
         <div className='row'>
           <div className='col-xs-2 col-xs-offset-5'>
             <img className={classes.duck}

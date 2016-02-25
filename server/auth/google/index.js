@@ -10,9 +10,15 @@ router
     failureRedirect: '/signup',
     session: false
   }))
-  .get('/callback', passport.authenticate('google', {
-    failureRedirect: '/signup',
-    session: false
-  }), setTokenCookie);
+  .get('/callback', function(ctx, next) {
+    return passport.authenticate('google', {
+      failureRedirect: '/signup',
+      session: false
+    }, function(user, info, status) {
+      ctx.state = { user };
+
+      return setTokenCookie(ctx, next);
+    })(ctx, next);
+  });
 
 export default router;
