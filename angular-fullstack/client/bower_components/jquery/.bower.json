@@ -12,12 +12,12 @@
     "library"
   ],
   "homepage": "https://github.com/jquery/jquery-dist",
-  "version": "2.2.0",
-  "_release": "2.2.0",
+  "version": "2.2.1",
+  "_release": "2.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "2.2.0",
-    "commit": "6fc01e29bdad0964f62ef56d01297039cdcadbe5"
+    "tag": "2.2.1",
+    "commit": "788eaba2f83e7b7445c7a83a50c81c0704423874"
   },
   "_source": "git://github.com/jquery/jquery-dist.git",
   "_target": ">= 1.9.0",

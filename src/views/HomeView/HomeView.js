@@ -29,29 +29,71 @@ export class HomeView extends React.Component<void, Props, void> {
   };
 
   render () {
+    const things = [{
+      info: 'info 1',
+      name: 'name 1'
+    }, {
+      info: 'info 2',
+      name: 'name 2'
+    }];
+
+    const addThing = function() {
+      console.log('addThing');
+    };
+
+    const deleteThing = function() {
+      console.log('deleteThing');
+    };
+
     return (
-      <div className='container text-center'>
-        <a href='/auth/facebook/'>Facebook</a>
-        <div className='row'>
-          <div className='col-xs-2 col-xs-offset-5'>
-            <img className={classes.duck}
-              src={DuckImage}
-              alt='This is a duck, because Redux.' />
+      <div>
+        <div className='container text-center'>
+          <div className='row'>
+            <div className='col-xs-2 col-xs-offset-5'>
+              <img className={classes.duck}
+                src={DuckImage}
+                alt='This is a duck, because Redux.' />
+            </div>
           </div>
-        </div>
-        <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>
-          Sample Counter:
+          <h1>Welcome to the React Redux Starter Kit</h1>
+          <h2>
+            Sample Counter:
+            {' '}
+            <span className={classes['counter--green']}>{this.props.counter}</span>
+          </h2>
+          <button className='btn btn-default' onClick={this.props.increment}>
+            Increment
+          </button>
           {' '}
-          <span className={classes['counter--green']}>{this.props.counter}</span>
-        </h2>
-        <button className='btn btn-default' onClick={this.props.increment}>
-          Increment
-        </button>
-        {' '}
-        <button className='btn btn-default' onClick={this.props.doubleAsync}>
-          Double (Async)
-        </button>
+          <button className='btn btn-default' onClick={this.props.doubleAsync}>
+            Double (Async)
+          </button>
+
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <h1 className="page-header">Features:</h1>
+              {things.map(thing => {
+                return (
+                  <ul className="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6">
+                    <li><a href="#">{thing.name}<button type="button" className="close" onClick={addThing}>&times;</button></a></li>
+                  </ul>
+                );
+              })}
+            </div>
+          </div>
+
+          <form className="thing-form">
+            <label>Syncs in realtime across clients</label>
+            <p className="input-group">
+              <input type="text" className="form-control" placeholder="Add a new thing here." ng-model="main.newThing" />
+              <span className="input-group-btn">
+                <button type="submit" className="btn btn-primary" onClick={addThing}>Add New</button>
+              </span>
+            </p>
+          </form>
+        </div>
       </div>
     )
   }
