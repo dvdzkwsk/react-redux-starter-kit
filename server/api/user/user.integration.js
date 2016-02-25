@@ -5,7 +5,7 @@ import request from 'supertest';
 const app = server.listen();
 
 describe('User API:', function() {
-  let user;
+  let user, admin;
 
   // Clear users before testing
   before(function() {
@@ -17,6 +17,16 @@ describe('User API:', function() {
       });
 
       return user.save();
+    })
+    .then(function() {
+      admin = new User({
+        name: 'Fake Admin',
+        email: 'admin@example.com',
+        password: 'admin',
+        role: 'admin'
+      });
+
+      return admin.save();
     });
   });
 
@@ -25,35 +35,69 @@ describe('User API:', function() {
     return User.remove();
   });
 
-  xdescribe('GET /api/users', function() {
-    let token;
+  describe('GET /api/users', function() {
+    let adminToken, token;
 
     before(function(done) {
       request(app)
         .post('/auth/local')
         .send({
-          email: 'admin@admin.com',
-          password: 'admin',
-          role: 'admin'
+          email: 'admin@example.com',
+          password: 'admin'
         })
         .expect(200)
-        .expecT('Content-Type', /json/)
+        .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
             return done(err);
           }
 
-          token = res.body.token;
+          adminToken = res.body.token;
+
+          request(app)
+            .post('/auth/local')
+            .send({
+              email: 'test@example.com',
+              password: 'password'
+            })
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+
+              if (err) {
+                return done(err);
+              }
+
+              token = res.body.token;
+
+              done();
+          });
+        });
+    });
+
+    it('should give admin access to view all users', function(done) {
+      request(app)
+        .get('/api/users')
+        .set('authorization', 'Bearer ' + adminToken)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+
+          expect(res.body.length).to.equal(2);
           done();
         });
     });
 
-    it('should give admin access to view all users', function() {
+    it('should respond with 403 if not logged in as admin', function(done) {
+      request(app)
+        .get('/api/users')
+        .set('authorization', 'Bearer ' + token)
+        .expect(403)
+        .end(done);
     });
-
-    it('should respond with 403 if not logged in as admin', function() {
-    });
-
   });
 
   describe('GET /api/users/me', function() {
@@ -102,7 +146,7 @@ describe('User API:', function() {
     });
   });
 
-  xdescribe('GET /api/users/:id', function() {
+  describe('GET /api/users/:id', function() {
     let token;
 
     before(function(done) {
@@ -126,7 +170,7 @@ describe('User API:', function() {
 
     it('should respond with a user profile when authenticated', function(done) {
       request(app)
-        .get('/api/users/me')
+        .get(`/api/users/${user._id}`)
         .set('authorization', 'Bearer ' + token)
         .expect(200)
         .expect('Content-Type', /json/)
@@ -148,36 +192,43 @@ describe('User API:', function() {
     });
   });
 
-  xdescribe('POST /api/users', function() {
+  describe('POST /api/users', function() {
 
-    it('should create a user locally', function() {
+    it('should create a user locally and give back token', function(done) {
+      request(app)
+        .post('/api/users')
+        .send({
+          name: 'Duck',
+          email: 'duck@redux.com',
+          password: 'duck'
+        })
+        .expect(201)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if(err) {
+            return done(err);
+          }
+
+          expect(res.body.token).to.exist;
+
+          done();
+        });
     });
 
   });
 
-  xdescribe('PUT /api/users/me/password', function() {
-
-    it('should be able to change own password', function() {
-    });
-
-    it('should respond with 403 if not authenticated', function() {
-    });
-
-  });
-
-  xdescribe('DELETE /api/users/:id', function() {
+  describe('PUT /api/users/me/password', function() {
     let token;
 
     before(function(done) {
       request(app)
         .post('/auth/local')
         .send({
-          email: 'admin@admin.com',
-          password: 'admin',
-          role: 'admin'
+          email: 'test@example.com',
+          password: 'password'
         })
         .expect(200)
-        .expecT('Content-Type', /json/)
+        .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
             return done(err);
@@ -188,10 +239,89 @@ describe('User API:', function() {
         });
     });
 
-    it('should give admin access to delete a user', function() {
+    after(function() {
+      user.password = 'password';
+      return user.save();
     });
 
-    it('should respond with 403 if not logged in as admin', function() {
+    it('should be able to change own password and respond with 204', function(done) {
+      request(app)
+        .put('/api/users/me/password')
+        .set('authorization', 'Bearer ' + token)
+        .send({
+          oldPassword: 'password',
+          newPassword: 'newpassword'
+        })
+        .expect(204)
+        .end(done);
+    });
+
+    it('should respond with 401 if not authenticated', function(done) {
+      request(app)
+        .put('/api/users/me/password')
+        .send({
+          oldPassword: 'password',
+          newPassword: 'newpassword'
+        })
+        .expect(401)
+        .end(done);
+    });
+
+  });
+
+  describe('DELETE /api/users/:id', function() {
+   let adminToken, token;
+
+    before(function(done) {
+      request(app)
+        .post('/auth/local')
+        .send({
+          email: 'admin@example.com',
+          password: 'admin'
+        })
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+
+          adminToken = res.body.token;
+
+          request(app)
+            .post('/auth/local')
+            .send({
+              email: 'test@example.com',
+              password: 'password'
+            })
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+              if (err) {
+                return done(err);
+              }
+
+              token = res.body.token;
+
+              done();
+          });
+        });
+    });
+
+    it('should give admin access to delete a user', function(done) {
+      request(app)
+        .delete(`/api/users/${user._id}`)
+        .set('authorization', 'Bearer ' + adminToken)
+        .expect(204)
+        .end(done);
+    });
+
+    it('should respond with 403 if not logged in as admin', function(done) {
+      request(app)
+        .delete(`/api/users/${user._id}`)
+        .set('authorization', 'Bearer ' + token)
+        .expect(403)
+        .end(done);
     });
 
   });

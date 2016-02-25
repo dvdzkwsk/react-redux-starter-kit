@@ -67,12 +67,12 @@ export async function create(ctx, next) {
 
     await newUser.save();
     const token = jwt.sign({ 
-      _id: user._id 
-    }, config.secrets.session, {
+      _id: newUser._id 
+    }, config.secrets_session, {
       expiresIn: 60 * 60 * 5
     });
 
-    respondWithResult(ctx)({ token });
+    respondWithResult(ctx, 201)({ token });
   } catch (err) {
     validationError(ctx)(err);
   }
@@ -99,7 +99,7 @@ export async function destroy(ctx, next) {
  * Change a users password
  */
 export async function changePassword(ctx, next) {
-  const userId = ctx.user._id;
+  const userId = ctx.state.user._id;
   const oldPass = String(ctx.request.body.oldPassword);
   const newPass = String(ctx.request.body.newPassword);
 

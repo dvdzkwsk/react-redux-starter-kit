@@ -52,8 +52,8 @@ export function hasRole(roleRequired) {
   }
 
   function meetsRequirements(ctx, next) {
-    if (config.userRoles.indexO(ctx.state.user.role) >=
-        config.userRoles.indexOf(roleRequired)) {
+    if (config.user_roles.indexOf(ctx.state.user.role) >=
+        config.user_roles.indexOf(roleRequired)) {
       return next();
     } else {
       ctx.status = 403;
