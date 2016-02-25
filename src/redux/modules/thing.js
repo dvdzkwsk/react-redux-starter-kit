@@ -33,11 +33,11 @@ export const postThing = ({ name, info }) => {
   };
 };
 
-export const deleteThing = ({ _id, name, info }) => {
-  return (dispatch, getState) => {
+export const deleteThing = (_id) => {
+  return (dispatch) => {
     return axios.delete(`/api/things/${_id}`)
       .then((res) => {
-        dispatch(deleteThingSuccess(getState().things, _id));
+        dispatch(deleteThingSuccess(_id));
       });
   };
 };
@@ -53,7 +53,7 @@ export const postThingSuccess = (thing) => ({
 });
 
 export const deleteThingSuccess = (_id) => ({
-  type: GET_THING_SUCCESS,
+  type: DELETE_THING_SUCCESS,
   payload: _id 
 });
 
@@ -74,11 +74,11 @@ const ACTION_HANDLERS = {
     return things;
   },
 
-  [POST_THING_SUCCESS] ({ things }, { payload: thing }) {
+  [POST_THING_SUCCESS] (things, { payload: thing }) {
     return [...things, thing];
   },
 
-  [DELETE_THING_SUCCESS] ({ things }, { payload: _id }) {
+  [DELETE_THING_SUCCESS] (things, { payload: _id }) {
     const index = _.findIndex(things, (thing) => thing._id === _id);
 
     return [

@@ -16,21 +16,20 @@ export class ThingView extends React.Component {
   constructor (props) {
     super(props);
 
-    this.getThing = this.props.getThing.bind(this);
-    this.deleteThing = this.props.deleteThing.bind(this);
+    this.onDeleteThingClickHandler = this.onDeleteThingClickHandler.bind(this);
   }
 
   componentDidMount () {
-    this.getThing();
+    this.props.getThing();
+  }
+
+  onDeleteThingClickHandler (_id) {
+    this.props.deleteThing(_id);
   }
 
   render () {
-    const addThing = () => console.log('hey');
-    const thingss = [{
-      _id: '123',
-      name: 'name',
-      info: 'info'
-    }];
+    const addThing = () => console.log('helo');
+
     return (
       <div className='container'>
         <div className='row'>
@@ -39,7 +38,7 @@ export class ThingView extends React.Component {
             <h1 className='page-header'>Features:</h1>
             <ThingsList 
               things={this.props.things}
-              onDeleteThingClick={this.props.deleteThing} />
+              onDeleteThingClick={this.onDeleteThingClickHandler} />
 
           </div>
         </div>
