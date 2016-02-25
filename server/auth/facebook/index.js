@@ -1,8 +1,8 @@
-import Router from 'koa-router'
-import passport from 'koa-passport'
-import { setTokenCookie } from '../auth.service'
+import Router from 'koa-router';
+import passport from 'koa-passport';
+import { setTokenCookie } from '../auth.service';
 
-const router = new Router()
+const router = new Router();
 
 router
   .get('/', passport.authenticate('facebook', {
@@ -15,11 +15,11 @@ router
       failureRedirect: '/signup',
       session: false
     }, function (user, info, status) {
-      ctx.state = { user }
+      ctx.state = { user };
 
-      return setTokenCookie(ctx, next)
-    })(ctx, next)
-  })
+      return setTokenCookie(ctx, next);
+    })(ctx, next);
+  });
 
 
-export default router
+export default router;

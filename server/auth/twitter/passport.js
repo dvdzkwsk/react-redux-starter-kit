@@ -1,5 +1,5 @@
-import passport from 'koa-passport'
-import { Strategy as TwitterStrategy } from 'passport-twitter'
+import passport from 'koa-passport';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 
 export function setup (User, config) {
   passport.use(new TwitterStrategy({
@@ -13,7 +13,7 @@ export function setup (User, config) {
     })
       .then(user => {
         if (user) {
-          return done(null, user)
+          return done(null, user);
         }
 
         user = new User({
@@ -22,11 +22,11 @@ export function setup (User, config) {
           role: 'user',
           provider: 'twitter',
           twitter: profile._json
-        })
+        });
         user.save()
           .then(user => done(null, user))
-          .catch(err => done(err))
+          .catch(err => done(err));
       })
-      .catch(err => done(err))
-  }))
+      .catch(err => done(err));
+  }));
 }

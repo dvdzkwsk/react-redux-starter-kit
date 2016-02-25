@@ -1,8 +1,8 @@
-import cp from 'child_process'
-import flowBin from 'flow-bin'
+import cp from 'child_process';
+import flowBin from 'flow-bin';
 
 try {
-  cp.execFileSync(flowBin, ['check'], {stdio: 'inherit'})
+  cp.execFileSync(flowBin, ['check'], {stdio: 'inherit'});
 } catch (e) {
-  process.exit(1)
+  process.exit(1);
 }

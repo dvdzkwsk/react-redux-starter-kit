@@ -1,5 +1,5 @@
-import passport from 'koa-passport'
-import { Strategy as FacebookStrategy } from 'passport-facebook'
+import passport from 'koa-passport';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
 
 export function setup (User, config) {
   passport.use(new FacebookStrategy({
@@ -17,7 +17,7 @@ export function setup (User, config) {
     })
       .then(user => {
         if (user) {
-          return done(null, user)
+          return done(null, user);
         }
 
         user = new User({
@@ -26,14 +26,14 @@ export function setup (User, config) {
           role: 'user',
           provider: 'facebook',
           facebook: profile._json
-        })
+        });
 
         user.save()
           .then(user => {
-            done(null, user)
+            done(null, user);
           })
-          .catch(err => done(err))
+          .catch(err => done(err));
       })
-      .catch(err => done(err))
-  }))
+      .catch(err => done(err));
+  }));
 }

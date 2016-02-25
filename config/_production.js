@@ -10,4 +10,4 @@ export default () => ({
     chunkModules : true,
     colors : true
   }
-})
+});

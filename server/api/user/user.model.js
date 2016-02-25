@@ -1,7 +1,7 @@
-import crypto from 'crypto'
-import mongoose from 'mongoose'
+import crypto from 'crypto';
+import mongoose from 'mongoose';
 
-const authTypes = ['github', 'twitter', 'facebook', 'google']
+const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 let UserSchema = new mongoose.Schema({
   name: String,
@@ -20,7 +20,7 @@ let UserSchema = new mongoose.Schema({
   twitter: {},
   google: {},
   github: {}
-})
+});
 
 /**
  * Virtuals
@@ -33,8 +33,8 @@ UserSchema
     return {
       'name': this.name,
       'role': this.role
-    }
-  })
+    };
+  });
 
 // Non-sensitive info we'll be putting in the token
 UserSchema
@@ -43,8 +43,8 @@ UserSchema
     return {
       '_id': this._id,
       'role': this.role
-    }
-  })
+    };
+  });
 
 /**
  * Validations
@@ -55,44 +55,44 @@ UserSchema
   .path('email')
   .validate(function (email) {
     if (authTypes.indexOf(this.provider) !== -1) {
-      return true
+      return true;
     }
-    return email.length
-  }, 'Email cannot be blank')
+    return email.length;
+  }, 'Email cannot be blank');
 
 // Validate empty password
 UserSchema
   .path('password')
   .validate(function (password) {
     if (authTypes.indexOf(this.provider) !== -1) {
-      return true
+      return true;
     }
-    return password.length
-  }, 'Password cannot be blank')
+    return password.length;
+  }, 'Password cannot be blank');
 
 // Validate email is not taken
 UserSchema
   .path('email')
   .validate(function (value, respond) {
-    const self = this
+    const self = this;
     return this.constructor.findOne({ email: value })
       .then(function (user) {
         if (user) {
           if (self.id === user.id) {
-            return respond(true)
+            return respond(true);
           }
-          return respond(false)
+          return respond(false);
         }
-        return respond(true)
+        return respond(true);
       })
       .catch(function (err) {
-        throw err
-      })
-  }, 'The specified email address is already in use.')
+        throw err;
+      });
+  }, 'The specified email address is already in use.');
 
 const validatePresenceOf = value => {
-  return value && value.length
-}
+  return value && value.length;
+};
 
 /**
  * Pre-save hook
@@ -101,28 +101,28 @@ UserSchema
   .pre('save', function (next) {
     // Handle new/update passwords
     if (!this.isModified('password')) {
-      return next()
+      return next();
     }
 
     if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
-      next(new Error('Invalid password'))
+      next(new Error('Invalid password'));
     }
 
     // Make salt with a callback
     this.makeSalt((saltErr, salt) => {
       if (saltErr) {
-        next(saltErr)
+        next(saltErr);
       }
-      this.salt = salt
+      this.salt = salt;
       this.encryptPassword(this.password, (encryptErr, hashedPassword) => {
         if (encryptErr) {
-          next(encryptErr)
+          next(encryptErr);
         }
-        this.password = hashedPassword
-        next()
-      })
-    })
-  })
+        this.password = hashedPassword;
+        next();
+      });
+    });
+  });
 
 /**
  * Methods
@@ -138,20 +138,20 @@ UserSchema.methods = {
    */
   authenticate (password, callback) {
     if (!callback) {
-      return this.password === this.encryptPassword(password)
+      return this.password === this.encryptPassword(password);
     }
 
     this.encryptPassword(password, (err, pwdGen) => {
       if (err) {
-        return callback(err)
+        return callback(err);
       }
 
       if (this.password === pwdGen) {
-        callback(null, true)
+        callback(null, true);
       } else {
-        callback(null, false)
+        callback(null, false);
       }
-    })
+    });
   },
 
   /**
@@ -163,30 +163,30 @@ UserSchema.methods = {
    * @api public
    */
   makeSalt (byteSize, callback) {
-    let defaultByteSize = 16
+    let defaultByteSize = 16;
 
     if (typeof arguments[0] === 'function') {
-      callback = arguments[0]
-      byteSize = defaultByteSize
+      callback = arguments[0];
+      byteSize = defaultByteSize;
     } else if (typeof arguments[1] === 'function') {
-      callback = arguments[1]
+      callback = arguments[1];
     }
 
     if (!byteSize) {
-      byteSize = defaultByteSize
+      byteSize = defaultByteSize;
     }
 
     if (!callback) {
-      return crypto.randomBytes(byteSize).toString('base64')
+      return crypto.randomBytes(byteSize).toString('base64');
     }
 
     return crypto.randomBytes(byteSize, (err, salt) => {
       if (err) {
-        callback(err)
+        callback(err);
       } else {
-        callback(null, salt.toString('base64'))
+        callback(null, salt.toString('base64'));
       }
-    })
+    });
   },
 
   /**
@@ -199,26 +199,26 @@ UserSchema.methods = {
    */
   encryptPassword (password, callback) {
     if (!password || !this.salt) {
-      return null
+      return null;
     }
 
-    const defaultIterations = 10000
-    const defaultKeyLength = 64
-    const salt = new Buffer(this.salt, 'base64')
+    const defaultIterations = 10000;
+    const defaultKeyLength = 64;
+    const salt = new Buffer(this.salt, 'base64');
 
     if (!callback) {
       return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
-                   .toString('base64')
+                   .toString('base64');
     }
 
     return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, (err, key) => {
       if (err) {
-        callback(err)
+        callback(err);
       } else {
-        callback(null, key.toString('base64'))
+        callback(null, key.toString('base64'));
       }
-    })
+    });
   }
-}
+};
 
-export default mongoose.model('User', UserSchema)
+export default mongoose.model('User', UserSchema);

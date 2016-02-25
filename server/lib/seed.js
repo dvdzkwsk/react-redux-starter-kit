@@ -1,8 +1,8 @@
-import Thing from '../api/thing/thing.model'
-import User from '../api/user/user.model'
+import Thing from '../api/thing/thing.model';
+import User from '../api/user/user.model';
 
 export default async function seed () {
-  await Thing.find({}).remove()
+  await Thing.find({}).remove();
 
   await Thing.create({
     name: 'Development Tools',
@@ -12,9 +12,9 @@ export default async function seed () {
     name: 'Server and Client integration',
     info: 'Built with a powerful and fun stack: MongoDB, Koa, ' +
            'React, and Node.'
-  })
+  });
 
-  await User.find({}).remove()
+  await User.find({}).remove();
 
   await User.create({
     provider: 'local',
@@ -27,7 +27,7 @@ export default async function seed () {
     name: 'Admin',
     email: 'admin@example.com',
     password: 'admin'
-  })
+  });
 
-  console.log('done populating database')
+  console.log('done populating database');
 }

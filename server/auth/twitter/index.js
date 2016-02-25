@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
-import express from 'express'
-import passport from 'passport'
-import {setTokenCookie} from '../auth.service'
+import express from 'express';
+import passport from 'passport';
+import {setTokenCookie} from '../auth.service';
 
-var router = express.Router()
+var router = express.Router();
 
 router
   .get('/', passport.authenticate('twitter', {
@@ -14,6 +14,6 @@ router
   .get('/callback', passport.authenticate('twitter', {
     failureRedirect: '/signup',
     session: false
-  }), setTokenCookie)
+  }), setTokenCookie);
 
-export default router
+export default router;
