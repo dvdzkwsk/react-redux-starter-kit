@@ -47,7 +47,6 @@ const karmaConfig = {
     },
     externals: {
       ...webpackConfig.externals,
-      cheerio: 'window',
       'react/lib/ExecutionEnvironment': true,
       'react/lib/ReactContext': 'window',
       'text-encoding': 'window'
