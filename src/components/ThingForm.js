@@ -8,7 +8,7 @@ export default class ThingForm extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = { 
+    this.state = {
       name: '',
       info: ''
     };
@@ -48,27 +48,27 @@ export default class ThingForm extends React.Component {
 
   render () {
     return (
-      <form 
+      <form
         className='thing-form'
         onSubmit={this.onFormSubmit}>
 
         <label>Syncs in realtime across clients</label>
 
-        <p 
+        <p
           className='input-group'>
 
-          <input 
-            type='text' 
-            className='form-control' 
-            placeholder='Add a new thing here.' 
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Add a new thing here.'
             name='name'
             value={this.state.name}
             onChange={this.onNameInputChange} />
 
-          <span 
+          <span
             className='input-group-btn'>
-            <input 
-              type='submit' 
+            <input
+              type='submit'
               className='btn btn-primary'
               disabled={!this.state.name}
               value='Add New' />

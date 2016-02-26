@@ -58,7 +58,7 @@ const mapStateToProps = ({ things }) => ({
   things
 });
 
-export default connect((mapStateToProps), {
+export default connect(mapStateToProps, {
   getThing,
   postThing,
   deleteThing

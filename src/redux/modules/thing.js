@@ -24,7 +24,7 @@ export const getThing = () => {
   };
 };
 
-export const postThing = ({ name  }) => {
+export const postThing = ({ name }) => {
   return (dispatch, getState) => {
     return axios.post('/api/things', { name })
       .then(({ data }) => {
