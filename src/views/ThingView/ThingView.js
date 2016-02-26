@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ThingsList from '../../components/ThingsList';
+import ThingForm from '../../components/ThingForm';
 import { getThing,
-         postThing, 
+         postThing,
          deleteThing } from '../../redux/modules/thing';
 
 export class ThingView extends React.Component {
@@ -16,42 +17,38 @@ export class ThingView extends React.Component {
   constructor (props) {
     super(props);
 
-    this.onDeleteThingClickHandler = this.onDeleteThingClickHandler.bind(this);
+    this.handleDeleteThingClick = this.handleDeleteThingClick.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   componentDidMount () {
     this.props.getThing();
   }
 
-  onDeleteThingClickHandler (_id) {
+  handleDeleteThingClick (_id) {
     this.props.deleteThing(_id);
   }
 
-  render () {
-    const addThing = () => console.log('helo');
+  handleFormSubmit ({ name, info }) {
+    this.props.postThing({ name, info });
+  }
 
+  render () {
     return (
       <div className='container'>
         <div className='row'>
           <div className='col-lg-12'>
 
             <h1 className='page-header'>Features:</h1>
-            <ThingsList 
+            <ThingsList
               things={this.props.things}
-              onDeleteThingClick={this.onDeleteThingClickHandler} />
+              onDeleteThingClick={this.handleDeleteThingClick} />
 
           </div>
         </div>
 
-        <form className='thing-form'>
-          <label>Syncs in realtime across clients</label>
-          <p className='input-group'>
-            <input type='text' className='form-control' placeholder='Add a new thing here.' ng-model='main.newThing' />
-            <span className='input-group-btn'>
-              <button type='submit' className='btn btn-primary' onClick={addThing}>Add New</button>
-            </span>
-          </p>
-        </form>
+        <ThingForm onFormSubmit={this.handleFormSubmit} />
+
       </div>
     );
   }

@@ -5,13 +5,13 @@ export default async function seed () {
   await Thing.find({}).remove();
 
   await Thing.create({
-    name: 'Development Tools',
-    info: 'Integration with popular tools such as Webpack, Babel, Karma, ' +
-          'Mocha, ESLint, and Redux Devtools.'
+    name: 'React'
   }, {
-    name: 'Server and Client integration',
-    info: 'Built with a powerful and fun stack: MongoDB, Koa, ' +
-           'React, and Node.'
+    name: 'Redux'
+  }, {
+    name: 'Webpack'
+  }, {
+    name: 'Koa'
   });
 
   await User.find({}).remove();

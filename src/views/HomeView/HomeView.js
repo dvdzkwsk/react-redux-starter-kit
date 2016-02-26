@@ -1,9 +1,9 @@
 /* @flow */
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../../redux/modules/counter'
-import DuckImage from './Duck.jpg'
-import classes from './HomeView.scss'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { increment, doubleAsync } from '../../redux/modules/counter';
+import DuckImage from './Duck.jpg';
+import classes from './HomeView.scss';
 
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
@@ -52,14 +52,14 @@ export class HomeView extends React.Component<void, Props, void> {
           Double (Async)
         </button>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
   counter: state.counter
-})
+});
 export default connect((mapStateToProps), {
   increment: () => increment(1),
   doubleAsync
-})(HomeView)
+})(HomeView);

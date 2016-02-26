@@ -10,7 +10,7 @@ export const GET_THING_SUCCESS = 'GET_THING_SUCCESS';
 export const POST_THING = 'POST_THING';
 export const POST_THING_SUCCESS = 'POST_THING_SUCCESS';
 export const DELETE_THING = 'DELETE_THING';
-export const DELETE_THING_SUCCESS = 'DELETE_THING_SUCCESS'
+export const DELETE_THING_SUCCESS = 'DELETE_THING_SUCCESS';
 
 // ------------------------------------
 // Actions
@@ -24,11 +24,11 @@ export const getThing = () => {
   };
 };
 
-export const postThing = ({ name, info }) => {
+export const postThing = ({ name  }) => {
   return (dispatch, getState) => {
-    return axios.post('/api/things', { name, info })
+    return axios.post('/api/things', { name })
       .then(({ data }) => {
-        dispatch(postThingSuccess(getState().things, data));
+        dispatch(postThingSuccess(data));
       });
   };
 };
@@ -54,7 +54,7 @@ export const postThingSuccess = (thing) => ({
 
 export const deleteThingSuccess = (_id) => ({
   type: DELETE_THING_SUCCESS,
-  payload: _id 
+  payload: _id
 });
 
 export const actions = {
