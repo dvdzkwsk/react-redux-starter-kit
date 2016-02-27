@@ -64,13 +64,12 @@
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
-    "co-request": "^1.0.0",
     "debug": "^2.2.0",
     "history": "^2.0.0",
-    "iconv-lite": "^0.4.13",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",
+    "koa-proxy": "^0.5.0",
     "koa-static": "^2.0.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
@@ -78,8 +77,7 @@
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0-beta",
     "redux": "^3.0.0",
-    "redux-thunk": "^1.0.0",
-    "url": "^0.11.0"
+    "redux-thunk": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
