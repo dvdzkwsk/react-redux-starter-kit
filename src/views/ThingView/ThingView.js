@@ -39,7 +39,8 @@ export class ThingView extends React.Component {
         <div className='row'>
           <div className='col-lg-12'>
 
-            <h1 className='page-header'>Features:</h1>
+            <h1 className='text-center'>Features</h1>
+
             <ThingsList
               things={this.props.things}
               onDeleteThingClick={this.handleDeleteThingClick} />
@@ -47,7 +48,15 @@ export class ThingView extends React.Component {
           </div>
         </div>
 
-        <ThingForm onFormSubmit={this.handleFormSubmit} />
+        <div className="row">
+          <div className="col-lg-12">
+          
+            <h1 className='text-center'>Sync realtime across clients</h1>
+
+            <ThingForm onFormSubmit={this.handleFormSubmit} />
+
+          </div>
+        </div>
 
       </div>
     );

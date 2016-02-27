@@ -10,8 +10,6 @@ import facebookAuth from './facebook';
 // Passport Configuration
 localPassportSetup(User, config);
 facebookPassportSetup(User, config);
-// require('./local/passport').setup(User, config);
-// require('./facebook/passport').setup(User, config);
 // require('./google/passport').setup(User, config);
 // require('./twitter/passport').setup(User, config);
 

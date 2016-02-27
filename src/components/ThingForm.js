@@ -49,10 +49,7 @@ export default class ThingForm extends React.Component {
   render () {
     return (
       <form
-        className='thing-form'
         onSubmit={this.onFormSubmit}>
-
-        <label>Syncs in realtime across clients</label>
 
         <p
           className='input-group'>

@@ -9,10 +9,16 @@ import { Route, IndexRoute } from 'react-router';
 import CoreLayout from 'layouts/CoreLayout/CoreLayout';
 import HomeView from 'views/HomeView/HomeView';
 import ThingView from 'views/ThingView/ThingView';
+import SettingsView from 'views/SettingsView/SettingsView';
+import SignupView from 'views/SignupView/SignupView';
+import LoginView from 'views/LoginView/LoginView';
 
 export default (store) => (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
     <Route path='/things' component={ThingView} />
+    <Route path='/settings' component={SettingsView} />
+    <Route path='/signup' component={SignupView} />
+    <Route path='/login' component={LoginView} />
   </Route>
 );

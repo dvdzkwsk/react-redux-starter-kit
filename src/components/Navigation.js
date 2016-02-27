@@ -8,10 +8,21 @@ const Navigation = ({ activePath }) => {
   }, {
     path: '/things',
     name: 'Things'
+  }, {
+    path: '/settings',
+    name: 'Settings'
+  }, {
+    path: '/signup',
+    name: 'Signup'
+  }, {
+    path: '/login',
+    name: 'Login'
   }];
 
   return (
-    <div className='container text-center'>
+    <div 
+      style={{ marginTop: '10px' }}
+      className='container text-center'>
       <div className='btn-group'>
         {routes.map(({ name, path }) => {
           const className = activePath === path ? 'success' : 'default';
