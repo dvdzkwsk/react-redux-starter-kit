@@ -10,10 +10,14 @@ export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 // NOTE: "Action" is a Flow interface defined in https://github.com/TechnologyAdvice/flow-interfaces
 // If you're unfamiliar with Flow, you are completely welcome to avoid annotating your code, but
 // if you'd like to learn more you can check out: flowtype.org.
-export const increment = (value: number = 1): Action => ({
-  type: COUNTER_INCREMENT,
-  payload: value
-})
+// DOUBLE NOTE: there is currently a bug with babel-eslint where a `space-infix-ops` error is
+// incorrectly thrown when using arrow functions, hence the oddity.
+export function increment (value: number = 1): Action {
+  return {
+    type: COUNTER_INCREMENT,
+    payload: value
+  }
+}
 
 // This is a thunk, meaning it is a function that immediately
 // returns a function for lazy evaluation. It is incredibly useful for
