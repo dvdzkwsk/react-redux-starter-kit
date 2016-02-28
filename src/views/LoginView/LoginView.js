@@ -18,6 +18,8 @@ export class LoginView extends React.Component {
 
           <div className="col-sm-12">
 
+            <LoginForm />
+
           </div>
 
         </div>
