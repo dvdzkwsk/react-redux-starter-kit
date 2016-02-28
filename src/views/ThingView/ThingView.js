@@ -48,9 +48,9 @@ export class ThingView extends React.Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-lg-12">
-          
+        <div className='row'>
+          <div className='col-lg-12'>
+
             <h1 className='text-center'>Sync realtime across clients</h1>
 
             <ThingForm onFormSubmit={this.handleFormSubmit} />

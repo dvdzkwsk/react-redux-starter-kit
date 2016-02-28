@@ -27,7 +27,7 @@ export default class SignupForm extends React.Component {
       name: event.target.value
     });
   }
-  
+
   onEmailInputChange (event) {
     this.setState({
       email: event.target.value
@@ -49,8 +49,8 @@ export default class SignupForm extends React.Component {
   onFormSubmit (event) {
     event.preventDefault();
 
-    const { name, 
-            email, 
+    const { name,
+            email,
             password,
             confirmPassword } = this.state;
 
@@ -71,8 +71,8 @@ export default class SignupForm extends React.Component {
 
   get error () {
     return (
-      <div className="form-group has-error">
-        <p className="help-block">
+      <div className='form-group has-error'>
+        <p className='help-block'>
           Error
         </p>
       </div>
@@ -84,50 +84,50 @@ export default class SignupForm extends React.Component {
       <form
         onSubmit={this.onFormSubmit}>
 
-       <div className="form-group">
+       <div className='form-group'>
           <label>Name</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             onChange={this.onNameInputChange}
             value={this.state.name}
-            className="form-control" />
+            className='form-control' />
        </div>
 
-       <div className="form-group">
+       <div className='form-group'>
           <label>Email</label>
-          <input 
-            type="email" 
+          <input
+            type="email"
             onChange={this.onEmailInputChange}
             value={this.state.email}
+            className='form-control' />
+        </div>
+
+        <div className='form-group'>
+          <label>Password</label>
+
+          <input
+            type="password"
+            onChange={this.onPasswordInputChange}
+            value={this.state.password}
             className="form-control" />
         </div>
 
-        <div className="form-group">
-          <label>Password</label>
-
-          <input 
-            type="password" 
-            onChange={this.onPasswordInputChange}
-            value={this.state.password}
-            className="form-control"  />
-        </div>
-
-        <div className="form-group">
+        <div className='form-group'>
           <label>Confirm Password</label>
 
-          <input 
-            type="password" 
+          <input
+            type="password"
             onChange={this.onConfirmPasswordInputChange}
             value={this.state.confirmPassword}
-            className="form-control"  />
+            className="form-control" />
         </div>
 
         {this.error}
 
-        <input 
+        <input
           type='submit'
           value='Signup'
-          className="btn btn-inverse btn-lg btn-login" />
+          className='btn btn-inverse btn-lg btn-login' />
 
       </form>
    );

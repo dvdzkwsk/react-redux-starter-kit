@@ -36,15 +36,15 @@ export default class LoginForm extends React.Component {
 
     const { email, password } = this.state;
 
-    if (!email && !password) 
+    if (!email && !password)
       return this.setState({
         error: 'Please enter your email and password'
       });
 
-    // this.props.onFormSubmit({
-    //   email,
-    //   password
-    // });
+    this.props.onFormSubmit({
+      email,
+      password
+    });
 
     this.setState({
       email: '',
@@ -55,8 +55,8 @@ export default class LoginForm extends React.Component {
 
   get error () {
     return (
-      <div className="form-group has-error">
-        <p className="help-block">
+      <div className='form-group has-error'>
+        <p className='help-block'>
           Error
         </p>
       </div>
@@ -68,31 +68,31 @@ export default class LoginForm extends React.Component {
        <form
         onSubmit={this.onFormSubmit}>
 
-        <div className="form-group">
+        <div className='form-group'>
           <label>Email</label>
-          <input 
-            type="email" 
+          <input
+            type="email"
             onChange={this.onEmailInputChange}
             value={this.state.email}
-            className="form-control" />
+            className='form-control' />
         </div>
 
-        <div className="form-group">
+        <div className='form-group'>
           <label>Password</label>
 
-          <input 
-            type="password" 
+          <input
+            type="password"
             onChange={this.onPasswordInputChange}
             value={this.state.password}
-            className="form-control"  />
+            className="form-control" />
         </div>
 
         {this.error}
 
-        <input 
+        <input
           type='submit'
           value='Login'
-          className="btn btn-inverse btn-lg btn-login" />
+          className='btn btn-inverse btn-lg btn-login' />
 
       </form>
     );

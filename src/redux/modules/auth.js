@@ -17,17 +17,19 @@ export const login = ({ email, password }) => {
   return (dispatch) => {
     return axios.post('/auth/local', {
       email, password
-    }).then(({ data }) => {
-      dispatch(loginSuccess(data));
+    }).then(({ data: { token }}) => {
+      localStorage.setItem('token', token);
+      dispatch(loginSuccess());
     });
   };
 };
 
 export const signup = ({ name, email, password }) => {
   return (dispatch, getState) => {
-    return axios.post('/api/users', { 
+    return axios.post('/api/users', {
       name, email, password
-    }).then(({ data }) => {
+    }).then(({ data: { token }}) => {
+      localStorage.setItem('token', token);
       dispatch(signupSuccess(data));
     });
   };
@@ -35,25 +37,24 @@ export const signup = ({ name, email, password }) => {
 
 export const logout = () => {
   return (dispatch) => {
-    return axios.delete(`/api/things/${_id}`)
-      .then((res) => {
-        dispatch(logoutSuccess(_id));
-      });
+    localStorage.removeItem('token');
+    dispatch(logoutSuccess());
   };
 };
 
 export const loginSuccess = (token) => ({
   type: LOGIN_SUCCESS,
-  payload: token
+  payload: true
 });
 
 export const signupSuccess = (token) => ({
   type: SIGNUP_SUCCESS,
-  payload: token
+  payload: true
 });
 
 export const logoutSuccess = () => ({
-  type: LOGOUT_SUCCESS
+  type: LOGOUT_SUCCESS,
+  payload: false
 });
 
 export const actions = {
@@ -69,29 +70,24 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [LOGIN_SUCCESS] (state, { payload: things }) {
-    return things;
+  [LOGIN_SUCCESS] (state, { payload: isAuthenticated }) {
+    return isAuthenticated;
   },
 
-  [SIGNUP_SUCCESS] (things, { payload: thing }) {
-    return [...things, thing];
+  [SIGNUP_SUCCESS] (state, { payload: isAuthenticated }) {
+    return isAuthenticated;
   },
 
-  [LOGOUT_SUCCESS] (things, { payload: _id }) {
-    const index = _.findIndex(things, (thing) => thing._id === _id);
-
-    return [
-      ...things.slice(0, index),
-      ...things.slice(index + 1)
-    ];
+  [LOGOUT_SUCCESS] (state, { payload: isAuthenticated }) {
+    return isAuthenticated;
   }
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = [];
-export default function thingReducer (state = initialState, action) {
+const initialState = false;
+export default function authReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
   return handler ? handler(state, action) : state;

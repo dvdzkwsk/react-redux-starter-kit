@@ -20,7 +20,7 @@ const Navigation = ({ activePath }) => {
   }];
 
   return (
-    <div 
+    <div
       style={{ marginTop: '10px' }}
       className='container text-center'>
       <div className='btn-group'>
