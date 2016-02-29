@@ -24,10 +24,6 @@ export const getThing = () => {
       method: 'get'
     };
 
-    if (getState().isAuthenticated) {
-      config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
-    }
-
     return axios(config)
       .then(({ data }) => {
         dispatch(getThingSuccess(data));
@@ -42,10 +38,6 @@ export const postThing = ({ name }) => {
       method: 'get'
     };
 
-    if (getState().isAuthenticated) {
-      config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
-    }
-    
     return axios.post('/api/things', { name })
       .then(({ data }) => {
         dispatch(postThingSuccess(data));
@@ -59,10 +51,6 @@ export const deleteThing = (_id) => {
       url: '/api/things',
       method: 'get'
     };
-
-    if (getState().isAuthenticated) {
-      config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
-    }
 
     return axios.delete(`/api/things/${_id}`)
       .then((res) => {

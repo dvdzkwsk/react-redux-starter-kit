@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AxiosSettings from '../../utils/axios.config';
 
 // ------------------------------------
 // Constants
@@ -19,6 +20,7 @@ export const login = ({ email, password }) => {
       email, password
     }).then(({ data: { token }}) => {
       localStorage.setItem('token', token);
+      AxiosSettings.setAuthHeader();
       dispatch(loginSuccess());
     });
   };
@@ -30,6 +32,7 @@ export const signup = ({ name, email, password }) => {
       name, email, password
     }).then(({ data: { token }}) => {
       localStorage.setItem('token', token);
+      AxiosSettings.setAuthHeader();
       dispatch(signupSuccess(data));
     });
   };
@@ -89,6 +92,5 @@ const ACTION_HANDLERS = {
 const initialState = localStorage.getItem('token') ? true : false;
 export default function authReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
-
   return handler ? handler(state, action) : state;
 }
