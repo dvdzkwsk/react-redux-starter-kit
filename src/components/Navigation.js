@@ -1,22 +1,27 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const Navigation = ({ activePath }) => {
-  const routes = [{
+const Navigation = ({ activePath, isAuthenticated }) => {
+  const publicRoutes = [{
     path: '/',
     name: 'Home'
   }, {
     path: '/things',
     name: 'Things'
-  }, {
+  }];
+  
+  const privateRoutes = [{
     path: '/settings',
-    name: 'Settings'
+    name: 'Settings',
+    isAuthenticated: true
   }, {
     path: '/signup',
-    name: 'Signup'
+    name: 'Signup',
+    isAuthenticated: false
   }, {
     path: '/login',
-    name: 'Login'
+    name: 'Login',
+    isAuthenticated: false
   }];
 
   return (
@@ -24,7 +29,8 @@ const Navigation = ({ activePath }) => {
       style={{ marginTop: '10px' }}
       className='container text-center'>
       <div className='btn-group'>
-        {routes.map(({ name, path }) => {
+
+        {publicRoutes.map(({ name, path }) => {
           const className = activePath === path ? 'success' : 'default';
 
           return (
@@ -36,6 +42,22 @@ const Navigation = ({ activePath }) => {
             </Link>
           );
         })}
+
+        {privateRoutes
+          .filter((route) => route.isAuthenticated === isAuthenticated)
+          .map(({ name, path }) => {
+            const className = activePath === path ? 'success' : 'default';
+
+            return (
+              <Link
+                className={`btn btn-${className}`}
+                key={path}
+                to={path}>
+                {name}
+              </Link>
+            );
+        })}
+
       </div>
     </div>
   );
@@ -43,6 +65,7 @@ const Navigation = ({ activePath }) => {
 
 Navigation.propTypes = {
   activePath: PropTypes.string.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default Navigation;

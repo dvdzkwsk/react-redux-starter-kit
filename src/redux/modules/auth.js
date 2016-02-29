@@ -86,7 +86,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = false;
+const initialState = localStorage.getItem('token') ? true : false;
 export default function authReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 

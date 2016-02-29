@@ -15,8 +15,17 @@ export const DELETE_THING_SUCCESS = 'DELETE_THING_SUCCESS';
 // Actions
 // ------------------------------------
 export const getThing = () => {
-  return (dispatch) => {
-    return axios.get('/api/things')
+  return (dispatch, getState) => {
+    const config = {
+      url: '/api/things',
+      method: 'get'
+    };
+
+    if (getState().isAuthenticated) {
+      config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+    }
+
+    return axios(config)
       .then(({ data }) => {
         dispatch(getThingSuccess(data));
       });
@@ -25,6 +34,15 @@ export const getThing = () => {
 
 export const postThing = ({ name }) => {
   return (dispatch, getState) => {
+    const config = {
+      url: '/api/things',
+      method: 'get'
+    };
+
+    if (getState().isAuthenticated) {
+      config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+    }
+    
     return axios.post('/api/things', { name })
       .then(({ data }) => {
         dispatch(postThingSuccess(data));
@@ -33,7 +51,16 @@ export const postThing = ({ name }) => {
 };
 
 export const deleteThing = (_id) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const config = {
+      url: '/api/things',
+      method: 'get'
+    };
+
+    if (getState().isAuthenticated) {
+      config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+    }
+
     return axios.delete(`/api/things/${_id}`)
       .then((res) => {
         dispatch(deleteThingSuccess(_id));

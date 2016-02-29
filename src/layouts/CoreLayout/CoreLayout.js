@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import '../../styles/core.scss';
 
-import Navigation from '../../components/Navigation';
+import Navigation from '../../containers/Navigation';
 import Footer from '../../components/Footer';
 
 // Note: Stateless/function components *will not* hot reload!
@@ -18,7 +18,9 @@ function CoreLayout ({ children, location }) {
     <div className='page-container'>
       <div className='view-container'>
 
-        <Navigation activePath={location.pathname} />
+        <Navigation 
+          activePath={location.pathname} 
+        />
 
         {children}
 
