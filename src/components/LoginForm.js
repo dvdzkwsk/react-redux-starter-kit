@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 
 export default class LoginForm extends React.Component {
   static propTypes = {
-    onFormSubmit: PropTypes.func.isRequired
+    onFormSubmit: PropTypes.func.isRequired,
+    isSubmitPending: PropTypes.bool.isRequired
   };
 
   constructor (props) {
@@ -36,7 +37,7 @@ export default class LoginForm extends React.Component {
 
     const { email, password } = this.state;
 
-    if (!email && !password)
+    if (!email || !password)
       return this.setState({
         error: 'Please enter your email and password'
       });
@@ -57,8 +58,16 @@ export default class LoginForm extends React.Component {
     return (
       <div className='form-group has-error'>
         <p className='help-block'>
-          Error
+          {this.state.error}
         </p>
+      </div>
+    );
+  }
+
+  get pending () {
+    return (
+      <div className='form-group'>
+        <p>Please wait, logging in...</p>
       </div>
     );
   }
@@ -68,33 +77,37 @@ export default class LoginForm extends React.Component {
        <form
         onSubmit={this.onFormSubmit}>
 
-        <div className='form-group'>
-          <label>Email</label>
-          <input
-            type="email"
-            onChange={this.onEmailInputChange}
-            value={this.state.email}
-            className='form-control' />
-        </div>
+          <div className='form-group'>
+            <label>Email</label>
+            <input
+              type="email"
+              onChange={this.onEmailInputChange}
+              value={this.state.email}
+              className='form-control' />
+          </div>
 
-        <div className='form-group'>
-          <label>Password</label>
+          <div className='form-group'>
+            <label>Password</label>
 
-          <input
-            type="password"
-            onChange={this.onPasswordInputChange}
-            value={this.state.password}
-            className="form-control" />
-        </div>
+            <input
+              type="password"
+              onChange={this.onPasswordInputChange}
+              value={this.state.password}
+              className="form-control" />
+          </div>
 
-        {this.error}
+          {this.state.error && this.error}
 
-        <input
-          type='submit'
-          value='Login'
-          className='btn btn-inverse btn-lg btn-login' />
+          <div className='form-group'>
+            <input
+              type='submit'
+              value='Login'
+              className='btn btn-inverse btn-lg btn-login' />
+          </div>
 
-      </form>
+          {this.props.isSubmitPending && this.pending}
+
+       </form>
     );
   }
 }

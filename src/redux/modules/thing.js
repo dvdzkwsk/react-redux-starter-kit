@@ -4,12 +4,15 @@ import _ from 'lodash';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const GET_THING = 'GET_THING';
+export const GET_THING_PENDING = 'GET_THING_PENDING';
 export const GET_THING_SUCCESS = 'GET_THING_SUCCESS';
-export const POST_THING = 'POST_THING';
+export const GET_THING_FAILURE = 'GET_THING_FAILURE';
+export const POST_THING_PENDING = 'POST_THING_PENDING';
 export const POST_THING_SUCCESS = 'POST_THING_SUCCESS';
-export const DELETE_THING = 'DELETE_THING';
+export const POST_THING_FAILURE = 'POST_THING_FAILURE';
+export const DELETE_THING_PENDING = 'DELETE_THING_PENDING';
 export const DELETE_THING_SUCCESS = 'DELETE_THING_SUCCESS';
+export const DELETE_THING_FAILURE = 'DELETE_THING_FAILURE';
 
 // ------------------------------------
 // Actions
