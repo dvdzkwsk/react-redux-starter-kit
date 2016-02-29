@@ -88,7 +88,9 @@ $ npm start                     # Compile and launch
 Starting a New Project
 ----------------------
 
-Want to start a new project without having to clean up the (tiny) example code? After cloning the repo and following the steps above, do the following:
+First, I highly suggest checking out a new project by [SpencerCDixon](https://github.com/SpencerCDixon): [redux-cli](https://github.com/SpencerCDixon/redux-cli). This tool integrates extremely well with this project and offers added benefits such as generators (components, redux modules, etc.) and config/template management. It's still a work in progress, but give it a shot.
+
+Alternatively, if you just want to stick with this project and want to start a fresh project without having to clean up the example code in `master`, you can do the following after cloning the repo:
 
 ```shell
 $ git checkout -b <your-project-name> new-project
