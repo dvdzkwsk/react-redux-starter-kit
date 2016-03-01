@@ -1,5 +1,5 @@
 module.exports = {
-  description() {
-    return 'generates a view component';
+  description () {
+    return 'generates a view component'
   }
-};
+}

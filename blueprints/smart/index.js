@@ -1,12 +1,13 @@
 module.exports = {
-  description() {
-    return 'generates a smart (container) component';
+  description () {
+    return 'generates a smart (container) component'
   },
-  fileMapTokens() {
+
+  fileMapTokens () {
     return {
       __smart__: (options) => {
-        return options.settings.getSetting('smartPath');
+        return options.settings.getSetting('smartPath')
       }
     }
   }
-};
+}

@@ -1,19 +1,14 @@
 // Constants
-
-// export const constants = { };
+// export const constants = { }
 
 // Action Creators
-
-// export const actions = { };
+// export const actions = { }
 
 // Reducer
-export const defaultState = {
-};
-
-export default function(state = defaultState, action) {
+export const initialState = {}
+export default function (state = initialState, action) {
   switch (action.type) {
     default:
-      return state;
+      return state
   }
 }
-

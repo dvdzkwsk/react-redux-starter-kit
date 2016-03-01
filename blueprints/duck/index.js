@@ -1,5 +1,5 @@
 module.exports = {
-  description() {
-    return 'generates a redux duck';
+  description () {
+    return 'generates a redux duck'
   }
-};
+}

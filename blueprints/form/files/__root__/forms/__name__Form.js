@@ -1,37 +1,38 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm } from 'redux-form';
+import React from 'react'
+import { reduxForm } from 'redux-form'
 
-export const fields = [];
+export const fields = []
 
 const validate = (values) => {
-  const errors = {};
-  return errors;
-};
+  const errors = {}
+  return errors
+}
 
-const propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  fields: PropTypes.object.isRequired
-};
+type Props = {
+  handleSubmit: Function,
+  fields: Object,
+}
+export class <%= pascalEntityName %> extends React.Component {
+  props: Props;
 
-export class <%= pascalEntityName %> extends Component {
+  defaultProps = {
+    fields: {},
+  }
+
   render() {
-    const {
-      fields: {},
-      handleSubmit
-    } = this.props;
+    const { fields, handleSubmit } = this.props
 
     return (
       <form onSubmit={handleSubmit}>
       </form>
-    );
+    )
   }
 }
 
-<%= pascalEntityName %>.propTypes = propTypes;
 <%= pascalEntityName %> = reduxForm({
   form: '<%= pascalEntityName %>',
   fields,
   validate
-})(<%= pascalEntityName %>);
+})(<%= pascalEntityName %>)
 
-export default <%= pascalEntityName %>;
+export default <%= pascalEntityName %>

@@ -1,15 +1,16 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
-function <%= pascalEntityName %> ({ children }) {
-  return (
-    <div className='<%= snakeEntityName %>-layout'>
-      {children}
-    </div>
-  )
-}
+type Props = {
 
-<%= pascalEntityName %>.propTypes = {
-  children: PropTypes.element
+};
+export class <%= pascalEntityName %> extends React.Component {
+  props: Props;
+
+  render () {
+    return (
+      <div></div>
+    )
+  }
 }
 
 export default <%= pascalEntityName %>
