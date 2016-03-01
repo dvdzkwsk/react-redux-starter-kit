@@ -26,6 +26,7 @@ Table of Contents
 1. [Server](#server)
 1. [Styles](#styles)
 1. [Testing](#testing)
+1. [CLI Generators](#cli-generators)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
 
@@ -88,7 +89,13 @@ $ npm start                     # Compile and launch
 Starting a New Project
 ----------------------
 
-First, I highly suggest checking out a new project by [SpencerCDixon](https://github.com/SpencerCDixon): [redux-cli](https://github.com/SpencerCDixon/redux-cli). This tool integrates extremely well with this project and offers added benefits such as generators (components, redux modules, etc.) and config/template management. It's still a work in progress, but give it a shot.
+First, I highly suggest checking out a new project by
+[SpencerCDixon](https://github.com/SpencerCDixon):
+[redux-cli](https://github.com/SpencerCDixon/redux-cli). This tool integrates
+extremely well with this project and offers added benefits such as generators
+(components, redux modules, etc.) and config/template management. It's still a
+work in progress, but give it a shot and file bugs to help make the project more
+robust.
 
 Alternatively, if you just want to stick with this project and want to start a fresh project without having to clean up the example code in `master`, you can do the following after cloning the repo:
 
@@ -252,6 +259,31 @@ Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
 
 Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/_base.js`.
+
+CLI Generators
+--------------
+If you used the [Redux CLI](https://github.com/SpencerCDixon/redux-cli) to
+generate your project a number of blueprints are available (which you can override).
+The generated files live in the `blueprints` folder so you can customize the
+generators for your projects specific needs.
+
+If you have an existing app you can run `redux init` to set up the CLI, then
+make sure to copy over the `blueprints` folder in this project for starter-kit
+specific generators.
+
+[See the Redux CLI github repo](https://github.com/SpencerCDixon/redux-cli#creating-blueprints) for more information on how to create and use
+blueprints.
+
+|Name|Description|Options|
+|---|---|---|
+|`redux g dumb <comp name>`|generates a dumb component and test file||
+|`redux g smart <smart name>`|generates a smart connected component and test file||
+|`redux g layout <comp name>`|generates functional layout component||
+|`redux g view <comp name>`|generates a view component||
+|`redux g form <form name>`|generates a form component (assumes redux-form)||
+|`redux g duck <duck name>`|generates a redux duck and test file||
+|`redux g blueprint <new blueprint>`|generates an empty blueprint for you to make||
+
 
 Deployment
 ----------
