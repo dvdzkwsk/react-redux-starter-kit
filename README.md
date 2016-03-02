@@ -53,6 +53,7 @@ Features
   * Mocha w/ chai, sinon-chai, and chai-as-promised, and [chai-enzyme](https://github.com/producthunt/chai-enzyme)
   * PhantomJS
   * Code coverage reports/instrumentation with [isparta](https://github.com/deepsweet/isparta-loader)
+* [Flow](http://flowtype.org/) (`^0.22.0`)
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
   * [react-transform-hmr](https://github.com/gaearon/react-transform-hmr) hot reloading for React components
   * [redbox-react](https://github.com/KeywordBrain/redbox-react) visible error reporting for React components
@@ -118,6 +119,7 @@ Great, now that introductions have been made here's everything in full detail:
 |`npm run test`|Runs unit tests with Karma and generates a coverage report.|
 |`npm run test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
 |`npm run deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
+|`npm run flow:check`|Analyzes the project for type errors.|
 |`npm run lint`|Lint all `.js` files.|
 |`npm run lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
 
@@ -173,6 +175,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── build                    # All build-related configuration
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
+├── interfaces               # Type declarations for Flow
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
