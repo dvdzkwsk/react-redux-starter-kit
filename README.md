@@ -153,7 +153,7 @@ Common configuration options:
 CLI Generators
 --------------
 
-This project integrates with [Redux CLI](https://github.com/SpencerCDixon/redux-cli) out of the box. If you used it to generate this project you have immediate access to its awesome blueprint generators (if you cloned/forked the project you have these features as well, but make sure to install the CLI first!).
+This project integrates with [Redux CLI](https://github.com/SpencerCDixon/redux-cli) out of the box. If you used it to generate this project you have immediate access to the generators listed below (if you cloned/forked the project you have these features as well, but make sure to install the CLI first!).
 
 |Script|Description|Options|
 |---|---|---|
@@ -164,8 +164,9 @@ This project integrates with [Redux CLI](https://github.com/SpencerCDixon/redux-
 |`redux g form <form name>`|generates a form component (assumes redux-form)||
 |`redux g duck <duck name>`|generates a redux duck and test file||
 |`redux g blueprint <new blueprint>`|generates an empty blueprint for you to make||
+**NOTE**: `redux-form` is not a dependency by default. If you wish to use it make sure to `npm i --save redux-form`, or if you wish to modify the skeleton you can update the blueprint in `~/blueprints/form/files/...`.
 
-A number of blueprints are available (which you can override) in the `~/blueprints` folder so you can customize the
+All of these blueprints are available (and can be overriden) in the `~/blueprints` folder so you can customize the
 default generators for your project's specific needs. If you have an existing app you can run `redux init` to set up the CLI, then
 make sure to copy over the `blueprints` folder in this project for starter-kit specific generators.
 
