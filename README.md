@@ -19,14 +19,13 @@ Table of Contents
 1. [Requirements](#requirements)
 1. [Features](#features)
 1. [Getting Started](#getting-started)
-1. [Starting a New Project](#starting-a-new-project)
 1. [Usage](#usage)
+1. [CLI Generators](#cli-generators)
 1. [Structure](#structure)
 1. [Webpack](#webpack)
 1. [Server](#server)
 1. [Styles](#styles)
 1. [Testing](#testing)
-1. [CLI Generators](#cli-generators)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
 
@@ -86,8 +85,7 @@ $ npm install                   # Install Node modules listed in ./package.json 
 $ npm start                     # Compile and launch
 ```
 
-Starting a New Project
-----------------------
+### Starting a New Project
 
 First, I highly suggest checking out a new project by
 [SpencerCDixon](https://github.com/SpencerCDixon):
@@ -121,16 +119,18 @@ Before delving into the descriptions of each available npm script, here's a brie
 
 Great, now that introductions have been made here's everything in full detail:
 
-* `npm start` - Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.
-* `npm run compile` - Compiles the application to disk (`~/dist` by default).
-* `npm run dev` - Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.
-* `npm run dev:nw` - Same as `npm run dev`, but opens the redux devtools in a new window.
-* `npm run dev:no-debug` - Same as `npm run dev` but disables redux devtools.
-* `npm run test` - Runs unit tests with Karma and generates a coverage report.
-* `npm run test:dev` - Runs Karma and watches for changes to re-run tests; does not generate coverage reports.
-* `npm run deploy`- Runs linter, tests, and then, on success, compiles your application to disk.
-* `npm run lint`- Lint all `.js` files.
-* `npm run lint:fix` - Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).
+|Key|Description|
+|---|---|
+|`npm start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
+|`npm run compile`|Compiles the application to disk (`~/dist` by default).|
+|`npm run dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
+|`npm run dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
+|`npm run dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
+|`npm run test`|Runs unit tests with Karma and generates a coverage report.|
+|`npm run test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
+|`npm run deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
+|`npm run lint`|Lint all `.js` files.|
+|`npm run lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
 
 **NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/_production.js`.
 
@@ -140,13 +140,36 @@ Basic project configuration can be found in `~/config/_base.js`. Here you'll be 
 
 Common configuration options:
 
-* `dir_src` - application source code base path
-* `dir_dist` - path to build compiled application to
-* `server_host` - hostname for the Koa server
-* `server_port` - port for the Koa server
-* `compiler_css_modules` - whether or not to enable CSS modules
-* `compiler_devtool` - what type of source-maps to generate (set to `false`/`null` to disable)
-* `compiler_vendor` - packages to separate into to the vendor bundle
+|Key|Description|
+|---|---|
+|`dir_src`|application source code base path|
+|`dir_dist`|path to build compiled application to|
+|`server_host`|hostname for the Koa server|
+|`server_port`|port for the Koa server|
+|`compiler_css_modules`|whether or not to enable CSS modules|
+|`compiler_devtool`|what type of source-maps to generate (set to `false`/`null` to disable)|
+|`compiler_vendor`|packages to separate into to the vendor bundle|
+
+CLI Generators
+--------------
+
+This project integrates with [Redux CLI](https://github.com/SpencerCDixon/redux-cli) out of the box. If you used it to generate this project you have immediate access to its awesome blueprint generators (if you cloned/forked the project you have these features as well, but make sure to install the CLI first!).
+
+|Name|Description|Options|
+|---|---|---|
+|`redux g dumb <comp name>`|generates a dumb component and test file||
+|`redux g smart <smart name>`|generates a smart connected component and test file||
+|`redux g layout <comp name>`|generates functional layout component||
+|`redux g view <comp name>`|generates a view component||
+|`redux g form <form name>`|generates a form component (assumes redux-form)||
+|`redux g duck <duck name>`|generates a redux duck and test file||
+|`redux g blueprint <new blueprint>`|generates an empty blueprint for you to make||
+
+A number of blueprints are available (which you can override) in the `~/blueprints` folder so you can customize the
+default generators for your project's specific needs. If you have an existing app you can run `redux init` to set up the CLI, then
+make sure to copy over the `blueprints` folder in this project for starter-kit specific generators.
+
+[See the Redux CLI github repo](https://github.com/SpencerCDixon/redux-cli#creating-blueprints) for more information on how to create and use blueprints.
 
 Structure
 ---------
@@ -156,6 +179,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ```
 .
 ├── bin                      # Build/Start scripts
+├── blueprints               # Blueprint files for redux-cli
 ├── build                    # All build-related configuration
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
@@ -216,12 +240,14 @@ import SomeComponent from 'components/SomeComponent' // Hooray!
 
 These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/_base.js`. When adding new globals, also add them to `~/.eslintrc`.
 
-* `process.env.NODE_ENV` - the active `NODE_ENV` when the build started
-* `__DEV__` - True when `process.env.NODE_ENV` is `development`
-* `__PROD__` - True when `process.env.NODE_ENV` is `production`
-* `__TEST__` - True when `process.env.NODE_ENV` is `test`
-* `__DEBUG__` - True when `process.env.NODE_ENV` is `development` and cli arg `--no_debug` is not set (`npm run dev:no-debug`)
-* `__BASENAME__` - [npm history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)
+|Key|Description|
+|---|---|
+|`process.env.NODE_ENV`|the active `NODE_ENV` when the build started|
+|`__DEV__`|True when `process.env.NODE_ENV` is `development`|
+|`__PROD__`|True when `process.env.NODE_ENV` is `production`|
+|`__TEST__`|True when `process.env.NODE_ENV` is `test`|
+|`__DEBUG__`|True when `process.env.NODE_ENV` is `development` and cli arg `--no_debug` is not set (`npm run dev:no-debug`)|
+|`__BASENAME__`|[npm history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)|
 
 Server
 ------
@@ -256,34 +282,9 @@ Here's an example:
 Testing
 -------
 
-To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
+To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module (duck).
 
 Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/_base.js`.
-
-CLI Generators
---------------
-If you used the [Redux CLI](https://github.com/SpencerCDixon/redux-cli) to
-generate your project a number of blueprints are available (which you can override).
-The generated files live in the `blueprints` folder so you can customize the
-generators for your projects specific needs.
-
-If you have an existing app you can run `redux init` to set up the CLI, then
-make sure to copy over the `blueprints` folder in this project for starter-kit
-specific generators.
-
-[See the Redux CLI github repo](https://github.com/SpencerCDixon/redux-cli#creating-blueprints) for more information on how to create and use
-blueprints.
-
-|Name|Description|Options|
-|---|---|---|
-|`redux g dumb <comp name>`|generates a dumb component and test file||
-|`redux g smart <smart name>`|generates a smart connected component and test file||
-|`redux g layout <comp name>`|generates functional layout component||
-|`redux g view <comp name>`|generates a view component||
-|`redux g form <form name>`|generates a form component (assumes redux-form)||
-|`redux g duck <duck name>`|generates a redux duck and test file||
-|`redux g blueprint <new blueprint>`|generates an empty blueprint for you to make||
-
 
 Deployment
 ----------
