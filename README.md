@@ -119,7 +119,7 @@ Before delving into the descriptions of each available npm script, here's a brie
 
 Great, now that introductions have been made here's everything in full detail:
 
-|Key|Description|
+|Script|Description|
 |---|---|
 |`npm start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
 |`npm run compile`|Compiles the application to disk (`~/dist` by default).|
@@ -155,7 +155,7 @@ CLI Generators
 
 This project integrates with [Redux CLI](https://github.com/SpencerCDixon/redux-cli) out of the box. If you used it to generate this project you have immediate access to its awesome blueprint generators (if you cloned/forked the project you have these features as well, but make sure to install the CLI first!).
 
-|Name|Description|Options|
+|Script|Description|Options|
 |---|---|---|
 |`redux g dumb <comp name>`|generates a dumb component and test file||
 |`redux g smart <smart name>`|generates a smart connected component and test file||
@@ -240,7 +240,7 @@ import SomeComponent from 'components/SomeComponent' // Hooray!
 
 These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/_base.js`. When adding new globals, also add them to `~/.eslintrc`.
 
-|Key|Description|
+|Variable|Description|
 |---|---|
 |`process.env.NODE_ENV`|the active `NODE_ENV` when the build started|
 |`__DEV__`|True when `process.env.NODE_ENV` is `development`|
