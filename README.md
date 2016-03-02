@@ -39,39 +39,28 @@ Features
 --------
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
-  * Includes react-addons-test-utils (`^0.14.0`)
 * [Redux](https://github.com/rackt/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
   * redux-devtools
-    * use `npm run dev:nw` to display them in a separate window.
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^2.0.0`)
-* [react-router-redux](https://github.com/rackt/react-router-redux) (`^3.0.0`)
+* [react-router-redux](https://github.com/rackt/react-router-redux) (`^4.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
-  * [CSS modules!](https://github.com/css-modules/css-modules)
-  * sass-loader
-  * postcss-loader with cssnano for style autoprefixing and minification
-  * Bundle splitting for app and vendor dependencies
-  * CSS extraction during builts that are not using HMR (like `npm run compile`)
-  * Loaders for fonts and images
+  * Bundle splitting and CSS extraction
+  * Sass w/ CSS modules, autoprefixer, and minification
 * [Koa](https://github.com/koajs/koa) (`^2.0.0-alpha`)
-  * webpack-dev-middleware
-  * webpack-hot-middleware
 * [Karma](https://github.com/karma-runner/karma)
-  * Mocha w/ chai, sinon-chai, and chai-as-promised
-  * [Airbnb's Enzyme](https://github.com/airbnb/enzyme) with [chai-enzyme](https://github.com/producthunt/chai-enzyme)
+  * Mocha w/ chai, sinon-chai, and chai-as-promised, and [chai-enzyme](https://github.com/producthunt/chai-enzyme)
   * PhantomJS
-  * Code coverage reports
+  * Code coverage reports/instrumentation with [isparta](https://github.com/deepsweet/isparta-loader)
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
+  * [react-transform-hmr](https://github.com/gaearon/react-transform-hmr) hot reloading for React components
+  * [redbox-react](https://github.com/KeywordBrain/redbox-react) visible error reporting for React components
   * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
-  * [babel-preset-react-hmre](https://github.com/danmartinez101/babel-preset-react-hmre) for:
-    * react-transform-hmr (HMR for React components)
-    * redbox-react (visible error reporting for React components)
   * [babel-plugin-transform-react-constant-elements](https://babeljs.io/docs/plugins/transform-react-constant-elements/) save some memory allocation
   * [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) remove `PropTypes`
 * [ESLint](http://eslint.org)
-  * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this!
-  * Includes separate test-specific `.eslintrc` to support chai assertions
+  * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this.
 
 Getting Started
 ---------------
