@@ -1,6 +1,69 @@
 Changelog
 =========
 
+2.0.0-alpha.0
+-------------
+
+### Features
+* Integrated with [redux-cli](https://github.com/SpencerCDixon/redux-cli)
+* Added support for [Flowtype](http://flowtype.org/)
+* Added `npm run flow:check` script
+* Added [chai-enzyme](https://github.com/producthunt/chai-enzyme)
+* Added `babel-plugin-transform-react-constant-elements` in production
+* Added `babel-plugin-transform-react-remove-prop-types` in production
+* Added `eslint-plugin-flowvars`
+* Added `better-npm-run`
+* Added loader for `.otf` files
+* Added `nodemon` for local server development
+* Added placeholder favicon, `humans.txt`, and `robots.txt`
+* Replaced `express` with `koa@^2.0.0-alpha`
+* Added `koa-proxy` with config support
+* Added `koa-conntect-history-api-fallback`
+* Upgraded `eslint` to `^2.0.0`
+* Upgraded `babel-eslint` to `^5.0.0`
+* Upgraded `eslint-plugin-react` to `^4.0.0`
+* Upgraded `yargs` to `^4.0.0`
+* Upgraded `html-webpack-plugin` from `^1.6.1` to `^2.7.1`
+* Upgraded `react-router` to `^2.0.0`
+* Replaced `redux-simple-router` with `react-router-redux`
+* Replaced `phantomjs` with `phantomjs-prebuilt`
+* Replaced Karma spec reporter with mocha reporter
+
+### Improvements
+* Webpack optimization plugins are now correctly used only in production
+* Added ability to simultaneously use CSS modules and regular CSS
+* Added `karma-webpack-with-fast-source-maps` for selective and faster test rebuilds
+* Simplified environment-based webpack configuration
+* Fixed CSS being minified twice with both `cssnano` and `css-loader`
+* Updated `cssnano` to not use unsafe options by default
+* Redux devtools now looks for the browser extension if available
+* Added webpack entry point for tests to replace file globs in Karma
+* Made Webpack compiler script generic so it can accept any webpack configuration file
+* Added sample tests for counter redux module
+* Replaced `react-hmre` with `redbox-react` and `react-transform-hmr`
+* Disabled verbose uglify warnings during compilation
+* Updated route definition file to have access to the redux store
+* Updated server start message so link is clickable
+* `ExtractTextPlugin` is now correctly used whenever HMR is disabled
+* `npm run deploy` now cleans out `~/dist` directory
+* Miscellaneous folder structure improvements
+* Removed unnecessary `bin` file for Karma
+* Removed unnecessary `NotFoundView`
+* Re-enabled support for `.jsx` files
+* Specified compatible Node and NPM engines
+
+### Fixes
+* Fixed some development-only code not being stripped from production bundles
+* Added rimraf for `~/dist` clearing to support Windows users
+* Fixed miscellaneous path issues for Windows users
+* Fixed source maps for Sass files
+* Updated server start debug message to display correct host
+
+### Deprecations
+* Removed `redux-actions`
+* Removed `dotenv`
+* Removed `add-module-exports` babel plugin
+
 1.0.0
 -----
 
