@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.0.0-alpha.1
+-------------
+
+### Features
+* Upgraded `react-router-redux` from `^4.0.0-beta` to `^4.0.0`
+
 2.0.0-alpha.0
 -------------
 
