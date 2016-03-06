@@ -9,7 +9,7 @@ export const ACTIONTYPE = 'ACTIONTYPE'
 // NOTE: "Action" is a Flow interface defined in https://github.com/TechnologyAdvice/flow-interfaces
 // If you're unfamiliar with Flow, you are completely welcome to avoid annotating your code, but
 // if you'd like to learn more you can check out: flowtype.org.
-export const <%= pascalEntityName %>Action = (payload: Object): Action => ({
+export const <%= camelEntityName %>Action = (payload: Object): Action => ({
   // employee: string, loginTime: number, company: string
   type: ACTIONTYPE,
   payload: payload
@@ -33,7 +33,7 @@ export const request<%= pascalEntityName %> = (): Function => {
 }
 
 export const actions = {
-  <%= pascalEntityName %>Action,
+  <%= camelEntityName %>Action,
   request<%= pascalEntityName %>
 }
 
