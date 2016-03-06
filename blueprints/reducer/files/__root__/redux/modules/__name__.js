@@ -22,7 +22,7 @@ export const <%= pascalEntityName %>Action = (payload: Object): Action => ({
 // you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
 // reducer take care of this logic.
 
-export const request<%= pascalEntityName %> = (email: string, password: string): Function => {
+export const request<%= pascalEntityName %> = (): Function => {
   return (dispatch: Function, getState: Function): Promise => {
     return new Promise((resolve: Function): void => {
       setTimeout(() => {
