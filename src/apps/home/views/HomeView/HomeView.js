@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../../redux/modules/counter'
+import { increment, doubleAsync } from './../../reducers'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 
