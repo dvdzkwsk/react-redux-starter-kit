@@ -77,7 +77,7 @@
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0",
     "redux": "^3.0.0",
-    "redux-thunk": "^1.0.0"
+    "redux-thunk": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
