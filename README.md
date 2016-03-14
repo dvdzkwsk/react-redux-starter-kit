@@ -90,11 +90,13 @@ Alternatively, if you just want to stick with this project and want to start a f
 ```shell
 git fetch origin new-project                      # Make sure you've fetched the latest copy of this branch from remote
 git checkout new-project                          # Checkout the new-project branch
-git checkout -b <your-project-name> new-project   # Create a branch based on the new-project branch
-$ npm install                                     # There are a few npm dependencies in this branch that aren't in master
-$ npm run make:project                            # Make your new project
 $ rm -rf .git && git init                         # Start a new git repository
 ```
+
+Great, you now have a fresh project! There are a few titles you'll probably want to update, and then you're good to go:
+
+* `~/package.json` - package name
+* `~/src/index.html` - template title tag
 
 Usage
 -----
