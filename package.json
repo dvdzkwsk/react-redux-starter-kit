@@ -82,7 +82,7 @@
   "devDependencies": {
     "babel-cli": "^6.5.1",
     "babel-core": "^6.3.17",
-    "babel-eslint": "^6.0.0-beta.5",
+    "babel-eslint": "^6.0.0-beta.6",
     "babel-loader": "^6.2.0",
     "babel-plugin-react-transform": "^2.0.0",
     "babel-plugin-transform-react-constant-elements": "^6.5.0",
