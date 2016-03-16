@@ -16,7 +16,7 @@ type Props = {
   counter: number,
   doubleAsync: Function,
   increment: Function
-};
+}
 
 // We avoid using the `@connect` decorator on the class definition so
 // that we can export the undecorated component for testing.
@@ -59,6 +59,7 @@ export class HomeView extends React.Component<void, Props, void> {
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
+
 export default connect((mapStateToProps), {
   increment: () => increment(1),
   doubleAsync
