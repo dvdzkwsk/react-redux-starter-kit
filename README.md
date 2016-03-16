@@ -313,6 +313,10 @@ By default this repo does not bundle the babel polyfill in order to reduce bundl
 
 In keeping with the goals of this project, no internationalization support is provided out of the box. However, [juanda99](https://github.com/juanda99) has been kind enough to maintain a fork of this repo with internationalization support, [check it out!](https://github.com/juanda99/react-redux-starter-kit)
 
+### Deployment Issues (Generally Heroku)
+
+Make sure that your environment is installing both dependencies _and_ devDependencies, since the latter are required to build the application. You can also reference [this issue](https://github.com/davezuko/react-redux-starter-kit/issues/571) for more details.
+
 ### High editor CPU usage after compilation
 
 While this is common to any sizable application, it's worth noting for those who may not know: if you happen to notice higher CPU usage in your editor after compiling the application, you may need to tell your editor not to process the dist folder. For example, in Sublime you can add:
