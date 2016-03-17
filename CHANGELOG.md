@@ -1,6 +1,25 @@
 Changelog
 =========
 
+2.0.0-alpha.2
+-------------
+
+### Features
+* Upgraded `eslint` to `^2.4.0`
+* Upgraded `babel-eslint` to `^6.0.0-beta.6`
+* Upgraded `better-npm-run` to `0.0.8`
+* Upgraded `phantomjs-polyfill` to `0.0.2`
+* Upgraded `karma-mocha-reporter` to `^2.0.0`
+* Upgraded `webpack` to `^1.12.14`
+* Upgraded `redux-thunk` to `^2.0.0`
+
+### Improvements
+* Added `index.js` files for blueprints for convenient imports
+
+### Fixes
+* Removed some `cssnano` options that caused potential conflicts with css modules
+* Updated flow to understand global webpack definitions
+
 2.0.0-alpha.1
 -------------
 
