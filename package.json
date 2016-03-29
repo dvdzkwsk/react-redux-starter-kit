@@ -105,7 +105,6 @@
     "eslint": "^2.4.0",
     "eslint-config-standard": "^5.1.0",
     "eslint-config-standard-react": "^2.2.0",
-    "eslint-loader": "^1.1.1",
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-flow-vars": "^0.2.0",
     "eslint-plugin-promise": "^1.0.8",
