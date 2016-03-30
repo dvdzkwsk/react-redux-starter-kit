@@ -38,14 +38,16 @@ Requirements
 Features
 --------
 
-* [React](https://github.com/facebook/react) (`^0.14.0`)
+* [React](https://github.com/facebook/react) (`^0.15.0-rc2`)
 * [Redux](https://github.com/rackt/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
-  * redux-devtools
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^2.0.0`)
+  * Asynchronous routes configured with dependencies and reducers
 * [react-router-redux](https://github.com/rackt/react-router-redux) (`^4.0.0`)
 * [Webpack](https://github.com/webpack/webpack)
+  * Vanilla HMR using `module.hot` and `webpack-dev-middleware`
+  * Code-splitting using `react-router` route configuration
   * Bundle splitting and CSS extraction
   * Sass w/ CSS modules, autoprefixer, and minification
 * [Koa](https://github.com/koajs/koa) (`^2.0.0-alpha`)
@@ -55,8 +57,6 @@ Features
   * Code coverage reports/instrumentation with [isparta](https://github.com/deepsweet/isparta-loader)
 * [Flow](http://flowtype.org/) (`^0.22.0`)
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
-  * [react-transform-hmr](https://github.com/gaearon/react-transform-hmr) hot reloading for React components
-  * [redbox-react](https://github.com/KeywordBrain/redbox-react) visible error reporting for React components
   * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
   * [babel-plugin-transform-react-constant-elements](https://babeljs.io/docs/plugins/transform-react-constant-elements/) save some memory allocation
   * [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) remove `PropTypes`
@@ -74,6 +74,18 @@ $ cd react-redux-starter-kit
 $ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
 $ npm start                     # Compile and launch
 ```
+
+### Redux DevTools
+
+Redux DevTools components have been removed from this project in favor of the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd), which runs on a separate thread and provides much better performance and functionality. It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
+
+**We strongly recommend using the chrome extension.** However, adding the DevTools components to your project is simple, first grab the packages from npm:
+
+```
+npm i --D redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor
+```
+
+Then follow the [manual integration walkthrough](https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md).
 
 ### Starting a New Project
 
@@ -97,6 +109,7 @@ Great, you now have a fresh project! There are a few titles you'll probably want
 
 * `~/package.json` - package name
 * `~/src/index.html` - template title tag
+* `~/src/main.js` - Helmet document title
 
 Usage
 -----
@@ -111,19 +124,21 @@ Before delving into the descriptions of each available npm script, here's a brie
 
 Great, now that introductions have been made here's everything in full detail:
 
-|Script|Description|
+|`npm run...`|Description|
 |---|---|
-|`npm start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
-|`npm run compile`|Compiles the application to disk (`~/dist` by default).|
-|`npm run dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
-|`npm run dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
-|`npm run dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
-|`npm run test`|Runs unit tests with Karma and generates a coverage report.|
-|`npm run test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
-|`npm run deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
-|`npm run flow:check`|Analyzes the project for type errors.|
-|`npm run lint`|Lint all `.js` files.|
-|`npm run lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
+|`start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
+|`compile`|Compiles the application to disk (`~/dist` by default).|
+|`dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
+|`dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
+|`dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
+|`test`|Runs unit tests with Karma and generates a coverage report.|
+|`test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
+|`deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
+|`deploy:dev`|Same as `deploy` but overrides `NODE_ENV` to "development".|
+|`deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
+|`flow:check`|Analyzes the project for type errors.|
+|`lint`|Lint all `.js` files.|
+|`lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
 
 **NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/_production.js`.
 
@@ -170,7 +185,7 @@ make sure to copy over the `blueprints` folder in this project for starter-kit s
 Structure
 ---------
 
-The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. It is something that has worked very well for me and my team, but use only what makes sense to you.
+The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. The current fractal hierarchy was inspired by [an old angular RFC](https://docs.google.com/document/u/1/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub) and contributed by [Justin Greenberg](https://github.com/justingreenberg).
 
 ```
 .
@@ -183,25 +198,56 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
-│   ├── components           # Generic React Components (generally Dumb components)
-│   ├── containers           # Components that provide context (e.g. Redux Provider)
+│   ├── components           # App-wide Presentational React Components
+│   ├── store                # Redux-specific pieces
+│   │   ├── createStore.js   # Create and instrument redux store
+│   │   └── reducers.js      # Reducer registry and injection
 │   ├── layouts              # Components that dictate major page structure
-│   ├── redux                # Redux-specific pieces
-│   │   ├── modules          # Collections of reducers/constants/actions
-│   │   └── utils            # Redux-specific helpers
-│   ├── routes               # Application route definitions
+│   ├── routes               # Main route definitions and async split points
+│   │   ├── index.js         # Bootstrap main application routes with store
+│   │   ├── Home *              # Fractal (All Route-specific, as needed)
+│   │   │   ├── index.js *      # Route definitions and async split points
+│   │   │   ├── assets          # Assets required to render components
+│   │   │   ├── components      # Presentational React Components
+│   │   │   ├── containers      # Connect components to actions and store
+│   │   │   ├── modules         # Collections of reducers/constants/actions
+│   │   │   └── routes          # Sub-route definitions and async split points
+│   │   └── NotFound         # Capture unknown routes in component
 │   ├── static               # Static assets (not imported anywhere in source code)
 │   ├── styles               # Application-wide styles (generally settings)
-│   ├── views                # Components that live at a route
 │   └── main.js              # Application bootstrap and rendering
 └── tests                    # Unit tests
 ```
 
-### Components vs. Views vs. Layouts
+### Fractal Structure (or, Recursive Route Hierarchy)
 
-**TL;DR:** They're all components.
+Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this does not scale and can seriously affect production velocity as your project grows. By starting with a fractal structure, you are forced to think about your architecture more strategically from day one.
 
-This distinction may not be important for you, but as an explanation: A **Layout** is something that describes an entire page structure, such as a fixed navigation, viewport, sidebar, and footer. Most applications will probably only have one layout, but keeping these components separate makes their intent clear. **Views** are components that live at routes, and are generally rendered within a **Layout**. What this ends up meaning is that, with this structure, nearly everything inside of **Components** ends up being a dumb component.
+We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application.
+
+This provides many benefits which may not immediately be obvious:
+- Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*, only when it is required.
+- Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin)[https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin] for flexible, high-performance development and scalability.
+
+#### Layouts
+- Regular stateless components that dictate major page structure
+- Useful for populating structure with named routes
+
+#### Components
+- Components should be stateless and purely presentational
+- Prefer functional components ie. `const Cool = ({ who }) => <div>${who} is cool</div>`
+- The top-level `components` directory should be thought of as a global common palette
+
+#### Containers
+- Containers **only** `connect` presentational components to actions/state
+- One or many container components can be composed in a stateless function component
+- Rule of thumb: **no JSX in containers**!
+
+#### Routes
+- A route directory
+  - *Must* contain an `index.js` that returns route definition
+  - *May* contain assets, components, containers, modules, and additional child Routes as needed
+- Child routes follow the same structure recursively
 
 Webpack
 -------
@@ -294,6 +340,10 @@ Have more questions? Feel free to submit an issue or join the Gitter chat!
 
 Troubleshooting
 ---------------
+
+### Redux DevTools
+
+We recommend using
 
 ### `npm run dev:nw` produces `cannot read location of undefined.`
 
