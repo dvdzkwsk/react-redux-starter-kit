@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.0.0-alpha.3
+-------------
+
+### Features
+* Upgraded `flow-interfaces` to `^0.6.0`
+
+### Improvements
+* Moved dependencies needed for production builds from devDependencies to regular dependencies
+
+### Fixes
+* Production configuration now generates assets with absolute rather than relative paths
+
+### Deprecations
+* Removed `eslint-loader` for performance reasons
+
 2.0.0-alpha.2
 -------------
 
