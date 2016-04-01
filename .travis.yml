@@ -14,9 +14,9 @@ script:
   - npm run lint
   - npm run flow:check
   - npm run test
-  - NODE_ENV=development npm run deploy
-  - NODE_ENV=staging npm run deploy
-  - NODE_ENV=production npm run deploy
+  - NODE_ENV=development npm run deploy:no-env
+  - NODE_ENV=staging npm run deploy:no-env
+  - NODE_ENV=production npm run deploy:no-env
 
 after_success:
   - npm run codecov
