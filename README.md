@@ -111,21 +111,21 @@ Before delving into the descriptions of each available npm script, here's a brie
 
 Great, now that introductions have been made here's everything in full detail:
 
-|Script|Description|
+|`npm run...`|Description|
 |---|---|
-|`npm start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
-|`npm run compile`|Compiles the application to disk (`~/dist` by default).|
-|`npm run dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
-|`npm run dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
-|`npm run dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
-|`npm run test`|Runs unit tests with Karma and generates a coverage report.|
-|`npm run test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
-|`npm run deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
-|`npm run deploy:dev`|Same as `deploy` but overrides `NODE_ENV` to "development".|
-|`npm run deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
-|`npm run flow:check`|Analyzes the project for type errors.|
-|`npm run lint`|Lint all `.js` files.|
-|`npm run lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
+|`start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
+|`compile`|Compiles the application to disk (`~/dist` by default).|
+|`dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
+|`dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
+|`dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
+|`test`|Runs unit tests with Karma and generates a coverage report.|
+|`test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
+|`deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
+|`deploy:dev`|Same as `deploy` but overrides `NODE_ENV` to "development".|
+|`deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
+|`flow:check`|Analyzes the project for type errors.|
+|`lint`|Lint all `.js` files.|
+|`lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
 
 **NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/_production.js`.
 
