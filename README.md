@@ -121,6 +121,8 @@ Great, now that introductions have been made here's everything in full detail:
 |`npm run test`|Runs unit tests with Karma and generates a coverage report.|
 |`npm run test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
 |`npm run deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
+|`npm run deploy:dev`|Same as `deploy` but overrides `NODE_ENV` to "development".|
+|`npm run deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
 |`npm run flow:check`|Analyzes the project for type errors.|
 |`npm run lint`|Lint all `.js` files.|
 |`npm run lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
