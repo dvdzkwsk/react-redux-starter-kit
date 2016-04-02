@@ -19,7 +19,8 @@
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
     "deploy": "better-npm-run deploy",
-    "deploy:no-env": "better-npm-run deploy-no-env",
+    "deploy:dev": "better-npm-run deploy:dev",
+    "deploy:prod": "better-npm-run deploy:prod",
     "flow:check": "babel-node bin/flow-check",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
@@ -40,13 +41,20 @@
     "deploy": {
       "command": "npm run clean && npm run compile",
       "env": {
-        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
-    "deploy-no-env": {
-      "command": "npm run clean && npm run compile",
+    "deploy:dev": {
+      "command": "npm run deploy",
       "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy:prod": {
+      "command": "npm run deploy",
+      "env": {
+        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
