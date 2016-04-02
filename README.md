@@ -184,19 +184,25 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── interfaces               # Type declarations for Flow
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
-├── src                      # Application source code
-│   ├── components           # Generic React Components (generally Dumb components)
-│   ├── containers           # Components that provide context (e.g. Redux Provider)
-│   ├── layouts              # Components that dictate major page structure
+├── src                      # Project source code
+|   ├── apps                 # Split your project up into Self Contained Apps
+|   │   └── home             # Home app
+|   |       ├── components   # Home app React Components (generally Dumb components)
+|   |       ├── views        # Home app components that live at a route
+|   |       ├── tests        # Home app unit tests
+|   |       ├── reducers.js  # Home app Redux reducer
+|   |       └── routes.js    # Home app ReactRouter Routes
+│   ├── components           # Project-wide React Components (generally Dumb components)
+│   ├── containers           # Project-wide components that provide context (e.g. Redux Provider)
+│   ├── layouts              # Project-wide components that dictate major page structure
 │   ├── redux                # Redux-specific pieces
-│   │   ├── modules          # Collections of reducers/constants/actions
 │   │   └── utils            # Redux-specific helpers
-│   ├── routes               # Application route definitions
-│   ├── static               # Static assets (not imported anywhere in source code)
-│   ├── styles               # Application-wide styles (generally settings)
-│   ├── views                # Components that live at a route
+│   ├── routes               # Project-wide route definitions
+│   ├── static               # Project-wide static assets (not imported anywhere in source code)
+│   ├── styles               # Project-wide styles (generally settings)
+│   ├── views                # Project-wide components that live at a route
 │   └── main.js              # Application bootstrap and rendering
-└── tests                    # Unit tests
+└── tests                    # Project-wide Unit tests
 ```
 
 ### Components vs. Views vs. Layouts
@@ -204,6 +210,17 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 **TL;DR:** They're all components.
 
 This distinction may not be important for you, but as an explanation: A **Layout** is something that describes an entire page structure, such as a fixed navigation, viewport, sidebar, and footer. Most applications will probably only have one layout, but keeping these components separate makes their intent clear. **Views** are components that live at routes, and are generally rendered within a **Layout**. What this ends up meaning is that, with this structure, nearly everything inside of **Components** ends up being a dumb component.
+
+### Self Contained Apps
+
+The idea of a Self Contained App (SCA) is that you can keep everything specific to an section of your project within the one directory and not have pieces spread out all over the file system. This partitioning is similar to the concept of an app in [Django](https://docs.djangoproject.com/en/1.9/intro/tutorial01/#creating-the-polls-app) (among others).
+
+There are a number of advantages to using SCAs;
+
+- Less spread of naturally grouped items across the project file system.
+- Easier to [code split](https://webpack.github.io/docs/code-splitting.html) the project.
+- Refactoring becomes much easier because everything is contained in the SCA.
+- Import using relative paths within the SCA rather than nested folders from the project root.
 
 Webpack
 -------

@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../../redux/modules/counter'
+import { increment, doubleAsync } from './../../reducers'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 
@@ -16,7 +16,7 @@ type Props = {
   counter: number,
   doubleAsync: Function,
   increment: Function
-};
+}
 
 // We avoid using the `@connect` decorator on the class definition so
 // that we can export the undecorated component for testing.
@@ -59,6 +59,7 @@ export class HomeView extends React.Component<void, Props, void> {
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
+
 export default connect((mapStateToProps), {
   increment: () => increment(1),
   doubleAsync
