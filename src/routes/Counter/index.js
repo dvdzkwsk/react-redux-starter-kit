@@ -9,9 +9,9 @@ export default (store) => ({
       './components/CounterView',
       './modules/counter'
     ], (require) => {
-      // Now these modules can lazily evaluated using require hook provided.
-      // They will not loaded until the router invokes this callback. This is
-      // possible due to webpack's code splitting and chunking features.
+      // These modules can be lazily evaluated using require hook, and
+      // will not loaded until the router invokes this callback. Webpack
+      // detects this and creates a split point.
       const CounterView = require('./components/CounterView').default
       const counterReducer = require('./modules/counter').default
 

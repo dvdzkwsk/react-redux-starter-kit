@@ -226,8 +226,8 @@ Small applications can be built using a flat directory structure, with folders f
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application.
 
 This provides many benefits which may not immediately be obvious:
-- Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*, only when it is required.
-- Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin)[https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin] for flexible, high-performance development and scalability.
+- Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*.
+- Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin](https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin) for flexible, high-performance development and scalability.
 
 #### Layouts
 - Regular stateless components that dictate major page structure

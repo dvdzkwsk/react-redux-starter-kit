@@ -3,8 +3,8 @@ import { increment, doubleAsync } from '../modules/counter'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
-    wiring in the actions and state necessary to implement the presentational
-    component that it renders - in this case, the counter component:   */
+    wiring in the actions and state necessary to render a presentational
+    component - in this case, the counter:   */
 
 import Counter from 'components/Counter'
 
@@ -24,8 +24,8 @@ const mapStateToProps = (state, ownProps) => ({
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
 
     import { createSelector } from 'reselect'
-    const aboutCount = (state) => state.aboutCounter
-    const tripleCount = createSelector(aboutCount, (count) => count * 3)
+    const counter = (state) => state.counter
+    const tripleCount = createSelector(counter, (count) => count * 3)
     const mapStateToProps = (state) => ({
       counter: tripleCount(state)
     })
