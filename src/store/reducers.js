@@ -5,8 +5,8 @@ export const reducers = (asyncReducers) => {
   return combineReducers({ router, ...asyncReducers })
 }
 
-export const injectReducer = (store, name, asyncReducer) => {
-  store.asyncReducers[name] = asyncReducer
+export const injectReducer = ({ store, key, reducer }) => {
+  store.asyncReducers[key] = reducer
   store.replaceReducer(reducers(store.asyncReducers))
 }
 

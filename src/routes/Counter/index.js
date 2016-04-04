@@ -16,7 +16,11 @@ export default (store) => ({
       const counterReducer = require('./modules/counter').default
 
       // Inject our reducer into the store
-      injectReducer(store, 'counter', counterReducer)
+      injectReducer({
+        store,
+        key: 'counter',
+        reducer: counterReducer
+      })
 
       // Render The CounterView (our 'main' route component)
       next(null, CounterView)
