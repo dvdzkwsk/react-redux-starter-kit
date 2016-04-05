@@ -185,7 +185,7 @@ make sure to copy over the `blueprints` folder in this project for starter-kit s
 Structure
 ---------
 
-The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. The current fractal hierarchy was inspired by [an old angular RFC](https://docs.google.com/document/u/1/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub) and contributed by [Justin Greenberg](https://github.com/justingreenberg).
+The folder structure provided is only meant to serve as a guide, it is by no means prescriptive.
 
 ```
 .
@@ -198,56 +198,74 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
-│   ├── components           # App-wide Presentational React Components
+│   ├── main.js              # Application bootstrap and rendering
+│   ├── components           # Reusable Presentational Components
+│   ├── containers           # Reusable Container Components
+│   ├── layouts              # Components that dictate major page structure
+│   ├── static               # Static assets (not imported anywhere in source code)
+│   ├── styles               # Application-wide styles (generally settings)
 │   ├── store                # Redux-specific pieces
 │   │   ├── createStore.js   # Create and instrument redux store
 │   │   └── reducers.js      # Reducer registry and injection
-│   ├── layouts              # Components that dictate major page structure
-│   ├── routes               # Main route definitions and async split points
-│   │   ├── index.js         # Bootstrap main application routes with store
-│   │   ├── Home *              # Fractal (All Route-specific, as needed)
-│   │   │   ├── index.js *      # Route definitions and async split points
-│   │   │   ├── assets          # Assets required to render components
-│   │   │   ├── components      # Presentational React Components
-│   │   │   ├── containers      # Connect components to actions and store
-│   │   │   ├── modules         # Collections of reducers/constants/actions
-│   │   │   └── routes          # Sub-route definitions and async split points
-│   │   └── NotFound         # Capture unknown routes in component
-│   ├── static               # Static assets (not imported anywhere in source code)
-│   ├── styles               # Application-wide styles (generally settings)
-│   └── main.js              # Application bootstrap and rendering
+│   └── routes               # Main route definitions and async split points
+│       ├── index.js         # Bootstrap main application routes with store
+│       ├── Root.js          # Wrapper component for context-aware providers
+│       ├── Home *              # Fractal route
+│       │   ├── index.js *      # Route definitions and async split points
+│       │   ├── assets          # Assets required to render components
+│       │   ├── components      # Presentational React Components
+│       │   ├── containers      # Connect components to actions and store
+│       │   ├── modules         # Collections of reducers/constants/actions
+│       │   └── routes          # Fractal sub-routes, optional
+│       └── NotFound         # Capture unknown routes in component
 └── tests                    # Unit tests
 ```
 
 ### Fractal Structure (or, Recursive Route Hierarchy)
 
-Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this does not scale and can seriously affect production velocity as your project grows. By starting with a fractal structure, you are forced to think about your architecture more strategically from day one.
+Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this does not scale and can seriously affect development velocity as your project grows. By starting with a fractal structure, your application drives it's own architecture from day one.
 
-We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application.
+We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. *Additional child routes can be nested in a fractal hierarchy.*
 
-This provides many benefits which may not immediately be obvious:
+This provides many benefits that may not be immediately obvious:
 - Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*.
 - Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin](https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin) for flexible, high-performance development and scalability.
 
-#### Layouts
-- Regular stateless components that dictate major page structure
-- Useful for populating structure with named routes
+##### Layouts
+- Stateless components that dictate major page structure
+- Useful for composing `react-router` [named components](https://github.com/reactjs/react-router/blob/master/docs/API.md#components-1) into views
 
-#### Components
-- Components should be stateless and purely presentational
-- Prefer functional components ie. `const Cool = ({ who }) => <div>${who} is cool</div>`
-- The top-level `components` directory should be thought of as a global common palette
+##### Components
+- Prefer [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)
+  - example: `const HelloMessage = props => <div>Hello {props.name}</div>`
+- Top-level `components` and `containers` directories contain reusable component palette
 
-#### Containers
+##### Containers
 - Containers **only** `connect` presentational components to actions/state
+  - Rule of thumb: **no JSX in containers**!
 - One or many container components can be composed in a stateless function component
-- Rule of thumb: **no JSX in containers**!
+- Props injected by `react-router` can be accessed in containers using `connect`:
+  ```js
+    // CounterContainerWithName.js
+    import { connect } from 'react-redux'
+    import Counter from 'components/Counter'
+    export const mapStateToProps = (state, ownProps) => ({
+      counter: state.counter,
+      music: ownProps.location.query.music // why not
+    })
+    export default connect(mapStateToProps)(Counter)
 
-#### Routes
-- A route directory
+    // Location -> 'local.dev/counter?music=reggae'
+    // Counter.props = { counter: 0, music: 'reggae' }
+  ```
+
+##### Routes
+- A route directory...
   - *Must* contain an `index.js` that returns route definition
-  - *May* contain assets, components, containers, modules, and additional child Routes as needed
-- Child routes follow the same structure recursively
+  - **Optional:** assets, components, containers, redux modules, nested child routes
+  - Additional child routes can be nested within `routes` directory in a fractal hierarchy.
+
+Again, this is by no means prescriptive. This setup provides a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional—smaller apps might benefit from a flat routes directory**, which is totally cool! Code splitting is currently based on static analysis of require and will still work with this setup. The folder structure itself is simply for organizational purposes.
 
 Webpack
 -------

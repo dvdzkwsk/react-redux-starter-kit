@@ -17,7 +17,7 @@ export default (initialState = {}, history) => {
   }
 
   // Create final store and subscribe router in debug env ie. for devtools
-  const store = middleware(createStore)(reducers(), initialState)
+  const store = createStore(reducers(), initialState, middleware)
 
   store.asyncReducers = {}
 
