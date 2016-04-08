@@ -38,7 +38,7 @@ Requirements
 Features
 --------
 
-* [React](https://github.com/facebook/react) (`^0.14.0`)
+* [React](https://github.com/facebook/react) (`^15.0.0`)
 * [Redux](https://github.com/rackt/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
   * redux-devtools
