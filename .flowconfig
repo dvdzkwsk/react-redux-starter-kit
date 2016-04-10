@@ -40,7 +40,6 @@ module.name_mapper='^views\/\(.*\)$' -> '<PROJECT_ROOT>/src/views/\1'
 module.name_mapper='^views$' -> '<PROJECT_ROOT>/src/views'
 
 munge_underscores=true
-strip_root=true
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe

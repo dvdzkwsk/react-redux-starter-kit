@@ -28,6 +28,7 @@ Table of Contents
 1. [Testing](#testing)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
+1. [Thank You](#thank-you)
 
 Requirements
 ------------
@@ -38,7 +39,7 @@ Requirements
 Features
 --------
 
-* [React](https://github.com/facebook/react) (`^0.15.0-rc2`)
+* [React](https://github.com/facebook/react) (`^15.0.0`)
 * [Redux](https://github.com/rackt/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
   * redux-thunk middleware
@@ -77,9 +78,11 @@ $ npm start                     # Compile and launch
 
 ### Redux DevTools
 
-Redux DevTools components have been removed from this project in favor of the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd), which runs on a separate thread and provides much better performance and functionality. It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
+#### We recommend using the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd).
 
-**We strongly recommend using the chrome extension.** However, adding the DevTools components to your project is simple, first grab the packages from npm:
+Using the chrome extension allows your monitors to run on a separate thread and affords better performance and functionality. It comes with several of the most popular monitors, is easy to configure, filters actions, and doesn’t require installing any packages.
+
+However, adding the DevTools components to your project is simple, first grab the packages from npm:
 
 ```
 npm i --D redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor
@@ -140,7 +143,7 @@ Great, now that introductions have been made here's everything in full detail:
 |`lint`|Lint all `.js` files.|
 |`lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
 
-**NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/_production.js`.
+**NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/config/_production.js`.
 
 ### Configuration
 
@@ -210,20 +213,20 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   └── routes               # Main route definitions and async split points
 │       ├── index.js         # Bootstrap main application routes with store
 │       ├── Root.js          # Wrapper component for context-aware providers
-│       ├── Home *              # Fractal route
-│       │   ├── index.js *      # Route definitions and async split points
-│       │   ├── assets          # Assets required to render components
-│       │   ├── components      # Presentational React Components
-│       │   ├── containers      # Connect components to actions and store
-│       │   ├── modules         # Collections of reducers/constants/actions
-│       │   └── routes          # Fractal sub-routes, optional
+│       ├── Home             # Fractal route
+│       │   ├── index.js     # Route definitions and async split points
+│       │   ├── assets       # Assets required to render components
+│       │   ├── components   # Presentational React Components
+│       │   ├── container    # Connect components to actions and store
+│       │   ├── modules      # Collections of reducers/constants/actions
+│       │   └── routes **    # Fractal sub-routes (optional)
 │       └── NotFound         # Capture unknown routes in component
 └── tests                    # Unit tests
 ```
 
-### Fractal Structure (or, Recursive Route Hierarchy)
+#### Fractal App Structure (aka Self-Contained Apps, Recursive Route Hierarchy, Modules, Providers)
 
-Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this does not scale and can seriously affect development velocity as your project grows. By starting with a fractal structure, your application drives it's own architecture from day one.
+Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this structure does not scale and can seriously affect development velocity as your project grows. By starting with a fractal structure, your application drives it's own architecture from day one.
 
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. *Additional child routes can be nested in a fractal hierarchy.*
 
@@ -237,8 +240,8 @@ This provides many benefits that may not be immediately obvious:
 
 ##### Components
 - Prefer [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)
-  - example: `const HelloMessage = props => <div>Hello {props.name}</div>`
-- Top-level `components` and `containers` directories contain reusable component palette
+  - example: `const HelloMessage = ({ name }) => <div>Hello {name}</div>`
+- Top-level `components` and `containers` directories contain reusable components
 
 ##### Containers
 - Containers **only** `connect` presentational components to actions/state
@@ -359,10 +362,6 @@ Have more questions? Feel free to submit an issue or join the Gitter chat!
 Troubleshooting
 ---------------
 
-### Redux DevTools
-
-We recommend using
-
 ### `npm run dev:nw` produces `cannot read location of undefined.`
 
 This is most likely because the new window has been blocked by your popup blocker, so make sure it's disabled before trying again.
@@ -392,3 +391,15 @@ While this is common to any sizable application, it's worth noting for those who
 ```
 	"folder_exclude_patterns": [".svn",	".git",	".hg", "CVS",	"node_modules",	"dist"]
 ```
+
+Thank You
+---------
+
+This project wouldn't be possible without help from the community, so I'd like to highlight some of its biggest contributors. Thank you all for your hard work, you've made my life a lot easier and taught me a lot in the process.
+
+* [Justin Greenberg](https://github.com/justingreenberg) - For all of your PR's, getting us to Babel 6, and constant work improving our patterns.
+* [Roman Pearah](https://github.com/neverfox) - For your bug reports, help in triaging issues, and PR contributions.
+* [Spencer Dixin](https://github.com/SpencerCDixon) - For your creation of [redux-cli](https://github.com/SpencerCDixon/redux-cli).
+* [Jonas Matser](https://github.com/mtsr) - For your help in triaging issues and unending support in our Gitter channel.
+
+And to everyone else who has contributed, even if you are not listed here your work is appreciated.
