@@ -47,6 +47,7 @@ const karmaConfig = {
     },
     externals: {
       ...webpackConfig.externals,
+      'react/addons': true,
       'react/lib/ExecutionEnvironment': true,
       'react/lib/ReactContext': 'window',
       'text-encoding': 'window'
