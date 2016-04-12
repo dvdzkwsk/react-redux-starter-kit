@@ -58,20 +58,6 @@
         "DEBUG": "app:*"
       }
     },
-    "deploy:dev": {
-      "command": "npm run deploy",
-      "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy:prod": {
-      "command": "npm run deploy",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
-      }
-    },
     "start": {
       "command": "babel-node bin/server",
       "env": {
