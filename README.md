@@ -112,7 +112,6 @@ Great, you now have a fresh project! There are a few titles you'll probably want
 
 * `~/package.json` - package name
 * `~/src/index.html` - template title tag
-* `~/src/main.js` - Helmet document title
 
 Usage
 -----
@@ -219,14 +218,16 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │       │   ├── components   # Presentational React Components
 │       │   ├── container    # Connect components to actions and store
 │       │   ├── modules      # Collections of reducers/constants/actions
-│       │   └── routes **    # Fractal sub-routes (optional)
+│       │   └── routes **    # Fractal sub-routes (** optional)
 │       └── NotFound         # Capture unknown routes in component
 └── tests                    # Unit tests
 ```
 
-#### Fractal App Structure (aka Self-Contained Apps, Recursive Route Hierarchy, Modules, Providers)
+#### Fractal App Structure
 
-Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this structure does not scale and can seriously affect development velocity as your project grows. By starting with a fractal structure, your application drives it's own architecture from day one.
+_Also known as: Self-Contained Apps, Recursive Route Hierarchy, Providers, etc_
+
+Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this structure does not scale and can seriously affect development velocity as your project grows. Starting with a fractal structure allows your application to organically drive it's own architecture from day one.
 
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. *Additional child routes can be nested in a fractal hierarchy.*
 
@@ -234,22 +235,24 @@ This provides many benefits that may not be immediately obvious:
 - Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*.
 - Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin](https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin) for flexible, high-performance development and scalability.
 
+Large, mature apps tend to naturally organize themselves in this way—analogous to large, mature trees (as in actual trees :evergreen_tree:). The trunk is the router, branches are route bundles, and leaves are views composed of common/shared components/containers. Global application and UI state should be placed on or close to the trunk (or perhaps at the base of a huge branch, eg. `/app` route).
+
 ##### Layouts
 - Stateless components that dictate major page structure
 - Useful for composing `react-router` [named components](https://github.com/reactjs/react-router/blob/master/docs/API.md#components-1) into views
 
 ##### Components
 - Prefer [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)
-  - example: `const HelloMessage = ({ name }) => <div>Hello {name}</div>`
+  - eg: `const HelloMessage = ({ name }) => <div>Hello {name}</div>`
 - Top-level `components` and `containers` directories contain reusable components
 
 ##### Containers
 - Containers **only** `connect` presentational components to actions/state
   - Rule of thumb: **no JSX in containers**!
 - One or many container components can be composed in a stateless function component
-- Props injected by `react-router` can be accessed in containers using `connect`:
+- Tip: props injected by `react-router` can be accessed using `connect`:
   ```js
-    // CounterContainerWithName.js
+    // CounterWithMusicContainer.js
     import { connect } from 'react-redux'
     import Counter from 'components/Counter'
     export const mapStateToProps = (state, ownProps) => ({
@@ -258,7 +261,7 @@ This provides many benefits that may not be immediately obvious:
     })
     export default connect(mapStateToProps)(Counter)
 
-    // Location -> 'local.dev/counter?music=reggae'
+    // Location -> 'localhost:3000/counter?music=reggae'
     // Counter.props = { counter: 0, music: 'reggae' }
   ```
 
@@ -268,7 +271,7 @@ This provides many benefits that may not be immediately obvious:
   - **Optional:** assets, components, containers, redux modules, nested child routes
   - Additional child routes can be nested within `routes` directory in a fractal hierarchy.
 
-Again, this is by no means prescriptive. This setup provides a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional—smaller apps might benefit from a flat routes directory**, which is totally cool! Code splitting is currently based on static analysis of require and will still work with this setup. The folder structure itself is simply for organizational purposes.
+Note: This structure is designed to provide a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional—smaller apps might benefit from a flat routes directory**, which is totally cool! Webpack creates split points based on static analysis of `require` during compilation; the recursive hierarchy folder structure is simply for organizational purposes.
 
 Webpack
 -------
