@@ -17,7 +17,7 @@ const mapActionCreators = {
   doubleAsync
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   counter: state.counter
 })
 
