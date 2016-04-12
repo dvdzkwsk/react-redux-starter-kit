@@ -54,7 +54,7 @@ if (config.env === 'development') {
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
-  app.use(convert(serve(paths.base(config.dir_dist))))
+  app.use(convert(serve(paths.dist())))
 }
 
 export default app
