@@ -2,15 +2,12 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
 
-/*  Note: Instead of JSX, we are using react-router's PlainRoute, which uses
-    a simple javascript object to provide route definitions. This keeps things
-    very explicit, proves there's no magic happening, and is the preferred method
-    for code splitting. When creating a new route, we provide the instantiated
-    store so that it can continue to inject dyamically loaded reducers and leverage
-    tools such as `redux-saga` and `rereduce`  */
-
 export const createRoutes = (store) => {
-  return {
+/*  Note: Instead of using JSX, we are using react-router PlainRoute,
+    a simple javascript object to provide route definitions.
+    When creating a new async route, pass the instantiated store!   */
+
+  const routes = {
     path: '/',
     component: CoreLayout,
     indexRoute: Home,
@@ -24,6 +21,8 @@ export const createRoutes = (store) => {
       })
     }
   }
+
+  return routes
 }
 
 export default createRoutes

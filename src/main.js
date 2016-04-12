@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { useRouterHistory } from 'react-router'
+import { Router, useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import Root from './routes/Root'
 import createStore from './store/createStore'
+import { Provider } from 'react-redux'
 
 const MOUNT_ELEMENT = document.getElementById('root')
-const DEFAULT_TITLE = 'React Redux Starter Kit'
 
 // Configure history for react-router
 const browserHistory = useRouterHistory(createBrowserHistory)({
@@ -23,37 +22,40 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
 })
 
-// Default titles and nested template (react-helmet)
-const title = {
-  defaultTitle: DEFAULT_TITLE,
-  titleTemplate: `%s - ${DEFAULT_TITLE}`
+let render = (key = null) => {
+  const routes = require('./routes/index').default(store)
+  const App = (
+    <Provider store={store}>
+      <div style={{ height: '100%' }}>
+        <Router history={history} children={routes} key={key} />
+      </div>
+    </Provider>
+  )
+  ReactDOM.render(App, MOUNT_ELEMENT)
 }
 
-let render = () => {
-  // This syntax will be updated in the near future to use System loader
-  const createRoutes = require('./routes/index').default
-  const routes = createRoutes(store)
-  const props = { history, routes, store, title }
-
-  ReactDOM.render(<Root {...props}/>, MOUNT_ELEMENT)
-}
-
-// If supported, set up hot reloading and overlay for runtime errors
-if (module.hot) {
+// Enable HMR and catch runtime errors in RedBox
+// This code is excluded from production bundle
+if (__DEV__ && module.hot) {
   const renderApp = render
   const renderError = (error) => {
     const RedBox = require('redbox-react')
 
-    ReactDOM.render(<RedBox error={error} />, MOUNT_ELEMENT)
+    ReactDOM.render(<RedBox error={error}/>, MOUNT_ELEMENT)
   }
   render = () => {
     try {
-      renderApp()
+      renderApp(Math.random())
     } catch (error) {
       renderError(error)
     }
   }
   module.hot.accept(['./routes/index'], () => render())
+}
+
+// Use Redux DevTools chrome extension
+if (__DEBUG__) {
+  if (!window.devToolsExtension) window.devToolsExtension.open()
 }
 
 render()

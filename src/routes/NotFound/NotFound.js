@@ -1,17 +1,15 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
-import Helmet from 'react-helmet'
 
 const goBack = (e) => {
   e.preventDefault()
   return browserHistory.goBack()
 }
 
-const NotFound = () => (
+export const NotFound = () => (
   <div>
-    <Helmet title='Not Found'/>
-    <h3 className='text-muted'>Page Not Found!</h3>
-    <a href='#' onClick={goBack}>Go Back</a>
+    <h4>Page not found!</h4>
+    <p><a href='#' onClick={goBack}>&larr; Back</a></p>
   </div>
 )
 
