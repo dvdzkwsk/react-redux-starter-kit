@@ -2,7 +2,7 @@ import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
   path: 'counter',
-  getComponents (location, next) {
+  getComponent (nextState, next) {
     require.ensure([
       './containers/CounterContainer',
       './modules/counter'
