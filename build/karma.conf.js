@@ -45,6 +45,8 @@ const karmaConfig = {
         }
       ])
     },
+    // Enzyme fix, see:
+    // https://github.com/airbnb/enzyme/issues/47
     externals: {
       ...webpackConfig.externals,
       'react/addons': true,
