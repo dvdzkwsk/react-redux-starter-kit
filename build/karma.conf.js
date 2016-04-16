@@ -49,8 +49,7 @@ const karmaConfig = {
       ...webpackConfig.externals,
       'react/addons': true,
       'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': 'window',
-      'text-encoding': 'window'
+      'react/lib/ReactContext': 'window'
     },
     sassLoader: webpackConfig.sassLoader
   },
