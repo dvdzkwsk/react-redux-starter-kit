@@ -33,8 +33,9 @@ Table of Contents
 Requirements
 ------------
 
-* node `^4.2.0`
 * npm `^3.0.0`
+* node `^4.2.0`
+* mongodb `^3.0.3`
 
 Features
 --------
@@ -73,31 +74,17 @@ Just clone the repo and install the necessary node modules:
 $ git clone https://github.com/davezuko/react-redux-starter-kit.git
 $ cd react-redux-starter-kit
 $ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
+```
+
+Start mongodb
+```shell
+$ mongod
+```
+
+Start the node application
+```shell
 $ npm start                     # Compile and launch
 ```
-
-### Starting a New Project
-
-First, I highly suggest checking out a new project by
-[SpencerCDixon](https://github.com/SpencerCDixon):
-[redux-cli](https://github.com/SpencerCDixon/redux-cli). This tool integrates
-extremely well with this project and offers added benefits such as generators
-(components, redux modules, etc.) and config/template management. It's still a
-work in progress, but give it a shot and file bugs to help make the project more
-robust.
-
-Alternatively, if you just want to stick with this project and want to start a fresh project without having to clean up the example code in `master`, you can do the following after cloning the repo:
-
-```shell
-git fetch origin new-project                      # Make sure you've fetched the latest copy of this branch from remote
-git checkout new-project                          # Checkout the new-project branch
-$ rm -rf .git && git init                         # Start a new git repository
-```
-
-Great, you now have a fresh project! There are a few titles you'll probably want to update, and then you're good to go:
-
-* `~/package.json` - package name
-* `~/src/index.html` - template title tag
 
 Usage
 -----
