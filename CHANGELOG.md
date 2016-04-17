@@ -1,6 +1,20 @@
 Changelog
 =========
 
+2.0.0-alpha.5
+-------------
+
+### Features
+* Upgraded `flow-bin` to `0.23.0`
+* Upgraded `fs-extra` to `^0.27.0`
+
+### Improvements
+* Minor cleanup in Karma configuration
+* Added missing node-style index files in blueprints
+
+### Fixes
+* Modified webpack manifest initialization to prevent syntax errors in some environments (https://github.com/davezuko/react-redux-starter-kit/issues/572)
+
 2.0.0-alpha.4
 -------------
 
