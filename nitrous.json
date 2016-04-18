@@ -1,0 +1,8 @@
+{
+  "template": "nodejs",
+  "ports": [3000],
+  "name": "A React Redux Starter Kit",
+  "scripts": {
+    "Start React Redux Start Kit": "cd ~/code/react-redux-starter-kit && npm run dev"
+  }
+}

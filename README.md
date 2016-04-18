@@ -14,6 +14,18 @@ This starter kit is designed to get you up and running with a bunch of awesome n
 
 The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
 
+Nitrous Quickstart
+------------------
+
+You can quickly create a free development environment to get started using this
+starter kit in the cloud on [Nitrous](https://www.nitrous.io/):
+
+<a href="https://www.nitrous.io/quickstart">
+  <img src="https://nitrous-image-icons.s3.amazonaws.com/quickstart.png" alt="Nitrous Quickstart" width=142 height=34>
+</a>
+
+In the IDE, start this starter kit via `Run > Start React Redux Starter Kit` and access your site via `Preview > 3000`.
+
 Table of Contents
 -----------------
 1. [Requirements](#requirements)
