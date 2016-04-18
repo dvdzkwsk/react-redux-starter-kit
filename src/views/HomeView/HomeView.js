@@ -59,7 +59,7 @@ export class HomeView extends React.Component<void, Props, void> {
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
-export default connect((mapStateToProps), {
+export default connect(mapStateToProps, {
   increment: () => increment(1),
   doubleAsync
 })(HomeView)
