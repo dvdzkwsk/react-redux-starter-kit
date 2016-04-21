@@ -7,9 +7,6 @@ React Redux Starter Kit
 [![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-> ### Want Semicolons?
-> After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs. See, we can coexist peacefully.
-
 This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
 
 The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
@@ -92,13 +89,7 @@ Then follow the [manual integration walkthrough](https://github.com/gaearon/redu
 
 ### Starting a New Project
 
-First, I highly suggest checking out a new project by
-[SpencerCDixon](https://github.com/SpencerCDixon):
-[redux-cli](https://github.com/SpencerCDixon/redux-cli). This tool integrates
-extremely well with this project and offers added benefits such as generators
-(components, redux modules, etc.) and config/template management. It's still a
-work in progress, but give it a shot and file bugs to help make the project more
-robust.
+First, I highly suggest checking out a new project by [SpencerCDixon](https://github.com/SpencerCDixon): [redux-cli](https://github.com/SpencerCDixon/redux-cli). This tool integrates extremely well with this project and offers added benefits such as generators (components, redux modules, etc.) and config/template management. It's still a work in progress, but give it a shot and file bugs to help make the project more robust.
 
 Alternatively, if you just want to stick with this project and want to start a fresh project without having to clean up the example code in `master`, you can do the following after cloning the repo:
 
@@ -178,9 +169,7 @@ This project integrates with [Redux CLI](https://github.com/SpencerCDixon/redux-
 |`redux g blueprint <new blueprint>`|generates an empty blueprint for you to make||
 **NOTE**: `redux-form` is not a dependency by default. If you wish to use it make sure to `npm i --save redux-form`, or if you wish to modify the skeleton you can update the blueprint in `~/blueprints/form/files/...`.
 
-All of these blueprints are available (and can be overriden) in the `~/blueprints` folder so you can customize the
-default generators for your project's specific needs. If you have an existing app you can run `redux init` to set up the CLI, then
-make sure to copy over the `blueprints` folder in this project for starter-kit specific generators.
+All of these blueprints are available (and can be overriden) in the `~/blueprints` folder so you can customize the default generators for your project's specific needs. If you have an existing app you can run `redux init` to set up the CLI, then make sure to copy over the `blueprints` folder in this project for starter-kit specific generators.
 
 [See the Redux CLI github repo](https://github.com/SpencerCDixon/redux-cli#creating-blueprints) for more information on how to create and use blueprints.
 
@@ -227,30 +216,30 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 
 _Also known as: Self-Contained Apps, Recursive Route Hierarchy, Providers, etc_
 
-Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this structure does not scale and can seriously affect development velocity as your project grows. Starting with a fractal structure allows your application to organically drive it's own architecture from day one.
+Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this structure does not scale and can seriously affect development velocity as your project grows. Starting with a fractal structure allows your application to organically drive its own architecture from day one.
 
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. *Additional child routes can be nested in a fractal hierarchy.*
 
 This provides many benefits that may not be immediately obvious:
-- Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*.
-- Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin](https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin) for flexible, high-performance development and scalability.
+* Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*.
+* Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin](https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin) for flexible, high-performance development and scalability.
 
 Large, mature apps tend to naturally organize themselves in this way—analogous to large, mature trees (as in actual trees :evergreen_tree:). The trunk is the router, branches are route bundles, and leaves are views composed of common/shared components/containers. Global application and UI state should be placed on or close to the trunk (or perhaps at the base of a huge branch, eg. `/app` route).
 
 ##### Layouts
-- Stateless components that dictate major page structure
-- Useful for composing `react-router` [named components](https://github.com/reactjs/react-router/blob/master/docs/API.md#components-1) into views
+* Stateless components that dictate major page structure
+* Useful for composing `react-router` [named components](https://github.com/reactjs/react-router/blob/master/docs/API.md#components-1) into views
 
 ##### Components
-- Prefer [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)
+* Prefer [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)
   - eg: `const HelloMessage = ({ name }) => <div>Hello {name}</div>`
-- Top-level `components` and `containers` directories contain reusable components
+* Top-level `components` and `containers` directories contain reusable components
 
 ##### Containers
-- Containers **only** `connect` presentational components to actions/state
+* Containers **only** `connect` presentational components to actions/state
   - Rule of thumb: **no JSX in containers**!
-- One or many container components can be composed in a stateless function component
-- Tip: props injected by `react-router` can be accessed using `connect`:
+* One or many container components can be composed in a stateless function component
+* Tip: props injected by `react-router` can be accessed using `connect`:
   ```js
     // CounterWithMusicContainer.js
     import { connect } from 'react-redux'
@@ -266,12 +255,12 @@ Large, mature apps tend to naturally organize themselves in this way—analogous
   ```
 
 ##### Routes
-- A route directory...
+* A route directory...
   - *Must* contain an `index.js` that returns route definition
   - **Optional:** assets, components, containers, redux modules, nested child routes
-  - Additional child routes can be nested within `routes` directory in a fractal hierarchy.
+  - Additional child routes can be nested within `routes` directory in a fractal hierarchy
 
-Note: This structure is designed to provide a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional—smaller apps might benefit from a flat routes directory**, which is totally cool! Webpack creates split points based on static analysis of `require` during compilation; the recursive hierarchy folder structure is simply for organizational purposes.
+**Note:** This structure is designed to provide a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional, smaller apps might benefit from a flat routes directory**, which is totally cool! Webpack creates split points based on static analysis of `require` during compilation; the recursive hierarchy folder structure is simply for organizational purposes.
 
 Webpack
 -------
@@ -364,6 +353,10 @@ Have more questions? Feel free to submit an issue or join the Gitter chat!
 
 Troubleshooting
 ---------------
+
+### Want Semicolons?
+
+After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs. See, we can coexist peacefully.
 
 ### `npm run dev:nw` produces `cannot read location of undefined.`
 
