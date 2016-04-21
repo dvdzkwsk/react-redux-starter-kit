@@ -11,6 +11,9 @@ This starter kit is designed to get you up and running with a bunch of awesome n
 
 The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
 
+Finally, This project wouldn't be possible without the help of our many contributors, so [thank you](#thank-you) for all of your help.
+
+
 Table of Contents
 -----------------
 1. [Requirements](#requirements)
