@@ -97,8 +97,8 @@ First, I highly suggest checking out a new project by [SpencerCDixon](https://gi
 Alternatively, if you just want to stick with this project and want to start a fresh project without having to clean up the example code in `master`, you can do the following after cloning the repo:
 
 ```shell
-git fetch origin new-project                      # Make sure you've fetched the latest copy of this branch from remote
-git checkout new-project                          # Checkout the new-project branch
+git fetch origin new-project-v3                   # Make sure you've fetched the latest copy of this branch from remote
+git checkout new-project-v3                       # Checkout the new-project branch
 $ rm -rf .git && git init                         # Start a new git repository
 ```
 
