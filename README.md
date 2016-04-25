@@ -142,7 +142,7 @@ Great, now that introductions have been made here's everything in full detail:
 
 Basic project configuration can be found in `~/config/_base.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**.
 
-If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (e.g. `~/config/_production.js`). This can be entirely arbitrary, such as `NODE_ENV=staging` where the config file is `~/config/_staging.js`.
+If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `~/config/environemnts.js` and define overrides on a per-NODE_ENV basis. There are examples for both `development` and `production`, so use those as guidelines.
 
 Common configuration options:
 
