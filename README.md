@@ -59,8 +59,7 @@ Features
 * [Flow](http://flowtype.org/) (`^0.22.0`)
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
   * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
-  * [babel-plugin-transform-react-constant-elements](https://babeljs.io/docs/plugins/transform-react-constant-elements/) save some memory allocation
-  * [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) remove `PropTypes`
+  * [react-optimize](https://github.com/thejameskyle/babel-react-optimize) for performance optimizations in production
 * [ESLint](http://eslint.org)
   * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this.
 
@@ -125,8 +124,7 @@ Great, now that introductions have been made here's everything in full detail:
 |`start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
 |`compile`|Compiles the application to disk (`~/dist` by default).|
 |`dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
-|`dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
-|`dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
+|`dev:no-debug`|Same as `npm run dev` but disables devtool instrumentation.|
 |`test`|Runs unit tests with Karma and generates a coverage report.|
 |`test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
 |`deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
