@@ -98,21 +98,21 @@ times for larger projects. `npm run lint` still exists to aid in
 deploy processes (such as with CI), and it's recommended that you
 use a linting plugin for your IDE in place of this loader.
 
-If you do wish to continue using the loader, you can uncomment
-the code below and run `npm i --save-dev eslint-loader`. This code
-will be removed in a future release.
-
-webpackConfig.module.preLoaders = [{
-  test: /\.(js|jsx)$/,
-  loader: 'eslint',
-  exclude: /node_modules/
-}]
-
-webpackConfig.eslint = {
-  configFile: paths.base('.eslintrc'),
-  emitWarning: __DEV__
-}
+If you do wish to continue using the loader, you can run
+'npm run dev:lint'.
 */
+if (process.argv.indexOf('eslint') !== -1) {
+  webpackConfig.module.preLoaders = [{
+    test: /\.(js|jsx)$/,
+    loader: 'eslint',
+    exclude: /node_modules/
+  }]
+
+  webpackConfig.eslint = {
+    configFile: paths.base('.eslintrc'),
+    emitWarning: __DEV__
+  }
+}
 
 // ------------------------------------
 // Loaders

@@ -14,6 +14,7 @@
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
+    "dev:lint": "better-npm-run dev:lint",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "better-npm-run test",
@@ -33,6 +34,13 @@
     },
     "dev": {
       "command": "nodemon --exec babel-node bin/server",
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "app:*"
+      }
+    },
+    "dev:lint": {
+      "command": "nodemon --exec babel-node bin/server eslint",
       "env": {
         "NODE_ENV": "development",
         "DEBUG": "app:*"
@@ -133,6 +141,7 @@
     "eslint": "^2.4.0",
     "eslint-config-standard": "^5.1.0",
     "eslint-config-standard-react": "^2.2.0",
+    "eslint-loader": "^1.3.0",
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-flow-vars": "^0.3.0",
     "eslint-plugin-promise": "^1.0.8",
