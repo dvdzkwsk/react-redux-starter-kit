@@ -59,8 +59,7 @@ Features
 * [Flow](http://flowtype.org/) (`^0.22.0`)
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
   * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
-  * [babel-plugin-transform-react-constant-elements](https://babeljs.io/docs/plugins/transform-react-constant-elements/) save some memory allocation
-  * [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) remove `PropTypes`
+  * [react-optimize](https://github.com/thejameskyle/babel-react-optimize) for performance optimizations in production
 * [ESLint](http://eslint.org)
   * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this.
 
