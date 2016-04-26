@@ -2,10 +2,15 @@ import webpack from 'webpack'
 import cssnano from 'cssnano'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+
 import config from '../config'
 import _debug from 'debug'
 
-const debug = _debug('app:webpack:config')
+const debug = _debug('app:webpack')
+
+// Capture stdout from plugins
+console.log = (...str) => debug(...str)
+
 const paths = config.utils_paths
 const {__DEV__, __PROD__, __TEST__} = config.globals
 
@@ -18,8 +23,23 @@ const webpackConfig = {
     root: paths.client(),
     extensions: ['', '.js', '.jsx', '.json']
   },
-  module: {}
+  module: {
+    loaders: []
+  },
+  plugins: []
 }
+
+// ------------------------------------
+// HappyPack
+// ------------------------------------
+let Thread, threadPool
+if (config.thread) {
+  debug('Happy[init]: Setting up thread pool for build parallelization.')
+
+  Thread = require('HappyPack')
+  threadPool = Thread.ThreadPool({ size: config.thread_count })
+}
+
 // ------------------------------------
 // Entry Points
 // ------------------------------------
@@ -44,7 +64,7 @@ webpackConfig.output = {
 // ------------------------------------
 // Plugins
 // ------------------------------------
-webpackConfig.plugins = [
+webpackConfig.plugins.push(
   new webpack.DefinePlugin(config.globals),
   new HtmlWebpackPlugin({
     template: paths.client('index.html'),
@@ -56,7 +76,7 @@ webpackConfig.plugins = [
       collapseWhitespace: true
     }
   })
-]
+)
 
 if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).')
@@ -118,28 +138,48 @@ webpackConfig.eslint = {
 // Loaders
 // ------------------------------------
 // JavaScript / JSON
-webpackConfig.module.loaders = [{
-  test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
-  loader: 'babel',
-  query: {
-    cacheDirectory: true,
-    plugins: ['transform-runtime'],
-    presets: ['es2015', 'react', 'stage-0'],
-    env: {
-      production: {
-        plugins: [
-          'transform-react-remove-prop-types',
-          'transform-react-constant-elements'
-        ]
-      }
-    }
-  }
-},
-{
+
+webpackConfig.module.loaders.push({
   test: /\.json$/,
   loader: 'json'
-}]
+})
+
+const babelQuery = {
+  cacheDirectory: true,
+  plugins: ['transform-runtime'],
+  presets: ['es2015', 'react', 'stage-0'],
+  env: {
+    production: {
+      plugins: [
+        'transform-react-remove-prop-types',
+        'transform-react-constant-elements'
+      ]
+    }
+  }
+}
+
+if (config.thread && config.thread_babel) {
+  webpackConfig.plugins.push(
+    new Thread({
+      id: 'babel',
+      threadPool,
+      cache: false, // Use babel-loader's cacheDirectory (in babelQuery)
+      loaders: [`babel?${JSON.stringify(babelQuery)}`]
+    })
+  )
+  webpackConfig.module.loaders.push({
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    loader: 'happypack/loader?id=babel'
+  })
+} else {
+  webpackConfig.module.loaders.push({
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    loader: 'babel',
+    query: babelQuery
+  })
+}
 
 // ------------------------------------
 // Style Loaders
@@ -173,49 +213,100 @@ if (isUsingCSSModules) {
     'localIdentName=[name]__[local]___[hash:base64:5]'
   ].join('&')
 
-  webpackConfig.module.loaders.push({
-    test: /\.scss$/,
-    include: cssModulesRegex,
-    loaders: [
-      'style',
-      cssModulesLoader,
-      'postcss',
-      'sass?sourceMap'
-    ]
-  })
+  const scssModulesLoaders = [
+    'style',
+    cssModulesLoader,
+    'postcss',
+    'sass?sourceMap'
+  ]
 
-  webpackConfig.module.loaders.push({
-    test: /\.css$/,
-    include: cssModulesRegex,
-    loaders: [
-      'style',
-      cssModulesLoader,
-      'postcss'
-    ]
-  })
+  const cssModulesLoaders = [
+    'style',
+    cssModulesLoader,
+    'postcss'
+  ]
+
+  if (config.thread && config.thread_css_modules) {
+    webpackConfig.plugins.push(
+      new Thread({
+        id: 'styles-scss-modules',
+        threadPool,
+        loaders: scssModulesLoaders
+      }),
+      new Thread({
+        id: 'styles-css-modules',
+        threadPool,
+        loaders: cssModulesLoaders
+      })
+    )
+    webpackConfig.module.loaders.push({
+      test: /\.scss$/,
+      include: cssModulesRegex,
+      loader: 'happypack/loader?id=styles-scss-modules'
+    }, {
+      test: /\.css$/,
+      include: cssModulesRegex,
+      loader: 'happypack/loader?id=styles-css-modules'
+    })
+  } else {
+    webpackConfig.module.loaders.push({
+      test: /\.scss$/,
+      include: cssModulesRegex,
+      loaders: scssModulesLoaders
+    }, {
+      test: /\.css$/,
+      include: cssModulesRegex,
+      loaders: cssModulesLoaders
+    })
+  }
 }
 
 // Loaders for files that should not be treated as CSS modules.
 const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
-webpackConfig.module.loaders.push({
-  test: /\.scss$/,
-  exclude: excludeCSSModules,
-  loaders: [
-    'style',
-    BASE_CSS_LOADER,
-    'postcss',
-    'sass?sourceMap'
-  ]
-})
-webpackConfig.module.loaders.push({
-  test: /\.css$/,
-  exclude: excludeCSSModules,
-  loaders: [
-    'style',
-    BASE_CSS_LOADER,
-    'postcss'
-  ]
-})
+
+const scssLoaders = [ 'style', BASE_CSS_LOADER, 'postcss', 'sass?sourceMap' ]
+if (config.thread && config.thread_scss) {
+  webpackConfig.plugins.push(
+    new Thread({
+      id: 'styles-scss',
+      threadPool,
+      loaders: scssLoaders
+    })
+  )
+  webpackConfig.module.loaders.push({
+    test: /\.scss$/,
+    exclude: excludeCSSModules,
+    loader: 'happypack/loader?id=styles-scss'
+  })
+} else {
+  webpackConfig.module.loaders.push({
+    test: /\.scss$/,
+    exclude: excludeCSSModules,
+    loaders: scssLoaders
+  })
+}
+
+const cssLoaders = [ 'style', BASE_CSS_LOADER, 'postcss' ]
+if (config.thread && config.thread_css) {
+  webpackConfig.plugins.push(
+    new Thread({
+      id: 'styles-css',
+      threadPool,
+      loaders: cssLoaders
+    })
+  )
+  webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    exclude: excludeCSSModules,
+    loader: 'happypack/loader?id=styles-css'
+  })
+} else {
+  webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    exclude: excludeCSSModules,
+    loaders: cssLoaders
+  })
+}
 
 // ------------------------------------
 // Style Configuration

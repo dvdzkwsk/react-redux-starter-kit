@@ -98,6 +98,7 @@
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.8.4",
     "fs-extra": "^0.28.0",
+    "happypack": "^2.1.0",
     "history": "^2.0.0",
     "html-webpack-plugin": "^2.7.1",
     "imports-loader": "^0.6.5",
@@ -121,7 +122,7 @@
     "sass-loader": "^3.0.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
-    "webpack": "^1.12.14",
+    "webpack": "^1.13.0",
     "yargs": "^4.0.0"
   },
   "devDependencies": {

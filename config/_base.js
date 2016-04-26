@@ -44,6 +44,13 @@ const config = {
     'react-router-redux',
     'redux'
   ],
+  // Parallellization! via HappyPack
+  thread: true,
+  thread_count: 3,
+  thread_babel: true,
+  thread_css: false,
+  thread_scss: true,
+  thread_css_modules: true,
 
   // ----------------------------------
   // Test Configuration
