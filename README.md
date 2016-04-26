@@ -220,13 +220,100 @@ _Also known as: Self-Contained Apps, Recursive Route Hierarchy, Providers, etc_
 
 Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this structure does not scale and can seriously affect development velocity as your project grows. Starting with a fractal structure allows your application to organically drive its own architecture from day one.
 
-We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. *Additional child routes can be nested in a fractal hierarchy.*
-
-This provides many benefits that may not be immediately obvious:
+This structure provides many benefits that may not be immediately obvious:
 * Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*.
 * Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin](https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin) for flexible, high-performance development and scalability.
 
 Large, mature apps tend to naturally organize themselves in this way—analogous to large, mature trees (as in actual trees :evergreen_tree:). The trunk is the router, branches are route bundles, and leaves are views composed of common/shared components/containers. Global application and UI state should be placed on or close to the trunk (or perhaps at the base of a huge branch, eg. `/app` route).
+
+*Note: We recommend keeping your store flat, which is not strictly fractal. However, this structure provides a rock-solid foundation for creating or migrating to truly fractal apps by dropping in frameworks such as [redux-elm](https://github.com/salsita/redux-elm).*
+
+#### Code Splitting Anatomy
+
+We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application.
+
+It's important to understand how webpack integrates with `react-router` to implement code splitting, and how everything is tied together with redux. Let's dissect the counter route definition:
+
+```js
+/*  1. ReactRouter -  Create PlainRoute definition object  */
+export default (store) => ({
+  path: 'counter',
+  
+  /*  2. ReactRouter -  Invoked when path match (lazy)  */
+  getComponent (nextState, cb) {
+  
+    /*  3. Webpack (build) -  Create split point
+        4. Webpack (runtime) -  Load async chunk with embedded jsonp client  */
+    require.ensure([], (require) => {
+    
+      /*  5. Webpack (build) -  Require all bundle contents  */
+      const Counter = require('./containers/CounterContainer').default
+      const reducer = require('./modules/counter').default
+
+      /*  6. Redux -  Use store and helper to add async reducer  */
+      injectReducer(store, { key: 'counter', reducer })
+
+      /*  7. ReactRouter -  Return component */
+      cb(null, Counter)
+
+    /*  8. Webpack -  Provide a name for bundle  */
+    }, 'counter')
+  }
+})
+```
+
+ 1. **ReactRouter** - We export a function that accepts the instantiated store for async reducer/middleware/etc injection and returns a `PlainRoute` object *evaluated by react-router during application bootstrap*.
+ 2. **ReactRouter** - The `getComponent` callback is registered but it is not invoked until the route is matched, so it is the perfect place to encapsulate and load our bundled logic at runtime.
+ 3. **Webpack (Build)** - Webpack uses the `require.ensure` callback to create a split point and replaces it with a call to it's own internal `jsonp` client with relevant module information.
+ 4. **Webpack (Runtime)** - Webpack's loads your bundle over the network.
+ 5. **Webpack (Build)** - Webpack walks the required dependency tree and runs a chunking algorithm to merge modules into an async bundle, also known as code-splitting.
+ 6. **Redux** - Use `injectReducer` helper and instantiated store to inject `counter` reducer on key 'counter'
+ 7. **ReactRouter** - Pass resolved component back up to `Router` (using CPS callback signature)
+ 8. **Webpack (Build)** - Create named chunk using `require.ensure` callback
+
+
+**Notes**
+
+- Your entire route hierarchy **can and should** be loaded during application bootstrap, since code-splitting and bundle loading happens lazily in `getComponents` the route definitions should be registered in advance!
+- Additional child routes can be nested in a fractal hierarchy by adding `childRoutes`
+- This structure is designed to provide a flexible foundation for module bundling and dynamic loading
+- Using a fractal structure is optional, smaller apps might benefit from a flat routes directory
+
+**Usage with JSX**
+
+We recommend using POJO route definitions, however can can easily integrate them with JSX routes using React Router's [`createRoutes`](https://github.com/reactjs/react-router/blob/master/docs/API.md#createroutesroutes) helper. Example of POJO routes using JSX:
+ 
+```js
+// ...
+import SubRoutes from './routes/SubRoutes' // JSX Routes
+
+export default {
+  path: '/component',
+  component: Component,
+  children: createRoutes(SubRoutes)
+}
+
+```
+
+- Alternatively, the JSX route definition file can `export default createRoutes(<Route />)`
+- JSX can easily use POJO routes by passing them as a prop, ie `<Route children={PlainRoute} />`
+ 
+
+
+#### Recommendations
+
+Above all, you should seek the find the best solution for the problem you are trying to solve. This setup will not fit every use case, but it is extremely flexible. There is no "right" or "wrong" way to set up your project. Here are some general recommendations that we have found useful. If you would like to add something, please submit a PR.
+
+##### Routes
+* A route directory...
+  - *Should* contain an `index.js` that returns route definition
+  - **Optional:** assets, components, containers, redux modules, nested child routes
+  - Additional child routes can be nested within `routes` directory in a fractal hierarchy
+
+##### Store
+ - Your store **should not reflect the hierarchy of your folder structure**
+ - Keep your store as flat and normalized as possible. If you are dealing with deeply nested data structures, we recommend using a tool such as [normalizr](https://github.com/gaearon/normalizr).
+ - Note that the `injectReducer` helper can be repurposed to suit your needs.
 
 ##### Layouts
 * Stateless components that dictate major page structure
@@ -256,13 +343,6 @@ Large, mature apps tend to naturally organize themselves in this way—analogous
     // Counter.props = { counter: 0, music: 'reggae' }
   ```
 
-##### Routes
-* A route directory...
-  - *Must* contain an `index.js` that returns route definition
-  - **Optional:** assets, components, containers, redux modules, nested child routes
-  - Additional child routes can be nested within `routes` directory in a fractal hierarchy
-
-**Note:** This structure is designed to provide a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional, smaller apps might benefit from a flat routes directory**, which is totally cool! Webpack creates split points based on static analysis of `require` during compilation; the recursive hierarchy folder structure is simply for organizational purposes.
 
 Webpack
 -------
@@ -280,6 +360,10 @@ You can redefine which packages to bundle separately by modifying `compiler_vend
   'redux'
 ]
 ```
+
+### Code Splitting
+
+We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. See structure above for more information.
 
 ### Webpack Root Resolve
 Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:

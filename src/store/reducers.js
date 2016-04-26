@@ -5,7 +5,8 @@ export const reducers = (asyncReducers) => {
   return combineReducers({
     // Add sync reducers here
     router,
-    ...asyncReducers })
+    ...asyncReducers
+  })
 }
 
 export const injectReducer = (store, { key, reducer }) => {
