@@ -124,8 +124,7 @@ Great, now that introductions have been made here's everything in full detail:
 |`start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
 |`compile`|Compiles the application to disk (`~/dist` by default).|
 |`dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
-|`dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
-|`dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
+|`dev:no-debug`|Same as `npm run dev` but disables devtool instrumentation.|
 |`test`|Runs unit tests with Karma and generates a coverage report.|
 |`test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
 |`deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
