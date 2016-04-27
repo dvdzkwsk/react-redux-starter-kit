@@ -338,37 +338,7 @@ You can redefine which packages to bundle separately by modifying `compiler_vend
 
 ### Code Splitting
 
-We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application.
-
-```js
-import { injectReducer } from '../../store/reducers'
-
-export default (store) => ({
-  path: 'counter',
-  
-  /*  Async getComponent is only invoked when route matches   */
-  getComponent (nextState, cb) {
-  
-    /*  Webpack - use 'require.ensure' to create a split point
-        and embed an async module loader (jsonp) when bundling   */
-    require.ensure([], (require) => {
- 
-      /*  Webpack - use require callback to define
-          dependencies for bundling   */
-      const Counter = require('./containers/CounterContainer').default
-      const reducer = require('./modules/counter').default
-
-      /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'counter', reducer })
-
-      /*  Return getComponent   */
-      cb(null, Counter)
-
-    /* Webpack named bundle   */
-    }, 'counter')
-  }
-})
-```
+We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. See structure above for more information.
 
 ### Webpack Root Resolve
 Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
