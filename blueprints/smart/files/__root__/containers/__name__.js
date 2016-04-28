@@ -8,7 +8,7 @@ type Props = {
 export class <%= pascalEntityName %> extends React.Component {
   props: Props;
 
-  render() {
+  render () {
     return (
       <div></div>
     )
