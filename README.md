@@ -227,13 +227,11 @@ Large, mature apps tend to naturally organize themselves in this way—analogous
 
 *Note: We recommend keeping your store flat, which is not strictly fractal. However, this structure provides a rock-solid foundation for creating or migrating to truly fractal apps by dropping in frameworks such as [redux-elm](https://github.com/salsita/redux-elm).*
 
-#### Design Considerations
-
-##### Code Splitting
+#### Code Splitting Anatomy
 
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application.
 
-It's important to understand how webpack integrates with `react-router` to implement code splitting, and how everything is tied together with redux. Let's walk through the counter route definition:
+It's important to understand how webpack integrates with `react-router` to implement code splitting, and how everything is tied together with redux. Let's dissect the counter route definition:
 
 ```js
 /*  1. ReactRouter -  Create PlainRoute definition object  */
@@ -275,15 +273,19 @@ export default (store) => ({
 
 Notes:
 - Your entire route hierarchy **can and should** be loaded during application bootstrap, since code-splitting and bundle loading happens lazily in `getComponents` the route definitions should be registered in advance!
-- Additional child routes can be nested in a fractal hierarchy by adding `childRoutes`.
+- Additional child routes can be nested in a fractal hierarchy by adding `childRoutes`
+- This structure is designed to provide a flexible foundation for module bundling and dynamic loading
+- Using a fractal structure is optional, smaller apps might benefit from a flat routes directory
+
+#### Recommendations
+
+Above all, you should seek the find the best solution for the problem you are trying to solve. This setup will not fit every use case, but it is extremely flexible. There is no "right" or "wrong" way to set up your project. Here are some general recommendations that we have found useful. If you would like to add something, please submit a PR.
 
 ##### Routes
 * A route directory...
-  - *Must* contain an `index.js` that returns route definition
+  - *Should* contain an `index.js` that returns route definition
   - **Optional:** assets, components, containers, redux modules, nested child routes
   - Additional child routes can be nested within `routes` directory in a fractal hierarchy
-
-**Note:** This structure is designed to provide a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional, smaller apps might benefit from a flat routes directory**, which is totally cool! Webpack creates split points based on static analysis of `require` during compilation; the recursive hierarchy folder structure is simply for organizational purposes.
 
 ##### Store
  - Your store **should not reflect the hierarchy of your folder structure**
