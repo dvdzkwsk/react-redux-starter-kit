@@ -28,6 +28,7 @@ Table of Contents
 1. [Testing](#testing)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
+1. [Learning Resources](#learning-resources)
 1. [Thank You](#thank-you)
 
 Requirements
@@ -388,6 +389,11 @@ While this is common to any sizable application, it's worth noting for those who
 ```
 	"folder_exclude_patterns": [".svn",	".git",	".hg", "CVS",	"node_modules",	"dist"]
 ```
+
+Learning Resources
+------------
+
+[Starting out with react-redux-starter-kit](https://suspicious.website/2016/04/29/starting-out-with-react-redux-starter-kit/) is an introduction to the components used in this starter kit with a small example in the end.
 
 Thank You
 ---------
