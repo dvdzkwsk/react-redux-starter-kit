@@ -272,11 +272,33 @@ export default (store) => ({
  8. **Webpack (Build)** - Create named chunk using `require.ensure` callback
 
 
-Notes:
+**Notes**
+
 - Your entire route hierarchy **can and should** be loaded during application bootstrap, since code-splitting and bundle loading happens lazily in `getComponents` the route definitions should be registered in advance!
 - Additional child routes can be nested in a fractal hierarchy by adding `childRoutes`
 - This structure is designed to provide a flexible foundation for module bundling and dynamic loading
 - Using a fractal structure is optional, smaller apps might benefit from a flat routes directory
+
+**Usage with JSX**
+
+We recommend using POJO route definitions, however can can easily integrate them with JSX routes using React Router's [`createRoutes`](https://github.com/reactjs/react-router/blob/master/docs/API.md#createroutesroutes) helper. Example of POJO routes using JSX:
+ 
+```js
+// ...
+import SubRoutes from './routes/SubRoutes' // JSX Routes
+
+export default {
+  path: '/component',
+  component: Component,
+  children: createRoutes(SubRoutes)
+}
+
+```
+
+- Alternatively, the JSX route definition file can `export default createRoutes(<Route />)`
+- JSX can easily use POJO routes by passing them as a prop, ie `<Route children={PlainRoute} />`
+ 
+
 
 #### Recommendations
 
