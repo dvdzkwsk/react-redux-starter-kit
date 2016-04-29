@@ -102,7 +102,7 @@
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",
-    "koa-proxy": "^0.5.0",
+    "koa-proxy": "^0.6.0",
     "koa-static": "^2.0.0",
     "node-sass": "^3.3.3",
     "normalize.css": "^4.1.1",
