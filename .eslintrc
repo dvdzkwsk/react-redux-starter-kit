@@ -4,9 +4,6 @@
     "standard",
     "standard-react"
   ],
-  "plugins" : [
-    "flow-vars"
-  ],
   "env"     : {
     "browser" : true
   },
