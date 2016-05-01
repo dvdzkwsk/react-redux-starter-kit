@@ -12,7 +12,6 @@ install:
 
 script:
   - npm run lint
-  - npm run flow:check
   - npm run test
   - NODE_ENV=development npm run deploy
   - NODE_ENV=staging npm run deploy
