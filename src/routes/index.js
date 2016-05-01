@@ -2,7 +2,6 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
-import NotFoundRoute from './NotFound'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -12,8 +11,7 @@ export const createRoutes = (store) => ({
   component: CoreLayout,
   indexRoute: Home,
   childRoutes: [
-    CounterRoute(store), // Provide instantiated store
-    NotFoundRoute
+    CounterRoute(store)
   ]
 })
 
@@ -24,8 +22,7 @@ export const createRoutes = (store) => ({
       require.ensure([], (require) => {
         cb(null, [
           // Remove imports!
-          require('./Counter').default(store),
-          require('./NotFound').default
+          require('./Counter').default(store)
         ])
       })
     }
