@@ -66,10 +66,10 @@ If everything works, you should see the following:
 While developing, you will probably rely mostly on `npm start`; however, there are additional scripts at your disposal:
 
 |`npm run <script>`|Description|
-|---|---|
-|`start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
+|------------------|-----------|
+|`start`|Serves your app at `localhost:3000`. HMR will be enabled in development.|
 |`compile`|Compiles the application to disk (`~/dist` by default).|
-|`dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
+|`dev`|Same as `npm start`, but enables nodemon for the server as well.|
 |`dev:no-debug`|Same as `npm run dev` but disables devtool instrumentation.|
 |`test`|Runs unit tests with Karma and generates a coverage report.|
 |`test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
@@ -155,7 +155,7 @@ Default project configuration can be found in `~/config/index.js`. Here you'll b
 If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `~/config/environemnts.js` and define overrides on a per-NODE_ENV basis. There are examples for both `development` and `production`, so use those as guidelines. Here are some common configuration options:
 
 |Key|Description|
-|---|---|
+|---|-----------|
 |`dir_src`|application source code base path|
 |`dir_dist`|path to build compiled application to|
 |`server_host`|hostname for the Koa server|
