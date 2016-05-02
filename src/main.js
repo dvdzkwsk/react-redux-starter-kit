@@ -41,7 +41,7 @@ if (__DEV__ && module.hot) {
   const renderError = (error) => {
     const RedBox = require('redbox-react')
 
-    ReactDOM.render(<RedBox error={error}/>, MOUNT_ELEMENT)
+    ReactDOM.render(<RedBox error={error} />, MOUNT_ELEMENT)
   }
   render = () => {
     try {

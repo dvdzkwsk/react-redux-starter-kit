@@ -1,15 +1,7 @@
-/* @flow */
 import React from 'react'
 import classes from './Counter.scss'
 
-// FlowType annotations
-type Props = {
-  counter: number,
-  doubleAsync: Function,
-  increment: Function
-}
-
-export const Counter = (props: Props) => (
+export const Counter = (props) => (
   <div>
     <h2 className={classes.counterContainer}>
       Counter:
