@@ -13,12 +13,13 @@ The primary goal of this project is to remain as **unopinionated** as possible. 
 Finally, This project wouldn't be possible without the help of our many contributors, so [thank you](#thank-you) for all of your help.
 
 ## Table of Contents
-1. [Requirements](#requirements)
 1. [Features](#features)
+1. [Requirements](#requirements)
 1. [Getting Started](#getting-started)
 1. [Application Structure](#application-structure)
 1. [Development](#development)
   1. [Developer Tools](#developer-tools)
+  1. [Routing](#routing)
 1. [Testing](#testing)
 1. [Deployment](#deployment)
 1. [Build System](#build-system)
@@ -28,8 +29,8 @@ Finally, This project wouldn't be possible without the help of our many contribu
   1. [Styles](#styles)
   1. [Server](#server)
   1. [Production Optimization](#production-optimization)
-1. [FAQ](#troubleshooting)
 1. [Learning Resources](#learning-resources)
+1. [FAQ](#troubleshooting)
 1. [Thank You](#thank-you)
 
 ## Features
