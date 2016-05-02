@@ -58,6 +58,10 @@ $ npm install                   # Install project dependencies
 $ npm start                     # Compile and launch
 ```
 
+If everything works, you should see the following:
+
+<img src="http://i.imgur.com/zR7VRG6.png?2" />
+
 While developing, you will probably rely mostly on `npm start`; however, there are additional scripts at your disposal:
 
 |`npm run <script>`|Description|
