@@ -138,7 +138,7 @@
     "isparta-loader": "^2.0.0",
     "karma": "^0.13.21",
     "karma-coverage": "^0.5.0",
-    "karma-mocha": "^0.2.0",
+    "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.0.0",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-webpack-with-fast-source-maps": "^1.9.2",
