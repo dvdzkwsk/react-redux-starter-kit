@@ -152,7 +152,7 @@ Have more questions? Feel free to submit an issue or join the Gitter chat!
 
 Default project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the actual webpack build configuration**.
 
-If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `~/config/environemnts.js` and define overrides on a per-NODE_ENV basis. There are examples for both `development` and `production`, so use those as guidelines. Here are some common configuration options:
+If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `~/config/environments.js` and define overrides on a per-NODE_ENV basis. There are examples for both `development` and `production`, so use those as guidelines. Here are some common configuration options:
 
 |Key|Description|
 |---|-----------|
