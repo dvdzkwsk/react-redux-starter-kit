@@ -1,29 +1,37 @@
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
-
-import reducers from './reducers'
+import makeRootReducer from './reducers'
 
 export default (initialState = {}, history) => {
-  let middleware = applyMiddleware(thunk, routerMiddleware(history))
+  // ======================================================
+  // Middleware Configuration
+  // ======================================================
+  const middleware = [thunk, routerMiddleware(history)]
 
-  // Use DevTools chrome extension in development
+  // ======================================================
+  // Developer Tools
+  // ======================================================
   if (__DEBUG__) {
     const devToolsExtension = window.devToolsExtension
-
     if (typeof devToolsExtension === 'function') {
-      middleware = compose(middleware, devToolsExtension())
+      middleware.push(devToolsExtension())
     }
   }
 
-  const store = createStore(reducers(), initialState, middleware)
-
+  // ======================================================
+  // Store Instantiation and HMR Setup
+  // ======================================================
+  const store = createStore(
+    makeRootReducer(),
+    initialState,
+    applyMiddleware(...middleware)
+  )
   store.asyncReducers = {}
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const reducers = require('./reducers').default
-
       store.replaceReducer(reducers)
     })
   }
