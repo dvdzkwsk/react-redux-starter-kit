@@ -120,7 +120,7 @@ config.utils_paths = {
 debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
 const environments = require('./environments').default
 const overrides = environments[config.env]
-if (environments[config.env]) {
+if (overrides) {
   debug('Found overrides, applying to default configuration.')
   Object.assign(config, overrides(config))
 } else {
