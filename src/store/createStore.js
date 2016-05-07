@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import makeRootReducer from './reducers'
@@ -10,12 +10,13 @@ export default (initialState = {}, history) => {
   const middleware = [thunk, routerMiddleware(history)]
 
   // ======================================================
-  // Developer Tools
+  // Store Enhancers
   // ======================================================
+  const enhancers = []
   if (__DEBUG__) {
     const devToolsExtension = window.devToolsExtension
     if (typeof devToolsExtension === 'function') {
-      middleware.push(devToolsExtension())
+      enhancers.push(devToolsExtension())
     }
   }
 
@@ -25,7 +26,10 @@ export default (initialState = {}, history) => {
   const store = createStore(
     makeRootReducer(),
     initialState,
-    applyMiddleware(...middleware)
+    compose(
+      applyMiddleware(...middleware),
+      ...enhancers
+    )
   )
   store.asyncReducers = {}
 
