@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { Router, useRouterHistory } from 'react-router'
+import { useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
-import { Provider } from 'react-redux'
+import AppContainer from './containers/AppContainer'
 
 // ========================================================
 // Browser History Setup
@@ -17,7 +17,7 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // Store and History Instantiation
 // ========================================================
 // Create redux store and sync with react-router-redux. We have installed the
-// react-router-redux reducer under the key "router" in src/routes/index.js,
+// react-router-redux reducer under the routerKey "router" in src/routes/index.js,
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
 const initialState = window.___INITIAL_STATE__
@@ -40,16 +40,18 @@ if (__DEBUG__) {
 // ========================================================
 const MOUNT_NODE = document.getElementById('root')
 
-let render = (key = null) => {
+let render = (routerKey = null) => {
   const routes = require('./routes/index').default(store)
-  const App = (
-    <Provider store={store}>
-      <div style={{ height: '100%' }}>
-        <Router history={history} children={routes} key={key} />
-      </div>
-    </Provider>
+
+  ReactDOM.render(
+    <AppContainer
+      store={store}
+      history={history}
+      routes={routes}
+      routerKey={routerKey}
+    />,
+    MOUNT_NODE
   )
-  ReactDOM.render(App, MOUNT_NODE)
 }
 
 // Enable HMR and catch runtime errors in RedBox
