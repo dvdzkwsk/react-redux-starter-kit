@@ -6,21 +6,39 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import { Provider } from 'react-redux'
 
-const MOUNT_ELEMENT = document.getElementById('root')
-
-// Configure history for react-router
+// ========================================================
+// Browser History Setup
+// ========================================================
 const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: __BASENAME__
 })
 
+// ========================================================
+// Store and History Instantiation
+// ========================================================
 // Create redux store and sync with react-router-redux. We have installed the
 // react-router-redux reducer under the key "router" in src/routes/index.js,
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
-const store = createStore(window.__INITIAL_STATE__, browserHistory)
+const initialState = window.___INITIAL_STATE__
+const store = createStore(initialState, browserHistory)
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
 })
+
+// ========================================================
+// Developer Tools Setup
+// ========================================================
+if (__DEBUG__) {
+  if (window.devToolsExtension) {
+    window.devToolsExtension.open()
+  }
+}
+
+// ========================================================
+// Render Setup
+// ========================================================
+const MOUNT_NODE = document.getElementById('root')
 
 let render = (key = null) => {
   const routes = require('./routes/index').default(store)
@@ -31,7 +49,7 @@ let render = (key = null) => {
       </div>
     </Provider>
   )
-  ReactDOM.render(App, MOUNT_ELEMENT)
+  ReactDOM.render(App, MOUNT_NODE)
 }
 
 // Enable HMR and catch runtime errors in RedBox
@@ -41,7 +59,7 @@ if (__DEV__ && module.hot) {
   const renderError = (error) => {
     const RedBox = require('redbox-react')
 
-    ReactDOM.render(<RedBox error={error} />, MOUNT_ELEMENT)
+    ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
   }
   render = () => {
     try {
@@ -53,9 +71,7 @@ if (__DEV__ && module.hot) {
   module.hot.accept(['./routes/index'], () => render())
 }
 
-// Use Redux DevTools chrome extension
-if (__DEBUG__) {
-  if (window.devToolsExtension) window.devToolsExtension.open()
-}
-
+// ========================================================
+// Go!
+// ========================================================
 render()
