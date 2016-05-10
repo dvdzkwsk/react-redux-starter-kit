@@ -90,7 +90,6 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ├── build                    # All build-related configuration
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
-├── interfaces               # Type declarations for Flow
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
