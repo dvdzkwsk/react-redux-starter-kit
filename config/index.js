@@ -2,7 +2,9 @@
 import path from 'path'
 import _debug from 'debug'
 import { argv } from 'yargs'
+import ip from 'ip'
 
+const localip = ip.address()
 const debug = _debug('app:config')
 debug('Creating default configuration.')
 
@@ -24,7 +26,7 @@ const config = {
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : 'localhost',
+  server_host : localip, // use string 'localhost' to prevent exposure on local network
   server_port : process.env.PORT || 3000,
 
   // ----------------------------------
@@ -120,7 +122,7 @@ config.utils_paths = {
 debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
 const environments = require('./environments').default
 const overrides = environments[config.env]
-if (environments[config.env]) {
+if (overrides) {
   debug('Found overrides, applying to default configuration.')
   Object.assign(config, overrides(config))
 } else {

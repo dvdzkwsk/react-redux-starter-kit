@@ -45,10 +45,11 @@ if (config.env === 'development') {
   app.use(convert(serve(paths.client('static'))))
 } else {
   debug(
-    'Server is being run outside of live development mode. This starter kit ' +
-    'does not provide any production-ready server functionality. To learn ' +
-    'more about deployment strategies, check out the "deployment" section ' +
-    'in the README.'
+    'Server is being run outside of live development mode, meaning it will ' +
+    'only serve the compiled application bundle in ~/dist. Generally you ' +
+    'do not need an application server for this and can instead use a web ' +
+    'server such as nginx to serve your static files. See the "deployment" ' +
+    'section in the README for more information on deployment strategies.'
   )
 
   // Serving ~/dist by default. Ideally these files should be served by
