@@ -1,6 +1,7 @@
 // ---------------------------------------
 // Test Environment Setup
 // ---------------------------------------
+import 'babel-polyfill'
 import sinon from 'sinon'
 import chai from 'chai'
 import sinonChai from 'sinon-chai'
