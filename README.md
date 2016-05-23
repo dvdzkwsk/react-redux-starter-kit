@@ -78,6 +78,8 @@ While developing, you will probably rely mostly on `npm start`; however, there a
 |`deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
 |`lint`|Lint all `.js` files.|
 |`lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
+|`setup`|Removes git contributions and setups a blank repo for you.|
+|`clean`|Same as setup but cleans up some files.|
 
 ## Application Structure
 
