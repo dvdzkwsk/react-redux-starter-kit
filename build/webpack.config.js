@@ -25,6 +25,7 @@ const webpackConfig = {
 // ------------------------------------
 const APP_ENTRY_PATHS = [
   'babel-polyfill',
+  'bootstrap-loader',
   paths.client('main.js')
 ]
 
@@ -58,6 +59,10 @@ webpackConfig.plugins = [
     minify: {
       collapseWhitespace: true
     }
+  }),
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery"
   })
 ]
 
