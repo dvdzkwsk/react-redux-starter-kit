@@ -1,125 +1,166 @@
 import {
   COUNTER_INCREMENT,
+  DOUBLE_ASYNC_PENDING,
+  DOUBLE_ASYNC_ABORTED,
   increment,
   doubleAsync,
   default as counterReducer
-} from 'routes/Counter/modules/counter'
+} from 'routes/Counter/modules/counter';
+
+
+import { ActionsObservable } from 'redux-observable';
+import Rx from 'rxjs';
+
 
 describe('(Redux Module) Counter', () => {
+  const scheduler = Rx.Scheduler.asap;
+
+  let globalState = {
+    counter: counterReducer(undefined, {})
+  };
+  const dispatch = action => {
+    globalState = {
+      counter: counterReducer(globalState.counter, action)
+    };
+  };
+  const actions = new Rx.Subject();
+  const actionsObs = new ActionsObservable(actions);
+  const store = { getState: () => globalState };
+  const getStateSpy = sinon.spy(store, 'getState');
+
   it('Should export a constant COUNTER_INCREMENT.', () => {
-    expect(COUNTER_INCREMENT).to.equal('COUNTER_INCREMENT')
-  })
+    expect(COUNTER_INCREMENT).to.equal('COUNTER_INCREMENT');
+  });
 
   describe('(Reducer)', () => {
     it('Should be a function.', () => {
-      expect(counterReducer).to.be.a('function')
-    })
+      expect(counterReducer).to.be.a('function');
+    });
 
     it('Should initialize with a state of 0 (Number).', () => {
-      expect(counterReducer(undefined, {})).to.equal(0)
-    })
+      expect(counterReducer(undefined, {})).to.equal(5);
+    });
 
     it('Should return the previous state if an action was not matched.', () => {
-      let state = counterReducer(undefined, {})
-      expect(state).to.equal(0)
-      state = counterReducer(state, {type: '@@@@@@@'})
-      expect(state).to.equal(0)
-      state = counterReducer(state, increment(5))
-      expect(state).to.equal(5)
-      state = counterReducer(state, {type: '@@@@@@@'})
-      expect(state).to.equal(5)
-    })
-  })
+      let state = counterReducer(undefined, {});
+      expect(state).to.equal(5);
+      state = counterReducer(state, { type: '@@@@@@@' });
+      expect(state).to.equal(5);
+      state = counterReducer(state, increment(5));
+      expect(state).to.equal(10);
+      state = counterReducer(state, { type: '@@@@@@@' });
+      expect(state).to.equal(10);
+    });
+  });
 
   describe('(Action Creator) increment', () => {
     it('Should be exported as a function.', () => {
-      expect(increment).to.be.a('function')
-    })
+      expect(increment).to.be.a('function');
+    });
 
     it('Should return an action with type "COUNTER_INCREMENT".', () => {
-      expect(increment()).to.have.property('type', COUNTER_INCREMENT)
-    })
+      expect(increment()).to.have.property('type', COUNTER_INCREMENT);
+    });
 
     it('Should assign the first argument to the "payload" property.', () => {
-      expect(increment(5)).to.have.property('payload', 5)
-    })
+      expect(increment(5)).to.have.property('payload', 5);
+    });
 
     it('Should default the "payload" property to 1 if not provided.', () => {
-      expect(increment()).to.have.property('payload', 1)
-    })
-  })
+      expect(increment()).to.have.property('payload', 1);
+    });
+  });
 
   describe('(Action Creator) doubleAsync', () => {
-    let _globalState
-    let _dispatchSpy
-    let _getStateSpy
+    const actionFactory = () => doubleAsync()(actionsObs, store);
 
     beforeEach(() => {
-      _globalState = {
+      globalState = {
         counter: counterReducer(undefined, {})
-      }
-      _dispatchSpy = sinon.spy((action) => {
-        _globalState = {
-          ..._globalState,
-          counter: counterReducer(_globalState.counter, action)
-        }
-      })
-      _getStateSpy = sinon.spy(() => {
-        return _globalState
-      })
-    })
+      };
+      getStateSpy.reset();
+    });
 
     it('Should be exported as a function.', () => {
-      expect(doubleAsync).to.be.a('function')
-    })
+      expect(doubleAsync).to.be.a('function');
+    });
 
     it('Should return a function (is a thunk).', () => {
-      expect(doubleAsync()).to.be.a('function')
-    })
+      expect(doubleAsync()).to.be.a('function');
+    });
 
-    it('Should return a promise from that thunk that gets fulfilled.', () => {
-      return doubleAsync()(_dispatchSpy, _getStateSpy).should.eventually.be.fulfilled
-    })
+    it('Should return a observable from that thunk that gets fulfilled.', done => {
+      actionFactory()
+        .subscribe(
+        () => { },
+        (error) => console.error(error),
+        () => { done(); }
+        );
+    });
 
-    it('Should call dispatch and getState exactly once.', () => {
-      return doubleAsync()(_dispatchSpy, _getStateSpy)
-        .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
-        })
-    })
+    it('Should start with dispatching a pending action.', done => {
+      actionFactory()
+        .subscribe(
+        value => {
+          expect(value.type).to.equal(DOUBLE_ASYNC_PENDING);
+          done();
+        }
+        );
+    });
 
-    it('Should produce a state that is double the previous state.', () => {
-      _globalState = { counter: 2 }
+    it('Should be able to cancel the observable.', done => {
+      let lastValue;
+      actionFactory()
+        .subscribe(
+        (value) => { lastValue = value; },
+        (error) => console.error(error),
+        () => {
+          expect(lastValue.type).to.be.equal(DOUBLE_ASYNC_PENDING);
+          done();
+        }
+        );
+      scheduler.schedule(
+        () => {
+          actions.next({ type: DOUBLE_ASYNC_ABORTED });
+        }, 100);
+      scheduler.flush();
+    });
 
-      return doubleAsync()(_dispatchSpy, _getStateSpy)
-        .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
-          expect(_globalState.counter).to.equal(4)
-          return doubleAsync()(_dispatchSpy, _getStateSpy)
-        })
-        .then(() => {
-          _dispatchSpy.should.have.been.calledTwice
-          _getStateSpy.should.have.been.calledTwice
-          expect(_globalState.counter).to.equal(8)
-        })
-    })
-  })
+    it('Should call store.getState exactly once.', done => {
+      actionFactory().subscribe(
+        () => { },
+        (error) => console.error(error),
+        () => {
+          getStateSpy.should.have.been.calledOnce;
+          done();
+        }
+      );
+    });
 
-  // NOTE: if you have a more complex state, you will probably want to verify
-  // that you did not mutate the state. In this case our state is just a number
-  // (which cannot be mutated).
-  describe('(Action Handler) COUNTER_INCREMENT', () => {
-    it('Should increment the state by the action payload\'s "value" property.', () => {
-      let state = counterReducer(undefined, {})
-      expect(state).to.equal(0)
-      state = counterReducer(state, increment(1))
-      expect(state).to.equal(1)
-      state = counterReducer(state, increment(2))
-      expect(state).to.equal(3)
-      state = counterReducer(state, increment(-3))
-      expect(state).to.equal(0)
-    })
-  })
-})
+    it('Should produce a state that is double the previous state.', done => {
+      const byCounterIncrement = value => value.type === COUNTER_INCREMENT;
+      actionFactory()
+        .filter(byCounterIncrement)
+        .flatMap(
+        value => {
+          dispatch(value);
+          getStateSpy.should.have.been.calledOnce;
+          expect(globalState.counter).to.equal(10);
+          return actionFactory();
+        }
+        )
+        .filter(byCounterIncrement)
+        .subscribe(
+        value => {
+          dispatch(value);
+          getStateSpy.should.have.been.calledTwice;
+          expect(globalState.counter).to.equal(20);
+        },
+        error => { console.error(error); },
+        () => {
+          done();
+        }
+        );
+    });
+  });
+});

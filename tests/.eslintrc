@@ -1,11 +1,13 @@
 {
-  "extends" : "../.eslintrc",
-  "env"     : {
-    "mocha" : true
+  "extends": "../.eslintrc",
+  "env": {
+    "mocha": true
   },
-  "globals" : {
-    "expect" : false,
-    "should" : false,
-    "sinon"  : false
+  "globals": {
+    "expect": false,
+    "should": false,
+    "sinon": false,
+    "TestScheduler": false,
+    "Observable": false
   }
 }
