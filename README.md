@@ -50,15 +50,47 @@ Finally, This project wouldn't be possible without the help of our many contribu
 
 ## Getting Started
 
-After confirming that your development environment meets the specified [requirements](#requirements), you can follow these steps to get the project up and running:
+After confirming that your development environment meets the specified [requirements](#requirements), you can create a new project based on `react-redux-starter-kit` in one of two ways:
+
+### Install from source
+
+First, clone or download:
 
 ```bash
 $ git clone https://github.com/davezuko/react-redux-starter-kit.git
-$ cd react-redux-starter-kit
+// or
+$ wget -O react-redux-starter-kit.zip https://github.com/davezuko/react-redux-starter-kit/archive/master.zip
+$ unzip react-redux-starter-kit.zip
+```
+
+Then, rename to your project name and change into the directory:
+
+```bash
+$ mv react-redux-starter-kit <my-project-name>
+$ cd <my-project-name>
+```
+
+### Alternatively, install via `redux-cli`
+
+If not already installed (globally):
+
+```bash
+$ npm i redux-cli -g
+```
+
+Then, create a new project:
+
+```bash
+$ redux new <my-project-name>
+$ cd <my-project-name>
+```
+
+### Install dependencies, and check to see it works
+
+```bash
 $ npm install                   # Install project dependencies
 $ npm start                     # Compile and launch
 ```
-
 If everything works, you should see the following:
 
 <img src="http://i.imgur.com/zR7VRG6.png?2" />
@@ -93,24 +125,27 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
+│   ├── index.html           # Main HTML page container for app
 │   ├── main.js              # Application bootstrap and rendering
 │   ├── components           # Reusable Presentational Components
 │   ├── containers           # Reusable Container Components
 │   ├── layouts              # Components that dictate major page structure
+│   ├── redux                # "Ducks" location...
+│   │   └── modules          # reducer, action, creators not part of a route
+│   ├── routes               # Main route definitions and async split points
+│   │   ├── index.js         # Bootstrap main application routes with store
+│   │   └── Home             # Fractal route
+│   │       ├── index.js     # Route definitions and async split points
+│   │       ├── assets       # Assets required to render components
+│   │       ├── components   # Presentational React Components
+│   │       ├── container    # Connect components to actions and store
+│   │       ├── modules      # Collections of reducers/constants/actions
+│   │       └── routes **    # Fractal sub-routes (** optional)
 │   ├── static               # Static assets (not imported anywhere in source code)
-│   ├── styles               # Application-wide styles (generally settings)
 │   ├── store                # Redux-specific pieces
 │   │   ├── createStore.js   # Create and instrument redux store
 │   │   └── reducers.js      # Reducer registry and injection
-│   └── routes               # Main route definitions and async split points
-│       ├── index.js         # Bootstrap main application routes with store
-│       └── Home             # Fractal route
-│           ├── index.js     # Route definitions and async split points
-│           ├── assets       # Assets required to render components
-│           ├── components   # Presentational React Components
-│           ├── container    # Connect components to actions and store
-│           ├── modules      # Collections of reducers/constants/actions
-│           └── routes **    # Fractal sub-routes (** optional)
+│   └── styles               # Application-wide styles (generally settings)
 └── tests                    # Unit tests
 ```
 
@@ -128,6 +163,12 @@ npm i --save-dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-m
 ```
 
 Then follow the [manual integration walkthrough](https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md).
+
+#### `redux-cli`
+
+```bash
+npm install redux-cli --save-dev
+```
 
 ### Routing
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. See the [application structure](#application-structure) section for more information.
