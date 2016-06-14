@@ -8,7 +8,6 @@
     "npm": "^3.0.0"
   },
   "scripts": {
-    "clean": "rimraf dist",
     "compile": "better-npm-run compile",
     "lint": "eslint src tests server",
     "lint:fix": "npm run lint -- --fix",
@@ -20,7 +19,9 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
-    "codecov": "cat coverage/*/lcov.info | codecov"
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "setup": "node ./bin/setup.js",
+    "clean": "node ./bin/clean.js"
   },
   "betterScripts": {
     "compile": {
@@ -63,7 +64,21 @@
       }
     },
     "test": {
-      "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
+      "command": "npm run ",
+      "env": {
+        "NODE_ENV": "test",
+        "DEBUG": "app:*"
+      }
+    },
+    "setup": {
+      "command": "node ./bin/setup.js",
+      "env": {
+        "NODE_ENV": "test",
+        "DEBUG": "app:*"
+      }
+    },
+    "clean": {
+      "command": "node ./bin/clean.js",
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "app:*"
@@ -127,6 +142,7 @@
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "chai-enzyme": "^0.4.0",
+    "chalk": "^1.1.3",
     "cheerio": "^0.20.0",
     "codecov": "^1.0.1",
     "enzyme": "^2.0.0",
@@ -148,7 +164,9 @@
     "nodemon": "^1.8.1",
     "phantomjs-prebuilt": "^2.1.3",
     "react-addons-test-utils": "^15.0.0",
+    "readline": "^1.3.0",
     "redbox-react": "^1.2.2",
+    "shelljs": "^0.7.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "webpack-dev-middleware": "^1.6.1",
