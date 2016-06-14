@@ -23,7 +23,7 @@ describe('(Component) Header', () => {
       expect(_wrapper.contains(
         <IndexLink activeClassName={classes.activeRoute} to='/'>
           Home
-        </Link>
+        </IndexLink>
       )).to.be.true
     })
 
