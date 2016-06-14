@@ -126,7 +126,7 @@
     "babel-eslint": "^6.0.0-beta.6",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
-    "chai-enzyme": "^0.4.0",
+    "chai-enzyme": "^0.5.0",
     "cheerio": "^0.20.0",
     "codecov": "^1.0.1",
     "enzyme": "^2.0.0",
