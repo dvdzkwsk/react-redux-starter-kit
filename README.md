@@ -145,7 +145,47 @@ Out of the box, this starter kit is deployable by serving the `~/dist` folder ge
 If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. The Koa server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
 
 ### Heroku
-More details to come, but in the meantime check out [this helpful comment](https://github.com/davezuko/react-redux-starter-kit/issues/730#issuecomment-213997120) by [DonHansDampf](https://github.com/DonHansDampf) addressing Heroku deployments.
+
+Heroku has `nodejs buildpack` script that does the following when you deploy your app to Heroku.
+1. Find `packages.json` in the root directory.
+2. Install `nodejs` and `npm` packages.
+3. Run `npm postinstall script`
+4. Run `npm start`
+
+Therefore, you need to modify `package.json` before deploying to Heroku. Make the following changes in the `scripts` section of `package.json`.
+
+```
+...
+"start": "better-npm-run start:prod",
+"serve": "better-npm-run start",
+"postinstall": "npm run deploy:prod",
+"betterScripts": {
+  ...
+  "start:prod": {
+    "command": "babel-node bin/server",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+  ...
+},
+```
+
+It's also important to tell Heroku to install all `devDependencies` to successfully compile your app on Heroku's environment. Run the following in your terminal.
+
+```bash
+$ heroku config:set NPM_CONFIG_PRODUCTION=false
+```
+
+With this setup, you will install all the necessray packages, build your app, and start the webserver (e.g. koa) everytime you push your app to Heroku. Try to deploy to Heroku by running the following commands.
+
+```bash
+$ git add .
+$ git commit -m 'My awesome commit'
+$ git push heroku master
+```
+
+If you fail to deploy for an unknown reason, try [this helpful comment](https://github.com/davezuko/react-redux-starter-kit/issues/730#issuecomment-213997120) by [DonHansDampf](https://github.com/DonHansDampf) addressing Heroku deployments.
 
 Have more questions? Feel free to submit an issue or join the Gitter chat!
 
