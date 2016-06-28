@@ -104,7 +104,6 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │   │   └── reducers.js      # Reducer registry and injection
 │   └── routes               # Main route definitions and async split points
 │       ├── index.js         # Bootstrap main application routes with store
-│       ├── Root.js          # Wrapper component for context-aware providers
 │       └── Home             # Fractal route
 │           ├── index.js     # Route definitions and async split points
 │           ├── assets       # Assets required to render components
