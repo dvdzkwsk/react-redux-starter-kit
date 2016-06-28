@@ -4,7 +4,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer'
+import { AppContainer } from 'react-hot-loader'
 
 // ========================================================
 // Browser History Setup
@@ -40,37 +40,30 @@ if (__DEBUG__) {
 // ========================================================
 const MOUNT_NODE = document.getElementById('root')
 
-let render = (routerKey = null) => {
-  const routes = require('./routes/index').default(store)
+// TODO(zuko): get rid of routerKey
+// TODO(zuko): hot reloading does actually work, the whole app reloads
+const render = (routerKey = null) => {
+  const nextRoutes = require('./routes/index').default(store)
+  const NextRootContainer = require('./containers/RootContainer').default
 
   ReactDOM.render(
-    <AppContainer
-      store={store}
-      history={history}
-      routes={routes}
-      routerKey={routerKey}
-    />,
+    <AppContainer>
+      <NextRootContainer
+        store={store}
+        history={history}
+        routes={nextRoutes}
+        routerKey={routerKey}
+      />
+    </AppContainer>,
     MOUNT_NODE
   )
 }
 
-// Enable HMR and catch runtime errors in RedBox
-// This code is excluded from production bundle
 if (__DEV__ && module.hot) {
-  const renderApp = render
-  const renderError = (error) => {
-    const RedBox = require('redbox-react')
-
-    ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
-  }
-  render = () => {
-    try {
-      renderApp(Math.random())
-    } catch (error) {
-      renderError(error)
-    }
-  }
-  module.hot.accept(['./routes/index'], () => render())
+  module.hot.accept([
+    './containers/RootContainer',
+    './routes/index'
+  ], () => render(Date.now()))
 }
 
 // ========================================================
