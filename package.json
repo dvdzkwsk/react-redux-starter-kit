@@ -116,7 +116,7 @@
     "redux": "^3.0.0",
     "redux-thunk": "^2.0.0",
     "rimraf": "^2.5.1",
-    "sass-loader": "^3.0.0",
+    "sass-loader": "^4.0.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.14",
