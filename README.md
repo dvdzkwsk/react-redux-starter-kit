@@ -108,7 +108,7 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │           ├── index.js     # Route definitions and async split points
 │           ├── assets       # Assets required to render components
 │           ├── components   # Presentational React Components
-│           ├── container    # Connect components to actions and store
+│           ├── containers   # Connect components to actions and store
 │           ├── modules      # Collections of reducers/constants/actions
 │           └── routes **    # Fractal sub-routes (** optional)
 └── tests                    # Unit tests
