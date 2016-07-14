@@ -68,7 +68,7 @@ if (config.globals.__COVERAGE__) {
     test: /\.(js|jsx)$/,
     include: new RegExp(config.dir_client),
     loader: 'isparta',
-    exclude: /node_modules/
+    exclude: [/node_modules/, /test-bundler/]
   }]
 }
 
