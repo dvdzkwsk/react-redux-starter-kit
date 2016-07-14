@@ -21,9 +21,7 @@ global.should = chai.should()
 // Require Tests
 // ---------------------------------------
 // for use with karma-webpack-with-fast-source-maps
-// NOTE: A trailing `;` is used because its absense breaks some test environments
-// `new Array()` breaks the `__karmaWebpackManifest__` variable. 
-const __karmaWebpackManifest__ = []; // eslint-disable-line
+const __karmaWebpackManifest__ = []
 const inManifest = (path) => ~__karmaWebpackManifest__.indexOf(path)
 
 // require all `tests/**/*.spec.js`
