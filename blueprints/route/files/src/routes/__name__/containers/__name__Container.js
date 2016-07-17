@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../modules/<%= pascalEntityName %>'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -11,11 +10,16 @@ import <%= pascalEntityName %> from '../components/<%= pascalEntityName %>'
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
-
-const mapActionCreators = {
+/*
+import { increment, doubleAsync } from '../modules/<%= pascalEntityName %>'
+const mapDispatchToProps = {
   increment: () => increment(1),
   doubleAsync
 }
+
+- OR - just refer to the actions objects:
+*/
+import { actions as mapDispatchToProps} from '../modules/<%= pascalEntityName %>'
 
 const mapStateToProps = (state) => ({
   counter: state.counter
@@ -35,4 +39,4 @@ const mapStateToProps = (state) => ({
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapActionCreators)(<%= pascalEntityName %>)
+export default connect(mapStateToProps, mapDispatchToProps)(<%= pascalEntityName %>)
