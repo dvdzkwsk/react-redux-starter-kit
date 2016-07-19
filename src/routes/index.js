@@ -1,5 +1,5 @@
 // We only need to import the modules necessary for initial render
-import CoreLayout from 'LAYOUT/CoreLayout/CoreLayout'
+import CoreLayout from 'LAYOUT/CoreLayout/'
 import Home from './Home'
 import CounterRoute from './Counter'
 
