@@ -29,11 +29,13 @@ const history = syncHistoryWithStore(browserHistory, store, {
 // ========================================================
 // Developer Tools Setup
 // ========================================================
-if (__DEBUG__) {
-  if (window.devToolsExtension) {
-    window.devToolsExtension.open()
-  }
-}
+// Frankly, the seperating window of Redux-DevTools is annoying.
+// Embedded in Chrome devTools is quite enough
+// if (__DEBUG__) {
+//   if (window.devToolsExtension) {
+//     window.devToolsExtension.open()
+//   }
+// }
 
 // ========================================================
 // Render Setup
