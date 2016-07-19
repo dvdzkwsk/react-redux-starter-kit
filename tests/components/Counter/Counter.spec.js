@@ -33,9 +33,9 @@ describe('(Component) Counter', () => {
   })
 
   it('Should render exactly two buttons.', () => {
-    expect(_wrapper).to.have.descendants('.btn')
+    expect(_wrapper.find('button')).to.have.length(2)
   })
-  //
+
   describe('An increment button...', () => {
     let _button
 
