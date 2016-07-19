@@ -114,7 +114,7 @@
     "react-router": "^2.2.0",
     "react-router-redux": "^4.0.0",
     "redux": "^3.0.0",
-    "redux-thunk": "^2.0.0",
+    "redux-saga": "^0.11.0",
     "rimraf": "^2.5.1",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.0",
