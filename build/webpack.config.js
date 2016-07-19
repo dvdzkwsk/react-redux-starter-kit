@@ -16,7 +16,21 @@ const webpackConfig = {
   devtool: config.compiler_devtool,
   resolve: {
     root: paths.client(),
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json'],
+    alias: {
+    // Since `root` has set, within /src you could
+    // easily import Foo component with `components/Foo`.
+    // But how about a npm package named `components`?
+    // In case of confusing, alias those frequent-used
+    // directories with the style of `CONSTANT`
+      COMPONENT: 'components',
+      CONTAINER: 'containers',
+      LAYOUT: 'layouts',
+      ROUTE: 'routes',
+      SERVICE: 'services',
+      STORE: 'store',
+      STYLE: 'styles'
+    }
   },
   module: {}
 }
