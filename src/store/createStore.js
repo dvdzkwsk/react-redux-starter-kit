@@ -9,9 +9,7 @@ export default (initialState = {}, history) => {
   // Middleware Configuration
   // ======================================================
   const logger = createLogger()
-  const middleware = __DEBUG__
-    ? [thunk, routerMiddleware(history), logger] 
-    : [thunk, routerMiddleware(history)]
+  const middleware = __DEBUG__ ? [thunk, routerMiddleware(history), logger] : [thunk, routerMiddleware(history)]
 
   // ======================================================
   // Store Enhancers
