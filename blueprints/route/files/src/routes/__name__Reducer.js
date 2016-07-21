@@ -1,4 +1,4 @@
-import { ACTION_HANDLERS } from './CounterActions'
+import { ACTION_HANDLERS } from './<%= pascalEntityName %>Actions'
 
 // ------------------------------------
 // Reducer

@@ -1,4 +1,4 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from 'STORE/reducers'
 
 export default (store) => ({
   path: '<%= dashesEntityName %>',
@@ -10,7 +10,7 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const <%= pascalEntityName %> = require('./containers/<%= pascalEntityName %>Container').default
-      const reducer = require('./modules/<%= pascalEntityName %>').default
+      const reducer = require('./<%= pascalEntityName %>Reducer').default
 
       /*  Add the reducer to the store on key 'counter'  */
       injectReducer(store, { key: '<%= pascalEntityName %>', reducer })
