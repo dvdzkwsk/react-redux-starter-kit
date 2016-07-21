@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from 'COMPONENT/Header'
+import Header from 'COMPONENT/Header/'
 import classes from './CoreLayout.scss'
 import 'STYLE/core.scss'
 
