@@ -161,7 +161,9 @@ if (config.compiler_css_modules) {
   )
 }
 
-const isUsingCSSModules = !!PATHS_TO_TREAT_AS_CSS_MODULES.length
+// NOTE: Disabled CSSModules
+// const isUsingCSSModules = !!PATHS_TO_TREAT_AS_CSS_MODULES.length
+const isUsingCSSModules = false
 const cssModulesRegex = new RegExp(`(${PATHS_TO_TREAT_AS_CSS_MODULES.join('|')})`)
 
 // Loaders for styles that need to be treated as CSS modules.
