@@ -1,5 +1,3 @@
-_
-.idea
 .DS_STORE
 *.log
 
@@ -7,3 +5,5 @@ node_modules
 
 dist
 coverage
+
+.idea
