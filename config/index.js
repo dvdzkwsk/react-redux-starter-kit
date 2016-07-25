@@ -42,16 +42,6 @@ const config = {
   },
 
   // ----------------------------------
-  // Proxy Configuration
-  // ----------------------------------
-  proxy : {
-    enabled: false,
-    options: {
-      host: 'localhost:3001'
-    }
-  },
-
-  // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
   compiler_css_modules     : true,
