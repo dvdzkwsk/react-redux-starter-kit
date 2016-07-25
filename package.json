@@ -1,7 +1,7 @@
 {
-  "name": "sainsburys-starter-kit",
-  "version": "1.0.0-alpha.0",
-  "description": "Sainsbury's React Redux Starter Kit",
+  "name": "react-redux-starter-kit",
+  "version": "3.0.0-alpha.1",
+  "description": "Get started with React, Redux, and React-Router!",
   "main": "index.js",
   "engines": {
     "node": ">=5.2.0",
