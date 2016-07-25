@@ -18,8 +18,9 @@ const config = {
   // Project Structure
   // ----------------------------------
   path_base  : path.resolve(__dirname, '..'),
-  dir_client : 'src',
+  dir_src    : 'src',
   dir_dist   : 'dist',
+  dir_public : 'dist/public',
   dir_server : 'server',
   dir_test   : 'tests',
 
@@ -125,8 +126,9 @@ const base = (...args) =>
 
 config.utils_paths = {
   base   : base,
-  client : base.bind(null, config.dir_client),
-  dist   : base.bind(null, config.dir_dist)
+  src    : base.bind(null, config.dir_src),
+  dist   : base.bind(null, config.dir_dist),
+  public : base.bind(null, config.dir_public)
 }
 
 // ========================================================

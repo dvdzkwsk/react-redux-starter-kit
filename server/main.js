@@ -44,7 +44,7 @@ export default async () => {
     // these files. This middleware doesn't need to be enabled outside
     // of development since this directory will be copied into ~/dist
     // when the application is compiled.
-    app.use(serve(paths.client('static')))
+    app.use(serve(paths.src('static')))
   } else {
     debug(
       'Server is being run outside of live development mode, meaning it will ' +
@@ -57,7 +57,7 @@ export default async () => {
     // Serving ~/dist by default. Ideally these files should be served by
     // the web server and not the app server, but this helps to demo the
     // server in production.
-    app.use(serve(paths.dist()))
+    app.use(serve(paths.public()))
   }
 
   if (config.universal) {

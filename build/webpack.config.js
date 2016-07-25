@@ -15,7 +15,7 @@ const webpackConfig = {
   target: 'web',
   devtool: config.compiler_devtool,
   resolve: {
-    root: paths.client(),
+    root: paths.src(),
     extensions: ['', '.js', '.jsx', '.json']
   },
   module: {}
@@ -25,7 +25,7 @@ const webpackConfig = {
 // ------------------------------------
 const APP_ENTRY_PATHS = [
   'babel-polyfill',
-  paths.client('main.js')
+  paths.src('client.js')
 ]
 
 webpackConfig.entry = {
@@ -40,7 +40,7 @@ webpackConfig.entry = {
 // ------------------------------------
 webpackConfig.output = {
   filename: `[name].[${config.compiler_hash_type}].js`,
-  path: paths.dist(),
+  path: paths.public(),
   publicPath: config.compiler_public_path
 }
 
@@ -54,9 +54,9 @@ webpackConfig.plugins = [
 if (!config.universal) {
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({
-      template: paths.client('index.html'),
+      template: paths.src('index.html'),
       hash: false,
-      favicon: paths.client('static/favicon.ico'),
+      favicon: paths.src('static/favicon.ico'),
       filename: 'index.html',
       inject: 'body',
       minify: {
@@ -162,7 +162,7 @@ const PATHS_TO_TREAT_AS_CSS_MODULES = [
 // If config has CSS modules enabled, treat this project's styles as CSS modules.
 if (config.compiler_css_modules) {
   PATHS_TO_TREAT_AS_CSS_MODULES.push(
-    paths.client().replace(/[\^\$\.\*\+\-\?\=\!\:\|\\\/\(\)\[\]\{\}\,]/g, '\\$&') // eslint-disable-line
+    paths.src().replace(/[\^\$\.\*\+\-\?\=\!\:\|\\\/\(\)\[\]\{\}\,]/g, '\\$&') // eslint-disable-line
   )
 }
 
@@ -226,7 +226,7 @@ webpackConfig.module.loaders.push({
 // Style Configuration
 // ------------------------------------
 webpackConfig.sassLoader = {
-  includePaths: paths.client('styles')
+  includePaths: paths.src('styles')
 }
 
 webpackConfig.postcss = [

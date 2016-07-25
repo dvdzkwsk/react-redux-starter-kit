@@ -10,7 +10,7 @@ const {__DEV__, __PROD__, __TEST__} = config.globals
 
 const APP_ENTRY_PATHS = [
   'babel-polyfill',
-  paths.client('server.js')
+  paths.src('server.js')
 ]
 
 let o
