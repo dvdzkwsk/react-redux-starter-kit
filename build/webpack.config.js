@@ -48,18 +48,23 @@ webpackConfig.output = {
 // Plugins
 // ------------------------------------
 webpackConfig.plugins = [
-  new webpack.DefinePlugin(config.globals),
-  new HtmlWebpackPlugin({
-    template: paths.client('index.html'),
-    hash: false,
-    favicon: paths.client('static/favicon.ico'),
-    filename: 'index.html',
-    inject: 'body',
-    minify: {
-      collapseWhitespace: true
-    }
-  })
+  new webpack.DefinePlugin(config.globals)
 ]
+
+if (!config.universal) {
+  webpackConfig.plugins.push(
+    new HtmlWebpackPlugin({
+      template: paths.client('index.html'),
+      hash: false,
+      favicon: paths.client('static/favicon.ico'),
+      filename: 'index.html',
+      inject: 'body',
+      minify: {
+        collapseWhitespace: true
+      }
+    })
+  )
+}
 
 if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).')
@@ -177,7 +182,7 @@ if (isUsingCSSModules) {
     test: /\.scss$/,
     include: cssModulesRegex,
     loaders: [
-      'style',
+      'simple-universal-style',
       cssModulesLoader,
       'postcss',
       'sass?sourceMap'
@@ -188,7 +193,7 @@ if (isUsingCSSModules) {
     test: /\.css$/,
     include: cssModulesRegex,
     loaders: [
-      'style',
+      'simple-universal-style',
       cssModulesLoader,
       'postcss'
     ]
@@ -201,7 +206,7 @@ webpackConfig.module.loaders.push({
   test: /\.scss$/,
   exclude: excludeCSSModules,
   loaders: [
-    'style',
+    'simple-universal-style',
     BASE_CSS_LOADER,
     'postcss',
     'sass?sourceMap'
@@ -211,7 +216,7 @@ webpackConfig.module.loaders.push({
   test: /\.css$/,
   exclude: excludeCSSModules,
   loaders: [
-    'style',
+    'simple-universal-style',
     BASE_CSS_LOADER,
     'postcss'
   ]

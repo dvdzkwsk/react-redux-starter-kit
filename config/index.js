@@ -26,8 +26,21 @@ const config = {
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : localip, // use string 'localhost' to prevent exposure on local network
+  server_host : process.env.HOST || localip,
   server_port : process.env.PORT || 3000,
+  universal   : true,
+
+  // ----------------------------------
+  // Proxy Configuration
+  // ----------------------------------
+  //universal_server_host : process.env.UHOST || 'localhost',
+  //universal_server_port : process.env.UPORT || 3001,
+  proxy : {
+    enabled: false,
+    options: {
+      host: 'localhost:3001'
+    }
+  },
 
   // ----------------------------------
   // Compiler Configuration

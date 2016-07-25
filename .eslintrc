@@ -5,9 +5,7 @@
     "standard-react"
   ],
   "plugins": [
-    "babel",
-    "react",
-    "promise"
+    "babel"
   ],
   "env"     : {
     "browser" : true
@@ -24,6 +22,6 @@
     "max-len": [2, 120, 2],
     "generator-star-spacing": 0,
     "babel/generator-star-spacing": 1,
-    "jsx-quotes": [2, "prefer-single"]
+    "jsx-quotes": [2, "prefer-single"],
   }
 }
