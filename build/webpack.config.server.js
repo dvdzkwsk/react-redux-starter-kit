@@ -1,5 +1,6 @@
 import webpack from 'webpack'
 import webpackConfig from './webpack.config'
+import clone from 'clone'
 import config from '../config'
 import _debug from 'debug'
 import fs from 'fs'
@@ -8,42 +9,36 @@ const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
 const {__DEV__, __PROD__, __TEST__} = config.globals
 
-const APP_ENTRY_PATHS = [
-  'babel-polyfill',
-  paths.src('server.js')
-]
+debug('Create server configuration.')
+const webpackConfigServer = clone(webpackConfig)
 
-export default {
-  ...webpackConfig,
-
-  name: 'server',
-
-  target: 'node',
-
-  entry: APP_ENTRY_PATHS,
-
-  output: {
-    filename: `server.js`,
-    path: paths.dist(),
-    library: 'server',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
-  },
-
-  externals: fs.readdirSync(paths.base('node_modules'))
-    .concat([
+webpackConfigServer.name = 'server'
+webpackConfigServer.target = 'node'
+webpackConfigServer.externals = fs.readdirSync(paths.base('node_modules'))
+  .concat([
     'react-dom/server', 'react/addons',
   ]).reduce(function (ext, mod) {
     ext[mod] = 'commonjs ' + mod
     return ext
-  }, {}),
+  }, {})
 
-  plugins: [
-    new webpack.DefinePlugin(config.globals),
-  ]
+// ------------------------------------
+// Entry Points
+// ------------------------------------
+webpackConfigServer.entry = [
+  'babel-polyfill',
+  paths.src(config.entry_server)
+]
 
-  //node: {
-  //  __filename: true,
-  //  __dirname: true
-  //}
+// ------------------------------------
+// Bundle Output
+// ------------------------------------
+webpackConfigServer.output = {
+  filename: `server.js`,
+  path: paths.dist(),
+  library: 'server',
+  libraryTarget: 'umd',
+  umdNamedDefine: true
 }
+
+export default webpackConfigServer

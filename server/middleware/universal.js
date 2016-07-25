@@ -12,17 +12,21 @@ import _debug from 'debug'
 const paths = config.utils_paths
 const debug = _debug('app:server:universal')
 const {__DEV__, __PROD__, __TEST__} = config.globals
-
+const output = paths.dist(config.universal.output)
 
 export default async function () {
   debug('Enable universal middleware.')
 
-  try {
-    let server = await compileServer()
-    return Promise.resolve(require(server))
-  } catch (error) {
-    return Promise.reject(error)
+  if (__DEV__) {
+    try {
+      debug('Compile server.')
+      await compileServer()
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
+
+  return Promise.resolve(require(output))
 }
 
 function compileServer() {
@@ -31,7 +35,7 @@ function compileServer() {
 
     compiler.plugin("done", stats => {
       debug('Hash: ' + stats.hash)
-      resolve(webpackConfig.output.path + '/' + webpackConfig.output.filename)
+      resolve(true)
     })
 
     compiler.run(function (err, stats) {

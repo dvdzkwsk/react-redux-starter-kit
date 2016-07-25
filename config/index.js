@@ -25,11 +25,21 @@ const config = {
   dir_test   : 'tests',
 
   // ----------------------------------
+  // Entry points
+  // ----------------------------------
+  entry_client: 'client.js',
+  entry_server: 'server.js',
+
+  // ----------------------------------
   // Server Configuration
   // ----------------------------------
   server_host : process.env.HOST || localip,
   server_port : process.env.PORT || 3000,
-  universal   : true,
+  universal: {
+    enabled: true,
+    output: 'server.js',
+    client_info: 'client_info.json'
+  },
 
   // ----------------------------------
   // Proxy Configuration
