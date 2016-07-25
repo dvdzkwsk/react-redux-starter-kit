@@ -12,6 +12,10 @@ export const createRoutes = (store) => ({
   indexRoute: Home,
   childRoutes: [
     CounterRoute(store)
+    //, {
+    //  path: '*',
+    //  redirect: '/404'
+    //}
   ]
 })
 

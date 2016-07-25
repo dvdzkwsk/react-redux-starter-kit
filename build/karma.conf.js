@@ -1,6 +1,6 @@
 import { argv } from 'yargs'
 import config from '../config'
-import webpackConfig from './webpack.config'
+import webpackConfig from './webpack.config.client'
 import _debug from 'debug'
 
 const debug = _debug('app:karma')
@@ -66,7 +66,7 @@ if (config.globals.__COVERAGE__) {
   karmaConfig.reporters.push('coverage')
   karmaConfig.webpack.module.preLoaders = [{
     test: /\.(js|jsx)$/,
-    include: new RegExp(config.dir_client),
+    include: new RegExp(config.dir_src),
     loader: 'isparta',
     exclude: /node_modules/
   }]
