@@ -42,7 +42,6 @@ export default async () => {
           vendor: `vendor.${stats.hash}.js`
         }
       }
-      console.log(stats)
     })
 
     app.use(webpackDevMiddleware(compiler, publicPath))
