@@ -34,8 +34,6 @@ const config = {
   // ----------------------------------
   // Proxy Configuration
   // ----------------------------------
-  //universal_server_host : process.env.UHOST || 'localhost',
-  //universal_server_port : process.env.UPORT || 3001,
   proxy : {
     enabled: false,
     options: {

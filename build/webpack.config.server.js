@@ -13,7 +13,6 @@ const APP_ENTRY_PATHS = [
   paths.src('server.js')
 ]
 
-let o
 export default {
   ...webpackConfig,
 
@@ -31,7 +30,7 @@ export default {
     umdNamedDefine: true
   },
 
-  externals: o = fs.readdirSync(paths.base('node_modules'))
+  externals: fs.readdirSync(paths.base('node_modules'))
     .concat([
     'react-dom/server', 'react/addons',
   ]).reduce(function (ext, mod) {
