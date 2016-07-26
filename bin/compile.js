@@ -39,7 +39,7 @@ const clientInfo = paths.dist(config.universal.client_info)
   }
 })()
 
-function writeClientInfo(data) {
+function writeClientInfo (data) {
   return new Promise((resolve, reject) => {
     fs.writeJson(clientInfo, data, function (err) {
       if (err) {

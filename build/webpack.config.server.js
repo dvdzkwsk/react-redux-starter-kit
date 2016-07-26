@@ -1,4 +1,3 @@
-import webpack from 'webpack'
 import webpackConfig from './webpack.config'
 import clone from 'clone'
 import config from '../config'
@@ -7,7 +6,6 @@ import fs from 'fs'
 
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
-const {__DEV__, __PROD__, __TEST__} = config.globals
 
 debug('Create server configuration.')
 const webpackConfigServer = clone(webpackConfig)
@@ -16,7 +14,7 @@ webpackConfigServer.name = 'server'
 webpackConfigServer.target = 'node'
 webpackConfigServer.externals = fs.readdirSync(paths.base('node_modules'))
   .concat([
-    'react-dom/server', 'react/addons',
+    'react-dom/server', 'react/addons'
   ]).reduce(function (ext, mod) {
     ext[mod] = 'commonjs ' + mod
     return ext
@@ -34,7 +32,7 @@ webpackConfigServer.entry = [
 // Bundle Output
 // ------------------------------------
 webpackConfigServer.output = {
-  filename: `server.js`,
+  filename: 'server.js',
   path: paths.dist(),
   library: 'server',
   libraryTarget: 'umd',

@@ -5,7 +5,6 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import clone from 'clone'
 import config from '../config'
 import _debug from 'debug'
-import fs from 'fs'
 
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths

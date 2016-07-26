@@ -17,7 +17,7 @@ const paths = config.utils_paths
 
 export default async () => {
   const app = new Koa()
-  var clientInfo;
+  var clientInfo
 
   // Enable koa-proxy if it has been enabled in the config.
   if (config.proxy && config.proxy.enabled) {
@@ -34,7 +34,7 @@ export default async () => {
     const { publicPath } = webpackConfigClient.output
 
     // Catch the hash of the build in order to use it in the universal middleware
-    config.universal && compiler.plugin("done", stats => {
+    config.universal && compiler.plugin('done', stats => {
       // Create client info from the fresh build
       clientInfo = {
         assetsByChunkName: {
@@ -57,6 +57,11 @@ export default async () => {
       // Get assets from client_info.json
       debug('Read client info.')
       fs.readJSON(paths.dist(config.universal.client_info), (err, data) => {
+        if (err) {
+          clientInfo = {}
+          debug('Failed to read client_data!')
+          return
+        }
         clientInfo = data
       })
     } else {
