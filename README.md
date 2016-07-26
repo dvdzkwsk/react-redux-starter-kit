@@ -43,6 +43,7 @@ Finally, This project wouldn't be possible without the help of our many contribu
 * [koa](https://github.com/koajs/koa)
 * [karma](https://github.com/karma-runner/karma)
 * [eslint](http://eslint.org)
+* [universal](http://redux.js.org/docs/recipes/ServerRendering.html)
 
 ## Requirements
 * node `^4.2.0`
@@ -100,6 +101,8 @@ While developing, you will probably rely mostly on `npm start`; however, there a
 |`npm run <script>`|Description|
 |------------------|-----------|
 |`start`|Serves your app at `localhost:3000`. HMR will be enabled in development.|
+|`start:dev`|Same as `start` but overrides `NODE_ENV` to "development".|
+|`start:prod`|Serves your app at `localhost:3000`. Production environment.|
 |`compile`|Compiles the application to disk (`~/dist` by default).|
 |`dev`|Same as `npm start`, but enables nodemon for the server as well.|
 |`dev:no-debug`|Same as `npm run dev` but disables devtool instrumentation.|
@@ -286,6 +289,10 @@ This starter kit comes packaged with an Koa server. It's important to note that 
 Babel is configured to use [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined. Additionally, in production, we use [react-optimize](https://github.com/thejameskyle/babel-react-optimize) to further optimize your React code.
 
 In production, webpack will extract styles to a `.css` file, minify your JavaScript, and perform additional optimizations such as module deduplication.
+
+### Universal / Server rendering
+
+This starter kit supports universal rendering by setting the configuration key `universal.enabled` to `true`. It compiles the project using the configuration from `build/webpack.config.server.js` then uses it as a Koa middleware.
 
 ## Learning Resources
 

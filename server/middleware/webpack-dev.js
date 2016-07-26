@@ -11,7 +11,7 @@ export default function (compiler, publicPath) {
 
   const middleware = WebpackDevMiddleware(compiler, {
     publicPath,
-    contentBase: paths.client(),
+    contentBase: paths.src(),
     hot: true,
     quiet: config.compiler_quiet,
     noInfo: config.compiler_quiet,
