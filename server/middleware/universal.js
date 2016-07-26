@@ -1,17 +1,11 @@
-import { match } from 'react-router'
-import { renderToStaticMarkup } from 'react-dom/server'
-import { syncHistoryWithStore } from 'react-router-redux'
-import createMemoryHistory from 'react-router/lib/createMemoryHistory'
 import Webpack from 'webpack'
-import createStore from '../../src/store/createStore'
-import AppContainer from '../../src/containers/AppContainer'
 import config from '../../config'
 import webpackConfig from '../../build/webpack.config.server'
 import _debug from 'debug'
 
 const paths = config.utils_paths
 const debug = _debug('app:server:universal')
-const {__DEV__, __PROD__, __TEST__} = config.globals
+const {__DEV__} = config.globals
 const output = paths.dist(config.universal.output)
 
 export default async function () {
@@ -29,11 +23,11 @@ export default async function () {
   return Promise.resolve(require(output))
 }
 
-function compileServer() {
+function compileServer () {
   return new Promise((resolve, reject) => {
     let compiler = Webpack(webpackConfig)
 
-    compiler.plugin("done", stats => {
+    compiler.plugin('done', stats => {
       debug('Hash: ' + stats.hash)
       resolve(true)
     })

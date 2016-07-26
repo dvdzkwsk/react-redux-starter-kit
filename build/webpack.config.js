@@ -5,7 +5,6 @@ import _debug from 'debug'
 
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
-const {__DEV__, __PROD__, __TEST__} = config.globals
 
 debug('Create generic configuration.')
 const webpackConfig = {

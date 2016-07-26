@@ -2,7 +2,6 @@ import config from '../config'
 import server from '../server/main'
 import _debug from 'debug'
 
-
 (async () => {
   const debug = _debug('app:bin:server')
   const port = config.server_port
