@@ -58,9 +58,9 @@ After confirming that your development environment meets the specified [requirem
 First, clone or download:
 
 ```bash
-$ git clone https://github.com/davezuko/react-redux-starter-kit.git
+$ git clone git@github.com:janoist1/universal-react-redux-starter-kit.git
 // or
-$ wget -O react-redux-starter-kit.zip https://github.com/davezuko/react-redux-starter-kit/archive/master.zip
+$ wget -O react-redux-starter-kit.zip https://github.com/janoist1/universal-react-redux-starter-kit/archive/master.zip
 $ unzip react-redux-starter-kit.zip
 ```
 
