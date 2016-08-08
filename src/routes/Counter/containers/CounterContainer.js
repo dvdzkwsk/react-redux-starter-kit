@@ -12,7 +12,7 @@ import Counter from 'components/Counter'
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const mapDispatchtoProps = {
+const mapDispatchToProps = {
   increment: () => increment(1),
   doubleAsync
 }
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => ({
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapDispatchtoProps)(Counter)
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
