@@ -3,7 +3,7 @@ import React from 'react'
 import {mount, render, shallow} from 'enzyme'
 
 class Fixture extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <input id='checked' defaultChecked />
@@ -22,6 +22,14 @@ describe('(Framework) Karma Plugins', function () {
     assert.ok(should)
   })
 
+  it('Should expose "TestScheduler" globally.', () => {
+    assert.ok(TestScheduler);
+  });
+
+  it('Should expose "Observable" globally.', () => {
+    assert.ok(Observable);
+  });
+
   it('Should have chai-as-promised helpers.', function () {
     const pass = new Promise(res => res('test'))
     const fail = new Promise((res, rej) => rej())
@@ -32,7 +40,7 @@ describe('(Framework) Karma Plugins', function () {
     ])
   })
 
-  it('should have chai-enzyme working', function() {
+  it('should have chai-enzyme working', function () {
     let wrapper = shallow(<Fixture />)
     expect(wrapper.find('#checked')).to.be.checked()
 

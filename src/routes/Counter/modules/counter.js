@@ -1,7 +1,11 @@
+import Rx from 'rxjs'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+export const DOUBLE_ASYNC_PENDING = 'DOUBLE_ASYNC_PENDING'
+export const DOUBLE_ASYNC_ABORTED = 'DOUBLE_ASYNC_ABORTED'
 
 // ------------------------------------
 // Actions
@@ -15,22 +19,18 @@ export function increment (value = 1) {
 
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk!
+    creating async actions, especially when combined with redux-observable!
 
     NOTE: This is solely for demonstration purposes. In a real application,
     you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
     reducer take care of this logic.  */
 
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch(increment(getState().counter))
-        resolve()
-      }, 200)
-    })
-  }
-}
+export const doubleAsync = () =>
+  (actions, store) =>
+    Rx.Observable.of(increment(store.getState().counter))
+      .delay(500)
+      .takeUntil(actions.ofType(DOUBLE_ASYNC_ABORTED))
+      .startWith({ type: DOUBLE_ASYNC_PENDING })
 
 export const actions = {
   increment,
@@ -47,7 +47,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0
+const initialState = 5
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
