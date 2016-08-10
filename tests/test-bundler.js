@@ -21,7 +21,7 @@ global.should = chai.should()
 // Require Tests
 // ---------------------------------------
 // for use with karma-webpack-with-fast-source-maps
-const __karmaWebpackManifest__ = []; // eslint-disable-line
+const __karmaWebpackManifest__ = [] // eslint-disable-line
 const inManifest = (path) => ~__karmaWebpackManifest__.indexOf(path)
 
 // require all `tests/**/*.spec.js`
