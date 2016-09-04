@@ -7,18 +7,18 @@ import _debug from 'debug'
 
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
-const {__DEV__, __PROD__, __TEST__} = config.globals
+const { __DEV__, __PROD__, __TEST__ } = config.globals
 
 debug('Create configuration.')
 const webpackConfig = {
-  name: 'client',
-  target: 'web',
-  devtool: config.compiler_devtool,
-  resolve: {
-    root: paths.client(),
-    extensions: ['', '.js', '.jsx', '.json']
+  name    : 'client',
+  target  : 'web',
+  devtool : config.compiler_devtool,
+  resolve : {
+    root       : paths.client(),
+    extensions : ['', '.js', '.jsx', '.json']
   },
-  module: {}
+  module : {}
 }
 // ------------------------------------
 // Entry Points
@@ -28,19 +28,19 @@ const APP_ENTRY_PATHS = [
 ]
 
 webpackConfig.entry = {
-  app: __DEV__
+  app : __DEV__
     ? APP_ENTRY_PATHS.concat(`webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`)
     : APP_ENTRY_PATHS,
-  vendor: config.compiler_vendor
+  vendor : config.compiler_vendor
 }
 
 // ------------------------------------
 // Bundle Output
 // ------------------------------------
 webpackConfig.output = {
-  filename: `[name].[${config.compiler_hash_type}].js`,
-  path: paths.dist(),
-  publicPath: config.compiler_public_path
+  filename   : `[name].[${config.compiler_hash_type}].js`,
+  path       : paths.dist(),
+  publicPath : config.compiler_public_path
 }
 
 // ------------------------------------
@@ -49,13 +49,13 @@ webpackConfig.output = {
 webpackConfig.plugins = [
   new webpack.DefinePlugin(config.globals),
   new HtmlWebpackPlugin({
-    template: paths.client('index.html'),
-    hash: false,
-    favicon: paths.client('static/favicon.ico'),
-    filename: 'index.html',
-    inject: 'body',
-    minify: {
-      collapseWhitespace: true
+    template : paths.client('index.html'),
+    hash     : false,
+    favicon  : paths.client('static/favicon.ico'),
+    filename : 'index.html',
+    inject   : 'body',
+    minify   : {
+      collapseWhitespace : true
     }
   })
 ]
@@ -72,10 +72,10 @@ if (__DEV__) {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        unused: true,
-        dead_code: true,
-        warnings: false
+      compress : {
+        unused    : true,
+        dead_code : true,
+        warnings  : false
       }
     })
   )
@@ -85,7 +85,7 @@ if (__DEV__) {
 if (!__TEST__) {
   webpackConfig.plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor']
+      names : ['vendor']
     })
   )
 }
@@ -121,18 +121,18 @@ webpackConfig.eslint = {
 // ------------------------------------
 // JavaScript / JSON
 webpackConfig.module.loaders = [{
-  test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
-  loader: 'babel',
-  query: {
-    cacheDirectory: true,
-    plugins: ['transform-runtime'],
-    presets: ['es2015', 'react', 'stage-0']
+  test    : /\.(js|jsx)$/,
+  exclude : /node_modules/,
+  loader  : 'babel',
+  query   : {
+    cacheDirectory : true,
+    plugins        : ['transform-runtime'],
+    presets        : ['es2015', 'react', 'stage-0']
   }
 },
 {
-  test: /\.json$/,
-  loader: 'json'
+  test   : /\.json$/,
+  loader : 'json'
 }]
 
 // ------------------------------------
@@ -168,9 +168,9 @@ if (isUsingCSSModules) {
   ].join('&')
 
   webpackConfig.module.loaders.push({
-    test: /\.scss$/,
-    include: cssModulesRegex,
-    loaders: [
+    test    : /\.scss$/,
+    include : cssModulesRegex,
+    loaders : [
       'style',
       cssModulesLoader,
       'postcss',
@@ -179,9 +179,9 @@ if (isUsingCSSModules) {
   })
 
   webpackConfig.module.loaders.push({
-    test: /\.css$/,
-    include: cssModulesRegex,
-    loaders: [
+    test    : /\.css$/,
+    include : cssModulesRegex,
+    loaders : [
       'style',
       cssModulesLoader,
       'postcss'
@@ -192,9 +192,9 @@ if (isUsingCSSModules) {
 // Loaders for files that should not be treated as CSS modules.
 const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
 webpackConfig.module.loaders.push({
-  test: /\.scss$/,
-  exclude: excludeCSSModules,
-  loaders: [
+  test    : /\.scss$/,
+  exclude : excludeCSSModules,
+  loaders : [
     'style',
     BASE_CSS_LOADER,
     'postcss',
@@ -202,9 +202,9 @@ webpackConfig.module.loaders.push({
   ]
 })
 webpackConfig.module.loaders.push({
-  test: /\.css$/,
-  exclude: excludeCSSModules,
-  loaders: [
+  test    : /\.css$/,
+  exclude : excludeCSSModules,
+  loaders : [
     'style',
     BASE_CSS_LOADER,
     'postcss'
@@ -215,24 +215,24 @@ webpackConfig.module.loaders.push({
 // Style Configuration
 // ------------------------------------
 webpackConfig.sassLoader = {
-  includePaths: paths.client('styles')
+  includePaths : paths.client('styles')
 }
 
 webpackConfig.postcss = [
   cssnano({
-    autoprefixer: {
-      add: true,
-      remove: true,
-      browsers: ['last 2 versions']
+    autoprefixer : {
+      add      : true,
+      remove   : true,
+      browsers : ['last 2 versions']
     },
-    discardComments: {
-      removeAll: true
+    discardComments : {
+      removeAll : true
     },
-    discardUnused: false,
-    mergeIdents: false,
-    reduceIdents: false,
-    safe: true,
-    sourcemap: true
+    discardUnused : false,
+    mergeIdents   : false,
+    reduceIdents  : false,
+    safe          : true,
+    sourcemap     : true
   })
 ]
 
@@ -267,7 +267,7 @@ if (!__DEV__) {
 
   webpackConfig.plugins.push(
     new ExtractTextPlugin('[name].[contenthash].css', {
-      allChunks: true
+      allChunks : true
     })
   )
 }

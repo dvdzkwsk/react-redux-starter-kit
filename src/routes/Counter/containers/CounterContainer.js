@@ -13,12 +13,12 @@ import Counter from 'components/Counter'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  increment: () => increment(1),
+  increment : () => increment(1),
   doubleAsync
 }
 
 const mapStateToProps = (state) => ({
-  counter: state.counter
+  counter : state.counter
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

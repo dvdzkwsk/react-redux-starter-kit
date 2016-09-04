@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 
 class AppContainer extends Component {
   static propTypes = {
-    history: PropTypes.object.isRequired,
-    routes: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired
+    history : PropTypes.object.isRequired,
+    routes  : PropTypes.object.isRequired,
+    store   : PropTypes.object.isRequired
   }
 
   render () {

@@ -1,6 +1,6 @@
 import assert from 'assert'
 import React from 'react'
-import {mount, render, shallow} from 'enzyme'
+import { mount, render, shallow } from 'enzyme'
 
 class Fixture extends React.Component {
   render () {

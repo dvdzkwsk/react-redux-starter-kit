@@ -20,10 +20,21 @@
     "__BASENAME__" : false
   },
   "rules": {
-    "semi" : [2, "never"],
-    "max-len": [2, 120, 2],
-    "generator-star-spacing": 0,
-    "babel/generator-star-spacing": 1,
-    "jsx-quotes": [2, "prefer-single"]
+    "key-spacing" : [2, {
+      "singleLine" : {
+        "beforeColon" : false,
+        "afterColon"  : true
+      },
+      "multiLine" : {
+        "align"       : "colon",
+        "beforeColon" : true,
+        "afterColon"  : true
+      }
+    }],
+    "babel/generator-star-spacing" : 1,
+    "generator-star-spacing"       : 0,
+    "jsx-quotes"                   : [2, "prefer-single"],
+    "max-len"                      : [2, 120, 2],
+    "object-curly-spacing"         : [2, "always"]
   }
 }
