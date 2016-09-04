@@ -8,7 +8,7 @@ describe('(Component) Header', () => {
   let _wrapper
 
   beforeEach(() => {
-    _wrapper = shallow(<Header/>)
+    _wrapper = shallow(<Header />)
   })
 
   it('Renders a welcome message', () => {
@@ -18,7 +18,6 @@ describe('(Component) Header', () => {
   })
 
   describe('Navigation links...', () => {
-
     it('Should render a Link to Home route', () => {
       expect(_wrapper.contains(
         <IndexLink activeClassName={classes.activeRoute} to='/'>

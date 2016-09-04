@@ -20,5 +20,4 @@ describe('(View) Home', () => {
     expect(duck).to.exist
     expect(duck.attr('alt')).to.match(/This is a duck, because Redux!/)
   })
-
 })
