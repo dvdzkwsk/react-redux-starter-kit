@@ -14,9 +14,9 @@ export default {
       enabled : false,
       options : {
         host  : 'http://localhost:8000',
-        match : /^\/api\/.*/
-      }
-    }
+        match : /^\/api\/.*/,
+      },
+    },
   }),
 
   // ======================================================
@@ -30,7 +30,7 @@ export default {
     compiler_stats           : {
       chunks       : true,
       chunkModules : true,
-      colors       : true
-    }
-  })
-}
+      colors       : true,
+    },
+  }),
+};
