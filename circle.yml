@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: 4.5.0
+dependencies:
+  override:
+    - npm install -g npm@3.10.7
+    - npm install
+  pre:
+    - rm -rf ./node_modules
+  cache_directories:
+    - ~/.npm
+test:
+  override:
+    - npm run test
+
