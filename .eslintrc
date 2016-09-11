@@ -48,10 +48,6 @@
       120,
       2
     ],
-    "semi": [
-      2,
-      "never"
-    ],
     "object-curly-spacing": [
       2,
       "always"
