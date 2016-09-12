@@ -1,13 +1,10 @@
 /* eslint key-spacing:0 spaced-comment:0 */
-import path from 'path'
-import _debug from 'debug'
-import { argv } from 'yargs'
-import ip from 'ip'
+const path = require('path')
+const debug = require('debug')('app:config')
+const { argv } = require('yargs')
+const ip = require('ip')
 
-const localip = ip.address()
-const debug = _debug('app:config')
 debug('Creating default configuration.')
-
 // ========================================================
 // Default Configuration
 // ========================================================
@@ -26,7 +23,7 @@ const config = {
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : localip, // use string 'localhost' to prevent exposure on local network
+  server_host : ip.address(), // use string 'localhost' to prevent exposure on local network
   server_port : process.env.PORT || 3000,
 
   // ----------------------------------
@@ -43,7 +40,6 @@ const config = {
     colors : true
   },
   compiler_vendor : [
-    'babel-polyfill',
     'history',
     'react',
     'react-redux',
@@ -82,7 +78,6 @@ config.globals = {
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
-  '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__COVERAGE__' : !argv.watch && config.env === 'test',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 }
@@ -120,7 +115,7 @@ config.utils_paths = {
 // Environment Configuration
 // ========================================================
 debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
-const environments = require('./environments').default
+const environments = require('./environments')
 const overrides = environments[config.env]
 if (overrides) {
   debug('Found overrides, applying to default configuration.')
@@ -129,4 +124,4 @@ if (overrides) {
   debug('No environment overrides found, defaults will be used.')
 }
 
-export default config
+module.exports = config

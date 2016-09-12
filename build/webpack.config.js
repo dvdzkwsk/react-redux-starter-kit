@@ -1,15 +1,14 @@
-import webpack from 'webpack'
-import cssnano from 'cssnano'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import config from '../config'
-import _debug from 'debug'
+const webpack = require('webpack')
+const cssnano = require('cssnano')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const config = require('../config')
+const debug = require('debug')('app:webpack:config')
 
-const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
 const { __DEV__, __PROD__, __TEST__ } = config.globals
 
-debug('Create configuration.')
+debug('Creating configuration.')
 const webpackConfig = {
   name    : 'client',
   target  : 'web',
@@ -23,14 +22,12 @@ const webpackConfig = {
 // ------------------------------------
 // Entry Points
 // ------------------------------------
-const APP_ENTRY_PATHS = [
-  paths.client('main.js')
-]
+const APP_ENTRY = paths.client('main.js')
 
 webpackConfig.entry = {
   app : __DEV__
-    ? APP_ENTRY_PATHS.concat(`webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`)
-    : APP_ENTRY_PATHS,
+    ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`)
+    : [APP_ENTRY],
   vendor : config.compiler_vendor
 }
 
@@ -182,9 +179,10 @@ if (!__DEV__) {
   webpackConfig.module.loaders.filter((loader) =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {
-    const [first, ...rest] = loader.loaders
+    const first = loader.loaders[0]
+    const rest = loader.loaders.slice(1)
     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
-    Reflect.deleteProperty(loader, 'loaders')
+    delete loader.loaders
   })
 
   webpackConfig.plugins.push(
@@ -194,4 +192,4 @@ if (!__DEV__) {
   )
 }
 
-export default webpackConfig
+module.exports = webpackConfig

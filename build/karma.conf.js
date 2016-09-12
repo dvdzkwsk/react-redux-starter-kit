@@ -1,11 +1,9 @@
-import { argv } from 'yargs'
-import config from '../config'
-import webpackConfig from './webpack.config'
-import _debug from 'debug'
+const { argv } = require('yargs')
+const config = require('../config')
+const webpackConfig = require('./webpack.config')
+const debug = require('debug')('app:karma')
 
-const debug = _debug('app:karma')
-debug('Create configuration.')
-
+debug('Creating configuration.')
 const karmaConfig = {
   basePath : '../', // project root in relation to bin/karma.js
   files    : [
@@ -25,13 +23,11 @@ const karmaConfig = {
   browsers : ['PhantomJS'],
   webpack  : {
     devtool : 'cheap-module-source-map',
-    resolve : {
-      ...webpackConfig.resolve,
-      alias : {
-        ...webpackConfig.resolve.alias,
+    resolve : Object.assign({}, webpackConfig.resolve, {
+      alias : Object.assign({}, webpackConfig.resolve.alias, {
         sinon : 'sinon/pkg/sinon.js'
-      }
-    },
+      })
+    }),
     plugins : webpackConfig.plugins,
     module  : {
       noParse : [
@@ -46,12 +42,11 @@ const karmaConfig = {
     },
     // Enzyme fix, see:
     // https://github.com/airbnb/enzyme/issues/47
-    externals : {
-      ...webpackConfig.externals,
+    externals : Object.assign({}, webpackConfig.externals, {
       'react/addons'                   : true,
       'react/lib/ExecutionEnvironment' : true,
       'react/lib/ReactContext'         : 'window'
-    },
+    }),
     sassLoader : webpackConfig.sassLoader
   },
   webpackMiddleware : {
@@ -72,5 +67,4 @@ if (config.globals.__COVERAGE__) {
   }]
 }
 
-// cannot use `export default` because of Karma.
 module.exports = (cfg) => cfg.set(karmaConfig)
