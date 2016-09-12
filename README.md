@@ -24,7 +24,6 @@ Finally, This project wouldn't be possible without the help of our many contribu
 1. [Deployment](#deployment)
 1. [Build System](#build-system)
   1. [Configuration](#configuration)
-  1. [Root Resolve](#root-resolve)
   1. [Globals](#globals)
   1. [Styles](#styles)
   1. [Server](#server)
@@ -37,7 +36,6 @@ Finally, This project wouldn't be possible without the help of our many contribu
 * [react](https://github.com/facebook/react)
 * [redux](https://github.com/rackt/redux)
 * [react-router](https://github.com/rackt/react-router)
-* [react-router-redux](https://github.com/rackt/react-router-redux)
 * [webpack](https://github.com/webpack/webpack)
 * [babel](https://github.com/babel/babel)
 * [express](https://github.com/expressjs/express)
@@ -168,7 +166,6 @@ If you need environment-specific overrides (useful for dynamically setting API e
 |`compiler_devtool`|what type of source-maps to generate (set to `false`/`null` to disable)|
 |`compiler_vendor`|packages to separate into to the vendor bundle|
 
-### Root Resolve
 Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
 
 ```js
@@ -190,7 +187,6 @@ These are global variables available to you anywhere in your source code. If you
 |`__DEV__`|True when `process.env.NODE_ENV` is `development`|
 |`__PROD__`|True when `process.env.NODE_ENV` is `production`|
 |`__TEST__`|True when `process.env.NODE_ENV` is `test`|
-|`__DEBUG__`|True when `process.env.NODE_ENV` is `development` and cli arg `--no_debug` is not set (`npm run dev:no-debug`)|
 
 ### Styles
 
