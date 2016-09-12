@@ -1,6 +1,5 @@
 import React from 'react'
 import { Header } from 'components/Header/Header'
-import classes from 'components/Header/Header.scss'
 import { IndexLink, Link } from 'react-router'
 import { shallow } from 'enzyme'
 
@@ -20,7 +19,7 @@ describe('(Component) Header', () => {
   describe('Navigation links...', () => {
     it('Should render a Link to Home route', () => {
       expect(_wrapper.contains(
-        <IndexLink activeClassName={classes.activeRoute} to='/'>
+        <IndexLink activeClassName='route--active' to='/'>
           Home
         </IndexLink>
       )).to.be.true
@@ -28,7 +27,7 @@ describe('(Component) Header', () => {
 
     it('Should render a Link to Counter route', () => {
       expect(_wrapper.contains(
-        <Link activeClassName={classes.activeRoute} to='/counter'>
+        <Link activeClassName='route--active' to='/counter'>
           Counter
         </Link>
       )).to.be.true
