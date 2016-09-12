@@ -1,6 +1,6 @@
 {
-  "parser"  : "babel-eslint",
-  "extends" : [
+  "parser": "babel-eslint",
+  "extends": [
     "standard",
     "standard-react"
   ],
@@ -9,32 +9,19 @@
     "react",
     "promise"
   ],
-  "env"     : {
+  "env": {
     "browser" : true
   },
-  "globals" : {
+  "globals": {
     "__DEV__"      : false,
+    "__TEST__"     : false,
     "__PROD__"     : false,
-    "__DEBUG__"    : false,
-    "__COVERAGE__" : false,
-    "__BASENAME__" : false
+    "__COVERAGE__" : false
   },
   "rules": {
-    "key-spacing" : [2, {
-      "singleLine" : {
-        "beforeColon" : false,
-        "afterColon"  : true
-      },
-      "multiLine" : {
-        "align"       : "colon",
-        "beforeColon" : true,
-        "afterColon"  : true
-      }
-    }],
-    "babel/generator-star-spacing" : 1,
-    "generator-star-spacing"       : 0,
-    "jsx-quotes"                   : [2, "prefer-single"],
-    "max-len"                      : [2, 120, 2],
-    "object-curly-spacing"         : [2, "always"]
+    "key-spacing"          : 0,
+    "jsx-quotes"           : [2, "prefer-single"],
+    "max-len"              : [2, 120, 2],
+    "object-curly-spacing" : [2, "always"]
   }
 }
