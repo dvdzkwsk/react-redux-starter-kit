@@ -62,8 +62,10 @@ if (config.globals.__COVERAGE__) {
   karmaConfig.webpack.module.preLoaders = [{
     test    : /\.(js|jsx)$/,
     include : new RegExp(config.dir_client),
-    loader  : 'isparta',
-    exclude : /node_modules/
+    loader  : 'babel',
+    query   : Object.assign({}, config.compiler_babel, {
+      plugins : (config.compiler_babel.plugins || []).concat('istanbul')
+    })
   }]
 }
 

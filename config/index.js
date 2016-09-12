@@ -29,6 +29,11 @@ const config = {
   // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
+  compiler_babel : {
+    cacheDirectory : true,
+    plugins        : ['transform-runtime'],
+    presets        : ['es2015', 'react', 'stage-0']
+  },
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
@@ -39,7 +44,7 @@ const config = {
     chunkModules : false,
     colors : true
   },
-  compiler_vendor : [
+  compiler_vendors : [
     'history',
     'react',
     'react-redux',
@@ -87,14 +92,14 @@ config.globals = {
 // ------------------------------------
 const pkg = require('../package.json')
 
-config.compiler_vendor = config.compiler_vendor
+config.compiler_vendors = config.compiler_vendors
   .filter((dep) => {
     if (pkg.dependencies[dep]) return true
 
     debug(
       `Package "${dep}" was not found as an npm dependency in package.json; ` +
       `it won't be included in the webpack vendor bundle.
-       Consider removing it from vendor_dependencies in ~/config/index.js`
+       Consider removing it from \`compiler_vendors\` in ~/config/index.js`
     )
   })
 
