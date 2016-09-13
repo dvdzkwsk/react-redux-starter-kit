@@ -6,7 +6,9 @@ const config = require('../config')
 const debug = require('debug')('app:webpack:config')
 
 const paths = config.utils_paths
-const { __DEV__, __PROD__, __TEST__ } = config.globals
+const __DEV__ = config.globals.__DEV__
+const __PROD__ = config.globals.__PROD__
+const __TEST__ = config.globals.__TEST__
 
 debug('Creating configuration.')
 const webpackConfig = {

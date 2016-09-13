@@ -1,7 +1,7 @@
 /* eslint key-spacing:0 spaced-comment:0 */
 const path = require('path')
 const debug = require('debug')('app:config')
-const { argv } = require('yargs')
+const argv = require('yargs').argv
 const ip = require('ip')
 
 debug('Creating default configuration.')
@@ -104,9 +104,10 @@ config.compiler_vendors = config.compiler_vendors
 // ------------------------------------
 // Utilities
 // ------------------------------------
-const resolve = path.resolve
-const base = (...args) =>
-  Reflect.apply(resolve, null, [config.path_base, ...args])
+function base () {
+  const args = [config.path_base].concat([].slice.call(arguments))
+  return path.resolve.apply(path, args)
+}
 
 config.utils_paths = {
   base   : base,

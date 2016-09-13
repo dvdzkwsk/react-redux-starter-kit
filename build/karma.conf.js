@@ -1,4 +1,4 @@
-const { argv } = require('yargs')
+const argv = require('yargs').argv
 const config = require('../config')
 const webpackConfig = require('./webpack.config')
 const debug = require('debug')('app:karma')
