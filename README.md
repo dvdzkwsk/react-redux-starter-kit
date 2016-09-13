@@ -43,7 +43,7 @@ Finally, This project wouldn't be possible without the help of our many contribu
 * [eslint](http://eslint.org)
 
 ## Requirements
-* node `^4.2.0`
+* node `^4.5.0`
 * npm `^3.0.0`
 
 ## Getting Started

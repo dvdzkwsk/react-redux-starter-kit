@@ -4,7 +4,7 @@
   "description": "Get started with React, Redux, and React-Router!",
   "main": "index.js",
   "engines": {
-    "node": ">=4.2.0",
+    "node": ">=4.5.0",
     "npm": "^3.0.0"
   },
   "scripts": {
