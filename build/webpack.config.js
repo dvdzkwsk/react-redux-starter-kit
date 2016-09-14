@@ -1,46 +1,45 @@
-import webpack from 'webpack'
-import cssnano from 'cssnano'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import config from '../config'
-import _debug from 'debug'
+const webpack = require('webpack')
+const cssnano = require('cssnano')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const config = require('../config')
+const debug = require('debug')('app:webpack:config')
 
-const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
-const {__DEV__, __PROD__, __TEST__} = config.globals
+const __DEV__ = config.globals.__DEV__
+const __PROD__ = config.globals.__PROD__
+const __TEST__ = config.globals.__TEST__
 
-debug('Create configuration.')
+debug('Creating configuration.')
 const webpackConfig = {
-  name: 'client',
-  target: 'web',
-  devtool: config.compiler_devtool,
-  resolve: {
-    root: paths.client(),
-    extensions: ['', '.js', '.jsx', '.json']
+  name    : 'client',
+  target  : 'web',
+  devtool : config.compiler_devtool,
+  resolve : {
+    root       : paths.client(),
+    extensions : ['', '.js', '.jsx', '.json']
   },
-  module: {}
+  module : {}
 }
 // ------------------------------------
 // Entry Points
 // ------------------------------------
-const APP_ENTRY_PATHS = [
-  paths.client('main.js')
-]
+const APP_ENTRY = paths.client('main.js')
 
 webpackConfig.entry = {
-  app: __DEV__
-    ? APP_ENTRY_PATHS.concat(`webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`)
-    : APP_ENTRY_PATHS,
-  vendor: config.compiler_vendor
+  app : __DEV__
+    ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`)
+    : [APP_ENTRY],
+  vendor : config.compiler_vendors
 }
 
 // ------------------------------------
 // Bundle Output
 // ------------------------------------
 webpackConfig.output = {
-  filename: `[name].[${config.compiler_hash_type}].js`,
-  path: paths.dist(),
-  publicPath: config.compiler_public_path
+  filename   : `[name].[${config.compiler_hash_type}].js`,
+  path       : paths.dist(),
+  publicPath : config.compiler_public_path
 }
 
 // ------------------------------------
@@ -49,13 +48,13 @@ webpackConfig.output = {
 webpackConfig.plugins = [
   new webpack.DefinePlugin(config.globals),
   new HtmlWebpackPlugin({
-    template: paths.client('index.html'),
-    hash: false,
-    favicon: paths.client('static/favicon.ico'),
-    filename: 'index.html',
-    inject: 'body',
-    minify: {
-      collapseWhitespace: true
+    template : paths.client('index.html'),
+    hash     : false,
+    favicon  : paths.client('static/favicon.ico'),
+    filename : 'index.html',
+    inject   : 'body',
+    minify   : {
+      collapseWhitespace : true
     }
   })
 ]
@@ -72,10 +71,10 @@ if (__DEV__) {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        unused: true,
-        dead_code: true,
-        warnings: false
+      compress : {
+        unused    : true,
+        dead_code : true,
+        warnings  : false
       }
     })
   )
@@ -85,54 +84,23 @@ if (__DEV__) {
 if (!__TEST__) {
   webpackConfig.plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor']
+      names : ['vendor']
     })
   )
 }
-
-// ------------------------------------
-// Pre-Loaders
-// ------------------------------------
-/*
-[ NOTE ]
-We no longer use eslint-loader due to it severely impacting build
-times for larger projects. `npm run lint` still exists to aid in
-deploy processes (such as with CI), and it's recommended that you
-use a linting plugin for your IDE in place of this loader.
-
-If you do wish to continue using the loader, you can uncomment
-the code below and run `npm i --save-dev eslint-loader`. This code
-will be removed in a future release.
-
-webpackConfig.module.preLoaders = [{
-  test: /\.(js|jsx)$/,
-  loader: 'eslint',
-  exclude: /node_modules/
-}]
-
-webpackConfig.eslint = {
-  configFile: paths.base('.eslintrc'),
-  emitWarning: __DEV__
-}
-*/
 
 // ------------------------------------
 // Loaders
 // ------------------------------------
 // JavaScript / JSON
 webpackConfig.module.loaders = [{
-  test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
-  loader: 'babel',
-  query: {
-    cacheDirectory: true,
-    plugins: ['transform-runtime'],
-    presets: ['es2015', 'react', 'stage-0']
-  }
-},
-{
-  test: /\.json$/,
-  loader: 'json'
+  test    : /\.(js|jsx)$/,
+  exclude : /node_modules/,
+  loader  : 'babel',
+  query   : config.compiler_babel
+}, {
+  test   : /\.json$/,
+  loader : 'json'
 }]
 
 // ------------------------------------
@@ -142,59 +110,10 @@ webpackConfig.module.loaders = [{
 // css-loader not to duplicate minimization.
 const BASE_CSS_LOADER = 'css?sourceMap&-minimize'
 
-// Add any packge names here whose styles need to be treated as CSS modules.
-// These paths will be combined into a single regex.
-const PATHS_TO_TREAT_AS_CSS_MODULES = [
-  // 'react-toolbox', (example)
-]
-
-// If config has CSS modules enabled, treat this project's styles as CSS modules.
-if (config.compiler_css_modules) {
-  PATHS_TO_TREAT_AS_CSS_MODULES.push(
-    paths.client().replace(/[\^\$\.\*\+\-\?\=\!\:\|\\\/\(\)\[\]\{\}\,]/g, '\\$&') // eslint-disable-line
-  )
-}
-
-const isUsingCSSModules = !!PATHS_TO_TREAT_AS_CSS_MODULES.length
-const cssModulesRegex = new RegExp(`(${PATHS_TO_TREAT_AS_CSS_MODULES.join('|')})`)
-
-// Loaders for styles that need to be treated as CSS modules.
-if (isUsingCSSModules) {
-  const cssModulesLoader = [
-    BASE_CSS_LOADER,
-    'modules',
-    'importLoaders=1',
-    'localIdentName=[name]__[local]___[hash:base64:5]'
-  ].join('&')
-
-  webpackConfig.module.loaders.push({
-    test: /\.scss$/,
-    include: cssModulesRegex,
-    loaders: [
-      'style',
-      cssModulesLoader,
-      'postcss',
-      'sass?sourceMap'
-    ]
-  })
-
-  webpackConfig.module.loaders.push({
-    test: /\.css$/,
-    include: cssModulesRegex,
-    loaders: [
-      'style',
-      cssModulesLoader,
-      'postcss'
-    ]
-  })
-}
-
-// Loaders for files that should not be treated as CSS modules.
-const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
 webpackConfig.module.loaders.push({
-  test: /\.scss$/,
-  exclude: excludeCSSModules,
-  loaders: [
+  test    : /\.scss$/,
+  exclude : null,
+  loaders : [
     'style',
     BASE_CSS_LOADER,
     'postcss',
@@ -202,37 +121,34 @@ webpackConfig.module.loaders.push({
   ]
 })
 webpackConfig.module.loaders.push({
-  test: /\.css$/,
-  exclude: excludeCSSModules,
-  loaders: [
+  test    : /\.css$/,
+  exclude : null,
+  loaders : [
     'style',
     BASE_CSS_LOADER,
     'postcss'
   ]
 })
 
-// ------------------------------------
-// Style Configuration
-// ------------------------------------
 webpackConfig.sassLoader = {
-  includePaths: paths.client('styles')
+  includePaths : paths.client('styles')
 }
 
 webpackConfig.postcss = [
   cssnano({
-    autoprefixer: {
-      add: true,
-      remove: true,
-      browsers: ['last 2 versions']
+    autoprefixer : {
+      add      : true,
+      remove   : true,
+      browsers : ['last 2 versions']
     },
-    discardComments: {
-      removeAll: true
+    discardComments : {
+      removeAll : true
     },
-    discardUnused: false,
-    mergeIdents: false,
-    reduceIdents: false,
-    safe: true,
-    sourcemap: true
+    discardUnused : false,
+    mergeIdents   : false,
+    reduceIdents  : false,
+    safe          : true,
+    sourcemap     : true
   })
 ]
 
@@ -260,16 +176,17 @@ if (!__DEV__) {
   webpackConfig.module.loaders.filter((loader) =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {
-    const [first, ...rest] = loader.loaders
+    const first = loader.loaders[0]
+    const rest = loader.loaders.slice(1)
     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
-    Reflect.deleteProperty(loader, 'loaders')
+    delete loader.loaders
   })
 
   webpackConfig.plugins.push(
     new ExtractTextPlugin('[name].[contenthash].css', {
-      allChunks: true
+      allChunks : true
     })
   )
 }
 
-export default webpackConfig
+module.exports = webpackConfig

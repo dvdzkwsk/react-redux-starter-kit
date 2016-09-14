@@ -1,24 +1,29 @@
-import fs from 'fs-extra'
-import _debug from 'debug'
-import webpackCompiler from '../build/webpack-compiler'
-import webpackConfig from '../build/webpack.config'
-import config from '../config'
+const fs = require('fs-extra')
+const debug = require('debug')('app:bin:compile')
+const webpackCompiler = require('../build/webpack-compiler')
+const webpackConfig = require('../build/webpack.config')
+const config = require('../config')
 
-const debug = _debug('app:bin:compile')
 const paths = config.utils_paths
 
-;(async function () {
-  try {
-    debug('Run compiler')
-    const stats = await webpackCompiler(webpackConfig)
-    if (stats.warnings.length && config.compiler_fail_on_warning) {
-      debug('Config set to fail on warning, exiting with status code "1".')
+const compile = () => {
+  debug('Starting compiler.')
+  return Promise.resolve()
+    .then(() => webpackCompiler(webpackConfig))
+    .then(stats => {
+      if (stats.warnings.length && config.compiler_fail_on_warning) {
+        throw new Error('Config set to fail on warning, exiting with status code "1".')
+      }
+      debug('Copying static assets to dist folder.')
+      fs.copySync(paths.client('static'), paths.dist())
+    })
+    .then(() => {
+      debug('Compilation completed successfully.')
+    })
+    .catch((err) => {
+      debug('Compiler encountered an error.', err)
       process.exit(1)
-    }
-    debug('Copy static assets to dist folder.')
-    fs.copySync(paths.client('static'), paths.dist())
-  } catch (e) {
-    debug('Compiler encountered an error.', e)
-    process.exit(1)
-  }
-})()
+    })
+}
+
+compile()

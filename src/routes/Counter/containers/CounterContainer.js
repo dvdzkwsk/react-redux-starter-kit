@@ -6,19 +6,19 @@ import { increment, doubleAsync } from '../modules/counter'
     wiring in the actions and state necessary to render a presentational
     component - in this case, the counter:   */
 
-import Counter from 'components/Counter'
+import Counter from '../components/Counter'
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  increment: () => increment(1),
+  increment : () => increment(1),
   doubleAsync
 }
 
 const mapStateToProps = (state) => ({
-  counter: state.counter
+  counter : state.counter
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

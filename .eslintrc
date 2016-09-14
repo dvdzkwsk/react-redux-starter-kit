@@ -1,6 +1,6 @@
 {
-  "parser"  : "babel-eslint",
-  "extends" : [
+  "parser": "babel-eslint",
+  "extends": [
     "standard",
     "standard-react"
   ],
@@ -9,21 +9,19 @@
     "react",
     "promise"
   ],
-  "env"     : {
+  "env": {
     "browser" : true
   },
-  "globals" : {
+  "globals": {
     "__DEV__"      : false,
+    "__TEST__"     : false,
     "__PROD__"     : false,
-    "__DEBUG__"    : false,
-    "__COVERAGE__" : false,
-    "__BASENAME__" : false
+    "__COVERAGE__" : false
   },
   "rules": {
-    "semi" : [2, "never"],
-    "max-len": [2, 120, 2],
-    "generator-star-spacing": 0,
-    "babel/generator-star-spacing": 1,
-    "jsx-quotes": [2, "prefer-single"]
+    "key-spacing"          : 0,
+    "jsx-quotes"           : [2, "prefer-single"],
+    "max-len"              : [2, 120, 2],
+    "object-curly-spacing" : [2, "always"]
   }
 }
