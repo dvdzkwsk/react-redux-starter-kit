@@ -29,7 +29,7 @@
       }
     },
     "dev": {
-      "command": "nodemon --exec node bin/server --ignore dist --ignore coverage --ignore tests --ignore src",
+      "command": "nodemon bin/server --ignore dist --ignore coverage --ignore tests --ignore src",
       "env": {
         "NODE_ENV": "development",
         "DEBUG": "app:*"
