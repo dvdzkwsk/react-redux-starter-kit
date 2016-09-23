@@ -1,4 +1,4 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from 'store/reducers'
 
 export default (store) => ({
   path : 'counter',
