@@ -13,6 +13,14 @@ module.exports = {
   }),
 
   // ======================================================
+  // Overrides when NODE_ENV === 'development' and context === 'qa'
+  // ======================================================
+  development_qa : (config) => ({
+    server_port: 3001,
+    compiler_public_path : `http://${config.server_host}:3001/`
+  }),
+
+  // ======================================================
   // Overrides when NODE_ENV === 'production'
   // ======================================================
   production : (config) => ({
@@ -25,5 +33,13 @@ module.exports = {
       chunkModules : true,
       colors       : true
     }
+  }),
+
+  // ======================================================
+  // Overrides when NODE_ENV === 'production' and context === 'qa'
+  // ======================================================
+  production_qa : (config) => ({
+    server_port: 3001,
+    compiler_public_path     : './'
   })
 }

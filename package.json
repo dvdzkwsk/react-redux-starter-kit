@@ -14,11 +14,13 @@
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
+    "dev:qa": "better-npm-run dev --env_context=qa",
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
+    "deploy:prod:qa": "better-npm-run deploy:prod -- -- --env_context=qa",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {

@@ -10,6 +10,7 @@ debug('Creating default configuration.')
 // ========================================================
 const config = {
   env : process.env.NODE_ENV || 'development',
+  env_context: argv.env_context || false,
 
   // ----------------------------------
   // Project Structure
@@ -78,6 +79,7 @@ config.globals = {
     'NODE_ENV' : JSON.stringify(config.env)
   },
   'NODE_ENV'     : config.env,
+  '__CONTEXT__'  : JSON.stringify(config.env_context),
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
@@ -126,6 +128,16 @@ if (overrides) {
   Object.assign(config, overrides(config))
 } else {
   debug('No environment overrides found, defaults will be used.')
+}
+
+// ========================================================
+// Context Configuration
+// ========================================================
+const context = config.env + '_' + config.env_context
+const contextOverrides = environments[context]
+if (contextOverrides) {
+  debug(`Found context overrides for "${context}", applying.`)
+  Object.assign(config, contextOverrides(config))
 }
 
 module.exports = config
