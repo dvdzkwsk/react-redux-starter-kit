@@ -110,6 +110,7 @@
     "yargs": "^5.0.0"
   },
   "devDependencies": {
+    "babel-core": "^6.17.0",
     "babel-eslint": "^6.0.0-beta.6",
     "babel-plugin-istanbul": "^2.0.1",
     "chai": "^3.4.1",
