@@ -16,8 +16,8 @@ const webpackConfig = {
   target  : 'web',
   devtool : config.compiler_devtool,
   resolve : {
-    root       : paths.client(),
-    extensions : ['', '.js', '.jsx', '.json']
+    modules    : [paths.client(), 'node_modules'],
+    extensions : ['.js', '.jsx', '.json']
   },
   module : {}
 }
@@ -71,6 +71,31 @@ webpackConfig.plugins = [
     })
   },
   new webpack.DefinePlugin(config.globals),
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      context: __dirname,
+      postcss: [
+        cssnano({
+          autoprefixer : {
+            add      : true,
+            remove   : true,
+            browsers : ['last 2 versions']
+          },
+          discardComments : {
+            removeAll : true
+          },
+          discardUnused : false,
+          mergeIdents   : false,
+          reduceIdents  : false,
+          safe          : true,
+          sourcemap     : true
+        })
+      ],
+      sassLoader: {
+        includePaths : paths.client('styles')
+      }
+    }
+  }),
   new HtmlWebpackPlugin({
     template : paths.client('index.html'),
     hash     : false,
@@ -154,28 +179,6 @@ webpackConfig.module.loaders.push({
   ]
 })
 
-webpackConfig.sassLoader = {
-  includePaths : paths.client('styles')
-}
-
-webpackConfig.postcss = [
-  cssnano({
-    autoprefixer : {
-      add      : true,
-      remove   : true,
-      browsers : ['last 2 versions']
-    },
-    discardComments : {
-      removeAll : true
-    },
-    discardUnused : false,
-    mergeIdents   : false,
-    reduceIdents  : false,
-    safe          : true,
-    sourcemap     : true
-  })
-]
-
 // File loaders
 /* eslint-disable */
 webpackConfig.module.loaders.push(
@@ -202,12 +205,16 @@ if (!__DEV__) {
   ).forEach((loader) => {
     const first = loader.loaders[0]
     const rest = loader.loaders.slice(1)
-    loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
+    loader.loader = ExtractTextPlugin.extract({
+      fallbackLoader : first,
+      loader         : rest.join('!')
+    })
     delete loader.loaders
   })
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('[name].[contenthash].css', {
+    new ExtractTextPlugin({
+      filename  : '[name].[contenthash].css',
       allChunks : true
     })
   )

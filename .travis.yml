@@ -8,7 +8,9 @@ cache:
     - node_modules
 
 install:
+  - npm prune
   - npm install
+  - npm update
 
 script:
   - npm run deploy:dev

@@ -46,8 +46,7 @@ const karmaConfig = {
       'react/addons'                   : true,
       'react/lib/ExecutionEnvironment' : true,
       'react/lib/ReactContext'         : 'window'
-    }),
-    sassLoader : webpackConfig.sassLoader
+    })
   },
   webpackMiddleware : {
     noInfo : true
@@ -59,7 +58,8 @@ const karmaConfig = {
 
 if (config.globals.__COVERAGE__) {
   karmaConfig.reporters.push('coverage')
-  karmaConfig.webpack.module.preLoaders = [{
+  karmaConfig.webpack.module.loaders.push({
+    enforce : 'pre',
     test    : /\.(js|jsx)$/,
     include : new RegExp(config.dir_client),
     exclude : /node_modules/,
@@ -67,7 +67,7 @@ if (config.globals.__COVERAGE__) {
     query   : Object.assign({}, config.compiler_babel, {
       plugins : (config.compiler_babel.plugins || []).concat('istanbul')
     })
-  }]
+  })
 }
 
 module.exports = (cfg) => cfg.set(karmaConfig)
