@@ -108,7 +108,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.14",
-    "yargs": "^5.0.0"
+    "yargs": "^6.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
