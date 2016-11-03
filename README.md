@@ -102,14 +102,18 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │   ├── components           # Global Reusable Presentational Components
 │   ├── containers           # Global Reusable Container Components
 │   ├── layouts              # Components that dictate major page structure
-│   ├── redux                # "Ducks" location...
-│   │   └── modules          # reducer, action, creators not part of a route
+│   │   └── CoreLayout.js    # CoreLayout which receives children for each route
+│   │   └── CoreLayout.scss  # Styles related to the CoreLayout
+│   │   └── index.js         # Main file for layout
 │   ├── routes               # Main route definitions and async split points
 │   │   ├── index.js         # Bootstrap main application routes with store
-│   │   └── Home             # Fractal route
-│   │       ├── index.js     # Route definitions and async split points
-│   │       ├── assets       # Assets required to render components
-│   │       ├── components   # Presentational React Components
+│   │   ├── Home             # Fractal route
+│   │   │   ├── index.js     # Route definitions and async split points
+│   │   │   ├── assets       # Assets required to render components
+│   │   │   ├── components   # Presentational React Components
+│   │   │   └── routes **    # Fractal sub-routes (** optional)
+│   │   └── Counter          # Fractal route
+│   │       ├── index.js     # Counter route definition
 │   │       ├── container    # Connect components to actions and store
 │   │       ├── modules      # Collections of reducers/constants/actions
 │   │       └── routes **    # Fractal sub-routes (** optional)
