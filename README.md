@@ -91,7 +91,6 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ```
 .
 ├── bin                      # Build/Start scripts
-├── blueprints               # Blueprint files for redux-cli
 ├── build                    # All build-related configuration
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── config                   # Project configuration settings
