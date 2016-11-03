@@ -95,7 +95,7 @@
     "ip": "^1.1.2",
     "json-loader": "^0.5.4",
     "node-sass": "^3.7.0",
-    "normalize.css": "^4.1.1",
+    "normalize.css": "^5.0.0",
     "postcss-loader": "^0.13.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
