@@ -13,7 +13,7 @@ const paths = config.utils_paths
 // rendering, you'll want to remove this middleware.
 app.use(require('connect-history-api-fallback')())
 
-//Apply gzip compression
+// Apply gzip compression
 app.use(compress())
 
 // ------------------------------------
