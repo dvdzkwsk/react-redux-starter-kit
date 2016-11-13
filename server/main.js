@@ -3,6 +3,7 @@ const debug = require('debug')('app:server')
 const webpack = require('webpack')
 const webpackConfig = require('../build/webpack.config')
 const config = require('../config')
+const compress = require('compression')
 
 const app = express()
 const paths = config.utils_paths
@@ -11,6 +12,9 @@ const paths = config.utils_paths
 // (ignoring file requests). If you want to implement universal
 // rendering, you'll want to remove this middleware.
 app.use(require('connect-history-api-fallback')())
+
+// Apply gzip compression
+app.use(compress())
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
