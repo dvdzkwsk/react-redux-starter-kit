@@ -1,3 +1,4 @@
+const argv = require('yargs').argv
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -54,22 +55,6 @@ webpackConfig.externals['react/addons'] = true
 // Plugins
 // ------------------------------------
 webpackConfig.plugins = [
-  // Plugin to show any webpack warnings and prevent tests from running
-  function () {
-    let errors = []
-    this.plugin('done', function (stats) {
-      if (stats.compilation.errors.length) {
-        // Log each of the warnings
-        stats.compilation.errors.forEach(function (error) {
-          errors.push(error.message || error)
-        })
-
-        // Pretend no assets were generated. This prevents the tests
-        // from running making it clear that there were warnings.
-        throw new Error(errors)
-      }
-    })
-  },
   new webpack.DefinePlugin(config.globals),
   new HtmlWebpackPlugin({
     template : paths.client('index.html'),
@@ -82,6 +67,26 @@ webpackConfig.plugins = [
     }
   })
 ]
+
+// Ensure that the compiler exits on errors during testing so that
+// they do not get skipped and misreported.
+if (__TEST__ && !argv.watch) {
+  webpackConfig.plugins.push(function () {
+    this.plugin('done', function (stats) {
+      const errors = []
+      if (stats.compilation.errors.length) {
+        // Log each of the warnings
+        stats.compilation.errors.forEach(function (error) {
+          errors.push(error.message || error)
+        })
+
+        // Pretend no assets were generated. This prevents the tests
+        // from running making it clear that there were warnings.
+        throw new Error(errors)
+      }
+    })
+  })
+}
 
 if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).')
