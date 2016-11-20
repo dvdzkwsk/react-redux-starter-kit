@@ -99,6 +99,7 @@
     "node-sass": "^3.7.0",
     "normalize.css": "^5.0.0",
     "postcss-loader": "^1.1.0",
+    "rc-queue-anim": "^0.12.6",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^4.4.5",

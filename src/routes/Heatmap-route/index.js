@@ -1,10 +1,10 @@
-import CoreLayout2 from './layouts/CoreLayout2'
+import CoreLayout from './layouts/CoreLayout'
 import Clickmap from './Clickmap'
 import Textmap from './Textmap'
 
 export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout2,
+  path        : '/heatmap',
+  component   : CoreLayout,
   indexRoute  : Textmap,
   childRoutes : [
     Clickmap

@@ -13,13 +13,12 @@ class App extends Component {
   }
 
   render () {
-    const { routes, routes1, store } = this.props
+    const { routes, store } = this.props
 
     return (
       <Provider store={store}>
         <div style={{ height: '100%' }}>
           <Router history={browserHistory} children={routes} />
-          <Router history={browserHistory} children={routes1} />
         </div>
       </Provider>
     )
