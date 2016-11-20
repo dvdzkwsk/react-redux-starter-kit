@@ -10,6 +10,7 @@ export default class Sider extends Component {
     this.state = {
       current: '1'
     }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick (e) {
@@ -26,7 +27,7 @@ export default class Sider extends Component {
         selectedKeys={[this.state.current]}
         mode='inline'
         theme='dark'
-                >
+        >
         <SubMenu key='sub1' title={<span><Icon type='mail' /><span>Navigation One</span></span>}>
           <MenuItemGroup title='Item 1'>
             <Menu.Item key='1'>Option 1</Menu.Item>
