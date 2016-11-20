@@ -1,3 +1,19 @@
+# check it out!
+* 路由容器组件
+* 布局容器组件
+* 容器组件
+* 展示组件
+
+从包含角度来对比的话，是从上往下的，不能反向。
+
+路由容器组件只有1个（暂时），根组件一定是布局容器组件。
+
+布局容器组件可以不止1个
+布局容器组件向容器组件传递的最好只是标记量形式（tag）
+
+容器组件负责包含的展示组件的数据绑定，注入UI交互行为和默认展示数据，
+定义钩子函数
+
 # React Redux Starter Kit
 
 [![Join the chat at https://gitter.im/davezuko/react-redux-starter-kit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/davezuko/react-redux-starter-kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
