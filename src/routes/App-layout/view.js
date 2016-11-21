@@ -1,12 +1,9 @@
 import React from 'react'
-import './CoreLayout.scss'
-import '../../styles/core.scss'
-import QueueAnim from 'rc-queue-anim'
+import Sider from '../Sider'
+import './style.scss'
+// import Location from '../Location'
 
-import Sider from '../../containers/Sider'
-import Location from '../../containers/Location'
-
-export const CoreLayout = ({ children }) => (
+export const AppLayout = ({ children }) => (
       <div className='ant-layout-aside'>
           <aside className='ant-layout-sider'>
             <div className='ant-layout-logo' />
@@ -15,7 +12,6 @@ export const CoreLayout = ({ children }) => (
           <div className='ant-layout-main'>
             <div className='ant-layout-header' />
             <div className='ant-layout-breadcrumb'>
-              <Location />
             </div>
             <div className='ant-layout-container'>
               <div className='ant-layout-content'>
@@ -31,8 +27,6 @@ export const CoreLayout = ({ children }) => (
       </div>
 )
 
-CoreLayout.propTypes = {
+AppLayout.propTypes = {
   children: React.PropTypes.element.isRequired
 }
-
-export default CoreLayout
