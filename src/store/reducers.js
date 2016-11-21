@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import siderData from '../containers/Sider/reducers'
+import { SiderData } from '../reducers/Sider'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    siderData
+    SiderData
   })
 }
 

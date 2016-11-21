@@ -1,6 +1,6 @@
-import { FETCH_SUCCESS } from './actions'
+import { FETCH_SUCCESS } from '../constants/Sider'
 
-export default function siderReducer (state = [], action) {
+export const SiderData = (state = [], action) => {
   switch (action.type) {
     case FETCH_SUCCESS:
       return [...action.payload]

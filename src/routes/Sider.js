@@ -44,40 +44,40 @@ class Sider extends Component {
         theme='dark'
         >
         {this.props.siderData.map((sub, index) => (
-            <SubMenu key={'sub' + subTag++} title=
-            {<span><Icon type={sub.icon || 'mail'} /><span>{sub.title}</span></span>} >
-            
-              {sub.children && sub.children.map((item, index) => {
-                if (item.type === 'group') {
-                  return (<MenuItemGroup key={'item' + itemTag++} title={item.title}>
-                    {item.children && item.children.map((option, index) => (
-                      <Menu.Item key={'option' + optionTag++}>{option.title}</Menu.Item>
-                    ))}
-                  </MenuItemGroup>)
-                } else if (item.type === 'drop') {
-                  return (<SubMenu key={'item' + itemTag++} title={item.title}>
-                    {item.children && item.children.map((option, index) => (
-                      <Menu.Item key={'option' + optionTag++}>{option.title}</Menu.Item>
-                    ))}
-                  </SubMenu>)
-                } else {
-                  return (
-                    <Menu.Item key={'option' + optionTag++}>{item.title}</Menu.Item>
-                  )
-                }
-              })}
+          <SubMenu key={'sub' + subTag++} title={<span><Icon type={sub.icon || 'mail'} /><span>{sub.title}</span></span>} >
 
-            </SubMenu>
-          ))}
+            {sub.children && sub.children.map((item, index) => {
+              if (item.type === 'group') {
+                return (<MenuItemGroup key={'item' + itemTag++} title={item.title}>
+                  {item.children && item.children.map((option, index) => (
+                    <Menu.Item key={'option' + optionTag++}>{option.title}</Menu.Item>
+                  ))}
+                </MenuItemGroup>)
+              } else if (item.type === 'drop') {
+                return (<SubMenu key={'item' + itemTag++} title={item.title}>
+                  {item.children && item.children.map((option, index) => (
+                    <Menu.Item key={'option' + optionTag++}>{option.title}</Menu.Item>
+                  ))}
+                </SubMenu>)
+              } else {
+                return (
+                  <Menu.Item key={'option' + optionTag++}>{item.title}</Menu.Item>
+                )
+              }
+            })}
+
+          </SubMenu>
+        ))}
       </Menu>
     )
   }
 }
 
-export default connect(state => ({
-  siderData: state.siderData
-}), dispatch => ({
-  ...bindActionCreators({
-    fetchData
-  }, dispatch)
-}))(Sider)
+export default connect(
+  state => ({
+    siderData: state.SiderData
+  }),
+  dispatch => ({
+    fetchData: () => dispatch(fetchData())
+  })
+)(Sider)

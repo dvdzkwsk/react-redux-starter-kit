@@ -1,1 +1,3 @@
-export { AppLayout } from './view'
+import { AppLayout } from './view'
+
+export default AppLayout
