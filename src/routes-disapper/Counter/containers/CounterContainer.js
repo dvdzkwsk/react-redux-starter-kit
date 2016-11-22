@@ -4,7 +4,11 @@ import { increment, doubleAsync } from '../modules/counter'
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
     wiring in the actions and state necessary to render a presentational
-    component - in this case, the counter:   */
+    component - in this case, the counter:
+    这是一个容器组件。注意它不包含任何JSX，
+    它也没有反应。此组件是**唯一的* *负责
+    接线的动作和状态要渲染一个表象
+    组件-在这种情况下，计数器：  */
 
 import Counter from '../components/Counter'
 

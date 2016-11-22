@@ -1,8 +1,8 @@
 import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import './HomeView.scss'
+import DuckImage from './assets/Duck.jpg'
+import './style.scss'
 
-export const HomeView = () => (
+export const HomeRoute = () => (
   <div>
     <h4>Welcome!</h4>
     <img
@@ -12,4 +12,4 @@ export const HomeView = () => (
   </div>
 )
 
-export default HomeView
+export default HomeRoute
