@@ -1,24 +1,14 @@
 # check it out!
-* app根组件
-* 路由容器组件
-* 布局容器组件
-* 一般容器组件
-* 展示组件
-
-app根组件下面至少有1个路由套件
-一个路由套件由1个布局容器组件和多个路由容器组件和多个一般容器组件组成
-一个路由容器可能是路由套件
-
-布局容器组件包含一般容器组件和路由容器组件，传递的信息仅限于tag等标记量
-
-不管是路由容器组件还是一般容器组件都可能包含actions,reducers,containers,不可复用的components,contants
-其中containers负责包含的展示组件到state和action之间数据绑定，定义钩子函数等
-actions定义事件驱动
-reducers定义事件发生如何处理数据
-contants定义常量数据
-
-可复用的组件
-* 展示组件
+* 目录结构采用扁平风格
+* 在components，containers之上加上一层layouts，避免无用的props导致子组件vrender损失性能，也不用大量的定义shouldcomponentupdate，可能会带来的问题是
+reducer很难管理
+* layouts仅应该包含containers(或不依赖store的component），并且传递标记风格样式的props
+* containers仅应该包含components，并且关联state和交互行为注入到component中
+* component应不依赖探测条件，仅提供展示和交互的接口
+* 如果mapstatetoprop中存在大量计算，应该使用reselect，对关心的数据进行缓存
+* 如果尽可能的减小reducer的粒度，并且保证所有action都有对应的处理，就不会出现state发生clone的现象，那么reselect就不是那么必要了
+* 异步加载路由组件仅在依赖过多时使用
+* 组件的命名采用驼峰首字母大写
 
 # React Redux Starter Kit
 

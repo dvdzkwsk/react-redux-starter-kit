@@ -1,6 +1,4 @@
-import {
-    FETCH_SUCCESS
-} from '../constants/Sider'
+import { FETCH_SUCCESS } from './constants'
 
 export const fetchSuccess = (data) => ({
   type: FETCH_SUCCESS,
@@ -14,14 +12,15 @@ export const fetchData = () => {
         dispatch(fetchSuccess([{
           title: '热力图',
           children: [{
-            title: '浏览热力图'
+            title: '浏览热力图',
+            url: '/heatmap'
           }]
         }, {
           title: 'NavOne',
           children: [{
             title: 'item1',
             type: 'drop',
-            children: [{ title: 'option1', type: 'option' }]
+            children: [{ title: 'option1', url: '/heatmap', type: 'option' }]
           }]
         }, {
           title: 'NavOne',

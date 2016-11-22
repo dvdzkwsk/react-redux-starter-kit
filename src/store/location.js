@@ -1,7 +1,7 @@
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const LOCATION_CHANGE = 'LOCATION_CHANGE'
+export const LOCATION_CHANGE = 'location/change'
 
 // ------------------------------------
 // Actions

@@ -1,13 +1,13 @@
-import AppLayout from './routes/App-layout'
-import Home from './routes/Home-route'
-import CounterRoute from './routes/Counter'
+import App from './layouts/App'
+import Home from './layouts/Home'
+import Heatmap from './layouts/Heatmap'
 
 export const createRoutes = (store) => ({
   path        : '/',
-  component   : AppLayout,
+  component   : App,
   indexRoute  : Home,
   childRoutes : [
-    CounterRoute(store)
+    Heatmap
   ]
 })
 

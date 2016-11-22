@@ -3,11 +3,24 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Menu, Icon } from 'antd'
 import { fetchData } from '../actions/Sider'
+import { Link } from 'react-router'
 
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
 
-console.log('todo connect')
+const mapStateToProps = (state, ownProps) => {
+  return {
+    siderData: state.SiderData
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetchData: () =>{
+      dispatch(fetchData())
+    }
+  }
+}
+
 class Sider extends Component {
   static propTypes = {
     fetchData: React.PropTypes.func.isRequired,
@@ -42,26 +55,27 @@ class Sider extends Component {
         selectedKeys={[this.state.current]}
         mode='inline'
         theme='dark'
-        >
+        > 
         {this.props.siderData.map((sub, index) => (
-          <SubMenu key={'sub' + subTag++} title={<span><Icon type={sub.icon || 'mail'} /><span>{sub.title}</span></span>} >
+          <SubMenu key={'sub' + subTag++} title={<span><Icon type={sub.icon || 'mail'} />
+          <span>{sub.title}</span></span>} >
 
             {sub.children && sub.children.map((item, index) => {
               if (item.type === 'group') {
                 return (<MenuItemGroup key={'item' + itemTag++} title={item.title}>
                   {item.children && item.children.map((option, index) => (
-                    <Menu.Item key={'option' + optionTag++}>{option.title}</Menu.Item>
+                    <Menu.Item key={'option' + optionTag++}><Link to={option.url}>{option.title}</Link></Menu.Item>
                   ))}
                 </MenuItemGroup>)
               } else if (item.type === 'drop') {
                 return (<SubMenu key={'item' + itemTag++} title={item.title}>
                   {item.children && item.children.map((option, index) => (
-                    <Menu.Item key={'option' + optionTag++}>{option.title}</Menu.Item>
+                    <Menu.Item key={'option' + optionTag++}><Link to={option.url}>{option.title}</Link></Menu.Item>
                   ))}
                 </SubMenu>)
               } else {
                 return (
-                  <Menu.Item key={'option' + optionTag++}>{item.title}</Menu.Item>
+                  <Menu.Item key={'option' + optionTag++}><Link to={item.url}>{item.title}</Link></Menu.Item>
                 )
               }
             })}
@@ -74,10 +88,6 @@ class Sider extends Component {
 }
 
 export default connect(
-  state => ({
-    siderData: state.SiderData
-  }),
-  dispatch => ({
-    fetchData: () => dispatch(fetchData())
-  })
+  mapStateToProps,
+  mapDispatchToProps,
 )(Sider)
