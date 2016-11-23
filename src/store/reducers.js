@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SiderData } from '../containers/Sider/reducers'
+import { SiderData } from '../layouts/App/containers/Sider/reducers'
 import location from './location'
 
 export const makeRootReducer = (asyncReducers) => {

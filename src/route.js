@@ -1,13 +1,13 @@
-import App from './layouts/App'
-import Home from './layouts/Home'
-import Heatmap from './layouts/Heatmap'
+import AppLayout from './layouts/App'
+import HomeLayout from './layouts/Home'
+import HeatmapLayout from './layouts/Heatmap'
 
 export const createRoutes = (store) => ({
   path        : '/',
-  component   : App,
-  indexRoute  : Home,
+  component   : AppLayout,
+  indexRoute  : HomeLayout,
   childRoutes : [
-    Heatmap
+    HeatmapLayout
   ]
 })
 

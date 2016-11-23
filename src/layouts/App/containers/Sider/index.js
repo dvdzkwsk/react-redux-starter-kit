@@ -8,20 +8,15 @@ import { fetchData } from './actions'
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
 
-const mapStateToProps = (state, ownProps) => {
-  return {
+@connect(
+  state => ({
     siderData: state.SiderData
-  }
-}
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    fetchData: () =>{
-      dispatch(fetchData())
-    }
-  }
-}
-
-class SiderContainer extends Component {
+  }),
+  dispatch => ({
+    fetchData: () => dispatch(fetchData())
+  })
+)
+export class SiderContainer extends Component {
   static propTypes = {
     fetchData: React.PropTypes.func.isRequired,
     siderData: React.PropTypes.array.isRequired
@@ -86,7 +81,3 @@ class SiderContainer extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SiderContainer)
