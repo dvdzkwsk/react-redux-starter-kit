@@ -1,10 +1,10 @@
 import React from 'react'
 import { IndexLink } from 'react-router'
 
-import Sider from '../../containers/Sider'
+import { SiderContainer } from './containers'
 
 import './style.scss'
-import DuckImage from './assets/Duck.jpg'
+import DuckImage from './assets/logo.jpg'
 
 
 export const AppLayout = ({ children }) => (
@@ -17,7 +17,7 @@ export const AppLayout = ({ children }) => (
           src={ DuckImage } /></IndexLink>
        
       </div>
-      <Sider global-style="default"/>
+      <SiderContainer global-style="default"/>
     </aside>
     <div className='ant-layout-main'>
       <div className='ant-layout-header'/>

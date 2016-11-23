@@ -1,9 +1,8 @@
 import React from 'react'
+import { RootContainer } from './containers'
 
 export const HomeLayout = () => (
   <div>
-    <h4>Welcome!HomeLayout!</h4>
+    <RootContainer />
   </div>
 )
-
-export default HomeLayout

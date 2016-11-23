@@ -1,9 +1,8 @@
 import React from 'react'
+import { RootContainer } from './containers'
 
 export const HeatmapLayout = () => (
   <div>
-    <h4>Welcome!HeatmapLayout!</h4>
+    <RootContainer />
   </div>
 )
-
-export default HeatmapLayout

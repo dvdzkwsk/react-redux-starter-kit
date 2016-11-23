@@ -8,7 +8,8 @@ reducer很难管理
 * 如果mapstatetoprop中存在大量计算，应该使用reselect，对关心的数据进行缓存
 * 如果尽可能的减小reducer的粒度，并且保证所有action都有对应的处理，就不会出现state发生clone的现象，那么reselect就不是那么必要了
 * 异步加载路由组件仅在依赖过多时使用
-* 组件的命名采用驼峰首字母大写
+* 组件的命名采用驼峰首字母大写，组件的类名请明确表示component/container/layout，而文件目录名则有上级限制，不需要这样
+
 
 # React Redux Starter Kit
 
