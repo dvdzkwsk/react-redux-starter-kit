@@ -155,7 +155,7 @@ webpackConfig.module.loaders = [{
   query   : config.compiler_babel
 }, {
   test   : /\.json$/,
-  loader : 'json'
+  loader : 'json-loader'
 }]
 
 // ------------------------------------
