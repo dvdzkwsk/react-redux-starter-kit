@@ -36,18 +36,13 @@ const karmaConfig = {
       loaders : webpackConfig.module.loaders.concat([
         {
           test   : /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
-          loader : 'imports?define=>false,require=>false'
+          loader : 'imports-loader?define=>false,require=>false'
         }
       ])
     },
     // Enzyme fix, see:
     // https://github.com/airbnb/enzyme/issues/47
-    externals : Object.assign({}, webpackConfig.externals, {
-      'react/addons'                   : true,
-      'react/lib/ExecutionEnvironment' : true,
-      'react/lib/ReactContext'         : 'window'
-    }),
-    sassLoader : webpackConfig.sassLoader
+    externals : webpackConfig.externals
   },
   webpackMiddleware : {
     noInfo : true
@@ -59,15 +54,16 @@ const karmaConfig = {
 
 if (config.globals.__COVERAGE__) {
   karmaConfig.reporters.push('coverage')
-  karmaConfig.webpack.module.preLoaders = [{
+  karmaConfig.webpack.module.loaders.push({
+    enforce : 'pre',
     test    : /\.(js|jsx)$/,
     include : new RegExp(config.dir_client),
     exclude : /node_modules/,
-    loader  : 'babel',
+    loader  : 'babel-loader',
     query   : Object.assign({}, config.compiler_babel, {
       plugins : (config.compiler_babel.plugins || []).concat('istanbul')
     })
-  }]
+  })
 }
 
 module.exports = (cfg) => cfg.set(karmaConfig)

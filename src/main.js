@@ -27,8 +27,8 @@ let render = () => {
 // Developer Tools Setup
 // ========================================================
 if (__DEV__) {
-  if (window.devToolsExtension) {
-    window.devToolsExtension.open()
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    window.__REDUX_DEVTOOLS_EXTENSION__.open()
   }
 }
 

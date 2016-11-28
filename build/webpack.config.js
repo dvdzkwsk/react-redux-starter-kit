@@ -17,8 +17,8 @@ const webpackConfig = {
   target  : 'web',
   devtool : config.compiler_devtool,
   resolve : {
-    root       : paths.client(),
-    extensions : ['', '.js', '.jsx', '.json']
+    modules    : [paths.client(), 'node_modules'],
+    extensions : ['.js', '.jsx', '.json']
   },
   module : {}
 }
@@ -46,16 +46,42 @@ webpackConfig.output = {
 // ------------------------------------
 // Externals
 // ------------------------------------
-webpackConfig.externals = {}
-webpackConfig.externals['react/lib/ExecutionEnvironment'] = true
-webpackConfig.externals['react/lib/ReactContext'] = true
-webpackConfig.externals['react/addons'] = true
+webpackConfig.externals = [
+  'react/lib/ExecutionEnvironment',
+  'react/lib/ReactContext',
+  'react/addons'
+]
 
 // ------------------------------------
 // Plugins
 // ------------------------------------
 webpackConfig.plugins = [
   new webpack.DefinePlugin(config.globals),
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      context: __dirname,
+      postcss: [
+        cssnano({
+          autoprefixer : {
+            add      : true,
+            remove   : true,
+            browsers : ['last 2 versions']
+          },
+          discardComments : {
+            removeAll : true
+          },
+          discardUnused : false,
+          mergeIdents   : false,
+          reduceIdents  : false,
+          safe          : true,
+          sourcemap     : true
+        })
+      ],
+      sassLoader: {
+        includePaths : paths.client('styles')
+      }
+    }
+  }),
   new HtmlWebpackPlugin({
     template : paths.client('index.html'),
     hash     : false,
@@ -95,10 +121,9 @@ if (__DEV__) {
     new webpack.NoErrorsPlugin()
   )
 } else if (__PROD__) {
-  debug('Enable plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
+  debug('Enable plugins for production (OccurenceOrder, UglifyJS).')
   webpackConfig.plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress : {
         unused    : true,
@@ -125,11 +150,11 @@ if (!__TEST__) {
 webpackConfig.module.loaders = [{
   test    : /\.(js|jsx)$/,
   exclude : /node_modules/,
-  loader  : 'babel',
+  loader  : 'babel-loader',
   query   : config.compiler_babel
 }, {
   test   : /\.json$/,
-  loader : 'json'
+  loader : 'json-loader'
 }]
 
 // ------------------------------------
@@ -137,60 +162,36 @@ webpackConfig.module.loaders = [{
 // ------------------------------------
 // We use cssnano with the postcss loader, so we tell
 // css-loader not to duplicate minimization.
-const BASE_CSS_LOADER = 'css?sourceMap&-minimize'
+const BASE_CSS_LOADER = 'css-loader?sourceMap&-minimize'
 
 webpackConfig.module.loaders.push({
   test    : /\.scss$/,
-  exclude : null,
   loaders : [
-    'style',
+    'style-loader',
     BASE_CSS_LOADER,
-    'postcss',
-    'sass?sourceMap'
+    'postcss-loader',
+    'sass-loader?sourceMap'
   ]
 })
 webpackConfig.module.loaders.push({
   test    : /\.css$/,
-  exclude : null,
   loaders : [
-    'style',
+    'style-loader',
     BASE_CSS_LOADER,
-    'postcss'
+    'postcss-loader'
   ]
 })
-
-webpackConfig.sassLoader = {
-  includePaths : paths.client('styles')
-}
-
-webpackConfig.postcss = [
-  cssnano({
-    autoprefixer : {
-      add      : true,
-      remove   : true,
-      browsers : ['last 2 versions']
-    },
-    discardComments : {
-      removeAll : true
-    },
-    discardUnused : false,
-    mergeIdents   : false,
-    reduceIdents  : false,
-    safe          : true,
-    sourcemap     : true
-  })
-]
 
 // File loaders
 /* eslint-disable */
 webpackConfig.module.loaders.push(
-  { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
-  { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-  { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
-  { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-  { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-  { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
+  { test: /\.woff(\?.*)?$/,  loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
+  { test: /\.woff2(\?.*)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
+  { test: /\.otf(\?.*)?$/,   loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
+  { test: /\.ttf(\?.*)?$/,   loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
+  { test: /\.eot(\?.*)?$/,   loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]' },
+  { test: /\.svg(\?.*)?$/,   loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+  { test: /\.(png|jpg)$/,    loader: 'url-loader?limit=8192' }
 )
 /* eslint-enable */
 
@@ -207,12 +208,16 @@ if (!__DEV__) {
   ).forEach((loader) => {
     const first = loader.loaders[0]
     const rest = loader.loaders.slice(1)
-    loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
+    loader.loader = ExtractTextPlugin.extract({
+      fallbackLoader : first,
+      loader         : rest.join('!')
+    })
     delete loader.loaders
   })
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('[name].[contenthash].css', {
+    new ExtractTextPlugin({
+      filename  : '[name].[contenthash].css',
       allChunks : true
     })
   )
