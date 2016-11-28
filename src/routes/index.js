@@ -19,10 +19,10 @@ export const createRoutes = (store) => ({
     using getChildRoutes with the following signature:
 
     getChildRoutes (location, cb) {
-      require.ensure([], (require) => {
+      System.import('./Counter').then((module) => {
         cb(null, [
           // Remove imports!
-          require('./Counter').default(store)
+          module.default(store)
         ])
       })
     }
