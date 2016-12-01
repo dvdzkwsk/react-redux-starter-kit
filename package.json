@@ -113,7 +113,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",
-    "babel-plugin-istanbul": "^2.0.1",
+    "babel-plugin-istanbul": "^3.0.0",
     "chai": "^3.4.1",
     "chai-as-promised": "^6.0.0",
     "chai-enzyme": "^0.6.1",
