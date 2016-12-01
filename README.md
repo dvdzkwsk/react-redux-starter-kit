@@ -48,7 +48,7 @@ Finally, This project wouldn't be possible without the help of our many contribu
 
 ## Getting Started
 
-After confirming that your development environment meets the specified [requirements](#requirements), you can create a new project based on `react-redux-starter-kit` in one of two ways:
+After confirming that your development environment meets the specified [requirements](#requirements), you can create a new project based on `react-redux-starter-kit` by doing the following:
 
 ### Install from source
 
