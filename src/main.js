@@ -23,15 +23,6 @@ let render = () => {
   )
 }
 
-// ========================================================
-// Developer Tools Setup
-// ========================================================
-if (__DEV__) {
-  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
-    window.__REDUX_DEVTOOLS_EXTENSION__.open()
-  }
-}
-
 // This code is excluded from production bundle
 if (__DEV__) {
   if (module.hot) {
