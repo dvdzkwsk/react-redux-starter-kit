@@ -1,14 +1,14 @@
 const argv = require('yargs').argv
-const config = require('../config')
+const project = require('./project.config')
 const webpackConfig = require('./webpack.config')
-const debug = require('debug')('app:karma')
+const debug = require('debug')('app:config:karma')
 
 debug('Creating configuration.')
 const karmaConfig = {
   basePath : '../', // project root in relation to bin/karma.js
   files    : [
     {
-      pattern  : `./${config.dir_test}/test-bundler.js`,
+      pattern  : `./${project.dir_test}/test-bundler.js`,
       watched  : false,
       served   : true,
       included : true
@@ -18,7 +18,7 @@ const karmaConfig = {
   frameworks    : ['mocha'],
   reporters     : ['mocha'],
   preprocessors : {
-    [`${config.dir_test}/test-bundler.js`] : ['webpack']
+    [`${project.dir_test}/test-bundler.js`] : ['webpack']
   },
   browsers : ['PhantomJS'],
   webpack  : {
@@ -53,19 +53,19 @@ const karmaConfig = {
     noInfo : true
   },
   coverageReporter : {
-    reporters : config.coverage_reporters
+    reporters : project.coverage_reporters
   }
 }
 
-if (config.globals.__COVERAGE__) {
+if (project.globals.__COVERAGE__) {
   karmaConfig.reporters.push('coverage')
   karmaConfig.webpack.module.preLoaders = [{
     test    : /\.(js|jsx)$/,
-    include : new RegExp(config.dir_client),
+    include : new RegExp(project.dir_client),
     exclude : /node_modules/,
     loader  : 'babel',
-    query   : Object.assign({}, config.compiler_babel, {
-      plugins : (config.compiler_babel.plugins || []).concat('istanbul')
+    query   : Object.assign({}, project.compiler_babel, {
+      plugins : (project.compiler_babel.plugins || []).concat('istanbul')
     })
   }]
 }

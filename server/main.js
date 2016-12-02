@@ -1,12 +1,11 @@
 const express = require('express')
 const debug = require('debug')('app:server')
 const webpack = require('webpack')
-const webpackConfig = require('../build/webpack.config')
-const config = require('../config')
+const webpackConfig = require('../config/webpack.config')
+const project = require('../config/project.config')
 const compress = require('compression')
 
 const app = express()
-const paths = config.utils_paths
 
 // This rewrites all routes requests to the root /index.html file
 // (ignoring file requests). If you want to implement universal
@@ -19,18 +18,18 @@ app.use(compress())
 // ------------------------------------
 // Apply Webpack HMR Middleware
 // ------------------------------------
-if (config.env === 'development') {
+if (project.env === 'development') {
   const compiler = webpack(webpackConfig)
 
   debug('Enable webpack dev and HMR middleware')
   app.use(require('webpack-dev-middleware')(compiler, {
     publicPath  : webpackConfig.output.publicPath,
-    contentBase : paths.client(),
+    contentBase : project.paths.client(),
     hot         : true,
-    quiet       : config.compiler_quiet,
-    noInfo      : config.compiler_quiet,
+    quiet       : project.compiler_quiet,
+    noInfo      : project.compiler_quiet,
     lazy        : false,
-    stats       : config.compiler_stats
+    stats       : project.compiler_stats
   }))
   app.use(require('webpack-hot-middleware')(compiler))
 
@@ -38,7 +37,7 @@ if (config.env === 'development') {
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
-  app.use(express.static(paths.client('static')))
+  app.use(express.static(project.paths.client('static')))
 } else {
   debug(
     'Server is being run outside of live development mode, meaning it will ' +
@@ -51,7 +50,7 @@ if (config.env === 'development') {
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
-  app.use(express.static(paths.dist()))
+  app.use(express.static(project.paths.dist()))
 }
 
 module.exports = app

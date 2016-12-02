@@ -29,7 +29,7 @@
       }
     },
     "dev": {
-      "command": "nodemon bin/server --ignore dist --ignore coverage --ignore tests --ignore src",
+      "command": "nodemon bin/dev-server --ignore dist --ignore coverage --ignore tests --ignore src",
       "env": {
         "NODE_ENV": "development",
         "DEBUG": "app:*"
@@ -56,13 +56,13 @@
       }
     },
     "start": {
-      "command": "node bin/server",
+      "command": "node bin/dev-server",
       "env": {
         "DEBUG": "app:*"
       }
     },
     "test": {
-      "command": "node ./node_modules/karma/bin/karma start build/karma.conf",
+      "command": "node ./node_modules/karma/bin/karma start config/karma.config",
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "app:*"
