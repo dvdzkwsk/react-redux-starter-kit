@@ -42,7 +42,7 @@ const compile = () => {
         throw new Error('Config set to fail on warning, exiting with status code "1".')
       }
       debug('Copying static assets to dist folder.')
-      fs.copySync(project.paths.client('static'), project.paths.dist())
+      fs.copySync(project.paths.public(), project.paths.dist())
     })
     .then(() => {
       debug('Compilation completed successfully.')

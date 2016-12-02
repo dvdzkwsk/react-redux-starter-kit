@@ -92,6 +92,7 @@ The application structure presented in this boilerplate is **fractal**, where fu
 .
 ├── bin                      # Build/Start scripts
 ├── config                   # Project and build configurations
+├── public                   # Static public assets (not imported anywhere in source code)
 ├── server                   # Express application that provides webpack middleware
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
@@ -115,7 +116,6 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │   │       ├── container    # Connect components to actions and store
 │   │       ├── modules      # Collections of reducers/constants/actions
 │   │       └── routes **    # Fractal sub-routes (** optional)
-│   ├── static               # Static assets (not imported anywhere in source code)
 │   ├── store                # Redux-specific pieces
 │   │   ├── createStore.js   # Create and instrument redux store
 │   │   └── reducers.js      # Reducer registry and injection

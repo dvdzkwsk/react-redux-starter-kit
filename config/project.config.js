@@ -17,6 +17,7 @@ const config = {
   path_base  : path.resolve(__dirname, '..'),
   dir_client : 'src',
   dir_dist   : 'dist',
+  dir_public : 'public',
   dir_server : 'server',
   dir_test   : 'tests',
 
@@ -112,6 +113,7 @@ function base () {
 config.paths = {
   base   : base,
   client : base.bind(null, config.dir_client),
+  public : base.bind(null, config.dir_public),
   dist   : base.bind(null, config.dir_dist)
 }
 
