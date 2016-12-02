@@ -21,7 +21,7 @@ app.use(compress())
 if (project.env === 'development') {
   const compiler = webpack(webpackConfig)
 
-  debug('Enable webpack dev and HMR middleware')
+  debug('Enabling webpack dev and HMR middleware')
   app.use(require('webpack-dev-middleware')(compiler, {
     publicPath  : webpackConfig.output.publicPath,
     contentBase : project.paths.client(),

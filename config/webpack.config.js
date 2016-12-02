@@ -84,13 +84,13 @@ if (__TEST__ && !argv.watch) {
 }
 
 if (__DEV__) {
-  debug('Enable plugins for live development (HMR, NoErrors).')
+  debug('Enabling plugins for live development (HMR, NoErrors).')
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   )
 } else if (__PROD__) {
-  debug('Enable plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
+  debug('Enabling plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
   webpackConfig.plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -196,7 +196,7 @@ webpackConfig.module.loaders.push(
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
 if (!__DEV__) {
-  debug('Apply ExtractTextPlugin to CSS loaders.')
+  debug('Applying ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.loaders.filter((loader) =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {
