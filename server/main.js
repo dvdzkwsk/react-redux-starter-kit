@@ -33,11 +33,11 @@ if (project.env === 'development') {
   }))
   app.use(require('webpack-hot-middleware')(compiler))
 
-  // Serve static assets from ~/src/static since Webpack is unaware of
+  // Serve static assets from ~/public since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
-  app.use(express.static(project.paths.client('static')))
+  app.use(express.static(project.paths.public()))
 } else {
   debug(
     'Server is being run outside of live development mode, meaning it will ' +
