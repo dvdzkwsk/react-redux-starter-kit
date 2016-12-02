@@ -44,7 +44,7 @@ Finally, This project wouldn't be possible without the help of our many contribu
 
 ## Requirements
 * node `^4.5.0`
-* npm `^3.0.0`
+* yarn `^0.17.0` or npm `^3.0.0`
 
 ## Getting Started
 
@@ -59,11 +59,11 @@ $ git clone https://github.com/davezuko/react-redux-starter-kit.git <my-project-
 $ cd <my-project-name>
 ```
 
-Then install dependencies and check to see it works
+Then install dependencies and check to see it works. It is recommended that you use [Yarn](https://yarnpkg.com/) for deterministic installs, but `npm install` will work just as well.
 
 ```bash
-$ npm install                   # Install project dependencies
-$ npm start                     # Compile and launch
+$ yarn install    # Install project dependencies
+$ npm start       # Compile and launch
 ```
 If everything works, you should see the following:
 
