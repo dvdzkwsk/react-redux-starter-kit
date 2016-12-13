@@ -92,7 +92,7 @@
     "file-loader": "^0.9.0",
     "fs-extra": "^1.0.0",
     "html-webpack-plugin": "^2.22.0",
-    "imports-loader": "^0.6.5",
+    "imports-loader": "^0.7.0",
     "ip": "^1.1.2",
     "json-loader": "^0.5.4",
     "node-sass": "^4.0.0",
