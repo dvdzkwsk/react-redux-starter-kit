@@ -62,7 +62,7 @@
       }
     },
     "test": {
-      "command": "node ./node_modules/karma/bin/karma start config/karma.config",
+      "command": "node ./node_modules/karma/bin/karma start config/karma.conf",
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "app:*"
