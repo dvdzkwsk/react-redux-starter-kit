@@ -28,7 +28,7 @@ if (project.env === 'development') {
     stats       : project.compiler_stats
   }))
   app.use(require('webpack-hot-middleware')(compiler, {
-    path: `${webpackConfig.output.publicPath}/__webpack_hmr`
+    path: '/__webpack_hmr'
   }))
 
   // Serve static assets from ~/public since Webpack is unaware of
