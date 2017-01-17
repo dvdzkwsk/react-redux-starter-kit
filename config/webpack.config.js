@@ -90,7 +90,7 @@ if (__DEV__) {
     new webpack.NoErrorsPlugin()
   )
 } else if (__PROD__) {
-  debug('Enabling plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
+  debug('Enabling plugins for production (OccurrenceOrder, Dedupe & UglifyJS).')
   webpackConfig.plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
