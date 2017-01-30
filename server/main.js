@@ -25,7 +25,12 @@ if (project.env === 'development') {
     quiet       : project.compiler_quiet,
     noInfo      : project.compiler_quiet,
     lazy        : false,
-    stats       : project.compiler_stats
+    stats       : project.compiler_stats,
+    // Temporary for WSL (build 15019)
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
+    }
   }))
   app.use(require('webpack-hot-middleware')(compiler, {
     path: '/__webpack_hmr'
