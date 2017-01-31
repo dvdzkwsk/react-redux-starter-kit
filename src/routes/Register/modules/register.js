@@ -23,23 +23,6 @@ export const postForm = () => {
         { headers: {'Content-Type': 'application/json'} }
       )
     })
-
-    // dispatch({
-    //   type: SUBMIT_REGISTER_FORM,
-    //   payload: new Promise((resolve, reject) => {
-    //     jQuery.post({
-    //       url: 'http://127.0.0.1:3001',
-    //       contentType: 'application/json',
-    //       data
-    //     }).then((data, textStatus, jqXHR) => {
-    //       delete jqXHR.then; // treat xhr as a non-promise
-    //       resolve(jqXHR);
-    //     }).fail((jqXHR, textStatus, errorThrown) => {
-    //       delete jqXHR.then; // treat xhr as a non-promise
-    //       reject(jqXHR);
-    //     })
-    //   })
-    // })
   }
 }
 
