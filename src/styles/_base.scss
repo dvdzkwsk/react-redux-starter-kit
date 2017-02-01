@@ -10,3 +10,9 @@ For example:
 @import './variables/components';
 @import './themes/default';
 */
+
+/**
+ * Fontawesome
+ */
+$fa-font-path: '~font-awesome/fonts/';
+@import '~font-awesome/scss/font-awesome.scss';
