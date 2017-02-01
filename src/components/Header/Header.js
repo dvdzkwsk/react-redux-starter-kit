@@ -6,11 +6,11 @@ export const Header = () => (
   <div>
     <h1>React Redux Starter Kit</h1>
     <IndexLink to='/' activeClassName='route--active'>
-      Home
+      <span className="fa fa-home"/> Home
     </IndexLink>
     {' · '}
     <Link to='/counter' activeClassName='route--active'>
-      Counter
+      <span className="fa fa-clock-o"/> Counter
     </Link>
   </div>
 )
