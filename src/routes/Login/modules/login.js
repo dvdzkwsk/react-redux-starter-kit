@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
 import Cookies from 'js-cookie'
-import { AUTH_SUCCESS } from '../../../store/rootReducers/auth'
+import { FETCHED_AUTH_TOKEN } from '../../../store/rootReducers/auth'
 import { FETCHED_USER_ID } from '../../../store/rootReducers/user'
 
 // ------------------------------------
@@ -12,9 +12,9 @@ export const SUBMIT_LOGIN_FORM_PENDING = `${SUBMIT_LOGIN_FORM}_PENDING`
 export const SUBMIT_LOGIN_FORM_FULFILLED = `${SUBMIT_LOGIN_FORM}_FULFILLED`
 export const SUBMIT_LOGIN_FORM_REJECTED = `${SUBMIT_LOGIN_FORM}_REJECTED`
 
-export const authSuccess = (authToken) => {
+export const fetchedAuthToken = (authToken) => {
   return {
-    type: AUTH_SUCCESS,
+    type: FETCHED_AUTH_TOKEN,
     payload: { authToken }
   }
 }
@@ -56,10 +56,10 @@ export const login = () => {
           expires: response.data.ttl / 60 / 60 / 24 // seconds to days
         })
 
-        dispatch(authSuccess(authToken))
+        dispatch(fetchedAuthToken(authToken))
         dispatch(fetchedUserId(response.data.userId))
 
-        browserHistory.push('/semesters')
+        browserHistory.push('semesters')
       })
     ))
   }
@@ -67,8 +67,9 @@ export const login = () => {
 
 export const actions = {
   login,
-  authSuccess,
-  fetchedUserId
+  fetchedAuthToken,
+  fetchedUserId,
+  submitLoginForm
 }
 
 const LOGIN_ACTION_HANDLERS = {

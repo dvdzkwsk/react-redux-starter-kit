@@ -1,7 +1,7 @@
-export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const FETCHED_AUTH_TOKEN = 'FETCHED_AUTH_TOKEN'
 
 const AUTH_ACTION_HANDLERS = {
-  [AUTH_SUCCESS]: (state, action) => {
+  [FETCHED_AUTH_TOKEN]: (state, action) => {
     return ({ ...state, authToken: action.payload.authToken })
   }
 }
