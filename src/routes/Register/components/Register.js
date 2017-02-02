@@ -14,6 +14,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 export const Register = (props) => (
   <form id="registerForm">
     <Field component={renderField} name="email" type="text" label="e-mail"/>
+    <Field component={renderField} name="password" type="password" label="password"/>
     <button type="button" onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</button>
     <button type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Clear Values</button>
   </form>
