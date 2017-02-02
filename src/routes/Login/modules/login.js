@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
+import Cookies from 'js-cookie'
 
 // ------------------------------------
 // Constants
@@ -15,6 +16,7 @@ export const SUBMIT_LOGIN_FORM_REJECTED = `${SUBMIT_LOGIN_FORM}_REJECTED`
 export const postForm = () => {
   return (dispatch, getState) => {
     const data = JSON.stringify(getState().form.loginForm.values)
+    // TODO set TTL
 
     dispatch({
       type: SUBMIT_LOGIN_FORM,
@@ -22,7 +24,13 @@ export const postForm = () => {
         'Users/login',
         data,
       ).then((response) => {
-        axios.defaults.headers.common['Authorization'] = response.data.id
+        const authToken = response.data.id
+
+        axios.defaults.headers.common['Authorization'] = authToken
+        Cookies.set('authToken', authToken, {
+          expires: response.data.ttl / 60 / 60 / 24 // seconds to days
+        })
+
         browserHistory.push('/semesters')
       })
     })
