@@ -12,7 +12,7 @@ export const SUBMIT_REGISTER_FORM_REJECTED = `${SUBMIT_REGISTER_FORM}_REJECTED`
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const postForm = () => {
+export const register = () => {
   return (dispatch, getState) => {
     const data = JSON.stringify(getState().form.registerForm.values)
 
@@ -27,7 +27,7 @@ export const postForm = () => {
 }
 
 export const actions = {
-  postForm
+  register
 }
 
 const REGISTER_ACTION_HANDLERS = {
