@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import reducers from './reducers'
-import { reducer as formReducer } from 'redux-form'
+import reducers from './rootReducers'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    form: formReducer,
     ...reducers,
     ...asyncReducers
   })
