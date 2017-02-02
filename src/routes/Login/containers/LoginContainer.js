@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { postForm } from '../modules/login'
+import { login } from '../modules/login'
 
 import Login from '../components/Login'
 
 const mapActionCreators: {handleSubmit: Function} = {
-  handleSubmit: postForm
+  handleSubmit: login
 }
 
 const mapStateToProps = (state): { submitting: boolean } => ({

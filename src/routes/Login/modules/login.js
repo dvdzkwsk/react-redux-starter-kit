@@ -13,10 +13,10 @@ export const SUBMIT_LOGIN_FORM_REJECTED = `${SUBMIT_LOGIN_FORM}_REJECTED`
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const postForm = () => {
+export const login = () => {
   return (dispatch, getState) => {
     const data = JSON.stringify(getState().form.loginForm.values)
-    // TODO set TTL
+    // TODO set TTL with rememberMe
 
     dispatch({
       type: SUBMIT_LOGIN_FORM,
@@ -38,7 +38,7 @@ export const postForm = () => {
 }
 
 export const actions = {
-  postForm
+  login
 }
 
 const LOGIN_ACTION_HANDLERS = {
