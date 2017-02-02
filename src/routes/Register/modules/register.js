@@ -19,9 +19,9 @@ export const postForm = () => {
     dispatch({
       type: SUBMIT_REGISTER_FORM,
       payload: axios.post(
-        'http://localhost:3001/api/Users',
+        'api/Users',
         data,
-        { headers: {'Content-Type': 'application/json'} }
+        // { headers: {'Content-Type': 'application/json'} }
       ).then((response) => browserHistory.push('/login'))
     })
   }

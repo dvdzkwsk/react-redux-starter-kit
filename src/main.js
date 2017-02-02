@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import createRoutes from './routes/index'
+import { configureAll } from './config'
+
+configureAll()
 
 // ========================================================
 // Store Instantiation
