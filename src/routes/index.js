@@ -9,17 +9,46 @@ import NotFoundRoute from './NotFound'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout,
-  indexRoute  : Home,
-  childRoutes : [
-    CounterRoute(store),
-    RegisterRoute(store),
-    LoginRoute(store),
-    NotFoundRoute
-  ]
-})
+export const createRoutes = (store) => {
+
+  const requireLogin = (nextState, replace, cb) => {
+    const { auth: { authToken } } = store.getState();
+    if (!authToken) {
+      replace('login');
+    }
+    cb();
+  }
+
+  const requirePublic = (nextState, replace, cb) => {
+    const { auth: { authToken } } = store.getState();
+    if (authToken) {
+      replace('semesters');
+    }
+    cb();
+  }
+
+  return ({
+    path        : '/',
+    component   : CoreLayout,
+    indexRoute  : Home,
+    childRoutes : [
+      {
+        onEnter: requirePublic,
+        childRoutes: [
+          RegisterRoute(store),
+          LoginRoute(store)
+        ]
+      },
+      {
+        onEnter: requireLogin,
+        childRoutes: [
+          CounterRoute(store)
+        ]
+      },
+      NotFoundRoute
+    ]
+  })
+}
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
