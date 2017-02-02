@@ -20,8 +20,7 @@ export const postForm = () => {
       type: SUBMIT_REGISTER_FORM,
       payload: axios.post(
         'Users',
-        data,
-        // { headers: {'Content-Type': 'application/json'} }
+        data
       ).then((response) => browserHistory.push('/login'))
     })
   }
