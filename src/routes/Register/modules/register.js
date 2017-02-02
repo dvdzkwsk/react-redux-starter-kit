@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router'
 
 // ------------------------------------
 // Constants
@@ -7,7 +8,7 @@ export const SUBMIT_REGISTER_FORM = 'SUBMIT_REGISTER_FORM'
 export const SUBMIT_REGISTER_FORM_PENDING = `${SUBMIT_REGISTER_FORM}_PENDING`
 export const SUBMIT_REGISTER_FORM_FULFILLED = `${SUBMIT_REGISTER_FORM}_FULFILLED`
 export const SUBMIT_REGISTER_FORM_REJECTED = `${SUBMIT_REGISTER_FORM}_REJECTED`
-// TODO https://github.com/rstacruz/nprogress
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -18,10 +19,10 @@ export const postForm = () => {
     dispatch({
       type: SUBMIT_REGISTER_FORM,
       payload: axios.post(
-        'url',
+        'http://localhost:3001/api/Users',
         data,
         { headers: {'Content-Type': 'application/json'} }
-      )
+      ).then((response) => browserHistory.push('/login'))
     })
   }
 }
@@ -38,7 +39,7 @@ const REGISTER_ACTION_HANDLERS = {
     return ({ ...state, submitting: false })
   },
   [SUBMIT_REGISTER_FORM_REJECTED]: (state) => {
-    return ({ ...state })
+    return ({ ...state, submitting: false })
   }
 }
 
