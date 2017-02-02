@@ -26,6 +26,13 @@ export const fetchedUserId = (id) => {
   }
 }
 
+export const submitLoginForm = (promise) => {
+  return {
+    type: SUBMIT_LOGIN_FORM,
+    payload: promise
+  }
+}
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -37,9 +44,8 @@ export const login = () => {
 
     formData = JSON.stringify(formData)
 
-    dispatch({
-      type: SUBMIT_LOGIN_FORM,
-      payload: axios.post(
+    dispatch(submitLoginForm(
+      axios.post(
         'Users/login',
         formData
       ).then((response) => {
@@ -55,7 +61,7 @@ export const login = () => {
 
         browserHistory.push('/semesters')
       })
-    })
+    ))
   }
 }
 
