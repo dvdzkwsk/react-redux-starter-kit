@@ -12,18 +12,16 @@ export const SUBMIT_REGISTER_FORM_REJECTED = `${SUBMIT_REGISTER_FORM}_REJECTED`
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const register = () => {
-  return (dispatch, getState) => {
-    const data = JSON.stringify(getState().form.registerForm.values)
+export const register = () => (dispatch, getState) => {
+  const data = JSON.stringify(getState().form.registerForm.values)
 
-    dispatch({
-      type: SUBMIT_REGISTER_FORM,
-      payload: axios.post(
-        'Users',
-        data
-      ).then((response) => browserHistory.push('/login'))
-    })
-  }
+  dispatch({
+    type: SUBMIT_REGISTER_FORM,
+    payload: axios.post(
+      'Users',
+      data
+    ).then((response) => browserHistory.push('/login'))
+  })
 }
 
 export const actions = {
@@ -31,15 +29,9 @@ export const actions = {
 }
 
 const REGISTER_ACTION_HANDLERS = {
-  [SUBMIT_REGISTER_FORM_PENDING]: (state) => {
-    return ({ ...state, submitting: true })
-  },
-  [SUBMIT_REGISTER_FORM_FULFILLED]: (state) => {
-    return ({ ...state, submitting: false })
-  },
-  [SUBMIT_REGISTER_FORM_REJECTED]: (state) => {
-    return ({ ...state, submitting: false })
-  }
+  [SUBMIT_REGISTER_FORM_PENDING]: (state) => ({...state, submitting: true}),
+  [SUBMIT_REGISTER_FORM_FULFILLED]: (state) => ({...state, submitting: false}),
+  [SUBMIT_REGISTER_FORM_REJECTED]: (state) => ({...state, submitting: false})
 }
 
 // ------------------------------------
