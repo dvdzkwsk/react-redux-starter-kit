@@ -10,21 +10,20 @@ import NotFoundRoute from './NotFound'
     PlainRoute objects to build route definitions.   */
 
 export const createRoutes = (store) => {
-
   const requireLogin = (nextState, replace, cb) => {
-    const { auth: { authToken } } = store.getState();
+    const { auth: { authToken } } = store.getState()
     if (!authToken) {
-      replace('login');
+      replace('login')
     }
-    cb();
+    cb()
   }
 
   const requirePublic = (nextState, replace, cb) => {
-    const { auth: { authToken } } = store.getState();
+    const { auth: { authToken } } = store.getState()
     if (authToken) {
-      replace('semesters');
+      replace('semesters')
     }
-    cb();
+    cb()
   }
 
   return ({

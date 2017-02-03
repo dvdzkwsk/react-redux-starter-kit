@@ -2,9 +2,9 @@ import { injectReducer } from '../../store/reducers'
 
 import LoginContainer from './containers/LoginContainer'
 
-export default  (store) => ({
+export default (store) => ({
   path: 'login',
-  getComponent(nextState, cb) {
+  getComponent (nextState, cb) {
     require.ensure([
       './containers/LoginContainer',
       './modules/login'

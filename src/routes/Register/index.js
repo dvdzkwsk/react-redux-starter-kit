@@ -2,9 +2,9 @@ import { injectReducer } from '../../store/reducers'
 
 import RegisterContainer from './containers/RegisterContainer'
 
-export default  (store) => ({
+export default (store) => ({
   path: 'register',
-  getComponent(nextState, cb) {
+  getComponent (nextState, cb) {
     require.ensure([
       './containers/RegisterContainer',
       './modules/register'

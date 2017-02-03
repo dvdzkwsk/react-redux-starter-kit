@@ -5,18 +5,18 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type}/>
+      <input {...input} placeholder={label} type={type} />
       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
     </div>
   </div>
 )
 
 export const Register = (props) => (
-  <form id="registerForm">
-    <Field component={renderField} name="email" type="text" label="e-mail"/>
-    <Field component={renderField} name="password" type="password" label="password"/>
-    <button type="button" onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</button>
-    <button type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Clear Values</button>
+  <form id='registerForm'>
+    <Field component={renderField} name='email' type='text' label='e-mail' />
+    <Field component={renderField} name='password' type='password' label='password' />
+    <button type='button' onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</button>
+    <button type='button' disabled={props.pristine || props.submitting} onClick={props.reset}>Clear Values</button>
   </form>
 )
 

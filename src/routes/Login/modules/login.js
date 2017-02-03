@@ -14,12 +14,12 @@ export const SUBMIT_LOGIN_FORM_REJECTED = `${SUBMIT_LOGIN_FORM}_REJECTED`
 
 export const fetchedAuthToken = (authToken) => ({
   type: FETCHED_AUTH_TOKEN,
-  payload: {authToken}
+  payload: { authToken }
 })
 
 export const fetchedUserId = (id) => ({
   type: FETCHED_USER_ID,
-  payload: {id}
+  payload: { id }
 })
 
 export const submitLoginForm = (promise) => ({
@@ -65,16 +65,16 @@ export const actions = {
 }
 
 const LOGIN_ACTION_HANDLERS = {
-  [SUBMIT_LOGIN_FORM_PENDING]: (state) => ({...state, submitting: true}),
-  [SUBMIT_LOGIN_FORM_FULFILLED]: (state) => ({...state, submitting: false}),
-  [SUBMIT_LOGIN_FORM_REJECTED]: (state) => ({...state, submitting: false})
+  [SUBMIT_LOGIN_FORM_PENDING]: (state) => ({ ...state, submitting: true }),
+  [SUBMIT_LOGIN_FORM_FULFILLED]: (state) => ({ ...state, submitting: false }),
+  [SUBMIT_LOGIN_FORM_REJECTED]: (state) => ({ ...state, submitting: false })
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = { submitting: false }
-export default function loginReducer (state = initialState, action: Action) {
+export default function loginReducer (state = initialState, action) {
   const handler = LOGIN_ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

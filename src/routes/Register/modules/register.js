@@ -29,16 +29,16 @@ export const actions = {
 }
 
 const REGISTER_ACTION_HANDLERS = {
-  [SUBMIT_REGISTER_FORM_PENDING]: (state) => ({...state, submitting: true}),
-  [SUBMIT_REGISTER_FORM_FULFILLED]: (state) => ({...state, submitting: false}),
-  [SUBMIT_REGISTER_FORM_REJECTED]: (state) => ({...state, submitting: false})
+  [SUBMIT_REGISTER_FORM_PENDING]: (state) => ({ ...state, submitting: true }),
+  [SUBMIT_REGISTER_FORM_FULFILLED]: (state) => ({ ...state, submitting: false }),
+  [SUBMIT_REGISTER_FORM_REJECTED]: (state) => ({ ...state, submitting: false })
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = { submitting: false }
-export default function registerReducer (state = initialState, action: Action) {
+export default function registerReducer (state = initialState, action) {
   const handler = REGISTER_ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
