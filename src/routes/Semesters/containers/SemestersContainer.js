@@ -5,6 +5,8 @@ import Semesters from '../components/Semesters'
 
 const mapDispatchToProps = {}
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  semesters: state.semesters.semesters
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Semesters)
