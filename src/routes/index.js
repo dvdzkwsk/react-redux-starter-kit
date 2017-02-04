@@ -4,6 +4,7 @@ import Home from './Home'
 import CounterRoute from './Counter'
 import RegisterRoute from './Register'
 import LoginRoute from './Login'
+import SemestersRoute from './Semesters'
 import NotFoundRoute from './NotFound'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -41,7 +42,8 @@ export const createRoutes = (store) => {
       {
         onEnter: requireLogin,
         childRoutes: [
-          CounterRoute(store)
+          CounterRoute(store),
+          SemestersRoute(store)
         ]
       },
       NotFoundRoute
