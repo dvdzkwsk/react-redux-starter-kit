@@ -12,10 +12,16 @@ For example:
 */
 
 /**
- * Bootstrap
+ * Bootstrap 3
  */
-$font-size-base: 0.8rem;
-@import '~bootstrap/scss/bootstrap.scss';
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+///**
+// * Bootstrap 4
+// */
+//$font-size-base: 0.8rem;
+//@import '~bootstrap/scss/bootstrap.scss';
 
 
 /**
