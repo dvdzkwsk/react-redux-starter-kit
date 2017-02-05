@@ -17,10 +17,9 @@ export const register = () => (dispatch, getState) => {
 
   dispatch({
     type: SUBMIT_REGISTER_FORM,
-    payload: axios.post(
-      'Users',
-      data
-    ).then((response) => browserHistory.push('/login'))
+    payload: axios
+      .post('Users', data)
+      .then((response) => browserHistory.push('/login'))
   })
 }
 
