@@ -20,9 +20,9 @@ export const mode = {
   info: 3,      // info semester
   remove: 4,   // remove semester
   properties: {
-    1: {uriName: "add"},
-    2: {uriName: "edit"},
-    3: {uriName: "info"}
+    1: { uriName: 'add' },
+    2: { uriName: 'edit' },
+    3: { uriName: 'info' }
   }
 }
 
@@ -30,8 +30,7 @@ export const mode = {
 // Actions
 // ------------------------------------
 
-
-export const switchSemestersMode  = (mode) => (dispatch, getState) => () => dispatch({
+export const switchSemestersMode = (mode) => (dispatch, getState) => () => dispatch({
   type: SWITCH_SEMESTERS_MODE,
   payload: mode
 })
@@ -73,7 +72,7 @@ const SEMESTERS_ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { semesters: [], currentSemester: {}, mode: mode.standard }
+const initialState = { semesters: [], mode: mode.standard }
 export default function semestersReducer (state = initialState, action) {
   const handler = SEMESTERS_ACTION_HANDLERS[action.type]
 

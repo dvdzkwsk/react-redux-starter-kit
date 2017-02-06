@@ -4,10 +4,12 @@ import { mode } from '../modules/semesters'
 
 export const Semesters = (props) => (
   <div>
-    <div className="list-group">
+    <div className='list-group'>
     { props.semesters.map(semester => (
-      <button className="list-group-item" key={semester.id}>
-        <span className="badge">14</span>
+      <button className='list-group-item' key={semester.id}
+              onClick={() => browserHistory.push(`semester/${mode.properties[mode.edit].uriName}/${semester.id}`)}
+      >
+        <span className='badge'>14</span>
         { semester.name }
       </button>
     )) }
