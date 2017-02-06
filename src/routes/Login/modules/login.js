@@ -38,22 +38,22 @@ export const login = () => (dispatch, getState) => {
   formData = JSON.stringify(formData)
 
   dispatch(submitLoginForm(
-    axios.post(
-      'Users/login',
-      formData
-    ).then((response) => {
-      const authToken = response.data.id
+    axios
+      .post('Users/login', formData)
+      .then((response) => {
+        const authToken = response.data.id
 
-      axios.defaults.headers.common['Authorization'] = authToken
-      Cookies.set('authToken', authToken, {
-        expires: response.data.ttl / 60 / 60 / 24 // seconds to days
+        axios.defaults.headers.common['Authorization'] = authToken
+        Cookies.set('authToken', authToken, {
+          expires: response.data.ttl / 60 / 60 / 24 // seconds to days
+        })
+
+        dispatch(fetchedAuthToken(authToken))
+        dispatch(fetchedUserId(response.data.userId))
+
+        browserHistory.push('semesters')
       })
-
-      dispatch(fetchedAuthToken(authToken))
-      dispatch(fetchedUserId(response.data.userId))
-
-      browserHistory.push('semesters')
-    })
+      .catch((err) => {})
   ))
 }
 
