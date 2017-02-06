@@ -5,6 +5,7 @@ import CounterRoute from './Counter'
 import RegisterRoute from './Register'
 import LoginRoute from './Login'
 import SemestersRoute from './Semesters'
+import SemesterRoute from './Semester'
 import NotFoundRoute from './NotFound'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -14,7 +15,7 @@ export const createRoutes = (store) => {
   const requireLogin = (nextState, replace, cb) => {
     const { auth: { authToken } } = store.getState()
     if (!authToken) {
-      replace('login')
+      // replace('login')
     }
     cb()
   }
@@ -22,7 +23,7 @@ export const createRoutes = (store) => {
   const requirePublic = (nextState, replace, cb) => {
     const { auth: { authToken } } = store.getState()
     if (authToken) {
-      replace('semesters')
+      // replace('semesters')
     }
     cb()
   }
@@ -43,7 +44,8 @@ export const createRoutes = (store) => {
         onEnter: requireLogin,
         childRoutes: [
           CounterRoute(store),
-          SemestersRoute(store)
+          SemestersRoute(store),
+          SemesterRoute(store)
         ]
       },
       NotFoundRoute
