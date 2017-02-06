@@ -10,9 +10,32 @@ export const FETCH_INITIAL_SEMESTER_DATA_REJECTED = `${FETCH_INITIAL_SEMESTER_DA
 
 export const SEMESTER_DATA_FETCHED = 'SEMESTER_DATA_FETCHED'
 
+export const ADD_NEW_SEMESTER = 'ADD_NEW_SEMESTER'
+export const SWITCH_SEMESTERS_MODE = 'SWITCH_SEMESTERS_MODE'
+
+export const mode = {
+  standard: 0, // switch to subject
+  add: 1,      // add semester
+  edit: 2,     // edit semester
+  info: 3,      // info semester
+  remove: 4,   // remove semester
+  properties: {
+    1: {uriName: "add"},
+    2: {uriName: "edit"},
+    3: {uriName: "info"}
+  }
+}
+
 // ------------------------------------
 // Actions
 // ------------------------------------
+
+
+export const switchSemestersMode  = (mode) => (dispatch, getState) => () => dispatch({
+  type: SWITCH_SEMESTERS_MODE,
+  payload: mode
+})
+
 export const fetchInitialSemesterData = (promise) => ({
   type: FETCH_INITIAL_SEMESTER_DATA,
   payload: promise
@@ -24,28 +47,33 @@ export const semesterDataFetched = (semesters) => ({
 })
 
 export const loadSemesters = (store) => {
-    store.dispatch(fetchInitialSemesterData(
-      axios
-        .get('semesters')
-        .then((response) => store.dispatch(semesterDataFetched(response.data)))
-    ))
+  const { dispatch } = store
+  dispatch(fetchInitialSemesterData(
+    axios
+      .get('semesters')
+      .then((response) => dispatch(semesterDataFetched(response.data)))
+  ))
 }
 
 export const actions = {
-  loadSemesters
+  loadSemesters,
+  switchSemestersMode
 }
 
 const SEMESTERS_ACTION_HANDLERS = {
   [FETCH_INITIAL_SEMESTER_DATA_PENDING]: (state) => ({ ...state, fetching: true }),
   [FETCH_INITIAL_SEMESTER_DATA_FULFILLED]: (state) => ({ ...state, fetching: false }),
   [FETCH_INITIAL_SEMESTER_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
-  [SEMESTER_DATA_FETCHED]: (state, action) => ({ ...state, semesters: action.payload.semesters })
+
+  [SEMESTER_DATA_FETCHED]: (state, action) => ({ ...state, semesters: action.payload.semesters }),
+
+  [SWITCH_SEMESTERS_MODE]: (state, action) => ({ ...state, mode: action.payload })
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { semesters: [] }
+const initialState = { semesters: [], currentSemester: {}, mode: mode.standard }
 export default function semestersReducer (state = initialState, action) {
   const handler = SEMESTERS_ACTION_HANDLERS[action.type]
 

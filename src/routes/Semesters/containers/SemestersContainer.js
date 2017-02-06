@@ -1,12 +1,15 @@
 import { connect } from 'react-redux'
-// import {  } from '../modules/semesters'
+import { switchSemestersMode } from '../modules/semesters'
 
 import Semesters from '../components/Semesters'
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  switchMode: switchSemestersMode
+}
 
 const mapStateToProps = (state) => ({
-  semesters: state.semesters.semesters
+  semesters: state.semesters.semesters,
+  mode: state.semesters.mode
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Semesters)
