@@ -3,11 +3,11 @@ import { register } from '../modules/register'
 
 import Register from '../components/Register'
 
-const mapActionCreators: {handleSubmit: Function} = {
+const mapActionCreators = {
   handleSubmit: register
 }
 
-const mapStateToProps = (state): { submitting: boolean } => ({
+const mapStateToProps = (state) => ({
   submitting: state.register.submitting
 })
 
