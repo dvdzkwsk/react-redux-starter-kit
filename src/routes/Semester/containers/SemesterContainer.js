@@ -7,8 +7,8 @@ const mapDispatchToProps = {
   handleSubmit: updateSemester
 }
 
-const mapStateToProps = (state) => ({
-  currentSemester: state.semesters.currentSemester,
+const mapStateToProps = (state, ownProps) => ({
+  currentSemester: ownProps.params.semesterId ? state.semesters.currentSemester : {}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Semester)
