@@ -10,7 +10,6 @@ export const FETCH_INITIAL_SEMESTER_DATA_REJECTED = `${FETCH_INITIAL_SEMESTER_DA
 
 export const SEMESTER_DATA_FETCHED = 'SEMESTER_DATA_FETCHED'
 
-export const ADD_NEW_SEMESTER = 'ADD_NEW_SEMESTER'
 export const SWITCH_SEMESTERS_MODE = 'SWITCH_SEMESTERS_MODE'
 
 export const mode = {
@@ -30,7 +29,7 @@ export const mode = {
 // Actions
 // ------------------------------------
 
-export const switchSemestersMode = (mode) => (dispatch, getState) => () => dispatch({
+export const switchSemestersMode = (mode) => (dispatch, getState) => dispatch({
   type: SWITCH_SEMESTERS_MODE,
   payload: mode
 })
@@ -51,6 +50,7 @@ export const loadSemesters = (store) => {
     axios
       .get('semesters')
       .then((response) => dispatch(semesterDataFetched(response.data)))
+      .catch((err) => {})
   ))
 }
 
