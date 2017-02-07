@@ -31,7 +31,7 @@ const SEMESTER_ACTION_HANDLERS = {}
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { semesterId: null }
+const initialState = { }
 export default function semesterReducer (state = initialState, action) {
   const handler = SEMESTER_ACTION_HANDLERS[action.type]
 

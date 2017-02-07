@@ -1,25 +1,22 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
-const renderField = ({ input, label, type, value, meta: { touched, error, warning } }) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} value={value} />
-      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-    </div>
-  </div>
-)
-
-export const Semester = (props) => (
+let Semester = (props) => (
   <form id='semesterForm'>
-    <Field component={renderField} name='id' type='number' label='ID' value={props.currentSemester.id} />
-    <Field component={renderField} name='name' type='text' label='name' value={props.currentSemester.name} />
-    <button type='button' onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</button>
-    <button type='button' disabled={props.pristine || props.submitting} onClick={props.reset}>reset</button>
+    <Field component='input' name='id' type='number' placeholder='ID' className='form-control' />
+    <Field component='input' name='name' type='text' placeholder='name' className='form-control' />
+    <button type='button' onClick={props.handleSubmit} disabled={props.pristine || props.submitting} className='btn btn-primary'>Submit</button>
+    <button type='button' disabled={props.pristine || props.submitting} onClick={props.reset} className='btn btn-default'>reset</button>
   </form>
 )
 
-export default reduxForm({
+Semester = reduxForm({
   form: 'semesterForm'
 })(Semester)
+
+export default connect(
+  state => ({
+    initialValues: state.semesters.selectedSemester
+  })
+)(Semester)
