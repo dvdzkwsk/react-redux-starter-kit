@@ -20,7 +20,7 @@ export const updateSemester = () => (dispatch, getState) => {
       .put('semesters', data)
       .then((response) => browserHistory.goBack())
       .catch((err) => {
-        dispatch({type: ERROR_OCCURRED, payload: err})
+        dispatch({ type: ERROR_OCCURRED, payload: err })
         throw err
       })
   })

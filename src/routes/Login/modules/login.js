@@ -55,7 +55,7 @@ export const login = () => (dispatch, getState) => {
         browserHistory.push('semesters')
       })
       .catch((err) => {
-        dispatch({type: ERROR_OCCURRED, payload: err})
+        dispatch({ type: ERROR_OCCURRED, payload: err })
         throw err
       })
   ))

@@ -22,7 +22,7 @@ export const register = () => (dispatch, getState) => {
       .post('Users', data)
       .then((response) => browserHistory.push('/login'))
       .catch((err) => {
-        dispatch({type: ERROR_OCCURRED, payload: err})
+        dispatch({ type: ERROR_OCCURRED, payload: err })
         throw err
       })
   })
