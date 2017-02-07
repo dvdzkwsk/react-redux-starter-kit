@@ -7,6 +7,8 @@ const mapDispatchToProps = {
   handleSubmit: updateSemester
 }
 
-const mapStateToProps = (state, ownProps) => ({})
+const mapStateToProps = (state, ownProps) => ({
+  mode: state.semesters.mode
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Semester)
