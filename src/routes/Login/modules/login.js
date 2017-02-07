@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 import Cookies from 'js-cookie'
 import { FETCHED_AUTH_TOKEN } from '../../../store/rootReducers/auth'
 import { FETCHED_USER_ID } from '../../../store/rootReducers/user'
+import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
 
 // ------------------------------------
 // Constants
@@ -54,7 +55,7 @@ export const login = () => (dispatch, getState) => {
         browserHistory.push('semesters')
       })
       .catch((err) => {
-        // TODO
+        dispatch({type: ERROR_OCCURRED, payload: err})
         throw err
       })
   ))

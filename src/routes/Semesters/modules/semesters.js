@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
+import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
 
 // ------------------------------------
 // Constants
@@ -52,7 +53,7 @@ export const semesterClick = (semesterId) => (dispatch, getState) => {
         payload: axios
           .delete(`semesters/${semesterId}`)
           .catch((err) => {
-            // TODO
+            dispatch({type: ERROR_OCCURRED, payload: err})
             throw err
           })
       })
@@ -78,7 +79,7 @@ export const loadSemesters = (store) => {
     payload: axios
       .get('semesters')
       .catch((err) => {
-        store.dispatch({type: 'ERROR_OCCURRED', payload: err})
+        store.dispatch({type: ERROR_OCCURRED, payload: err})
         throw err
       })
   })

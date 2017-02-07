@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
+import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
 
 // ------------------------------------
 // Constants
@@ -21,7 +22,7 @@ export const register = () => (dispatch, getState) => {
       .post('Users', data)
       .then((response) => browserHistory.push('/login'))
       .catch((err) => {
-        // TODO
+        dispatch({type: ERROR_OCCURRED, payload: err})
         throw err
       })
   })
