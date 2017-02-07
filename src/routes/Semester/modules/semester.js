@@ -18,7 +18,10 @@ export const updateSemester = () => (dispatch, getState) => {
     payload: axios
       .put('semesters', data)
       .then((response) => browserHistory.goBack())
-      .catch((err) => {})
+      .catch((err) => {
+        // TODO
+        throw err
+      })
   })
 }
 

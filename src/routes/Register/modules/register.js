@@ -20,7 +20,10 @@ export const register = () => (dispatch, getState) => {
     payload: axios
       .post('Users', data)
       .then((response) => browserHistory.push('/login'))
-      .catch((err) => {})
+      .catch((err) => {
+        // TODO
+        throw err
+      })
   })
 }
 

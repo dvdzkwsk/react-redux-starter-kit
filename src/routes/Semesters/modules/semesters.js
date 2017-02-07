@@ -51,7 +51,10 @@ export const semesterClick = (semesterId) => (dispatch, getState) => {
         type: DELETE_SEMESTER,
         payload: axios
           .delete(`semesters/${semesterId}`)
-          .catch((err) => {})
+          .catch((err) => {
+            // TODO
+            throw err
+          })
       })
       dispatch({ type: DELETE_SEMESTER, payload: semesterId })
       break
@@ -74,7 +77,10 @@ export const loadSemesters = (store) => {
     type: FETCH_INITIAL_SEMESTER_DATA,
     payload: axios
       .get('semesters')
-      .catch((err) => {})
+      .catch((err) => {
+        store.dispatch({type: 'ERROR_OCCURRED', payload: err})
+        throw err
+      })
   })
 }
 

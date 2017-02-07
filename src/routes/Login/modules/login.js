@@ -53,7 +53,10 @@ export const login = () => (dispatch, getState) => {
 
         browserHistory.push('semesters')
       })
-      .catch((err) => {})
+      .catch((err) => {
+        // TODO
+        throw err
+      })
   ))
 }
 
