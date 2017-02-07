@@ -1,0 +1,14 @@
+#alerts-queue {
+  position: fixed;
+  padding: 1em;
+  width: 30em;
+  max-width: 100%;
+  top: 0;
+  right: 0;
+}
+
+#alerts-queue>.alert {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+}
