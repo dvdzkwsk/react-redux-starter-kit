@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router'
 
 // ------------------------------------
 // Constants
@@ -8,9 +9,11 @@ export const FETCH_INITIAL_SEMESTER_DATA_PENDING = `${FETCH_INITIAL_SEMESTER_DAT
 export const FETCH_INITIAL_SEMESTER_DATA_FULFILLED = `${FETCH_INITIAL_SEMESTER_DATA}_FULFILLED`
 export const FETCH_INITIAL_SEMESTER_DATA_REJECTED = `${FETCH_INITIAL_SEMESTER_DATA}_REJECTED`
 
-export const SEMESTER_DATA_FETCHED = 'SEMESTER_DATA_FETCHED'
-
 export const SWITCH_SEMESTERS_MODE = 'SWITCH_SEMESTERS_MODE'
+
+export const SET_SELECTED_SEMESTER = 'SET_SELECTED_SEMESTER'
+
+export const DELETE_SEMESTER = 'DELETE_SEMESTER'
 
 export const mode = {
   standard: 0, // switch to subject
@@ -29,50 +32,70 @@ export const mode = {
 // Actions
 // ------------------------------------
 
-export const switchSemestersMode = (mode) => (dispatch, getState) => dispatch({
-  type: SWITCH_SEMESTERS_MODE,
-  payload: mode
+export const setSelectedSemester = (semesterId) => ({
+  type: SET_SELECTED_SEMESTER,
+  payload: semesterId
 })
 
-export const fetchInitialSemesterData = (promise) => ({
-  type: FETCH_INITIAL_SEMESTER_DATA,
-  payload: promise
-})
+export const semesterClick = (semesterId) => (dispatch, getState) => {
+  const currentMode = getState().semesters.mode
+  switch (currentMode) {
+    case mode.edit:
+    case mode.info:
+      dispatch(setSelectedSemester(semesterId))
+      browserHistory.push(`semester/${mode.properties[currentMode].uriName}/${semesterId}`)
+      break
+    case mode.remove:
+      dispatch({
+        type: DELETE_SEMESTER,
+        payload: axios
+          .delete(`semesters/${semesterId}`)
+          .catch((err) => {})
+      })
+      dispatch({ type: DELETE_SEMESTER, payload: semesterId })
+      break
+    default:
+      browserHistory.push(`subjects?semesterId=${semesterId}`)
+      break
+  }
+}
 
-export const semesterDataFetched = (semesters) => ({
-  type: SEMESTER_DATA_FETCHED,
-  payload: { semesters }
-})
+export const modeButtonClick = (newMode) => (dispatch, getState) => {
+  dispatch({
+    type: SWITCH_SEMESTERS_MODE,
+    // if new mode == current mode then set standard mode
+    payload: newMode === getState().semesters.mode ? mode.standard : newMode
+  })
+}
 
 export const loadSemesters = (store) => {
-  const { dispatch } = store
-  dispatch(fetchInitialSemesterData(
-    axios
+  store.dispatch({
+    type: FETCH_INITIAL_SEMESTER_DATA,
+    payload: axios
       .get('semesters')
-      .then((response) => dispatch(semesterDataFetched(response.data)))
       .catch((err) => {})
-  ))
+  })
 }
 
 export const actions = {
-  loadSemesters,
-  switchSemestersMode
+  loadSemesters
 }
 
 const SEMESTERS_ACTION_HANDLERS = {
   [FETCH_INITIAL_SEMESTER_DATA_PENDING]: (state) => ({ ...state, fetching: true }),
-  [FETCH_INITIAL_SEMESTER_DATA_FULFILLED]: (state) => ({ ...state, fetching: false }),
+  [FETCH_INITIAL_SEMESTER_DATA_FULFILLED]: (state, action) => ({ ...state, semesters: action.payload.data, fetching: false }),
   [FETCH_INITIAL_SEMESTER_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
 
-  [SEMESTER_DATA_FETCHED]: (state, action) => ({ ...state, semesters: action.payload.semesters }),
+  [SWITCH_SEMESTERS_MODE]: (state, action) => ({ ...state, mode: action.payload }),
+  [SET_SELECTED_SEMESTER]: (state, action) => ({ ...state, selectedSemester: state.semesters.find((semester) => semester.id == action.payload) }),
 
-  [SWITCH_SEMESTERS_MODE]: (state, action) => ({ ...state, mode: action.payload })
+  [DELETE_SEMESTER]: (state, action) => ({ ...state, semesters: state.semesters.filter((semester) => semester.id != action.payload) })
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { semesters: [], mode: mode.standard }
+const initialState = { semesters: [], mode: mode.standard, selectedSemester: {}, fetching: false }
 export default function semestersReducer (state = initialState, action) {
   const handler = SEMESTERS_ACTION_HANDLERS[action.type]
 

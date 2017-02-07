@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { switchSemestersMode } from '../modules/semesters'
+import { semesterClick, modeButtonClick } from '../modules/semesters'
 
 import Semesters from '../components/Semesters'
 
 const mapDispatchToProps = {
-  switchMode: switchSemestersMode
+  semesterClick,
+  modeButtonClick
 }
 
 const mapStateToProps = (state) => ({

@@ -5,16 +5,19 @@ import { mode } from '../modules/semesters'
 export const Semesters = (props) => (
   <div>
     <div className='list-group'>
-    { props.semesters.map(semester => (
-      <button className='list-group-item' key={semester.id}
-              onClick={() => browserHistory.push(`semester/${mode.properties[mode.edit].uriName}/${semester.id}`)}
-      >
-        <span className='badge'>14</span>
-        { semester.name }
-      </button>
-    )) }
+      { props.semesters.map(semester => (
+        <button className='list-group-item' key={semester.id}
+          onClick={() => props.semesterClick(semester.id)}
+        >
+          <span className='badge'>14</span>
+          { semester.name }
+        </button>
+      )) }
     </div>
-    <button onClick={() => browserHistory.push(`semester/${mode.properties[mode.add].uriName}`)}>new</button>
+    <button className='btn btn-default' onClick={() => {props.modeButtonClick(mode.add); browserHistory.push(`semester/${mode.properties[mode.add].uriName}`)}}>new</button>
+    <button className={props.mode === mode.edit ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.edit)}>edit</button>
+    <button className={props.mode === mode.info ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.info)}>info</button>
+    <button className={props.mode === mode.remove ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.remove)}>remove</button>
   </div>
 )
 
