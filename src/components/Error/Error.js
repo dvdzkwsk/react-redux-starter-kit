@@ -7,7 +7,7 @@ export const Error = (props) => (
   <div id='alerts-queue'>
     {props.errors.map((error, index) => (
       <Alert key={index} bsStyle='danger' onDismiss={() => props.removeErrorByIndex(index)}>
-        <p>{error.message}</p>
+        <p>{error.response ? error.response.statusText || error.message : error.message}</p>
       </Alert>
     ))}
   </div>
