@@ -14,7 +14,7 @@ export const Semesters = (props) => (
         </button>
       )) }
     </div>
-    <button className='btn btn-default' onClick={() => {props.modeButtonClick(mode.add); browserHistory.push(`semester/${mode.properties[mode.add].uriName}`)}}>new</button>
+    <button className='btn btn-default' onClick={() => {props.modeButtonClick(mode.add); props.semesterClick(null)}}>new</button>
     <button className={props.mode === mode.edit ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.edit)}>edit</button>
     <button className={props.mode === mode.info ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.info)}>info</button>
     <button className={props.mode === mode.remove ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.remove)}>remove</button>

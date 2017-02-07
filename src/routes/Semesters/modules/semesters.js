@@ -40,10 +40,11 @@ export const setSelectedSemester = (semesterId) => ({
 export const semesterClick = (semesterId) => (dispatch, getState) => {
   const currentMode = getState().semesters.mode
   switch (currentMode) {
+    case mode.add:
     case mode.edit:
     case mode.info:
       dispatch(setSelectedSemester(semesterId))
-      browserHistory.push(`semester/${mode.properties[currentMode].uriName}/${semesterId}`)
+      browserHistory.push(`semester/${mode.properties[currentMode].uriName}${semesterId ? '/' + semesterId : ''}`)
       break
     case mode.remove:
       dispatch({
