@@ -8,10 +8,11 @@ import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const SUBMIT_LOGIN_FORM = 'SUBMIT_LOGIN_FORM'
-export const SUBMIT_LOGIN_FORM_PENDING = `${SUBMIT_LOGIN_FORM}_PENDING`
-export const SUBMIT_LOGIN_FORM_FULFILLED = `${SUBMIT_LOGIN_FORM}_FULFILLED`
-export const SUBMIT_LOGIN_FORM_REJECTED = `${SUBMIT_LOGIN_FORM}_REJECTED`
+export const PREfIX = 'login/'
+export const SUBMIT_FORM = `${PREfIX}SUBMIT_FORM`
+export const SUBMIT_FORM_PENDING = `${SUBMIT_FORM}_PENDING`
+export const SUBMIT_FORM_FULFILLED = `${SUBMIT_FORM}_FULFILLED`
+export const SUBMIT_FORM_REJECTED = `${SUBMIT_FORM}_REJECTED`
 
 export const fetchedAuthToken = (authToken) => ({
   type: FETCHED_AUTH_TOKEN,
@@ -24,7 +25,7 @@ export const fetchedUserId = (id) => ({
 })
 
 export const submitLoginForm = (promise) => ({
-  type: SUBMIT_LOGIN_FORM,
+  type: SUBMIT_FORM,
   payload: promise
 })
 
@@ -69,9 +70,9 @@ export const actions = {
 }
 
 const LOGIN_ACTION_HANDLERS = {
-  [SUBMIT_LOGIN_FORM_PENDING]: (state) => ({ ...state, submitting: true }),
-  [SUBMIT_LOGIN_FORM_FULFILLED]: (state) => ({ ...state, submitting: false }),
-  [SUBMIT_LOGIN_FORM_REJECTED]: (state) => ({ ...state, submitting: false })
+  [SUBMIT_FORM_PENDING]: (state) => ({ ...state, submitting: true }),
+  [SUBMIT_FORM_FULFILLED]: (state) => ({ ...state, submitting: false }),
+  [SUBMIT_FORM_REJECTED]: (state) => ({ ...state, submitting: false })
 }
 
 // ------------------------------------
