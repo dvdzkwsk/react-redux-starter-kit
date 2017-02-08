@@ -8,7 +8,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  mode: state.semesters.mode
+  mode: ownProps.params.mode
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Semester)
