@@ -36,7 +36,7 @@ export const login = () => (dispatch, getState) => {
 
   dispatch(submitLoginForm(
     axios
-      .post('Users/login', formData)
+      .post('users/login', formData)
       .then((response) => {
         const authToken = response.data.id
 

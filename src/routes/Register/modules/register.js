@@ -20,7 +20,7 @@ export const register = () => (dispatch, getState) => {
   dispatch({
     type: SUBMIT_FORM,
     payload: axios
-      .post('Users', data)
+      .post('users', data)
       .then((response) => browserHistory.push('/login'))
       .catch((err) => {
         dispatch({ type: ERROR_OCCURRED, payload: err })
