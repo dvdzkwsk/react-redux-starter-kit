@@ -3,7 +3,8 @@ import browserHistory from 'react-router/lib/browserHistory'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const LOCATION_CHANGE = 'LOCATION_CHANGE'
+export const PREFIX = 'location/'
+export const LOCATION_CHANGE = `${PREFIX}LOCATION_CHANGE`
 
 // ------------------------------------
 // Actions

@@ -1,5 +1,6 @@
-export const ERROR_OCCURRED = 'ERROR_OCCURRED'
-export const REMOVE_ERROR_BY_INDEX = 'REMOVE_ERROR_BY_INDEX'
+export const PREFIX = 'error/'
+export const ERROR_OCCURRED = `${PREFIX}ERROR_OCCURRED`
+export const REMOVE_ERROR_BY_INDEX = `${PREFIX}REMOVE_ERROR_BY_INDEX`
 
 export const removeErrorByIndex = (index) => (dispatch, getState) => dispatch({
   type: REMOVE_ERROR_BY_INDEX,

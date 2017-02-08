@@ -1,4 +1,5 @@
-export const FETCHED_AUTH_TOKEN = 'FETCHED_AUTH_TOKEN'
+export const PREFIX = 'auth/'
+export const FETCHED_AUTH_TOKEN = `${PREFIX}FETCHED_AUTH_TOKEN`
 
 const AUTH_ACTION_HANDLERS = {
   [FETCHED_AUTH_TOKEN]: (state, action) => ({ ...state, authToken: action.payload })
