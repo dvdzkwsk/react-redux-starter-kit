@@ -7,18 +7,18 @@ import fuzzysearch from 'fuzzysearch'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const FETCH_INITIAL_SEMESTER_DATA = 'FETCH_INITIAL_SEMESTER_DATA'
-export const FETCH_INITIAL_SEMESTER_DATA_PENDING = `${FETCH_INITIAL_SEMESTER_DATA}_PENDING`
-export const FETCH_INITIAL_SEMESTER_DATA_FULFILLED = `${FETCH_INITIAL_SEMESTER_DATA}_FULFILLED`
-export const FETCH_INITIAL_SEMESTER_DATA_REJECTED = `${FETCH_INITIAL_SEMESTER_DATA}_REJECTED`
+export const PREFIX = 'semesters/'
+export const FETCH_INITIAL_DATA = `${PREFIX}FETCH_INITIAL_DATA`
+export const FETCH_INITIAL_DATA_PENDING = `${FETCH_INITIAL_DATA}_PENDING`
+export const FETCH_INITIAL_DATA_FULFILLED = `${FETCH_INITIAL_DATA}_FULFILLED`
+export const FETCH_INITIAL_DATA_REJECTED = `${FETCH_INITIAL_DATA}_REJECTED`
 
-export const SWITCH_SEMESTERS_MODE = 'SWITCH_SEMESTERS_MODE'
+export const SWITCH_MODE = `${PREFIX}SWITCH_MODE`
 
-export const SET_SELECTED_SEMESTER = 'SET_SELECTED_SEMESTER'
+export const SET_SELECTED_SEMESTER = `${PREFIX}SET_SELECTED_SEMESTER`
+export const DELETE_SEMESTER = `${PREFIX}DELETE_SEMESTER`
 
-export const DELETE_SEMESTER = 'DELETE_SEMESTER'
-
-export const SEARCH_BUTTON_CLICKED = 'SEARCH_BUTTON_CLICKED'
+export const SEARCH_BUTTON_CLICKED = `${PREFIX}SEARCH_BUTTON_CLICKED`
 
 export const mode = {
   standard: 0, // switch to subject
@@ -71,19 +71,17 @@ export const semesterClick = (semesterId) => (dispatch, getState) => {
 
 export const modeButtonClick = (newMode) => (dispatch, getState) => {
   dispatch({
-    type: SWITCH_SEMESTERS_MODE,
+    type: SWITCH_MODE,
     // if new mode == current mode then set standard mode
     payload: newMode === getState().semesters.mode ? mode.standard : newMode
   })
 }
 
-export const searchButtonClick = () => (dispatch, getState) => dispatch({
-  type: SEARCH_BUTTON_CLICKED
-})
+export const searchButtonClick = () => (dispatch, getState) => dispatch({ type: SEARCH_BUTTON_CLICKED })
 
 export const loadSemesters = (store) => {
   store.dispatch({
-    type: FETCH_INITIAL_SEMESTER_DATA,
+    type: FETCH_INITIAL_DATA,
     payload: axios
       .get('semesters')
       .catch((err) => {
@@ -98,16 +96,16 @@ export const actions = {
 }
 
 const SEMESTERS_ACTION_HANDLERS = {
-  [FETCH_INITIAL_SEMESTER_DATA_PENDING]: (state) => ({ ...state, fetching: true }),
-  [FETCH_INITIAL_SEMESTER_DATA_FULFILLED]: (state, action) => ({
+  [FETCH_INITIAL_DATA_PENDING]: (state) => ({ ...state, fetching: true }),
+  [FETCH_INITIAL_DATA_FULFILLED]: (state, action) => ({
     ...state,
     semesters: action.payload.data,
     filteredSemesters: action.payload.data,
     fetching: false
   }),
-  [FETCH_INITIAL_SEMESTER_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
+  [FETCH_INITIAL_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
 
-  [SWITCH_SEMESTERS_MODE]: (state, action) => ({ ...state, mode: action.payload }),
+  [SWITCH_MODE]: (state, action) => ({ ...state, mode: action.payload }),
   [SET_SELECTED_SEMESTER]: (state, action) => ({
     ...state,
     selectedSemester: state.filteredSemesters.find((semester) => semester.id == action.payload)
