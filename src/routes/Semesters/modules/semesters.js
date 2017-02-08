@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
-import { CHANGE } from 'redux-form/lib/actionTypes'
+import { CHANGE, DESTROY } from 'redux-form/lib/actionTypes'
 import fuzzysearch from 'fuzzysearch'
 
 // ------------------------------------
@@ -17,6 +17,8 @@ export const SWITCH_SEMESTERS_MODE = 'SWITCH_SEMESTERS_MODE'
 export const SET_SELECTED_SEMESTER = 'SET_SELECTED_SEMESTER'
 
 export const DELETE_SEMESTER = 'DELETE_SEMESTER'
+
+export const SEARCH_BUTTON_CLICKED = 'SEARCH_BUTTON_CLICKED'
 
 export const mode = {
   standard: 0, // switch to subject
@@ -75,6 +77,10 @@ export const modeButtonClick = (newMode) => (dispatch, getState) => {
   })
 }
 
+export const searchButtonClick = () => (dispatch, getState) => dispatch({
+  type: SEARCH_BUTTON_CLICKED
+})
+
 export const loadSemesters = (store) => {
   store.dispatch({
     type: FETCH_INITIAL_SEMESTER_DATA,
@@ -111,13 +117,25 @@ const SEMESTERS_ACTION_HANDLERS = {
   [CHANGE]: (state, action) => action.meta.field === 'searchSemesterField' ? {
       ...state,
       filteredSemesters: state.semesters.filter((semester) => fuzzysearch(action.payload, semester.name))
-    } : state
+    } : state,
+  [DESTROY]: (state, action) => action.meta.form.find((formId) => formId === 'searchBarForm') ? {
+      ...state,
+      filteredSemesters: state.semesters
+    } : state,
+  [SEARCH_BUTTON_CLICKED]: (state, action) => ({ ...state, showSearchBar: !state.showSearchBar })
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { semesters: [], filteredSemesters: [], selectedSemester: {},  mode: mode.standard,fetching: false }
+const initialState = {
+  semesters: [],
+  filteredSemesters: [],
+  selectedSemester: {},
+  mode: mode.standard,
+  fetching: false,
+  showSearchBar: false
+}
 export default function semestersReducer (state = initialState, action) {
   const handler = SEMESTERS_ACTION_HANDLERS[action.type]
 
