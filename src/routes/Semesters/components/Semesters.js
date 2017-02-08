@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import { ListGroup, ListGroupItem, ButtonGroup, Button } from 'react-bootstrap'
 import { mode } from '../modules/semesters'
 import SearchBar from './SearchBar'
 
@@ -14,11 +14,13 @@ export const Semesters = (props) => (
         </ListGroupItem>
       )) }
     </ListGroup>
-    <button className='btn btn-default' onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }}>new</button>
-    <button className={props.mode === mode.edit ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.edit)}>edit</button>
-    <button className={props.mode === mode.info ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.info)}>info</button>
-    <button className={props.mode === mode.remove ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.modeButtonClick(mode.remove)}>remove</button>
-    <button className={props.showSearchBar ? 'btn btn-primary' : 'btn btn-default'} onClick={() => props.searchButtonClick()}>search</button>
+    <ButtonGroup>
+      <Button onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }}>new</Button>
+      <Button {...props.mode === mode.edit ? {bsStyle:'primary'} : {}} onClick={() => props.modeButtonClick(mode.edit)}>edit</Button>
+      <Button {...props.mode === mode.info ? {bsStyle:'primary'} : {}} onClick={() => props.modeButtonClick(mode.info)}>info</Button>
+      <Button {...props.mode === mode.remove ? {bsStyle:'primary'} : {}} onClick={() => props.modeButtonClick(mode.remove)}>remove</Button>
+    </ButtonGroup>
+    <Button {...props.showSearchBar ? {bsStyle:'primary'} : {}} onClick={() => props.searchButtonClick()}>search</Button>
   </div>
 )
 
