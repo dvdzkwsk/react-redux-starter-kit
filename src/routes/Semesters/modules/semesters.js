@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
+import { CHANGE } from 'redux-form/lib/actionTypes'
+import fuzzysearch from 'fuzzysearch'
 
 // ------------------------------------
 // Constants
@@ -91,19 +93,31 @@ export const actions = {
 
 const SEMESTERS_ACTION_HANDLERS = {
   [FETCH_INITIAL_SEMESTER_DATA_PENDING]: (state) => ({ ...state, fetching: true }),
-  [FETCH_INITIAL_SEMESTER_DATA_FULFILLED]: (state, action) => ({ ...state, semesters: action.payload.data, fetching: false }),
+  [FETCH_INITIAL_SEMESTER_DATA_FULFILLED]: (state, action) => ({
+    ...state,
+    semesters: action.payload.data,
+    filteredSemesters: action.payload.data, fetching: false
+  }),
   [FETCH_INITIAL_SEMESTER_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
 
   [SWITCH_SEMESTERS_MODE]: (state, action) => ({ ...state, mode: action.payload }),
-  [SET_SELECTED_SEMESTER]: (state, action) => ({ ...state, selectedSemester: state.semesters.find((semester) => semester.id == action.payload) }),
+  [SET_SELECTED_SEMESTER]: (state, action) => ({
+    ...state,
+    selectedSemester: state.filteredSemesters.find((semester) => semester.id == action.payload)
+  }),
 
-  [DELETE_SEMESTER]: (state, action) => ({ ...state, semesters: state.semesters.filter((semester) => semester.id != action.payload) })
+  [DELETE_SEMESTER]: (state, action) => ({ ...state, filteredSemesters: state.filteredSemesters.filter((semester) => semester.id != action.payload) }),
+
+  [CHANGE]: (state, action) => action.meta.field === 'searchSemesterField' ? {
+      ...state,
+      filteredSemesters: state.semesters.filter((semester) => fuzzysearch(action.payload, semester.name))
+    } : state
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { semesters: [], mode: mode.standard, selectedSemester: {}, fetching: false }
+const initialState = { semesters: [], filteredSemesters: [], selectedSemester: {},  mode: mode.standard,fetching: false }
 export default function semestersReducer (state = initialState, action) {
   const handler = SEMESTERS_ACTION_HANDLERS[action.type]
 

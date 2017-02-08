@@ -1,11 +1,13 @@
 import React from 'react'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { mode } from '../modules/semesters'
+import SearchBar from './SearchBar'
 
 export const Semesters = (props) => (
   <div>
+    <SearchBar />
     <ListGroup>
-      { props.semesters.map(semester => (
+      { props.filteredSemesters.map(semester => (
         <ListGroupItem key={semester.id} onClick={() => props.semesterClick(semester.id)}>
           <span className='badge'>14</span>
           { semester.name }

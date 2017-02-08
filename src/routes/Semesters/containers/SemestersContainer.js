@@ -9,7 +9,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  semesters: state.semesters.semesters,
+  filteredSemesters: state.semesters.filteredSemesters,
   mode: state.semesters.mode
 })
 
