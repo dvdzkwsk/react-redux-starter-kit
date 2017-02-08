@@ -14,11 +14,13 @@ export const Header = (props) => (
     </Navbar.Header>
     {props.loggedIn ? (
       <Navbar.Collapse>
-        <Nav pullRight>
+        <Nav>
           {props.user ? (<NavItem disabled>Signed in as: {props.user.firstName} {props.user.surname}</NavItem>) : ''}
           <NavItem><FontAwesome name='user' /> profile</NavItem>
           <NavItem href='about'><FontAwesome name='question-circle' /> about</NavItem>
           <NavItem><FontAwesome name='gear' /> settings</NavItem>
+        </Nav>
+        <Nav pullRight>
           <NavItem onClick={() => browserHistory.push('logout')}><FontAwesome name='sign-out' /> logout</NavItem>
         </Nav>
       </Navbar.Collapse>
