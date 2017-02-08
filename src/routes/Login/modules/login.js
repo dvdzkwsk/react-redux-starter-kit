@@ -2,7 +2,7 @@ import axios from 'axios'
 import { browserHistory } from 'react-router'
 import Cookies from 'js-cookie'
 import { FETCHED_AUTH_TOKEN, AUTH_LOGOUT } from '../../../store/rootReducers/auth'
-import { FETCHED_USER_ID, USER_LOGOUT } from '../../../store/rootReducers/user'
+import { FETCHED_USER, USER_LOGOUT } from '../../../store/rootReducers/user'
 import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
 
 // ------------------------------------
@@ -30,6 +30,7 @@ export const login = () => (dispatch, getState) => {
       .post('users/login', formData)
       .then((response) => {
         const authToken = response.data.id
+        const userId = response.data.userId
 
         axios.defaults.headers.common[ 'Authorization' ] = authToken
         Cookies.set('authToken', authToken, {
@@ -37,10 +38,12 @@ export const login = () => (dispatch, getState) => {
         })
 
         dispatch({ type: FETCHED_AUTH_TOKEN, payload: authToken })
-        dispatch({ type: FETCHED_USER_ID, payload: response.data.userId })
 
         browserHistory.push('semesters')
+
+        return axios.get(`users/${userId}`)
       })
+      .then((response) => dispatch({ type: FETCHED_USER, payload: response.data }))
       .catch((err) => {
         dispatch({ type: ERROR_OCCURRED, payload: err })
         throw err
