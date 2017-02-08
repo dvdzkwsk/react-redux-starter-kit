@@ -1,18 +1,28 @@
 import React from 'react'
-import { IndexLink, Link } from 'react-router'
+import FontAwesome from 'react-fontawesome'
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button } from 'react-bootstrap'
 import './Header.scss'
 
 export const Header = () => (
-  <div>
-    <h1>React Redux Starter Kit</h1>
-    <IndexLink to='/' activeClassName='route--active'>
-      <span className='fa fa-home' /> Home
-    </IndexLink>
-    {' · '}
-    <Link to='/counter' activeClassName='route--active'>
-      <span className='fa fa-clock-o' /> Counter
-    </Link>
-  </div>
+  <Navbar fluid>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <Navbar.Link href='/'><FontAwesome name='home' /> GPA-App</Navbar.Link>
+      </Navbar.Brand>
+    </Navbar.Header>
+      <Nav pullRight>
+        <NavDropdown title={(<FontAwesome name='navicon' />)} id='settings' noCaret>
+          <MenuItem disabled>Signed in as: [name here]</MenuItem>
+          <MenuItem divider />
+          <MenuItem><FontAwesome name='user' /> profile</MenuItem>
+          <MenuItem divider />
+          <MenuItem href='about'><FontAwesome name='question-circle' /> about</MenuItem>
+          <MenuItem divider />
+          <MenuItem><FontAwesome name='gear' /> settings</MenuItem>
+          <MenuItem><FontAwesome name='sign-out' /> logout</MenuItem>
+        </NavDropdown>
+      </Nav>
+  </Navbar>
 )
 
 export default Header

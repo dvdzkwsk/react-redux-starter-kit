@@ -5,10 +5,10 @@ import './CoreLayout.scss'
 import '../../styles/core.scss'
 
 export const CoreLayout = ({ children }) => (
-  <div className='container text-center'>
+  <div className='container-fluid text-center'>
     <Error />
     <Header />
-    <div className='core-layout__viewport'>
+    <div className='core-layout__viewport container'>
       {children}
     </div>
   </div>
