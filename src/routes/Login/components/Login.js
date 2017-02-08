@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 export const Login = (props) => (
   <Form>
     <InputGroup>
-      <InputGroup.Addon><FontAwesome name='address-book' /></InputGroup.Addon>
+      <InputGroup.Addon><FontAwesome name='at' /></InputGroup.Addon>
       <Field component='input' name='email' type='text' placeholder='e-mail' className='form-control' />
     </InputGroup>
     <InputGroup>
