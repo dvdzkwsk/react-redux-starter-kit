@@ -13,7 +13,7 @@ export const Login = (props) => (
       <InputGroup.Addon><FontAwesome name='key' /></InputGroup.Addon>
       <Field component='input' name='password' type='password' placeholder='password' className='form-control' />
     </InputGroup>
-    <div className="checkbox">
+    <div className='checkbox'>
       <label>
         <Field component='input' id='rememberMe' name='rememberMe' type='checkbox' label='remember me' /> remember me
       </label>

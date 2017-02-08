@@ -10,13 +10,13 @@ let Semester = (props) => {
     <form id='semesterForm'>
       {/* TODO replace type with hidden */}
       <fieldset disabled={infoMode}>
-        <Field component='input' name='id' type='number' placeholder='ID' className='form-control' disabled='true'/>
-        <Field component='input' name='name' type='text' placeholder='name' className='form-control'/>
+        <Field component='input' name='id' type='number' placeholder='ID' className='form-control' disabled='true' />
+        <Field component='input' name='name' type='text' placeholder='name' className='form-control' />
       </fieldset>
       { !infoMode ? (<button type='button' onClick={props.handleSubmit} disabled={props.pristine || props.submitting} className='btn btn-primary'>Submit</button>) : ''}
       <button type='button' onClick={browserHistory.goBack} className='btn btn-default'>cancel</button>
     </form>
-  );
+  )
 }
 
 Semester = reduxForm({

@@ -102,7 +102,8 @@ const SEMESTERS_ACTION_HANDLERS = {
   [FETCH_INITIAL_SEMESTER_DATA_FULFILLED]: (state, action) => ({
     ...state,
     semesters: action.payload.data,
-    filteredSemesters: action.payload.data, fetching: false
+    filteredSemesters: action.payload.data,
+    fetching: false
   }),
   [FETCH_INITIAL_SEMESTER_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
 
@@ -115,13 +116,13 @@ const SEMESTERS_ACTION_HANDLERS = {
   [DELETE_SEMESTER]: (state, action) => ({ ...state, filteredSemesters: state.filteredSemesters.filter((semester) => semester.id != action.payload) }),
 
   [CHANGE]: (state, action) => action.meta.field === 'searchSemesterField' ? {
-      ...state,
-      filteredSemesters: state.semesters.filter((semester) => fuzzysearch(action.payload, semester.name))
-    } : state,
+    ...state,
+    filteredSemesters: state.semesters.filter((semester) => fuzzysearch(action.payload, semester.name))
+  } : state,
   [DESTROY]: (state, action) => action.meta.form.find((formId) => formId === 'searchBarForm') ? {
-      ...state,
-      filteredSemesters: state.semesters
-    } : state,
+    ...state,
+    filteredSemesters: state.semesters
+  } : state,
   [SEARCH_BUTTON_CLICKED]: (state, action) => ({ ...state, showSearchBar: !state.showSearchBar })
 }
 

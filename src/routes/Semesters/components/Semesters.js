@@ -17,11 +17,11 @@ export const Semesters = (props) => (
     </ListGroup>
     <ButtonGroup>
       <Button onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }}><FontAwesome name='plus' /></Button>
-      <Button {...props.mode === mode.edit ? {bsStyle:'primary'} : {}} onClick={() => props.modeButtonClick(mode.edit)}><FontAwesome name='edit' /></Button>
-      <Button {...props.mode === mode.info ? {bsStyle:'primary'} : {}} onClick={() => props.modeButtonClick(mode.info)}><FontAwesome name='info' /></Button>
-      <Button {...props.mode === mode.remove ? {bsStyle:'primary'} : {}} onClick={() => props.modeButtonClick(mode.remove)}><FontAwesome name='remove' /></Button>
+      <Button {...props.mode === mode.edit ? { bsStyle:'primary' } : {}} onClick={() => props.modeButtonClick(mode.edit)}><FontAwesome name='edit' /></Button>
+      <Button {...props.mode === mode.info ? { bsStyle:'primary' } : {}} onClick={() => props.modeButtonClick(mode.info)}><FontAwesome name='info' /></Button>
+      <Button {...props.mode === mode.remove ? { bsStyle:'primary' } : {}} onClick={() => props.modeButtonClick(mode.remove)}><FontAwesome name='remove' /></Button>
     </ButtonGroup>
-    <Button {...props.showSearchBar ? {bsStyle:'primary'} : {}} onClick={() => props.searchButtonClick()}><FontAwesome name='search' /></Button>
+    <Button {...props.showSearchBar ? { bsStyle:'primary' } : {}} onClick={() => props.searchButtonClick()}><FontAwesome name='search' /></Button>
   </div>
 )
 
