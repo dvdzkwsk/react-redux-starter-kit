@@ -1,6 +1,7 @@
 import React from 'react'
+import { browserHistory } from 'react-router'
 import FontAwesome from 'react-fontawesome'
-import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap'
 import './Header.scss'
 
 export const Header = (props) => (
@@ -9,21 +10,18 @@ export const Header = (props) => (
       <Navbar.Brand>
         <Navbar.Link href='/'><FontAwesome name='home' /> GPA-App</Navbar.Link>
       </Navbar.Brand>
+      <Navbar.Toggle />
     </Navbar.Header>
-
     {props.loggedIn ? (
-      <Nav pullRight>
-        <NavDropdown title={(<FontAwesome name='navicon' />)} id='settings' noCaret>
-          {props.user ? (<MenuItem disabled>Signed in as: {props.user.firstName} {props.user.surname}</MenuItem>) : ''}
-          {props.user ? (<MenuItem divider />) : ''}
-          <MenuItem><FontAwesome name='user' /> profile</MenuItem>
-          <MenuItem divider />
-          <MenuItem href='about'><FontAwesome name='question-circle' /> about</MenuItem>
-          <MenuItem divider />
-          <MenuItem><FontAwesome name='gear' /> settings</MenuItem>
-          <MenuItem><FontAwesome name='sign-out' /> logout</MenuItem>
-        </NavDropdown>
-      </Nav>
+      <Navbar.Collapse>
+        <Nav pullRight>
+          {props.user ? (<NavItem disabled>Signed in as: {props.user.firstName} {props.user.surname}</NavItem>) : ''}
+          <NavItem><FontAwesome name='user' /> profile</NavItem>
+          <NavItem href='about'><FontAwesome name='question-circle' /> about</NavItem>
+          <NavItem><FontAwesome name='gear' /> settings</NavItem>
+          <NavItem onClick={() => browserHistory.push('logout')}><FontAwesome name='sign-out' /> logout</NavItem>
+        </Nav>
+      </Navbar.Collapse>
     ) : ''}
   </Navbar>
 )
