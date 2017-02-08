@@ -1,7 +1,7 @@
 export const FETCHED_USER_ID = 'FETCHED_USER_ID'
 
 const USER_ACTION_HANDLERS = {
-  [FETCHED_USER_ID]: (state, action) => ({ ...state, id: action.payload.id })
+  [FETCHED_USER_ID]: (state, action) => ({ ...state, id: action.payload })
 }
 
 // ------------------------------------

@@ -14,11 +14,6 @@ export const SUBMIT_FORM_PENDING = `${SUBMIT_FORM}_PENDING`
 export const SUBMIT_FORM_FULFILLED = `${SUBMIT_FORM}_FULFILLED`
 export const SUBMIT_FORM_REJECTED = `${SUBMIT_FORM}_REJECTED`
 
-export const fetchedAuthToken = (authToken) => ({
-  type: FETCHED_AUTH_TOKEN,
-  payload: { authToken }
-})
-
 export const fetchedUserId = (id) => ({
   type: FETCHED_USER_ID,
   payload: { id }
@@ -50,8 +45,8 @@ export const login = () => (dispatch, getState) => {
           expires: response.data.ttl / 60 / 60 / 24 // seconds to days
         })
 
-        dispatch(fetchedAuthToken(authToken))
-        dispatch(fetchedUserId(response.data.userId))
+        dispatch({ type: FETCHED_AUTH_TOKEN, payload: authToken })
+        dispatch({ type: FETCHED_USER_ID, payload: response.data.userId })
 
         browserHistory.push('semesters')
       })
@@ -63,10 +58,7 @@ export const login = () => (dispatch, getState) => {
 }
 
 export const actions = {
-  login,
-  fetchedAuthToken,
-  fetchedUserId,
-  submitLoginForm
+
 }
 
 const LOGIN_ACTION_HANDLERS = {
