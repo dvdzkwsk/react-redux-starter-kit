@@ -80,12 +80,12 @@ export const modeButtonClick = (newMode) => (dispatch, getState) => {
 export const searchButtonClick = () => (dispatch, getState) => dispatch({ type: SEARCH_BUTTON_CLICKED })
 
 export const loadSemesters = (store) => {
-  const { dispatch } = store
+  const { dispatch, getState } = store
 
   dispatch({
     type: FETCH_INITIAL_DATA,
     payload: axios
-      .get('semesters')
+      .get(`users/${getState().user.id}/semesters`)
       .catch((err) => {
         dispatch({ type: ERROR_OCCURRED, payload: err })
         throw err

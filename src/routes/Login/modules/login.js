@@ -39,11 +39,13 @@ export const login = () => (dispatch, getState) => {
 
         dispatch({ type: FETCHED_AUTH_TOKEN, payload: authToken })
 
-        browserHistory.push('semesters')
-
         return axios.get(`users/${userId}`)
       })
-      .then((response) => dispatch({ type: FETCHED_USER, payload: response.data }))
+      .then((response) => {
+        dispatch({ type: FETCHED_USER, payload: response.data })
+
+        browserHistory.push('semesters')
+      })
       .catch((err) => {
         dispatch({ type: ERROR_OCCURRED, payload: err })
         throw err

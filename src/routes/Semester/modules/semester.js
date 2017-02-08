@@ -12,7 +12,7 @@ export const UPDATE_SEMESTER = 'UPDATE_SEMESTER'
 // ------------------------------------
 
 export const updateSemester = () => (dispatch, getState) => {
-  const data = JSON.stringify(getState().form.semesterForm.values)
+  const data = JSON.stringify({ ...getState().form.semesterForm.values, userId: getState().user.id })
 
   dispatch({
     type: UPDATE_SEMESTER,
