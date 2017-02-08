@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListGroup, ListGroupItem, ButtonGroup, Button } from 'react-bootstrap'
+import { ListGroup, ListGroupItem, ButtonGroup, Button, Badge } from 'react-bootstrap'
 import FontAwesome from 'react-fontawesome'
 import { mode } from '../modules/semesters'
 import SearchBar from './SearchBar'
@@ -10,7 +10,7 @@ export const Semesters = (props) => (
     <ListGroup>
       { props.filteredSemesters.map(semester => (
         <ListGroupItem key={semester.id} onClick={() => props.semesterClick(semester.id)}>
-          <span className='badge'>14</span>
+          <Badge>14</Badge>
           { semester.name }
         </ListGroupItem>
       )) }
