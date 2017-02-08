@@ -1,8 +1,10 @@
 export const PREFIX = 'user/'
 export const FETCHED_USER_ID = `${PREFIX}FETCHED_USER_ID`
+export const USER_LOGOUT = `${PREFIX}_REMOVE_USER`
 
 const USER_ACTION_HANDLERS = {
-  [FETCHED_USER_ID]: (state, action) => ({ ...state, id: action.payload })
+  [FETCHED_USER_ID]: (state, action) => ({ ...state, id: action.payload }),
+  [USER_LOGOUT]: (state, action) => ({ })
 }
 
 // ------------------------------------

@@ -6,7 +6,10 @@ import RegisterRoute from './Register'
 import LoginRoute from './Login'
 import SemestersRoute from './Semesters'
 import SemesterRoute from './Semester'
+// import LogoutRoute from './Logout'
 import NotFoundRoute from './NotFound'
+
+import { logout } from './Login/modules/login'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -25,6 +28,12 @@ export const createRoutes = (store) => {
     if (authToken) {
       // replace('semesters')
     }
+    cb()
+  }
+
+  const logoutRedirect = (nextState, replace, cb) => {
+    replace('login')
+    logout(store)
     cb()
   }
 
@@ -47,6 +56,10 @@ export const createRoutes = (store) => {
           SemestersRoute(store),
           SemesterRoute(store)
         ]
+      },
+      {
+        path: 'logout',
+        onEnter: logoutRedirect
       },
       NotFoundRoute
     ]
