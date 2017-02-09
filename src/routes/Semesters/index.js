@@ -1,5 +1,4 @@
 import { injectReducer } from '../../store/reducers'
-import { loadSemesters } from './modules/semesters'
 
 export default (store) => ({
   path: 'semesters',
@@ -12,8 +11,5 @@ export default (store) => ({
 
       cb(null, Semesters)
     }, 'semesters')
-  },
-  onEnter (nextState, replace) {
-    loadSemesters(store)
   }
 })

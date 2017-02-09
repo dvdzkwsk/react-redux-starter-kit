@@ -79,9 +79,7 @@ export const modeButtonClick = (newMode) => (dispatch, getState) => {
 
 export const searchButtonClick = () => (dispatch, getState) => dispatch({ type: SEARCH_BUTTON_CLICKED })
 
-export const loadSemesters = (store) => {
-  const { dispatch, getState } = store
-
+export const loadSemesters = () => (dispatch, getState) => {
   dispatch({
     type: FETCH_INITIAL_DATA,
     payload: axios
@@ -103,7 +101,8 @@ const SEMESTERS_ACTION_HANDLERS = {
     ...state,
     semesters: action.payload.data,
     filteredSemesters: action.payload.data,
-    fetching: false
+    fetching: false,
+    fetched: true
   }),
   [FETCH_INITIAL_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
 
@@ -135,6 +134,7 @@ const initialState = {
   selectedSemester: {},
   mode: mode.standard,
   fetching: false,
+  fetched: false,
   showSearchBar: false
 }
 export default function semestersReducer (state = initialState, action) {

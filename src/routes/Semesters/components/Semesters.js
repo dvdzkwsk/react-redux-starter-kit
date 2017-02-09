@@ -6,6 +6,7 @@ import SearchBar from './SearchBar'
 
 export const Semesters = (props) => (
   <div>
+    { props.fetched ? '' : props.loadSemesters() }
     { props.showSearchBar ? (<SearchBar />) : '' }
     <ListGroup>
       { props.filteredSemesters.map(semester => (
