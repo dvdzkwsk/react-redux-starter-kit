@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import { TextField } from 'redux-form-material-ui'
+import FlatButton from 'material-ui/FlatButton'
 import { mode } from '../../Semesters/modules/semesters'
 import { browserHistory } from 'react-router'
 
@@ -10,11 +12,11 @@ let Semester = (props) => {
     <form id='semesterForm'>
       {/* TODO replace type with hidden */}
       <fieldset disabled={infoMode}>
-        <Field component='input' name='id' type='number' placeholder='ID' className='form-control' disabled='true' />
-        <Field component='input' name='name' type='text' placeholder='name' className='form-control' />
+        <Field name='id' component={TextField} type='number' floatingLabelText='ID' disabled={true} />
+        <Field name='name' component={TextField} floatingLabelText='Name' />
       </fieldset>
-      { !infoMode ? (<button type='button' onClick={props.handleSubmit} disabled={props.pristine || props.submitting} className='btn btn-primary'>Submit</button>) : ''}
-      <button type='button' onClick={browserHistory.goBack} className='btn btn-default'>cancel</button>
+      { !infoMode ? (<FlatButton primary={true} onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</FlatButton>) : ''}
+      <FlatButton onClick={browserHistory.goBack}>cancel</FlatButton>
     </form>
   )
 }
