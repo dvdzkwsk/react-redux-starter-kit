@@ -1,6 +1,7 @@
 import React from 'react'
-import { ListGroup, ListGroupItem, ButtonGroup, Button, Badge } from 'react-bootstrap'
 import FontAwesome from 'react-fontawesome'
+import {List, ListItem} from 'material-ui/List'
+import FlatButton from 'material-ui/FlatButton';
 import { mode } from '../modules/semesters'
 import SearchBar from '../containers/SearchBarContainer'
 
@@ -8,21 +9,18 @@ export const Semesters = (props) => (
   <div>
     { props.fetched ? '' : props.loadSemesters() }
     { props.showSearchBar ? (<SearchBar />) : '' }
-    <ListGroup>
+    <List>
       { props.filteredSemesters.map(semester => (
-        <ListGroupItem key={semester.id} onClick={() => props.semesterClick(semester.id)}>
-          <Badge>14</Badge>
+        <ListItem key={semester.id} onClick={() => props.semesterClick(semester.id)}>
           { semester.name }
-        </ListGroupItem>
+        </ListItem>
       )) }
-    </ListGroup>
-    <ButtonGroup>
-      <Button onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }}><FontAwesome name='plus' /></Button>
-      <Button {...props.mode === mode.edit ? { bsStyle:'primary' } : {}} onClick={() => props.modeButtonClick(mode.edit)}><FontAwesome name='edit' /></Button>
-      <Button {...props.mode === mode.info ? { bsStyle:'primary' } : {}} onClick={() => props.modeButtonClick(mode.info)}><FontAwesome name='info' /></Button>
-      <Button {...props.mode === mode.remove ? { bsStyle:'primary' } : {}} onClick={() => props.modeButtonClick(mode.remove)}><FontAwesome name='remove' /></Button>
-    </ButtonGroup>
-    <Button {...props.showSearchBar ? { bsStyle:'primary' } : {}} onClick={() => props.searchButtonClick()}><FontAwesome name='search' /></Button>
+    </List>
+    <FlatButton onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }}><FontAwesome name='plus' /></FlatButton>
+    <FlatButton {...props.mode === mode.edit ? { primary: true } : {}} onClick={() => props.modeButtonClick(mode.edit)}><FontAwesome name='edit' /></FlatButton>
+    <FlatButton {...props.mode === mode.info ? { primary: true } : {}} onClick={() => props.modeButtonClick(mode.info)}><FontAwesome name='info' /></FlatButton>
+    <FlatButton {...props.mode === mode.remove ? { primary: true } : {}} onClick={() => props.modeButtonClick(mode.remove)}><FontAwesome name='remove' /></FlatButton>
+    <FlatButton {...props.showSearchBar ? { primary: true } : {}} onClick={() => props.searchButtonClick()}><FontAwesome name='search' /></FlatButton>
   </div>
 )
 
