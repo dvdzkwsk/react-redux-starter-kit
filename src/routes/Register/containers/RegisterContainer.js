@@ -4,11 +4,7 @@ import { register } from '../modules/register'
 import Register from '../components/Register'
 
 const mapActionCreators = {
-  handleSubmit: register
+  register
 }
 
-const mapStateToProps = (state) => ({
-  submitting: state.register.submitting
-})
-
-export default connect(mapStateToProps, mapActionCreators)(Register)
+export default connect(null, mapActionCreators)(Register)
