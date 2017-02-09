@@ -10,11 +10,11 @@ export const Semesters = (props) => (
     { props.fetched ? '' : props.loadSemesters() }
     { props.showSearchBar ? (<SearchBar />) : '' }
     <List>
-      { props.filteredSemesters.map(semester => (
-        <ListItem key={semester.id} onClick={() => props.semesterClick(semester.id)}>
-          { semester.name }
-        </ListItem>
-      )) }
+    { props.filteredSemesters.map(semester => (
+      <ListItem key={semester.id} onClick={() => props.semesterClick(semester.id)}>
+        { semester.name }
+      </ListItem>
+    )) }
     </List>
     <FlatButton onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }}><FontAwesome name='plus' /></FlatButton>
     <FlatButton {...props.mode === mode.edit ? { primary: true } : {}} onClick={() => props.modeButtonClick(mode.edit)}><FontAwesome name='edit' /></FlatButton>
