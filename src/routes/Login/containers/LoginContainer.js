@@ -4,11 +4,7 @@ import { login } from '../modules/login'
 import Login from '../components/Login'
 
 const mapActionCreators: {handleSubmit: Function} = {
-  handleSubmit: login
+  login
 }
 
-const mapStateToProps = (state): { submitting: boolean } => ({
-  submitting: state.login.submitting
-})
-
-export default connect(mapStateToProps, mapActionCreators)(Login)
+export default connect(null, mapActionCreators)(Login)

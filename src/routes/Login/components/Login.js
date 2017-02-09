@@ -1,44 +1,31 @@
 import React from 'react'
-import { Form, FormGroup, Col, ControlLabel, InputGroup, Button } from 'react-bootstrap'
-import FontAwesome from 'react-fontawesome'
-import { Field, reduxForm } from 'redux-form'
+import { FormGroup, Button } from 'react-bootstrap'
+import { Form, Field, reduxForm } from 'redux-form'
+import { loginSucceed, loginFailed } from '../modules/login'
 
 export const Login = (props) => (
-  <Form horizontal>
+  <Form onSubmit={props.handleSubmit(props.login)} form='form'>
     <FormGroup>
-      <Col componentClass={ControlLabel} sm={2}>Email</Col>
-      <Col sm={10}>
-        <Field component='input' name='email' type='text' placeholder='e-mail' className='form-control' />
-      </Col>
+      <Field component='input' name='email' type='text' placeholder='e-mail' className='form-control' />
     </FormGroup>
     <FormGroup>
-      <Col componentClass={ControlLabel} sm={2}>Password</Col>
-      <Col sm={10}>
-        <Field component='input' name='password' type='password' placeholder='password' className='form-control' />
-      </Col>
+      <Field component='input' name='password' type='password' placeholder='password' className='form-control' />
     </FormGroup>
     <FormGroup>
-      <Col smOffset={2} sm={10}>
-        <div className='checkbox'>
-          <label>
-            <Field component='input' id='rememberMe' name='rememberMe' type='checkbox' label='remember me' /> remember me
-          </label>
-        </div>
-      </Col>
+      <div className='checkbox'>
+        <label>
+          <Field component='input' id='rememberMe' name='rememberMe' type='checkbox' label='remember me' /> remember me
+        </label>
+      </div>
     </FormGroup>
     <FormGroup>
-      <Col smOffset={2} sm={10}>
-        <Button type='button' onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Sign in</Button>
-      </Col>
+      <Button type='button' onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Sign in</Button>
     </FormGroup>
   </Form>
 )
 
-Login.propTypes = {
-  handleSubmit : React.PropTypes.func.isRequired,
-  submitting   : React.PropTypes.bool.isRequired
-}
-
 export default reduxForm({
-  form: 'loginForm'
+  form: 'loginForm',
+  onSubmitSuccess: loginSucceed,
+  onSubmitFail: loginFailed
 })(Login)
