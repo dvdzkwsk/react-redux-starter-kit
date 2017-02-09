@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { toggle } from '../store/rootReducers/drawer'
 
-import Header from '../components/Header'
+import MenuDrawer from '../components/MenuDrawer'
 
 const mapDispatchToProps = {
   toggle
@@ -9,7 +9,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   loggedIn: !!state.auth.authToken,
-  user: state.user
+  open: state.drawer.open
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(MenuDrawer)

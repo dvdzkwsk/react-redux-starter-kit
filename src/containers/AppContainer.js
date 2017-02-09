@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
+
+injectTapEventPlugin()
 
 class AppContainer extends Component {
   static propTypes = {
@@ -17,9 +23,11 @@ class AppContainer extends Component {
 
     return (
       <Provider store={store}>
-        <div style={{ height: '100%' }}>
-          <Router history={browserHistory} children={routes} />
-        </div>
+        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+          <div style={{ height: '100%' }}>
+            <Router history={browserHistory} children={routes} />
+          </div>
+        </MuiThemeProvider>
       </Provider>
     )
   }
