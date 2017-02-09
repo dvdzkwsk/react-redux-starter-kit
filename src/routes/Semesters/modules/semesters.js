@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
-import { CHANGE, DESTROY } from 'redux-form/lib/actionTypes'
+import { SEARCH_VALUE_CHANGED } from './searchBar'
+import { DESTROY } from 'redux-form/lib/actionTypes'
 import fuzzysearch from 'fuzzysearch'
 
 // ------------------------------------
@@ -125,10 +126,7 @@ const SEMESTERS_ACTION_HANDLERS = {
   },
   [DELETE_SEMESTER]: (state, action) => ({ ...state, filteredSemesters: state.filteredSemesters.filter((semester) => semester.id != action.payload) }),
 
-  [CHANGE]: (state, action) => action.meta.field === 'searchSemesterField' ? {
-    ...state,
-    filteredSemesters: state.semesters.filter((semester) => fuzzysearch(action.payload, semester.name))
-  } : state,
+  [SEARCH_VALUE_CHANGED]: (state, action) => ({ ...state, filteredSemesters: state.semesters.filter((semester) => fuzzysearch(action.payload, semester.name)) }),
   [DESTROY]: (state, action) => action.meta.form.find((formId) => formId === 'searchBarForm') ? {
     ...state,
     filteredSemesters: state.semesters

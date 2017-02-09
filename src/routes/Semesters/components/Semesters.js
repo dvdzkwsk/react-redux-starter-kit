@@ -2,7 +2,7 @@ import React from 'react'
 import { ListGroup, ListGroupItem, ButtonGroup, Button, Badge } from 'react-bootstrap'
 import FontAwesome from 'react-fontawesome'
 import { mode } from '../modules/semesters'
-import SearchBar from './SearchBar'
+import SearchBar from '../containers/SearchBarContainer'
 
 export const Semesters = (props) => (
   <div>

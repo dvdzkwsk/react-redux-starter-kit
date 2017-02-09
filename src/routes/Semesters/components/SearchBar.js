@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 export const SearchBar = (props) => (
   <InputGroup>
     <InputGroup.Addon><FontAwesome name='search' /></InputGroup.Addon>
-    <Field component='input' name='searchSemesterField' type='text' placeholder='search semesters...' className='form-control' />
+    <Field onChange={props.searchValueChanged} component='input' name='searchSemesterField' type='text' placeholder='search semesters...' className='form-control' />
   </InputGroup>
 )
 
