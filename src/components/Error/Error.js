@@ -1,16 +1,14 @@
 import React from 'react'
-import { Alert } from 'react-bootstrap'
+import Snackbar from 'material-ui/Snackbar'
 
 import './Error.scss'
 
 export const Error = (props) => (
-  <div id='alerts-queue'>
-    {props.errors.map((error, index) => (
-      <Alert key={index} bsStyle='danger' onDismiss={() => props.removeErrorByIndex(index)}>
-        <p>{error.response ? error.response.statusText || error.message : error.message}</p>
-      </Alert>
-    ))}
-  </div>
+  <Snackbar open={props.errors.length > 0}
+            message={props.errors[0] ? props.errors[0].message : ''}
+            autoHideDuration={3000}
+            onRequestClose={() => props.removeByMessage(props.errors[0].message)}
+  />
 )
 
 export default Error

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { removeErrorByIndex } from '../store/rootReducers/error'
+import { removeByMessage } from '../store/rootReducers/error'
 
 import Error from '../components/Error'
 
 const mapDispatchToProps = {
-  removeErrorByIndex
+  removeByMessage
 }
 
 const mapStateToProps = (state) => ({
