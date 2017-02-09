@@ -6,8 +6,10 @@ import './Error.scss'
 export const Error = (props) => (
   <Snackbar open={props.errors.length > 0}
             message={props.errors[0] ? props.errors[0].message : ''}
-            autoHideDuration={3000}
+            autoHideDuration={5000}
+            action='CLOSE'
             onRequestClose={() => props.removeByMessage(props.errors[0].message)}
+            onActionTouchTap={() => props.removeByMessage(props.errors[0].message)}
   />
 )
 
