@@ -9,7 +9,7 @@ export const Login = (props) => (
     <Field name='email' component={TextField} floatingLabelText='Email' />
     <Field name='password' component={TextField} floatingLabelText='Password' type='password' />
     <Field name='rememberMe' component={Checkbox} label='remember me' />
-    <FlatButton onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Sign in</FlatButton>
+    <FlatButton type='submit' onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Sign in</FlatButton>
   </Form>
 )
 
