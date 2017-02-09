@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
 import { Field, Form, reduxForm } from 'redux-form'
 import { TextField } from 'redux-form-material-ui'
 import FlatButton from 'material-ui/FlatButton';
