@@ -16,6 +16,8 @@ export const FETCH_INITIAL_DATA_REJECTED = `${FETCH_INITIAL_DATA}_REJECTED`
 export const SWITCH_MODE = `${PREFIX}SWITCH_MODE`
 
 export const SET_SELECTED_SEMESTER = `${PREFIX}SET_SELECTED_SEMESTER`
+export const UPDATE_SEMESTER = `${PREFIX}UPDATE_SEMESTER`
+export const UPDATE_SEMESTER_FULFILLED = `${UPDATE_SEMESTER}_FULFILLED`
 export const DELETE_SEMESTER = `${PREFIX}DELETE_SEMESTER`
 
 export const SEARCH_BUTTON_CLICKED = `${PREFIX}SEARCH_BUTTON_CLICKED`
@@ -112,6 +114,15 @@ const SEMESTERS_ACTION_HANDLERS = {
     selectedSemester: state.filteredSemesters.find((semester) => semester.id == action.payload)
   }),
 
+  [UPDATE_SEMESTER_FULFILLED]: (state, action) => {
+    const newSemesters = [ ...state.semesters.filter((semester) => semester.id != action.payload.id), action.payload ]
+    return ({
+      ...state,
+      semesters: newSemesters,
+      // TODO filter again instead of add it like this
+      filteredSemesters: newSemesters
+    });
+  },
   [DELETE_SEMESTER]: (state, action) => ({ ...state, filteredSemesters: state.filteredSemesters.filter((semester) => semester.id != action.payload) }),
 
   [CHANGE]: (state, action) => action.meta.field === 'searchSemesterField' ? {
