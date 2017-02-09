@@ -1,1 +1,1 @@
-export reduxPromiseNProgressMiddleware from './redux-promise-nprogress-middleware'
+export nProgressMiddleware from './nprogress-middleware'
