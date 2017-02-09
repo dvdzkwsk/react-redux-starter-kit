@@ -7,6 +7,4 @@ const mapDispatchToProps = {
   searchValueChanged
 }
 
-const mapStateToProps = (state) => ({})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
+export default connect(null, mapDispatchToProps)(SearchBar)
