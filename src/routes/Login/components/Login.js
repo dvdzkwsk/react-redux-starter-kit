@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Field, reduxForm } from 'redux-form'
 import { TextField, Checkbox } from 'redux-form-material-ui'
-import FlatButton from 'material-ui/FlatButton';
+import FlatButton from 'material-ui/FlatButton'
 import { loginSucceed, loginFailed } from '../modules/login'
 
 export const Login = (props) => (
