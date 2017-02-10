@@ -11,8 +11,7 @@ export const FETCH_INITIAL_DATA_PENDING = `${FETCH_INITIAL_DATA}_PENDING`
 export const FETCH_INITIAL_DATA_FULFILLED = `${FETCH_INITIAL_DATA}_FULFILLED`
 export const FETCH_INITIAL_DATA_REJECTED = `${FETCH_INITIAL_DATA}_REJECTED`
 
-export const UPDATE_SEMESTER = `${PREFIX}UPDATE_SEMESTER`
-export const UPDATE_SEMESTER_FULFILLED = `${UPDATE_SEMESTER}_FULFILLED`
+export const SEMESTER_CHANGED = `${PREFIX}SEMESTER_CHANGED`
 export const DELETE_SEMESTER = `${PREFIX}DELETE_SEMESTER`
 
 
@@ -60,7 +59,7 @@ const SEMESTERS_ACTION_HANDLERS = {
   [FETCH_INITIAL_DATA_FULFILLED]: (state, action) => ({ ...state, semesters: action.payload, fetching: false, fetched: true }),
   [FETCH_INITIAL_DATA_REJECTED]: (state) => ({ ...state, fetching: false }),
 
-  [UPDATE_SEMESTER_FULFILLED]: (state, action) => ({ ...state, semesters: [ ...state.semesters.filter((semester) => semester.id != action.payload.id), action.payload ] }),
+  [SEMESTER_CHANGED]: (state, action) => ({ ...state, semesters: [ ...state.semesters.filter((semester) => semester.id != action.payload.id), action.payload ] }),
   [DELETE_SEMESTER]: (state, action) => ({ ...state, semesters: state.semesters.filter((semester) => semester.id != action.payload) })
 }
 

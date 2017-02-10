@@ -1,27 +1,16 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { UPDATE_SEMESTER, UPDATE_SEMESTER_FULFILLED } from '../../Semesters/modules/semestersData'
+import { SEMESTER_CHANGED } from '../../Semesters/modules/semestersData'
 import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-export const updateSemester = (values, dispatch) => (dispatch, getState) => {
-  return axios.put('semesters', JSON.stringify({ ...values, userId: getState().user.id }))
-  //     .then((response) => {
-  //       //TODO filter again
-  //       browserHistory.goBack();
-  //       return response.data
-  //     })
-  //     .catch((err) => {
-  //       dispatch({ type: ERROR_OCCURRED, payload: err })
-  //       throw err
-  //     })
-}
+export const updateSemester = (values, dispatch) => (dispatch, getState) => axios.put('semesters', JSON.stringify({ ...values, userId: getState().user.id }))
 
 export const updateSucceed = (result, dispatch) => {
-  dispatch({ type: UPDATE_SEMESTER_FULFILLED, payload: result.data })
+  dispatch({ type: SEMESTER_CHANGED, payload: result.data })
   browserHistory.goBack();
   return result.data
 }
