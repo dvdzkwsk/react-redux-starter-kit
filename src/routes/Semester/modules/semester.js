@@ -11,7 +11,7 @@ export const updateSemester = (values, dispatch) => (dispatch, getState) => axio
 
 export const updateSucceed = (result, dispatch) => {
   dispatch({ type: SEMESTER_CHANGED, payload: result.data })
-  browserHistory.goBack();
+  browserHistory.goBack()
   return result.data
 }
 

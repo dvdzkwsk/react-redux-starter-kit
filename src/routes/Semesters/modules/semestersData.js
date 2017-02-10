@@ -14,7 +14,6 @@ export const FETCH_INITIAL_DATA_REJECTED = `${FETCH_INITIAL_DATA}_REJECTED`
 export const SEMESTER_CHANGED = `${PREFIX}SEMESTER_CHANGED`
 export const DELETE_SEMESTER = `${PREFIX}DELETE_SEMESTER`
 
-
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -39,10 +38,13 @@ export const deleteSemester = (semesterId) => (dispatch, getState) => {
   dispatch({ type: DELETE_SEMESTER, payload: semesterId })
 
   const state = getState()
-  dispatch({ type: FILTER_SEMESTERS, payload: {
-    semesters: state.semestersData.semesters,
-    searchValue: state.form.searchBarForm ? state.form.searchBarForm.values.searchSemesterField : ''
-  } })
+  dispatch({
+    type: FILTER_SEMESTERS,
+    payload: {
+      semesters: state.semestersData.semesters,
+      searchValue: state.form.searchBarForm ? state.form.searchBarForm.values.searchSemesterField : ''
+    }
+  })
 
   axios
     .delete(`semesters/${semesterId}`)

@@ -1,5 +1,5 @@
 import React from 'react'
-import Paper from 'material-ui/Paper';
+import Paper from 'material-ui/Paper'
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
 import Add from 'material-ui/svg-icons/content/add'
 import Edit from 'material-ui/svg-icons/image/edit'
@@ -9,14 +9,14 @@ import Search from 'material-ui/svg-icons/action/search'
 import { mode } from '../modules/semestersMainView'
 
 export const ActionBar = (props) => (
-  <Paper zDepth={0} style={{textAlign: 'center'}}>
-    <BottomNavigation selectedIndex={props.selectedIndex} style={{display:'inline'}}>
+  <Paper zDepth={0} style={{ textAlign: 'center' }}>
+    <BottomNavigation selectedIndex={props.selectedIndex} style={{ display: 'inline' }}>
       <BottomNavigationItem label='add' icon={<Add />} onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }} />
       <BottomNavigationItem label='edit' icon={<Edit />} onClick={() => { props.modeButtonClick(mode.edit); props.setSelectedIndex(1) }} />
       <BottomNavigationItem label='info' icon={<Info />} onClick={() => { props.modeButtonClick(mode.info); props.setSelectedIndex(2) }} />
       <BottomNavigationItem label='remove' icon={<Delete />} onClick={() => { props.modeButtonClick(mode.remove); props.setSelectedIndex(3) }} />
     </BottomNavigation>
-    <BottomNavigation selectedIndex={props.showSearchBar} style={{display:'inline'}}>
+    <BottomNavigation selectedIndex={props.showSearchBar} style={{ display: 'inline' }}>
       <BottomNavigationItem label='search' icon={<Search />} onClick={() => props.searchButtonClick()} />
     </BottomNavigation>
   </Paper>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, Form, reduxForm } from 'redux-form'
 import { TextField } from 'redux-form-material-ui'
-import FlatButton from 'material-ui/FlatButton';
+import FlatButton from 'material-ui/FlatButton'
 import { registerSucceed, registerFailed } from '../modules/register'
 
 export const Register = (props) => (

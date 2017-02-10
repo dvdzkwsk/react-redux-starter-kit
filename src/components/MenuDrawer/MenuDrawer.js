@@ -1,5 +1,5 @@
 import React from 'react'
-import {browserHistory} from 'react-router'
+import { browserHistory } from 'react-router'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
@@ -7,8 +7,8 @@ import AppBar from 'material-ui/AppBar'
 import FontAwesome from 'react-fontawesome'
 
 export const MenuDrawer = (props) => (
-  <Drawer open={props.open} openSecondary={true}>
-    <AppBar onClick={props.toggle} title="Menu" />
+  <Drawer open={props.open} openSecondary>
+    <AppBar onClick={props.toggle} title='Menu' />
     {props.loggedIn ? (<MenuItem><FontAwesome name='user' /> profile</MenuItem>) : ''}
     {props.loggedIn ? (<Divider />) : ''}
     <MenuItem><FontAwesome name='question-circle' /> about</MenuItem>

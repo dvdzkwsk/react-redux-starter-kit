@@ -4,7 +4,7 @@ export const TOGGLE = `${PREFIX}TOGGLE_DRAWER`
 export const toggle = () => (dispatch, getState) => dispatch({ type: TOGGLE })
 
 const DRAWER_ACTION_HANDLERS = {
-  [TOGGLE]: (state, action) => ({ ...state, open: !state.open }),
+  [TOGGLE]: (state, action) => ({ ...state, open: !state.open })
 }
 
 // ------------------------------------

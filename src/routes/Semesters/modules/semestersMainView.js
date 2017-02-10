@@ -62,10 +62,10 @@ export const modeButtonClick = (newMode) => (dispatch, getState) => {
 }
 
 export const searchButtonClick = () => (dispatch, getState) => {
-  dispatch({ type: TOGGLE_SEARCH_BAR });
+  dispatch({ type: TOGGLE_SEARCH_BAR })
 
   const state = getState()
-  if(!state.semestersView.main.showSearchBar) {
+  if (!state.semestersView.main.showSearchBar) {
     dispatch({ type: FILTER_SEMESTERS, payload: { semesters: state.semestersData.semesters, searchValue: '' } })
   }
 }

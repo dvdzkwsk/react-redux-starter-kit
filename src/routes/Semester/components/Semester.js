@@ -13,10 +13,10 @@ let Semester = (props) => {
     <Form onSubmit={props.handleSubmit(props.updateSemester)} form='form'>
       {/* TODO replace type with hidden */}
       <fieldset disabled={isInfoMode}>
-        <Field name='id' component={TextField} type='number' floatingLabelText='ID' disabled={true} />
+        <Field name='id' component={TextField} type='number' floatingLabelText='ID' disabled />
         <Field name='name' component={TextField} floatingLabelText='Name' />
       </fieldset>
-      { !isInfoMode ? (<FlatButton type='submit' primary={true} onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</FlatButton>) : ''}
+      { !isInfoMode ? (<FlatButton type='submit' primary onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</FlatButton>) : ''}
       <FlatButton onClick={browserHistory.goBack}>cancel</FlatButton>
     </Form>
   )
