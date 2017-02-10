@@ -74,12 +74,10 @@ export const actions = {}
 
 const SEMESTERS_ACTION_HANDLERS = {
   [SWITCH_MODE]: (state, action) => ({ ...state, mode: action.payload }),
-  [SET_SELECTED_SEMESTER]: (state, action) => ({
-    ...state,
-    selectedSemester: state.filteredSemesters.find((semester) => semester.id == action.payload)
-  }),
+  [SET_SELECTED_SEMESTER]: (state, action) => ({ ...state, selectedSemester: state.filteredSemesters.find((semester) => semester.id == action.payload) }),
   [FILTER_SEMESTERS]: (state, action) => ({ ...state, filteredSemesters: action.payload.semesters.filter((semester) => fuzzysearch(action.payload.searchValue, semester.name)) }),
-  [TOGGLE_SEARCH_BAR]: (state, action) => ({ ...state, showSearchBar: !state.showSearchBar })
+  [TOGGLE_SEARCH_BAR]: (state, action) => ({ ...state, showSearchBar: !state.showSearchBar }),
+  [SET_SELECTED_INDEX]: (state, action) => ({ ...state, selectedIndex: action.payload })
 }
 
 // ------------------------------------

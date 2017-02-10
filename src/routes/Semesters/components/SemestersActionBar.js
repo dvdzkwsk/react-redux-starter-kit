@@ -12,9 +12,9 @@ export const ActionBar = (props) => (
   <Paper zDepth={0} style={{textAlign: 'center'}}>
     <BottomNavigation selectedIndex={props.selectedIndex} style={{display:'inline'}}>
       <BottomNavigationItem label='add' icon={<Add />} onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }} />
-      <BottomNavigationItem label='edit' icon={<Edit />} onClick={() => props.modeButtonClick(mode.edit)} />
-      <BottomNavigationItem label='info' icon={<Info />} onClick={() => props.modeButtonClick(mode.info)} />
-      <BottomNavigationItem label='remove' icon={<Delete />} onClick={() => props.modeButtonClick(mode.remove)} />
+      <BottomNavigationItem label='edit' icon={<Edit />} onClick={() => { props.modeButtonClick(mode.edit); props.setSelectedIndex(1) }} />
+      <BottomNavigationItem label='info' icon={<Info />} onClick={() => { props.modeButtonClick(mode.info); props.setSelectedIndex(2) }} />
+      <BottomNavigationItem label='remove' icon={<Delete />} onClick={() => { props.modeButtonClick(mode.remove); props.setSelectedIndex(3) }} />
     </BottomNavigation>
     <BottomNavigation selectedIndex={props.showSearchBar} style={{display:'inline'}}>
       <BottomNavigationItem label='search' icon={<Search />} onClick={() => props.searchButtonClick()} />
