@@ -30,9 +30,9 @@ export const mode = {
 // Actions
 // ------------------------------------
 
-export const setSelectedIndex = (index) => (dispatch, getState) => dispatch({
+export const setSelectedIndex = (newIndex) => (dispatch, getState) => dispatch({
   type: SET_SELECTED_INDEX,
-  payload: index
+  payload: newIndex === getState().semestersView.main.selectedIndex ? null : newIndex
 })
 
 export const semesterClick = (semesterId) => (dispatch, getState) => {
