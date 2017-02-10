@@ -4,7 +4,7 @@ import { updateSemester } from '../modules/semester'
 import Semester from '../components/Semester'
 
 const mapDispatchToProps = {
-  handleSubmit: updateSemester
+  updateSemester
 }
 
 const mapStateToProps = (state, ownProps) => ({

@@ -1,28 +1,31 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Form, Field, reduxForm } from 'redux-form'
 import { TextField } from 'redux-form-material-ui'
 import FlatButton from 'material-ui/FlatButton'
 import { mode } from '../../Semesters/modules/semestersMainView'
 import { browserHistory } from 'react-router'
+import { updateSucceed, updateFailed } from '../modules/semester'
 
 let Semester = (props) => {
-  const infoMode = props.mode === mode.info
+  const isInfoMode = props.mode === mode.info
   return (
-    <form id='semesterForm'>
+    <Form onSubmit={props.handleSubmit(props.updateSemester)} form='form'>
       {/* TODO replace type with hidden */}
-      <fieldset disabled={infoMode}>
+      <fieldset disabled={isInfoMode}>
         <Field name='id' component={TextField} type='number' floatingLabelText='ID' disabled={true} />
         <Field name='name' component={TextField} floatingLabelText='Name' />
       </fieldset>
-      { !infoMode ? (<FlatButton primary={true} onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</FlatButton>) : ''}
+      { !isInfoMode ? (<FlatButton type='submit' primary={true} onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</FlatButton>) : ''}
       <FlatButton onClick={browserHistory.goBack}>cancel</FlatButton>
-    </form>
+    </Form>
   )
 }
 
 Semester = reduxForm({
-  form: 'semesterForm'
+  form: 'semesterForm',
+  onSubmitSuccess: updateSucceed,
+  onSubmitFail: updateFailed
 })(Semester)
 
 export default connect(
