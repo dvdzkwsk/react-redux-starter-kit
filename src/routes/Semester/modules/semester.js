@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { UPDATE_SEMESTER } from '../../Semesters/modules/semesters'
+import { UPDATE_SEMESTER } from '../../Semesters/modules/semestersData'
 import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
 
 // ------------------------------------

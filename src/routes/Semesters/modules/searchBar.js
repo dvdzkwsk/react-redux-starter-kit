@@ -1,7 +1,9 @@
-export const PREFIX = 'semestersSearchBar/'
-export const SEARCH_VALUE_CHANGED = `${PREFIX}SEARCH_VALUE_CHANGED`
+import { FILTER_SEMESTERS } from './semestersMainView'
 
 export const searchValueChanged = (event, newValue, previousValue) => (dispatch, getState) => dispatch({
-  type: SEARCH_VALUE_CHANGED,
-  payload: newValue
+  type: FILTER_SEMESTERS,
+  payload: {
+    semesters: getState().semestersData.semesters,
+    searchValue: newValue
+  }
 })

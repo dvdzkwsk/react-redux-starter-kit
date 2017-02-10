@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { semesterClick, modeButtonClick, searchButtonClick, loadSemesters } from '../modules/semesters'
+import { loadSemesters } from '../modules/semestersData'
+import { semesterClick, modeButtonClick, searchButtonClick } from '../modules/semestersMainView'
 
 import Semesters from '../components/Semesters'
 
@@ -11,10 +12,10 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  filteredSemesters: state.semesters.filteredSemesters,
-  mode: state.semesters.mode,
-  showSearchBar: state.semesters.showSearchBar,
-  fetched: state.semesters.fetched
+  filteredSemesters: state.semestersView.main.filteredSemesters,
+  mode: state.semestersView.main.mode,
+  showSearchBar: state.semestersView.main.showSearchBar,
+  fetched: state.semestersData.fetched
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Semesters)

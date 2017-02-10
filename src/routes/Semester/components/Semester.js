@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { TextField } from 'redux-form-material-ui'
 import FlatButton from 'material-ui/FlatButton'
-import { mode } from '../../Semesters/modules/semesters'
+import { mode } from '../../Semesters/modules/semestersMainView'
 import { browserHistory } from 'react-router'
 
 let Semester = (props) => {
@@ -27,6 +27,6 @@ Semester = reduxForm({
 
 export default connect(
   state => ({
-    initialValues: state.semesters.selectedSemester
+    initialValues: state.semestersView.main.selectedSemester
   })
 )(Semester)
