@@ -6,6 +6,8 @@ import apiRequest from 'helpers/api'
 export const UPDATE_SEARCH = 'UPDATE_SEARCH'
 export const UPDATE_PAGE = 'UPDATE_PAGE'
 export const UPDATE_PER_PAGE = "UPDATE_PER_PAGE"
+export const INCREMENT_PAGE = "INCREMENT_PAGE"
+export const DECREMENT_PAGE = "DECREMENT_PAGE"
 export const REQUEST_RULES = 'REQUEST_RULES'
 export const RECEIVE_RULES = 'RECEIVE_RULES'
 
@@ -33,6 +35,18 @@ export function updatePerPage(perpage) {
   }
 }
 
+export function incrementPage() {
+  return {
+    type: INCREMENT_PAGE
+  }
+}
+
+export function decrementPage() {
+  return {
+    type: DECREMENT_PAGE
+  }
+}
+
 export function requestRules () {
   return {
     type    : REQUEST_RULES
@@ -45,10 +59,6 @@ export function receiveRules (payload) {
     payload
   }
 }
-
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk! */
 
 export const fetchRules = () => {
   return (dispatch, getState) => {
@@ -75,6 +85,8 @@ export const actions = {
   updateSearch,
   updatePage,
   updatePerPage,
+  incrementPage,
+  decrementPage,
   requestRules,
   receiveRules,
   fetchRules
@@ -87,6 +99,8 @@ const ACTION_HANDLERS = {
   [UPDATE_SEARCH] : (state, action) => ({...state, search: action.search}),
   [UPDATE_PAGE] : (state, action) => ({...state, page: action.page}),
   [UPDATE_PER_PAGE] : (state, action) => ({...state, perpage: action.perpage}),
+  [INCREMENT_PAGE] : (state, action) => ({...state, page: state.page + 1}),
+  [DECREMENT_PAGE] : (state, action) => ({...state, page: Math.max(state.page - 1, 1)}),
   [REQUEST_RULES]    : (state, action) => state,
   [RECEIVE_RULES] : (state, action) => ({...state, ...action.payload})
 }
