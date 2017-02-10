@@ -14,6 +14,9 @@ const karmaConfig = {
       included : true
     }
   ],
+  client: {
+    captureConsole: true
+  },
   singleRun     : !argv.watch,
   frameworks    : ['mocha'],
   reporters     : ['mocha'],
