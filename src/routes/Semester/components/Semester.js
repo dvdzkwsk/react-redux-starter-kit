@@ -8,7 +8,7 @@ import { browserHistory } from 'react-router'
 import { updateSucceed, updateFailed } from '../modules/semester'
 
 let Semester = (props) => {
-  const isInfoMode = props.mode === mode.info
+  const isInfoMode = props.mode === mode.properties[mode.info].uriName
   return (
     <Form onSubmit={props.handleSubmit(props.updateSemester)} form='form'>
       {/* TODO replace type with hidden */}
@@ -16,7 +16,7 @@ let Semester = (props) => {
         <Field name='id' component={TextField} type='number' floatingLabelText='ID' disabled />
         <Field name='name' component={TextField} floatingLabelText='Name' />
       </fieldset>
-      { !isInfoMode ? (<FlatButton type='submit' primary onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>Submit</FlatButton>) : ''}
+      { !isInfoMode ? (<FlatButton type='submit' primary onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>{props.mode}</FlatButton>) : ''}
       <FlatButton onClick={browserHistory.goBack}>cancel</FlatButton>
     </Form>
   )
