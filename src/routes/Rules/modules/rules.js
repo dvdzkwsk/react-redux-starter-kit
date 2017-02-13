@@ -1,3 +1,4 @@
+import Immutable from 'immutable'
 import apiRequest from 'helpers/api'
 
 // ------------------------------------
@@ -5,43 +6,43 @@ import apiRequest from 'helpers/api'
 // ------------------------------------
 export const UPDATE_SEARCH = 'UPDATE_SEARCH'
 export const UPDATE_PAGE = 'UPDATE_PAGE'
-export const UPDATE_PER_PAGE = "UPDATE_PER_PAGE"
-export const INCREMENT_PAGE = "INCREMENT_PAGE"
-export const DECREMENT_PAGE = "DECREMENT_PAGE"
+export const UPDATE_PER_PAGE = 'UPDATE_PER_PAGE'
+export const INCREMENT_PAGE = 'INCREMENT_PAGE'
+export const DECREMENT_PAGE = 'DECREMENT_PAGE'
 export const REQUEST_RULES = 'REQUEST_RULES'
 export const RECEIVE_RULES = 'RECEIVE_RULES'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateSearch(search) {
+export function updateSearch (search) {
   return {
     type: UPDATE_SEARCH,
     search
   }
 }
 
-export function updatePage(page) {
+export function updatePage (page) {
   return {
     type: UPDATE_PAGE,
     page
   }
 }
 
-export function updatePerPage(perpage) {
+export function updatePerPage (perpage) {
   return {
     type: UPDATE_PER_PAGE,
     perpage
   }
 }
 
-export function incrementPage() {
+export function incrementPage () {
   return {
     type: INCREMENT_PAGE
   }
 }
 
-export function decrementPage() {
+export function decrementPage () {
   return {
     type: DECREMENT_PAGE
   }
@@ -64,7 +65,7 @@ export const fetchRules = () => {
   return (dispatch, getState) => {
     dispatch(requestRules())
 
-    const {search, page, perpage} = getState().rules
+    const { search, page, perpage } = getState().rules.getIn(['result', 'payload']).toJS()
 
     return apiRequest({
       scope: 'rule',
@@ -75,8 +76,8 @@ export const fetchRules = () => {
         perpage
       }
     })
-    .then(({payload, status, error}) => {
-      dispatch(receiveRules(payload))
+    .then((data) => {
+      dispatch(receiveRules(data))
     })
   }
 }
@@ -96,25 +97,31 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [UPDATE_SEARCH] : (state, action) => ({...state, search: action.search}),
-  [UPDATE_PAGE] : (state, action) => ({...state, page: action.page}),
-  [UPDATE_PER_PAGE] : (state, action) => ({...state, perpage: action.perpage}),
-  [INCREMENT_PAGE] : (state, action) => ({...state, page: state.page + 1}),
-  [DECREMENT_PAGE] : (state, action) => ({...state, page: Math.max(state.page - 1, 1)}),
+  [UPDATE_SEARCH] : (state, action) => state.setIn(['result', 'payload', 'search'], action.search),
+  [UPDATE_PAGE] : (state, action) => state.setIn(['result', 'payload', 'page'], action.page),
+  [UPDATE_PER_PAGE] : (state, action) => state.setIn(['result', 'payload', 'perpage'], action.perpage),
+  [INCREMENT_PAGE] : (state, action) => state.updateIn(['result', 'payload', 'page'], page => page + 1),
+  [DECREMENT_PAGE] : (state, action) => state.updateIn(['result', 'payload', 'page'], page => page - 1 || 1),
   [REQUEST_RULES]    : (state, action) => state,
-  [RECEIVE_RULES] : (state, action) => ({...state, ...action.payload})
+  [RECEIVE_RULES] : (state, action) => action.payload
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
-  rules: [],
-  search: undefined,
-  maxpage: undefined,
-  page: 1,
-  perpage: 20
-}
+const initialState = Immutable.fromJS({
+  entities: {
+    rules: []
+  },
+  result: {
+    payload: {
+      search: undefined,
+      page: 1,
+      perpage: 20,
+      rules: []
+    }
+  }
+})
 export default function rulesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

@@ -19,8 +19,6 @@ const mapDispatchToProps = {
   fetchRules
 }
 
-const mapStateToProps = (state) => ({
-  ...state.rules
-})
+const mapStateToProps = (state) => state.rules.getIn(['result', 'payload']).toJS()
 
 export default connect(mapStateToProps, mapDispatchToProps)(Rules)

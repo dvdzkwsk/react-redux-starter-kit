@@ -13,7 +13,6 @@ export default (store) => ({
       store.dispatch(fetchRules())
 
       cb(null, Rules)
-
     }, 'rules')
   }
 })

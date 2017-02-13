@@ -75,7 +75,7 @@ describe('(Redux Module) Rule', () => {
     })
 
     it('Should assign the first argument to the "rule" property.', () => {
-      const rule = {description: ''}
+      const rule = { description: '' }
 
       expect(receiveRule(rule)).to.have.property('rule', rule)
     })
@@ -146,7 +146,7 @@ describe('(Redux Module) Rule', () => {
   // NOTE: if you have a more complex state, you will probably want to verify
   // that you did not mutate the state. In this case our state is just a number
   // (which cannot be mutated).
-  /*describe('(Action Handler) COUNTER_INCREMENT', () => {
+  /* describe('(Action Handler) COUNTER_INCREMENT', () => {
     it('Should increment the state by the action payload\'s "value" property.', () => {
       let state = ruleReducer(undefined, {})
       expect(state).to.equal(0)
@@ -157,5 +157,5 @@ describe('(Redux Module) Rule', () => {
       state = ruleReducer(state, increment(-3))
       expect(state).to.equal(0)
     })
-  })*/
+  }) */
 })
