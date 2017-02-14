@@ -1,4 +1,5 @@
 import React from 'react'
+import PaginationContainer from '../containers/PaginationContainer'
 import RuleDescriptionContainer from '../containers/RuleDescriptionContainer'
 
 export const Rules = (props) => (
@@ -65,28 +66,16 @@ export const Rules = (props) => (
       <button className='btn btn-primary' type='submit' >
         Submit
       </button>
-      <button className='btn btn-default'
-        style={{ display: props.page > 1 ? 'initial' : 'none' }}
-        onClick={() => {
-          props.decrementPage()
-          props.fetchRules()
-        }}>
-        <div className='glyphicon glyphicon-chevron-left' />
-      </button>
-      <button className='btn btn-default' onClick={() => {
-        props.incrementPage()
-        props.fetchRules()
-      }}>
-        <div className='glyphicon glyphicon-chevron-right' />
-      </button>
     </form>
-    <ul className='list-unstyled'>
+    <PaginationContainer />
+    <ul className='list-group'>
       {
         props.rules.map(rule => (
           <RuleDescriptionContainer key={rule} id={rule} />
         ))
       }
     </ul>
+    <PaginationContainer />
   </div>
 )
 

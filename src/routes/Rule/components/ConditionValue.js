@@ -22,8 +22,6 @@ export const ConditionValue = (props) => {
   const areOptionsPredefined = options.length > 0
   const values = getValidatedValues(props)
 
-  console.log(values)
-
   if (areOptionsPredefined) {
     SelectComponent = Select
   }

@@ -1,10 +1,11 @@
 import React from 'react'
 import ConditionContainer from '../containers/ConditionContainer'
+import ActionContainer from '../containers/ActionContainer'
 
 // TODO change what is displayed based on location hash (#conditions, #actions, etc.)
 export const Rule = (props) => (
-  <form style={{ margin: '0 auto', textAlign: 'left' }}>
-    <div className='input-group'>
+  <form style={{ textAlign: 'left' }}>
+    <div className='form-group'>
       <label
         className='control-label'
         htmlFor='description-input'>
@@ -28,9 +29,12 @@ export const Rule = (props) => (
       <li role='presentation'><a href='#actions'>Actions</a></li>
       <li role='presentation'><a href='#review'>Review</a></li>
     </ul>
-    <fieldset>
+    <fieldset className='form-group'>
       {props.conditions.map(id => (
-        <ConditionContainer key={id} id={id} />
+        <ConditionContainer
+          key={id}
+          id={id}
+        />
       ))}
       <button
         className='btn btn-default'
@@ -40,15 +44,34 @@ export const Rule = (props) => (
         }}
       >
         <div className='glyphicon glyphicon-plus'></div>
+        <span> Add Condition </span>
       </button>
     </fieldset>
-    <fieldset />
+    <fieldset className='form-group'>
+      {props.actions.map(id => (
+        <ActionContainer
+          key={id}
+          id={id}
+        />
+      ))}
+      <button
+        className='btn btn-default'
+        onClick={e => {
+          e.preventDefault()
+          //props.addCondition(props.id)
+        }}
+      >
+        <div className='glyphicon glyphicon-plus'></div>
+        <span> Add Action </span>
+      </button>
+    </fieldset>
   </form>
 )
 
 Rule.propTypes = {
   // rules     : React.PropTypes.array.isRequired,
-  updateDescription : React.PropTypes.func.isRequired
+  updateDescription : React.PropTypes.func.isRequired,
+  addCondition : React.PropTypes.func.isRequired
 }
 
 export default Rule

@@ -31,10 +31,24 @@ export const Condition = (props) => (
       onChange={value => {
         props.updateConditionValue({
           id: props.id,
+          ruleId: props.ruleId,
           value: value
         })
       }}
     />
+    <button
+      className='btn btn-default'
+      onClick={e => {
+        e.preventDefault()
+        props.deleteCondition({
+          id: props.id,
+          ruleId: props.ruleId
+        })
+      }}
+    >
+      <div className='glyphicon glyphicon-minus33'></div>
+      <span> Delete Condition </span>
+    </button>
   </fieldset>
 )
 
@@ -42,7 +56,8 @@ Condition.propTypes = {
   id: React.PropTypes.string.isRequired,
   dimension: React.PropTypes.string.isRequired,
   op: React.PropTypes.bool.isRequired,
-  value: React.PropTypes.array.isRequired
+  value: React.PropTypes.array.isRequired,
+  ruleId: React.PropTypes.string.isRequired
 }
 
 export default Condition

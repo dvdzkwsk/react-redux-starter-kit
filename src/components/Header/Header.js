@@ -1,7 +1,7 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Header.scss'
-
+// TODO fix hamburger menu
 export const Header = () => (
   <div className='navbar navbar-default'>
     <div className='container-fluid'>
@@ -19,8 +19,13 @@ export const Header = () => (
       <div className='collapse navbar-collapse' id='navbar-collapse-1'>
         <ul className='nav navbar-nav'>
           <li>
+            <Link to='/rule/new' activeClassName='route--active'>
+              Create Rule
+            </Link>
+          </li>
+          <li>
             <Link to='/rules' activeClassName='route--active'>
-              Rules
+              View/Edit Rules
             </Link>
           </li>
         </ul>

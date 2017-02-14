@@ -1,73 +1,70 @@
+import React from 'react'
 import Immutable from 'immutable'
 
-export default Immutable.fromJS([
-  {
-    'type': 'timeline',
-    'value': {
-      'preroll': 'integer',
-      'midroll': 'array',
-      'postroll': 'integer'
+export const ARRAY = 'ARRAY'
+export const BOOL = 'BOOL'
+export const NUMBER = 'NUMBER'
+export const STRING = 'STRING'
+
+export default Immutable.fromJS({
+  timeline: {
+    value: {
+      preroll: NUMBER,
+      midroll: ARRAY,
+      postroll: NUMBER
     }
   },
-  {
-    'type': 'capping',
-    'value': {
-      'interval': 'integer'
+  capping: {
+    value: {
+      interval: NUMBER
     }
   },
-  {
-    'type': 'noad',
-    'value': {
-      'code': 'integer',
-      'status': 'string'
+  noad: {
+    value: {
+      code: NUMBER,
+      status: STRING
     }
   },
-  {
-    'type': 'dimension',
-    'value': {
-      'label': 'string',
-      'value': 'string'
+  dimension: {
+    value: {
+      label: STRING,
+      value: STRING
     }
   },
-  {
-    'type': 'mediation',
-    'value': {
-      'label': 'string',
-      'rank': 'integer'
+  mediation: {
+    value: {
+      label: STRING,
+      rank: NUMBER
     }
   },
-  {
-    'type': 'cookie',
-    'value': {
-      'label': 'string',
-      'value': 'string',
-      'ttl': 'integer'
+  cookie: {
+    value: {
+      label: STRING,
+      value: STRING,
+      ttl: NUMBER
     }
   },
-  {
-    'type': 'skip',
-    'value': {
-      'offset': 'integer'
+  skip: {
+    value: {
+      offset: NUMBER
     }
   },
-  {
-    'type': 'source',
-    'value': {
-      'label': 'string',
-      'description': 'string',
-      'value': 'array',
-      'secure': 'boolean',
-      'server': 'boolean',
-      'timeout': 'array',
-      'cookie': 'array',
-      'sync': 'array',
-      'price': 'string'
+  source: {
+    value: {
+      label: STRING,
+      description: STRING,
+      value: ARRAY,
+      secure: BOOL,
+      server: BOOL,
+      timeout: ARRAY,
+      cookie: ARRAY,
+      sync: ARRAY,
+      price: STRING
     }
   },
-  {
-    'type': 'timeout',
-    'value': {
-      'timeout': 'integer'
+  timeout: {
+    value: {
+      timeout: NUMBER
     }
   }
-])
+})

@@ -1,10 +1,12 @@
 import { schema } from 'normalizr'
 
 const conditionSchema = new schema.Entity('conditions', {}, {
-  idAttribute: arrayIndexer
+  idAttribute: arrayIndexer,
+  processStrategy: addRuleId
 })
 const actionSchema = new schema.Entity('actions', {}, {
-  idAttribute: arrayIndexer
+  idAttribute: arrayIndexer,
+  processStrategy: addRuleId
 })
 const ruleSchema = new schema.Entity('rules', {
   conditions: [conditionSchema],
@@ -23,6 +25,10 @@ const adDirectorSchema = new schema.Object({
 
 function arrayIndexer (value, parent, key) {
   return `${parent.id}_${parent[key].indexOf(value)}`
+}
+
+function addRuleId (value, parent, key) {
+  return Object.assign({}, value, { ruleId: parent.id })
 }
 
 // export { ruleSchema }
