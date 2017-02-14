@@ -1,17 +1,15 @@
 import { connect } from 'react-redux'
-import { semesterClick, modeButtonClick, searchButtonClick, setSelectedIndex } from '../modules/semestersMainView'
+import { semesterClick, modeButtonClick, searchButtonClick } from '../modules/semestersMainView'
 
 import ActionBar from '../components/SemestersActionBar'
 
 const mapDispatchToProps = {
   semesterClick,
   modeButtonClick,
-  searchButtonClick,
-  setSelectedIndex
+  searchButtonClick
 }
 
 const mapStateToProps = (state) => ({
-  selectedIndex: state.semestersView.main.selectedIndex,
   mode: state.semestersView.main.mode,
   showSearchBar: state.semestersView.main.showSearchBar
 })

@@ -13,7 +13,6 @@ const SEMESTERS_ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  selecteModeIndex: null,
   searchMode: false
 }
 export default function semestersReducer (state = initialState, action) {

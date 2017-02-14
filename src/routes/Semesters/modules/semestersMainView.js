@@ -11,7 +11,6 @@ export const SWITCH_MODE = `${PREFIX}SWITCH_MODE`
 export const SET_SELECTED_SEMESTER = `${PREFIX}SET_SELECTED_SEMESTER`
 export const FILTER_SEMESTERS = `${PREFIX}FILTER_SEMESTERS`
 export const TOGGLE_SEARCH_BAR = `${PREFIX}TOGGLE_SEARCH_BAR`
-export const SET_SELECTED_INDEX = `${PREFIX}SET_SELECTED_INDEX`
 
 export const mode = {
   standard: 0, // switch to subject
@@ -29,11 +28,6 @@ export const mode = {
 // ------------------------------------
 // Actions
 // ------------------------------------
-
-export const setSelectedIndex = (newIndex) => (dispatch, getState) => dispatch({
-  type: SET_SELECTED_INDEX,
-  payload: newIndex === getState().semestersView.main.selectedIndex ? null : newIndex
-})
 
 export const semesterClick = (semesterId) => (dispatch, getState) => {
   const currentMode = getState().semestersView.main.mode
@@ -76,8 +70,7 @@ const SEMESTERS_ACTION_HANDLERS = {
   [SWITCH_MODE]: (state, action) => ({ ...state, mode: action.payload }),
   [SET_SELECTED_SEMESTER]: (state, action) => ({ ...state, selectedSemester: state.filteredSemesters.find((semester) => semester.id == action.payload) }),
   [FILTER_SEMESTERS]: (state, action) => ({ ...state, filteredSemesters: action.payload.semesters.filter((semester) => fuzzysearch(action.payload.searchValue, semester.name)) }),
-  [TOGGLE_SEARCH_BAR]: (state, action) => ({ ...state, showSearchBar: !state.showSearchBar }),
-  [SET_SELECTED_INDEX]: (state, action) => ({ ...state, selectedIndex: action.payload })
+  [TOGGLE_SEARCH_BAR]: (state, action) => ({ ...state, showSearchBar: !state.showSearchBar })
 }
 
 // ------------------------------------
@@ -87,8 +80,7 @@ const initialState = {
   filteredSemesters: [],
   selectedSemester: {},
   mode: mode.standard,
-  showSearchBar: false,
-  selectedIndex: null
+  showSearchBar: false
 }
 export default function semestersReducer (state = initialState, action) {
   const handler = SEMESTERS_ACTION_HANDLERS[action.type]
