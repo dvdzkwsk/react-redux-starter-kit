@@ -9,7 +9,7 @@ export const Header = (props) => (
   <Navbar fluid>
     <Navbar.Header>
       <Navbar.Brand>
-        <Navbar.Link onClick={() => browserHistory.push('/')}><FontAwesome name='home' /> GPA-App</Navbar.Link>
+        <Navbar.Link onClick={() => browserHistory.push('/')} style={{ cursor: 'pointer' }}><FontAwesome name='home' /> GPA-App</Navbar.Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
