@@ -7,11 +7,8 @@ const mapDispatchToProps = {
   updateSemester
 }
 
-const mapStateToProps = (state, ownProps) => {
-  console.log('--------------', ownProps);
-  return ({
-    mode: ownProps.params.mode
-  });
-}
+const mapStateToProps = (state, ownProps) => ({
+  mode: ownProps.params.mode
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Semester)

@@ -6,9 +6,9 @@ import './Error.scss'
 export const Error = (props) => (
   <div id='alerts-queue'>
     {props.errors.map((error, index) => (
-    <Alert key={index} bsStyle='danger' onDismiss={() => props.removeByMessage(error.message)}>
-      <p>{error.message}</p>
-    </Alert>
+      <Alert key={index} bsStyle='danger' onDismiss={() => props.removeByMessage(error.message)}>
+        <p>{error.message}</p>
+      </Alert>
     ))}
   </div>
 )
