@@ -16,6 +16,18 @@ let Semester = (props) => {
           <ControlLabel>Name</ControlLabel>
           <Field name='name' component='input' type='text' placeholder='Name' className='form-control' />
         </FormGroup>
+        <FormGroup>
+          <ControlLabel>School</ControlLabel>
+          <Field name='school' component='input' type='text' placeholder='School' className='form-control' />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Start</ControlLabel>
+          <Field name='start' component='input' type='date' placeholder='Start' className='form-control' />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>End</ControlLabel>
+          <Field name='end' component='input' type='date' placeholder='End' className='form-control' />
+        </FormGroup>
       </fieldset>
       { !isInfoMode ? (<Button type='submit' bsStyle='primary' onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>{props.mode}</Button>) : ''}
       <Button onClick={browserHistory.goBack}>cancel</Button>
