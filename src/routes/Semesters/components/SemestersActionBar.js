@@ -1,25 +1,18 @@
 import React from 'react'
-import Paper from 'material-ui/Paper'
-import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
-import Add from 'material-ui/svg-icons/content/add'
-import Edit from 'material-ui/svg-icons/image/edit'
-import Info from 'material-ui/svg-icons/action/info'
-import Delete from 'material-ui/svg-icons/action/delete'
-import Search from 'material-ui/svg-icons/action/search'
+import { ButtonGroup, Button } from 'react-bootstrap'
+import FontAwesome from 'react-fontawesome'
 import { mode } from '../modules/semestersMainView'
 
 export const ActionBar = (props) => (
-  <Paper zDepth={0} style={{ textAlign: 'center' }}>
-    <BottomNavigation selectedIndex={props.selectedIndex} style={{ display: 'inline' }}>
-      <BottomNavigationItem label='add' icon={<Add />} onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }} />
-      <BottomNavigationItem label='edit' icon={<Edit />} onClick={() => { props.modeButtonClick(mode.edit); props.setSelectedIndex(1) }} />
-      <BottomNavigationItem label='info' icon={<Info />} onClick={() => { props.modeButtonClick(mode.info); props.setSelectedIndex(2) }} />
-      <BottomNavigationItem label='remove' icon={<Delete />} onClick={() => { props.modeButtonClick(mode.remove); props.setSelectedIndex(3) }} />
-    </BottomNavigation>
-    <BottomNavigation selectedIndex={props.showSearchBar} style={{ display: 'inline' }}>
-      <BottomNavigationItem label='search' icon={<Search />} onClick={() => props.searchButtonClick()} />
-    </BottomNavigation>
-  </Paper>
+  <div>
+    <ButtonGroup style={{ textAlign: 'center' }}>
+      <Button onClick={() => { props.modeButtonClick(mode.add); props.semesterClick(null) }}><FontAwesome name='plus' /></Button>
+      <Button onClick={() => { props.modeButtonClick(mode.edit) }} {...props.mode === mode.edit ? { bsStyle: 'primary' } : {}}><FontAwesome name='edit' /></Button>
+      <Button onClick={() => { props.modeButtonClick(mode.info) }} {...props.mode === mode.info ? { bsStyle: 'primary' } : {}}><FontAwesome name='info' /></Button>
+      <Button onClick={() => { props.modeButtonClick(mode.remove) }} {...props.mode === mode.remove ? { bsStyle: 'primary' } : {}}><FontAwesome name='remove' /></Button>
+    </ButtonGroup>
+    <Button onClick={() => props.searchButtonClick()} {...props.showSearchBar ? { bsStyle: 'primary' } : {}}><FontAwesome name='search' /></Button>
+  </div>
 )
 
 export default ActionBar

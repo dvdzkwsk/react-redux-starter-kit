@@ -1,10 +1,13 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
 import { Field, reduxForm } from 'redux-form'
-import { TextField } from 'redux-form-material-ui'
+import { InputGroup } from 'react-bootstrap'
+import FontAwesome from 'react-fontawesome'
 
 export const SearchBar = (props) => (
-  <Field name='searchSemesterField' onChange={props.searchValueChanged} component={TextField} hintText={<span><FontAwesome name='search' /> search semesters...</span>} />
+  <InputGroup>
+    <InputGroup.Addon><FontAwesome name='search' /></InputGroup.Addon>
+    <Field name='searchSemesterField' onChange={props.searchValueChanged} type='text' component='input' placeholder=' search semesters...' className='form-control' />
+  </InputGroup>
 )
 
 export default reduxForm({

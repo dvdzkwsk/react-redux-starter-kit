@@ -12,7 +12,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   selectedIndex: state.semestersView.main.selectedIndex,
-  showSearchBar: state.semestersView.main.showSearchBar ? 0 : null
+  mode: state.semestersView.main.mode,
+  showSearchBar: state.semestersView.main.showSearchBar
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionBar)
