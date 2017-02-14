@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Field, reduxForm } from 'redux-form'
-import { TextField } from 'redux-form-material-ui'
-import FlatButton from 'material-ui/FlatButton'
+import { FormGroup, ControlLabel, Button } from 'react-bootstrap'
 import { mode } from '../../Semesters/modules/semestersMainView'
 import { browserHistory } from 'react-router'
 import { updateSucceed, updateFailed } from '../modules/semester'
@@ -11,13 +10,15 @@ let Semester = (props) => {
   const isInfoMode = props.mode === mode.properties[mode.info].uriName
   return (
     <Form onSubmit={props.handleSubmit(props.updateSemester)} form='form'>
-      {/* TODO replace type with hidden */}
       <fieldset disabled={isInfoMode}>
-        <Field name='id' component={TextField} type='number' floatingLabelText='ID' disabled />
-        <Field name='name' component={TextField} floatingLabelText='Name' />
+        <Field name='id' component='input' type='hidden' placeholder='ID' className='form-control' />
+        <FormGroup>
+          <ControlLabel>Name</ControlLabel>
+          <Field name='name' component='input' type='text' placeholder='Name' className='form-control' />
+        </FormGroup>
       </fieldset>
-      { !isInfoMode ? (<FlatButton type='submit' primary onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>{props.mode}</FlatButton>) : ''}
-      <FlatButton onClick={browserHistory.goBack}>cancel</FlatButton>
+      { !isInfoMode ? (<Button type='submit' bsStyle='primary' onClick={props.handleSubmit} disabled={props.pristine || props.submitting}>{props.mode}</Button>) : ''}
+      <Button onClick={browserHistory.goBack}>cancel</Button>
     </Form>
   )
 }
