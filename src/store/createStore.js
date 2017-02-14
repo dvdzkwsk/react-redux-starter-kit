@@ -2,7 +2,6 @@ import { applyMiddleware, compose, createStore } from 'redux'
 
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
-import createPromise from 'redux-promise-middleware'
 import { nProgressMiddleware } from './middleware'
 
 import { browserHistory } from 'react-router'
@@ -10,13 +9,12 @@ import makeRootReducer from './reducers'
 import { updateLocation } from './rootReducers/location'
 
 const logger = createLogger()
-const promise = createPromise()
 
 export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk, promise, nProgressMiddleware, logger]
+  const middleware = [thunk, nProgressMiddleware, logger]
 
   // ======================================================
   // Store Enhancers
