@@ -1,5 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
+import createLogger from 'redux-logger'
+// import { persistStore, autoRehydrate } from 'redux-persist'
 import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
@@ -13,7 +15,9 @@ export default (initialState = {}) => {
   // ======================================================
   // Store Enhancers
   // ======================================================
-  const enhancers = []
+  const enhancers = [
+    // autoRehydrate()
+  ]
 
   let composeEnhancers = compose
 
@@ -22,6 +26,8 @@ export default (initialState = {}) => {
     if (typeof composeWithDevToolsExtension === 'function') {
       composeEnhancers = composeWithDevToolsExtension
     }
+    const logger = createLogger()
+    middleware.push(logger)
   }
 
   // ======================================================
@@ -35,6 +41,7 @@ export default (initialState = {}) => {
       ...enhancers
     )
   )
+  // persistStore(store)
   store.asyncReducers = {}
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime

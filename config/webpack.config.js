@@ -49,6 +49,7 @@ webpackConfig.externals = {}
 webpackConfig.externals['react/lib/ExecutionEnvironment'] = true
 webpackConfig.externals['react/lib/ReactContext'] = true
 webpackConfig.externals['react/addons'] = true
+webpackConfig.externals['constant'] = 'window.constant'
 
 // ------------------------------------
 // Plugins
@@ -109,7 +110,7 @@ if (__DEV__) {
 if (!__TEST__) {
   webpackConfig.plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
-      names : ['vendor']
+      names : ['vendor', 'manifest']
     })
   )
 }
