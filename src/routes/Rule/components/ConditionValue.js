@@ -105,6 +105,7 @@ function BooleanValue (props) {
   )
 }
 
+// TODO finish this component
 function IntegerValue (props) {
   return (
     <SelectComponent />

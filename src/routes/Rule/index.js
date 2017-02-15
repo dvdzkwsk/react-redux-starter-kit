@@ -13,11 +13,17 @@ export default (store) => ({
 
       const Rule = require('./containers/RuleContainer').default
       const ruleReducer = require('./modules/rule').default
+      const createRule = require('./modules/rule').createRule
       const fetchRule = require('./modules/rule').fetchRule
 
       injectReducer(store, { key: 'rule', reducer: ruleReducer })
 
-      store.dispatch(fetchRule(nextState.params.id))
+      if (nextState.params.id === 'new') {
+        store.dispatch(createRule())
+      }
+      else {
+        store.dispatch(fetchRule(nextState.params.id))
+      }
 
       cb(null, Rule)
     }, 'rule')

@@ -1,13 +1,17 @@
 import { connect } from 'react-redux'
 import {
   updateDescription,
-  addCondition
+  addCondition,
+  addAction,
+  updateRule
 } from '../modules/rule'
 import Rule from '../components/Rule'
 
 const mapDispatchToProps = {
   updateDescription,
-  addCondition
+  addCondition,
+  addAction,
+  updateRule
 }
 
 const mapStateToProps = (state) => state.rule.getIn(['entities', 'rules']).first().toJS()

@@ -17,7 +17,8 @@ const dimensionSchema = new schema.Entity('dimensions', {}, {
 })
 const payloadSchema = new schema.Object({
   rules: [ruleSchema],
-  dimensions: [dimensionSchema]
+  dimensions: [dimensionSchema],
+  rule: ruleSchema
 })
 const adDirectorSchema = new schema.Object({
   payload: payloadSchema

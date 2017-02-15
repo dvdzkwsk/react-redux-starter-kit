@@ -1,4 +1,4 @@
-import { normalize, schema } from 'normalizr'
+import { normalize, denormalize, schema } from 'normalizr'
 import Immutable from 'immutable'
 import adDirectorSchema from 'helpers/schema'
 import 'whatwg-fetch'
@@ -23,6 +23,30 @@ export function apiRequest (bodyObject) {
 		.then(response => response.json())
 		.then(json => Immutable.fromJS(normalize(json, adDirectorSchema)))
 		// .catch(error => console.error(error))
+}
+
+export function getRuleById (id) {
+  console.log('getting rule', id)
+  return apiRequest({
+    scope: 'rule',
+    method: 'read',
+    payload: {
+      id
+    }
+  })
+}
+
+export function postImmutableRule (immutable) {
+  const payload = denormalize(immutable.get('result').toJS(), adDirectorSchema, immutable.get('entities').toJS()).payload
+  const rule = payload.rule || payload.rules[0]
+
+  return apiRequest({
+    scope: 'rule',
+    method: 'update',
+    payload: {
+      ...rule
+    }
+  })
 }
 
 export default apiRequest

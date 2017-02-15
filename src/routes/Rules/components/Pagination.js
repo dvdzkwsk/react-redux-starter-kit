@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const Pagination = (props) => (
-  <nav>
+  <nav style={{ textAlign: 'center'}}>
     <ul className='pagination'>
       <li
         style={{ display: props.page > 1 ? 'initial' : 'none' }}

@@ -4,31 +4,33 @@ import RuleDescriptionContainer from '../containers/RuleDescriptionContainer'
 
 export const Rules = (props) => (
   <div style={{ margin: '0 auto' }} >
-    <h2>Rules</h2>
     <form className='form-inline' onSubmit={e => {
       e.preventDefault()
       props.fetchRules()
     }}>
       <div className='form-group'>
-        <div className='input-group'>
-          <input
-            className='form-control'
-            value={props.search}
-            type='text'
-            min='1'
-            onChange={e => {
-              props.updateSearch(e.target.value)
-            }}
-          />
-          <div className='input-group-addon glyphicon glyphicon-search' />
-        </div>
+        <label
+          className='control-label'
+          htmlFor='search-input'
+        >
+          Search
+        </label>
+        <input
+          id='search-input'
+          className='form-control'
+          value={props.search}
+          type='search'
+          onChange={e => {
+            props.updateSearch(e.target.value)
+          }}
+        />
       </div>
       <div className='form-group'>
         <label
           className='control-label'
           htmlFor='page-input'
         >
-          Page:
+          Page
         </label>
         <input
           id='page-input'
@@ -46,7 +48,7 @@ export const Rules = (props) => (
           className='control-label'
           htmlFor='per-page-input'
         >
-          Per Page:
+          Per Page
         </label>
         <select
           id='per-page-input'
@@ -63,9 +65,11 @@ export const Rules = (props) => (
           <option value={100}>100</option>
         </select>
       </div>
-      <button className='btn btn-primary' type='submit' >
-        Submit
-      </button>
+      <div className='form-group'>
+        <button className='btn btn-primary' type='submit' >
+          Submit
+        </button>
+      </div>
     </form>
     <PaginationContainer />
     <ul className='list-group'>

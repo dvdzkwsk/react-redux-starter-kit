@@ -15,7 +15,12 @@ export const ActionValue = (props) => {
   return <fieldset>
     {
       Actions.getIn([props.type, 'value']).map((type, key) => {
-        return typeMap.get(type)({ key, value: props.value[key] })
+        return typeMap.get(type)({
+          key,
+          value: props.value[key],
+          onChange: props.updateActionValue,
+          id: props.id
+        })
       })
     }
 
@@ -34,9 +39,17 @@ function ArrayValue (props) {
       <Select.Creatable
         id={`${props.key}-input`}
         value={props.value}
+        multi
         options={options}
-        onChange={e => {
-
+        onChange={values => {
+          console.log(values)
+          const value = values.map(v => v.value)
+          console.log(value)
+          props.onChange({
+            id: props.id,
+            key: props.key,
+            value
+          })
         }}
       />
     </div>
@@ -52,7 +65,11 @@ function BoolValue (props) {
         className='form-control'
         defaultValue={props.value}
         onChange={e => {
-
+          props.onChange({
+            id: props.id,
+            key: props.key,
+            value: e.target.value === 'true'
+          })
         }}
         >
         <option value={true}>true</option>
@@ -72,7 +89,11 @@ function NumberValue (props) {
         defaultValue={props.value}
         type='number'
         onChange={e => {
-
+          props.onChange({
+            id: props.id,
+            key: props.key,
+            value: Number(e.target.value)
+          })
         }}
       />
     </div>
@@ -89,7 +110,11 @@ function StringValue (props) {
         defaultValue={props.value}
         type='text'
         onChange={e => {
-
+          props.onChange({
+            id: props.id,
+            key: props.key,
+            value: e.target.value
+          })
         }}
       />
     </div>
