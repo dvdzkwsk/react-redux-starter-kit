@@ -2,15 +2,24 @@ import React from 'react'
 import DimensionSelectorContainer from '../containers/DimensionSelectorContainer'
 import ConditionValueContainer from '../containers/ConditionValueContainer'
 
-export const Condition = (props) => (
+export const Condition = ({
+  id,
+  ruleId,
+  dimension,
+  op,
+  updateConditionDimension,
+  updateConditionOp,
+  updateConditionValue,
+  deleteCondition
+}) => (
   <fieldset>
     <div className='row'>
       <div className='col-sm-6'>
         <DimensionSelectorContainer
-          dimension={props.dimension}
+          dimension={dimension}
           onChange={dimension => {
-            props.updateConditionDimension({
-              id: props.id,
+            updateConditionDimension({
+              id: id,
               dimension
             })
           }}
@@ -18,11 +27,11 @@ export const Condition = (props) => (
       </div>
       <div className='col-sm-6'>
         <select
-          defaultValue={props.op}
+          defaultValue={op}
           className='form-control'
           onChange={e => {
-            props.updateConditionOp({
-              id: props.id,
+            updateConditionOp({
+              id: id,
               op: e.target.value === 'true'
             })
           }}
@@ -35,11 +44,11 @@ export const Condition = (props) => (
     <div className='row'>
       <div className='col-xs-12'>
         <ConditionValueContainer
-          id={props.id}
+          id={id}
           onChange={value => {
-            props.updateConditionValue({
-              id: props.id,
-              ruleId: props.ruleId,
+            updateConditionValue({
+              id: id,
+              ruleId: ruleId,
               value: value
             })
           }}
@@ -50,9 +59,9 @@ export const Condition = (props) => (
       className='btn btn-default'
       onClick={e => {
         e.preventDefault()
-        props.deleteCondition({
-          id: props.id,
-          ruleId: props.ruleId
+        deleteCondition({
+          id: id,
+          ruleId: ruleId
         })
       }}
     >
@@ -64,10 +73,14 @@ export const Condition = (props) => (
 
 Condition.propTypes = {
   id: React.PropTypes.string.isRequired,
+  ruleId: React.PropTypes.string.isRequired,
   dimension: React.PropTypes.string.isRequired,
   op: React.PropTypes.bool.isRequired,
   value: React.PropTypes.array.isRequired,
-  ruleId: React.PropTypes.string.isRequired
+  updateConditionDimension: React.PropTypes.func.isRequired,
+  updateConditionOp: React.PropTypes.func.isRequired,
+  updateConditionValue: React.PropTypes.func.isRequired,
+  deleteCondition: React.PropTypes.func.isRequired  
 }
 
 export default Condition

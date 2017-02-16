@@ -12,6 +12,14 @@ export default (store) => ({
 
       store.dispatch(fetchDimensions())
 
+      const conditionsReducer = require('./modules/conditions').default
+
+      injectReducer(store, { key: 'conditions', reducer: conditionsReducer })
+
+      const actionsReducer = require('./modules/actions').default
+
+      injectReducer(store, { key: 'actions', reducer: actionsReducer })
+
       const Rule = require('./containers/RuleContainer').default
       const ruleReducer = require('./modules/rule').default
       const createRule = require('./modules/rule').createRule

@@ -4,10 +4,9 @@ import Immutable from 'immutable'
 import adDirectorSchema from 'helpers/schema'
 import 'whatwg-fetch'
 
-export const REQUEST = 'REQUEST'
-export const SUCCESS = 'SUCCESS'
-export const FAILURE = 'FAILURE'
-
+const REQUEST = 'REQUEST'
+const SUCCESS = 'SUCCESS'
+const FAILURE = 'FAILURE'
 const authorization = 'Basic ' + btoa(`${__API_USER__}:${__API_KEY__}`)
 const endpoint = __PROD__ ? __PROD_API_BASE__ : __DEV_API_BASE__
 

@@ -4,7 +4,7 @@ import {
   updateActionRank,
   updateActionYield,
   deleteAction
-} from '../modules/rule'
+} from '../modules/actions'
 import Action from '../components/Action'
 
 const mapDispatchToProps = {
@@ -14,6 +14,6 @@ const mapDispatchToProps = {
   deleteAction
 }
 
-const mapStateToProps = (state, ownProps) => state.rule.getIn(['entities', 'actions', ownProps.id]).toJS()
+const mapStateToProps = (state, ownProps) => state.actions.get(ownProps.id).toJS()
 
 export default connect(mapStateToProps, mapDispatchToProps)(Action)

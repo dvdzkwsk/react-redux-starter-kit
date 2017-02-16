@@ -50,17 +50,13 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [REQUEST_DIMENSIONS]    : (state, action) => state,
-  [RECEIVE_DIMENSIONS] : (state, action) => action.payload
+  [RECEIVE_DIMENSIONS] : (state, action) => action.payload.getIn(['entities', 'dimensions'], state)
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = Immutable.fromJS({
-  entities: {
-    dimensions: []
-  }
-})
+const initialState = Immutable.fromJS({})
 
 export default function dimensionsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

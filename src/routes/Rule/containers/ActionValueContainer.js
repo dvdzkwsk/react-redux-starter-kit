@@ -3,12 +3,12 @@ import ActionValue from '../components/ActionValue'
 import Actions from 'data/actions'
 import {
   updateActionValue
-} from '../modules/rule'
+} from '../modules/actions'
 
 const mapDispatchToProps = {
   updateActionValue
 }
 
-const mapStateToProps = (state, ownProps) => state.rule.getIn(['entities', 'actions', ownProps.id]).toJS()
+const mapStateToProps = (state, ownProps) => state.actions.get(ownProps.id).toJS()
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionValue)

@@ -14,6 +14,6 @@ const mapDispatchToProps = {
   updateRule
 }
 
-const mapStateToProps = (state) => state.rule.getIn(['entities', 'rules']).first().toJS()
+const mapStateToProps = (state) => state.rule.isEmpty() ? state.rule.toJS() : state.rule.first().toJS()
 
 export default connect(mapStateToProps, mapDispatchToProps)(Rule)

@@ -1,17 +1,23 @@
 import React from 'react'
-import ConditionContainer from '../containers/ConditionContainer'
-import ActionContainer from '../containers/ActionContainer'
-import ReviewContainer from '../containers/ReviewContainer'
-import StatusMessageContainer from '../containers/StatusMessageContainer'
+import ConditionListContainer from '../containers/ConditionListContainer'
+import ActionListContainer from '../containers/ActionListContainer'
+//import ReviewContainer from '../containers/ReviewContainer'
+//import StatusMessageContainer from '../containers/StatusMessageContainer'
 import './Rule.scss'
 
+// TODO consider using redux forms
 // TODO change what is displayed based on location hash (#conditions, #actions, etc.)
-export const Rule = (props) => (
+export const Rule = ({
+  id,
+  updateRule,
+  description,
+  updateDescription,
+  params
+}) => (
   <div>
-    <StatusMessageContainer />
     <form onSubmit={e => {
       e.preventDefault()
-      props.updateRule()
+      updateRule()
     }}>
       <div className='form-group'>
         <label
@@ -24,10 +30,10 @@ export const Rule = (props) => (
           id='description-input'
           className='form-control'
           type='text'
-          value={props.description}
+          value={description}
           onChange={e => {
-            props.updateDescription({
-              id: props.id,
+            updateDescription({
+              id,
               description: e.target.value
             })
           }}
@@ -47,49 +53,24 @@ export const Rule = (props) => (
         />
       </div>
       <ul className='nav nav-tabs' role='tablist'>
-        <li role='presentation' className='active'><a href='#conditions' role='tab' data-toggle='tab'>Conditions</a></li>
-        <li role='presentation'><a href='#actions' role='tab' data-toggle='tab'>Actions</a></li>
-        <li role='presentation'><a href='#review' role='tab' data-toggle='tab'>Review</a></li>
+        <li role='presentation' className='active'>
+          <a href='#conditions' role='tab' data-toggle='tab'>Conditions</a>
+        </li>
+        <li role='presentation'>
+          <a href='#actions' role='tab' data-toggle='tab'>Actions</a>
+        </li>
+        <li role='presentation'>
+          <a href='#review' role='tab' data-toggle='tab'>Review</a>
+        </li>
       </ul>
       <div className='tab-content'>
         <div role='tabpanel' id='conditions' className='form-group tab-pane active fade in'>
-          {props.conditions.map(id => (
-            <ConditionContainer
-              key={id}
-              id={id}
-            />
-          ))}
-          <button
-            className='btn btn-default'
-            onClick={e => {
-              e.preventDefault()
-              props.addCondition(props.id)
-            }}
-          >
-            <div className='glyphicon glyphicon-plus' />
-            <span> Add Condition </span>
-          </button>
+          <ConditionListContainer ruleId={params.id} />
         </div>
         <div role='tabpanel' id='actions' className='form-group tab-pane fade'>
-          {props.actions.map(id => (
-            <ActionContainer
-              key={id}
-              id={id}
-            />
-          ))}
-          <button
-            className='btn btn-default'
-            onClick={e => {
-              e.preventDefault()
-              props.addAction(props.id)
-            }}
-          >
-            <div className='glyphicon glyphicon-plus' />
-            <span> Add Action </span>
-          </button>
+          <ActionListContainer ruleId={params.id} />
         </div>
         <div role='tabpanel' id='review' className='form-group tab-pane fade'>
-          <ReviewContainer />
           <button type='submit' className='btn btn-primary'>Submit</button>
         </div>
       </div>
@@ -98,9 +79,11 @@ export const Rule = (props) => (
 )
 
 Rule.propTypes = {
+  id: React.PropTypes.string.isRequired,
+  updateRule: React.PropTypes.func.isRequired,
+  description: React.PropTypes.string.isRequired,
   updateDescription : React.PropTypes.func.isRequired,
-  addCondition : React.PropTypes.func.isRequired,
-  addAction : React.PropTypes.func.isRequired
+  params: React.PropTypes.object.isRequired
 }
 
 export default Rule

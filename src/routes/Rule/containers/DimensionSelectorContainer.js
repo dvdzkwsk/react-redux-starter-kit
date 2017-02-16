@@ -4,6 +4,8 @@ import DimensionSelector from '../components/DimensionSelector'
 
 const mapDispatchToProps = {}
 
-const mapStateToProps = (state) => state.dimensions.get('entities').toJS()
+const mapStateToProps = (state) => ({
+  dimensions: state.dimensions.toJS()
+})
 
 export default connect(mapStateToProps)(DimensionSelector)

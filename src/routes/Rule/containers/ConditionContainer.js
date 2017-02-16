@@ -4,7 +4,7 @@ import {
   updateConditionOp,
   updateConditionValue,
   deleteCondition
-} from '../modules/rule'
+} from '../modules/conditions'
 import Condition from '../components/Condition'
 
 const mapDispatchToProps = {
@@ -14,6 +14,6 @@ const mapDispatchToProps = {
   deleteCondition
 }
 
-const mapStateToProps = (state, ownProps) => state.rule.getIn(['entities', 'conditions', ownProps.id]).toJS()
+const mapStateToProps = (state, ownProps) => state.conditions.get(ownProps.id).toJS()
 
 export default connect(mapStateToProps, mapDispatchToProps)(Condition)
