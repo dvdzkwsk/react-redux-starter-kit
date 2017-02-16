@@ -34,17 +34,17 @@ export const Condition = (props) => (
     </div>
     <div className='row'>
       <div className='col-xs-12'>
-      <ConditionValueContainer
-        id={props.id}
-        onChange={value => {
-          props.updateConditionValue({
-            id: props.id,
-            ruleId: props.ruleId,
-            value: value
-          })
-        }}
+        <ConditionValueContainer
+          id={props.id}
+          onChange={value => {
+            props.updateConditionValue({
+              id: props.id,
+              ruleId: props.ruleId,
+              value: value
+            })
+          }}
       />
-    </div>
+      </div>
     </div>
     <button
       className='btn btn-default'
@@ -56,7 +56,7 @@ export const Condition = (props) => (
         })
       }}
     >
-      <div className='glyphicon glyphicon-minus'></div>
+      <div className='glyphicon glyphicon-minus' />
       <span> Delete Condition </span>
     </button>
   </fieldset>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import Actions from 'data/actions'
-import { ARRAY, BOOL, NUMBER, STRING }  from 'data/actions'
+import { ARRAY, BOOL, NUMBER, STRING } from 'data/actions'
 import 'react-select/dist/react-select.css'
 
 const typeMap = new Map([
@@ -72,7 +72,7 @@ function BoolValue (props) {
           })
         }}
         >
-        <option value={true}>true</option>
+        <option value>true</option>
         <option value={false}>false</option>
       </select>
     </div>

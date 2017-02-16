@@ -1,5 +1,6 @@
 import { injectReducer } from 'store/reducers'
 
+// TODO make edit and create child routes
 export default (store) => ({
   path : 'rule/:id',
   getComponent (nextState, cb) {
@@ -20,8 +21,7 @@ export default (store) => ({
 
       if (nextState.params.id === 'new') {
         store.dispatch(createRule())
-      }
-      else {
+      } else {
         store.dispatch(fetchRule(nextState.params.id))
       }
 

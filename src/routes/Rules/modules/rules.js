@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import apiRequest from 'helpers/api'
+import { fetchFromAPI, SUCCESS } from 'helpers/api'
 
 // ------------------------------------
 // Constants
@@ -67,7 +67,7 @@ export const fetchRules = () => {
 
     const { search, page, perpage } = getState().rules.getIn(['result', 'payload']).toJS()
 
-    return apiRequest({
+    dispatch(fetchFromAPI({
       scope: 'rule',
       method: 'read',
       payload: {
@@ -75,10 +75,7 @@ export const fetchRules = () => {
         page,
         perpage
       }
-    })
-    .then((data) => {
-      dispatch(receiveRules(data))
-    })
+    }))
   }
 }
 
@@ -103,7 +100,7 @@ const ACTION_HANDLERS = {
   [INCREMENT_PAGE] : (state, action) => state.updateIn(['result', 'payload', 'page'], page => page + 1),
   [DECREMENT_PAGE] : (state, action) => state.updateIn(['result', 'payload', 'page'], page => page - 1 || 1),
   [REQUEST_RULES]    : (state, action) => state,
-  [RECEIVE_RULES] : (state, action) => action.payload
+  [SUCCESS] : (state, action) => action.payload
 }
 
 // ------------------------------------

@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { getRuleById, postImmutableRule } from 'helpers/api'
+import { fetchFromAPI, convertRequest } from 'helpers/api'
 
 // ------------------------------------
 // Constants
@@ -148,20 +148,29 @@ export function receiveError (error) {
 }
 
 export const fetchRule = (id) => {
-  return (dispatch, getState) => {
-    dispatch(requestRule())
-
-    getRuleById(id)
-    .then(rule => {
-      dispatch(receiveRule(rule))
-    })
-  }
+  return fetchFromAPI({
+    scope: 'rule',
+    method: 'read',
+    payload: {
+      id
+    }
+  }, [
+    REQUEST_RULE,
+    RECEIVE_RULE
+  ]
+  )
 }
 
-export function postRule () {
-  return {
-    type    : POST_RULE
-  }
+export function postRule (rule) {
+  return fetchFromAPI({
+    scope: 'rule',
+    method: 'update',
+    payload: rule
+  }, [
+    POST_RULE,
+    RECEIVE_RULE
+  ]
+  )
 }
 
 export function receiveUpdatedRule (rule) {
@@ -173,19 +182,9 @@ export function receiveUpdatedRule (rule) {
 
 export const updateRule = () => {
   return (dispatch, getState) => {
-    dispatch(postRule())
-
-    postImmutableRule(getState().rule)
-    .then(rule => {
-      const isError = rule.getIn(['result', 'status']) === 'error'
-
-      if (isError) {
-        dispatch(receiveError(rule))
-      }
-      else {
-        dispatch(receiveUpdatedRule(rule))
-      }
-    })
+    const denormalized = convertRequest(getState().rule)
+    debugger
+    dispatch(postRule(denormalized.payload.rules[0]))
   }
 }
 
@@ -249,9 +248,9 @@ const ACTION_HANDLERS = {
   ),
   [UPDATE_ACTION_RANK] : (state, action) => state.setIn(['entities', 'actions', action.id, 'rank'], action.rank),
   [UPDATE_ACTION_YIELD] : (state, action) => state.setIn(['entities', 'actions', action.id, 'yield'], action._yield),
-  [UPDATE_ACTION_VALUE] : (state, action) => {
-    return state.setIn(['entities', 'actions', action.id, 'value', action.key], action.value)
-  },
+  [UPDATE_ACTION_VALUE] : (state, action) => (
+    state.setIn(['entities', 'actions', action.id, 'value', action.key], action.value)
+  ),
   [DELETE_ACTION] : (state, action) => (
     state.updateIn(
       ['entities', 'rules', action.ruleId, 'actions'],
@@ -276,9 +275,17 @@ const ACTION_HANDLERS = {
       a => a.push(id)
     )
   },
-  [CREATE_RULE] : (state, action) => initialState,
+  [CREATE_RULE] : (state, action) => createState,
   [REQUEST_RULE] : (state, action) => state,
-  [RECEIVE_RULE] : (state, action) => action.rule.mergeDeep(initialState),
+  [RECEIVE_RULE] : (state, action) => {
+    const status = action.payload.getIn(['result', 'status'])
+    if (status === 'ok') {
+      return action.payload.mergeDeep(initialState)
+    }
+    else if (status === 'error') {
+      return state.mergeDeep(action.payload)
+    }
+  },
   [POST_RULE] : (state, action) => state,
   // TODO update path id when rule is updated
   [RECEIVE_UPDATED_RULE] : (state, action) => action.rule.mergeDeep(initialState),
@@ -290,6 +297,15 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = Immutable.fromJS({
   entities: {
+    rules: {},
+    actions: {},
+    conditions: {}
+  },
+  result: {}
+})
+
+const createState = initialState.mergeDeep(Immutable.fromJS({
+  entities: {
     rules: {
       new: {
         id: 'new',
@@ -297,14 +313,20 @@ const initialState = Immutable.fromJS({
         conditions: [],
         actions: []
       }
-    },
-    actions: {},
-    conditions: {}
+    }
   },
-  result: {}
-})
+  result: {
+    payload: {
+      rules: [
+        'new'
+      ]
+    }
+  }
+}))
 
-export default function ruleReducer (state = initialState, action) {
+console.log(createState.toJS())
+
+export default function ruleReducer (state = createState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

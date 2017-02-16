@@ -7,8 +7,8 @@ export const Action = (props) => (
     <div className='row'>
       <div className='col-sm-6'>
         <TypeSelector type={props.type} onChange={_type => {
-          props.updateActionType({_type, id: props.id})
-        }}/>
+          props.updateActionType({ _type, id: props.id })
+        }} />
       </div>
       <div className='form-group col-sm-3'>
         <label className='control-label' htmlFor='rank-input'>Rank</label>
@@ -47,7 +47,7 @@ export const Action = (props) => (
     </div>
     <div className='form-group'>
       <label className='control-label'>Value</label>
-      <ActionValueContainer id={props.id}/>
+      <ActionValueContainer id={props.id} />
     </div>
     <button
       className='btn btn-default'
@@ -59,7 +59,7 @@ export const Action = (props) => (
         })
       }}
     >
-      <div className='glyphicon glyphicon-minus'></div>
+      <div className='glyphicon glyphicon-minus' />
       <span> Delete Action </span>
     </button>
   </fieldset>

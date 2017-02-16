@@ -83,7 +83,11 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
+  '__DEV_API_BASE__' : JSON.stringify(process.env.DEV_API_BASE || ''),
+  '__PROD_API_BASE__': JSON.stringify(process.env.PROD_API_BASE || ''),
+  '__API_USER__' : JSON.stringify(process.env.API_USER || ''),
+  '__API_KEY__' : JSON.stringify(process.env.API_KEY || '')
 }
 
 // ------------------------------------

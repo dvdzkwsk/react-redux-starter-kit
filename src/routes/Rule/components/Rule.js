@@ -66,7 +66,7 @@ export const Rule = (props) => (
               props.addCondition(props.id)
             }}
           >
-            <div className='glyphicon glyphicon-plus'></div>
+            <div className='glyphicon glyphicon-plus' />
             <span> Add Condition </span>
           </button>
         </div>
@@ -84,7 +84,7 @@ export const Rule = (props) => (
               props.addAction(props.id)
             }}
           >
-            <div className='glyphicon glyphicon-plus'></div>
+            <div className='glyphicon glyphicon-plus' />
             <span> Add Action </span>
           </button>
         </div>

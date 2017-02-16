@@ -1,52 +1,44 @@
+import { CALL_API } from 'redux-api-middleware'
 import { normalize, denormalize, schema } from 'normalizr'
 import Immutable from 'immutable'
 import adDirectorSchema from 'helpers/schema'
 import 'whatwg-fetch'
 
-// TODO replace with API middleware
-const dev = true
-const authorization = 'Basic ' + btoa('adops:5VUgoHIroKAscJhyPf')
-const URL = dev ? 'http://ec2-54-147-204-2.compute-1.amazonaws.com:8000/manager/api/' : 'http://addir.vip.dailymotion.com/manager/api/'
+export const REQUEST = 'REQUEST'
+export const SUCCESS = 'SUCCESS'
+export const FAILURE = 'FAILURE'
 
-export function apiRequest (bodyObject) {
-  const body = JSON.stringify(bodyObject)
+const authorization = 'Basic ' + btoa(`${__API_USER__}:${__API_KEY__}`)
+const endpoint = __PROD__ ? __PROD_API_BASE__ : __DEV_API_BASE__
 
-  return fetch(URL,
-    {
+export const fetchFromAPI = (body,
+  [requestType = REQUEST, successType = SUCCESS, failureType = FAILURE] = [REQUEST, SUCCESS, FAILURE]) => {
+  console.log(requestType, successType, failureType)
+  return {
+    [CALL_API]: {
+      endpoint,
       method: 'POST',
-      body,
+      body: JSON.stringify(body),
+      types: [
+        requestType,
+        {
+          type: successType,
+          payload: (action, state, response) => {
+            return response.json()
+            .then(json => convertResponse(json))
+          }
+        },
+        failureType
+      ],
       headers: {
         'Authorization': authorization,
         'Content-Type': 'application/json'
       }
-    })
-		.then(response => response.json())
-		.then(json => Immutable.fromJS(normalize(json, adDirectorSchema)))
-		// .catch(error => console.error(error))
-}
-
-export function getRuleById (id) {
-  console.log('getting rule', id)
-  return apiRequest({
-    scope: 'rule',
-    method: 'read',
-    payload: {
-      id
     }
-  })
+  }
 }
 
-export function postImmutableRule (immutable) {
-  const payload = denormalize(immutable.get('result').toJS(), adDirectorSchema, immutable.get('entities').toJS()).payload
-  const rule = payload.rule || payload.rules[0]
+export const convertResponse = response => Immutable.fromJS(normalize(response, adDirectorSchema))
+export const convertRequest = request => denormalize(request.get('result').toJS(), adDirectorSchema, request.get('entities').toJS())
 
-  return apiRequest({
-    scope: 'rule',
-    method: 'update',
-    payload: {
-      ...rule
-    }
-  })
-}
-
-export default apiRequest
+export default fetchFromAPI

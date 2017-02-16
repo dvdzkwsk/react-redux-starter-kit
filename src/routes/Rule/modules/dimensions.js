@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import apiRequest from 'helpers/api'
+import { fetchFromAPI } from 'helpers/api'
 
 // ------------------------------------
 // Constants
@@ -25,21 +25,18 @@ export function receiveDimensions (dimensions) {
 }
 
 export const fetchDimensions = (id) => {
-  return (dispatch, getState) => {
-    dispatch(requestDimensions())
-
-    getDimensions(id)
-    .then(dimensions => {
-      dispatch(receiveDimensions(dimensions))
-    })
-  }
+  return fetchFromAPI({
+    scope: 'dimension',
+    method: 'read'
+  },
+    [
+      REQUEST_DIMENSIONS,
+      RECEIVE_DIMENSIONS
+    ]
+  )
 }
 
 function getDimensions (id) {
-  return apiRequest({
-    scope: 'dimension',
-    method: 'read'
-  })
 }
 
 export const actions = {
@@ -53,7 +50,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [REQUEST_DIMENSIONS]    : (state, action) => state,
-  [RECEIVE_DIMENSIONS] : (state, action) => action.dimensions
+  [RECEIVE_DIMENSIONS] : (state, action) => action.payload
 }
 
 // ------------------------------------

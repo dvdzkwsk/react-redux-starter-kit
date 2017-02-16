@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const Pagination = (props) => (
-  <nav style={{ textAlign: 'center'}}>
+  <nav style={{ textAlign: 'center' }}>
     <ul className='pagination'>
       <li
         style={{ display: props.page > 1 ? 'initial' : 'none' }}
@@ -10,10 +10,10 @@ export const Pagination = (props) => (
           props.fetchRules()
         }}
       >
-        <span aria-hidden="true">&laquo;</span>
+        <span aria-hidden='true'>&laquo;</span>
       </li>
       <li>
-        <span aria-hidden="true">{props.page}</span>
+        <span aria-hidden='true'>{props.page}</span>
       </li>
       <li
         onClick={() => {
@@ -21,7 +21,7 @@ export const Pagination = (props) => (
           props.fetchRules()
         }}
       >
-        <span aria-hidden="true">&raquo;</span>
+        <span aria-hidden='true'>&raquo;</span>
       </li>
     </ul>
   </nav>
