@@ -1,24 +1,29 @@
 import React from 'react'
 
-export const Pagination = (props) => (
+export const Pagination = ({
+  page,
+  decrementPage,
+  incrementPage,
+  fetchRules
+}) => (
   <nav style={{ textAlign: 'center' }}>
     <ul className='pagination'>
       <li
-        style={{ display: props.page > 1 ? 'initial' : 'none' }}
+        style={{ display: page > 1 ? 'initial' : 'none' }}
         onClick={() => {
-          props.decrementPage()
-          props.fetchRules()
+          decrementPage()
+          fetchRules()
         }}
       >
         <span aria-hidden='true'>&laquo;</span>
       </li>
       <li>
-        <span aria-hidden='true'>{props.page}</span>
+        <span aria-hidden='true'>{page}</span>
       </li>
       <li
         onClick={() => {
-          props.incrementPage()
-          props.fetchRules()
+          incrementPage()
+          fetchRules()
         }}
       >
         <span aria-hidden='true'>&raquo;</span>

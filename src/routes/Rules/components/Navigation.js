@@ -2,11 +2,20 @@ import React from 'react'
 import PaginationContainer from '../containers/PaginationContainer'
 import RuleDescriptionContainer from '../containers/RuleDescriptionContainer'
 
-export const Rules = (props) => (
+export const Navigation = ({
+  search,
+  updateSearch,
+  page,
+  updatePage,
+  perpage,
+  updatePerPage,
+  rules,
+  fetchRules
+}) => (
   <div style={{ margin: '0 auto' }} >
     <form className='form-inline' onSubmit={e => {
       e.preventDefault()
-      props.fetchRules()
+      fetchRules()
     }}>
       <div className='form-group'>
         <label
@@ -18,10 +27,10 @@ export const Rules = (props) => (
         <input
           id='search-input'
           className='form-control'
-          value={props.search}
+          value={search}
           type='search'
           onChange={e => {
-            props.updateSearch(e.target.value)
+            updateSearch(e.target.value)
           }}
         />
       </div>
@@ -35,11 +44,11 @@ export const Rules = (props) => (
         <input
           id='page-input'
           className='form-control'
-          value={props.page}
+          value={page}
           type='number'
           min='1'
           onChange={e => {
-            props.updatePage(Number(e.target.value))
+            updatePage(Number(e.target.value))
           }}
         />
       </div>
@@ -53,11 +62,11 @@ export const Rules = (props) => (
         <select
           id='per-page-input'
           className='form-control'
-          value={props.perpage}
+          value={perpage}
           type='number'
           min='1'
           onChange={e => {
-            props.updatePerPage(Number(e.target.value))
+            updatePerPage(Number(e.target.value))
           }}
         >
           <option value={20}>20</option>
@@ -74,7 +83,7 @@ export const Rules = (props) => (
     <PaginationContainer />
     <ul className='list-group'>
       {
-        props.rules.map(rule => (
+        rules.map(rule => (
           <RuleDescriptionContainer key={rule} id={rule} />
         ))
       }
@@ -83,7 +92,7 @@ export const Rules = (props) => (
   </div>
 )
 
-Rules.propTypes = {
+Navigation.propTypes = {
   search: React.PropTypes.string,
   page: React.PropTypes.number.isRequired,
   perpage: React.PropTypes.number.isRequired,
@@ -91,4 +100,4 @@ Rules.propTypes = {
   fetchRules: React.PropTypes.func.isRequired
 }
 
-export default Rules
+export default Navigation

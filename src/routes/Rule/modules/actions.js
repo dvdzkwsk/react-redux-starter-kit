@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { RECEIVE_RULE } from './rule'
+import { RECEIVE_RULE, CREATE_RULE } from './rule'
 
 // ------------------------------------
 // Constants
@@ -76,6 +76,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [RECEIVE_RULE] : (state, action) => action.payload.getIn(['entities', 'actions'], state),
+  [CREATE_RULE] : (state, action) => initialState,
   [UPDATE_ACTION_TYPE] : (state, action) => (
     state.setIn([action.id, 'type'], action._type)
     .updateIn([action.id, 'value'], v => v.clear())

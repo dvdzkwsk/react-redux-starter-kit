@@ -4,15 +4,20 @@ export default (store) => ({
   path : 'rules',
   getComponent (nextState, cb) {
     require.ensure([], (require) => {
-      const Rules = require('./containers/RulesContainer').default
-      const reducer = require('./modules/rules').default
-      const fetchRules = require('./modules/rules').fetchRules
+      const rulesReducer = require('./modules/rules').default
 
-      injectReducer(store, { key: 'rules', reducer })
+      injectReducer(store, { key: 'rules', reducer: rulesReducer })
+
+      const navigationReducer = require('./modules/navigation').default
+
+      injectReducer(store, { key: 'navigation', reducer: navigationReducer})
+
+      const fetchRules = require('./modules/rules').fetchRules
 
       store.dispatch(fetchRules())
 
-      cb(null, Rules)
+      const Navigation = require('./containers/NavigationContainer').default
+      cb(null, Navigation)
     }, 'rules')
   }
 })

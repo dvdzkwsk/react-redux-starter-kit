@@ -2,7 +2,7 @@ import React from 'react'
 import ActionContainer from '../containers/ActionContainer'
 
 export const ActionList = ({ ruleId, actions, addAction }) => (
-  <div>Actions
+  <div>
     {
       Object.keys(actions).map(key => {
         return (<ActionContainer key={key} id={key} />)

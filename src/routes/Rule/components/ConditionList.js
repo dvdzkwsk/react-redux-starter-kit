@@ -3,7 +3,7 @@ import DimensionSelectorContainer from '../containers/DimensionSelectorContainer
 import ConditionContainer from '../containers/ConditionContainer'
 
 export const ConditionList = ({ ruleId, conditions, addCondition }) => (
-  <div>Conditions
+  <div>
     {
       Object.keys(conditions).map(key => {
         return (<ConditionContainer key={key} id={key} />)

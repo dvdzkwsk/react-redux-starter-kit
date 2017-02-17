@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { RECEIVE_RULE } from './rule'
+import { RECEIVE_RULE, CREATE_RULE } from './rule'
 
 // ------------------------------------
 // Constants
@@ -65,12 +65,13 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [RECEIVE_RULE] : (state, action) => action.payload.get('conditions', state),
+  [RECEIVE_RULE] : (state, action) => action.payload.getIn(['entities', 'conditions'], state),
+  [CREATE_RULE] : (state, action) => initialState,
   [UPDATE_CONDITION_DIMENSION] : (state, action) => state.setIn([action.id, 'dimension'], action.dimension),
   [UPDATE_CONDITION_OP] : (state, action) => state.setIn([action.id, 'op'], action.op),
   [UPDATE_CONDITION_VALUE] : (state, action) => state.setIn([action.id, 'value'], action.value),
   [DELETE_CONDITION] : (state, action) => state.delete(action.id),
-  [ADD_CONDITION] : (state, action) => state.set(`${action.id}_${Date.now()}`, defaultCondition.set('ruleId', action.id))
+  [ADD_CONDITION] : (state, action) => state.set(`${action.ruleId}_${Date.now()}`, defaultCondition.set('ruleId', action.ruleId))
 }
 
 // ------------------------------------

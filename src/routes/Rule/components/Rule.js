@@ -10,9 +10,8 @@ import './Rule.scss'
 export const Rule = ({
   id,
   updateRule,
-  description,
-  updateDescription,
-  params
+  description = '',
+  updateDescription
 }) => (
   <div>
     <form onSubmit={e => {
@@ -39,19 +38,6 @@ export const Rule = ({
           }}
         />
       </div>
-      <div className='form-group'>
-        <label
-          className='control-label'
-          htmlFor='start-input'
-        >
-          Start Date
-        </label>
-        <input
-          id='start-input'
-          className='form-control'
-          type='date'
-        />
-      </div>
       <ul className='nav nav-tabs' role='tablist'>
         <li role='presentation' className='active'>
           <a href='#conditions' role='tab' data-toggle='tab'>Conditions</a>
@@ -65,10 +51,10 @@ export const Rule = ({
       </ul>
       <div className='tab-content'>
         <div role='tabpanel' id='conditions' className='form-group tab-pane active fade in'>
-          <ConditionListContainer ruleId={params.id} />
+          <ConditionListContainer ruleId={id} />
         </div>
         <div role='tabpanel' id='actions' className='form-group tab-pane fade'>
-          <ActionListContainer ruleId={params.id} />
+          <ActionListContainer ruleId={id} />
         </div>
         <div role='tabpanel' id='review' className='form-group tab-pane fade'>
           <button type='submit' className='btn btn-primary'>Submit</button>

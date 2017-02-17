@@ -109,19 +109,10 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [UPDATE_DESCRIPTION] : (state, action) => state.setIn(['entities', 'rules', action.id, 'description'], action.description),
-  [CREATE_RULE] : (state, action) => createState,
+  [CREATE_RULE] : (state, action) => initialState,
   [REQUEST_RULE] : (state, action) => state,
   [RECEIVE_RULE] : (state, action) => action.payload.getIn(['entities', 'rules']),
   // TODO add reducer for error results
-  /*{
-    const status = action.payload.getIn(['result', 'status'])
-    if (status === 'ok') {
-      return action.payload.mergeDeep(initialState)
-    }
-    else if (status === 'error') {
-      return state.mergeDeep(action.payload)
-    }
-  },*/
   [POST_RULE] : (state, action) => state,
   // TODO update path id when rule is updated
   [RECEIVE_UPDATED_RULE] : (state, action) => action.rule.mergeDeep(initialState),
@@ -132,6 +123,9 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.fromJS({})
+const createState = Immutable.fromJS({
+
+})
 
 export default function ruleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

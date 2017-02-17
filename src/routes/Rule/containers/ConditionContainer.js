@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import Immutable from 'immutable'
 import {
   updateConditionDimension,
   updateConditionOp,
@@ -14,6 +15,6 @@ const mapDispatchToProps = {
   deleteCondition
 }
 
-const mapStateToProps = (state, ownProps) => state.conditions.get(ownProps.id).toJS()
+const mapStateToProps = (state, ownProps) => state.conditions.get(ownProps.id, Immutable.Map()).toJS()
 
 export default connect(mapStateToProps, mapDispatchToProps)(Condition)

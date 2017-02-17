@@ -1,18 +1,20 @@
 import { connect } from 'react-redux'
 import {
-  incrementPage,
-  decrementPage
+  updatePage,
+  updatePerPage,
+  updateSearch
 } from '../modules/navigation'
 import { fetchRules } from '../modules/rules'
 
-import Pagination from '../components/Pagination'
+import Navigation from '../components/Navigation'
 
 const mapDispatchToProps = {
-  incrementPage,
-  decrementPage,
+  updatePage,
+  updatePerPage,
+  updateSearch,
   fetchRules
 }
 
 const mapStateToProps = (state) => state.navigation.toJS()
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pagination)
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)
