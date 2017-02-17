@@ -25,7 +25,7 @@ export const Header = () => (
           </li>
           <li>
             <Link to='/rules' activeClassName='active'>
-              View/Edit Rules
+              View / Edit Rules
             </Link>
           </li>
         </ul>

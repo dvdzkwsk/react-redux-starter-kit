@@ -5,6 +5,10 @@ export default (store) => ({
   path : 'rule/:id',
   getComponent (nextState, cb) {
     require.ensure([], (require) => {
+      const statusReducer = require('./modules/status').default
+
+      injectReducer(store, { key: 'status', reducer: statusReducer })
+
       const dimensionsReducer = require('./modules/dimensions').default
       const fetchDimensions = require('./modules/dimensions').fetchDimensions
 

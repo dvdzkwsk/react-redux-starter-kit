@@ -10,14 +10,14 @@ describe('(View) Home', () => {
   })
 
   it('Renders a welcome message', () => {
-    const welcome = _component.find('h4')
+    const welcome = _component.find('p')
     expect(welcome).to.exist
-    expect(welcome.text()).to.match(/Welcome!/)
+    expect(welcome.text()).to.match(/Welcome/)
   })
 
-  it('Renders an awesome duck image', () => {
-    const duck = _component.find('img')
-    expect(duck).to.exist
-    expect(duck.attr('alt')).to.match(/This is a duck, because Redux!/)
+  it('Renders an Create Rule link', () => {
+    const createButton = _component.find('a').first()
+    expect(createButton).to.exist
+    expect(createButton.attr('href')).to.match(/rule\/new/)
   })
 })

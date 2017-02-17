@@ -12,7 +12,7 @@ export const HomeView = () => (
     </Link>
     <Link to='rules' role='button' className='btn btn-primary btn-lg'>
       <div className='glyphicon glyphicon-search' />
-      <span> View/Edit Rule</span>
+      <span> View / Edit Rule</span>
     </Link>
   </div>
 )

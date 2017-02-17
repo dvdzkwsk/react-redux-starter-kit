@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { fetchFromAPI, convertRequest } from 'helpers/api'
+import { fetchFromAPI } from 'helpers/api'
 
 // ------------------------------------
 // Constants
@@ -65,6 +65,7 @@ export const fetchRule = (id) => {
 }
 
 export function postRule (rule) {
+  console.log(rule)
   return fetchFromAPI({
     scope: 'rule',
     method: 'update',
@@ -85,10 +86,18 @@ export function receiveUpdatedRule (rule) {
 
 export const updateRule = () => {
   return (dispatch, getState) => {
-    const { payload } = convertRequest(getState().rule)
-    const rule = payload.rule || payload.rules[0]
+    const { rule, conditions, actions } = getState()
 
-    dispatch(postRule(rule))
+    const denormalized = rule.withMutations(r => {
+      r.set('conditions', conditions.filter(
+        c => c.get('ruleId') === r.get('id')
+      ).toList())
+      .set('actions', actions.filter(
+        a => a.get('ruleId') === r.get('id')
+      ).toList())
+    })
+
+    dispatch(postRule(denormalized.toJS()))
   }
 }
 
@@ -108,10 +117,10 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [UPDATE_DESCRIPTION] : (state, action) => state.setIn(['entities', 'rules', action.id, 'description'], action.description),
+  [UPDATE_DESCRIPTION] : (state, action) => state.set('description', action.description),
   [CREATE_RULE] : (state, action) => initialState,
   [REQUEST_RULE] : (state, action) => state,
-  [RECEIVE_RULE] : (state, action) => action.payload.getIn(['entities', 'rules']),
+  [RECEIVE_RULE] : (state, action) => action.payload.getIn(['result', 'status']) === 'error' ? state : action.payload.getIn(['entities', 'rules']).first(),
   // TODO add reducer for error results
   [POST_RULE] : (state, action) => state,
   // TODO update path id when rule is updated
@@ -123,9 +132,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.fromJS({})
-const createState = Immutable.fromJS({
-
-})
+const createState = Immutable.fromJS({})
 
 export default function ruleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

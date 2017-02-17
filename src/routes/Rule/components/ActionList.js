@@ -1,7 +1,11 @@
 import React from 'react'
 import ActionContainer from '../containers/ActionContainer'
 
-export const ActionList = ({ ruleId, actions, addAction }) => (
+export const ActionList = ({
+  ruleId,
+  actions={},
+  addAction
+}) => (
   <div>
     {
       Object.keys(actions).map(key => {
@@ -11,6 +15,7 @@ export const ActionList = ({ ruleId, actions, addAction }) => (
     <button
       className='btn btn-default'
       onClick={e => {
+        e.preventDefault()
         addAction(ruleId)
       }}
     >

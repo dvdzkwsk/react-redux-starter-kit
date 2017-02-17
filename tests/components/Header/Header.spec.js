@@ -10,25 +10,33 @@ describe('(Component) Header', () => {
     _wrapper = shallow(<Header />)
   })
 
-  it('Renders a welcome message', () => {
-    const welcome = _wrapper.find('h1')
-    expect(welcome).to.exist
-    expect(welcome.text()).to.match(/React Redux Starter Kit/)
-  })
+  /*it('Renders a product title', () => {
+    const title = _wrapper.find('.navbar-brand')
+    expect(title).to.exist
+    expect(title.text()).to.match(/Ad Director/)
+  })*/
 
   describe('Navigation links...', () => {
     it('Should render a Link to Home route', () => {
       expect(_wrapper.contains(
-        <IndexLink activeClassName='route--active' to='/'>
-          Home
+        <IndexLink to='/' className='navbar-brand' activeClassName='active'>
+          Ad Director
         </IndexLink>
       )).to.be.true
     })
 
-    it('Should render a Link to Counter route', () => {
+    it('Should render a Link to New Rule route', () => {
       expect(_wrapper.contains(
-        <Link activeClassName='route--active' to='/counter'>
-          Counter
+        <Link to='/rule/new' activeClassName='active'>
+          Create Rule
+        </Link>
+      )).to.be.true
+    })
+
+    it('Should render a Link to Rules route', () => {
+      expect(_wrapper.contains(
+        <Link to='/rules' activeClassName='active'>
+          View / Edit Rules
         </Link>
       )).to.be.true
     })

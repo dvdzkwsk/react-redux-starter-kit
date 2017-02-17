@@ -2,15 +2,19 @@ import React from 'react'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
-export const DimensionSelector = (props) => (
+export const DimensionSelector = ({
+  dimension,
+  dimensions,
+  onChange
+}) => (
   <Select
     simpleValue
-    value={props.dimension}
-    options={Object.keys(props.dimensions).map(label => ({
+    value={dimension}
+    options={Object.keys(dimensions).map(label => ({
       value: label,
       label
     }))}
-    onChange={props.onChange}
+    onChange={onChange}
   />
 )
 

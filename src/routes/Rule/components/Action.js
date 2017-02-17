@@ -2,12 +2,21 @@ import React from 'react'
 import TypeSelector from './TypeSelector'
 import ActionValueContainer from '../containers/ActionValueContainer'
 
-export const Action = (props) => (
-  <fieldset>
+export const Action = ({
+  id,
+  ruleId,
+  type='capping',
+  updateActionType,
+  rank=100,
+  updateActionRank,
+  updateActionYield,
+  deleteAction
+}) => (
+  <fieldset className='panel panel-default'>
     <div className='row'>
       <div className='col-sm-6'>
-        <TypeSelector type={props.type} onChange={_type => {
-          props.updateActionType({ _type, id: props.id })
+        <TypeSelector type={type} onChange={_type => {
+          updateActionType({ _type, id: id })
         }} />
       </div>
       <div className='form-group col-sm-3'>
@@ -16,12 +25,12 @@ export const Action = (props) => (
           id='rank-input'
           className='form-control'
           type='number'
-          defaultValue={props.rank}
+          defaultValue={rank}
           min={-1}
           max={100}
           onChange={e => {
-            props.updateActionRank({
-              id: props.id,
+            updateActionRank({
+              id: id,
               rank: Number(e.target.value)
             })
           }}
@@ -33,12 +42,12 @@ export const Action = (props) => (
           id='yield-input'
           className='form-control'
           type='number'
-          defaultValue={props.yield}
+          defaultValue={arguments[0].yield || 100}
           min={-1}
           max={100}
           onChange={e => {
-            props.updateActionYield({
-              id: props.id,
+            updateActionYield({
+              id: id,
               _yield: Number(e.target.value)
             })
           }}
@@ -47,15 +56,15 @@ export const Action = (props) => (
     </div>
     <div className='form-group'>
       <label className='control-label'>Value</label>
-      <ActionValueContainer id={props.id} />
+      <ActionValueContainer id={id} />
     </div>
     <button
       className='btn btn-default'
       onClick={e => {
         e.preventDefault()
-        props.deleteAction({
-          id: props.id,
-          ruleId: props.ruleId
+        deleteAction({
+          id: id,
+          ruleId: ruleId
         })
       }}
     >

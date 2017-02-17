@@ -35,24 +35,10 @@ export function updatePerPage (perpage) {
   }
 }
 
-export function incrementPage () {
-  return {
-    type: INCREMENT_PAGE
-  }
-}
-
-export function decrementPage () {
-  return {
-    type: DECREMENT_PAGE
-  }
-}
-
 export const actions = {
   updateSearch,
   updatePage,
-  updatePerPage,
-  incrementPage,
-  decrementPage
+  updatePerPage
 }
 
 // ------------------------------------
@@ -62,8 +48,6 @@ const ACTION_HANDLERS = {
   [UPDATE_SEARCH] : (state, action) => state.set('search', action.search),
   [UPDATE_PAGE] : (state, action) => state.set('page', action.page),
   [UPDATE_PER_PAGE] : (state, action) => state.set('perpage', action.perpage),
-  [INCREMENT_PAGE] : (state, action) => state.update('page', page => page + 1),
-  [DECREMENT_PAGE] : (state, action) => state.update('page', page => page - 1 || 1),
   [RECEIVE_RULES] : (state, action) => action.payload.getIn(['result', 'payload'], state)
 }
 // ------------------------------------
@@ -73,6 +57,7 @@ const initialState = Immutable.fromJS({
   search: undefined,
   page: 1,
   perpage: 20,
+  maxpage: undefined,
   rules: []
 })
 

@@ -1,8 +1,11 @@
 import React from 'react'
 
-export const StatusMessage = (props) => (
-  <div className={`alert alert-danger ${props.error ? 'show' : 'hidden'}`}>
-    {props.error}
+export const StatusMessage = ({
+  status,
+  error
+}) => (
+  <div className={`alert alert-danger ${error ? 'show' : 'hidden'}`}>
+    {error}
   </div>
 )
 

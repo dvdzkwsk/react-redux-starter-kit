@@ -1,29 +1,52 @@
 import React from 'react'
+import './Pagination.scss'
 
 export const Pagination = ({
+  search,
   page,
-  decrementPage,
-  incrementPage,
+  perpage,
+  maxpage,
+  updatePage,
   fetchRules
 }) => (
   <nav style={{ textAlign: 'center' }}>
     <ul className='pagination'>
       <li
-        style={{ display: page > 1 ? 'initial' : 'none' }}
+        className={page <= 1 && 'hidden'}
         onClick={() => {
-          decrementPage()
-          fetchRules()
+          fetchRules({
+            page: Math.max(page - 1, 1),
+            perpage,
+            search
+          })
         }}
       >
         <span aria-hidden='true'>&laquo;</span>
       </li>
-      <li>
-        <span aria-hidden='true'>{page}</span>
-      </li>
+      {
+        getPagination(page, maxpage).map(pageNumber => (
+          <li
+            className={page === pageNumber && 'active'}
+            onClick={() => fetchRules({
+              search,
+              page: pageNumber,
+              perpage
+            })
+          }>
+            <span aria-hidden='true'>
+              {pageNumber}
+            </span>
+          </li>
+        ))
+      }
       <li
+        className={page >= maxpage && 'hidden'}
         onClick={() => {
-          incrementPage()
-          fetchRules()
+          fetchRules({
+            page: Math.min(page + 1, maxpage),
+            perpage,
+            search
+          })
         }}
       >
         <span aria-hidden='true'>&raquo;</span>
@@ -32,8 +55,23 @@ export const Pagination = ({
   </nav>
 )
 
+function getPagination(page, maxPage) {
+  const min = Math.max(page - 2, 1)
+  const max = Math.min(min + 4, maxPage)
+  const pages = []
+  let value = min
+
+  while (value <= max) {
+    pages.push(value)
+    value++
+  }
+
+  return pages
+}
+
 Pagination.propTypes = {
   page: React.PropTypes.number.isRequired,
+  maxpage: React.PropTypes.number.isRequired,
   incrementPage: React.PropTypes.func.isRequired,
   decrementPage: React.PropTypes.func.isRequired,
   fetchRules: React.PropTypes.func.isRequired

@@ -12,7 +12,7 @@ const typeMap = new Map([
 ])
 
 export const ActionValue = (props) => {
-  return <fieldset>
+  return <fieldset className='panel panel-default'>
     {
       Actions.getIn([props.type, 'value']).map((type, key) => {
         return typeMap.get(type)({
@@ -42,9 +42,8 @@ function ArrayValue (props) {
         multi
         options={options}
         onChange={values => {
-          console.log(values)
           const value = values.map(v => v.value)
-          console.log(value)
+
           props.onChange({
             id: props.id,
             key: props.key,

@@ -1,17 +1,51 @@
+import Immutable from 'immutable'
 import {
   UPDATE_DESCRIPTION,
+  CREATE_RULE,
   REQUEST_RULE,
   RECEIVE_RULE,
+  POST_RULE,
+  RECEIVE_UPDATED_RULE,
+  RECEIVE_ERROR,
   updateDescription,
+  createRule,
   requestRule,
   receiveRule,
+  receiveError,
   fetchRule,
+  postRule,
+  receiveUpdatedRule,
+  updateRule,
   default as ruleReducer
 } from 'routes/Rule/modules/rule'
 
 describe('(Redux Module) Rule', () => {
+  it('Should export a constant UPDATE_DESCRIPTION.', () => {
+    expect(UPDATE_DESCRIPTION).to.equal('UPDATE_DESCRIPTION')
+  })
+
+  it('Should export a constant CREATE_RULE.', () => {
+    expect(CREATE_RULE).to.equal('CREATE_RULE')
+  })
+
   it('Should export a constant REQUEST_RULE.', () => {
     expect(REQUEST_RULE).to.equal('REQUEST_RULE')
+  })
+
+  it('Should export a constant RECEIVE_RULE.', () => {
+    expect(RECEIVE_RULE).to.equal('RECEIVE_RULE')
+  })
+
+  it('Should export a constant POST_RULE.', () => {
+    expect(POST_RULE).to.equal('POST_RULE')
+  })
+
+  it('Should export a constant RECEIVE_UPDATED_RULE.', () => {
+    expect(RECEIVE_UPDATED_RULE).to.equal('RECEIVE_UPDATED_RULE')
+  })
+
+  it('Should export a constant RECEIVE_ERROR.', () => {
+    expect(RECEIVE_ERROR).to.equal('RECEIVE_ERROR')
   })
 
   describe('(Reducer)', () => {
@@ -19,31 +53,17 @@ describe('(Redux Module) Rule', () => {
       expect(ruleReducer).to.be.a('function')
     })
 
-    it('Should initialize with a state containing a description.', () => {
-      expect(ruleReducer(undefined, {})).to.have.property('description')
-    })
-
     it('Should return the previous state if an action was not matched.', () => {
       let state = ruleReducer(undefined, {})
-      const INITIAL_STATE = Object.assign({}, state)
+      const INITIAL_STATE = Immutable.Map()
 
       expect(state).to.deep.equal(INITIAL_STATE)
       state = ruleReducer(state, { type: '@@@@@@@' })
       expect(state).to.deep.equal(INITIAL_STATE)
       state = ruleReducer(state, updateDescription('test'))
-      expect(state.description).to.equal('test')
+      expect(state.get('description')).to.equal('test')
       state = ruleReducer(state, { type: '@@@@@@@' })
-      expect(state.description).to.equal('test')
-    })
-  })
-
-  describe('(Action Creator) requestRule', () => {
-    it('Should be exported as a function.', () => {
-      expect(requestRule).to.be.a('function')
-    })
-
-    it('Should return an action with type "REQUEST_RULE".', () => {
-      expect(requestRule()).to.have.property('type', REQUEST_RULE)
+      expect(state.get('description')).to.equal('test')
     })
   })
 
@@ -56,12 +76,32 @@ describe('(Redux Module) Rule', () => {
       expect(updateDescription()).to.have.property('type', UPDATE_DESCRIPTION)
     })
 
-    it('Should assign the first argument to the "search" property.', () => {
-      expect(updateDescription('test')).to.have.property('description', 'test')
+    it('Should assign the first argument to the "description" property.', () => {
+      expect(updateDescription({description: 'test'})).to.have.property('description', 'test')
     })
 
-    it('Should have the "search" property if not provided.', () => {
+    it('Should have the "description" property if not provided.', () => {
       expect(updateDescription()).to.have.property('description')
+    })
+  })
+
+  describe('(Action Creator) createRule', () => {
+    it('Should be exported as a function.', () => {
+      expect(createRule).to.be.a('function')
+    })
+
+    it('Should return an action with type "CREATE_RULE".', () => {
+      expect(createRule()).to.have.property('type', CREATE_RULE)
+    })
+  })
+
+  describe('(Action Creator) requestRule', () => {
+    it('Should be exported as a function.', () => {
+      expect(requestRule).to.be.a('function')
+    })
+
+    it('Should return an action with type "REQUEST_RULE".', () => {
+      expect(requestRule()).to.have.property('type', REQUEST_RULE)
     })
   })
 
@@ -85,63 +125,30 @@ describe('(Redux Module) Rule', () => {
     })
   })
 
-  describe('(Action Creator) fetchRule', () => {
-    let _globalState
-    let _dispatchSpy
-    let _getStateSpy
+  // TODO test fetchRule
+  // TODO test postRule
 
-    beforeEach(() => {
-      _globalState = {
-        rules : ruleReducer(undefined, {})
-      }
-      _dispatchSpy = sinon.spy((action) => {
-        _globalState = {
-          ..._globalState,
-          rules : ruleReducer(_globalState.rules, action)
-        }
-      })
-      _getStateSpy = sinon.spy(() => {
-        return _globalState
-      })
-    })
-
+  describe('(Action Creator) receiveUpdatedRule', () => {
     it('Should be exported as a function.', () => {
-      expect(fetchRule).to.be.a('function')
+      expect(receiveUpdatedRule).to.be.a('function')
     })
 
-    it('Should return a function (is a thunk).', () => {
-      expect(fetchRule()).to.be.a('function')
+    it('Should return an action with type "RECEIVE_UPDATED_RULE".', () => {
+      expect(receiveUpdatedRule()).to.have.property('type', RECEIVE_UPDATED_RULE)
     })
 
-    it('Should return a promise from that thunk that gets fulfilled.', () => {
-      return fetchRule()(_dispatchSpy, _getStateSpy).should.eventually.be.fulfilled
+    it('Should assign the first argument to the "rule" property.', () => {
+      const rule = { description: '' }
+
+      expect(receiveUpdatedRule(rule)).to.have.property('rule', rule)
     })
 
-    it('Should call dispatch and getState exactly once.', () => {
-      return fetchRule()(_dispatchSpy, _getStateSpy)
-        .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
-        })
-    })
-
-    it('Should produce a state that is double the previous state.', () => {
-      _globalState = { rules: {} }
-
-      return fetchRule()(_dispatchSpy, _getStateSpy)
-        .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
-          expect(_globalState.rules.length).to.equal(20)
-          return fetchRule()(_dispatchSpy, _getStateSpy)
-        })
-        .then(() => {
-          _dispatchSpy.should.have.been.calledTwice
-          _getStateSpy.should.have.been.calledTwice
-          expect(_globalState.rules.length).to.equal(20)
-        })
+    it('Should have the "rule" property if not provided.', () => {
+      expect(receiveUpdatedRule()).to.have.property('rule')
     })
   })
+
+  // TODO test updateRule
 
   // NOTE: if you have a more complex state, you will probably want to verify
   // that you did not mutate the state. In this case our state is just a number

@@ -9,7 +9,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  conditions: state.conditions.toJS()
+  conditions: state.conditions.filter(c => c.get('ruleId') === ownProps.ruleId).toJS()
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConditionList)

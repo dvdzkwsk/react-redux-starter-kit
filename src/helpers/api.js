@@ -12,7 +12,6 @@ const endpoint = __PROD__ ? __PROD_API_BASE__ : __DEV_API_BASE__
 
 export const fetchFromAPI = (body,
   [requestType = REQUEST, successType = SUCCESS, failureType = FAILURE] = [REQUEST, SUCCESS, FAILURE]) => {
-  console.log(requestType, successType, failureType)
   return {
     [CALL_API]: {
       endpoint,
@@ -38,6 +37,6 @@ export const fetchFromAPI = (body,
 }
 
 export const convertResponse = response => Immutable.fromJS(normalize(response, adDirectorSchema))
-export const convertRequest = request => denormalize(request.get('result').toJS(), adDirectorSchema, request.get('entities').toJS())
+//export const convertRequest = request => denormalize(request.get('result').toJS(), adDirectorSchema, request.get('entities').toJS())
 
 export default fetchFromAPI

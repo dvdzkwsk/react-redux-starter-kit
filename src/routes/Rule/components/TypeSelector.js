@@ -9,15 +9,18 @@ const options = Actions.keySeq().sort().map(key => {
   }
 }).toJS()
 
-export const TypeSelector = (props) => (
+export const TypeSelector = ({
+  type,
+  onChange
+}) => (
   <div className='form-group'>
     <label className='control-label' htmlFor='type-input'>Type</label>
     <Select
       id='type-input'
       simpleValue
-      value={props.type}
+      value={type}
       options={options}
-      onChange={props.onChange}
+      onChange={onChange}
     />
   </div>
 )

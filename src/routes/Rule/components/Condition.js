@@ -1,18 +1,30 @@
 import React from 'react'
+import Select from 'react-select'
 import DimensionSelectorContainer from '../containers/DimensionSelectorContainer'
 import ConditionValueContainer from '../containers/ConditionValueContainer'
+
+const booleanOptions = [
+  {
+    label: 'is',
+    value: true
+  },
+  {
+    label: 'is not',
+    value: false
+  }
+]
 
 export const Condition = ({
   id,
   ruleId,
-  dimension,
-  op,
+  dimension='context.domain',
+  op=true,
   updateConditionDimension,
   updateConditionOp,
   updateConditionValue,
   deleteCondition
 }) => (
-  <fieldset>
+  <fieldset className='panel panel-default'>
     <div className='row'>
       <div className='col-sm-6'>
         <DimensionSelectorContainer
@@ -26,19 +38,17 @@ export const Condition = ({
         />
       </div>
       <div className='col-sm-6'>
-        <select
-          defaultValue={op}
-          className='form-control'
-          onChange={e => {
+        <Select
+          value={op}
+          simpleValue
+          options={booleanOptions}
+          onChange={value => {
             updateConditionOp({
               id: id,
-              op: e.target.value === 'true'
+              op: value
             })
           }}
-          >
-          <option value>is</option>
-          <option value={false}>is not</option>
-        </select>
+        />
       </div>
     </div>
     <div className='row'>
@@ -80,7 +90,7 @@ Condition.propTypes = {
   updateConditionDimension: React.PropTypes.func.isRequired,
   updateConditionOp: React.PropTypes.func.isRequired,
   updateConditionValue: React.PropTypes.func.isRequired,
-  deleteCondition: React.PropTypes.func.isRequired  
+  deleteCondition: React.PropTypes.func.isRequired
 }
 
 export default Condition

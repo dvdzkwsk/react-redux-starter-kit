@@ -2,7 +2,11 @@ import React from 'react'
 import DimensionSelectorContainer from '../containers/DimensionSelectorContainer'
 import ConditionContainer from '../containers/ConditionContainer'
 
-export const ConditionList = ({ ruleId, conditions, addCondition }) => (
+export const ConditionList = ({
+  ruleId,
+  conditions={},
+  addCondition
+}) => (
   <div>
     {
       Object.keys(conditions).map(key => {
@@ -12,6 +16,7 @@ export const ConditionList = ({ ruleId, conditions, addCondition }) => (
     <button
       className='btn btn-default'
       onClick={e => {
+        e.preventDefault()
         addCondition(ruleId)
       }}
     >

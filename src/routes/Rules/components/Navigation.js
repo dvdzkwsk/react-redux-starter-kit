@@ -1,21 +1,28 @@
 import React from 'react'
 import PaginationContainer from '../containers/PaginationContainer'
 import RuleDescriptionContainer from '../containers/RuleDescriptionContainer'
+import './Navigation.scss'
 
 export const Navigation = ({
   search,
   updateSearch,
-  page,
+  page = 1,
   updatePage,
-  perpage,
+  perpage = 20,
+  maxpage,
   updatePerPage,
   rules,
   fetchRules
 }) => (
-  <div style={{ margin: '0 auto' }} >
+  <div className='navigation'>
     <form className='form-inline' onSubmit={e => {
       e.preventDefault()
-      fetchRules()
+
+      const search = document.getElementById('search-input').value
+      const page = Number(document.getElementById('page-input').value)
+      const perpage = Number(document.getElementById('per-page-input').value)
+
+      fetchRules({search, page, perpage})
     }}>
       <div className='form-group'>
         <label
@@ -27,11 +34,8 @@ export const Navigation = ({
         <input
           id='search-input'
           className='form-control'
-          value={search}
+          defaultValue={search || ''}
           type='search'
-          onChange={e => {
-            updateSearch(e.target.value)
-          }}
         />
       </div>
       <div className='form-group'>
@@ -44,13 +48,11 @@ export const Navigation = ({
         <input
           id='page-input'
           className='form-control'
-          value={page}
+          defaultValue={page || 1}
           type='number'
           min='1'
-          onChange={e => {
-            updatePage(Number(e.target.value))
-          }}
         />
+        <span> of {maxpage} </span>
       </div>
       <div className='form-group'>
         <label
@@ -62,12 +64,9 @@ export const Navigation = ({
         <select
           id='per-page-input'
           className='form-control'
-          value={perpage}
+          defaultValue={perpage || 20}
           type='number'
           min='1'
-          onChange={e => {
-            updatePerPage(Number(e.target.value))
-          }}
         >
           <option value={20}>20</option>
           <option value={50}>50</option>
@@ -81,13 +80,15 @@ export const Navigation = ({
       </div>
     </form>
     <PaginationContainer />
-    <ul className='list-group'>
-      {
-        rules.map(rule => (
-          <RuleDescriptionContainer key={rule} id={rule} />
-        ))
-      }
-    </ul>
+    <table className='table table-hover'>
+      <tbody>
+        {
+          rules.map(rule => (
+            <RuleDescriptionContainer key={rule} id={rule} />
+          ))
+        }
+      </tbody>
+    </table>
     <PaginationContainer />
   </div>
 )

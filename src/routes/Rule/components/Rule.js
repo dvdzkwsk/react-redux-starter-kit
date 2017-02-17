@@ -1,8 +1,8 @@
 import React from 'react'
 import ConditionListContainer from '../containers/ConditionListContainer'
 import ActionListContainer from '../containers/ActionListContainer'
-//import ReviewContainer from '../containers/ReviewContainer'
-//import StatusMessageContainer from '../containers/StatusMessageContainer'
+import ReviewContainer from '../containers/ReviewContainer'
+import StatusMessageContainer from '../containers/StatusMessageContainer'
 import './Rule.scss'
 
 // TODO consider using redux forms
@@ -14,10 +14,8 @@ export const Rule = ({
   updateDescription
 }) => (
   <div>
-    <form onSubmit={e => {
-      e.preventDefault()
-      updateRule()
-    }}>
+    <StatusMessageContainer />
+    <form>
       <div className='form-group'>
         <label
           className='control-label'
@@ -49,6 +47,7 @@ export const Rule = ({
           <a href='#review' role='tab' data-toggle='tab'>Review</a>
         </li>
       </ul>
+      <br />
       <div className='tab-content'>
         <div role='tabpanel' id='conditions' className='form-group tab-pane active fade in'>
           <ConditionListContainer ruleId={id} />
@@ -57,7 +56,14 @@ export const Rule = ({
           <ActionListContainer ruleId={id} />
         </div>
         <div role='tabpanel' id='review' className='form-group tab-pane fade'>
-          <button type='submit' className='btn btn-primary'>Submit</button>
+          <ReviewContainer />
+          <button type='submit' className='btn btn-primary' onClick={e => {
+            e.preventDefault()
+            updateRule()
+          }}>
+            <div className='glyphicon glyphicon-floppy-disk' />
+            <span> Submit</span>
+          </button>
         </div>
       </div>
     </form>
@@ -68,8 +74,7 @@ Rule.propTypes = {
   id: React.PropTypes.string.isRequired,
   updateRule: React.PropTypes.func.isRequired,
   description: React.PropTypes.string.isRequired,
-  updateDescription : React.PropTypes.func.isRequired,
-  params: React.PropTypes.object.isRequired
+  updateDescription : React.PropTypes.func.isRequired
 }
 
 export default Rule
