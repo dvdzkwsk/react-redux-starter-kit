@@ -19,6 +19,7 @@ export const Condition = ({
   ruleId,
   dimension='context.domain',
   op=true,
+  value=[],
   updateConditionDimension,
   updateConditionOp,
   updateConditionValue,

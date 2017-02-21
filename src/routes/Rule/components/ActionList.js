@@ -8,9 +8,11 @@ export const ActionList = ({
 }) => (
   <div>
     {
+      Object.keys(actions).length ?
       Object.keys(actions).map(key => {
         return (<ActionContainer key={key} id={key} />)
-      })
+      }) :
+      <p>A rule must have at least one action.</p>
     }
     <button
       className='btn btn-default'
@@ -24,5 +26,11 @@ export const ActionList = ({
     </button>
   </div>
 )
+
+ActionList.propTypes = {
+  ruleId: React.PropTypes.string.isRequired,
+  actions: React.PropTypes.object.isRequired,
+  addAction: React.PropTypes.func.isRequired
+}
 
 export default ActionList

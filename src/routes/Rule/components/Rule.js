@@ -11,7 +11,8 @@ export const Rule = ({
   id,
   updateRule,
   description = '',
-  updateDescription
+  updateDescription,
+  params
 }) => (
   <div>
     <StatusMessageContainer />
@@ -57,10 +58,15 @@ export const Rule = ({
         </div>
         <div role='tabpanel' id='review' className='form-group tab-pane fade'>
           <ReviewContainer />
-          <button type='submit' className='btn btn-primary' onClick={e => {
-            e.preventDefault()
-            updateRule()
-          }}>
+          <button
+            type='submit'
+            className={`btn btn-primary `}
+            disabled={id !== params.id}
+            onClick={e => {
+              e.preventDefault()
+              updateRule()
+            }
+          }>
             <div className='glyphicon glyphicon-floppy-disk' />
             <span> Submit</span>
           </button>
@@ -74,7 +80,8 @@ Rule.propTypes = {
   id: React.PropTypes.string.isRequired,
   updateRule: React.PropTypes.func.isRequired,
   description: React.PropTypes.string.isRequired,
-  updateDescription : React.PropTypes.func.isRequired
+  updateDescription : React.PropTypes.func.isRequired,
+  params: React.PropTypes.object.isRequired
 }
 
 export default Rule

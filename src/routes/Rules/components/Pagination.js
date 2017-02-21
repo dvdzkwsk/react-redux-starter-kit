@@ -6,7 +6,6 @@ export const Pagination = ({
   page,
   perpage,
   maxpage,
-  updatePage,
   fetchRules
 }) => (
   <nav style={{ textAlign: 'center' }}>
@@ -70,10 +69,10 @@ function getPagination(page, maxPage) {
 }
 
 Pagination.propTypes = {
+  search: React.PropTypes.string,
   page: React.PropTypes.number.isRequired,
+  perpage: React.PropTypes.number.isRequired,
   maxpage: React.PropTypes.number.isRequired,
-  incrementPage: React.PropTypes.func.isRequired,
-  decrementPage: React.PropTypes.func.isRequired,
   fetchRules: React.PropTypes.func.isRequired
 }
 

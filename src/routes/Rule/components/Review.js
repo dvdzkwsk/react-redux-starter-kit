@@ -14,12 +14,14 @@ export const Review = ({
       </div>
       <ul className='list-group'>
         {
-          conditions.map(({dimension, op, value}) => {
+          conditions.map(({dimension, op, value}, i) => {
             const isInvalid = !value || !value.length
             const operator = isInvalid || op ? 'is' : 'is not'
 
             return (
-              <li className={`list-group-item ${isInvalid && 'list-group-item-danger'}`}>
+              <li
+                key={i}
+                className={`list-group-item ${isInvalid && 'list-group-item-danger'}`}>
                 {dimension.split('.').join(' ')} {operator} {value.join(' or ') || 'undefined'}
               </li>
             )
@@ -39,8 +41,8 @@ export const Review = ({
               <tbody>
                 {
                   Object.keys(a.value).length ?
-                  Object.keys(a.value).sort().map(key => (
-                    <tr>
+                  Object.keys(a.value).sort().map((key, i) => (
+                    <tr key={i}>
                       <td className='action-key'>{key}: </td>
                       <td className='action-value'>
                         {
@@ -64,5 +66,10 @@ export const Review = ({
     </div>
   </div>
 )
+
+Review.propTypes = {
+  conditions: React.PropTypes.array.isRequired,
+  actions: React.PropTypes.array.isRequired
+}
 
 export default Review

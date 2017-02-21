@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import DimensionSelectorContainer from '../containers/DimensionSelectorContainer'
 import ConditionContainer from '../containers/ConditionContainer'
 
@@ -9,9 +10,11 @@ export const ConditionList = ({
 }) => (
   <div>
     {
+      Object.keys(conditions).length ?
       Object.keys(conditions).map(key => {
         return (<ConditionContainer key={key} id={key} />)
-      })
+      }) :
+      <p>A rule with no conditions will be applied in every scenario.</p>
     }
     <button
       className='btn btn-default'
@@ -25,5 +28,11 @@ export const ConditionList = ({
     </button>
   </div>
 )
+
+ConditionList.propTypes = {
+  ruleId: React.PropTypes.string.isRequired,
+  conditions: React.PropTypes.object.isRequired,
+  addCondition: React.PropTypes.func.isRequired
+}
 
 export default ConditionList

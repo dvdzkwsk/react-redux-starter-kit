@@ -34,7 +34,8 @@ export const RuleDescription = ({
 RuleDescription.propTypes = {
   id: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired,
-  deleteRule: React.PropTypes.func.isRequired
+  deleteRule: React.PropTypes.func.isRequired,
+  disabled: React.PropTypes.bool.isRequired
 }
 
 export default RuleDescription

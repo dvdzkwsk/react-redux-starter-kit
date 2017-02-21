@@ -5,12 +5,9 @@ import './Navigation.scss'
 
 export const Navigation = ({
   search,
-  updateSearch,
   page = 1,
-  updatePage,
   perpage = 20,
   maxpage,
-  updatePerPage,
   rules,
   fetchRules
 }) => (
@@ -97,6 +94,7 @@ Navigation.propTypes = {
   search: React.PropTypes.string,
   page: React.PropTypes.number.isRequired,
   perpage: React.PropTypes.number.isRequired,
+  maxPage: React.PropTypes.number.isRequired,
   rules: React.PropTypes.array.isRequired,
   fetchRules: React.PropTypes.func.isRequired
 }

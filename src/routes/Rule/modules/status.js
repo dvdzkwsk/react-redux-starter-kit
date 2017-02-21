@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { RECEIVE_RULE } from './rule'
+import { RECEIVE_RULE, RECEIVE_UPDATED_RULE, CREATE_RULE } from './rule'
 
 // ------------------------------------
 // Constants
@@ -28,7 +28,9 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   // TODO remove unneeded properties
-  [RECEIVE_RULE] : (state, action) => action.payload.get('result', state)
+  [RECEIVE_RULE] : (state, action) => initialState,
+  [CREATE_RULE] : (state, action) => initialState,
+  [RECEIVE_UPDATED_RULE] : (state, action) => action.payload.get('result', state)
 }
 
 // ------------------------------------

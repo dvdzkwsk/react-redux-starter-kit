@@ -74,4 +74,15 @@ export const Action = ({
   </fieldset>
 )
 
+Action.propTypes = {
+  id: React.PropTypes.string.isRequired,
+  ruleId: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string.isRequired,
+  updateActionType: React.PropTypes.func.isRequired,
+  rank: React.PropTypes.number.isRequired,
+  updateActionRank: React.PropTypes.func.isRequired,
+  updateActionYield: React.PropTypes.func.isRequired,
+  deleteAction: React.PropTypes.func.isRequired
+}
+
 export default Action

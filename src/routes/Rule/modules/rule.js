@@ -72,7 +72,7 @@ export function postRule (rule) {
     payload: rule
   }, [
     POST_RULE,
-    RECEIVE_RULE
+    RECEIVE_UPDATED_RULE
   ]
   )
 }
@@ -88,14 +88,22 @@ export const updateRule = () => {
   return (dispatch, getState) => {
     const { rule, conditions, actions } = getState()
 
-    const denormalized = rule.withMutations(r => {
+    let denormalized = rule.withMutations(r => {
       r.set('conditions', conditions.filter(
         c => c.get('ruleId') === r.get('id')
-      ).toList())
+      )
+      .map(c => c.delete('ruleId'))
+      .toList())
       .set('actions', actions.filter(
         a => a.get('ruleId') === r.get('id')
-      ).toList())
+      )
+      .map(a => a.delete('ruleId'))
+      .toList())
     })
+
+    if (denormalized.get('id') === 'new') {
+      denormalized = denormalized.delete('id')
+    }
 
     dispatch(postRule(denormalized.toJS()))
   }
@@ -118,13 +126,12 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [UPDATE_DESCRIPTION] : (state, action) => state.set('description', action.description),
-  [CREATE_RULE] : (state, action) => initialState,
+  [CREATE_RULE] : (state, action) => createState,
   [REQUEST_RULE] : (state, action) => state,
-  [RECEIVE_RULE] : (state, action) => action.payload.getIn(['result', 'status']) === 'error' ? state : action.payload.getIn(['entities', 'rules']).first(),
-  // TODO add reducer for error results
+  [RECEIVE_RULE] : (state, action) => action.payload.getIn(['entities', 'rules']).first(),
   [POST_RULE] : (state, action) => state,
-  // TODO update path id when rule is updated
-  [RECEIVE_UPDATED_RULE] : (state, action) => action.rule.mergeDeep(initialState),
+  // TODO update path id when rule is updated?
+  [RECEIVE_UPDATED_RULE] : (state, action) => action.payload.getIn(['result', 'status']) === 'error' ? state : action.payload.getIn(['entities', 'rules']).first(),
   [RECEIVE_ERROR] : (state, action) => state.mergeDeep(action.error)
 }
 
@@ -132,7 +139,9 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.fromJS({})
-const createState = Immutable.fromJS({})
+const createState = Immutable.fromJS({
+  id: 'new'
+})
 
 export default function ruleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

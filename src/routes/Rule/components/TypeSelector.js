@@ -25,4 +25,9 @@ export const TypeSelector = ({
   </div>
 )
 
+TypeSelector.propTypes = {
+  type: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func.isRequired
+}
+
 export default TypeSelector
