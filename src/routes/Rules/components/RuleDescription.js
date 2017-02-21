@@ -11,9 +11,9 @@ export const RuleDescription = ({
   <tr className={disabled && 'disabled'}>
     <td>
       {
-        disabled ?
-        <span>{description} </span> :
-        <Link to={`rule/${id}`}>{description} </Link>
+        disabled
+        ? <span>{description} </span>
+        : <Link to={`rule/${id}`}>{description} </Link>
       }
     </td>
     <td className='delete-button'>

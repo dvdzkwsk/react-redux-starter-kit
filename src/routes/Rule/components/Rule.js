@@ -61,7 +61,7 @@ export const Rule = ({
           <button
             type='submit'
             className={`btn btn-primary `}
-            disabled={id !== params.id}
+            disabled={!(id === 'new' || id === params.id)}
             onClick={e => {
               e.preventDefault()
               updateRule()

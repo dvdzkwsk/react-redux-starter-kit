@@ -54,7 +54,7 @@ export const Pagination = ({
   </nav>
 )
 
-function getPagination(page, maxPage) {
+function getPagination (page, maxPage) {
   const min = Math.max(page - 2, 1)
   const max = Math.min(min + 4, maxPage)
   const pages = []

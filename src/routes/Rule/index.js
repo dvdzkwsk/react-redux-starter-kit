@@ -1,43 +1,52 @@
 import { injectReducer } from 'store/reducers'
 
-// TODO make edit and create child routes
+// TODO move create and edit routes to their own files
 export default (store) => ({
-  path : 'rule/:id',
+  path : 'rule',
+  childRoutes: [RuleCreateRoute(store), RuleEditRoute(store)]
+})
+
+const RuleCreateRoute = (store) => ({
+  path : 'new',
   getComponent (nextState, cb) {
     require.ensure([], (require) => {
-      const statusReducer = require('./modules/status').default
-
-      injectReducer(store, { key: 'status', reducer: statusReducer })
-
-      const dimensionsReducer = require('./modules/dimensions').default
-      const fetchDimensions = require('./modules/dimensions').fetchDimensions
-
-      injectReducer(store, { key: 'dimensions', reducer: dimensionsReducer })
-
-      store.dispatch(fetchDimensions())
-
-      const conditionsReducer = require('./modules/conditions').default
-
-      injectReducer(store, { key: 'conditions', reducer: conditionsReducer })
-
-      const actionsReducer = require('./modules/actions').default
-
-      injectReducer(store, { key: 'actions', reducer: actionsReducer })
+      injectAllReducers(store, require)
 
       const Rule = require('./containers/RuleContainer').default
-      const ruleReducer = require('./modules/rule').default
       const createRule = require('./modules/rule').createRule
-      const fetchRule = require('./modules/rule').fetchRule
 
-      injectReducer(store, { key: 'rule', reducer: ruleReducer })
-
-      if (nextState.params.id === 'new') {
-        store.dispatch(createRule())
-      } else {
-        store.dispatch(fetchRule(nextState.params.id))
-      }
+      store.dispatch(createRule())
 
       cb(null, Rule)
     }, 'rule')
   }
 })
+
+const RuleEditRoute = (store) => ({
+  path : ':id',
+  getComponent (nextState, cb) {
+    require.ensure([], (require) => {
+      injectAllReducers(store, require)
+
+      const Rule = require('./containers/RuleContainer').default
+      const fetchRule = require('./modules/rule').fetchRule
+
+      store.dispatch(fetchRule(nextState.params.id))
+
+      cb(null, Rule)
+    }, 'rule')
+  }
+})
+
+const injectAllReducers = (store, require) => {
+  const reducerTypes = ['status', 'dimensions', 'conditions', 'actions', 'rule']
+
+  reducerTypes.forEach(key => {
+    const reducer = require(`./modules/${key}`).default
+    injectReducer(store, { key, reducer })
+  })
+
+  const fetchDimensions = require('./modules/dimensions').fetchDimensions
+
+  store.dispatch(fetchDimensions())
+}

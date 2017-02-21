@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import ActionValue from '../components/ActionValue'
-import Actions from 'data/actions'
 import {
   updateActionValue
 } from '../modules/actions'

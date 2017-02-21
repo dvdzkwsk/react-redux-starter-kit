@@ -18,4 +18,10 @@ export const DimensionSelector = ({
   />
 )
 
+DimensionSelector.propTypes = {
+  dimension: React.PropTypes.string.isRequired,
+  dimensions: React.PropTypes.object.isRequired,
+  onChange: React.PropTypes.func.isRequired
+}
+
 export default DimensionSelector

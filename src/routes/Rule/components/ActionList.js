@@ -3,16 +3,16 @@ import ActionContainer from '../containers/ActionContainer'
 
 export const ActionList = ({
   ruleId,
-  actions={},
+  actions = {},
   addAction
 }) => (
   <div>
     {
-      Object.keys(actions).length ?
-      Object.keys(actions).map(key => {
-        return (<ActionContainer key={key} id={key} />)
-      }) :
-      <p>A rule must have at least one action.</p>
+      Object.keys(actions).length
+      ? Object.keys(actions).map(key => (
+        <ActionContainer key={key} id={key} />
+      ))
+      : <p>A rule must have at least one action.</p>
     }
     <button
       className='btn btn-default'

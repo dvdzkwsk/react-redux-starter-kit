@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware'
-import { normalize, denormalize, schema } from 'normalizr'
+import { normalize } from 'normalizr'
 import Immutable from 'immutable'
 import adDirectorSchema from 'helpers/schema'
 import 'whatwg-fetch'
@@ -37,6 +37,5 @@ export const fetchFromAPI = (body,
 }
 
 export const convertResponse = response => Immutable.fromJS(normalize(response, adDirectorSchema))
-//export const convertRequest = request => denormalize(request.get('result').toJS(), adDirectorSchema, request.get('entities').toJS())
 
 export default fetchFromAPI

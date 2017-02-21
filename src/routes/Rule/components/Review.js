@@ -1,6 +1,4 @@
 import React from 'react'
-import { denormalize } from 'normalizr'
-import adDirectorSchema from 'helpers/schema'
 import './Review.scss'
 
 export const Review = ({
@@ -14,7 +12,7 @@ export const Review = ({
       </div>
       <ul className='list-group'>
         {
-          conditions.map(({dimension, op, value}, i) => {
+          conditions.map(({ dimension, op, value }, i) => {
             const isInvalid = !value || !value.length
             const operator = isInvalid || op ? 'is' : 'is not'
 
@@ -40,22 +38,22 @@ export const Review = ({
             <table className='table table-bordered'>
               <tbody>
                 {
-                  Object.keys(a.value).length ?
-                  Object.keys(a.value).sort().map((key, i) => (
+                  Object.keys(a.value).length
+                  ? Object.keys(a.value).sort().map((key, i) => (
                     <tr key={i}>
                       <td className='action-key'>{key}: </td>
                       <td className='action-value'>
                         {
-                          Array.isArray(a.value[key]) ?
-                          a.value[key].join(', ') :
-                          a.value[key]
+                          Array.isArray(a.value[key])
+                          ? a.value[key].join(', ')
+                          : a.value[key]
                         }
                       </td>
                     </tr>
-                  )) :
-                  <tr className='danger'>
-                    <td className='text-danger'>undefined</td>
-                  </tr>
+                  ))
+                    : <tr className='danger'>
+                      <td className='text-danger'>undefined</td>
+                    </tr>
                 }
               </tbody>
             </table>

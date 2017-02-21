@@ -1,5 +1,4 @@
 import Immutable from 'immutable'
-import { fetchFromAPI } from 'helpers/api'
 import { RECEIVE_RULES } from './rules'
 
 // ------------------------------------

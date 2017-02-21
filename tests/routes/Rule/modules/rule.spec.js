@@ -77,7 +77,7 @@ describe('(Redux Module) Rule', () => {
     })
 
     it('Should assign the first argument to the "description" property.', () => {
-      expect(updateDescription({description: 'test'})).to.have.property('description', 'test')
+      expect(updateDescription({ description: 'test' })).to.have.property('description', 'test')
     })
 
     it('Should have the "description" property if not provided.', () => {

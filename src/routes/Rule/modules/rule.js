@@ -131,7 +131,11 @@ const ACTION_HANDLERS = {
   [RECEIVE_RULE] : (state, action) => action.payload.getIn(['entities', 'rules']).first(),
   [POST_RULE] : (state, action) => state,
   // TODO update path id when rule is updated?
-  [RECEIVE_UPDATED_RULE] : (state, action) => action.payload.getIn(['result', 'status']) === 'error' ? state : action.payload.getIn(['entities', 'rules']).first(),
+  [RECEIVE_UPDATED_RULE] : (state, action) => (
+    action.payload.getIn(['result', 'status']) === 'error'
+    ? state
+    : action.payload.getIn(['entities', 'rules']).first()
+  ),
   [RECEIVE_ERROR] : (state, action) => state.mergeDeep(action.error)
 }
 

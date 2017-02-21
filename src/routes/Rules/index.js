@@ -10,7 +10,7 @@ export default (store) => ({
 
       const navigationReducer = require('./modules/navigation').default
 
-      injectReducer(store, { key: 'navigation', reducer: navigationReducer})
+      injectReducer(store, { key: 'navigation', reducer: navigationReducer })
 
       const fetchRules = require('./modules/rules').fetchRules
 

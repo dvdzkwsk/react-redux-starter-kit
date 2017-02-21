@@ -19,7 +19,7 @@ export const Navigation = ({
       const page = Number(document.getElementById('page-input').value)
       const perpage = Number(document.getElementById('per-page-input').value)
 
-      fetchRules({search, page, perpage})
+      fetchRules({ search, page, perpage })
     }}>
       <div className='form-group'>
         <label
@@ -94,7 +94,7 @@ Navigation.propTypes = {
   search: React.PropTypes.string,
   page: React.PropTypes.number.isRequired,
   perpage: React.PropTypes.number.isRequired,
-  maxPage: React.PropTypes.number.isRequired,
+  maxpage: React.PropTypes.number.isRequired,
   rules: React.PropTypes.array.isRequired,
   fetchRules: React.PropTypes.func.isRequired
 }

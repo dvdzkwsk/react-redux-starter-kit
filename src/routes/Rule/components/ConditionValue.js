@@ -68,6 +68,7 @@ function getOptionsFromFormat (format) {
   return []
 }
 
+// TODO add validation errors in UI
 function getValidatedValues ({ value, type, format }) {
   let validationPattern
 
@@ -86,12 +87,12 @@ function getValidatedValues ({ value, type, format }) {
 function BooleanValue (props) {
   const booleanOptions = [
     {
-    	label: 'true',
-    	value: true
+      label: 'true',
+      value: true
     },
     {
-    	label: 'false',
-    	value: false
+      label: 'false',
+      value: false
     }
   ]
 
@@ -101,14 +102,18 @@ function BooleanValue (props) {
       value={props.values[0]}
       options={booleanOptions}
       onChange={value => props.onChange([value])}
-  	/>
+		/>
   )
 }
 
-// TODO finish this component
 function IntegerValue (props) {
   return (
-    <SelectComponent />
+    <SelectComponent
+      simpleValue
+      multi
+      value={props.values}
+      onChange={value => props.onChange(value.split(','))}
+		/>
   )
 }
 

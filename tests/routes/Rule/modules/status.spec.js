@@ -1,7 +1,7 @@
 import Immutable from 'immutable'
 import {
   UPDATE_STATUS,
-  updateStatus
+  updateStatus,
   default as statusReducer
 } from 'routes/Rule/modules/status'
 
@@ -39,7 +39,7 @@ describe('(Redux Module) STATUS', () => {
     })
 
     it('Should assign the first argument to the "description" property.', () => {
-      expect(updateStatus({status: 'test'})).to.have.property('status', 'test')
+      expect(updateStatus({ status: 'test' })).to.have.property('status', 'test')
     })
 
     it('Should have the "status" property if not provided.', () => {

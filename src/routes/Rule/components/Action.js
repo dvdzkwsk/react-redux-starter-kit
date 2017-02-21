@@ -5,9 +5,9 @@ import ActionValueContainer from '../containers/ActionValueContainer'
 export const Action = ({
   id,
   ruleId,
-  type='capping',
+  type = 'capping',
   updateActionType,
-  rank=100,
+  rank = 100,
   updateActionRank,
   updateActionYield,
   deleteAction

@@ -10,11 +10,11 @@ describe('(Component) Header', () => {
     _wrapper = shallow(<Header />)
   })
 
-  /*it('Renders a product title', () => {
+  /* it('Renders a product title', () => {
     const title = _wrapper.find('.navbar-brand')
     expect(title).to.exist
     expect(title.text()).to.match(/Ad Director/)
-  })*/
+  }) */
 
   describe('Navigation links...', () => {
     it('Should render a Link to Home route', () => {

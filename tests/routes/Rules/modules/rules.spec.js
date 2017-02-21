@@ -45,7 +45,7 @@ describe('(Redux Module) Rules', () => {
     })
   })
 
-  /*describe('(Action Creator) fetchRules', () => {
+  /* describe('(Action Creator) fetchRules', () => {
     let _globalState
     let _dispatchSpy
     let _getStateSpy
@@ -101,7 +101,7 @@ describe('(Redux Module) Rules', () => {
           expect(_globalState.rules.length).to.equal(20)
         })
     })
-  })*/
+  }) */
 
   // TODO test deleteRule
 })

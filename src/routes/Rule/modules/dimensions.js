@@ -36,9 +36,6 @@ export const fetchDimensions = (id) => {
   )
 }
 
-function getDimensions (id) {
-}
-
 export const actions = {
   requestDimensions,
   receiveDimensions,

@@ -17,9 +17,9 @@ const booleanOptions = [
 export const Condition = ({
   id,
   ruleId,
-  dimension='context.domain',
-  op=true,
-  value=[],
+  dimension = 'context.domain',
+  op = true,
+  value = [],
   updateConditionDimension,
   updateConditionOp,
   updateConditionValue,

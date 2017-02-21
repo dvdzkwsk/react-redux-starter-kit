@@ -73,7 +73,9 @@ const ACTION_HANDLERS = {
   [UPDATE_CONDITION_OP] : (state, action) => state.setIn([action.id, 'op'], action.op),
   [UPDATE_CONDITION_VALUE] : (state, action) => state.setIn([action.id, 'value'], action.value),
   [DELETE_CONDITION] : (state, action) => state.delete(action.id),
-  [ADD_CONDITION] : (state, action) => state.set(`${action.ruleId}_${Date.now()}`, defaultCondition.set('ruleId', action.ruleId))
+  [ADD_CONDITION] : (state, action) => (
+    state.set(`${action.ruleId}_${Date.now()}`, defaultCondition.set('ruleId', action.ruleId))
+  )
 }
 
 // ------------------------------------

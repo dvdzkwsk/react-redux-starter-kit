@@ -1,4 +1,3 @@
-import React from 'react'
 import Immutable from 'immutable'
 
 export const ARRAY = 'ARRAY'
