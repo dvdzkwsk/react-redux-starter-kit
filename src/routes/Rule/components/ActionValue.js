@@ -1,7 +1,12 @@
 import React from 'react'
 import Select from 'react-select'
-import Actions from 'data/actions'
-import { ARRAY, BOOL, NUMBER, STRING } from 'data/actions'
+import {
+  ARRAY,
+  BOOL,
+  NUMBER,
+  STRING,
+  default as Actions
+} from 'data/actions'
 import 'react-select/dist/react-select.css'
 
 const typeMap = new Map([
@@ -25,6 +30,13 @@ export const ActionValue = (props) => {
     }
 
   </fieldset>
+}
+
+ActionValue.propTypes = {
+  type: React.PropTypes.string.isRequired,
+  value: React.PropTypes.array.isRequired,
+  id: React.PropTypes.string.isRequired,
+  updateActionValue: React.PropTypes.func.isRequired
 }
 
 function ArrayValue (props) {
@@ -55,6 +67,13 @@ function ArrayValue (props) {
   )
 }
 
+ArrayValue.propTypes = {
+  key: React.PropTypes.string.isRequired,
+  value: React.PropTypes.array.isRequired,
+  id: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func.isRequired
+}
+
 function BoolValue (props) {
   return (
     <div className='form-group'>
@@ -78,6 +97,8 @@ function BoolValue (props) {
   )
 }
 
+BoolValue.propTypes = ArrayValue.propTypes
+
 function NumberValue (props) {
   return (
     <div className='form-group'>
@@ -99,6 +120,8 @@ function NumberValue (props) {
   )
 }
 
+NumberValue.propTypes = ArrayValue.propTypes
+
 function StringValue (props) {
   return (
     <div className='form-group'>
@@ -119,5 +142,7 @@ function StringValue (props) {
     </div>
   )
 }
+
+StringValue.propTypes = ArrayValue.propTypes
 
 export default ActionValue

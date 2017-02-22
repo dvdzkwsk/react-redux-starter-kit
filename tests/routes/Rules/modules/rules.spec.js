@@ -4,8 +4,8 @@ import {
   RECEIVE_RULES,
   REQUEST_DELETE_RULE,
   RECEIVE_DELETE_RULE,
-  fetchRules,
-  deleteRule,
+  // fetchRules,
+  // deleteRule,
   default as rulesReducer
 } from 'routes/Rules/modules/rules'
 
@@ -38,10 +38,6 @@ describe('(Redux Module) Rules', () => {
       expect(state).to.deep.equal(INITIAL_STATE)
       state = rulesReducer(state, { type: '@@@@@@@' })
       expect(state).to.deep.equal(INITIAL_STATE)
-      state = rulesReducer(state, updatePage(5))
-      expect(state.get('page')).to.equal(5)
-      state = rulesReducer(state, { type: '@@@@@@@' })
-      expect(state.get('page')).to.equal(5)
     })
   })
 

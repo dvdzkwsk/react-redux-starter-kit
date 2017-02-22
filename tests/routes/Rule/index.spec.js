@@ -11,7 +11,7 @@ describe('(Route) Rule', () => {
     expect(typeof _route).to.equal('object')
   })
 
-  it('Configuration should contain path `rule/:id`', () => {
-    expect(_route.path).to.equal('rule/:id')
+  it('Configuration should contain path `rule`', () => {
+    expect(_route.path).to.equal('rule')
   })
 })

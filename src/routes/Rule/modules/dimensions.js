@@ -11,19 +11,6 @@ export const RECEIVE_DIMENSIONS = 'RECEIVE_DIMENSIONS'
 // Actions
 // ------------------------------------
 
-export function requestDimensions () {
-  return {
-    type    : REQUEST_DIMENSIONS
-  }
-}
-
-export function receiveDimensions (dimensions) {
-  return {
-    type    : RECEIVE_DIMENSIONS,
-    dimensions
-  }
-}
-
 export const fetchDimensions = (id) => {
   return fetchFromAPI({
     scope: 'dimension',
@@ -37,8 +24,6 @@ export const fetchDimensions = (id) => {
 }
 
 export const actions = {
-  requestDimensions,
-  receiveDimensions,
   fetchDimensions
 }
 

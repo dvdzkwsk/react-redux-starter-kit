@@ -15,9 +15,5 @@ describe('(View) Home', () => {
     expect(welcome.text()).to.match(/Welcome/)
   })
 
-  it('Renders an Create Rule link', () => {
-    const createButton = _component.find('a').first()
-    expect(createButton).to.exist
-    expect(createButton.attr('href')).to.match(/rule\/new/)
-  })
+  // TODO test for create and edit rule links
 })

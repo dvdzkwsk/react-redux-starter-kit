@@ -30,19 +30,6 @@ export function createRule () {
   }
 }
 
-export function requestRule () {
-  return {
-    type    : REQUEST_RULE
-  }
-}
-
-export function receiveRule (rule) {
-  return {
-    type    : RECEIVE_RULE,
-    rule
-  }
-}
-
 export function receiveError (error) {
   return {
     type : RECEIVE_ERROR,
@@ -65,7 +52,6 @@ export const fetchRule = (id) => {
 }
 
 export function postRule (rule) {
-  console.log(rule)
   return fetchFromAPI({
     scope: 'rule',
     method: 'update',
@@ -77,12 +63,12 @@ export function postRule (rule) {
   )
 }
 
-export function receiveUpdatedRule (rule) {
+/* export function receiveUpdatedRule (rule) {
   return {
     type    : RECEIVE_UPDATED_RULE,
     rule
   }
-}
+} */
 
 export const updateRule = () => {
   return (dispatch, getState) => {
@@ -112,12 +98,10 @@ export const updateRule = () => {
 export const actions = {
   updateDescription,
   createRule,
-  requestRule,
-  receiveRule,
   fetchRule,
   postRule,
   updateRule,
-  receiveUpdatedRule,
+  // receiveUpdatedRule,
   receiveError
 }
 

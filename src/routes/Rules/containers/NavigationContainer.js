@@ -1,16 +1,10 @@
 import { connect } from 'react-redux'
-import {
-  updatePage,
-  updatePerPage,
-  updateSearch
-} from '../modules/navigation'
+import { updateSearch } from '../modules/navigation'
 import { fetchRules } from '../modules/rules'
 
 import Navigation from '../components/Navigation'
 
 const mapDispatchToProps = {
-  updatePage,
-  updatePerPage,
   updateSearch,
   fetchRules
 }

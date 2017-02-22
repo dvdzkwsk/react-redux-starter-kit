@@ -1,6 +1,7 @@
 import React from 'react'
 import './Review.scss'
 
+// TODO add messages when there are no conditions or no actions
 export const Review = ({
   conditions,
   actions

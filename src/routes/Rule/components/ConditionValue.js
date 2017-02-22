@@ -5,14 +5,14 @@ import 'react-select/dist/react-select.css'
 
 // TODO clean up and separate this code
 const componentMap = new Map([
-	['boolean', BooleanValue],
-	['integer', StringValue],
-	['string', StringValue]
+  ['boolean', BooleanValue],
+  ['integer', StringValue],
+  ['string', StringValue]
 ])
 
 const predefinedData = new Map([
-	['owner.country', CountryCodes],
-	['reader.country', CountryCodes]
+  ['owner.country', CountryCodes],
+  ['reader.country', CountryCodes]
 ])
 
 let SelectComponent = Select.Creatable
@@ -102,9 +102,11 @@ function BooleanValue (props) {
       value={props.values[0]}
       options={booleanOptions}
       onChange={value => props.onChange([value])}
-		/>
+  />
   )
 }
+
+BooleanValue.propTypes = ConditionValue.propTypes
 
 function IntegerValue (props) {
   return (
@@ -113,9 +115,11 @@ function IntegerValue (props) {
       multi
       value={props.values}
       onChange={value => props.onChange(value.split(','))}
-		/>
+  />
   )
 }
+
+IntegerValue.propTypes = ConditionValue.propTypes
 
 function valuesToOptions (value) {
   return value.map(label => ({
@@ -137,5 +141,7 @@ function StringValue (props) {
     />
   )
 }
+
+StringValue.propTypes = ConditionValue.propTypes
 
 export default ConditionValue

@@ -9,13 +9,10 @@ import {
   RECEIVE_ERROR,
   updateDescription,
   createRule,
-  requestRule,
-  receiveRule,
   receiveError,
-  fetchRule,
-  postRule,
-  receiveUpdatedRule,
-  updateRule,
+  // fetchRule,
+  // postRule,
+  // updateRule,
   default as ruleReducer
 } from 'routes/Rule/modules/rule'
 
@@ -60,7 +57,7 @@ describe('(Redux Module) Rule', () => {
       expect(state).to.deep.equal(INITIAL_STATE)
       state = ruleReducer(state, { type: '@@@@@@@' })
       expect(state).to.deep.equal(INITIAL_STATE)
-      state = ruleReducer(state, updateDescription('test'))
+      state = ruleReducer(state, updateDescription({ description: 'test' }))
       expect(state.get('description')).to.equal('test')
       state = ruleReducer(state, { type: '@@@@@@@' })
       expect(state.get('description')).to.equal('test')
@@ -73,15 +70,11 @@ describe('(Redux Module) Rule', () => {
     })
 
     it('Should return an action with type "UPDATE_DESCRIPTION".', () => {
-      expect(updateDescription()).to.have.property('type', UPDATE_DESCRIPTION)
+      expect(updateDescription({ description: 'test' })).to.have.property('type', UPDATE_DESCRIPTION)
     })
 
-    it('Should assign the first argument to the "description" property.', () => {
+    it('Should assign the description value to the "description" property.', () => {
       expect(updateDescription({ description: 'test' })).to.have.property('description', 'test')
-    })
-
-    it('Should have the "description" property if not provided.', () => {
-      expect(updateDescription()).to.have.property('description')
     })
   })
 
@@ -95,74 +88,21 @@ describe('(Redux Module) Rule', () => {
     })
   })
 
-  describe('(Action Creator) requestRule', () => {
+  describe('(Action Creator) receiveError', () => {
     it('Should be exported as a function.', () => {
-      expect(requestRule).to.be.a('function')
+      expect(receiveError).to.be.a('function')
     })
 
-    it('Should return an action with type "REQUEST_RULE".', () => {
-      expect(requestRule()).to.have.property('type', REQUEST_RULE)
-    })
-  })
-
-  describe('(Action Creator) receiveRule', () => {
-    it('Should be exported as a function.', () => {
-      expect(receiveRule).to.be.a('function')
+    it('Should return an action with type "RECEIVE_ERROR".', () => {
+      expect(receiveError('test')).to.have.property('type', RECEIVE_ERROR)
     })
 
-    it('Should return an action with type "RECEIVE_RULE".', () => {
-      expect(receiveRule()).to.have.property('type', RECEIVE_RULE)
-    })
-
-    it('Should assign the first argument to the "rule" property.', () => {
-      const rule = { description: '' }
-
-      expect(receiveRule(rule)).to.have.property('rule', rule)
-    })
-
-    it('Should have the "rule" property if not provided.', () => {
-      expect(receiveRule()).to.have.property('rule')
+    it('Should assign the first argument to the "error" property.', () => {
+      expect(receiveError('test')).to.have.property('error', 'test')
     })
   })
 
   // TODO test fetchRule
   // TODO test postRule
-
-  describe('(Action Creator) receiveUpdatedRule', () => {
-    it('Should be exported as a function.', () => {
-      expect(receiveUpdatedRule).to.be.a('function')
-    })
-
-    it('Should return an action with type "RECEIVE_UPDATED_RULE".', () => {
-      expect(receiveUpdatedRule()).to.have.property('type', RECEIVE_UPDATED_RULE)
-    })
-
-    it('Should assign the first argument to the "rule" property.', () => {
-      const rule = { description: '' }
-
-      expect(receiveUpdatedRule(rule)).to.have.property('rule', rule)
-    })
-
-    it('Should have the "rule" property if not provided.', () => {
-      expect(receiveUpdatedRule()).to.have.property('rule')
-    })
-  })
-
   // TODO test updateRule
-
-  // NOTE: if you have a more complex state, you will probably want to verify
-  // that you did not mutate the state. In this case our state is just a number
-  // (which cannot be mutated).
-  /* describe('(Action Handler) COUNTER_INCREMENT', () => {
-    it('Should increment the state by the action payload\'s "value" property.', () => {
-      let state = ruleReducer(undefined, {})
-      expect(state).to.equal(0)
-      state = ruleReducer(state, increment(1))
-      expect(state).to.equal(1)
-      state = ruleReducer(state, increment(2))
-      expect(state).to.equal(3)
-      state = ruleReducer(state, increment(-3))
-      expect(state).to.equal(0)
-    })
-  }) */
 })

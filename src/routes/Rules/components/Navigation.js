@@ -9,6 +9,7 @@ export const Navigation = ({
   perpage = 20,
   maxpage,
   rules,
+  updateSearch,
   fetchRules
 }) => (
   <div className='navigation'>
@@ -19,6 +20,7 @@ export const Navigation = ({
       const page = Number(document.getElementById('page-input').value)
       const perpage = Number(document.getElementById('per-page-input').value)
 
+      updateSearch(search)
       fetchRules({ search, page, perpage })
     }}>
       <div className='form-group'>
@@ -96,6 +98,7 @@ Navigation.propTypes = {
   perpage: React.PropTypes.number.isRequired,
   maxpage: React.PropTypes.number.isRequired,
   rules: React.PropTypes.array.isRequired,
+  updateSearch: React.PropTypes.func.isRequired,
   fetchRules: React.PropTypes.func.isRequired
 }
 

@@ -4,24 +4,12 @@ import { RECEIVE_RULE, RECEIVE_UPDATED_RULE, CREATE_RULE } from './rule'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const UPDATE_STATUS = 'UPDATE_STATUS'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-// TODO see if this function is required
-export function updateStatus ({ status, error }) {
-  return {
-    type    : UPDATE_STATUS,
-    status,
-    error
-  }
-}
-
-export const actions = {
-  updateStatus
-}
+export const actions = {}
 
 // ------------------------------------
 // Action Handlers

@@ -8,8 +8,8 @@ export const UPDATE_ACTION_TYPE = 'UPDATE_ACTION_TYPE'
 export const UPDATE_ACTION_RANK = 'UPDATE_ACTION_RANK'
 export const UPDATE_ACTION_YIELD = 'UPDATE_ACTION_YIELD'
 export const UPDATE_ACTION_VALUE = 'UPDATE_ACTION_VALUE'
-export const ADD_ACTION = 'ADD_ACTION'
 export const DELETE_ACTION = 'DELETE_ACTION'
+export const ADD_ACTION = 'ADD_ACTION'
 
 // ------------------------------------
 // Actions
@@ -55,10 +55,10 @@ export function deleteAction ({ id, ruleId }) {
   }
 }
 
-export function addAction (id) {
+export function addAction (ruleId) {
   return {
     type    : ADD_ACTION,
-    id
+    ruleId
   }
 }
 
@@ -85,7 +85,9 @@ const ACTION_HANDLERS = {
   [UPDATE_ACTION_YIELD] : (state, action) => state.setIn([action.id, 'yield'], action._yield),
   [UPDATE_ACTION_VALUE] : (state, action) => state.setIn([action.id, 'value', action.key], action.value),
   [DELETE_ACTION] : (state, action) => state.delete(action.id),
-  [ADD_ACTION] : (state, action) => state.set(`${action.id}_${Date.now()}`, defaultAction.set('ruleId', action.id))
+  [ADD_ACTION] : (state, action) => (
+    state.set(`${action.ruleId}_${Date.now()}`, defaultAction.set('ruleId', action.ruleId))
+  )
 }
 
 // ------------------------------------
