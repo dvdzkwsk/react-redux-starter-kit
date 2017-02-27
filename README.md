@@ -219,3 +219,9 @@ This project wouldn't be possible without help from the community, so I'd like t
 * [Jonas Matser](https://github.com/mtsr) - For your help in triaging issues and unending support in our Gitter channel.
 
 And to everyone else who has contributed, even if you are not listed here your work is appreciated.
+
+
+## NOTE
+
+In my experience, presentational components tend to be stateless pure functions, and containers tend to be stateful pure classes.
+https://gist.github.com/chantastic/fc9e3853464dffdb1e3c
