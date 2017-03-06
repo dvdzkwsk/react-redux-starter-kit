@@ -94,10 +94,10 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ├── config                   # Project and build configurations
 ├── public                   # Static public assets (not imported anywhere in source code)
 ├── server                   # Express application that provides webpack middleware
-│   └── main.js              # Server application entry point
+│   └── index.js              # Server application entry point
 ├── src                      # Application source code
 │   ├── index.html           # Main HTML page container for app
-│   ├── main.js              # Application bootstrap and rendering
+│   ├── index.js              # Application bootstrap and rendering
 │   ├── components           # Global Reusable Presentational Components
 │   ├── containers           # Global Reusable Container Components
 │   ├── layouts              # Components that dictate major page structure

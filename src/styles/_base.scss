@@ -10,3 +10,21 @@ For example:
 @import './variables/components';
 @import './themes/default';
 */
+
+/**
+ * Bootstrap 3
+ */
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+/**
+ * Bootstrap 4
+ */
+//$font-size-base: 0.8rem;
+//@import '~bootstrap/scss/bootstrap.scss';
+
+/**
+ * Fontawesome
+ */
+$fa-font-path: '~font-awesome/fonts/';
+@import '~font-awesome/scss/font-awesome.scss';
