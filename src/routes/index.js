@@ -6,7 +6,6 @@ import RegisterRoute from './Register'
 import LoginRoute from './Login'
 import SemestersRoute from './Semesters'
 import SemesterRoute from './Semester'
-// import LogoutRoute from './Logout'
 import NotFoundRoute from './NotFound'
 
 import { logout } from './Login/modules/login'
@@ -70,12 +69,12 @@ export const createRoutes = (store) => {
     using getChildRoutes with the following signature:
 
     getChildRoutes (location, cb) {
-      require.ensure([], (require) => {
-        cb(null, [
-          // Remove imports!
-          require('./Counter').default(store)
-        ])
-      })
+     import('./Counter').then((module) => {
+       cb(null, [
+         // Remove imports!
+         module.default(store)
+       ])
+     })
     }
 
     However, this is not necessary for code-splitting! It simply provides

@@ -17,12 +17,12 @@ export const Header = (props) => (
       <Navbar.Collapse>
         <Nav>
           {props.user ? (<NavItem disabled>Signed in as: {props.user.firstName} {props.user.surname}</NavItem>) : ''}
-          <NavItem onClick={() => browserHistory.push('profile')}><FontAwesome name='user' /> Profile</NavItem>
-          <NavItem onClick={() => browserHistory.push('about')}><FontAwesome name='question-circle' /> About</NavItem>
-          <NavItem onClick={() => browserHistory.push('settings')}><FontAwesome name='gear' /> Settings</NavItem>
+          <NavItem onClick={() => browserHistory.push('/profile')}><FontAwesome name='user' /> Profile</NavItem>
+          <NavItem onClick={() => browserHistory.push('/about')}><FontAwesome name='question-circle' /> About</NavItem>
+          <NavItem onClick={() => browserHistory.push('/settings')}><FontAwesome name='gear' /> Settings</NavItem>
         </Nav>
         <Nav pullRight>
-          <NavItem onClick={() => browserHistory.push('logout')}><FontAwesome name='sign-out' /> Sign out</NavItem>
+          <NavItem onClick={() => browserHistory.push('/logout')}><FontAwesome name='sign-out' /> Sign out</NavItem>
         </Nav>
       </Navbar.Collapse>
     ) : ''}

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ERROR_OCCURRED } from '../../../store/rootReducers/error'
-import { FILTER_SEMESTERS } from './semestersMainView'
+import { FILTER_SEMESTERS, filterSemesters } from './semestersMainView'
 
 // ------------------------------------
 // Constants
@@ -52,6 +52,11 @@ export const deleteSemester = (semesterId) => (dispatch, getState) => {
       dispatch({ type: ERROR_OCCURRED, payload: err })
       throw err
     })
+}
+
+export const semesterChanged = (semester) => (dispatch) => {
+  dispatch({ type: SEMESTER_CHANGED, payload: semester })
+  dispatch(filterSemesters())
 }
 
 export const actions = {}

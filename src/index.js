@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer'
+import MyApp from './containers/AppContainer'
 import createRoutes from './routes/index'
 import { configureAll } from './config'
 
@@ -22,40 +23,13 @@ let render = () => {
   const routes = createRoutes(store)
 
   ReactDOM.render(
-    <AppContainer store={store} routes={routes} />,
+    <AppContainer><MyApp store={store} routes={routes} /></AppContainer>,
     MOUNT_NODE
   )
 }
 
-// This code is excluded from production bundle
-if (__DEV__) {
-  if (module.hot) {
-    // Development render functions
-    const renderApp = render
-    const renderError = (error) => {
-      const RedBox = require('redbox-react').default
-
-      ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
-    }
-
-    // Wrap render in try/catch
-    render = () => {
-      try {
-        renderApp()
-      } catch (error) {
-        console.error(error)
-        renderError(error)
-      }
-    }
-
-    // Setup hot module replacement
-    module.hot.accept('./routes/index', () =>
-      setImmediate(() => {
-        ReactDOM.unmountComponentAtNode(MOUNT_NODE)
-        render()
-      })
-    )
-  }
+if (module.hot) {
+  module.hot.accept('./containers/AppContainer', render);
 }
 
 // ========================================================

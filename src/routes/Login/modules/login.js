@@ -30,7 +30,7 @@ export const loginSucceed = (result, dispatch) => {
     .then((response) => {
       dispatch({ type: FETCHED_USER, payload: response.data })
 
-      browserHistory.push('semesters')
+      browserHistory.push('/semesters')
     })
     .catch((err) => {
       dispatch({ type: ERROR_OCCURRED, payload: err })
@@ -58,7 +58,7 @@ export const logout = (store) => {
   delete axios.defaults.headers.common[ 'Authorization' ]
   Cookies.remove('authToken')
 
-  browserHistory.push('login')
+  browserHistory.push('/login')
 }
 
 export const actions = {}

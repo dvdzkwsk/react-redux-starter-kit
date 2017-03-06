@@ -4,10 +4,14 @@ import { combineReducers } from 'redux'
 export default (store) => ({
   path: 'semesters',
   getComponent (nextState, cb) {
-    require.ensure([], (require) => {
-      const Semesters = require('./containers/SemestersContainer').default
-      const semestersDataReducer = require('./modules/semestersData').default
-      const semestersMainViewReducer = require('./modules/semestersMainView').default
+    Promise.all([
+      import('./containers/SemestersContainer'),
+      import('./modules/semestersData'),
+      import('./modules/semestersMainView')
+    ]).then((modules) => {
+      const Semesters = modules[ 0 ].default
+      const semestersDataReducer = modules[ 1 ].default
+      const semestersMainViewReducer = modules[ 2 ].default
 
       const semestersViewReducer = combineReducers({
         main: semestersMainViewReducer
@@ -17,6 +21,6 @@ export default (store) => ({
       injectReducer(store, { key: 'semestersView', reducer: semestersViewReducer })
 
       cb(null, Semesters)
-    }, 'semesters')
+    })
   }
 })

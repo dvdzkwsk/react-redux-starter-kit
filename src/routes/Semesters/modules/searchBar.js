@@ -1,9 +1,5 @@
-import { FILTER_SEMESTERS } from './semestersMainView'
+import { FILTER_SEMESTERS, filterSemesters } from './semestersMainView'
 
-export const searchValueChanged = (event, newValue, previousValue) => (dispatch, getState) => dispatch({
-  type: FILTER_SEMESTERS,
-  payload: {
-    semesters: getState().semestersData.semesters,
-    searchValue: newValue
-  }
-})
+export const searchValueChanged = (event, newValue, previousValue) => (dispatch) => {
+  dispatch(filterSemesters(newValue))
+}

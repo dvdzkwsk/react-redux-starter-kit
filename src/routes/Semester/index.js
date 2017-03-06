@@ -2,14 +2,18 @@ import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
   path: 'semester/:mode(/:semesterId)',
+
   getComponent (nextState, cb) {
-    require.ensure([], (require) => {
-      const Semester = require('./containers/SemesterContainer').default
-      const reducer = require('./modules/semester').default
+    Promise.all([
+      import('./containers/SemesterContainer'),
+      import('./modules/semester')
+    ]).then((modules) => {
+      const Semester = modules[ 0 ].default
+      const reducer = modules[ 1 ].default
 
       injectReducer(store, { key: 'semester', reducer })
 
       cb(null, Semester)
-    }, 'semester')
+    })
   }
 })
