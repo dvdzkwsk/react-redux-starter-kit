@@ -6,6 +6,7 @@ import { fetchFromAPI } from 'helpers/api'
 // ------------------------------------
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION'
 export const CREATE_RULE = 'CREATE_RULE'
+export const EDIT_RULE = 'EDIT_RULE'
 export const REQUEST_RULE = 'REQUEST_RULE'
 export const RECEIVE_RULE = 'RECEIVE_RULE'
 export const POST_RULE = 'POST_RULE'
@@ -34,6 +35,13 @@ export function receiveError (error) {
   return {
     type : RECEIVE_ERROR,
     error
+  }
+}
+
+export function editRule (rule) {
+  return {
+    type: EDIT_RULE,
+    rule
   }
 }
 
@@ -101,7 +109,6 @@ export const actions = {
   fetchRule,
   postRule,
   updateRule,
-  // receiveUpdatedRule,
   receiveError
 }
 
@@ -113,6 +120,7 @@ const ACTION_HANDLERS = {
   [CREATE_RULE] : (state, action) => createState,
   [REQUEST_RULE] : (state, action) => state,
   [RECEIVE_RULE] : (state, action) => action.payload.getIn(['entities', 'rules']).first(),
+  [EDIT_RULE] : (state, action) => action.id,
   [POST_RULE] : (state, action) => state,
   // TODO update path id when rule is updated?
   [RECEIVE_UPDATED_RULE] : (state, action) => (
@@ -128,7 +136,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = Immutable.fromJS({})
 const createState = Immutable.fromJS({
-  id: 'new'
+  id: 'new',
+  description: ''
 })
 
 export default function ruleReducer (state = initialState, action) {

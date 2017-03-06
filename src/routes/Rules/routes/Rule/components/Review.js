@@ -33,8 +33,8 @@ export const Review = ({
         <h3 className='panel-title'>Then</h3>
       </div>
       <ul className='list-group'>
-        {actions.map(a => (
-          <li className='list-group-item'>
+        {actions.map((a, i) => (
+          <li key={i} className='list-group-item'>
             <p>set {a.type} to </p>
             <table className='table table-bordered'>
               <tbody>

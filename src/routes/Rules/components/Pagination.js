@@ -25,6 +25,7 @@ export const Pagination = ({
       {
         getPagination(page, maxpage).map(pageNumber => (
           <li
+            key={pageNumber}
             className={page === pageNumber && 'active'}
             onClick={() => fetchRules({
               search,
@@ -72,7 +73,7 @@ Pagination.propTypes = {
   search: React.PropTypes.string,
   page: React.PropTypes.number.isRequired,
   perpage: React.PropTypes.number.isRequired,
-  maxpage: React.PropTypes.number.isRequired,
+  maxpage: React.PropTypes.number,
   fetchRules: React.PropTypes.func.isRequired
 }
 

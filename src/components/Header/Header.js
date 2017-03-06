@@ -25,7 +25,7 @@ export const Header = () => (
       <div className='collapse navbar-collapse' id='navbar-collapse-1'>
         <ul className='nav navbar-nav'>
           <li>
-            <Link to='/rule/new' activeClassName='active'>
+            <Link to='/rules/new' activeClassName='active'>
               Create Rule
             </Link>
           </li>

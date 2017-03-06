@@ -34,7 +34,7 @@ export const ActionValue = (props) => {
 
 ActionValue.propTypes = {
   type: React.PropTypes.string.isRequired,
-  value: React.PropTypes.array.isRequired,
+  value: React.PropTypes.object.isRequired,
   id: React.PropTypes.string.isRequired,
   updateActionValue: React.PropTypes.func.isRequired
 }
@@ -69,7 +69,7 @@ function ArrayValue (props) {
 
 ArrayValue.propTypes = {
   key: React.PropTypes.string.isRequired,
-  value: React.PropTypes.array.isRequired,
+  value: React.PropTypes.object.isRequired,
   id: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired
 }

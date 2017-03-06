@@ -1,6 +1,4 @@
 import React from 'react'
-import PaginationContainer from '../containers/PaginationContainer'
-import RuleDescriptionContainer from '../containers/RuleDescriptionContainer'
 import './Navigation.scss'
 
 export const Navigation = ({
@@ -8,7 +6,6 @@ export const Navigation = ({
   page = 1,
   perpage = 20,
   maxpage,
-  rules,
   updateSearch,
   fetchRules
 }) => (
@@ -78,17 +75,6 @@ export const Navigation = ({
         </button>
       </div>
     </form>
-    <PaginationContainer />
-    <table className='table table-hover'>
-      <tbody>
-        {
-          rules.map(rule => (
-            <RuleDescriptionContainer key={rule} id={rule} />
-          ))
-        }
-      </tbody>
-    </table>
-    <PaginationContainer />
   </div>
 )
 
@@ -96,8 +82,7 @@ Navigation.propTypes = {
   search: React.PropTypes.string,
   page: React.PropTypes.number.isRequired,
   perpage: React.PropTypes.number.isRequired,
-  maxpage: React.PropTypes.number.isRequired,
-  rules: React.PropTypes.array.isRequired,
+  maxpage: React.PropTypes.number,
   updateSearch: React.PropTypes.func.isRequired,
   fetchRules: React.PropTypes.func.isRequired
 }

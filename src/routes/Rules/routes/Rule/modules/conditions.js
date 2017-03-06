@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { RECEIVE_RULE, CREATE_RULE, RECEIVE_UPDATED_RULE } from './rule'
+import { RECEIVE_RULE, RECEIVE_UPDATED_RULE, CREATE_RULE } from './rule'
 
 // ------------------------------------
 // Constants
