@@ -4,6 +4,7 @@ import Home from './Home'
 import CounterRoute from './Counter'
 import LoginRoute from './Login'
 import DashboardRoute from './Dashboard'
+import ServicesRoute from './Services'
 import NotFoundPage from '../components/NotFoundPage'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -17,6 +18,7 @@ export const createRoutes = (store) => ({
     CounterRoute(store),
     LoginRoute(store),
     DashboardRoute(store),
+    ServicesRoute(store),
     { path: '*', component: NotFoundPage }
   ]
 })

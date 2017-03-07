@@ -5,7 +5,7 @@ const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_PASSWORD = process.env.CLIENT_PASSWORD
 const BASE_API = process.env.BASE_API
 
-export function request (method, path, options) {
+export function request (method, path, options = {}) {
   var query = options.query || {}
   var body = options.body || {}
   var headers = Object.assign({

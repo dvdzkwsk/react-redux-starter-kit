@@ -1,4 +1,5 @@
 import React from 'react'
+import Moment from 'moment'
 import './InquiryCard.scss'
 
 export const InquiryCard = (props) => (
@@ -22,7 +23,7 @@ export const InquiryCard = (props) => (
         </li>
         <li>
           <i className="fa fa-calendar-o fa-fw" title="Booking Date"></i>
-          {props.inquiry.booking_date}
+          {Moment(props.inquiry.booking_date).format('Do MMMM YYYY')}
         </li>
         <li>
           <i className="fa fa-map-marker fa-fw" title="Address"></i>
