@@ -1,3 +1,4 @@
+import Immutable from 'immutable'
 import React, { PropTypes } from 'react'
 import InquiryCard from './InquiryCard'
 import DashboardNav from './DashboardNav'
@@ -24,7 +25,7 @@ export class Dashboard extends React.Component {
 }
 
 Dashboard.defaultProps = {
-  activeInquiries: []
+  activeInquiries: Immutable.List()
 }
 
 export default Dashboard

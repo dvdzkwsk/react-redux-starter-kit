@@ -1,3 +1,5 @@
+import Immutable from 'immutable'
+
 import { get } from 'utils/request'
 
 // ------------------------------------
@@ -22,7 +24,7 @@ export const getActiveInquiries = (email, password) => {
         query: {
           active: true
         },
-        accessToken: getState().login.accessToken
+        accessToken: getState().get('login').get('accessToken')
       })
       .then(function (response) {
         console.log(response)
@@ -46,18 +48,18 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [UPDATE_ACTIVE_INQUIRIES]: (state, { payload }) => {
-    return {
+    return state.merge({
       activeInquiries: payload
-    }
+    })
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
+const initialState = Immutable.Map({
   activeInquiries: []
-}
+})
 
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

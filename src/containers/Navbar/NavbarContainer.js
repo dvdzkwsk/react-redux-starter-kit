@@ -5,7 +5,7 @@ import { updateCurrentUser } from 'routes/Login/modules/login'
 import Navbar from '../../components/Navbar'
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.login && !isEmpty(state.login.accessToken)
+  isLoggedIn: state.get('login').get('accessToken')
 })
 
 const mapDispatchToProps = {

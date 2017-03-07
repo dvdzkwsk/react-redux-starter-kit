@@ -1,7 +1,5 @@
-// ------------------------------------
-// Constants
-// ------------------------------------
-export const LOCATION_CHANGE = 'LOCATION_CHANGE'
+import Immutable from 'immutable';
+import { LOCATION_CHANGE } from 'react-router-redux';
 
 // ------------------------------------
 // Actions
@@ -20,12 +18,14 @@ export const updateLocation = ({ dispatch }) => {
   return (nextLocation) => dispatch(locationChange(nextLocation))
 }
 
-// ------------------------------------
-// Reducer
-// ------------------------------------
-const initialState = null
-export default function locationReducer (state = initialState, action) {
-  return action.type === LOCATION_CHANGE
-    ? action.payload
-    : state
-}
+const initialState = Immutable.Map({
+  locationBeforeTransitions: null
+});
+
+export default (state = initialState, action) => {
+  if (action.type === LOCATION_CHANGE) {
+    return state.set('locationBeforeTransitions', action.payload);
+  }
+
+  return state;
+};

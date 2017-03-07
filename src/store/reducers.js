@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux'
-import locationReducer from './location'
+import { combineReducers } from 'redux-immutable'
+import routingReducer from './routing'
 import { default as loginReducer } from 'routes/Login/modules/login'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    location: locationReducer,
+    routing: routingReducer,
     login: loginReducer,
     ...asyncReducers
   })
