@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import InquiryCard from './InquiryCard'
+import DashboardNav from './DashboardNav'
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -9,11 +10,11 @@ export class Dashboard extends React.Component {
   render () {
     return (
       <div>
-        <h4>Dashboard!</h4>
-        <div>
+        <DashboardNav />
+        <div style={{padding: '10px'}}>
           {
             this.props.activeInquiries.map(function (item, index) {
-              return <InquiryCard key={index} inquiry={item}/>
+              return <InquiryCard key={index} inquiry={item} styles={{margin: '10px'}}/>
             })
           }
         </div>
