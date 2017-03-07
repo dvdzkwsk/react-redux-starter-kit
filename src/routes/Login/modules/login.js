@@ -1,5 +1,6 @@
+import Immutable from 'immutable'
+
 import { post } from 'utils/request'
-import { locationChange } from 'store/location'
 
 // ------------------------------------
 // Constants
@@ -46,20 +47,20 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [UPDATE_CURRENT_USER]: (state, { payload }) => {
-    return {
+    return state.merge({
       currentUser: payload.user,
       accessToken: payload.accessToken
-    }
+    })
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
+const initialState = Immutable.Map({
   currentUser: null,
   accessToken: null
-}
+})
 
 export default function loginReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
