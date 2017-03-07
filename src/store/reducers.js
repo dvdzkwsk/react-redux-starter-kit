@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 import locationReducer from './location'
+import { default as loginReducer } from 'routes/Login/modules/login'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     location: locationReducer,
+    login: loginReducer,
     ...asyncReducers
   })
 }

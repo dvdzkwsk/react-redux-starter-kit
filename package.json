@@ -88,6 +88,7 @@
     "css-loader": "^0.26.0",
     "cssnano": "^3.7.4",
     "debug": "^2.2.0",
+    "dotenv": "^4.0.0",
     "es6-promise": "^4.0.5",
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.9.0",

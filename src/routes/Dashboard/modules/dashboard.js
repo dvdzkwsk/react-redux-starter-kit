@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import { get } from 'utils/request'
 
 // ------------------------------------
 // Constants
@@ -18,20 +18,19 @@ export function updateActiveInquiries (inquiries) {
 export const getActiveInquiries = (email, password) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      fetch('https://api-beta.seekster.co/inquiries?active=true', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${btoa('seekster-web:MF/Ez09QytEdI5pw0DtOdTip7zJzlM+ZGX6BVLzrJkBDe5wukUPeBFvMandUsDDzOAyFoE9LrRhbsrzETMEDRw==')}`,
-          'X-Access-Token': getState().login.accessToken
-        }
-      })
-      .then(function (response) {
-        return response.json()
+      get('/inquiries', {
+        query: {
+          active: true
+        },
+        accessToken: getState().login.accessToken
       })
       .then(function (response) {
         console.log(response)
         dispatch(updateActiveInquiries(response))
+        resolve()
+      })
+      .catch(function (error) {
+        console.warn(error)
         resolve()
       })
     })

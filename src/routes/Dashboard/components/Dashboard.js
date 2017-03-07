@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import InquiryCard from './InquiryCard'
 
 export class Dashboard extends React.Component {
@@ -20,6 +20,10 @@ export class Dashboard extends React.Component {
       </div>
     )
   }
+}
+
+Dashboard.defaultProps = {
+  activeInquiries: []
 }
 
 export default Dashboard
