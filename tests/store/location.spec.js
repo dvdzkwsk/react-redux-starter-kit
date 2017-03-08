@@ -15,21 +15,26 @@ describe('(Internal Module) Location', () => {
       expect(locationReducer).to.be.a('function')
     })
 
-    it('Should initialize with a state of null.', () => {
-      expect(locationReducer(undefined, {})).to.equal(null)
+    it('Should initialize with a location object.', () => {
+      expect(locationReducer(undefined, {})).to.be.an('object')
+      expect(locationReducer(undefined, {})).to.have.property('pathname')
     })
 
     it('Should return the previous state if an action was not matched.', () => {
       let state = locationReducer(undefined, {})
-      expect(state).to.equal(null)
+      expect(state).to.be.an('object')
+      expect(state).to.have.property('pathname')
+      expect(state).to.have.property('pathname', '/context.html')
       state = locationReducer(state, { type: '@@@@@@@' })
-      expect(state).to.equal(null)
+      expect(state).to.have.property('pathname', '/context.html')
 
       const locationState = { pathname: '/yup' }
       state = locationReducer(state, locationChange(locationState))
       expect(state).to.equal(locationState)
+      expect(state).to.have.property('pathname', '/yup')
       state = locationReducer(state, { type: '@@@@@@@' })
       expect(state).to.equal(locationState)
+      expect(state).to.have.property('pathname', '/yup')
     })
   })
 

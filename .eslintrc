@@ -16,7 +16,11 @@
     "__DEV__"      : false,
     "__TEST__"     : false,
     "__PROD__"     : false,
-    "__COVERAGE__" : false
+    "__COVERAGE__" : false,
+    "__DEV_API_BASE__": false,
+    "__PROD_API_BASE__" : false,
+    "__API_KEY__": false,
+    "__API_USER__" : false
   },
   "rules": {
     "key-spacing"          : 0,

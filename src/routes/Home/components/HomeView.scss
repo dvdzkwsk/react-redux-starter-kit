@@ -1,5 +1,7 @@
-.duck {
-  display: block;
-  width: 120px;
-  margin: 1.5rem auto;
+.jumbotron {
+  text-align: center;
+
+  .btn-lg {
+      margin: 1rem;
+  }
 }
