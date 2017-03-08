@@ -1,13 +1,9 @@
 import { connect } from 'react-redux'
-import { login } from '../modules/login'
+import { login } from 'store/authentication'
 import Login from '../components/Login'
 
 const mapDispatchToProps = {
   submitForm: login
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(Login)
