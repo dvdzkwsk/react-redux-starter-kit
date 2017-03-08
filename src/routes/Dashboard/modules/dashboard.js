@@ -24,7 +24,7 @@ export const getActiveInquiries = (email, password) => {
         query: {
           active: true
         },
-        accessToken: getState().get('login').get('accessToken')
+        accessToken: getState().get('authentication').get('accessToken')
       })
       .then(function (response) {
         console.log(response)

@@ -5,13 +5,13 @@ import './Navbar.scss'
 export class Navbar extends React.Component {
   logout (e) {
     e.preventDefault()
-    this.props.logout()
+    this.props.logout(e)
   }
 
   render () {
     var menuItems = [
       this.props.isLoggedIn && <Link to='/dashboard'>Dashboard</Link>,
-      this.props.isLoggedIn && <Link to='/logout' onClick={(e) => this.logout(e)}>Logout</Link>,
+      this.props.isLoggedIn && <Link to='/logout' onClick={this.props.logout}>Logout</Link>,
       !this.props.isLoggedIn && <Link to='/login'>Login</Link>
     ]
 
