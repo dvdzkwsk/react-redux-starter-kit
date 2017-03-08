@@ -4,14 +4,14 @@ import { Link } from 'react-router'
 export const ServicesList = (props) => (
   <div>
     <div>
-      <h3>{props.category.name}</h3>
+      <h3>{props.category.get('name')}</h3>
     </div>
     <div>
       <ul>
-        { props.category.services.map(function (item, index) {
+        { props.category.get('services').map(function (item, index) {
           return (
             <li key={index}>
-              <Link to={`/inquiries/new?service=${item.slug}`}>{item.name}</Link>
+              <Link to={`/inquiries/new?service=${item.get('slug')}`}>{item.get('name')}</Link>
             </li>
           )
         })}

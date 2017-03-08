@@ -5,22 +5,27 @@ import { get } from 'utils/request'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const ALL_SERVICES = 'ALL_SERVICES'
+export const NEW_INQUIRY_FORM = 'NEW_INQUIRY_FORM'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateActiveInquiries (inquiries) {
+export function updateActiveInquiries (inquiryForm) {
   return {
-    type    : ALL_SERVICES,
-    payload : inquiries
+    type    : NEW_INQUIRY_FORM,
+    payload : inquiryForm
   }
 }
 
-export const getAllServices = () => {
+export const newInquiryForm = (email, password) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      get('/categories')
+      get('/inquiryForm', {
+        query: {
+          active: true
+        },
+        accessToken: getState().get('login').get('accessToken')
+      })
       .then(function (response) {
         console.log(response)
         dispatch(updateActiveInquiries(response))
@@ -35,16 +40,16 @@ export const getAllServices = () => {
 }
 
 export const actions = {
-  getAllServices
+  newInquiryForm
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ALL_SERVICES]: (state, { payload }) => {
+  [NEW_INQUIRY_FORM]: (state, { payload }) => {
     return state.merge({
-      allServices: payload
+      activeInquiries: payload
     })
   }
 }
@@ -53,7 +58,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.Map({
-  allServices: []
+  activeInquiries: []
 })
 
 export default function counterReducer (state = initialState, action) {

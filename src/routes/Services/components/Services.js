@@ -1,3 +1,4 @@
+import Immutable from 'immutable'
 import React from 'react'
 import { Link } from 'react-router'
 import ServicesList from './ServicesList'
@@ -24,7 +25,7 @@ export class Services extends React.Component {
 }
 
 Services.defaultProps = {
-  allServices: []
+  allServices: Immutable.List()
 }
 
 

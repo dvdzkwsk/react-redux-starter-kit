@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash'
 import { getAllServices } from '../modules/services'
 
 const mapStateToProps = (state) => ({
-  allServices: state.services.allServices
+  allServices: state.get('services').get('allServices')
 })
 
 const mapDispatchToProps = {
