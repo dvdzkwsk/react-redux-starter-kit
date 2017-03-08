@@ -27,7 +27,7 @@ describe('(Component) Header', () => {
 
     it('Should render a Link to New Rule route', () => {
       expect(_wrapper.contains(
-        <Link to='/rule/new' activeClassName='active'>
+        <Link to='/rules/new' activeClassName='active'>
           Create Rule
         </Link>
       )).to.be.true

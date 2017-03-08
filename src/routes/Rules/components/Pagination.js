@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import './Pagination.scss'
 
 export const Pagination = ({
@@ -27,15 +28,17 @@ export const Pagination = ({
           <li
             key={pageNumber}
             className={page === pageNumber && 'active'}
-            onClick={() => fetchRules({
-              search,
-              page: pageNumber,
-              perpage
-            })
-          }>
-            <span aria-hidden='true'>
+          >
+            <Link to={{
+              pathname: 'rules',
+              query: {
+                page: pageNumber,
+                perpage,
+                search
+              }
+            }} aria-hidden='true'>
               {pageNumber}
-            </span>
+            </Link>
           </li>
         ))
       }

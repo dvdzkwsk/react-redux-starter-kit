@@ -14,7 +14,7 @@ import {
   // postRule,
   // updateRule,
   default as ruleReducer
-} from 'routes/Rule/modules/rule'
+} from 'routes/Rules/routes/Rule/modules/rule'
 
 describe('(Redux Module) Rule', () => {
   it('Should export a constant UPDATE_DESCRIPTION.', () => {

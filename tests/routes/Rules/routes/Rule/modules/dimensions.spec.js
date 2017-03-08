@@ -4,7 +4,7 @@ import {
   RECEIVE_DIMENSIONS,
   // fetchDimensions,
   default as dimensionsReducer
-} from 'routes/Rule/modules/dimensions'
+} from 'routes/Rules/routes/Rule/modules/dimensions'
 
 describe('(Redux Module) Dimensions', () => {
   it('Should export a constant REQUEST_DIMENSIONS.', () => {

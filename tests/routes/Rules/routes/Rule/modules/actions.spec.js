@@ -13,7 +13,7 @@ import {
   deleteAction,
   addAction,
   default as actionsReducer
-} from 'routes/Rule/modules/actions'
+} from 'routes/Rules/routes/Rule/modules/actions'
 
 describe('(Redux Module) Actions', () => {
   it('Should export a constant UPDATE_ACTION_TYPE.', () => {

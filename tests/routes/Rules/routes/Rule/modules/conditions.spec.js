@@ -11,7 +11,7 @@ import {
   deleteCondition,
   addCondition,
   default as conditionsReducer
-} from 'routes/Rule/modules/conditions'
+} from 'routes/Rules/routes/Rule/modules/conditions'
 
 describe('(Redux Module) Conditions', () => {
   it('Should export a constant UPDATE_CONDITION_DIMENSION.', () => {

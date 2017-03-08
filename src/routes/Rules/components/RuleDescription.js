@@ -13,7 +13,7 @@ export const RuleDescription = ({
       {
         disabled
         ? <span>{description} </span>
-        : <Link to={`rules/${id}`}>{description} </Link>
+        : <Link to={`/rules/${id}`}>{description} </Link>
       }
     </td>
     <td className='delete-button'>

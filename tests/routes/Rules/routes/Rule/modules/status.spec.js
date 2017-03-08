@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import statusReducer from 'routes/Rule/modules/status'
+import statusReducer from 'routes/Rules/routes/Rule/modules/status'
 
 describe('(Redux Module) STATUS', () => {
   describe('(Reducer)', () => {

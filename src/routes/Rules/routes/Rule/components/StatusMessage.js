@@ -8,7 +8,7 @@ export const StatusMessage = ({
 }) => (
   <div className={`alert  ${error && 'alert-danger'} ${status === 'ok' && 'alert-success'} ${!status && 'hidden'}`}>
     {
-      status && (error || <span>'Success!' <Link to={`rule/${payload.rule}`}>Go to updated rule</Link>.</span>)
+      status && (error || <span>'Success!' <Link to={`/rules/${payload.rule}`}>Go to updated rule</Link>.</span>)
     }
   </div>
 )

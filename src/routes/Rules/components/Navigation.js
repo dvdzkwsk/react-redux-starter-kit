@@ -18,7 +18,11 @@ export const Navigation = ({
       const perpage = Number(document.getElementById('per-page-input').value)
 
       updateSearch(search)
-      fetchRules({ search, page, perpage })
+      fetchRules({
+        search,
+        page,
+        perpage
+      })
     }}>
       <div className='form-group'>
         <label
@@ -70,7 +74,11 @@ export const Navigation = ({
         </select>
       </div>
       <div className='form-group'>
-        <button className='btn btn-primary' type='submit' >
+        <button
+          className='btn btn-primary'
+          role='button'
+          type='submit'
+        >
           Submit
         </button>
       </div>

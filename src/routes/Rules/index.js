@@ -8,9 +8,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       injectAllReducers(store, require)
 
-      const fetchRules = require('./modules/rules').fetchRules
+      const location = store.getState().location
+      const query = location
+        ? location.query
+        : {}
 
-      store.dispatch(fetchRules())
+      query.page = query.page && Number(query.page)
+      query.perpage = query.perpage && Number(query.perpage)
+
+      const fetchRules = require('./modules/rules').fetchRules
+      store.dispatch(fetchRules(query))
 
       const RulesView = require('./components/RulesView').default
       cb(null, { component: RulesView })
