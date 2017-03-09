@@ -3,6 +3,7 @@ import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import LoginRoute from './Login'
 import DashboardRoute from './Dashboard'
+import InquiryDetailsRoute from './InquiryDetails'
 import ServicesRoute from './Services'
 import NotFoundPage from '../components/NotFoundPage'
 
@@ -16,6 +17,7 @@ export const createRoutes = (store) => ({
   childRoutes : [
     LoginRoute(store),
     DashboardRoute(store),
+    InquiryDetailsRoute(store),
     ServicesRoute(store),
     { path: '*', component: NotFoundPage }
   ]

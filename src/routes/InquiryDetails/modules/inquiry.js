@@ -1,37 +1,37 @@
 import Immutable from 'immutable'
 
-import { post } from 'utils/request'
+import { get } from 'utils/request'
+import { addToInquiries } from 'store/resources'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER'
+export const UPDATE_INQUIRY = 'UPDATE_INQUIRY'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateCurrentUser (user, accessToken) {
+export function updateInquiry (inquiry) {
   return {
-    type    : UPDATE_CURRENT_USER,
-    payload : { user, accessToken }
+    type    : UPDATE_INQUIRY,
+    payload : inquiry
   }
 }
 
-export const login = (email, password) => {
+export const getInquiry = (id) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      post('/users/sessions', {
-        body: {
-          email: email,
-          password: password,
-          devices_attributes: {
-            client_type: 'web'
-          }
-        }
+      dispatch(updateInquiry(id))
+
+      get('/inquiries/' + id, {
+        accessToken: getState().get('authentication').get('accessToken')
       })
       .then(function (response) {
-        console.log(response)
-        dispatch(updateCurrentUser(response.user, response.access_token))
+        dispatch(addToInquiries(response))
+        resolve()
+      })
+      .catch(function (error) {
+        console.warn(error)
         resolve()
       })
     })
@@ -39,17 +39,16 @@ export const login = (email, password) => {
 }
 
 export const actions = {
-  login
+  updateInquiry
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [UPDATE_CURRENT_USER]: (state, { payload }) => {
+  [UPDATE_INQUIRY]: (state, { payload }) => {
     return state.merge({
-      currentUser: payload.user,
-      accessToken: payload.accessToken
+      inquiry: payload
     })
   }
 }
@@ -58,11 +57,10 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.Map({
-  currentUser: null,
-  accessToken: null
+  inquiry: {}
 })
 
-export default function loginReducer (state = initialState, action) {
+export default function inquiryReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

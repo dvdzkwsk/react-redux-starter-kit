@@ -1,6 +1,7 @@
 import Immutable from 'immutable'
 
 import { get } from 'utils/request'
+import { addToInquiries } from 'store/resources'
 
 // ------------------------------------
 // Constants
@@ -28,7 +29,10 @@ export const getActiveInquiries = (email, password) => {
       })
       .then(function (response) {
         console.log(response)
-        dispatch(updateActiveInquiries(response))
+        response.forEach(inquiry => {
+          dispatch(addToInquiries(inquiry))
+        })
+        dispatch(updateActiveInquiries(response.map(inquiry => inquiry.order_number)))
         resolve()
       })
       .catch(function (error) {

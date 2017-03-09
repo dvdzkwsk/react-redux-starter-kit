@@ -4,7 +4,9 @@ import { isEmpty } from 'lodash'
 import { getActiveInquiries } from '../modules/dashboard'
 
 const mapStateToProps = (state) => ({
-  activeInquiries: state.get('dashboard').get('activeInquiries')
+  activeInquiries: state.get('dashboard').get('activeInquiries').map(orderNumber => (
+    state.get('resources').get('inquiries').get(orderNumber)
+  ))
 })
 
 const mapDispatchToProps = {
