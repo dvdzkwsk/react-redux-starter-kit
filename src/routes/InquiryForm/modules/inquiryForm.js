@@ -6,29 +6,49 @@ import { get } from 'utils/request'
 // Constants
 // ------------------------------------
 export const NEW_INQUIRY_FORM = 'NEW_INQUIRY_FORM'
+export const CHECK_PROMO_CODE = 'CHECK_PROMO_CODE'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateActiveInquiries (inquiryForm) {
+export function updateService (inquiryForm) {
   return {
     type    : NEW_INQUIRY_FORM,
     payload : inquiryForm
   }
 }
 
-export const newInquiryForm = (email, password) => {
+export function checkPromoCode (checkPromo) {
+  return {
+    type    : CHECK_PROMO_CODE,
+    payload : checkPromo
+  }
+}
+
+export const getService = () => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      get('/inquiryForm', {
-        query: {
-          active: true
-        },
-        accessToken: getState().get('login').get('accessToken')
-      })
+      get('/services/3')
       .then(function (response) {
         console.log(response)
-        dispatch(updateActiveInquiries(response))
+        dispatch(updateService(response))
+        resolve()
+      })
+      .catch(function (error) {
+        console.warn(error)
+        resolve()
+      })
+    })
+  }
+}
+
+export const getPromoCode = () => {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
+      get('/promo_codes')
+      .then(function (response) {
+        console.log(response)
+        dispatch(checkPromoCode(response))
         resolve()
       })
       .catch(function (error) {
@@ -40,7 +60,8 @@ export const newInquiryForm = (email, password) => {
 }
 
 export const actions = {
-  newInquiryForm
+  getService,
+  getPromoCode
 }
 
 // ------------------------------------
@@ -49,7 +70,12 @@ export const actions = {
 const ACTION_HANDLERS = {
   [NEW_INQUIRY_FORM]: (state, { payload }) => {
     return state.merge({
-      activeInquiries: payload
+      callService: payload
+    })
+  },
+  [CHECK_PROMO_CODE]: (state, { payload }) => {
+    return state.merge({
+      promoCode: payload
     })
   }
 }
@@ -57,8 +83,9 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = Immutable.Map({
-  activeInquiries: []
+const initialState = Immutable.fromJS({
+  callService: {},
+  promoCode: {}
 })
 
 export default function counterReducer (state = initialState, action) {

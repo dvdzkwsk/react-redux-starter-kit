@@ -18,6 +18,7 @@ export class Services extends React.Component {
               return <ServicesList key={index} category={item}/>
             })
           }
+          <Link to='/InquiryForm'>Inquiry Form</Link>
         </div>
       </div>
     )

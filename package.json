@@ -103,6 +103,7 @@
     "moment": "^2.17.1",
     "node-sass": "^4.5.0",
     "normalize.css": "^5.0.0",
+    "pickadate": "github:amsul/pickadate.js",
     "postcss-loader": "^1.1.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
