@@ -42,10 +42,10 @@ export const getService = () => {
   }
 }
 
-export const getPromoCode = () => {
+export const getPromoCode = (code) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      get('/promo_codes')
+      get('/promo_codes/' + code)
       .then(function (response) {
         console.log(response)
         dispatch(checkPromoCode(response))

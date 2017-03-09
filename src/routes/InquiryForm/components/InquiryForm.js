@@ -31,12 +31,8 @@ export class InquiryForm extends React.Component {
   }
 
   handleChange = debounce(function (e) {
-    var promoCode = $('promo-code').value
-    $.getJSON('https://api-beta.seekster.co/promo_codes/' + promoCode)
-      .then((data) => {
-        promoCode = data.code ? console.log('y') : console.log('n')
-      });
-  }, 800)
+    this.props.validatePromoCode(this.refs.promoCodeInput.value)
+  }, 500)
 
   render () {
     return (
@@ -87,9 +83,8 @@ export class InquiryForm extends React.Component {
               <textarea placeholder="Notes and special requests"/>
             </div>
             <div className="promo-code">
-              <input type="text" placeholder="Promo Code"
-                onChange={this.handleChange}/>
-              <div className="promo-status"></div>
+              <input type="text" placeholder="Promo Code" ref="promoCodeInput" onChange={::this.handleChange} />
+              <div className="promo-status">{this.props.promoCode.get('value')}</div>
             </div>
           </fieldset>
 
