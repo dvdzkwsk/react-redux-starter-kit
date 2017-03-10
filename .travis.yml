@@ -1,19 +1,11 @@
 sudo: false
 language: node_js
 node_js:
-  - "7"
+  - "6"
 
-# addons:
-#   apt:
-#     sources:
-#     - ubuntu-toolchain-r-test
-    # packages:
-    # - build-essential
-#     - gcc-6
-
-# cache:
-#   directories:
-#     # - node_modules
+cache:
+  directories:
+    - node_modules
 
 install:
   - npm install -g yarn
