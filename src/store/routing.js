@@ -18,7 +18,7 @@ export const updateLocation = ({ dispatch }) => {
   return (nextLocation) => dispatch(locationChange(nextLocation))
 }
 
-const initialState = Immutable.Map({
+const initialState = Immutable.fromJS({
   locationBeforeTransitions: null
 });
 

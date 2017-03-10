@@ -18,7 +18,9 @@ export class Navbar extends React.Component {
     return (
       <nav>
         <div className='brand'>
-          <IndexLink to='/'>Seekster</IndexLink>
+          <IndexLink to='/'>
+            <img src="https://beta.seekster.co/assets/seekster_logo-f983f395de7fa5bde6c7536fcac604b926e774c0ce8b7f0bdddf46bce73f0841.png" />
+          </IndexLink>
         </div>
         <ul className='menu-items'>
           {

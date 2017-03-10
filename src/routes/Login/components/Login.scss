@@ -1,0 +1,45 @@
+$brand-primary: #2d95f4;
+
+.panel {
+  padding: 15px;
+}
+.panel-login {
+  max-width: 428px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid $brand-primary;
+  border-radius: 4px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  .panel-header {
+    background-color: $brand-primary;
+    color: white;
+    padding: 15px;
+    .panel-title {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+  }
+
+  .panel-body {
+    text-align: center;
+    padding: 15px;
+    form {
+      margin: 0;
+    }
+    input {
+      width: 100%;
+      &[type=submit] {
+        margin-bottom: 0;
+        background-color: #fff;
+        border-color: #ccc;
+        &:hover {
+          background-color: #e6e6e6;
+          border-color: #adadad;
+        }
+      }
+    }
+  }
+}

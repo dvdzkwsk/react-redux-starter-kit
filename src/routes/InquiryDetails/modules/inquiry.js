@@ -1,34 +1,33 @@
 import Immutable from 'immutable'
 
 import { get } from 'utils/request'
-import { normalize, updateEntities, categorySchema } from 'store/entities'
+import { updateEntities } from 'store/entities'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const ALL_SERVICES = 'ALL_SERVICES'
+export const UPDATE_INQUIRY = 'UPDATE_INQUIRY'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateAllServices (inquiries) {
+export function updateInquiry (inquiry) {
   return {
-    type    : ALL_SERVICES,
-    payload : inquiries
+    type    : UPDATE_INQUIRY,
+    payload : inquiry
   }
 }
 
-export const getAllServices = () => {
+export const getInquiry = (id) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      get('/categories')
+      dispatch(updateInquiry(id))
+
+      get('/inquiries/' + id, {
+        accessToken: getState().get('authentication').get('accessToken')
+      })
       .then(function (response) {
-        var normalizedCategories = normalize(response, [categorySchema])
-
-        console.log(normalizedCategories)
-
-        dispatch(updateEntities(normalizedCategories.entities))
-        dispatch(updateAllServices(normalizedCategories.result))
+        // dispatch(addToInquiries(response))
         resolve()
       })
       .catch(function (error) {
@@ -40,16 +39,16 @@ export const getAllServices = () => {
 }
 
 export const actions = {
-  getAllServices
+  updateInquiry
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ALL_SERVICES]: (state, { payload }) => {
+  [UPDATE_INQUIRY]: (state, { payload }) => {
     return state.merge({
-      allServices: payload
+      inquiry: payload
     })
   }
 }
@@ -57,11 +56,11 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = Immutable.Map({
-  allServices: []
+const initialState = Immutable.fromJS({
+  inquiry: null
 })
 
-export default function allServicesReducer (state = initialState, action) {
+export default function inquiryReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

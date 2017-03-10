@@ -1,7 +1,7 @@
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
-  path : '/inquiries/new',
+  path : 'inquiries/:id',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -9,16 +9,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const InquiryForm = require('./containers/InquiryFormContainer').default
-      const reducer = require('./modules/inquiryForm').default
+      const InquiryDetails = require('./containers/InquiryDetailsContainer').default
+      const reducer = require('./modules/inquiry').default
 
       /*  Add the reducer to the store on key 'inquiryForm'  */
-      injectReducer(store, { key: 'inquiryForm', reducer })
+      injectReducer(store, { key: 'inquiry', reducer })
 
       /*  Return getComponent   */
-      cb(null, InquiryForm)
+      cb(null, InquiryDetails)
 
-    /* Webpack named bundle   */
-  }, 'inquiryForm')
+      /* Webpack named bundle   */
+    }, 'inquiry')
   }
 })
