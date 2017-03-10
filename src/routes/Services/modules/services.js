@@ -10,7 +10,7 @@ export const ALL_SERVICES = 'ALL_SERVICES'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateActiveInquiries (inquiries) {
+export function updateAllServices (inquiries) {
   return {
     type    : ALL_SERVICES,
     payload : inquiries
@@ -23,7 +23,7 @@ export const getAllServices = () => {
       get('/categories')
       .then(function (response) {
         console.log(response)
-        dispatch(updateActiveInquiries(response))
+        dispatch(updateAllServices(response))
         resolve()
       })
       .catch(function (error) {
@@ -56,7 +56,7 @@ const initialState = Immutable.Map({
   allServices: []
 })
 
-export default function counterReducer (state = initialState, action) {
+export default function allServicesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

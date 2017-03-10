@@ -5,7 +5,7 @@ import { get } from 'utils/request'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const NEW_INQUIRY_FORM = 'NEW_INQUIRY_FORM'
+export const UPDATE_SERVICE = 'UPDATE_SERVICE'
 export const CHECK_PROMO_CODE = 'CHECK_PROMO_CODE'
 
 // ------------------------------------
@@ -13,12 +13,12 @@ export const CHECK_PROMO_CODE = 'CHECK_PROMO_CODE'
 // ------------------------------------
 export function updateService (inquiryForm) {
   return {
-    type    : NEW_INQUIRY_FORM,
+    type    : UPDATE_SERVICE,
     payload : inquiryForm
   }
 }
 
-export function checkPromoCode (checkPromo) {
+export function updatePromoCode (checkPromo) {
   return {
     type    : CHECK_PROMO_CODE,
     payload : checkPromo
@@ -28,7 +28,7 @@ export function checkPromoCode (checkPromo) {
 export const getService = () => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      get('/services/3')
+      get('/services')
       .then(function (response) {
         console.log(response)
         dispatch(updateService(response))
@@ -48,7 +48,7 @@ export const getPromoCode = (code) => {
       get('/promo_codes/' + code)
       .then(function (response) {
         console.log(response)
-        dispatch(checkPromoCode(response))
+        dispatch(updatePromoCode(response))
         resolve()
       })
       .catch(function (error) {
@@ -68,9 +68,9 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [NEW_INQUIRY_FORM]: (state, { payload }) => {
+  [UPDATE_SERVICE]: (state, { payload }) => {
     return state.merge({
-      callService: payload
+      service: payload
     })
   },
   [CHECK_PROMO_CODE]: (state, { payload }) => {
@@ -84,11 +84,11 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.fromJS({
-  callService: {},
+  service: {},
   promoCode: {}
 })
 
-export default function counterReducer (state = initialState, action) {
+export default function inquiryFormReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

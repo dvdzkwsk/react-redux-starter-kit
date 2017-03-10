@@ -1,0 +1,116 @@
+$brand-primary: #2d95f4;
+
+.services-nav {
+  position: relative;
+  background-image: url(https://beta.seekster.co/assets/landing_page/hero/maid-591fe45ae6e24f970e55d265d07830f8ce9bd390f7f497bc6bcfbd401baec49b.jpg);
+  background-position: center;
+  padding: 0 30px;
+  color: white;
+
+  .services-nav-group {
+    display: inline-block;
+
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .services-nav-left {
+    width: 25%;
+    .title {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-family: inherit;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+  }
+
+  .services-nav-center {
+    text-align: center;
+    width: 49%;
+    .navigation {
+      padding: 0;
+      margin: 0;
+      li {
+        padding: 8px 10px;
+        padding-top: 15px;
+        margin: 0;
+        &.active {
+          padding-left: 0;
+        }
+        &.inactive {
+          padding-right: 0;
+        }
+        a:hover {
+          text-decoration: none;
+          font-weight: bold;
+          padding-bottom: 9px;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .services-nav-right {
+    text-align: right;
+    width: 25%;
+    .actions {
+      margin: 0;
+      padding: 0;
+      a {
+        border: 1px solid white;
+        border-bottom: none;
+        padding: 12px;
+        &:hover {
+          background-color: $brand-primary;
+          padding-top: 15px;
+          font-weight: normal;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.services-material-panel {
+  padding: 15px;
+  .header {
+    .title {
+      margin-bottom: 1.3rem;
+      padding: 0;
+      color: $brand-primary;
+    }
+  }
+
+  .body {
+    border-bottom: 2px solid $brand-primary;
+    padding-bottom: 1.8rem;
+    .details {
+      padding: 0 10px;
+      margin: 0;
+      li {
+        list-style: none;
+        line-height: 1.1;
+        .icon {
+          max-width: 20px;
+          width: 100%;
+          margin-right: 10px;
+        }
+        a:hover {
+          color: $brand-primary;
+          text-decoration: none;
+          font-weight: bold;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}

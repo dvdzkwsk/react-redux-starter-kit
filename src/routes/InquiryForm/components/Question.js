@@ -1,7 +1,6 @@
 import React from 'react'
 import Moment from 'moment'
 import { Link } from 'react-router'
-// import './Questions.scss'
 
 export const Question = (props) => {
   var input
@@ -19,20 +18,24 @@ export const Question = (props) => {
     case 'radio':
       input = props.question.get('choices').map((choice, index) => {
         return (
-          <label key={index}>
-            <input type='radio' value={choice.get('id')} />
-            {choice.get('value')}
-          </label>
+          <span className="radio" key={index}>
+            <label>
+              <input type='radio' value={choice.get('id')} />
+              {choice.get('value')}
+            </label>
+          </span>
         )
       })
       break;
     case 'checkboxes':
       input = props.question.get('choices').map((choice, index) => {
         return (
-          <label key={index}>
-            <input type='checkbox' value={choice.get('id')} />
-            {choice.get('value')}
-          </label>
+          <span className="checkboxes" key={index}>
+            <label>
+              <input type='checkbox' value={choice.get('id')} />
+              {choice.get('value')}
+            </label>
+          </span>
         )
       })
       break;
@@ -54,7 +57,7 @@ export const Question = (props) => {
   }
 
   return (
-    <div>
+    <div className="form question">
       <label>{props.question.get('name')}</label>
       {input}
     </div>

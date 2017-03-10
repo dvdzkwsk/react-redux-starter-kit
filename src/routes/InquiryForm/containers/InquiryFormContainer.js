@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash'
 import { getService, getPromoCode } from '../modules/inquiryForm'
 
 const mapStateToProps = (state) => ({
-  callService: state.get('inquiryForm').get('callService'),
+  service: state.get('inquiryForm').get('service'),
   promoCode: state.get('inquiryForm').get('promoCode')
 })
 
