@@ -1,9 +1,8 @@
 import Immutable from 'immutable';
 import { normalize, denormalize } from 'normalizr'
-import { inquirySchema } from './schemas'
 
-export { normalize, denormalize }
-export { inquirySchema } from './schemas'
+export { normalize, denormalize } from 'normalizr'
+export { inquirySchema, serviceSchema, categorySchema } from './schemas'
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES'
 

@@ -1,6 +1,10 @@
 import { schema } from 'normalizr'
 
-export const categorySchema  = new schema.Entity('categories');
+export const categorySchema  = new schema.Entity('categories', {
+  service: serviceSchema
+}, {
+  idAttribute: 'slug'
+});
 
 export const serviceSchema   = new schema.Entity('services', {
   category: categorySchema

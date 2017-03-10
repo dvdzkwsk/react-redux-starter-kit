@@ -6,6 +6,7 @@ import DashboardRoute from './Dashboard'
 import InquiryDetailsRoute from './InquiryDetails'
 import ServicesRoute from './Services'
 import NotFoundPage from '../components/NotFoundPage'
+import InquiryFormRoute from './InquiryForm'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -17,8 +18,9 @@ export const createRoutes = (store) => ({
   childRoutes : [
     LoginRoute(store),
     DashboardRoute(store),
-    InquiryDetailsRoute(store),
     ServicesRoute(store),
+    InquiryFormRoute(store),
+    InquiryDetailsRoute(store),
     { path: '*', component: NotFoundPage }
   ]
 })

@@ -20,11 +20,11 @@ export const InquiryCard = (props) => (
         </li>
         <li>
           <i className="fa fa-clock-o fa-fw" title="Booking Time"></i>
-          {props.inquiry.get('booking_time')}
+          {Moment(props.inquiry.get('booking_datetime')).format('h:mm a')}
         </li>
         <li>
           <i className="fa fa-calendar-o fa-fw" title="Booking Date"></i>
-          {Moment(props.inquiry.get('booking_date')).format('Do MMMM YYYY')}
+          {Moment(props.inquiry.get('booking_datetime')).format('Do MMMM YYYY')}
         </li>
         <li>
           <i className="fa fa-map-marker fa-fw" title="Address"></i>

@@ -5,30 +5,50 @@ import { get } from 'utils/request'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const NEW_INQUIRY_FORM = 'NEW_INQUIRY_FORM'
+export const UPDATE_SERVICE = 'UPDATE_SERVICE'
+export const CHECK_PROMO_CODE = 'CHECK_PROMO_CODE'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateActiveInquiries (inquiryForm) {
+export function updateService (inquiryForm) {
   return {
-    type    : NEW_INQUIRY_FORM,
+    type    : UPDATE_SERVICE,
     payload : inquiryForm
   }
 }
 
-export const newInquiryForm = (email, password) => {
+export function updatePromoCode (checkPromo) {
+  return {
+    type    : CHECK_PROMO_CODE,
+    payload : checkPromo
+  }
+}
+
+export const getService = (slug) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      get('/inquiryForm', {
-        query: {
-          active: true
-        },
-        accessToken: getState().get('login').get('accessToken')
-      })
+      get('/services/' + slug)
       .then(function (response) {
         console.log(response)
-        dispatch(updateActiveInquiries(response))
+        dispatch(updateService(response))
+        resolve()
+      })
+      .catch(function (error) {
+        console.warn(error)
+        resolve()
+      })
+    })
+  }
+}
+
+export const getPromoCode = (code) => {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
+      get('/promo_codes/' + code)
+      .then(function (response) {
+        console.log(response)
+        dispatch(updatePromoCode(response))
         resolve()
       })
       .catch(function (error) {
@@ -40,16 +60,22 @@ export const newInquiryForm = (email, password) => {
 }
 
 export const actions = {
-  newInquiryForm
+  getService,
+  getPromoCode
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [NEW_INQUIRY_FORM]: (state, { payload }) => {
+  [UPDATE_SERVICE]: (state, { payload }) => {
     return state.merge({
-      activeInquiries: payload
+      service: payload
+    })
+  },
+  [CHECK_PROMO_CODE]: (state, { payload }) => {
+    return state.merge({
+      promoCode: payload
     })
   }
 }
@@ -57,11 +83,12 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = Immutable.Map({
-  activeInquiries: []
+const initialState = Immutable.fromJS({
+  service: {},
+  promoCode: {}
 })
 
-export default function counterReducer (state = initialState, action) {
+export default function inquiryFormReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
