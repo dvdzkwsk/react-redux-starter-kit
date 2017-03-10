@@ -115,7 +115,6 @@
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "babel-plugin-istanbul": "^4.0.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "chai": "^3.4.1",
     "chai-as-promised": "^6.0.0",
     "chai-enzyme": "^0.6.1",

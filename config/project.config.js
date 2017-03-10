@@ -32,7 +32,7 @@ const config = {
   // ----------------------------------
   compiler_babel : {
     cacheDirectory : true,
-    plugins        : ['transform-runtime', 'transform-object-rest-spread'],
+    plugins        : ['transform-runtime'],
     presets        : ['es2015', 'react', 'stage-0']
   },
   compiler_devtool         : 'source-map',
