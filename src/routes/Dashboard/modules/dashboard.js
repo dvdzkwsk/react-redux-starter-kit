@@ -1,7 +1,7 @@
 import Immutable from 'immutable'
 
 import { get } from 'utils/request'
-import { addToInquiries } from 'store/resources'
+import { normalize, updateEntities, inquirySchema } from 'store/entities'
 
 // ------------------------------------
 // Constants
@@ -18,7 +18,7 @@ export function updateActiveInquiries (inquiries) {
   }
 }
 
-export const getActiveInquiries = (email, password) => {
+export const getActiveInquiries = () => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       get('/inquiries', {
@@ -28,11 +28,12 @@ export const getActiveInquiries = (email, password) => {
         accessToken: getState().get('authentication').get('accessToken')
       })
       .then(function (response) {
-        console.log(response)
-        response.forEach(inquiry => {
-          dispatch(addToInquiries(inquiry))
-        })
-        dispatch(updateActiveInquiries(response.map(inquiry => inquiry.order_number)))
+        var normalizedInquiries = normalize(response, [inquirySchema])
+
+        console.log(normalizedInquiries)
+
+        dispatch(updateEntities(normalizedInquiries.entities))
+        dispatch(updateActiveInquiries(normalizedInquiries.result))
         resolve()
       })
       .catch(function (error) {
@@ -61,7 +62,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = Immutable.Map({
+const initialState = Immutable.fromJS({
   activeInquiries: []
 })
 

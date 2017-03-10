@@ -1,0 +1,45 @@
+import Immutable from 'immutable';
+import { normalize, denormalize } from 'normalizr'
+import { inquirySchema } from './schemas'
+
+export { normalize, denormalize }
+export { inquirySchema } from './schemas'
+
+export const UPDATE_ENTITIES = 'UPDATE_ENTITIES'
+
+// ------------------------------------
+// Actions
+// ------------------------------------
+export function updateEntities (entities) {
+  return {
+    type    : UPDATE_ENTITIES,
+    payload : entities
+  }
+}
+
+export const actions = {
+  updateEntities
+}
+
+// ------------------------------------
+// Action Handlers
+// ------------------------------------
+const ACTION_HANDLERS = {
+  [UPDATE_ENTITIES]: (state, { payload }) => {
+    return state.merge(payload)
+  }
+}
+
+// ------------------------------------
+// Reducer
+// ------------------------------------
+const initialState = Immutable.fromJS({
+  inquiries: {},
+  services: {}
+})
+
+export default function entitiesReducer (state = initialState, action) {
+  const handler = ACTION_HANDLERS[action.type]
+
+  return handler ? handler(state, action) : state
+}

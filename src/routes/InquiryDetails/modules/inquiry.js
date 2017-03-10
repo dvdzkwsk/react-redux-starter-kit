@@ -1,7 +1,7 @@
 import Immutable from 'immutable'
 
 import { get } from 'utils/request'
-import { addToInquiries } from 'store/resources'
+import { updateEntities } from 'store/entities'
 
 // ------------------------------------
 // Constants
@@ -27,7 +27,7 @@ export const getInquiry = (id) => {
         accessToken: getState().get('authentication').get('accessToken')
       })
       .then(function (response) {
-        dispatch(addToInquiries(response))
+        // dispatch(addToInquiries(response))
         resolve()
       })
       .catch(function (error) {
@@ -56,8 +56,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = Immutable.Map({
-  inquiry: {}
+const initialState = Immutable.fromJS({
+  inquiry: null
 })
 
 export default function inquiryReducer (state = initialState, action) {
