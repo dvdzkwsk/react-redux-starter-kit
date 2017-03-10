@@ -1,13 +1,13 @@
 sudo: false
 language: node_js
 node_js:
-  - "6"
+  - "7"
 
-addons:
+# addons:
 #   apt:
 #     sources:
 #     - ubuntu-toolchain-r-test
-    packages:
+    # packages:
     # - build-essential
 #     - gcc-6
 
