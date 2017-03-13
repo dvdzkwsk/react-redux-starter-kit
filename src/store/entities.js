@@ -25,7 +25,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [UPDATE_ENTITIES]: (state, { payload }) => {
-    return state.merge(payload)
+    return state.mergeDeep(payload)
   }
 }
 

@@ -6,19 +6,19 @@ import { normalize, updateEntities, categorySchema } from 'store/entities'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const ALL_SERVICES = 'ALL_SERVICES'
+export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateAllServices (inquiries) {
+export function updateCategories (categories) {
   return {
-    type    : ALL_SERVICES,
-    payload : inquiries
+    type    : UPDATE_CATEGORIES,
+    payload : categories
   }
 }
 
-export const getAllServices = () => {
+export const getCategories = () => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       get('/categories')
@@ -28,7 +28,7 @@ export const getAllServices = () => {
         console.log(normalizedCategories)
 
         dispatch(updateEntities(normalizedCategories.entities))
-        dispatch(updateAllServices(normalizedCategories.result))
+        dispatch(updateCategories(normalizedCategories.result))
         resolve()
       })
       .catch(function (error) {
@@ -40,16 +40,16 @@ export const getAllServices = () => {
 }
 
 export const actions = {
-  getAllServices
+  updateCategories
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ALL_SERVICES]: (state, { payload }) => {
+  [UPDATE_CATEGORIES]: (state, { payload }) => {
     return state.merge({
-      allServices: payload
+      categories: payload
     })
   }
 }
@@ -57,11 +57,11 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = Immutable.Map({
-  allServices: []
+const initialState = Immutable.fromJS({
+  categories: []
 })
 
-export default function allServicesReducer (state = initialState, action) {
+export default function servicesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

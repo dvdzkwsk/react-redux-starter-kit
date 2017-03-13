@@ -1,10 +1,10 @@
 import Immutable from 'immutable'
 import React from 'react'
 import { Link } from 'react-router'
-import ServicesList from './ServicesList'
+import Category from './Category'
 import './Services.scss'
 
-export class Services extends React.Component {
+export class Categories extends React.Component {
   componentDidMount() {
     this.props.onComponentDidMount && this.props.onComponentDidMount()
   }
@@ -25,10 +25,11 @@ export class Services extends React.Component {
             </ul>
           </div>
         </div>
+
         <div>
           {
-            this.props.allServices.map(function (item, index) {
-              return <ServicesList key={index} category={item}/>
+            this.props.categories.map(function (category, index) {
+              return category && <Category key={index} category={category} />
             })
           }
         </div>
@@ -37,8 +38,8 @@ export class Services extends React.Component {
   }
 }
 
-Services.defaultProps = {
-  allServices: Immutable.List()
+Categories.defaultProps = {
+  categories: Immutable.List()
 }
 
-export default Services
+export default Categories

@@ -1,6 +1,7 @@
 import Immutable from 'immutable'
 
 import { get } from 'utils/request'
+import { normalize, updateEntities, serviceSchema } from 'store/entities'
 
 // ------------------------------------
 // Constants
@@ -11,10 +12,10 @@ export const CHECK_PROMO_CODE = 'CHECK_PROMO_CODE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateService (inquiryForm) {
+export function updateService (service) {
   return {
     type    : UPDATE_SERVICE,
-    payload : inquiryForm
+    payload : service
   }
 }
 
@@ -28,10 +29,16 @@ export function updatePromoCode (checkPromo) {
 export const getService = (slug) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
+      dispatch(updateService(slug))
+
       get('/services/' + slug)
       .then(function (response) {
-        console.log(response)
-        dispatch(updateService(response))
+        var normalizedService = normalize(response, serviceSchema)
+
+        console.log(normalizedService)
+
+        dispatch(updateEntities(normalizedService.entities))
+        dispatch(updateService(normalizedService.result))
         resolve()
       })
       .catch(function (error) {

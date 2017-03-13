@@ -1,19 +1,19 @@
 import { connect } from 'react-redux'
-import Services from '../components/Services'
-import { isEmpty } from 'lodash'
-import { getAllServices } from '../modules/services'
+import { getCategories } from '../modules/services'
 import { denormalize, categorySchema } from 'store/entities'
 
+import Categories from '../components/Categories'
+
 const mapStateToProps = (state) => ({
-  allServices: denormalize(
-    state.get('services').get('allServices'),
+  categories: denormalize(
+    state.get('services').get('categories'),
     [categorySchema],
     state.get('entities')
   )
 })
 
 const mapDispatchToProps = {
-  onComponentDidMount: getAllServices
+  onComponentDidMount: getCategories
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Services)
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)
