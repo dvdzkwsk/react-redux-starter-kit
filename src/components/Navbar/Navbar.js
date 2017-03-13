@@ -3,11 +3,6 @@ import { IndexLink, Link } from 'react-router'
 import './Navbar.scss'
 
 export class Navbar extends React.Component {
-  logout (e) {
-    e.preventDefault()
-    this.props.logout(e)
-  }
-
   render () {
     var menuItems = [
       this.props.isLoggedIn && <Link to='/dashboard'>Dashboard</Link>,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
-import { updateAccessToken } from 'store/authentication'
+import { logout } from 'store/authentication'
 
 import Navbar from '../../components/Navbar'
 
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   logout: (e) => {
     e.preventDefault()
-    return updateAccessToken(null)
+    return logout()
   }
 }
 

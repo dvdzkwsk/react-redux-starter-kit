@@ -2,7 +2,7 @@ import Immutable from 'immutable'
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import makeRootReducer from './reducers'
 import { persistStore, autoRehydrate } from 'redux-persist-immutable'
 
@@ -10,7 +10,7 @@ export default (initialState = Immutable.Map()) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
+  const middleware = [thunk, routerMiddleware(browserHistory)]
 
   // ======================================================
   // Store Enhancers
@@ -40,7 +40,7 @@ export default (initialState = Immutable.Map()) => {
   )
   store.asyncReducers = {}
 
-  store.history = syncHistoryWithStore(browserHistory, store, {
+  syncHistoryWithStore(browserHistory, store, {
     selectLocationState (state) {
       return state.get('routing').toJS();
     }

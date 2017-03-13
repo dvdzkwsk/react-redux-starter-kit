@@ -1,5 +1,6 @@
 import Immutable from 'immutable'
-import { post } from 'utils/request'
+import { request, post } from 'utils/request'
+import { push } from 'react-router-redux'
 
 // ------------------------------------
 // Constants
@@ -38,8 +39,35 @@ export const login = (email, password) => {
       })
       .then(function (response) {
         console.log(response)
+
         dispatch(updateCurrentUser(response.user))
         dispatch(updateAccessToken(response.access_token))
+
+        dispatch(push('/dashboard'))
+
+        resolve()
+      })
+    })
+  }
+}
+
+export const logout = () => {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
+      request('DELETE', '/users/sessions', {
+        body: {
+          client_type: 'web'
+        },
+        accessToken: getState().get('authentication').get('accessToken')
+      })
+      .then(function (response) {
+        console.log(response)
+
+        dispatch(updateCurrentUser(null))
+        dispatch(updateAccessToken(null))
+
+        dispatch(push('/login'))
+
         resolve()
       })
     })

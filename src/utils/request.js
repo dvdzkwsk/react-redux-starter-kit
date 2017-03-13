@@ -48,3 +48,7 @@ export function get (path, options) {
 export function post (path, options) {
   return request('POST', path, options)
 }
+
+export function put (path, options) {
+  return request('PUT', path, options)
+}
