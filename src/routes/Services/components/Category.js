@@ -7,16 +7,16 @@ export class Category extends React.Component {
     const { category } = this.props
 
     return (
-      <div className="services-material-panel">
-        <div className="header">
-          <h3 className="title">{category.get('name')}</h3>
+      <div className="services">
+        <div className="services-header">
+          <h3 className="services-title">{category.get('name')}</h3>
         </div>
-        <div className="body">
-          <ul className="details">
+        <div className="services-body">
+          <ul className="services-details">
             { category.get('services', Immutable.List()).map(function (service, index) {
               return (
                 <li key={index}>
-                  <img className="icon" src={service.get('icon')} />
+                  <img className="services-icon" src={service.get('icon')} />
                   <Link to={`/inquiries/new?service=${service.get('slug')}`}>{service.get('name')}</Link>
                 </li>
               )

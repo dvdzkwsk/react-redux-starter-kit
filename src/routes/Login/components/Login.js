@@ -1,5 +1,5 @@
 import React from 'react'
-import './Login.scss'
+import login from './Login.scss'
 
 export class Login extends React.Component {
   submit (e) {
@@ -10,26 +10,24 @@ export class Login extends React.Component {
 
   render () {
     return (
-      <div className="panel">
-        <div className="panel-login">
-          <div className="panel-header">
-            <h3 className="panel-title">Log In</h3>
-          </div>
-          <div className="panel-body">
-            <form onSubmit={(e) => this.submit(e)}>
-              <div className='form-group'>
-                <input type='text' name='email' ref='email' placeholder="Username / Email" />
-              </div>
+      <div className="panel panel-login">
+        <div className="panel-header">
+          <h3 className="panel-title">Log In</h3>
+        </div>
+        <div className="panel-body">
+          <form onSubmit={(e) => this.submit(e)}>
+            <div className='form-group'>
+              <input type='text' name='email' ref='email' placeholder="Username / Email" />
+            </div>
 
-              <div className='form-group'>
-                <input type='password' name='password' ref='password' placeholder="Password" />
-              </div>
+            <div className='form-group'>
+              <input type='password' name='password' ref='password' placeholder="Password" />
+            </div>
 
-              <div className='form-group'>
-                <input type='submit' value='Submit' />
-              </div>
-            </form>
-          </div>
+            <div className='form-group'>
+              <input type='submit' value='Submit' />
+            </div>
+          </form>
         </div>
       </div>
     )

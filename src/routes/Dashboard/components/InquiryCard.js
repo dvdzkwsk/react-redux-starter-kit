@@ -4,15 +4,16 @@ import { Link } from 'react-router'
 import './InquiryCard.scss'
 
 export const InquiryCard = (props) => (
-  <div className="material-panel" style={props.styles}>
-    <div className="header">
+  <div className="panel panel-inquiryCard" style={props.styles}>
+    <div className="panel-header inquiryCard-header">
       <Link to={`/inquiries/${props.inquiry.get('order_number')}`}>
-        <h3 className="title">{props.inquiry.get('order_number')}</h3>
+        <h3 className="panel-title title">{props.inquiry.get('order_number')}</h3>
         <h4 className="subtitle">{props.inquiry.get('service').get('name')}</h4>
         <span className="label">{props.inquiry.get('state')}</span>
       </Link>
     </div>
-    <div className="body">
+
+    <div className="panel-body inquiryCard-body">
       <ul className="details">
         <li>
           <i className="fa fa-info fa-fw" title="Order Number"></i>
@@ -39,8 +40,9 @@ export const InquiryCard = (props) => (
         <p>{props.inquiry.get('state')}</p>
       </div>
     </div>
-    <div className="actions">
-      <Link className="btn" to={`/inquiries/${props.inquiry.get('order_number')}`}>View Details</Link>
+    
+    <div className="panel-footer inquiryCard-actions">
+      <Link className="panel-btn" to={`/inquiries/${props.inquiry.get('order_number')}`}>View Details</Link>
     </div>
   </div>
 )

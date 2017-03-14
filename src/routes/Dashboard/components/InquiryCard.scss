@@ -1,12 +1,6 @@
 $brand-primary: #2d95f4;
 
-.material-panel {
-  position: relative;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-  border-radius: 4px;
-  vertical-align: top;
-  background: white;
-  margin-bottom: 30px;
+.panel-inquiryCard {
   display: inline-block;
   width: 345px;
 
@@ -15,23 +9,13 @@ $brand-primary: #2d95f4;
   }
 }
 
-.header {
-  position: relative;
-  padding: 10px 15px;
+.inquiryCard-header {
   border-bottom: 2px solid $brand-primary;
   color: #333;
 
-  a:hover {
-      color: $brand-primary;
-      text-decoration: none;
-  }
-
   .title {
     font-weight: bold;
-    font-size: 1.25em;
-    font-family: inherit;
     line-height: 1.1;
-    margin-bottom: 0;
   }
 
   .subtitle {
@@ -57,10 +41,7 @@ $brand-primary: #2d95f4;
   }
 }
 
-.body {
-  padding: 0 15px;
-  padding-top: 10px;
-
+.inquiryCard-body {
   .details {
     list-style: none;
     padding: 5px 0;
@@ -106,25 +87,7 @@ $brand-primary: #2d95f4;
   }
 }
 
-.actions {
-  position: relative;
-  padding: 10px;
+.inquiryCard-actions {
   border-top: 1px solid #ccc;
   min-height: 41px;
-
-  .btn {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    display: block;
-    text-align: center;
-
-    &:hover {
-      background-color: #e6e6e6;
-      border-color: #adadad;
-      text-decoration: none;
-    }
-  }
 }

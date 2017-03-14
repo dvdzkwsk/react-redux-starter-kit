@@ -6,6 +6,7 @@ $brand-primary: #2d95f4;
   background-position: center;
   padding: 0 30px;
   color: white;
+  height: 57px;
 
   .services-nav-group {
     display: inline-block;
@@ -23,7 +24,7 @@ $brand-primary: #2d95f4;
 
   .services-nav-left {
     width: 25%;
-    .title {
+    .services-nav-title {
       margin-top: 20px;
       margin-bottom: 10px;
       font-size: 24px;
@@ -39,6 +40,7 @@ $brand-primary: #2d95f4;
     .navigation {
       padding: 0;
       margin: 0;
+      display: none;
       li {
         padding: 8px 10px;
         padding-top: 15px;
@@ -62,7 +64,7 @@ $brand-primary: #2d95f4;
   .services-nav-right {
     text-align: right;
     width: 25%;
-    .actions {
+    .services-nav-actions {
       margin: 0;
       padding: 0;
       a {
@@ -80,26 +82,26 @@ $brand-primary: #2d95f4;
   }
 }
 
-.services-material-panel {
+.services {
   padding: 15px;
-  .header {
-    .title {
+  .services-header {
+    .services-title {
       margin-bottom: 1.3rem;
       padding: 0;
       color: $brand-primary;
     }
   }
 
-  .body {
+  .services-body {
     border-bottom: 2px solid $brand-primary;
     padding-bottom: 1.8rem;
-    .details {
+    .services-details {
       padding: 0 10px;
       margin: 0;
       li {
         list-style: none;
         line-height: 1.1;
-        .icon {
+        .services-icon {
           max-width: 20px;
           width: 100%;
           margin-right: 10px;

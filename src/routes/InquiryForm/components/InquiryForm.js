@@ -1,15 +1,18 @@
 import Immutable from 'immutable'
 import React, { PropTypes } from 'react'
-import Question from './Question'
 import { debounce } from 'lodash'
 import $ from 'jquery'
 import 'pickadate/lib/picker.date'
 import 'pickadate/lib/picker.time'
 import { findDOMNode } from 'react-dom'
 import './InquiryForm.scss'
+import { isEmpty } from 'lodash'
+import PackageFieldSet from './PackagesFieldSet'
+import QuestionsFieldSet from './QuestionsFieldSet'
 
 export class InquiryForm extends React.Component {
   componentDidMount () {
+    console.log(this.props)
     this.props.onComponentDidMount && this.props.onComponentDidMount(this.props.location.query.service)
 
     var datePicker = $(this.refs.datepicker).pickadate({
@@ -30,94 +33,74 @@ export class InquiryForm extends React.Component {
   }, 500)
 
   render () {
+    const { service } = this.props
+
     return (
-      <div className="panel">
-        <div className="inquiry-form">
-          <form>
-            <fieldset className='form-group'>
-              <legend>Packages</legend>
-              <div className="form packages">
-                {
-                  this.props.service.get('packages', []).map(function (pkg, index) {
-                    return (
-                      <span key={index} className="radio">
-                        <label>
-                          <input type='radio' value={pkg.get('id')}/>
-                          {pkg.get('name')} - ฿{pkg.get('price_satangs') / 100}
-                        </label>
-                      </span>
-                    )
-                  })
-                }
-              </div>
-            </fieldset>
+      <div>
+        <div className="panel panel-inquiry-form">
+          <div className="panel-body inquiry-form">
+            <form>
+              <PackageFieldSet packages={service.get('packages', Immutable.List())} />
+              <QuestionsFieldSet questions={service.get('questions', Immutable.List())} />
 
-            <fieldset className='form-group'>
-              <legend>Questions</legend>
-              {
-                this.props.service.get('questions', []).map(function (question, index) {
-                  return <Question key={index} question={question} />
-                })
-              }
-            </fieldset>
-
-            <fieldset className='form-group'>
-              <legend>Date Time</legend>
-              <div className="form datetime">
-                <div className="date">
-                  <input ref="datepicker" type="text" placeholder="Date"
-                    onClick={this.componentDidMount.datepicker}/>
+              <fieldset className='form-group datetime'>
+                <legend>Date Time</legend>
+                <div className="form">
+                  <div className="date">
+                    <input ref="datepicker" type="text" placeholder="Date"
+                      onClick={this.componentDidMount.datepicker} />
+                  </div>
+                  <div className="time">
+                    <input ref="timepicker" type="text" placeholder="Time"
+                      onClick={this.componentDidMount.timepicker} />
+                  </div>
                 </div>
-                <div className="time">
-                  <input ref="timepicker" type="text" placeholder="Time"
-                    onClick={this.componentDidMount.timepicker}/>
-                </div>
-              </div>
-            </fieldset>
+              </fieldset>
 
-            <fieldset className='form-group'>
-              <legend>Address</legend>
-              <div className="form">
-              </div>
-            </fieldset>
-
-            <fieldset className='form-group'>
-              <legend>Additional Information</legend>
-              <div className="form additional">
-                <div className="note">
-                  <textarea placeholder="Notes and special requests"/>
+              <fieldset className='form-group address'>
+                <legend>Address</legend>
+                <div className="form">
                 </div>
-                <div className="promo-code">
-                  <input type="text" placeholder="Promo Code" ref="promoCodeInput" onChange={::this.handleChange} />
-                  <div className="promo-status">{this.props.promoCode.get('value')}</div>
-                </div>
-              </div>
-            </fieldset>
+              </fieldset>
 
-            <fieldset className='form-group'>
-              <legend>Attachments</legend>
-              <div className="form attachment">
-                <button className="btn">Add Attachment</button>
-              </div>
-            </fieldset>
-            <input type="submit" value="Create ใบสั่งงาน" id="submitButton" />
-          </form>
+              <fieldset className='form-group additional'>
+                <legend>Additional Information</legend>
+                <div className="form">
+                  <div className="note">
+                    <textarea placeholder="Notes and special requests"/>
+                  </div>
+                  <div className="promo-code">
+                    <input type="text" placeholder="Promo Code" ref="promoCodeInput" onChange={::this.handleChange} />
+                    <div className="promo-status">{this.props.promoCode.get('value')}</div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset className='form-group attachment'>
+                <legend>Attachments</legend>
+                <div className="form">
+                  <button className="btn">Add Attachment</button>
+                </div>
+              </fieldset>
+              <input className="inquiry-submit" type="submit" value="Create ใบสั่งงาน" id="submitButton" />
+            </form>
+          </div>
         </div>
 
-        <div className="terms-panel">
+        <div className="panel panel-terms">
           <div className="header">
             <h3 className="title">Terms and Conditions</h3>
           </div>
-          <div className="body">
+          <div className="panel-body">
             <div className="descriptions">
               <p>
                 - Transportation fees are included in the package.
-                <br />- Service include basic cleaning such as sweeping and mopping, however special request can be made to clean some specific point.
-                <br />- Ironing and Laundry service within the service period will be surcharged 100 Baht (maid needs a training)
-                <br />- Service available in Bangkok, Pathumtani, Samutprakan, Nonthaburi, Samutsakorn.
-                <br />- Any inconvenience or comments can be notify through Seekster so we can take actions upon service vendors (points deduct/banned/indemnify)
-                <br />- Seekster holds the rights to refuse service request if it is abusive and found to be threat to our vendors or obliged to the laws and ethic of Kingdom of Thailand.
-                <br />- Payments are not refundable.
+                <br/>- Service include basic cleaning such as sweeping and mopping, however special request can be made to clean some specific point.
+                <br/>- Ironing and Laundry service within the service period will be surcharged 100 Baht (maid needs a training)
+                <br/>- Service available in Bangkok, Pathumtani, Samutprakan, Nonthaburi, Samutsakorn.
+                <br/>- Any inconvenience or comments can be notify through Seekster so we can take actions upon service vendors (points deduct/banned/indemnify)
+                <br/>- Seekster holds the rights to refuse service request if it is abusive and found to be threat to our vendors or obliged to the laws and ethic of Kingdom of Thailand.
+                <br/>- Payments are not refundable.
               </p>
               <p>
                 Seekster have a strict procedure in sourcing a vendors and getting them on the system.
