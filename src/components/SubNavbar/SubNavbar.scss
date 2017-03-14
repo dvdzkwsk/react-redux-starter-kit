@@ -1,19 +1,20 @@
 $brand-primary: #2d95f4;
 
-.dashboard-nav {
+.sub-nav {
   position: relative;
   background-image: url(https://beta.seekster.co/assets/landing_page/hero/maid-591fe45ae6e24f970e55d265d07830f8ce9bd390f7f497bc6bcfbd401baec49b.jpg);
   background-position: center;
   padding: 0 30px;
   color: white;
+  height: 57px;
 }
 
-.dashboard-nav-group {
+.sub-nav-group {
   display: inline-block;
 
   ul {
     list-style: none;
-    
+
     li {
       display: inline-block;
       margin: 0;
@@ -22,7 +23,7 @@ $brand-primary: #2d95f4;
   }
 }
 
-.dashboard-nav-left {
+.sub-nav-left {
   width: 25%;
   .title {
     margin-top: 20px;
@@ -34,7 +35,7 @@ $brand-primary: #2d95f4;
   }
 }
 
-.dashboard-nav-center {
+.sub-nav-center {
   text-align: center;
   width: 49%;
   .navigation {
@@ -46,9 +47,11 @@ $brand-primary: #2d95f4;
       margin: 0;
       &.active {
         padding-left: 0;
-      }
-      &.inactive {
-        padding-right: 0;
+        a {
+          padding-bottom: 9px;
+          font-weight: bold;
+          border-bottom: 3px solid white;
+        }
       }
       a:hover {
         text-decoration: none;
@@ -60,10 +63,10 @@ $brand-primary: #2d95f4;
   }
 }
 
-.dashboard-nav-right {
+.sub-nav-right {
   text-align: right;
   width: 25%;
-  .dashboard-nav-actions {
+  .sub-nav-actions {
     margin: 0;
     padding: 0;
     a {

@@ -16,7 +16,7 @@ export const PackagesFieldSet = (props) => {
               return (
                 <span key={index} className="radio">
                   <label>
-                    <input type='radio' name="package" value={pkg.get('id')}/>
+                    <input type='radio' name="package_id" value={pkg.get('id')}/>
                     {pkg.get('name')} - ฿{pkg.get('price_satangs') / 100}
                   </label>
                 </span>

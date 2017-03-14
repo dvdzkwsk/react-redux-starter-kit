@@ -12,7 +12,6 @@ import QuestionsFieldSet from './QuestionsFieldSet'
 
 export class InquiryForm extends React.Component {
   componentDidMount () {
-    console.log(this.props)
     this.props.onComponentDidMount && this.props.onComponentDidMount(this.props.location.query.service)
 
     var datePicker = $(this.refs.datepicker).pickadate({
@@ -32,6 +31,13 @@ export class InquiryForm extends React.Component {
     this.props.validatePromoCode(this.refs.promoCodeInput.value)
   }, 500)
 
+  onSubmit (e) {
+    e.preventDefault()
+    console.log(this.refs.form)
+    console.log(this.refs.form['service_id'].value)
+    console.log(this.refs.form.elements)
+  }
+
   render () {
     const { service } = this.props
 
@@ -39,8 +45,11 @@ export class InquiryForm extends React.Component {
       <div>
         <div className="panel panel-inquiry-form">
           <div className="panel-body inquiry-form">
-            <form>
+            <form ref="form" onSubmit={::this.onSubmit}>
+              <input type="hidden" name="service_id" value={service.get('id')} />
+
               <PackageFieldSet packages={service.get('packages', Immutable.List())} />
+              
               <QuestionsFieldSet questions={service.get('questions', Immutable.List())} />
 
               <fieldset className='form-group datetime'>

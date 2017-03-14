@@ -18,20 +18,20 @@ export const QuestionsFieldSet = (props) => {
 
               switch (question.get('display_type')) {
                 case 'string':
-                  input = <input type='text' />
+                  input = <input type='text' name="answers_attributes[{index}][value]" />
                   break;
                 case 'textarea':
-                  input = <textarea />
+                  input = <textarea name="answers_attributes[{index}][value]" />
                   break;
                 case 'number':
-                  input = <input type='number' placeholder={question.get('placeholder')} />
+                  input = <input type='number' name="answers_attributes[{index}][value]" placeholder={question.get('placeholder')} />
                   break;
                 case 'radio':
                   input = question.get('choices').map((choice, index) => {
                     return (
                       <span className="radio" key={index}>
                         <label>
-                          <input type='radio' name={question.get('name')} value={choice.get('id')} />
+                          <input type='radio' name="answers_attributes[{index}][choice_id]" value={choice.get('id')} />
                           {choice.get('value')}
                         </label>
                       </span>
@@ -43,7 +43,7 @@ export const QuestionsFieldSet = (props) => {
                     return (
                       <span className="checkboxes" key={index}>
                         <label>
-                          <input type='checkbox' value={choice.get('id')} />
+                          <input type='checkbox' name="answers_attributes[{index}][choice_ids]" value={choice.get('id')} />
                           {choice.get('value')}
                         </label>
                       </span>
@@ -70,6 +70,7 @@ export const QuestionsFieldSet = (props) => {
               return (
                 <div key={index}>
                   <label>{question.get('name')}</label>
+                  <input type="hidden" name="answers_attributes[{index}][question_id]" value="{question.get('id')}" />
                   {input}
                 </div>
               )

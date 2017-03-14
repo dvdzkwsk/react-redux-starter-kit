@@ -6,34 +6,34 @@ import { normalize, updateEntities, inquirySchema } from 'store/entities'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const UPDATE_ACTIVE_INQUIRIES = 'UPDATE_ACTIVE_INQUIRIES'
+export const UPDATE_INACTIVE_INQUIRIES = 'UPDATE_INACTIVE_INQUIRIES'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateActiveInquiries (inquiries) {
+export function updateInactiveInquiries (inquiriesHistory) {
   return {
-    type    : UPDATE_ACTIVE_INQUIRIES,
-    payload : inquiries
+    type    : UPDATE_INACTIVE_INQUIRIES,
+    payload : inquiriesHistory
   }
 }
 
-export const getActiveInquiries = () => {
+export const getInactiveInquiries = () => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       get('/inquiries', {
         query: {
-          active: true
+          inactive: true
         },
         accessToken: getState().get('authentication').get('accessToken')
       })
       .then(function (response) {
-        var normalizedInquiries = normalize(response, [inquirySchema])
+        var normalizedInquiriesHistory = normalize(response, [inquirySchema])
 
-        console.log(normalizedInquiries)
+        console.log(normalizedInquiriesHistory)
 
-        dispatch(updateEntities(normalizedInquiries.entities))
-        dispatch(updateActiveInquiries(normalizedInquiries.result))
+        dispatch(updateEntities(normalizedInquiriesHistory.entities))
+        dispatch(updateInactiveInquiries(normalizedInquiriesHistory.result))
         resolve()
       })
       .catch(function (error) {
@@ -45,16 +45,16 @@ export const getActiveInquiries = () => {
 }
 
 export const actions = {
-  getActiveInquiries
+  getInactiveInquiries
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [UPDATE_ACTIVE_INQUIRIES]: (state, { payload }) => {
+  [UPDATE_INACTIVE_INQUIRIES]: (state, { payload }) => {
     return state.merge({
-      activeInquiries: payload
+      inactiveInquiries: payload
     })
   }
 }
@@ -63,10 +63,10 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.fromJS({
-  activeInquiries: []
+  inactiveInquiries: []
 })
 
-export default function activeInquiresReducer (state = initialState, action) {
+export default function inactiveInquiriesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

@@ -13,6 +13,10 @@ $brand-primary: #2d95f4;
   border-bottom: 2px solid $brand-primary;
   color: #333;
 
+  a:hover {
+    color: $brand-primary
+  }
+
   .title {
     font-weight: bold;
     line-height: 1.1;

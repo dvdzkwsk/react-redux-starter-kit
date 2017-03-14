@@ -1,7 +1,8 @@
 import Immutable from 'immutable'
 import React, { PropTypes } from 'react'
 import InquiryCard from './InquiryCard'
-import DashboardNav from './DashboardNav'
+import SubNavbar from 'components/SubNavbar'
+import { Link } from 'react-router'
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -11,7 +12,16 @@ export class Dashboard extends React.Component {
   render () {
     return (
       <div>
-        <DashboardNav />
+        <SubNavbar title="Dashboard">
+          <ul className="navigation">
+            <li className={this.props.location.pathname == '/dashboard' ? 'active' : ''}>
+              <Link to='/dashboard'>Active Requests</Link>
+            </li>
+            <li className={this.props.location.pathname == '/history' ? 'active' : ''}>
+              <Link to='/history'>Inactive Requests</Link>
+            </li>
+          </ul>
+        </SubNavbar>
         <div style={{padding: '10px'}}>
           {
             this.props.activeInquiries.map(function (item, index) {
