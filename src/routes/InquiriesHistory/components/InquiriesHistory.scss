@@ -1,7 +1,7 @@
 $brand-primary: #2d95f4;
 
 .panel-inactive {
-  max-width: 910px;
+  max-width: 1110px;
   width: 100%;
   margin-left: 50%;
   transform: translateX(-50%);
@@ -24,7 +24,7 @@ $brand-primary: #2d95f4;
     }
     td {
       font-size: 14px;
-      padding: 10px;
+      padding: 15px;
       a {
         color: $brand-primary;
       }
@@ -40,8 +40,13 @@ $brand-primary: #2d95f4;
         background-color: $brand-primary;
         border-color: #0775b4;
         border-radius: 4px;
-        padding: 5px 10px;
+        padding: 8px 10px;
         font-size: 12px;
+        &:hover {
+          text-decoration: none;
+          background-color: #098cd6;
+          border-color: #0775b4;
+        }
       }
     }
   }

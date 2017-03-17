@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import InquiryDetails from '../components/InquiryDetails'
-import { getInquiry } from '../modules/inquiry'
+import { getInquiry, cancelInquiry } from '../modules/inquiry'
 import { denormalize, inquirySchema } from 'store/entities'
 
 const mapStateToProps = (state) => ({
@@ -12,7 +12,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  getInquiry: getInquiry
+  getInquiry: getInquiry,
+  cancelInquiry: cancelInquiry
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InquiryDetails)

@@ -43,7 +43,7 @@ export class InquiriesHistory extends React.Component {
                     return (
                         <tr key={index}>
                             <td>
-                              <Link to=''>{item.get('order_number')}</Link>
+                              <Link to={`/inquiries/${item.get('order_number')}`}>{item.get('order_number')}</Link>
                             </td>
                             <td>{item.get('service').get('name')}</td>
                             <td>{item.get('package') ? item.get('package').get('name') : '-'}</td>

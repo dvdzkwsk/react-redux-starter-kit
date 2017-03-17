@@ -25,7 +25,7 @@ export class Dashboard extends React.Component {
         <div style={{padding: '10px'}}>
           {
             this.props.activeInquiries.map(function (item, index) {
-              return <InquiryCard key={index} inquiry={item} styles={{margin: '10px'}}/>
+              return <InquiryCard key={index} inquiry={item} />
             })
           }
         </div>

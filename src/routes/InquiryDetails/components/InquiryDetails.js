@@ -1,6 +1,10 @@
 import Immutable from 'immutable'
 import React, { PropTypes } from 'react'
-import InquiryCard from 'routes/Dashboard/components/InquiryCard'
+import { Link } from 'react-router'
+import Details from './Details'
+import SubNavbar from 'components/SubNavbar'
+import Quotations from './Quotations'
+import './InquiryDetails.scss'
 
 export class InquiryDetails extends React.Component {
   componentDidMount() {
@@ -11,7 +15,29 @@ export class InquiryDetails extends React.Component {
     if (this.props.inquiry) {
       return (
         <div>
-          <InquiryCard inquiry={this.props.inquiry} styles={{margin: '10px'}}/>
+          <SubNavbar title={this.props.params.id} />
+          <div style={{padding: '10px'}} className="bg">
+            <div className="panel-detail-left">
+              <Details inquiry={this.props.inquiry} />
+            </div>
+
+            <div className="panel-detail-right">
+              <div className="panel panel-detail">
+                <div className="panel-header detail-header">
+                  <h3 className="panel-title title">Current Status</h3>
+                </div>
+                <div className="panel-body">
+                  <div className="description">
+                    <div className="text">Sit back, relax and get ready for your booking day.</div>
+                  </div>
+                </div>
+              </div>
+
+              <Quotations provider={this.props.inquiry.get('accepted_quotation')}
+                quotations={this.props.inquiry.get('quotations')} />
+
+            </div>
+          </div>
         </div>
       )
     }

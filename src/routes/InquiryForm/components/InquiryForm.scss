@@ -24,6 +24,9 @@ $brand-primary: #2d95f4;
   .form {
     margin: 15px 0;
     padding: 0 15px;
+    .button {
+      width: auto;
+    }
   }
 
   .radio, .checkboxes {

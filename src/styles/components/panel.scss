@@ -1,10 +1,18 @@
+.bg {
+  width: 100%;
+  text-align: center;
+}
+
 .panel {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 4px;
   background: white;
-  margin-bottom: 30px;
   position: relative;
   font-weight: normal;
+  margin: 10px;
+  margin-bottom: 30px;
+  vertical-align: top;
+  text-align: left;
 
   .panel-header {
     padding: $vertical-padding $horizontal-padding;
@@ -42,6 +50,7 @@
   .panel-footer {
     position: relative;
     padding: $vertical-padding $horizontal-padding;
+    border-top: 1px solid #999;
     .panel-btn {
       padding: 5px 10px;
       font-size: 12px;
@@ -56,6 +65,30 @@
         text-decoration: none;
         color: #333;
       }
+    }
+  }
+
+  .label {
+    background-color: white;
+    font-size: 80%;
+    color: $brand-primary;
+    border: 1px solid $brand-primary;
+    border-radius: .25em;
+    padding: 0.3em 0.6em;
+  }
+
+  .button {
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    text-align: center;
+    font-weight: 500;
+    width: 100%;
+    margin-bottom: 0;
+    &:hover {
+      background-color: #e6e6e6;
+      border-color: #adadad;
+      text-decoration: none;
+      color: #333;
     }
   }
 }

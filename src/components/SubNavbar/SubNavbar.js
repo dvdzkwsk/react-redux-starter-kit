@@ -13,7 +13,7 @@ export const SubNavbar = (props) => (
     <div className="sub-nav-group sub-nav-right">
       <ul className="sub-nav-actions">
         <li>
-          <a href="">New Inquiry</a>
+          <Link to="/services">New Inquiry</Link>
         </li>
       </ul>
     </div>

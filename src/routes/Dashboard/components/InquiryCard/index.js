@@ -6,7 +6,7 @@ import Package from './Package'
 import State from './State'
 
 export const InquiryCard = (props) => (
-  <div className="panel panel-inquiryCard" style={props.styles}>
+  <div className="panel panel-inquiryCard">
 
     <div className="panel-header inquiryCard-header">
       <Link to={`/inquiries/${props.inquiry.get('order_number')}`}>
@@ -46,8 +46,10 @@ export const InquiryCard = (props) => (
       </div>
     </div>
 
-    <div className="panel-footer inquiryCard-actions">
-      <Link className="panel-btn" to={`/inquiries/${props.inquiry.get('order_number')}`}>View Details</Link>
+    <div className="panel-footer">
+      <div className="actions">
+        <Link className="button" to={`/inquiries/${props.inquiry.get('order_number')}`}>View Details</Link>
+      </div>
     </div>
   </div>
 )

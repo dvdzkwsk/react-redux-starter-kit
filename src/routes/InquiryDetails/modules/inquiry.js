@@ -1,7 +1,7 @@
 import Immutable from 'immutable'
 
 import { get } from 'utils/request'
-import { updateEntities } from 'store/entities'
+import { normalize, updateEntities, inquirySchema } from 'store/entities'
 
 // ------------------------------------
 // Constants
@@ -28,6 +28,34 @@ export const getInquiry = (id) => {
       })
       .then(function (response) {
         // dispatch(addToInquiries(response))
+        var normalizedInquiry = normalize(response, inquirySchema)
+
+        console.log(normalizedInquiry)
+
+        dispatch(updateEntities(normalizedInquiry.entities))
+        dispatch(updateInquiry(normalizedInquiry.result))
+        resolve()
+      })
+      .catch(function (error) {
+        console.warn(error)
+        resolve()
+      })
+    })
+  }
+}
+
+export const cancelInquiry = (id) => {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
+      put('/inquiries/' + id + '/cancel', {
+        accessToken: getState().get('authentication').get('accessToken')
+      })
+      .then(function (response) {
+        var normalizedInquiry = normalize(response, inquirySchema)
+
+        console.log(normalizedInquiry)
+
+        dispatch(updateEntities(normalizedInquiry.entities))
         resolve()
       })
       .catch(function (error) {

@@ -15,7 +15,7 @@ export class Categories extends React.Component {
       <div>
         <SubNavbar title="Services" />
 
-        <div>
+        <div style={{padding: '10px'}}>
           {
             this.props.categories.map(function (category, index) {
               return category && <Category key={index} category={category} />

@@ -3,3 +3,85 @@
   width: 120px;
   margin: 1.5rem auto;
 }
+
+.search {
+  padding: 120px 0;
+  transition: background-image 3s ease-in-out;
+  background-color: #1ca7f6;
+  background-position: 50%;
+  text-align: center;
+  .tagline {
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    width: 100%;
+  }
+  .search-box {
+    margin: 1em auto;
+    width: calc(100% - 2em);
+    max-width: 600px;
+    background: white;
+    color: #1ca7f6;
+    padding: 1em;
+    border-radius: 2em;
+    label {
+
+    }
+  }
+}
+
+.trending-services {
+  text-align: center;
+  background-color: #f8f8f8;
+  width: 100%;
+  padding: 10px 15px;
+  .title {
+    text-transform: uppercase;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 1em 0 2em;
+    &:after {
+      content: '';
+      display: block;
+      width: 50px;
+      border-bottom: 3px solid grey;
+      margin: .5em auto;
+    }
+  }
+  .services {
+    a {
+      display: block;
+      color: black;
+      background: white;
+      box-shadow: 0 0 2px 2px gainsboro;
+      border-radius: 2px;
+      margin: 1em 0;
+      max-width: 255px;
+      width: 100%;
+      &:hover {
+        text-decoration: none;
+        box-shadow: 0 2px 4px 2px gainsboro;
+        top: -2px;
+        position: relative;
+      }
+    }
+  }
+  .services-more {
+    a {
+      margin-top: 1em;
+      padding: 0 1em;
+      font-size: 1.5em;
+      display: inline-block;
+      background: #1ca7f6;
+      border-radius: 1.5em;
+      color: white;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+        box-shadow: 0 0 2px 2px gainsboro;
+        top: -2px;
+        position: relative;
+      }
+    }
+  }
+}

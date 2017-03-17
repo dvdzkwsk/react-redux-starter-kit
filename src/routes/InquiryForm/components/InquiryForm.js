@@ -42,14 +42,14 @@ export class InquiryForm extends React.Component {
     const { service } = this.props
 
     return (
-      <div>
+      <div style={{padding: '10px'}}>
         <div className="panel panel-inquiry-form">
           <div className="panel-body inquiry-form">
             <form ref="form" onSubmit={::this.onSubmit}>
               <input type="hidden" name="service_id" value={service.get('id')} />
 
               <PackageFieldSet packages={service.get('packages', Immutable.List())} />
-              
+
               <QuestionsFieldSet questions={service.get('questions', Immutable.List())} />
 
               <fieldset className='form-group datetime'>
@@ -88,10 +88,10 @@ export class InquiryForm extends React.Component {
               <fieldset className='form-group attachment'>
                 <legend>Attachments</legend>
                 <div className="form">
-                  <button className="btn">Add Attachment</button>
+                  <button className="button">Add Attachment</button>
                 </div>
               </fieldset>
-              <input className="inquiry-submit" type="submit" value="Create ใบสั่งงาน" id="submitButton" />
+              <input className="button inquiry-submit" type="submit" value="Create ใบสั่งงาน" id="submitButton" />
             </form>
           </div>
         </div>

@@ -34,7 +34,7 @@ $brand-primary: #2d95f4;
 
   .label {
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 20px;
     color: $brand-primary;
     background-color: white;
@@ -89,9 +89,4 @@ $brand-primary: #2d95f4;
       padding-bottom: 10px;
     }
   }
-}
-
-.inquiryCard-actions {
-  border-top: 1px solid #ccc;
-  min-height: 41px;
 }
