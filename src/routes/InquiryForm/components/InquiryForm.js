@@ -12,7 +12,7 @@ import QuestionsFieldSet from './QuestionsFieldSet'
 
 export class InquiryForm extends React.Component {
   componentDidMount () {
-    this.props.onComponentDidMount && this.props.onComponentDidMount(this.props.location.query.service)
+    this.props.onComponentDidMount && this.props.onComponentDidMount(this.props.serviceSlug)
 
     var datePicker = $(this.refs.datepicker).pickadate({
       formatSubmit: 'yyyy-m-d'

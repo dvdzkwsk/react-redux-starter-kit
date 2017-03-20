@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import  './Rating.scss'
+import './Rating.scss'
 import { times } from 'lodash'
 
 export const Rating = (props) => {

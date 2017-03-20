@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Navbar.scss'
+import logo from 'assets/seekster_logo_with_name_black.png'
 
 export class Navbar extends React.Component {
   render () {
@@ -14,7 +15,7 @@ export class Navbar extends React.Component {
       <nav>
         <div className='brand'>
           <IndexLink to='/'>
-            <img src="https://beta.seekster.co/assets/seekster_logo-f983f395de7fa5bde6c7536fcac604b926e774c0ce8b7f0bdddf46bce73f0841.png" />
+            <img src={logo} />
           </IndexLink>
         </div>
         <ul className='menu-items'>
@@ -27,6 +28,12 @@ export class Navbar extends React.Component {
       </nav>
     )
   }
+}
+
+Navbar.propTypes = {
+  isLoggedIn: PropTypes.bool,
+
+  logout: PropTypes.func
 }
 
 export default Navbar

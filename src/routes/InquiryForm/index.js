@@ -19,6 +19,6 @@ export default (store) => ({
       cb(null, InquiryForm)
 
     /* Webpack named bundle   */
-  }, 'inquiryForm')
+    }, 'inquiryForm')
   }
 })

@@ -4,7 +4,8 @@ import { isEmpty } from 'lodash'
 import { getService, getPromoCode } from '../modules/inquiryForm'
 import { denormalize, serviceSchema } from 'store/entities'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+  serviceSlug: ownProps.locations.query.service,
   service: denormalize(
     state.get('inquiryForm').get('service'),
     serviceSchema,
