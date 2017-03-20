@@ -4,11 +4,11 @@ import { Link } from 'react-router'
 import Details from './Details'
 import SubNavbar from 'components/SubNavbar'
 import Quotations from './Quotations'
-import './InquiryDetails.scss'
+import './Inquiry.scss'
 
-export class InquiryDetails extends React.Component {
+export class Inquiry extends React.Component {
   componentDidMount() {
-    this.props.getInquiry && this.props.getInquiry(this.props.params.id)
+    this.props.getInquiry && this.props.getInquiry(this.props.inquiryId)
   }
 
   render () {
@@ -47,4 +47,4 @@ export class InquiryDetails extends React.Component {
   }
 }
 
-export default InquiryDetails
+export default Inquiry

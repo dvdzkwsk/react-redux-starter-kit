@@ -1,9 +1,13 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from 'store/reducers'
+import InquiriesHistoryRoute from './routes/InquiriesHistory'
 
 export default (store) => ({
   path : 'dashboard',
+  childRoutes: [
+    InquiriesHistoryRoute(store)
+  ],
   /*  Async getComponent is only invoked when route matches   */
-  getComponent (nextState, cb) {
+  getIndexRoute (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
     require.ensure([], (require) => {
@@ -16,7 +20,7 @@ export default (store) => ({
       injectReducer(store, { key: 'dashboard', reducer })
 
       /*  Return getComponent   */
-      cb(null, Dashboard)
+      cb(null, { component: Dashboard })
 
     /* Webpack named bundle   */
   }, 'dashboard')

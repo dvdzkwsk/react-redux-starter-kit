@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import Dashboard from '../components/Dashboard'
 import { isEmpty } from 'lodash'
-import { getActiveInquiries } from '../modules/dashboard'
+import { getInquiries } from '../modules/dashboard'
 import { denormalize, inquirySchema } from 'store/entities'
 
 const mapStateToProps = (state) => ({
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  onComponentDidMount: getActiveInquiries
+  getInquiries
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

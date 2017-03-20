@@ -7,7 +7,7 @@ import './InquiriesHistory.scss'
 
 export class InquiriesHistory extends React.Component {
   componentDidMount() {
-    this.props.onComponentDidMount && this.props.onComponentDidMount()
+    this.props.getInquiries && this.props.getInquiries({ inactive: true })
   }
 
   render () {

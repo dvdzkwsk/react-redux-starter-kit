@@ -6,7 +6,7 @@ import { Link } from 'react-router'
 
 export class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.onComponentDidMount && this.props.onComponentDidMount()
+    this.props.getInquiries && this.props.getInquiries({ active: true })
   }
 
   render () {
@@ -18,7 +18,7 @@ export class Dashboard extends React.Component {
               <Link to='/dashboard'>Active Requests</Link>
             </li>
             <li className={this.props.location.pathname == '/history' ? 'active' : ''}>
-              <Link to='/history'>Inactive Requests</Link>
+              <Link to='/dashboard/history'>Inactive Requests</Link>
             </li>
           </ul>
         </SubNavbar>

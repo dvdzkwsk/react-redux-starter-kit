@@ -5,14 +5,14 @@ import $ from 'jquery'
 import 'pickadate/lib/picker.date'
 import 'pickadate/lib/picker.time'
 import { findDOMNode } from 'react-dom'
-import './InquiryForm.scss'
+import './NewInquiry.scss'
 import { isEmpty } from 'lodash'
 import PackageFieldSet from './PackagesFieldSet'
 import QuestionsFieldSet from './QuestionsFieldSet'
 
-export class InquiryForm extends React.Component {
+export class NewInquiry extends React.Component {
   componentDidMount () {
-    this.props.onComponentDidMount && this.props.onComponentDidMount(this.props.serviceSlug)
+    this.props.getService && this.props.getService(this.props.serviceSlug)
 
     var datePicker = $(this.refs.datepicker).pickadate({
       formatSubmit: 'yyyy-m-d'
@@ -126,4 +126,4 @@ export class InquiryForm extends React.Component {
   }
 }
 
-export default InquiryForm
+export default NewInquiry

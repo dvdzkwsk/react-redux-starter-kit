@@ -4,6 +4,10 @@ import { Link } from 'react-router'
 import './InquiryCard.scss'
 import Package from './Package'
 import State from './State'
+import Quotations from './Quotations'
+import AcceptedQuotation from './AcceptedQuotation'
+import Details from './Details'
+import Description from './Description'
 
 export const InquiryCard = (props) => (
   <div className="panel panel-inquiryCard">
@@ -17,33 +21,17 @@ export const InquiryCard = (props) => (
     </div>
 
     <div className="panel-body inquiryCard-body">
-      <ul className="details">
-        <li>
-          <i className="fa fa-info fa-fw" title="Order Number"></i>
-          {props.inquiry.get('order_number')}
-        </li>
 
-        <li>
-          <i className="fa fa-clock-o fa-fw" title="Booking Time"></i>
-          {Moment(props.inquiry.get('booking_datetime')).format('h:mm a')}
-        </li>
-
-        <li>
-          <i className="fa fa-calendar-o fa-fw" title="Booking Date"></i>
-          {Moment(props.inquiry.get('booking_datetime')).format('Do MMMM YYYY')}
-        </li>
-
-        <li>
-          <i className="fa fa-map-marker fa-fw" title="Address"></i>
-          <p>{props.inquiry.get('address').get('long')} {props.inquiry.get('address').get('zip_code')}</p>
-        </li>
-      </ul>
+      <Details inquiry={props.inquiry}/>
 
       <Package package={props.inquiry.get('package')} />
 
-      <div className="description">
-        <p>{props.inquiry.get('state')}</p>
-      </div>
+      <AcceptedQuotation accepted_quotation={props.inquiry.get('accepted_quotation')}>
+        { props.inquiry.get('quotations') }
+      </AcceptedQuotation>
+
+      <Description inquiry={props.inquiry} />
+
     </div>
 
     <div className="panel-footer">

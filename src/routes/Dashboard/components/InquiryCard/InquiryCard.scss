@@ -50,7 +50,6 @@ $brand-primary: #2d95f4;
     list-style: none;
     padding: 5px 0;
     margin: 0;
-    border-bottom: 1px solid #999;
 
     li {
       margin-bottom: 5px;
@@ -67,25 +66,63 @@ $brand-primary: #2d95f4;
         vertical-align: top;
         display: inline-block;
         max-width: calc(100% - 30px);
-        margin: 0;
       }
     }
   }
 
   .package {
     padding: 15px 0;
-    border-bottom: 1px solid #999;
+    border-top: 1px solid #999;
 
     .name {
       float: right;
     }
   }
 
+  .quotations-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-top: 10px;
+  }
+  .quotations {
+    margin: 0;
+    border-top: 1px solid #999;
+    a {
+      display: block;
+      color: inherit;
+      padding: 15px;
+      margin: 0 -15px;
+      &:hover {
+        background-color: #f0f0f0;
+        text-decoration: none;
+      }
+    }
+    .price {
+      float: right;
+    }
+  }
+  .quotation-business-avatar {
+    height: 40px;
+    margin: -10px 0;
+    margin-right: 5px;
+    border-radius: 4px;
+    vertical-align: middle;
+  }
+
+  .quotation {
+    padding: 15px 0;
+    margin: 0;
+    border-top: 1px solid #999;
+    .title {
+      font-weight: bold;
+    }
+  }
+
   .description {
     padding-top: 10px;
+    border-top: 1px solid #999;
 
     p {
-      margin: 0;
       padding-bottom: 10px;
     }
   }

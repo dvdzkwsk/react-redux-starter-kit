@@ -1,24 +1,24 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from 'store/reducers'
 
 export default (store) => ({
-  path : '/inquiries/new',
+  path : 'new',
   /*  Async getComponent is only invoked when route matches   */
-  getComponent (nextState, cb) {
+  getIndexRoute (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const InquiryForm = require('./containers/InquiryFormContainer').default
-      const reducer = require('./modules/inquiryForm').default
+      const NewInquiry = require('./containers/NewInquiryContainer').default
+      const reducer = require('./modules/newInquiry').default
 
-      /*  Add the reducer to the store on key 'inquiryForm'  */
-      injectReducer(store, { key: 'inquiryForm', reducer })
+      /*  Add the reducer to the store on key 'newInquiry'  */
+      injectReducer(store, { key: 'newInquiry', reducer })
 
       /*  Return getComponent   */
-      cb(null, InquiryForm)
+      cb(null, { component: NewInquiry })
 
     /* Webpack named bundle   */
-    }, 'inquiryForm')
+  }, 'newInquiry')
   }
 })
