@@ -8,6 +8,8 @@ export default (initialState = {}) => {
     // ======================================================
     // Middleware Configuration
     // ======================================================
+
+    // 为什么要用thunk http://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559
     const middleware = [thunk];
 
     // ======================================================
