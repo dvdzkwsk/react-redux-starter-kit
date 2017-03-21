@@ -16,10 +16,8 @@ export function increment (value = 1) {
 
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk! */
-
-// 为什么要用THUNK http://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559
-
+    creating async actions, especially when combined with redux-thunk!
+*/
 export const doubleAsync = () => {
     return (dispatch, getState) => {
         return new Promise((resolve) => {
