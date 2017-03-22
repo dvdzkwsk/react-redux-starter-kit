@@ -1,9 +1,13 @@
-import { combineReducers } from 'redux'
-import locationReducer from './location'
+import { combineReducers } from 'redux-immutable'
+import routingReducer from './routing'
+import authenticationReducer from './authentication'
+import entitiesReducer from './entities'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    location: locationReducer,
+    routing: routingReducer,
+    authentication: authenticationReducer,
+    entities: entitiesReducer,
     ...asyncReducers
   })
 }

@@ -1,0 +1,39 @@
+$brand-primary: #2d95f4;
+
+nav {
+  background-color: white;
+  color: #333;
+  // border-bottom: 2px solid $brand-primary;
+  height: 80px;
+}
+
+div.brand {
+  display: inline-block;
+  width: 50%;
+  padding: 15px;
+  img {
+    max-height: 50px;
+    height: 100%;
+  }
+}
+
+ul.menu-items {
+  display: inline-block;
+  width: 50%;
+  height: 80px;
+  margin: 0;
+  list-style: none;
+  text-align: right;
+  float: right !important;
+
+  li.menu-item {
+    display: inline-block;
+    padding: 30px 15px;
+    margin: 0;
+    // line-height: 80px;
+    a:hover {
+      color: $brand-primary;
+      text-decoration: none;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 @import 'base';
 @import '~normalize.css/normalize';
+@import '~skeleton-scss/scss/skeleton';
+@import './components/panel';
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -18,4 +20,30 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+    color: $brand-primary;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  li {
+    margin: 0;
+  }
 }

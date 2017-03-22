@@ -1,0 +1,142 @@
+$brand-primary: #2d95f4;
+
+.panel-inquiry-form {
+  width: 100%;
+  max-width: 718px;
+  margin-left: 50%;
+  transform: translate(-50%);
+}
+
+.inquiry-form {
+  fieldset {
+    margin: 0 -15px;
+    padding: 0;
+    legend {
+      display: inline-block;
+      border-bottom: 2px solid $brand-primary;
+      width: calc(100% + 15px);
+      font-size: 21px;
+      font-weight: normal;
+      padding: 0 15px;
+    }
+  }
+
+  .form {
+    padding: 15px;
+    .button {
+      width: auto;
+    }
+  }
+
+  .radio, .checkboxes {
+    position: relative;
+    display: block;
+    label {
+      max-height: 25px;
+      margin-bottom: 0;
+      font-weight: normal;
+      cursor: pointer;
+      display: inline-block;
+      max-width: 100%;
+      font-size: 14px;
+      color: #333333;
+      input[type=radio] {
+          display: inline;
+          margin-right: 10px;
+      }
+    }
+  }
+
+  input[type=text] {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  }
+
+  input[type=checkbox] {
+    margin-right: 10px;
+  }
+
+  input[type=submit] {
+    color: white;
+    background-color: $brand-primary;
+    border: 1px solid #099cef;
+    &:hover {
+      background-color: #098cd6;
+      border-color: #0775b4;
+      color: white;
+    }
+  }
+
+  .datetime {
+    input[type=text] {
+      margin: 0;
+    }
+    .date {
+      width: 50%;
+      display: inline-block;
+      padding-right: 5px;
+    }
+    .time {
+      width: 50%;
+      display: inline-block;
+      padding-left: 5px;
+    }
+  }
+
+  .additional {
+    .note {
+      textarea {
+        width: 100%;
+        height: 100px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+      }
+    }
+  }
+
+  .attachment {
+    button{
+      font-weight: normal;
+      background-color: #fff;
+      border-color: #ccc;
+      &:hover {
+        background-color: #e6e6e6;
+        border-color: #adadad;
+      }
+    }
+  }
+}
+
+.panel-terms {
+  width: 100%;
+  max-width: 718px;
+  margin-left: 50%;
+  transform: translate(-50%);
+  font-weight: normal;
+
+  .header {
+    position: relative;
+    padding: 10px 10px 10px 0;
+    border-bottom: 2px solid $brand-primary;
+    .title {
+      display: inline-block;
+      color: white;
+      background-color: $brand-primary;
+      margin: 0;
+      padding: 8px;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      font-size: 1.25em;
+    }
+  }
+
+  p {
+    margin: 0;
+    padding-bottom: 10px;
+    line-height: 1.42857143;
+  }
+}

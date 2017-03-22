@@ -1,0 +1,36 @@
+$brand-primary: #2d95f4;
+
+.services {
+  padding: 15px;
+  .services-header {
+    .services-title {
+      margin-bottom: 1.3rem;
+      padding: 0;
+      color: $brand-primary;
+    }
+  }
+
+  .services-body {
+    border-bottom: 2px solid $brand-primary;
+    padding-bottom: 1.8rem;
+    .services-details {
+      padding: 0 10px;
+      margin: 0;
+      li {
+        list-style: none;
+        line-height: 1.1;
+        .services-icon {
+          max-width: 20px;
+          width: 100%;
+          margin-right: 10px;
+        }
+        a:hover {
+          color: $brand-primary;
+          text-decoration: none;
+          font-weight: bold;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}

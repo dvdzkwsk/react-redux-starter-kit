@@ -1,3 +1,6 @@
+// Setup dotenv
+const dotenv = require('dotenv').config()
+
 /* eslint key-spacing:0 spaced-comment:0 */
 const path = require('path')
 const debug = require('debug')('app:config:project')
@@ -24,8 +27,8 @@ const config = {
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : ip.address(), // use string 'localhost' to prevent exposure on local network
-  server_port : process.env.PORT || 3000,
+  server_host : 'lvh.me', // ip.address(), // use string 'localhost' to prevent exposure on local network
+  server_port : process.env.PORT || 4000,
 
   // ----------------------------------
   // Compiler Configuration
@@ -76,7 +79,10 @@ Edit at Your Own Risk
 // N.B.: globals added here must _also_ be added to .eslintrc
 config.globals = {
   'process.env'  : {
-    'NODE_ENV' : JSON.stringify(config.env)
+    'NODE_ENV'        : JSON.stringify(config.env),
+    'CLIENT_ID'       : JSON.stringify(dotenv.parsed.CLIENT_ID),
+    'CLIENT_PASSWORD' : JSON.stringify(dotenv.parsed.CLIENT_PASSWORD),
+    'BASE_API'        : JSON.stringify(dotenv.parsed.BASE_API)
   },
   'NODE_ENV'     : config.env,
   '__DEV__'      : config.env === 'development',

@@ -1,14 +1,16 @@
+import Immutable from 'immutable'
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import makeRootReducer from './reducers'
-import { updateLocation } from './location'
+import { persistStore, autoRehydrate } from 'redux-persist-immutable'
 
-export default (initialState = {}) => {
+export default (initialState = Immutable.Map()) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
+  const middleware = [thunk, routerMiddleware(browserHistory)]
 
   // ======================================================
   // Store Enhancers
@@ -32,13 +34,17 @@ export default (initialState = {}) => {
     initialState,
     composeEnhancers(
       applyMiddleware(...middleware),
+      autoRehydrate(),
       ...enhancers
     )
   )
   store.asyncReducers = {}
 
-  // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
-  store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
+  syncHistoryWithStore(browserHistory, store, {
+    selectLocationState (state) {
+      return state.get('routing').toJS();
+    }
+  })
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
@@ -46,6 +52,8 @@ export default (initialState = {}) => {
       store.replaceReducer(reducers(store.asyncReducers))
     })
   }
+
+  persistStore(store)
 
   return store
 }
