@@ -3,43 +3,52 @@ import Moment from 'moment'
 import { Link } from 'react-router'
 import './InquiryCard.scss'
 import Package from './Package'
-import State from './State'
+import StateTag from 'components/StateTag'
 import Quotations from './Quotations'
 import AcceptedQuotation from './AcceptedQuotation'
 import Details from './Details'
 import Description from './Description'
 
-export const InquiryCard = (props) => (
-  <div className="panel panel-inquiryCard">
+export class InquiryCard extends React.Component {
 
-    <div className="panel-header inquiryCard-header">
-      <Link to={`/inquiries/${props.inquiry.get('order_number')}`}>
-        <h3 className="panel-title title">{props.inquiry.get('order_number')}</h3>
-        <h4 className="subtitle">{props.inquiry.get('service').get('name')}</h4>
-        <State state={props.inquiry.get('state')} />
-      </Link>
-    </div>
+  render () {
+    var inquiry = this.props.inquiry
 
-    <div className="panel-body inquiryCard-body">
+    return (
+      <div className="panel panel-inquiryCard">
 
-      <Details inquiry={props.inquiry}/>
+        <div className="panel-header inquiryCard-header">
+          <Link to={`/inquiries/${inquiry.get('order_number')}`}>
+            <h3 className="panel-title title">{inquiry.get('order_number')}</h3>
+            <h4 className="subtitle">{inquiry.get('service').get('name')}</h4>
+            <StateTag value={inquiry.get('state')} />
+          </Link>
+        </div>
 
-      <Package package={props.inquiry.get('package')} />
+        <div className="panel-body inquiryCard-body">
 
-      <AcceptedQuotation accepted_quotation={props.inquiry.get('accepted_quotation')}>
-        { props.inquiry.get('quotations') }
-      </AcceptedQuotation>
+          <Details inquiry={inquiry}/>
 
-      <Description inquiry={props.inquiry} />
+          <Package package={inquiry.get('package')} />
 
-    </div>
+          <AcceptedQuotation accepted_quotation={inquiry.get('accepted_quotation')}>
+            { inquiry.get('quotations') }
+          </AcceptedQuotation>
 
-    <div className="panel-footer">
-      <div className="actions">
-        <Link className="button" to={`/inquiries/${props.inquiry.get('order_number')}`}>View Details</Link>
+          <Description inquiry={inquiry} />
+
+        </div>
+
+        <div className="panel-footer">
+          <div className="actions">
+            <Link className="button" to={`/inquiries/${inquiry.get('order_number')}`}>
+              View Details
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-)
+    )
+  }
+}
 
 export default InquiryCard

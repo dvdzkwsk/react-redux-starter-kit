@@ -2,8 +2,10 @@ import Immutable from 'immutable'
 import Moment from 'moment'
 import React, { PropTypes } from 'react'
 import SubNavbar from 'components/SubNavbar'
+import Navigation from 'components/SubNavbar/Navigation'
 import { Link } from 'react-router'
 import './InquiriesHistory.scss'
+import StateTag from 'components/StateTag'
 
 export class InquiriesHistory extends React.Component {
   componentDidMount() {
@@ -13,16 +15,9 @@ export class InquiriesHistory extends React.Component {
   render () {
     return (
       <div>
-        <SubNavbar title="Dashboard">
-          <ul className="navigation">
-            <li className={this.props.location.pathname == '/dashboard' ? 'active' : ''}>
-              <Link to='/dashboard'>Active Requests</Link>
-            </li>
-            <li className={this.props.location.pathname == '/history' ? 'active' : ''}>
-              <Link to='/history'>Inactive Requests</Link>
-            </li>
-          </ul>
-        </SubNavbar>
+      <SubNavbar title="Dashboard">
+        <Navigation path={this.props.location.pathname}/>
+      </SubNavbar>
         <div style={{padding: '10px'}}>
           <div className="panel panel-inactive">
             <div className="table-inactive">
@@ -49,7 +44,7 @@ export class InquiriesHistory extends React.Component {
                             <td>{item.get('package') ? item.get('package').get('name') : '-'}</td>
                             <td>{Moment(item.get('booking_datetime')).format('MMMM, D YYYY HH:mm')}</td>
                             <td>
-                              <span className="label">{item.get('state')}</span>
+                              <StateTag value={item.get('state')} />
                             </td>
                             <td><Link to={`/inquiries/${item.get('order_number')}`} className="btn">View Details</Link></td>
                         </tr>

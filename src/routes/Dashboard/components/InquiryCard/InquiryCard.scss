@@ -2,7 +2,8 @@ $brand-primary: #2d95f4;
 
 .panel-inquiryCard {
   display: inline-block;
-  width: 345px;
+  width: 30%;
+  vertical-align: top;
 
   @media (max-width: 420px) {
     width: 100%;
@@ -36,11 +37,6 @@ $brand-primary: #2d95f4;
     position: absolute;
     right: 15px;
     top: 20px;
-    color: $brand-primary;
-    background-color: white;
-    border: 1px solid $brand-primary;
-    border-radius: .25em;
-    font-size: 80%;
     padding: 0.3em 0.6em;
   }
 }
@@ -83,10 +79,10 @@ $brand-primary: #2d95f4;
     font-weight: 700;
     text-transform: uppercase;
     padding-top: 10px;
+    border-top: 1px solid #999;
   }
   .quotations {
     margin: 0;
-    border-top: 1px solid #999;
     a {
       display: block;
       color: inherit;
