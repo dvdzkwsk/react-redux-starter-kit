@@ -9,6 +9,7 @@ import './NewInquiry.scss'
 import { isEmpty } from 'lodash'
 import PackageFieldSet from './PackagesFieldSet'
 import QuestionsFieldSet from './QuestionsFieldSet'
+import AddressFieldSet from './AddressFieldSet'
 
 export class NewInquiry extends React.Component {
   componentDidMount () {
@@ -53,7 +54,7 @@ export class NewInquiry extends React.Component {
               <QuestionsFieldSet questions={service.get('questions', Immutable.List())} />
 
               <fieldset className='form-group datetime'>
-                <legend>Date Time</legend>
+                <legend>When do you need this service?</legend>
                 <div className="form">
                   <div className="date">
                     <input ref="datepicker" type="text" placeholder="Date"
@@ -66,11 +67,7 @@ export class NewInquiry extends React.Component {
                 </div>
               </fieldset>
 
-              <fieldset className='form-group address'>
-                <legend>Address</legend>
-                <div className="form">
-                </div>
-              </fieldset>
+              <AddressFieldSet address={service.get('address')}/>
 
               <fieldset className='form-group additional'>
                 <legend>Additional Information</legend>

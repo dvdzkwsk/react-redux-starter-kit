@@ -3,54 +3,61 @@ import Moment from 'moment'
 import { Link } from 'react-router'
 import PaymentSummary from './PaymentSummary'
 import Answers from './Answers'
-import Confirmation from './Confirmation'
-import State from 'routes/Dashboard/components/InquiryCard/State'
+import Actions from './Actions'
+import StateTag from 'components/StateTag'
 
-export const Details = (props) => (
-  <div className="panel panel-detail">
+export class Details extends React.Component {
 
-    <div className="detail-header">
-      <h3 className="panel-title title">{props.inquiry.get('service').get('name')}</h3>
-      <State state={props.inquiry.get('state')} />
-    </div>
+  render () {
+    var inquiry = this.props.inquiry
 
-    <div className="panel-body detail-body">
-      <ul className="details">
-        <li>
-          <i className="fa fa-info fa-fw" title="Order Number"></i>
-          {props.inquiry.get('order_number')}
-        </li>
+    return (
+      <div className="panel panel-detail">
 
-        <li>
-          <i className="fa fa-clock-o fa-fw" title="Booking Time"></i>
-          {Moment(props.inquiry.get('booking_datetime')).format('h:mm a')}
-        </li>
+        <div className="detail-header">
+          <h3 className="panel-title title">{inquiry.get('service').get('name')}</h3>
+          <StateTag value={inquiry.get('state')} />
+        </div>
 
-        <li>
-          <i className="fa fa-calendar-o fa-fw" title="Booking Date"></i>
-          {Moment(props.inquiry.get('booking_datetime')).format('Do MMMM YYYY')}
-        </li>
+        <div className="panel-body detail-body">
+          <ul className="details">
+            <li>
+              <i className="fa fa-info fa-fw" title="Order Number"></i>
+              {inquiry.get('order_number')}
+            </li>
 
-        <li>
-          <i className="fa fa-map-marker fa-fw" title="Address"></i>
-          <p>{props.inquiry.get('address').get('long')} {props.inquiry.get('address').get('zip_code')}</p>
-        </li>
+            <li>
+              <i className="fa fa-clock-o fa-fw" title="Booking Time"></i>
+              {Moment(inquiry.get('booking_datetime')).format('h:mm a')}
+            </li>
 
-        <li>
-          <i className="fa fa-phone fa-fw" title="Phone"></i>
-          <p>{props.inquiry.get('phone_number')}</p>
-        </li>
-      </ul>
+            <li>
+              <i className="fa fa-calendar-o fa-fw" title="Booking Date"></i>
+              {Moment(inquiry.get('booking_datetime')).format('Do MMMM YYYY')}
+            </li>
 
-      <PaymentSummary inquiry={props.inquiry} />
+            <li>
+              <i className="fa fa-map-marker fa-fw" title="Address"></i>
+              <p>{inquiry.get('address').get('long')} {inquiry.get('address').get('zip_code')}</p>
+            </li>
 
-      <Answers answer={props.inquiry.get('answers')} />
+            <li>
+              <i className="fa fa-phone fa-fw" title="Phone"></i>
+              <p>{inquiry.get('phone_number')}</p>
+            </li>
+          </ul>
 
-    </div>
+          <PaymentSummary inquiry={inquiry} />
 
-    <Confirmation inquiry={props.inquiry}/>
+          <Answers answer={inquiry.get('answers')} />
 
-  </div>
-)
+        </div>
+
+        <Actions inquiry={inquiry} cancelInquiry={this.props.cancelInquiry} />
+
+      </div>
+    )
+  }
+}
 
 export default Details

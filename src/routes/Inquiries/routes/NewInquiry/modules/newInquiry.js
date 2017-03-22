@@ -10,6 +10,7 @@ import { normalize, updateEntities, serviceSchema } from 'store/entities'
 // ------------------------------------
 export const UPDATE_SERVICE = 'UPDATE_SERVICE'
 export const CHECK_PROMO_CODE = 'CHECK_PROMO_CODE'
+export const UPDATE_SERVICE_IS_LOADING = 'UPDATE_SERVICE_IS_LOADING'
 
 // ------------------------------------
 // Actions
@@ -28,10 +29,18 @@ export function updatePromoCode (checkPromo) {
   }
 }
 
+export function updateServiceIsLoading (value) {
+  return {
+    type    : UPDATE_SERVICE_IS_LOADING,
+    payload : value
+  }
+}
+
 export const getService = (slug) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       dispatch(updateService(slug))
+      dispatch(updateServiceIsLoading(true))
 
       get('/services/' + slug)
       .then(function (response) {
@@ -45,6 +54,7 @@ export const getService = (slug) => {
       })
       .catch(function (error) {
         console.warn(error)
+        dispatch(updateServiceIsLoading(false))
         resolve()
       })
     })
@@ -86,6 +96,11 @@ const ACTION_HANDLERS = {
     return state.merge({
       promoCode: payload
     })
+  },
+  [UPDATE_SERVICE_IS_LOADING]: (state, { payload }) => {
+    return state.merge({
+      isLoading: payload
+    })
   }
 }
 
@@ -94,7 +109,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = Immutable.fromJS({
   service: {},
-  promoCode: {}
+  promoCode: {},
+  isLoading: false
 })
 
 export default function inquiryFormReducer (state = initialState, action) {

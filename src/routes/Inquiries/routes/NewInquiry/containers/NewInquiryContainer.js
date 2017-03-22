@@ -11,7 +11,8 @@ const mapStateToProps = (state, ownProps) => ({
     serviceSchema,
     state.get('entities')
   ),
-  promoCode: state.get('newInquiry').get('promoCode')
+  promoCode: state.get('newInquiry').get('promoCode'),
+  isLoading: state.get('newInquiry').get('isLoading')
 })
 
 const mapDispatchToProps = {

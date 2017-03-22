@@ -15,10 +15,10 @@ export class Inquiry extends React.Component {
     if (this.props.inquiry) {
       return (
         <div>
-          <SubNavbar title={this.props.params.id} />
-          <div style={{padding: '10px'}} className="bg">
+          <SubNavbar title={this.props.inquiryId} />
+          <div style={{padding: '10px', textAlign: 'center'}}>
             <div className="panel-detail-left">
-              <Details inquiry={this.props.inquiry} />
+              <Details inquiry={this.props.inquiry} cancelInquiry={this.props.cancelInquiry} />
             </div>
 
             <div className="panel-detail-right">

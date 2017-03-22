@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-import { get } from 'utils/request'
+import { get, put } from 'utils/request'
 import { normalize, updateEntities, inquirySchema } from 'store/entities'
 
 // ------------------------------------
