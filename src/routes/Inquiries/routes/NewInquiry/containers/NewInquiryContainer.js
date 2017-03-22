@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import NewInquiry from '../components/NewInquiry'
 import { isEmpty } from 'lodash'
-import { getService, getPromoCode } from '../modules/newInquiry'
+import { getService, getPromoCode, getProvince } from '../modules/newInquiry'
 import { denormalize, serviceSchema } from 'store/entities'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -12,12 +12,14 @@ const mapStateToProps = (state, ownProps) => ({
     state.get('entities')
   ),
   promoCode: state.get('newInquiry').get('promoCode'),
-  isLoading: state.get('newInquiry').get('isLoading')
+  provinces: state.get('newInquiry').get('provinces')
+  // isLoading: state.get('newInquiry').get('isLoading')
 })
 
 const mapDispatchToProps = {
   getService: getService,
-  validatePromoCode: getPromoCode
+  validatePromoCode: getPromoCode,
+  getProvinces: getProvinces
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewInquiry)

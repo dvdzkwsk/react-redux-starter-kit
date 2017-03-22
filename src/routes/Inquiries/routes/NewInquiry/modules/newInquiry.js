@@ -11,6 +11,7 @@ import { normalize, updateEntities, serviceSchema } from 'store/entities'
 export const UPDATE_SERVICE = 'UPDATE_SERVICE'
 export const CHECK_PROMO_CODE = 'CHECK_PROMO_CODE'
 export const UPDATE_SERVICE_IS_LOADING = 'UPDATE_SERVICE_IS_LOADING'
+export const UPDATE_PROVINCES = 'UPDATE_PROVINCE'
 
 // ------------------------------------
 // Actions
@@ -29,10 +30,17 @@ export function updatePromoCode (checkPromo) {
   }
 }
 
-export function updateServiceIsLoading (value) {
+// export function updateServiceIsLoading (value) {
+//   return {
+//     type    : UPDATE_SERVICE_IS_LOADING,
+//     payload : value
+//   }
+// }
+
+export function updateProvinces (province) {
   return {
-    type    : UPDATE_SERVICE_IS_LOADING,
-    payload : value
+    type    : UPDATE_PROVINCE,
+    payload : provinces
   }
 }
 
@@ -40,7 +48,7 @@ export const getService = (slug) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       dispatch(updateService(slug))
-      dispatch(updateServiceIsLoading(true))
+      // dispatch(updateServiceIsLoading(true))
 
       get('/services/' + slug)
       .then(function (response) {
@@ -54,7 +62,7 @@ export const getService = (slug) => {
       })
       .catch(function (error) {
         console.warn(error)
-        dispatch(updateServiceIsLoading(false))
+        // dispatch(updateServiceIsLoading(false))
         resolve()
       })
     })
@@ -78,9 +86,27 @@ export const getPromoCode = (code) => {
   }
 }
 
+export const getProvinces = () => {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
+      get('/provinces')
+      .then(function (response) {
+        console.log(response)
+        dispatch(updateProvinces(response))
+        resolve()
+      })
+      .catch(function (error) {
+        console.warn(error)
+        resolve()
+      })
+    })
+  }
+}
+
 export const actions = {
   getService,
-  getPromoCode
+  getPromoCode,
+  getProvinces
 }
 
 // ------------------------------------
@@ -97,9 +123,14 @@ const ACTION_HANDLERS = {
       promoCode: payload
     })
   },
-  [UPDATE_SERVICE_IS_LOADING]: (state, { payload }) => {
+  // [UPDATE_SERVICE_IS_LOADING]: (state, { payload }) => {
+    // return state.merge({
+    //   isLoading: payload
+    // })
+  // },
+  [UPDATE_PROVINCE]: (state, { payload }) => {
     return state.merge({
-      isLoading: payload
+      provinces: payload
     })
   }
 }
@@ -110,7 +141,8 @@ const ACTION_HANDLERS = {
 const initialState = Immutable.fromJS({
   service: {},
   promoCode: {},
-  isLoading: false
+  // isLoading: false,
+  provinces: []
 })
 
 export default function inquiryFormReducer (state = initialState, action) {

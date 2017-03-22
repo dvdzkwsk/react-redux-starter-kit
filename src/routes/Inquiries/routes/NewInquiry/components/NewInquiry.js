@@ -13,6 +13,7 @@ import AddressFieldSet from './AddressFieldSet'
 
 export class NewInquiry extends React.Component {
   componentDidMount () {
+    console.log(this.props)
     this.props.getService && this.props.getService(this.props.serviceSlug)
 
     var datePicker = $(this.refs.datepicker).pickadate({
@@ -67,7 +68,7 @@ export class NewInquiry extends React.Component {
                 </div>
               </fieldset>
 
-              <AddressFieldSet address={service.get('address')}/>
+              <AddressFieldSet address={service.get('address')} getProvince={this.props.getProvince}/>
 
               <fieldset className='form-group additional'>
                 <legend>Additional Information</legend>

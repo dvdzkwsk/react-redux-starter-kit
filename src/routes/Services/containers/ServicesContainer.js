@@ -9,7 +9,8 @@ const mapStateToProps = (state) => ({
     state.get('services').get('categories'),
     [categorySchema],
     state.get('entities')
-  )
+  ),
+  isLoading: state.get('services').get('isLoading')
 })
 
 const mapDispatchToProps = {

@@ -7,6 +7,7 @@ import { normalize, updateEntities, categorySchema } from 'store/entities'
 // Constants
 // ------------------------------------
 export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES'
+export const UPDATE_SERVICE_IS_LOADING = 'UPDATE_SERVICE_IS_LOADING'
 
 // ------------------------------------
 // Actions
@@ -18,9 +19,18 @@ export function updateCategories (categories) {
   }
 }
 
+export function updateServiceIsLoading (value) {
+  return {
+    type    : UPDATE_SERVICE_IS_LOADING,
+    payload : value
+  }
+}
+
 export const getCategories = () => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
+      dispatch(updateServiceIsLoading(true))
+
       get('/categories')
       .then(function (response) {
         var normalizedCategories = normalize(response, [categorySchema])
@@ -33,6 +43,7 @@ export const getCategories = () => {
       })
       .catch(function (error) {
         console.warn(error)
+        dispatch(updateServiceIsLoading(false))
         resolve()
       })
     })
@@ -51,6 +62,11 @@ const ACTION_HANDLERS = {
     return state.merge({
       categories: payload
     })
+  },
+  [UPDATE_SERVICE_IS_LOADING]: (state, { payload }) => {
+    return state.merge({
+      isLoading: payload
+    })
   }
 }
 
@@ -58,7 +74,8 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = Immutable.fromJS({
-  categories: []
+  categories: [],
+  isLoading: false
 })
 
 export default function servicesReducer (state = initialState, action) {
