@@ -1,0 +1,39 @@
+@import '~styles/variables/colors';
+
+.label {
+  background-color: white;
+  font-size: 80%;
+  border-radius: .25em;
+  border: 1px solid;
+  padding: 0.3em 0.6em;
+
+  &.draft {
+    color: $brand-disabled;
+    border-color: $brand-disabled;
+  }
+
+  &.pending_payment, &.pending_start {
+    color: $brand-secondary;
+    border-color: $brand-secondary;
+  }
+
+  &.pending_provider, &.pending_seeker, &.pending_completion {
+    color: $brand-primary;
+    border-color: $brand-primary;
+  }
+
+  &.completed {
+    color: $brand-success;
+    border-color: $brand-success;
+  }
+
+  &.pending_reviews {
+    color: $brand-warning;
+    border-color: $brand-warning;
+  }
+
+  &.cancelled, &.rejected {
+    color: $brand-error;
+    border-color: $brand-error;
+  }
+}
