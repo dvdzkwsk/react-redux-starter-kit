@@ -1,0 +1,25 @@
+nav {
+  background-color: black;
+  color: white;
+}
+
+div.brand {
+  display: inline-block;
+  width: 50%;
+  padding: 15px;
+}
+
+ul.menu-items {
+  display: inline-block;
+  width: 50%;
+  margin: 0;
+  padding: 15px;
+  list-style: none;
+  text-align: right;
+
+  li.menu-item {
+    display: inline-block;
+    padding: 0 15px;
+    margin: 0;
+  }
+}
