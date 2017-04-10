@@ -11,8 +11,11 @@ describe('(View) Home', () => {
 
   it('Renders a welcome message', () => {
     const welcome = _component.find('h4')
+    const subtitle = welcome.find('sub')
     expect(welcome).to.exist
+    expect(subtitle).to.exist
     expect(welcome.text()).to.match(/Welcome!/)
+    expect(subtitle.text()).to.match(/... in test/)
   })
 
   it('Renders an awesome duck image', () => {

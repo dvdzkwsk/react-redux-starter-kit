@@ -98,6 +98,8 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ├── src                      # Application source code
 │   ├── index.html           # Main HTML page container for app
 │   ├── main.js              # Application bootstrap and rendering
+│   ├── config               # Application environment settings
+│   │   └── development.js   # Configuration specific for development environment
 │   ├── components           # Global Reusable Presentational Components
 │   ├── containers           # Global Reusable Container Components
 │   ├── layouts              # Components that dictate major page structure
@@ -188,6 +190,15 @@ These are global variables available to you anywhere in your source code. If you
 |`__DEV__`|True when `process.env.NODE_ENV` is `development`|
 |`__PROD__`|True when `process.env.NODE_ENV` is `production`|
 |`__TEST__`|True when `process.env.NODE_ENV` is `test`|
+
+### Application config
+
+It is possible to define environment specific variable in the `src/config` folder. Each environment needs it own file. This variables can then be used from the application using
+
+```js
+import config from 'config'
+config.my_variable
+```
 
 ### Styles
 
