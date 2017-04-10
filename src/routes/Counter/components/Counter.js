@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const Counter = (props) => (
   <div style={{ margin: '0 auto' }} >
@@ -14,9 +15,9 @@ export const Counter = (props) => (
 )
 
 Counter.propTypes = {
-  counter     : React.PropTypes.number.isRequired,
-  doubleAsync : React.PropTypes.func.isRequired,
-  increment   : React.PropTypes.func.isRequired
+  counter     : PropTypes.number.isRequired,
+  doubleAsync : PropTypes.func.isRequired,
+  increment   : PropTypes.func.isRequired
 }
 
 export default Counter
