@@ -1,19 +1,20 @@
 sudo: false
 language: node_js
 node_js:
-  - "6"
-
+- '6'
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 install:
-  - npm install -g yarn
-  - yarn install
-
+- npm install -g yarn
+- yarn install
 script:
-  - npm run deploy:dev
-  - npm run deploy:prod
-
+- npm run deploy:dev
+- npm run deploy:prod
 after_success:
-  - npm run codecov
+- npm run codecov
+deploy:
+  provider: heroku
+  app: CaHoopIndustriesPresentsTheCamelCaseCoursework
+  api_key:
+    secure: EA94dXwky1tWq2fCcvsW5RJSKoU8T8NjWeTAbRsBVxlCDAJsWAIPo0bJSiOZFRce2SCtrD2ExH1T4kYTR9BX7A5hc41i+29UorHH389g1jtYmmXODP5jojGYERQTyvfVUlb/wEbPGkUgTjwruq3FZDtMj6WVoSip6qcmqtQhqWfg4HKz+TIzXOYER0eYY22NNYkNS7O/ecAIyKEFxvtR17XULmiA6iPc6gTTmyZaGc/iz5cgK2OAL1mIZxnG+ERsYkG8dnTqps4/2dovY0sVep8UwwDa+Mz6lCQXI3TdUd5HFFV+YXD5u3GA7cgcADcE8uqRRm0j9F/OqseCN9vOdP2vGzwkWzFqegvN2MC+yPTBBTI6Sri71jgCkmYtTJQ16aWiamDPVZWzYa5OGNiTT/Cto6KDHvOqlje1xlu0cfYKSDgzwr0ly5K0tlV9CwkSEd9uWE1paQvbC9bifpNcab4IghIJemiZqiy+K0ckOuhFxXrazabpLWFLr7eHyF0rmi6k9XiAWMkpq9L7opvRp3pf5HNZAhzc9Ehv4S2DWHNH3xlxIfOoE6C9pVwX2gXA4TV0ea3dqMCl+LLWBoW6aKvuRV6QkpXAqYbxPfuim0BLum75Jh+AwWJ0NWwMTc8pTNpqZjA13iW8b/of8Mn3iQXkmTdaKN4+JFw11qe+UCk=
