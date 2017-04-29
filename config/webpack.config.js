@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('./project.config')
 const debug = require('debug')('app:config:webpack')
+const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
 const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
@@ -87,7 +88,8 @@ if (__DEV__) {
   debug('Enabling plugins for live development (HMR, NoErrors).')
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new OpenBrowserPlugin({ url: project.compiler_public_path })
   )
 } else if (__PROD__) {
   debug('Enabling plugins for production (OccurrenceOrder, Dedupe & UglifyJS).')
