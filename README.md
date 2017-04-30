@@ -83,6 +83,7 @@ While developing, you will probably rely mostly on `npm start`; however, there a
 |`deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
 |`lint`|Lint all `.js` files.|
 |`lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
+|`yarn storybook`|Run React Storybook. [Read more on this](https://github.com/storybooks/storybook).|
 
 ## Application Structure
 
