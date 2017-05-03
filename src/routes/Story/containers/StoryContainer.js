@@ -7,7 +7,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  storyMeta: state.story
+  storyMeta: state.story.storyMeta
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StoryView);

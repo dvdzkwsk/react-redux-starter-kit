@@ -14,17 +14,19 @@ class StoryMeta extends Component {
 
   getStoryInformation(storyMeta) {
     return (
-      <div>
+      <div className="story-meta-container">
         <img className="story-thumb" src={storyMeta.imgUrl} />
-        <a href={storyMeta.url}>
-          <h2>{storyMeta.title}</h2>
-        </a>
-        <div>{`Topic: ${storyMeta.topic.name}`}</div>
-        <div>{`Moderator: ${storyMeta.topic.mod}`}</div>
-        <div>{`Votes: ${storyMeta.stats.votes}`}</div>
-        <div>{`Unique Commenters: ${storyMeta.stats.uniqueCommenters}`}</div>
-        <div>{`Comments: ${storyMeta.stats.comments}`}</div>
-        <div>{`Comments within Geo: ${storyMeta.stats.commentsWithinGeo}`}</div>
+        <div>
+          <a href={storyMeta.url}>
+            <h2>{storyMeta.title}</h2>
+          </a>
+          <div>{`Topic: ${storyMeta.topic.name}`}</div>
+          <div>{`Moderator: ${storyMeta.topic.mod}`}</div>
+          <div>{`Votes: ${storyMeta.stats.votes}`}</div>
+          <div>{`Unique Commenters: ${storyMeta.stats.uniqueCommenters}`}</div>
+          <div>{`Comments: ${storyMeta.stats.comments}`}</div>
+          <div>{`Comments within Geo: ${storyMeta.stats.commentsWithinGeo}`}</div>
+        </div>
       </div>
     );
   }

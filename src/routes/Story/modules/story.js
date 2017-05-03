@@ -21,7 +21,7 @@ export const getStoryMeta = (storyId) => {
         dispatch({
           type: GET_STORY_META,
           // TODO: NULL CHECK
-          story: JSON.parse(res.text),
+          storyMeta: JSON.parse(res.text),
         });
       });
   }
@@ -36,14 +36,23 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [GET_STORY_META]: (state, action) => {
-    return Object.assign({}, state, action.story);
+    return {
+      ...state,
+      storyMeta: {
+        ...action.storyMeta
+      }
+    };
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {};
+const initialState = {
+  story: {
+    storyMeta: undefined,
+  },
+};
 export default function storyReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
