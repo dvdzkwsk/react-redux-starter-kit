@@ -84,6 +84,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-runtime": "^6.11.6",
     "better-npm-run": "0.0.13",
+    "bluebird": "^3.5.0",
     "compression": "^1.6.2",
     "css-loader": "^0.26.0",
     "cssnano": "^3.7.4",
@@ -108,6 +109,7 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
+    "superagent": "^3.5.2",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.14",
     "yargs": "^6.3.0"

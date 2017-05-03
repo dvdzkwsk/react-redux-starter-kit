@@ -11,6 +11,23 @@ const app = express()
 // Apply gzip compression
 app.use(compress())
 
+const exampleStory = {
+  id: 123,
+  title: 'New Law Requires Welfare Recipients To Submit Sweat To Prove How Hard They’re Looking For Job',
+  url: 'http://www.theonion.com/article/new-law-requires-welfare-recipients-to-submit-swea-36626',
+  imgUrl: 'http://images2.onionstatic.com/onion/2695/9/16x9/800.jpg',
+  topic: {
+    name: 'Social Issues',
+    mod: 'pkeshary'
+  },
+  stats: {
+    uniqueCommenters: 4,
+    comments: 6,
+    votes: 12,
+    commentsWithinGeo: 2,
+  },
+};
+
 // ------------------------------------
 // Apply Webpack HMR Middleware
 // ------------------------------------
@@ -36,6 +53,10 @@ if (project.env === 'development') {
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
   app.use(express.static(project.paths.public()))
+
+  app.get('/story/:storyId', function(req, res) {
+    res.send(JSON.stringify(exampleStory));
+  });
 
   // This rewrites all routes requests to the root /index.html file
   // (ignoring file requests). If you want to implement universal
