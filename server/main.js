@@ -28,6 +28,19 @@ const exampleStory = {
   },
 };
 
+const exampleComment = {
+  id: 1,
+  text: `Finally, some accountability. When I was younger working
+  in the factory, we had to wring our clothes into a measuring cup
+  so Boss could see how many ounces of sweat we produced. Made us work harder.`,
+  member: 'fun_rots_character',
+  votes: 0,
+  ttl: 'ttl value',
+  replies: [],
+};
+
+let comments = [exampleComment];
+
 // ------------------------------------
 // Apply Webpack HMR Middleware
 // ------------------------------------
@@ -54,8 +67,20 @@ if (project.env === 'development') {
   // when the application is compiled.
   app.use(express.static(project.paths.public()))
 
+  // STORY
   app.get('/story/:storyId', function(req, res) {
     res.send(JSON.stringify(exampleStory));
+  });
+
+  // COMMENT
+  app.post('/comment/', function(req, res) {
+    comments.push(Object.assign({}, exampleComment, { id: comments.length + 1 }));
+    // send back hard-coded comment for now
+    res.send(Object.assign({}, exampleComment, { id: comments.length }));
+  });
+
+  app.get('/comment/:storyId', function(req, res) {
+    res.send(JSON.stringify(comments));
   });
 
   // This rewrites all routes requests to the root /index.html file

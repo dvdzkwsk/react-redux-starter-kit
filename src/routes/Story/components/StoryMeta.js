@@ -34,7 +34,7 @@ class StoryMeta extends Component {
   render() {
     const storyMeta = this.props.storyMeta;
     return (
-      <div>
+      <div className="section-container">
         <h1>Story Meta</h1>
         { storyMeta ? this.getStoryInformation(storyMeta) : null }
       </div>
