@@ -19,3 +19,14 @@ body {
 *:after {
   box-sizing: inherit;
 }
+
+.story-view {
+  .section-container {
+    > *:not(h1) {
+      padding-left: 50px;
+    }
+    h1 {
+      padding-left: 25px;
+    }
+  }
+}
