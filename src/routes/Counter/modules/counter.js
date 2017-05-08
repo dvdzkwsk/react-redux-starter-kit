@@ -7,7 +7,7 @@ export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function increment (value = 1) {
+export function increment (value = 2) {
   return {
     type    : COUNTER_INCREMENT,
     payload : value
