@@ -1,0 +1,10 @@
+{
+  "vsicons.presets.angular": false,
+  "files.exclude": {
+    "node_modules": true,
+    "dist": true,
+    "coverage": true,
+    "tests": true
+  },
+  "editor.formatOnSave": true
+}
