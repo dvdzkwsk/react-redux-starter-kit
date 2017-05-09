@@ -5,8 +5,8 @@ $ yarn start      # Compile and launch (same as `npm start`)
 ```
 or
 ```bash
-$ yarn install    # Install project dependencies
-$ yarn start      # Compile and launch (same as `npm start`)
+$ npm install
+$ npm start
 ```
 |`npm run <script>`|Description|
 |------------------|-----------|
