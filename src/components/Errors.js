@@ -18,7 +18,7 @@ export default class Errors extends Component {
     )
 
     return <div className='errors'><CSSTransitionGroup
-      transitionName='example'
+      transitionName='errors'
       transitionEnterTimeout={300}
       transitionLeaveTimeout={300}>
       {errorList}

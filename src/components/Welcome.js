@@ -11,7 +11,7 @@ export default class Welcome extends Component {
 
     if (inviteLink) {
       return <div><h3>Ожидаем второго игрока</h3>
-        <div className='col-sm-12'>Инвайт ссылка: <span className='invite'>{inviteLink}</span></div>
+        <div className='invite'>Инвайт ссылка: <span>{inviteLink}</span></div>
 
       </div>
     } else if (connectionError) {

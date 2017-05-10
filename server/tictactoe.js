@@ -8,7 +8,7 @@ const PORT = project.server_port
 const Game = require('./game')
 
 let uniqueId = 0 // Глобальный уникальный id
-let games = [] // Массив содержит все игровые сессии
+const games = [] // Массив содержит все игровые сессии
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
@@ -53,12 +53,19 @@ module.exports = (io) => {
     })
 
     /**
-     * Эвент срабатывает при отключении пользователя
+     * Пользователь отключился
      */
     socket.on('disconnect', () => {
       console.log(`пользователь ${socket.id} отсоединился`)
 
-      abortGame(io, socket.id)
+      const gameStatus = 'diconnected'
+      const game = games.find(g => g.player1.id === socket.id || g.player2.id === socket.id)
+
+      // уведомляем второго пользователя, что его оппонент отключился
+      if (game) {
+        game.status = gameStatus
+        io.to(game.id).emit('gameOver', { gameResult: 'disconnect', status: 'Игра окончена' })
+      }
     })
 
     // =====================================================
@@ -67,19 +74,46 @@ module.exports = (io) => {
     //
     // =====================================================
 
+    /**
+     * Делает ход
+     */
     socket.on('makeMove', (data) => {
-      const { gameId, squareIndex } = data
-      const index = games.findIndex(g => g.id === gameId)
-      const game = games[index]
+      const game = games.find(g => g.id === data.gameId)
 
       if (game) {
-        makeMove(io, game, squareIndex, socket.id)
+        makeMove(io, game, data.squareIndex, socket.id)
       } else {
-        io.to(socket.id).emit('error', { error: `Игра #${gameId} не найдена` })
+        io.to(socket.id).emit('error', { error: 'Не удалось сделать ход' })
+      }
+    })
+
+
+    // =====================================================
+    //
+    //     Events связанные с чатом
+    //
+    // =====================================================
+
+    /**
+     * Добавляет сообщение в чат
+     */
+    socket.on('sendMessage', (data, status) => {
+      const game = games.find(g => g.id === data.gameId)
+
+      // Если оппонент, все еще находится в игре
+      if (game && game.status !== 'diconnected') {
+        const recipient = (socket.id === game.player1.id) ? game.player2.id : game.player1.id
+
+        io.to(recipient).emit('newMessage', { text: data.text })
+        status('ok')
+      } else {
+        io.to(socket.id).emit('error', { error: 'Не удалось доставить сообщение' })
+        status('fail')
       }
     })
   })
 }
+
 
 /**
  * Создает игровую сессию и запускает игру
@@ -97,21 +131,7 @@ function startGame(io, gameId, room) {
 }
 
 /**
- * Прерывает любую незавершенную игру, где находился player
- */
-function abortGame(io, player) {
-  const gameStatus = 'aborted'
-  const index = games.findIndex(g => g.player1.id === player || g.player2.id === player)
-
-  // уведомляем пользователей о завершении игры
-  if (index > -1) {
-    games[index].status = gameStatus
-    io.to(games[index].id).emit('gameOver', { gameResult: 'disconnect', status: 'Игра окончена' })
-  }
-}
-
-/**
- * Корректно завершаем игру
+ * Игра окончена
  */
 function completeGame(io, game) {
   game.status = 'complete'

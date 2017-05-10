@@ -10,7 +10,6 @@ module.exports = class Game {
     this.turn = player1 // чей сейчас ход
     this.board = Array(9).fill('') // игровая доска
     this.status = 'started' // статус игры
-    this.chat = [] // чат
   }
 
   /**

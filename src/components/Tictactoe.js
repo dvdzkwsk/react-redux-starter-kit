@@ -19,10 +19,10 @@ export default class Tictactoe extends Component {
     this.handleSquareClick = this.handleSquareClick.bind(this)
   }
 
-  handleSquareClick(index) {
+  handleSquareClick(squareIndex) {
     const { gameId, socket } = this.props
 
-    socket.emit('makeMove', { gameId: gameId, squareIndex: index })
+    socket.emit('makeMove', { gameId: gameId, squareIndex: squareIndex })
   }
 
   render() {
