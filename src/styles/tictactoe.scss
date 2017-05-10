@@ -4,6 +4,8 @@ $light-gray: #2a2a2a;
 $hopbush: #c69;
 $regent-grey-02: rgba(128, 140, 153, 0.2);
 $light-orange: #FFE8C2;
+$nebula: #d2e1dd;
+$gray-lighter: #eee;
 
 $small-border: 3px;
 $large-padding: 10px 15px;
@@ -144,6 +146,19 @@ h3{
   opacity: 0;
   transform: translateX(250px);
   transition: 0.3s;
+}
+
+/*
+ * КОМПОНЕНТ С ЧАТОМ
+ */
+.chat{
+    margin: 15px 0;
+}
+.messages {
+    padding: 10px 15px;
+    border-radius: $small-border;
+    margin-top: 10px;
+    background: $gray-lighter
 }
 
 /*
