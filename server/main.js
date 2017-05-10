@@ -5,8 +5,13 @@ const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
+const socket = require('socket.io')
+const http = require('http')
 
 const app = express()
+const server = http.Server(app)
+const io = socket(server)
+const tictactoe = require('./tictactoe')
 
 // Apply gzip compression
 app.use(compress())
@@ -19,13 +24,13 @@ if (project.env === 'development') {
 
   debug('Enabling webpack dev and HMR middleware')
   app.use(require('webpack-dev-middleware')(compiler, {
-    publicPath  : webpackConfig.output.publicPath,
-    contentBase : project.paths.client(),
-    hot         : true,
-    quiet       : project.compiler_quiet,
-    noInfo      : project.compiler_quiet,
-    lazy        : false,
-    stats       : project.compiler_stats
+    publicPath: webpackConfig.output.publicPath,
+    contentBase: project.paths.client(),
+    hot: true,
+    quiet: project.compiler_quiet,
+    noInfo: project.compiler_quiet,
+    lazy: false,
+    stats: project.compiler_stats
   }))
   app.use(require('webpack-hot-middleware')(compiler, {
     path: '/__webpack_hmr'
@@ -66,4 +71,9 @@ if (project.env === 'development') {
   app.use(express.static(project.paths.dist()))
 }
 
-module.exports = app
+/**
+ * Tictactoe
+ */
+tictactoe(io)
+
+module.exports = server

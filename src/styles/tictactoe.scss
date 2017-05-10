@@ -1,0 +1,185 @@
+$white: #fff;
+$gray: #1E1E1E;
+$light-gray: #2a2a2a;
+$hopbush: #c69;
+$regent-grey-02: rgba(128, 140, 153, 0.2);
+$light-orange: #FFE8C2;
+$nebula: #d2e1dd;
+$gray-lighter: #eee;
+
+$small-border: 3px;
+$large-padding: 10px 15px;
+$small-padding: 4px 8px;
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+h3{
+  text-align: center;
+  margin: 20px 0;
+  font-weight: 300;
+}
+.app{
+  max-width: 450px;
+  min-width: 250px;
+}
+.invite {
+  text-align: center;
+}
+
+.invite span{
+    font-weight: bold;
+}
+
+/*
+ * КОМПОНЕНТ С ИГРОВОЙ ДОСКОЙ
+ */
+
+ .board{
+   position: relative;
+    overflow: hidden;
+ }
+.square {
+    cursor: pointer;
+    float:left;
+    position: relative;
+    width: 32%;
+    padding-bottom : 32%;
+    margin:0.66%;
+    background-color: $gray;
+    overflow:hidden;
+    border-radius: $small-border;
+}
+.square:hover{
+  background-color: $light-gray;
+  transition: background-color .3s linear;
+}
+.square .content {
+    position:absolute;
+    height:100%;
+    width:100%;
+    color: $white;
+}
+.symbol{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-size: 50px;
+    transition: font-size .2s;
+}
+
+/*
+ * КОМПОНЕНТ С ОШИБКАМИ
+ */
+
+.errors{
+    width: 200px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+}
+.err{
+  padding: $small-padding;
+  background-color: $light-orange;
+  border-radius: $small-border;
+  margin-bottom: 4px;
+}
+
+/*
+ * КОМПОНЕНТ С РЕЗУЛЬТАТОМ ИГРЫ
+ */
+
+ .result {
+    position:absolute;
+    height:100%;
+    width:100%;
+    background: $regent-grey-02;
+    border-radius: $small-border;
+ }
+ .result h4{
+    margin: 0;
+    padding: $large-padding;
+    border-radius: $small-border;
+    color:$white;
+    background-color: $hopbush;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 700;
+ }
+
+/*
+ * АНИМАЦИЯ
+ */
+
+.ttt-appear,
+.ttt-enter {
+  opacity: 0.01;
+}
+.ttt-appear.ttt-appear-active,
+.ttt-enter.ttt-enter-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+.turn-enter.turn-enter-active {
+    font-size: 30px;
+}
+.errors-enter {
+  opacity: 0;
+  transform: translateX(250px);
+}
+.errors-enter.errors-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: 0.3s;
+}
+
+.errors-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.errors-leave.errors-leave-active {
+  opacity: 0;
+  transform: translateX(250px);
+  transition: 0.3s;
+}
+
+/*
+ * КОМПОНЕНТ С ЧАТОМ
+ */
+.chat{
+    margin: 15px 0;
+}
+.messages {
+    margin-top: 10px;
+}
+.msg{
+    padding: 10px 15px;
+    border-radius: $small-border;
+    background: $gray-lighter;
+    margin-bottom: 5px;
+}
+
+.chat .msg .glyphicon{
+  float: right;
+}
+/*
+ * РАЗНОЕ
+ */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
