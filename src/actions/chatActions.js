@@ -1,9 +1,17 @@
-import { MESSAGE_SEND_REQUEST } from '../constants/chat'
+import { MESSAGE_SEND, MESSAGE_NEW } from '../constants/chat'
 
-export function sendMessage(user, text) {
-  const message = { user: user, text: text, status: 'wait' }
+export function sendMessage(text, status) {
+  const message = { user: 'you', text: text, status: status }
+
   return {
-    type: MESSAGE_SEND_REQUEST,
+    type: MESSAGE_SEND,
+    message
+  }
+}
+export function newMessage(text) {
+  const message = { user: 'opponent', text: text }
+  return {
+    type: MESSAGE_NEW,
     message
   }
 }

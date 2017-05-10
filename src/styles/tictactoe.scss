@@ -23,7 +23,11 @@ h3{
   max-width: 450px;
   min-width: 250px;
 }
-.invite{
+.invite {
+  text-align: center;
+}
+
+.invite span{
     font-weight: bold;
 }
 
@@ -127,22 +131,22 @@ h3{
 .turn-enter.turn-enter-active {
     font-size: 30px;
 }
-.example-enter {
+.errors-enter {
   opacity: 0;
   transform: translateX(250px);
 }
-.example-enter.example-enter-active {
+.errors-enter.errors-enter-active {
   opacity: 1;
   transform: translateX(0);
   transition: 0.3s;
 }
 
-.example-leave {
+.errors-leave {
   opacity: 1;
   transform: translateX(0);
 }
 
-.example-leave.example-leave-active {
+.errors-leave.errors-leave-active {
   opacity: 0;
   transform: translateX(250px);
   transition: 0.3s;
@@ -155,12 +159,18 @@ h3{
     margin: 15px 0;
 }
 .messages {
+    margin-top: 10px;
+}
+.msg{
     padding: 10px 15px;
     border-radius: $small-border;
-    margin-top: 10px;
-    background: $gray-lighter
+    background: $gray-lighter;
+    margin-bottom: 5px;
 }
 
+.chat .msg .glyphicon{
+  float: right;
+}
 /*
  * РАЗНОЕ
  */

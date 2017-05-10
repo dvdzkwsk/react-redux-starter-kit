@@ -91,7 +91,7 @@ class App extends Component {
     const { inviteLink, connectionError } = this.props.welcome
     const { status, board, gameId, gameResult, errors } = this.props.tictactoe
     const { messages, user } = this.props.chat
-    const { sendMessage } = this.props.chatActions
+    const { sendMessage, newMessage } = this.props.chatActions
 
     // До начала игры показываем компонент welcome
     if (currentComponent === 'welcome') {
@@ -109,7 +109,14 @@ class App extends Component {
           gameResult={gameResult}
           errors={errors}
         />
-        <Chat messages={messages} sendMessage={sendMessage} user={user} />
+        <Chat
+          messages={messages}
+          sendMessage={sendMessage}
+          newMessage={newMessage}
+          socket={socket}
+          gameId={gameId}
+          user={user}
+        />
       </div>
     }
   }
