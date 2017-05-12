@@ -34,8 +34,8 @@ Finally, This project wouldn't be possible without the help of our many contribu
 
 ## Features
 * [react](https://github.com/facebook/react)
-* [redux](https://github.com/rackt/redux)
-* [react-router](https://github.com/rackt/react-router)
+* [redux](https://github.com/reactjs/redux)
+* [react-router](https://github.com/ReactTraining/react-router)
 * [webpack](https://github.com/webpack/webpack)
 * [babel](https://github.com/babel/babel)
 * [express](https://github.com/expressjs/express)
