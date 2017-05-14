@@ -20,7 +20,7 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "better-npm-run storybook",
     "build-storybook": "build-storybook"
   },
   "betterScripts": {
@@ -69,6 +69,12 @@
         "NODE_ENV": "test",
         "DEBUG": "app:*"
       }
+    },
+    "storybook": {
+      "command": "start-storybook -p 6006",
+      "env": {
+        "NODE_ENV": "development"
+      }
     }
   },
   "repository": {
@@ -115,6 +121,7 @@
     "yargs": "^6.3.0"
   },
   "devDependencies": {
+    "@kadira/storybook": "^2.35.3",
     "babel-eslint": "^7.1.0",
     "babel-plugin-istanbul": "^3.0.0",
     "chai": "^3.4.1",
@@ -145,7 +152,6 @@
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.12.2",
-    "@kadira/storybook": "^2.21.0"
+    "webpack-hot-middleware": "^2.12.2"
   }
 }
