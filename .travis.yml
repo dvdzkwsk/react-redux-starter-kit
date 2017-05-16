@@ -4,16 +4,14 @@ node_js:
   - "6"
 
 cache:
+  yarn: true
   directories:
     - node_modules
 
-install:
-  - npm install -g yarn
-  - yarn install
-
 script:
-  - npm run deploy:dev
-  - npm run deploy:prod
+  - yarn lint
+  - yarn test
+  - yarn build
 
 after_success:
-  - npm run codecov
+  - yarn codecov

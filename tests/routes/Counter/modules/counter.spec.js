@@ -84,8 +84,8 @@ describe('(Redux Module) Counter', () => {
     it('Should call dispatch and getState exactly once.', () => {
       return doubleAsync()(_dispatchSpy, _getStateSpy)
         .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
+          _dispatchSpy.should.have.been.calledOnce()
+          _getStateSpy.should.have.been.calledOnce()
         })
     })
 
@@ -94,14 +94,14 @@ describe('(Redux Module) Counter', () => {
 
       return doubleAsync()(_dispatchSpy, _getStateSpy)
         .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
+          _dispatchSpy.should.have.been.calledOnce()
+          _getStateSpy.should.have.been.calledOnce()
           expect(_globalState.counter).to.equal(4)
           return doubleAsync()(_dispatchSpy, _getStateSpy)
         })
         .then(() => {
-          _dispatchSpy.should.have.been.calledTwice
-          _getStateSpy.should.have.been.calledTwice
+          _dispatchSpy.should.have.been.calledTwice()
+          _getStateSpy.should.have.been.calledTwice()
           expect(_globalState.counter).to.equal(8)
         })
     })
