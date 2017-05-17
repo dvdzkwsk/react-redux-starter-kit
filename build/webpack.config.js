@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('../project.config')
 
-const inProject = (...args) => path.resolve(project.basePath, ...args)
+const inProject = path.resolve.bind(path, project.basePath)
 const inProjectSrc = (file) => inProject(project.srcDir, file)
 
 const __DEV__ = project.env === 'development'
@@ -151,15 +151,17 @@ config.module.rules.push({
 
 // Fonts
 // ------------------------------------
-const FONT_TYPES = new Map([
+;[
   ['woff', 'application/font-woff'],
   ['woff2', 'application/font-woff2'],
   ['otf', 'font/opentype'],
   ['ttf', 'application/octet-stream'],
   ['eot', 'application/vnd.ms-fontobject'],
   ['svg', 'image/svg+xml'],
-])
-for (let [extension, mimetype] of FONT_TYPES) {
+].forEach((font) => {
+  const extension = font[0]
+  const mimetype = font[1]
+
   config.module.rules.push({
     test    : new RegExp(`\\.${extension}$`),
     loader  : 'url-loader',
@@ -169,7 +171,7 @@ for (let [extension, mimetype] of FONT_TYPES) {
       mimetype,
     },
   })
-}
+})
 
 // HTML Template
 // ------------------------------------
