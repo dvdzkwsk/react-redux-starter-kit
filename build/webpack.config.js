@@ -21,9 +21,6 @@ const config = {
     ],
   },
   devtool: project.sourcemaps ? 'source-map' : false,
-  performance: {
-    hints: false,
-  },
   output: {
     path: inProject(project.outDir),
     filename: __DEV__ ? '[name].js' : '[name].[chunkhash].js',
