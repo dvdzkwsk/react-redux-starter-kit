@@ -1,6 +1,16 @@
 Changelog
 =========
 
+3.0.1
+-------------
+
+### Improvements
+* Added Node `^5.0.0` to CI build
+
+### Fixes
+* Removed usage of the spread operator for function arguments
+* Added missing `fs-extra` dependency
+
 3.0.0
 -------------
 
