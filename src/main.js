@@ -36,6 +36,7 @@ if (__DEV__) {
       try {
         renderApp()
       } catch (e) {
+        console.error(e)
         renderError(e)
       }
     }
