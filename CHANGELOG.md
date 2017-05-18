@@ -1,6 +1,49 @@
 Changelog
 =========
 
+3.0.1
+-------------
+
+### Improvements
+* Added Node `^5.0.0` to CI build
+
+### Fixes
+* Removed usage of the spread operator for function arguments
+* Added missing `fs-extra` dependency
+
+3.0.0
+-------------
+
+### Features
+* Upgraded webpack to `^2.0.0` (along with all associated dependencies)
+* Upgraded react to `^15.5.4`
+* Upgraded react-dom to `^15.5.4`
+* Upgraded react-redux to `^5.0.4`
+* Upgraded redbox-react to `^5.0.4`
+* Upgraded bootstrap to `^4.0.0-alpha`
+* Replaced 3rd-party bootstrap import with local dependency
+* Replaced `babel-preset-stage-1` and friends with `babel-preset-env`
+* Added normalizer bundler for JavaScript (`Promise`, `fetch`, and `Object.assign`)
+* Added `dirty-chai`
+
+### Improvements
+* Replaced PropTypes usage with `prop-types` package
+* Simplified project structure and configuration
+* Replaced postcss-loader usage with css-loader builtins
+* Webpack manifest is now bundled separately from vendor bundle (improves caching)
+* Replaced `file-loader` with `url-loader`
+* Moved all build-related dependencies back to `devDependencies`
+* Replaced `better-npm-run` with `cross-env`
+* Cleaned up some sloppy tests
+
+### Fixes
+* `console.log` now works correctly inside of Karma
+
+### Deprecations
+* Code coverage reporting has been temporarily removed
+* Support for `.css` files has been temporarily removed (use `.scss` or `.sass`)
+* Removed `normalize.css` since this is now provided by bootstrap
+
 3.0.0-alpha.0
 -------------
 

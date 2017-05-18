@@ -1,37 +1,40 @@
-// ---------------------------------------
-// Test Environment Setup
-// ---------------------------------------
-import sinon from 'sinon'
+import 'normalize.js'
 import chai from 'chai'
-import sinonChai from 'sinon-chai'
+import sinon from 'sinon'
+import dirtyChai from 'dirty-chai'
 import chaiAsPromised from 'chai-as-promised'
+import sinonChai from 'sinon-chai'
 import chaiEnzyme from 'chai-enzyme'
 
-chai.use(sinonChai)
-chai.use(chaiAsPromised)
-chai.use(chaiEnzyme())
+// Mocha / Chai
+// ------------------------------------
+mocha.setup({ ui: 'bdd' })
+chai.should()
 
 global.chai = chai
-global.sinon = sinon
 global.expect = chai.expect
-global.should = chai.should()
+global.sinon = sinon
 
-// ---------------------------------------
-// Require Tests
-// ---------------------------------------
-// for use with karma-webpack-with-fast-source-maps
-const __karmaWebpackManifest__ = []; // eslint-disable-line
-const inManifest = (path) => ~__karmaWebpackManifest__.indexOf(path)
+// Chai Plugins
+// ------------------------------------
+chai.use(chaiEnzyme())
+chai.use(dirtyChai)
+chai.use(chaiAsPromised)
+chai.use(sinonChai)
 
-// require all `tests/**/*.spec.js`
-const testsContext = require.context('./', true, /\.spec\.js$/)
+// Test Importer
+// ------------------------------------
+// We use a Webpack global here as it is replaced with a string during compile.
+// Using a regular JS variable is not statically analyzable so webpack will throw warnings.
+const testsContext = require.context('./', true, /\.(spec|test)\.(js|ts|tsx)$/)
 
-// only run tests that have changed after the first pass.
-const testsToRun = testsContext.keys().filter(inManifest)
-;(testsToRun.length ? testsToRun : testsContext.keys()).forEach(testsContext)
+// When a test file changes, only rerun that spec file. If something outside of a
+// test file changed, rerun all tests.
+// https://www.npmjs.com/package/karma-webpack-with-fast-source-maps
+const __karmaWebpackManifest__ = []
+const allTests = testsContext.keys()
+const changedTests = allTests.filter(path => {
+  return __karmaWebpackManifest__.indexOf(path) !== -1
+})
 
-// require all `src/**/*.js` except for `main.js` (for isparta coverage reporting)
-if (__COVERAGE__) {
-  const componentsContext = require.context('../src/', true, /^((?!main|reducers).)*\.js$/)
-  componentsContext.keys().forEach(componentsContext)
-}
+;(changedTests.length ? changedTests : allTests).forEach(testsContext)
