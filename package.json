@@ -20,6 +20,8 @@
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "bootstrap": "^4.0.0-alpha",
     "compression": "^1.6.2",
     "express": "^4.14.0",
@@ -33,6 +35,7 @@
     "redbox-react": "^1.3.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "request": "^2.81.0",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

@@ -5,9 +5,14 @@ const logger = require('../build/lib/logger')
 const webpackConfig = require('../build/webpack.config')
 const project = require('../project.config')
 const compress = require('compression')
-
+require('dotenv').config()
 const app = express()
+var bodyParser = require('body-parser')
+const google = require('./google')
+
 app.use(compress())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
@@ -62,6 +67,9 @@ if (project.env === 'development') {
   // the web server and not the app server, but this helps to demo the
   // server in production.
   app.use(express.static(path.resolve(project.basePath, project.outDir)))
+
 }
 
 module.exports = app
+
+
