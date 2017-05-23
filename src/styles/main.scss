@@ -12,10 +12,71 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #eee;
 }
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+.outer-form-container {
+  margin: 0 auto;
+}
+.flex-outer {
+  list-style-type: none;
+  margin: 0 auto;
+}
+
+.flex-outer li{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
+.flex-outer > li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.flex-outer li label,
+.flex-outer li p {
+  padding: 8px;
+  font-size: 2em;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.flex-outer > li > label,
+.flex-outer li p {
+  text-align: left;
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.flex-outer > li > label + *{
+  flex: 1 0 220px;
+}
+
+.flex-outer li p {
+  margin: 0;
+}
+
+.flex-outer li input:not([type='checkbox']),
+.flex-outer li textarea {
+  padding: 15px;
+  border: none;
+}
+
+.flex-outer li button {
+  margin-left: auto;
+  padding: 8px 16px;
+  border: none;
+  background: #333;
+  color: #f2f2f2;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  border-radius: 2px;
 }
