@@ -18,11 +18,11 @@ const getPolylines = (origin, destination) => {
     return results.json.routes.map(route => {
       return route.overview_polyline.points;
     }) 
-  })
-}
+  });
+};
 
 const retrieveElevationInfo = poly => {
-  url = `https://maps.googleapis.com/maps/api/elevation/json?locations=enc:${poly}&key=${process.env.googleAPI}`
+  url = `https://maps.googleapis.com/maps/api/elevation/json?locations=enc:${poly}&key=${process.env.googleAPI}`;
   return axios.get(url)
   .then(results => { 
     return {
@@ -30,7 +30,7 @@ const retrieveElevationInfo = poly => {
       elevation: elevationDiff(results.data.results) 
     }
   });
-}
+};
 
 //takes an array of elevations in meters and converts the total ascent and descent
 const elevationDiff = (elevationArr) => {
@@ -51,15 +51,13 @@ const elevationDiff = (elevationArr) => {
   return {
     climb: Math.round(changes.climb * 3.28084),
     descent: Math.round((changes.descent * 3.28084))
-  }
+  };
 }
 
 const retrieveRouteInfo = (origin, destination) => {
-  let routes;
-
   getPolylines(origin, destination)
   .then(polys => {
-    return Promise.all(polys.map(retrieveElevationInfo))
+    return Promise.all(polys.map(retrieveElevationInfo));
   })
   .then(console.log);
 }
