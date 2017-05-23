@@ -1,50 +1,71 @@
 var axios = require('axios');
+var Promise = require('bluebird').Promise;
 var googleMaps = require('@google/maps').createClient({
   key: process.env.googleAPI,
-  Promise: require('bluebird').Promise
+  Promise: Promise
 });
 
-googleMaps.directions({
-  origin:'1262 page st, sf, ca',
-  destination: '855 page st, sf, ca',
-  mode: 'bicycling'
-})
-.asPromise()
-.then(results => {
-  console.log('routes', results.json.routes[0].overview_polyline)
-  console.log('routes.legs', results.json.routes[0])
-  console.log('routes.legs', results.json.routes[0].legs[0])
-  console.log('waypoints', results.json.geocoded_waypoints)
-})
+//returns an array of polylines
+const getPolylines = (origin, destination) => {
+  return googleMaps.directions({
+    origin: origin,
+    destination: destination,
+    mode: 'bicycling',
+    alternatives: true
+  })
+  .asPromise()
+  .then(results => {
+    return results.json.routes.map(route => {
+      return route.overview_polyline.points;
+    }) 
+  })
+}
 
+const retrieveElevationInfo = poly => {
+  url = `https://maps.googleapis.com/maps/api/elevation/json?locations=enc:${poly}&key=${process.env.googleAPI}`
+  return axios.get(url)
+  .then(results => { 
+    return {
+      poly: poly, 
+      elevation: elevationDiff(results.data.results) 
+    }
+  });
+}
 
-const wp  = 'swoeFnckjV_BRKcByDd@i@gI{@uM_AcOgD}g@_Ci^wAqTuBq\\Gi@ASOBuC\\g@H}Dd@}ARu@JMBDr@{Db@cAgPy@cLi@_HEw@eD`@uC\\iIbAuGt@sAoSi@iI}B{]QwCJCHEd@m@\\e@t@`An@|@B@'
-const test = 'wgpeFnkijVoD}i@'
-//path2 i copied from results.json.geocoded_waypoints
-
-
-axios.get(`https://maps.googleapis.com/maps/api/elevation/json?locations=enc:${test}&key=${process.env.googleAPI}`)
-.then(res => console.log(elevationDiff(res.data.results)))
-
+//takes an array of elevations in meters and converts the total ascent and descent
 const elevationDiff = (elevationArr) => {
   let prev = elevationArr[0].elevation;
 
-  let change = elevationArr.reduce((accum, distObj) => {
+  let changes = elevationArr.reduce((accum, distObj) => {
     let change = distObj.elevation - prev;
     if (change > 0) {
-      accum.gain += change;
+      accum.climb += change;
     } else {
-      accum.loss += -change;
+      accum.descent += change;
     }
 
     prev = distObj.elevation;
     return accum;
-  }, 
-  {gain: 0, loss: 0})
+  }, {descent: 0, climb: 0});
 
   return {
-    gain: change.gain * 3.28,
-    loss: change.loss * 3.28
+    climb: Math.round(changes.climb * 3.28084),
+    descent: Math.round((changes.descent * 3.28084))
   }
 }
+
+const retrieveRouteInfo = (origin, destination) => {
+  let routes;
+
+  getPolylines(origin, destination)
+  .then(polys => {
+    return Promise.all(polys.map(retrieveElevationInfo))
+  })
+  .then(console.log);
+}
+
+retrieveRouteInfo('631 cole street, sf', '944 market st, sf, ca');
+
+
+
 
