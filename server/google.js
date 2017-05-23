@@ -5,15 +5,12 @@ var googleMaps = require('@google/maps').createClient({
 });
 
 googleMaps.directions({
-  // key: process.env.googleAPI,
   origin:'1262 page st, sf, ca',
   destination: '855 page st, sf, ca',
   mode: 'bicycling'
 })
 .asPromise()
 .then(results => {
-
-
   console.log('routes', results.json.routes[0].overview_polyline)
   console.log('routes.legs', results.json.routes[0])
   console.log('routes.legs', results.json.routes[0].legs[0])
@@ -30,9 +27,6 @@ axios.get(`https://maps.googleapis.com/maps/api/elevation/json?locations=enc:${t
 .then(res => console.log(elevationDiff(res.data.results)))
 
 const elevationDiff = (elevationArr) => {
-  console.log('things in here', elevationArr[0])
-
-
   let prev = elevationArr[0].elevation;
 
   let change = elevationArr.reduce((accum, distObj) => {
