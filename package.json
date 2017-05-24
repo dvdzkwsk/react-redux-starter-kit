@@ -10,6 +10,8 @@
     "start": "cross-env NODE_ENV=development node build/scripts/start",
     "test": "cross-env NODE_ENV=test karma start build/karma.config",
     "test:watch": "npm test -- --watch",
+    "test:jest": "jest --config build/jest.config.js --no-cache",
+    "test:jest:dev": "npm run test:jest -- --watch",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix"
   },
