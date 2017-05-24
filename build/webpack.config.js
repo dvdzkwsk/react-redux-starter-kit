@@ -75,6 +75,7 @@ config.module.rules.push({
         ],
       ],
       presets: [
+        'babel-preset-es2015',
         'babel-preset-react',
         ['babel-preset-env', {
           targets: {
