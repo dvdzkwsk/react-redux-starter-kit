@@ -4,21 +4,24 @@ import { shallow } from 'enzyme'
 
 describe('(Layout) PageLayout', () => {
   it('renders as a <div>', () => {
-    shallow(<PageLayout />).should.have.tagName('div')
+    const wrapper = shallow(<PageLayout />)
+    expect(wrapper.is('div')).toBe(true)
   })
 
   it('renders a project title', () => {
-    shallow(<PageLayout />).find('h1').should.have.text('React Redux Starter Kit')
+    const wrapper = shallow(<PageLayout />)
+    expect(wrapper.find('h1').text()).toBe('React Redux Starter Kit')
   })
 
   it('renders its children inside of the viewport', () => {
     const Child = () => <h2>child</h2>
-    shallow(
+    const wrapper = shallow(
       <PageLayout>
         <Child />
       </PageLayout>
     )
-      .find('.page-layout__viewport')
-      .should.contain(<Child />)
+
+    const childWrapper = wrapper.find('.page-layout__viewport').find('Child')
+    expect(childWrapper.length).toBeGreaterThan(0)
   })
 })
