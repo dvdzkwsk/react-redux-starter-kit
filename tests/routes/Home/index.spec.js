@@ -8,10 +8,10 @@ describe('(Route) Home', () => {
   })
 
   it('Should return a route configuration object', () => {
-    expect(typeof HomeRoute).toEqual('object')
+    expect(typeof HomeRoute).toBe('object')
   })
 
   it('Should define a route component', () => {
-    expect(_component.type).toEqual('div')
+    expect(_component.type).toBe('div')
   })
 })
