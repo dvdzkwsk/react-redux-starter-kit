@@ -1,0 +1,21 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - echo $CODEBUILD_SRC_DIR
+      - echo Installing NPM...
+      - npm install
+  pre_build:
+    commands:
+      - echo Nothing for Pre-Build
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the Node.js code
+      - npm run deploy:prod
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Sync with S3
+      - aws s3 sync dist/* s3://extension.taygo.tech
