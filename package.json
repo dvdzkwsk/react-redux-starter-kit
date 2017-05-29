@@ -8,7 +8,7 @@
     "compile": "node build/scripts/compile",
     "build": "npm run clean && cross-env NODE_ENV=production npm run compile",
     "start": "cross-env NODE_ENV=development node build/scripts/start",
-    "test": "jest --config build/jest.config.js --no-cache",
+    "test": "jest --config build/jest.config.js --no-cache --coverage",
     "test:watch": "npm test -- --watch",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix"

@@ -1,6 +1,8 @@
 const project = require('../project.config')
 
 module.exports = {
+  'coverageDirectory': './coverage/',
+  'collectCoverage': true,
   'globals': {
     'process.env': { 'NODE_ENV': 'test' },
     '__DEV__': false,
