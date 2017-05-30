@@ -5,30 +5,38 @@ var googleMaps = require('@google/maps').createClient({
   Promise: Promise
 });
 
-//returns an array of polylines
-const getPolylines = (origin, destination) => {
-  return googleMaps.directions({
-    origin: origin,
-    destination: destination,
-    mode: 'bicycling',
-    alternatives: true
-  })
-  .asPromise()
-  .then(results => {
-    return results.json.routes.map(route => {
-      return route.overview_polyline.points;
-    }) 
-  });
+const stringifyLatLng = (latLng) => {
+   return latLng.lat + ',' + latLng.lng;
+}
+
+const latLngObj = (step) => {
+  return {
+    lat: step.lat,
+    lng: step.lng
+  };
 };
 
-const retrieveElevationInfo = poly => {
-  url = `https://maps.googleapis.com/maps/api/elevation/json?locations=enc:${poly}&key=${process.env.googleAPI}`;
+const createStepsFromRoute = (route) => {
+  let steps = [ latLngObj(route.legs[0].steps[0].start_location) ]
+              .concat(route.legs[0].steps.map(leg => latLngObj(leg.end_location))); 
+
+  return steps; 
+}
+
+const attachElevation = (steps) => {
+  let path = steps.map(stringifyLatLng).join('|');
+
+  return retrieveElevationInfo(path)
+  .then(elevationInfo => {
+    return Object.assign({steps: steps}, elevationInfo)
+  });
+}
+
+const retrieveElevationInfo = pathString => {
+  url = `https://maps.googleapis.com/maps/api/elevation/json?path=${pathString}&samples=150&key=${process.env.googleAPI}`;
   return axios.get(url)
   .then(results => { 
-    return {
-      poly: poly, 
-      elevation: elevationDiff(results.data.results) 
-    }
+    return elevationDiff(results.data.results) 
   });
 };
 
@@ -39,31 +47,40 @@ const elevationDiff = (elevationArr) => {
   let changes = elevationArr.reduce((accum, distObj) => {
     let change = distObj.elevation - prev;
     if (change > 0) {
-      accum.climb += change;
+      accum.ascent += change;
     } else {
       accum.descent += change;
     }
 
     prev = distObj.elevation;
     return accum;
-  }, {descent: 0, climb: 0});
+  }, {descent: 0, ascent: 0});
 
   return {
-    climb: Math.round(changes.climb * 3.28084),
+    ascent: Math.round(changes.ascent * 3.28084),
     descent: Math.round((changes.descent * 3.28084))
   };
-}
+};
 
-const retrieveRouteInfo = (origin, destination) => {
-  getPolylines(origin, destination)
-  .then(polys => {
-    return Promise.all(polys.map(retrieveElevationInfo));
+const getDirections = (origin, destination) => {
+  return googleMaps.directions({
+    origin: origin,
+    destination: destination,
+    mode: 'bicycling',
+    alternatives: true
   })
-  .then(console.log);
-}
+  .asPromise()
+  .then(results => {
+    return results.json.routes.map(route => {
+      return createStepsFromRoute(route);
+    });
+   })
+  .then(routesArr => {
+    return Promise.all(routesArr.map(attachElevation))
+  })
+  .then(console.log)
+};
 
-retrieveRouteInfo('631 cole street, sf', '944 market st, sf, ca');
-
-
+getDirections('631 cole st, sf, ca', '944 market st, sf, ca')
 
 
