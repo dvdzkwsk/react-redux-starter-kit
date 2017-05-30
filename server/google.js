@@ -1,13 +1,13 @@
-var axios = require('axios');
-var Promise = require('bluebird').Promise;
-var googleMaps = require('@google/maps').createClient({
+const axios = require('axios');
+const Promise = require('bluebird').Promise;
+const googleMaps = require('@google/maps').createClient({
   key: process.env.googleAPI,
   Promise: Promise
 });
 
 const stringifyLatLng = (latLng) => {
    return latLng.lat + ',' + latLng.lng;
-}
+};
 
 const latLngObj = (step) => {
   return {
@@ -21,7 +21,7 @@ const createStepsFromRoute = (route) => {
               .concat(route.legs[0].steps.map(leg => latLngObj(leg.end_location))); 
 
   return steps; 
-}
+};
 
 const attachElevation = (steps) => {
   let path = steps.map(stringifyLatLng).join('|');
@@ -30,9 +30,9 @@ const attachElevation = (steps) => {
   .then(elevationInfo => {
     return Object.assign({steps: steps}, elevationInfo)
   });
-}
+};
 
-const retrieveElevationInfo = pathString => {
+const retrieveElevationInfo = (pathString) => {
   url = `https://maps.googleapis.com/maps/api/elevation/json?path=${pathString}&samples=150&key=${process.env.googleAPI}`;
   return axios.get(url)
   .then(results => { 
@@ -76,8 +76,8 @@ const getDirections = (origin, destination) => {
     });
    })
   .then(routesArr => {
-    return Promise.all(routesArr.map(attachElevation))
+    return Promise.all(routesArr.map(attachElevation));
   })
 };
 
-module.exports.getDirections = getDirections
+module.exports.getDirections = getDirections;

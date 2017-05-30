@@ -1,18 +1,202 @@
-// // // results: {
-// // //   json: {
-// // //     geocoded_waypoints: [],
-// // //     routes: [
-// // //       { bounds: [Object],
-// // //        copyrights: 'Map data ©2017 Google',
-// // //        legs: [Object],
-// // //        overview_polyline: {points: 'crazysquigly'},
-// // //        summary: 'Page St',
-// // //        warnings: [Object],
-// // //        waypoint_order: [] }, {} , {}]
-// // //   }
-// // // }
+
+//RESULTS FROM OUR DIRECTIONS ROUTE:
+//OUTLINE:
+
+// [ {steps: [], ascent: #, descent: #}, {}, {}]   
+
+//EXAMPLE for '631 cole st, sf, ca' to '944 market st, sf, ca'
+// [
+//   {
+//     "steps": [
+//       {
+//         "lat": 37.7690564,
+//         "lng": -122.4506363
+//       },
+//       {
+//         "lat": 37.7695354,
+//         "lng": -122.4507359
+//       },
+//       {
+//         "lat": 37.7696002,
+//         "lng": -122.450244
+//       },
+//       {
+//         "lat": 37.770529,
+//         "lng": -122.4504334
+//       },
+//       {
+//         "lat": 37.7739163,
+//         "lng": -122.4238142
+//       },
+//       {
+//         "lat": 37.7767142,
+//         "lng": -122.4243971
+//       },
+//       {
+//         "lat": 37.7766779,
+//         "lng": -122.4246641
+//       },
+//       {
+//         "lat": 37.777618,
+//         "lng": -122.4248359
+//       },
+//       {
+//         "lat": 37.7784944,
+//         "lng": -122.4182568
+//       },
+//       {
+//         "lat": 37.7831079,
+//         "lng": -122.419195
+//       },
+//       {
+//         "lat": 37.7844603,
+//         "lng": -122.4085608
+//       },
+//       {
+//         "lat": 37.7840081,
+//         "lng": -122.408092
+//       },
+//       {
+//         "lat": 37.7834842,
+//         "lng": -122.4087433
+//       }
+//     ],
+//     "ascent": 99,
+//     "descent": 338
+//   },
+//   {
+//     "steps": [
+//       {
+//         "lat": 37.7690564,
+//         "lng": -122.4506363
+//       },
+//       {
+//         "lat": 37.7695354,
+//         "lng": -122.4507359
+//       },
+//       {
+//         "lat": 37.7696002,
+//         "lng": -122.450244
+//       },
+//       {
+//         "lat": 37.770529,
+//         "lng": -122.4504334
+//       },
+//       {
+//         "lat": 37.773254,
+//         "lng": -122.4290155
+//       },
+//       {
+//         "lat": 37.77646170000001,
+//         "lng": -122.4296619
+//       },
+//       {
+//         "lat": 37.77887279999999,
+//         "lng": -122.4300002
+//       },
+//       {
+//         "lat": 37.7802841,
+//         "lng": -122.41862
+//       },
+//       {
+//         "lat": 37.7831079,
+//         "lng": -122.419195
+//       },
+//       {
+//         "lat": 37.7844603,
+//         "lng": -122.4085608
+//       },
+//       {
+//         "lat": 37.7840081,
+//         "lng": -122.408092
+//       },
+//       {
+//         "lat": 37.7834842,
+//         "lng": -122.4087433
+//       }
+//     ],
+//     "ascent": 85,
+//     "descent": 325
+//   },
+//   {
+//     "steps": [
+//       {
+//         "lat": 37.7690564,
+//         "lng": -122.4506363
+//       },
+//       {
+//         "lat": 37.7695354,
+//         "lng": -122.4507359
+//       },
+//       {
+//         "lat": 37.7696002,
+//         "lng": -122.450244
+//       },
+//       {
+//         "lat": 37.770529,
+//         "lng": -122.4504334
+//       },
+//       {
+//         "lat": 37.774329,
+//         "lng": -122.4201949
+//       },
+//       {
+//         "lat": 37.774435,
+//         "lng": -122.4202083
+//       },
+//       {
+//         "lat": 37.7795381,
+//         "lng": -122.4137424
+//       },
+//       {
+//         "lat": 37.7796658,
+//         "lng": -122.4138881
+//       },
+//       {
+//         "lat": 37.7803962,
+//         "lng": -122.4135574
+//       },
+//       {
+//         "lat": 37.7837352,
+//         "lng": -122.4142647
+//       },
+//       {
+//         "lat": 37.7844603,
+//         "lng": -122.4085608
+//       },
+//       {
+//         "lat": 37.7840081,
+//         "lng": -122.408092
+//       },
+//       {
+//         "lat": 37.7834842,
+//         "lng": -122.4087433
+//       }
+//     ],
+//     "ascent": 87,
+//     "descent": 326
+//   }
+// ]
 
 
+//RESULTS FROM GOOGLE DIRECTION:
+
+//OUTLINE:
+// results: {
+//   json: {
+//     geocoded_waypoints: [],
+//     routes: [
+//       { bounds: [Object],
+//        copyrights: 'Map data ©2017 Google',
+//        legs: [Object],
+//        overview_polyline: {points: 'crazysquigly'},
+//        summary: 'Page St',
+//        warnings: [Object],
+//        waypoint_order: [] }, {} , {}]
+//   }
+// }
+
+//DETAILS:
 // let Response = 
 // {
 //    "geocoded_waypoints" : [
@@ -601,28 +785,5 @@
 //    "status" : "OK"
 // }
 
-// const mapToLegs = (response) => {
-
-//    return response.routes[0].legs[0].steps.reduce((latLngArr, leg) => {
-//       latLngArr.push(leg.end_location);
-//       return latLngArr;
-//    }, 
-//    [ response.routes[0].legs[0].steps[0].start_location ]);
-// }
-
-// const stringifyLatLng = (latLng) => {
-//    return latLng.lat + ',' + latLng.lng;
-// }
-
-// const mapToPathString = (response) => {
-
-//  return  [ stringifyLatLng(response.routes[0].legs[0].steps[0].start_location) ]
-//          .concat(response.routes[0].legs[0].steps.map(leg => stringifyLatLng(leg.end_location)))
-//          .join('|')
-// }
-
-
-// // console.log(mapToLegs(Response))
-// console.log(mapToPathString(Response))
 
 
