@@ -10,8 +10,7 @@
     "promise"
   ],
   "env": {
-    "browser" : true,
-    "jest": true
+    "browser" : true
   },
   "globals": {
     "__DEV__"      : false,
