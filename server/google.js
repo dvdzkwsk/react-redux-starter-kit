@@ -49,7 +49,7 @@ const elevationDiff = (elevationArr) => {
     if (change > 0) {
       accum.ascent += change;
     } else {
-      accum.descent += change;
+      accum.descent += -change;
     }
 
     prev = distObj.elevation;
@@ -78,9 +78,6 @@ const getDirections = (origin, destination) => {
   .then(routesArr => {
     return Promise.all(routesArr.map(attachElevation))
   })
-  .then(console.log)
 };
 
-getDirections('631 cole st, sf, ca', '944 market st, sf, ca')
-
-
+module.exports.getDirections = getDirections

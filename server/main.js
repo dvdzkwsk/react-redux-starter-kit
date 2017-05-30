@@ -7,8 +7,9 @@ const project = require('../project.config')
 const compress = require('compression')
 require('dotenv').config()
 const app = express()
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const google = require('./google')
+const directionsRoute = require('./routes/directions')
 
 app.use(compress())
 app.use(bodyParser.json())
@@ -33,6 +34,8 @@ if (project.env === 'development') {
   app.use(require('webpack-hot-middleware')(compiler, {
     path: '/__webpack_hmr'
   }))
+
+  app.get('/directions', directionsRoute)
 
   // Serve static assets from ~/public since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside
