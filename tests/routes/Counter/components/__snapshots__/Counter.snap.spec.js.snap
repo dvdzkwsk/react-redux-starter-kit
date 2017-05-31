@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "margin": "0 auto",
+    }
+  }
+>
+  <h2>
+    Counter: 
+    2
+  </h2>
+  <button
+    className="btn btn-primary"
+    onClick={[Function]}
+  >
+    Increment
+  </button>
+   
+  <button
+    className="btn btn-secondary"
+    onClick={[Function]}
+  >
+    Double (Async)
+  </button>
+</div>
+`;

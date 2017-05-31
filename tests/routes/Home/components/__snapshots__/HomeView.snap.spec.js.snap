@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <h4>
+    Welcome!
+  </h4>
+  <img
+    alt="This is a duck, because Redux!"
+    className="duck"
+    src="test-file-stub"
+  />
+</div>
+`;
