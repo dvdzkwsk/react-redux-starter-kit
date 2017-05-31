@@ -5,9 +5,15 @@ const logger = require('../build/lib/logger')
 const webpackConfig = require('../build/webpack.config')
 const project = require('../project.config')
 const compress = require('compression')
-
+require('dotenv').config()
 const app = express()
+const bodyParser = require('body-parser')
+const google = require('./google')
+const directionsRoute = require('./routes/directions')
+
 app.use(compress())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
@@ -28,6 +34,8 @@ if (project.env === 'development') {
   app.use(require('webpack-hot-middleware')(compiler, {
     path: '/__webpack_hmr'
   }))
+
+  app.get('/directions', directionsRoute)
 
   // Serve static assets from ~/public since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside
@@ -62,6 +70,9 @@ if (project.env === 'development') {
   // the web server and not the app server, but this helps to demo the
   // server in production.
   app.use(express.static(path.resolve(project.basePath, project.outDir)))
+
 }
 
 module.exports = app
+
+
