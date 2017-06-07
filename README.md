@@ -13,18 +13,19 @@ Finally, This project wouldn't be possible without the help of our many contribu
 
 ## Table of Contents
 1. [Requirements](#requirements)
-1. [Installation](#getting-started)
-1. [Running the Project](#running-the-project)
-1. [Project Structure](#project-structure)
-1. [Live Development](#local-development)
+2. [Installation](#getting-started)
+3. [Running the Project](#running-the-project)
+4. [Project Structure](#project-structure)
+5. [Live Development](#local-development)
     * [Hot Reloading](#hot-reloading)
     * [Redux DevTools](#redux-devtools)
-1. [Routing](#routing)
-1. [Testing](#testing)
+    * [React Storybook](#react-storybook)
+6. [Routing](#routing)
+7. [Testing](#testing)
     * [dirty-chai](#dirty-chai)
-1. [Building for Production](#building-for-production)
-1. [Deployment](#deployment)
-1. [Thank You](#thank-you)
+8. [Building for Production](#building-for-production)
+9. [Deployment](#deployment)
+10. [Thank You](#thank-you)
 
 ## Requirements
 * node `^5.0.0`
@@ -55,14 +56,15 @@ $ yarn start  # Start the development server (or `npm start`)
 
 While developing, you will probably rely mostly on `yarn start`; however, there are additional scripts at your disposal:
 
-|`yarn <script>`    |Description|
-|-------------------|-----------|
-|`start`            |Serves your app at `localhost:3000`|
-|`build`            |Builds the application to ./dist|
-|`test`             |Runs unit tests with Karma. See [testing](#testing)|
-|`test:watch`       |Runs `test` in watch mode to re-run tests when changed|
-|`lint`             |[Lints](http://stackoverflow.com/questions/8503559/what-is-linting) the project for potential errors|
-|`lint:fix`         |Lints the project and [fixes all correctable errors](http://eslint.org/docs/user-guide/command-line-interface.html#fix)|
+| `yarn <script>` | Description                              |
+| --------------- | ---------------------------------------- |
+| `start`         | Serves your app at `localhost:3000`      |
+| `build`         | Builds the application to ./dist         |
+| `test`          | Runs unit tests with Karma. See [testing](#testing) |
+| `test:watch`    | Runs `test` in watch mode to re-run tests when changed |
+| `lint`          | [Lints](http://stackoverflow.com/questions/8503559/what-is-linting) the project for potential errors |
+| `lint:fix`      | Lints the project and [fixes all correctable errors](http://eslint.org/docs/user-guide/command-line-interface.html#fix) |
+| `run storybook` | Runs the React Storybook component showcase. |
 
 ## Project Structure
 
@@ -70,6 +72,7 @@ The project structure presented in this boilerplate is **fractal**, where functi
 
 ```
 .
+├── .storybook               # React Storybook configuration
 ├── build                    # All build-related code
 ├── public                   # Static public assets (not imported anywhere in source code)
 ├── server                   # Express application that provides webpack middleware
@@ -123,6 +126,24 @@ yarn add --dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-mon
 ```
 
 Then follow the [manual integration walkthrough](https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md).
+
+### React Storybook
+
+Storybook is a development environment for rapid development of UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components. using live reloading.
+
+First install the CLI using npm:
+
+```
+npm i -g @storybook/cli
+```
+
+Then run React Storybook with:
+
+```
+yarn run storybook
+```
+
+For customising the setup [visit the React Storybook GitHub repository](https://github.com/storybooks/storybook).
 
 ## Routing
 We use `react-router` [route definitions](https://github.com/ReactTraining/react-router/blob/v3/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. See the [project structure](#project-structure) section for more information.
