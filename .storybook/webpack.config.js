@@ -2,13 +2,7 @@ const path = require('path');
 const webpackConfig = require('../build/webpack.config')
 
 module.exports = {
-	plugins: [
-		// your custom plugins
-	],
 	module: {
-		loaders: [
-			// add your custom loaders.
-		],
 		rules: [
 			{
 				test: /\.(png|jpg|gif)$/,

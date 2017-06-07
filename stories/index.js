@@ -6,7 +6,7 @@ import Counter from '../src/routes/Counter/components/Counter'
 import HomeView from '../src/routes/Home/components/HomeView'
 
 storiesOf('Counter', module)
-    .add('default', () => <Counter/>);
+    .add('default', () => <Counter counter={5} doubleAsync={()=>{alert("Custom callback")}} increment={()=>{alert("Custom callback")}}/>);
 
 storiesOf('HomeView', module)
     .add('default', () => <HomeView/>);
