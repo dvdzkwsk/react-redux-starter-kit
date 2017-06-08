@@ -3,15 +3,15 @@ import {
 } from 'store/createStore'
 
 describe('(Store) createStore', () => {
-  let store = createStore()
-
   it('should have an empty asyncReducers object', () => {
+    let store = createStore()
     expect(typeof store.asyncReducers).toBe('object')
     expect(store.asyncReducers).toEqual({})
   })
 
   describe('(Location)', () => {
     it('store should be initialized with Location state', () => {
+      let store = createStore()
       const location = {
         pathname : '/echo'
       }
