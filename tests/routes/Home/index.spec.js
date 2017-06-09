@@ -1,17 +1,21 @@
-import HomeRoute from 'routes/Home'
+import HomeRoute from 'src/routes/Home';
 
-describe('(Route) Home', () => {
-  let _component
+import test from 'ava';
 
-  beforeEach(() => {
-    _component = HomeRoute.component()
-  })
+test('my passing test', t => {
+  t.pass();
+});
 
-  it('Should return a route configuration object', () => {
-    expect(typeof HomeRoute).to.equal('object')
-  })
+let _component;
 
-  it('Should define a route component', () => {
-    expect(_component.type).to.equal('div')
-  })
-})
+test.beforeEach(() => {
+  _component = HomeRoute.component();
+});
+
+test('Should return a route configuration object', t => {
+  t.is(typeof HomeRoute, 'object');
+});
+
+test('Should define a route component', t => {
+  t.is(_component.type, 'div');
+});

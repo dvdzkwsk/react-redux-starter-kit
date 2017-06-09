@@ -18,33 +18,33 @@ const config = {
     ],
     main: [
       inProjectSrc(project.main),
-    ],
+    ]
   },
   devtool: project.sourcemaps ? 'source-map' : false,
   output: {
     path: inProject(project.outDir),
     filename: __DEV__ ? '[name].js' : '[name].[chunkhash].js',
-    publicPath: project.publicPath,
+    publicPath: project.publicPath
   },
   resolve: {
     modules: [
       inProject(project.srcDir),
       'node_modules',
     ],
-    extensions: ['*', '.js', '.jsx', '.json'],
+    extensions: ['*', '.js', '.jsx', '.json']
   },
   externals: project.externals,
   module: {
-    rules: [],
+    rules: []
   },
   plugins: [
     new webpack.DefinePlugin(Object.assign({
       'process.env': { NODE_ENV: JSON.stringify(project.env) },
       __DEV__,
       __TEST__,
-      __PROD__,
+      __PROD__
     }, project.globals))
-  ],
+  ]
 }
 
 // JavaScript
@@ -64,7 +64,7 @@ config.module.rules.push({
           {
             helpers: true,
             polyfill: false, // we polyfill needed features in src/normalize.js
-            regenerator: true,
+            regenerator: true
           },
         ],
         [
@@ -77,15 +77,15 @@ config.module.rules.push({
       presets: [
         'babel-preset-react',
         ['babel-preset-env', {
-          modules: false,
           targets: {
             ie9: true,
-          },
-          uglify: true,
+            uglify: true,
+            modules: false
+          }
         }],
       ]
-    },
-  }],
+    }
+  }]
 })
 
 // Styles
@@ -93,7 +93,7 @@ config.module.rules.push({
 const extractStyles = new ExtractTextPlugin({
   filename: 'styles/[name].[contenthash].css',
   allChunks: true,
-  disable: __DEV__,
+  disable: __DEV__
 })
 
 config.module.rules.push({
@@ -109,18 +109,18 @@ config.module.rules.push({
             autoprefixer: {
               add: true,
               remove: true,
-              browsers: ['last 2 versions'],
+              browsers: ['last 2 versions']
             },
             discardComments: {
-              removeAll : true,
+              removeAll : true
             },
             discardUnused: false,
             mergeIdents: false,
             reduceIdents: false,
             safe: true,
-            sourcemap: project.sourcemaps,
-          },
-        },
+            sourcemap: project.sourcemaps
+          }
+        }
       },
       {
         loader: 'sass-loader',
@@ -128,10 +128,10 @@ config.module.rules.push({
           sourceMap: project.sourcemaps,
           includePaths: [
             inProjectSrc('styles'),
-          ],
-        },
+          ]
+        }
       }
-    ],
+    ]
   })
 })
 config.plugins.push(extractStyles)
@@ -142,8 +142,8 @@ config.module.rules.push({
   test    : /\.(png|jpg|gif)$/,
   loader  : 'url-loader',
   options : {
-    limit : 8192,
-  },
+    limit : 8192
+  }
 })
 
 // Fonts
@@ -165,8 +165,8 @@ config.module.rules.push({
     options : {
       name  : 'fonts/[name].[ext]',
       limit : 10000,
-      mimetype,
-    },
+      mimetype
+    }
   })
 })
 
@@ -176,8 +176,8 @@ config.plugins.push(new HtmlWebpackPlugin({
   template: inProjectSrc('index.html'),
   inject: true,
   minify: {
-    collapseWhitespace: true,
-  },
+    collapseWhitespace: true
+  }
 }))
 
 // Development Tools
@@ -210,7 +210,7 @@ if (__PROD__) {
   config.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false,
+      debug: false
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: !!config.devtool,
@@ -225,8 +225,8 @@ if (__PROD__) {
         dead_code: true,
         evaluate: true,
         if_return: true,
-        join_vars: true,
-      },
+        join_vars: true
+      }
     })
   )
 }
