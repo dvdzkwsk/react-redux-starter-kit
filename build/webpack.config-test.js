@@ -14,7 +14,7 @@ const extractStyles = new ExtractTextPlugin({
 });
 
 module.exports = {
-  entry: {
+  entry: {		
     main: ['./tests/test-bundler.js']
   },
   target: 'node',
@@ -22,7 +22,7 @@ module.exports = {
     path: path.resolve('./build', project.basePath),
     filename: 'build/tests.js'
   },
-  externals: [nodeExternals()],
+  externals: [nodeExternals()],	
   module: {
     rules: [			
       {
@@ -105,6 +105,9 @@ module.exports = {
     ]
 	},
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+		modules: [
+			path.resolve(project.basePath)
+		]
   }
 };

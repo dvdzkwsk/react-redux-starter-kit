@@ -1,4 +1,4 @@
-import HomeRoute from '../../../src/routes/Home';
+import HomeRoute from 'src/routes/Home';
 
 import test from 'ava';
 
