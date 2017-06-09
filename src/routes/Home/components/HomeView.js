@@ -1,6 +1,6 @@
-import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import './HomeView.scss'
+import React from 'react';
+import DuckImage from '../assets/Duck.jpg';
+import './HomeView.scss';
 
 export const HomeView = () => (
   <div>
@@ -9,4 +9,4 @@ export const HomeView = () => (
   </div>
 )
 
-export default HomeView
+export default HomeView;
