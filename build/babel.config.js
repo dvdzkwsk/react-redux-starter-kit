@@ -20,14 +20,13 @@ module.exports = {
     ],
   ],
   presets: [
-    'babel-preset-es2015',
     'babel-preset-react',
     ['babel-preset-env', {
+      modules: false,
       targets: {
         ie9: true,
-        uglify: true,
-        modules: false,
       },
+      uglify: true,
     }],
   ]
 }
