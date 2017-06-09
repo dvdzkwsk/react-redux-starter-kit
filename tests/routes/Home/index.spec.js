@@ -3,7 +3,7 @@ import HomeRoute from 'src/routes/Home';
 import test from 'ava';
 
 test('my passing test', t => {
-	t.pass();
+  t.pass();
 });
 
 let _component;
@@ -13,7 +13,7 @@ test.beforeEach(() => {
 });
 
 test('Should return a route configuration object', t => {
-	t.is(typeof HomeRoute, 'object');
+  t.is(typeof HomeRoute, 'object');
 });
 
 test('Should define a route component', t => {
