@@ -138,7 +138,7 @@ config.module.rules.push({
 					mergeIdents: false,
 					reduceIdents: false,
 					safe: true,
-					sourcemap: true,
+					sourceMap: true,
 					plugins: function() {
 						return [lostGrid];
 					}
