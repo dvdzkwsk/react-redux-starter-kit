@@ -1,11 +1,79 @@
 {
-  "extends" : "../.eslintrc",
-  "env"     : {
-    "mocha" : true
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "plugins": [
+    "babel",
+    "react",
+    "promise"
+  ],
+  "env": {
+    "browser" : true
   },
-  "globals" : {
-    "expect" : false,
-    "should" : false,
-    "sinon"  : false
+  "globals": {
+    "__DEV__"      : false,
+    "__TEST__"     : false,
+    "__PROD__"     : false,
+    "__COVERAGE__" : false
+  },
+  "rules": {
+    "arrow-body-style": 1,
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "indent": [
+      2,
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "max-len": [
+      1,
+      150,
+      4,
+      {
+        "ignoreUrls": true
+      }
+    ],
+    "react/jsx-boolean-value": [2, "always"],
+    "react/no-did-mount-set-state": 1,
+    "react/jsx-wrap-multilines": 1,
+    "new-cap": 0,
+    "babel/new-cap": 0,
+    "no-else-return": 0,
+    "no-extend-native": 1,
+    "no-negated-condition": 2,
+    "no-param-reassign": 1,
+    "object-curly-spacing": [
+      2,
+      "always"
+    ],
+    "radix": [
+      2,
+      "as-needed"
+    ],
+    "react/jsx-indent-props": [
+      2,
+      2
+    ],
+    "react/jsx-curly-spacing": [
+      2,
+      "always"
+    ],
+    "jsx-quotes": [2, "prefer-double"],
+    "semi": [2, "always"],
+    "spaced-comment": 0,
+    "react/jsx-no-bind": [1],
+    "no-unused-vars": [
+      2,
+      {
+        "vars": "local"
+      }
+    ],
+    "template-curly-spacing": [0]
   }
 }

@@ -43,11 +43,11 @@ const compile = () => Promise.resolve()
     if (project.verbose) {
       logger.log(stats.toString({
         colors: true,
-        chunks: false,
+        chunks: false
       }))
     }
     logger.success(`Compiler finished successfully! See ./${project.outDir}.`)
   })
-  .catch((err) => logger.error('Compiler encountered errors.', err))
+	.catch((err) => logger.error('Compiler encountered errors.', err))
 
 compile()
