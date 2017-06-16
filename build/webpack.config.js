@@ -78,8 +78,7 @@ config.module.rules.push({
         'babel-preset-react',
         ['babel-preset-env', {
           modules: false,
-          targets: project.targetEnvironments,
-          uglify: true,
+          targets: Object.assign({}, project.targetEnvironments, { uglify: true }),
         }],
       ]
     },
