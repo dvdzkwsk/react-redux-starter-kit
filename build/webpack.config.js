@@ -51,7 +51,10 @@ const config = {
 // ------------------------------------
 config.module.rules.push({
   test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
+  exclude: (absPath) => {
+    const relativePathToBase = path.relative(project.basePath, absPath);
+    return /node_modules/.test(relativePathToBase);    
+  },
   use: [{
     loader: 'babel-loader',
     query: {
