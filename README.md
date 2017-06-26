@@ -57,7 +57,7 @@ While developing, you will probably rely mostly on `yarn start`; however, there 
 
 |`yarn <script>`    |Description|
 |-------------------|-----------|
-|`start`            |Serves your app at `localhost:3000`|
+|`start`            |Serves your app at `localhost:3100`|
 |`build`            |Builds the application to ./dist|
 |`test`             |Runs unit tests with Karma. See [testing](#testing)|
 |`test:watch`       |Runs `test` in watch mode to re-run tests when changed|
