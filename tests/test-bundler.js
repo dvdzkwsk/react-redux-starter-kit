@@ -37,4 +37,7 @@ const changedTests = allTests.filter(path => {
   return __karmaWebpackManifest__.indexOf(path) !== -1
 })
 
+const componentsContext = require.context('./../src', true, /\.(js)$/)
+componentsContext.keys().forEach(componentsContext)
+
 ;(changedTests.length ? changedTests : allTests).forEach(testsContext)
