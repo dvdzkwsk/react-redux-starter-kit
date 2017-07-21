@@ -3,19 +3,15 @@ import {
 } from 'store/createStore'
 
 describe('(Store) createStore', () => {
-  let store
-
-  before(() => {
-    store = createStore()
-  })
-
   it('should have an empty asyncReducers object', () => {
-    expect(store.asyncReducers).to.be.an('object')
-    expect(store.asyncReducers).to.be.empty()
+    let store = createStore()
+    expect(typeof store.asyncReducers).toBe('object')
+    expect(store.asyncReducers).toEqual({})
   })
 
   describe('(Location)', () => {
     it('store should be initialized with Location state', () => {
+      let store = createStore()
       const location = {
         pathname : '/echo'
       }
@@ -23,7 +19,7 @@ describe('(Store) createStore', () => {
         type    : 'LOCATION_CHANGE',
         payload : location
       })
-      expect(store.getState().location).to.deep.equal(location)
+      expect(store.getState().location).toEqual(location)
     })
   })
 })

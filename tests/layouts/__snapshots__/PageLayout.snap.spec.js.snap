@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="container text-center"
+>
+  <h1>
+    React Redux Starter Kit
+  </h1>
+  <a
+    onClick={[Function]}
+    style={Object {}}
+  >
+    Home
+  </a>
+   · 
+  <a
+    onClick={[Function]}
+    style={Object {}}
+  >
+    Counter
+  </a>
+  <div
+    className="page-layout__viewport"
+  />
+</div>
+`;

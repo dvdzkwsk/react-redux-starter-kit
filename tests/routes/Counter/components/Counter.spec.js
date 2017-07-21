@@ -11,29 +11,29 @@ describe('(Component) Counter', () => {
     _props = {
       counter : 5,
       ...bindActionCreators({
-        doubleAsync : (_spies.doubleAsync = sinon.spy()),
-        increment   : (_spies.increment = sinon.spy())
-      }, _spies.dispatch = sinon.spy())
+        doubleAsync : (_spies.doubleAsync = jest.fn()),
+        increment   : (_spies.increment = jest.fn())
+      }, _spies.dispatch = jest.fn())
     }
     _wrapper = shallow(<Counter {..._props} />)
   })
 
   it('renders as a <div>.', () => {
-    expect(_wrapper.is('div')).to.equal(true)
+    expect(_wrapper.is('div')).toBe(true)
   })
 
   it('renders with an <h2> that includes Counter label.', () => {
-    expect(_wrapper.find('h2').text()).to.match(/Counter:/)
+    expect(_wrapper.find('h2').text()).toMatch(/Counter:/)
   })
 
   it('renders {props.counter} at the end of the sample counter <h2>.', () => {
-    expect(_wrapper.find('h2').text()).to.match(/5$/)
+    expect(_wrapper.find('h2').text()).toMatch(/5$/)
     _wrapper.setProps({ counter: 8 })
-    expect(_wrapper.find('h2').text()).to.match(/8$/)
+    expect(_wrapper.find('h2').text()).toMatch(/8$/)
   })
 
   it('renders exactly two buttons.', () => {
-    expect(_wrapper.find('button')).to.have.length(2)
+    expect(_wrapper.find('button').length).toBe(2)
   })
 
   describe('Increment', () => {
@@ -44,20 +44,20 @@ describe('(Component) Counter', () => {
     })
 
     it('exists', () => {
-      expect(_button).to.exist()
+      expect(_button.length).toBeGreaterThan(0)
     })
 
     it('is a primary button', () => {
-      expect(_button.hasClass('btn btn-primary')).to.be.true()
+      expect(_button.hasClass('btn btn-primary')).toBe(true)
     })
 
     it('Calls props.increment when clicked', () => {
-      _spies.dispatch.should.have.not.been.called()
+      expect(_spies.dispatch).not.toHaveBeenCalled()
 
       _button.simulate('click')
 
-      _spies.dispatch.should.have.been.called()
-      _spies.increment.should.have.been.called()
+      expect(_spies.dispatch).toHaveBeenCalled()
+      expect(_spies.increment).toHaveBeenCalled()
     })
   })
 
@@ -69,20 +69,20 @@ describe('(Component) Counter', () => {
     })
 
     it('exists', () => {
-      expect(_button).to.exist()
+      expect(_button.length).toBeGreaterThan(0)
     })
 
     it('is a secondary button', () => {
-      expect(_button.hasClass('btn btn-secondary')).to.be.true()
+      expect(_button.hasClass('btn btn-secondary')).toBe(true)
     })
 
     it('Calls props.doubleAsync when clicked', () => {
-      _spies.dispatch.should.have.not.been.called()
+      expect(_spies.dispatch).not.toHaveBeenCalled()
 
       _button.simulate('click')
 
-      _spies.dispatch.should.have.been.called()
-      _spies.doubleAsync.should.have.been.called()
+      expect(_spies.dispatch).toHaveBeenCalled()
+      expect(_spies.doubleAsync).toHaveBeenCalled()
     })
   })
 })
