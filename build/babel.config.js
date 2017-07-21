@@ -28,5 +28,10 @@ module.exports = {
       },
       uglify: true,
     }],
-  ]
+  ],
+  env: {
+    test: {
+      presets: ["es2015", "react", "stage-0"]
+    }
+  }
 }
