@@ -24,6 +24,7 @@ if (project.env === 'development') {
     noInfo      : false,
     lazy        : false,
     stats       : 'normal',
+    headers: { 'Access-Control-Allow-Origin': '*' }    
   }))
   app.use(require('webpack-hot-middleware')(compiler, {
     path: '/__webpack_hmr'
