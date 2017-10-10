@@ -1,4 +1,3 @@
-/* @flow */
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -7,16 +6,7 @@ export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 // ------------------------------------
 // Actions
 // ------------------------------------
-
-/*  NOTE: "Action" is a Flow interface defined in https://github.com/TechnologyAdvice/flow-interfaces
-    If you're unfamiliar with Flow, you are completely welcome to avoid
-    annotating your code, but if you'd like to learn more you can
-    check out: flowtype.org.
-
-    NOTE: There is currently a bug with babel-eslint where a `space-infix-ops`
-    error is incorrectly thrown when using arrow functions, hence the oddity.  */
-
-export function increment (value: number = 1): Action {
+export function increment (value = 1) {
   return {
     type: COUNTER_INCREMENT,
     payload: value
@@ -31,9 +21,9 @@ export function increment (value: number = 1): Action {
     you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
     reducer take care of this logic.  */
 
-export const doubleAsync = (): Function => {
-  return (dispatch: Function, getState: Function): Promise => {
-    return new Promise((resolve: Function): void => {
+export const doubleAsync = () => {
+  return (dispatch, getState) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         dispatch(increment(getState().counter))
         resolve()
@@ -51,14 +41,14 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state: number, action: {payload: number}): number => state + action.payload
+  [COUNTER_INCREMENT]: (state, action) => state + action.payload
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = 0
-export default function counterReducer (state: number = initialState, action: Action): number {
+export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

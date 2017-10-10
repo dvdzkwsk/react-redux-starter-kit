@@ -1,4 +1,46 @@
-.activeRoute {
-  font-weight: bold;
-  text-decoration: underline;
+.gHeader {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #161523;
+    height: 90px;
+    z-index: 99999;
+    .gHeaderInner {
+        width: 1200px;
+        height: 90px;
+        margin: auto;
+        color: #b3b3b3;
+        font-size: 18px;
+        line-height: 90px;
+        .ahLogo {
+            margin-top: 16px;
+            float: left;
+            width: 369px;
+            height: 52px;
+            background: url(http://blz.nos.netease.com/1/duizhan/minisite/authors-home/ah-logo.png) no-repeat 0 0;
+            overflow: hidden;
+        }
+
+        &>ul{
+            float: right;
+            list-style: none;
+            &>li{
+                float: left;
+            
+                height: 90px;
+                width:120px;
+                cursor: pointer;
+                border-bottom: 4px solid #161523;
+                box-sizing: border-box;
+                &:hover,&.active{
+                    color:#fff;
+                    border-bottom-color:#ffa700;
+                }
+                
+            }
+            
+        }
+
+    }
 }

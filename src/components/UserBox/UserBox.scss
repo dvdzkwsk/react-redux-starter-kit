@@ -1,0 +1,31 @@
+.userBox {
+    float: right;
+    width: 160px;
+    height: 90px;
+    padding:20px 0;
+    cursor: pointer;
+    font-weight: bold;
+    &:hover{
+        color:#fff;
+    }
+
+    &>div{
+        float: left;
+    }
+    .username{
+        width:150px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .root{
+
+        .linkBtn{
+            background: #262537;
+            color: #BBB;
+            &:hover{
+                color: #fff;
+            }
+        }
+    }
+   
+}
