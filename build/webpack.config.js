@@ -126,6 +126,11 @@ config.module.rules.push({
         loader: 'sass-loader',
         options: {
           sourceMap: project.sourcemaps,
+          // There is a problem with sourcemaps generation on a production build (`yarn build`).
+          // The problem is described at the below link, as the current fix is to,
+          // change the default output style to `compact`:
+          // https://github.com/webpack-contrib/sass-loader/issues/351#issuecomment-279925341
+          outputStyle: 'compact',
           includePaths: [
             inProjectSrc('styles'),
           ],
